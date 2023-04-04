@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="" xsi:type="a:CqlToElmInfo"/>
+   <identifier id="POAGOpticNerveEvaluationQICore4" version="0.0.003"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localIdentifier="QICore" uri="http://hl7.org/fhir"/>
+   </usings>
+   <includes>
+      <def localIdentifier="FHIRHelpers" path="FHIRHelpers" version="4.1.000"/>
+      <def localIdentifier="SDE" path="SupplementalDataElements" version="3.1.000"/>
+      <def localIdentifier="CQMCommon" path="CQMCommon" version="1.1.000"/>
+      <def localIdentifier="QICoreCommon" path="QICoreCommon" version="1.3.000"/>
+   </includes>
+   <parameters>
+      <def name="Measurement Period" accessLevel="Public">
+         <parameterTypeSpecifier xsi:type="IntervalTypeSpecifier">
+            <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <codeSystems>
+      <def name="ActCode" id="http://terminology.hl7.org/CodeSystem/v3-ActCode" accessLevel="Public"/>
+   </codeSystems>
+   <valueSets>
+      <def name="Care Services in Long-Term Residential Facility" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014" accessLevel="Public"/>
+      <def name="Cup to Disc Ratio" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1333" accessLevel="Public"/>
+      <def name="Face-to-Face Interaction" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1048" accessLevel="Public"/>
+      <def name="Medical Reason" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007" accessLevel="Public"/>
+      <def name="Nursing Facility Visit" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012" accessLevel="Public"/>
+      <def name="Office Visit" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001" accessLevel="Public"/>
+      <def name="Ophthalmological Services" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285" accessLevel="Public"/>
+      <def name="Optic Disc Exam for Structural Abnormalities" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1334" accessLevel="Public"/>
+      <def name="Outpatient Consultation" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008" accessLevel="Public"/>
+      <def name="Primary Open-Angle Glaucoma" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.326" accessLevel="Public"/>
+   </valueSets>
+   <codes>
+      <def name="virtual" id="VR" display="virtual" accessLevel="Public">
+         <codeSystem name="ActCode"/>
+      </def>
+   </codes>
+   <contexts>
+      <def name="Patient"/>
+   </contexts>
+   <statements>
+      <def name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand dataType="fhir:Patient" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def name="SDE Ethnicity" context="Patient" accessLevel="Public">
+         <expression name="SDE Ethnicity" libraryName="SDE" xsi:type="ExpressionRef"/>
+      </def>
+      <def name="SDE Payer" context="Patient" accessLevel="Public">
+         <expression name="SDE Payer" libraryName="SDE" xsi:type="ExpressionRef"/>
+      </def>
+      <def name="SDE Race" context="Patient" accessLevel="Public">
+         <expression name="SDE Race" libraryName="SDE" xsi:type="ExpressionRef"/>
+      </def>
+      <def name="SDE Sex" context="Patient" accessLevel="Public">
+         <expression name="SDE Sex" libraryName="SDE" xsi:type="ExpressionRef"/>
+      </def>
+      <def name="Qualifying Encounter During Measurement Period" context="Patient" accessLevel="Public">
+         <expression xsi:type="Query">
+            <source alias="QualifyingEncounter">
+               <expression xsi:type="Union">
+                  <operand xsi:type="Union">
+                     <operand xsi:type="Union">
+                        <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                           <codes name="Office Visit" preserve="true" xsi:type="ValueSetRef"/>
+                        </operand>
+                        <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                           <codes name="Ophthalmological Services" preserve="true" xsi:type="ValueSetRef"/>
+                        </operand>
+                     </operand>
+                     <operand xsi:type="Union">
+                        <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                           <codes name="Outpatient Consultation" preserve="true" xsi:type="ValueSetRef"/>
+                        </operand>
+                        <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                           <codes name="Nursing Facility Visit" preserve="true" xsi:type="ValueSetRef"/>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                     <codes name="Care Services in Long-Term Residential Facility" preserve="true" xsi:type="ValueSetRef"/>
+                  </operand>
+               </expression>
+            </source>
+            <where xsi:type="And">
+               <operand xsi:type="IncludedIn">
+                  <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                     <operand path="period" scope="QualifyingEncounter" xsi:type="Property"/>
+                  </operand>
+                  <operand name="Measurement Period" xsi:type="ParameterRef"/>
+               </operand>
+               <operand xsi:type="Not">
+                  <operand xsi:type="Equivalent">
+                     <operand name="ToCode" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                        <operand path="class" scope="QualifyingEncounter" xsi:type="Property"/>
+                     </operand>
+                     <operand name="virtual" xsi:type="CodeRef"/>
+                  </operand>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def name="Primary Open Angle Glaucoma Encounter" context="Patient" accessLevel="Public">
+         <expression xsi:type="Query">
+            <source alias="ValidQualifyingEncounter">
+               <expression name="Qualifying Encounter During Measurement Period" xsi:type="ExpressionRef"/>
+            </source>
+            <relationship alias="PrimaryOpenAngleGlaucoma" xsi:type="With">
+               <expression dataType="fhir:Condition" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes name="Primary Open-Angle Glaucoma" preserve="true" xsi:type="ValueSetRef"/>
+               </expression>
+               <suchThat xsi:type="Overlaps">
+                  <operand name="ToPrevalenceInterval" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                     <operand name="PrimaryOpenAngleGlaucoma" xsi:type="AliasRef"/>
+                  </operand>
+                  <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                     <operand path="period" scope="ValidQualifyingEncounter" xsi:type="Property"/>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def name="Initial Population" context="Patient" accessLevel="Public">
+         <expression xsi:type="And">
+            <operand xsi:type="GreaterOrEqual">
+               <operand precision="Year" xsi:type="CalculateAgeAt">
+                  <operand path="birthDate" xsi:type="Property">
+                     <source name="Patient" xsi:type="ExpressionRef"/>
+                  </operand>
+                  <operand xsi:type="DateFrom">
+                     <operand xsi:type="Start">
+                        <operand name="Measurement Period" xsi:type="ParameterRef"/>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand valueType="t:Integer" value="18" xsi:type="Literal"/>
+            </operand>
+            <operand xsi:type="Exists">
+               <operand name="Primary Open Angle Glaucoma Encounter" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
+      </def>
+      <def name="Denominator" context="Patient" accessLevel="Public">
+         <expression name="Initial Population" xsi:type="ExpressionRef"/>
+      </def>
+      <def name="Medical Reason for Not Performing Cup to Disc Ratio" context="Patient" accessLevel="Public">
+         <expression xsi:type="Query">
+            <source alias="CupToDiscExamNotPerformed">
+               <expression xsi:type="Union">
+                  <operand dataType="fhir:Observation" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationnotdone" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes name="Cup to Disc Ratio" preserve="true" xsi:type="ValueSetRef"/>
+                  </operand>
+                  <operand dataType="fhir:Observation" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationnotdone" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                     <codes name="Cup to Disc Ratio" preserve="true" xsi:type="ValueSetRef"/>
+                  </operand>
+               </expression>
+            </source>
+            <relationship alias="EncounterWithPOAG" xsi:type="With">
+               <expression name="Primary Open Angle Glaucoma Encounter" xsi:type="ExpressionRef"/>
+               <suchThat xsi:type="In">
+                  <operand path="value" xsi:type="Property">
+                     <source path="issued" scope="CupToDiscExamNotPerformed" xsi:type="Property"/>
+                  </operand>
+                  <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                     <operand path="period" scope="EncounterWithPOAG" xsi:type="Property"/>
+                  </operand>
+               </suchThat>
+            </relationship>
+            <where xsi:type="InValueSet">
+               <code name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                  <operand xsi:type="SingletonFrom">
+                     <operand xsi:type="Query">
+                        <source alias="$this">
+                           <expression path="extension" xsi:type="Property">
+                              <source name="CupToDiscExamNotPerformed" xsi:type="AliasRef"/>
+                           </expression>
+                        </source>
+                        <where xsi:type="Equal">
+                           <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                              <operand path="url" scope="$this" xsi:type="Property"/>
+                           </operand>
+                           <operand valueType="t:String" value="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason" xsi:type="Literal"/>
+                        </where>
+                        <return distinct="false">
+                           <expression path="value" xsi:type="Property">
+                              <source name="$this" xsi:type="AliasRef"/>
+                           </expression>
+                        </return>
+                     </operand>
+                  </operand>
+               </code>
+               <valueset name="Medical Reason" preserve="true"/>
+            </where>
+         </expression>
+      </def>
+      <def name="Medical Reason for Not Performing Optic Disc Exam" context="Patient" accessLevel="Public">
+         <expression xsi:type="Query">
+            <source alias="OpticDiscExamNotPerformed">
+               <expression xsi:type="Union">
+                  <operand dataType="fhir:Observation" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationnotdone" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes name="Optic Disc Exam for Structural Abnormalities" preserve="true" xsi:type="ValueSetRef"/>
+                  </operand>
+                  <operand dataType="fhir:Observation" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationnotdone" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                     <codes name="Optic Disc Exam for Structural Abnormalities" preserve="true" xsi:type="ValueSetRef"/>
+                  </operand>
+               </expression>
+            </source>
+            <relationship alias="EncounterWithPOAG" xsi:type="With">
+               <expression name="Primary Open Angle Glaucoma Encounter" xsi:type="ExpressionRef"/>
+               <suchThat xsi:type="In">
+                  <operand path="value" xsi:type="Property">
+                     <source path="issued" scope="OpticDiscExamNotPerformed" xsi:type="Property"/>
+                  </operand>
+                  <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                     <operand path="period" scope="EncounterWithPOAG" xsi:type="Property"/>
+                  </operand>
+               </suchThat>
+            </relationship>
+            <where xsi:type="InValueSet">
+               <code name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                  <operand xsi:type="SingletonFrom">
+                     <operand xsi:type="Query">
+                        <source alias="$this">
+                           <expression path="extension" xsi:type="Property">
+                              <source name="OpticDiscExamNotPerformed" xsi:type="AliasRef"/>
+                           </expression>
+                        </source>
+                        <where xsi:type="Equal">
+                           <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                              <operand path="url" scope="$this" xsi:type="Property"/>
+                           </operand>
+                           <operand valueType="t:String" value="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason" xsi:type="Literal"/>
+                        </where>
+                        <return distinct="false">
+                           <expression path="value" xsi:type="Property">
+                              <source name="$this" xsi:type="AliasRef"/>
+                           </expression>
+                        </return>
+                     </operand>
+                  </operand>
+               </code>
+               <valueset name="Medical Reason" preserve="true"/>
+            </where>
+         </expression>
+      </def>
+      <def name="Denominator Exceptions" context="Patient" accessLevel="Public">
+         <expression xsi:type="Or">
+            <operand xsi:type="Exists">
+               <operand name="Medical Reason for Not Performing Cup to Disc Ratio" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand xsi:type="Exists">
+               <operand name="Medical Reason for Not Performing Optic Disc Exam" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
+      </def>
+      <def name="Cup to Disc Ratio Performed with Result" context="Patient" accessLevel="Public">
+         <expression xsi:type="Query">
+            <source alias="CupToDiscExamPerformed">
+               <expression dataType="fhir:Observation" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes name="Cup to Disc Ratio" preserve="true" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <relationship alias="EncounterWithPOAG" xsi:type="With">
+               <expression name="Primary Open Angle Glaucoma Encounter" xsi:type="ExpressionRef"/>
+               <suchThat xsi:type="IncludedIn">
+                  <operand name="ToInterval" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                     <operand xsi:type="Case">
+                        <caseItem>
+                           <when isType="t:DateTime" xsi:type="Is">
+                              <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <operand path="effective" scope="CupToDiscExamPerformed" xsi:type="Property"/>
+                              </operand>
+                           </when>
+                           <then xsi:type="As">
+                              <operand asType="t:DateTime" xsi:type="As">
+                                 <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <operand path="effective" scope="CupToDiscExamPerformed" xsi:type="Property"/>
+                                 </operand>
+                              </operand>
+                              <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                 <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                              </asTypeSpecifier>
+                           </then>
+                        </caseItem>
+                        <caseItem>
+                           <when xsi:type="Is">
+                              <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <operand path="effective" scope="CupToDiscExamPerformed" xsi:type="Property"/>
+                              </operand>
+                              <isTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              </isTypeSpecifier>
+                           </when>
+                           <then xsi:type="As">
+                              <operand xsi:type="As">
+                                 <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <operand path="effective" scope="CupToDiscExamPerformed" xsi:type="Property"/>
+                                 </operand>
+                                 <asTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </asTypeSpecifier>
+                              </operand>
+                              <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                 <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                              </asTypeSpecifier>
+                           </then>
+                        </caseItem>
+                        <caseItem>
+                           <when isType="t:DateTime" xsi:type="Is">
+                              <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <operand path="effective" scope="CupToDiscExamPerformed" xsi:type="Property"/>
+                              </operand>
+                           </when>
+                           <then xsi:type="As">
+                              <operand asType="t:DateTime" xsi:type="As">
+                                 <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <operand path="effective" scope="CupToDiscExamPerformed" xsi:type="Property"/>
+                                 </operand>
+                              </operand>
+                              <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                 <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                              </asTypeSpecifier>
+                           </then>
+                        </caseItem>
+                        <else xsi:type="Null">
+                           <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                              <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                              <choice xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              </choice>
+                              <choice xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                              </choice>
+                           </resultTypeSpecifier>
+                        </else>
+                     </operand>
+                  </operand>
+                  <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                     <operand path="period" scope="EncounterWithPOAG" xsi:type="Property"/>
+                  </operand>
+               </suchThat>
+            </relationship>
+            <where xsi:type="Not">
+               <operand xsi:type="IsNull">
+                  <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                     <operand path="value" scope="CupToDiscExamPerformed" xsi:type="Property"/>
+                  </operand>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def name="Optic Disc Exam Performed with Result" context="Patient" accessLevel="Public">
+         <expression xsi:type="Query">
+            <source alias="OpticDiscExamPerformed">
+               <expression dataType="fhir:Observation" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes name="Optic Disc Exam for Structural Abnormalities" preserve="true" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <relationship alias="EncounterWithPOAG" xsi:type="With">
+               <expression name="Primary Open Angle Glaucoma Encounter" xsi:type="ExpressionRef"/>
+               <suchThat xsi:type="IncludedIn">
+                  <operand name="ToInterval" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                     <operand xsi:type="Case">
+                        <caseItem>
+                           <when isType="t:DateTime" xsi:type="Is">
+                              <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <operand path="effective" scope="OpticDiscExamPerformed" xsi:type="Property"/>
+                              </operand>
+                           </when>
+                           <then xsi:type="As">
+                              <operand asType="t:DateTime" xsi:type="As">
+                                 <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <operand path="effective" scope="OpticDiscExamPerformed" xsi:type="Property"/>
+                                 </operand>
+                              </operand>
+                              <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                 <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                              </asTypeSpecifier>
+                           </then>
+                        </caseItem>
+                        <caseItem>
+                           <when xsi:type="Is">
+                              <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <operand path="effective" scope="OpticDiscExamPerformed" xsi:type="Property"/>
+                              </operand>
+                              <isTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              </isTypeSpecifier>
+                           </when>
+                           <then xsi:type="As">
+                              <operand xsi:type="As">
+                                 <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <operand path="effective" scope="OpticDiscExamPerformed" xsi:type="Property"/>
+                                 </operand>
+                                 <asTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </asTypeSpecifier>
+                              </operand>
+                              <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                 <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                              </asTypeSpecifier>
+                           </then>
+                        </caseItem>
+                        <caseItem>
+                           <when isType="t:DateTime" xsi:type="Is">
+                              <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <operand path="effective" scope="OpticDiscExamPerformed" xsi:type="Property"/>
+                              </operand>
+                           </when>
+                           <then xsi:type="As">
+                              <operand asType="t:DateTime" xsi:type="As">
+                                 <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <operand path="effective" scope="OpticDiscExamPerformed" xsi:type="Property"/>
+                                 </operand>
+                              </operand>
+                              <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                 <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                              </asTypeSpecifier>
+                           </then>
+                        </caseItem>
+                        <else xsi:type="Null">
+                           <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                              <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                              <choice xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              </choice>
+                              <choice xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                              </choice>
+                           </resultTypeSpecifier>
+                        </else>
+                     </operand>
+                  </operand>
+                  <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                     <operand path="period" scope="EncounterWithPOAG" xsi:type="Property"/>
+                  </operand>
+               </suchThat>
+            </relationship>
+            <where xsi:type="Not">
+               <operand xsi:type="IsNull">
+                  <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                     <operand path="value" scope="OpticDiscExamPerformed" xsi:type="Property"/>
+                  </operand>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def name="Numerator" context="Patient" accessLevel="Public">
+         <expression xsi:type="And">
+            <operand xsi:type="Exists">
+               <operand name="Cup to Disc Ratio Performed with Result" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand xsi:type="Exists">
+               <operand name="Optic Disc Exam Performed with Result" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
+      </def>
+   </statements>
+</library>

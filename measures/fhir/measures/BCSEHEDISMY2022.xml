@@ -1,0 +1,2825 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,EnableResultTypes,DisableListDemotion,DisableListPromotion" xsi:type="a:CqlToElmInfo"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="304">
+         <a:s>library BCSEHEDISMY2022 version '1.0.0'</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="BCSEHEDISMY2022" version="1.0.0"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="3:1-3:26" localIdentifier="FHIR" uri="http://hl7.org/fhir" version="4.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>using </a:s>
+               <a:s>
+                  <a:s>FHIR</a:s>
+               </a:s>
+               <a:s> version '4.0.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="5:1-5:56" localIdentifier="FHIRHelpers" path="FHIRHelpers" version="4.0.001">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>FHIRHelpers</a:s>
+               </a:s>
+               <a:s> version '4.0.001' called FHIRHelpers</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="3" locator="6:1-6:66" localIdentifier="Enrollment" path="NCQAHealthPlanEnrollment" version="1.0.0">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>NCQAHealthPlanEnrollment</a:s>
+               </a:s>
+               <a:s> version '1.0.0' called Enrollment</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="4" locator="7:1-7:48" localIdentifier="Status" path="NCQAStatus" version="1.0.0">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>NCQAStatus</a:s>
+               </a:s>
+               <a:s> version '1.0.0' called Status</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="5" locator="8:1-8:50" localIdentifier="CQLBase" path="NCQACQLBase" version="1.0.0">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>NCQACQLBase</a:s>
+               </a:s>
+               <a:s> version '1.0.0' called CQLBase</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="6" locator="9:1-9:52" localIdentifier="FHIRBase" path="NCQAFHIRBase" version="1.0.0">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>NCQAFHIRBase</a:s>
+               </a:s>
+               <a:s> version '1.0.0' called FHIRBase</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="7" locator="10:1-10:50" localIdentifier="Hospice" path="NCQAHospice" version="1.0.0">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="7">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>NCQAHospice</a:s>
+               </a:s>
+               <a:s> version '1.0.0' called Hospice</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="8" locator="11:1-11:83" localIdentifier="AdvancedIllnessFrailty" path="NCQAAdvancedIllnessandFrailty" version="1.0.0">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="8">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>NCQAAdvancedIllnessandFrailty</a:s>
+               </a:s>
+               <a:s> version '1.0.0' called AdvancedIllnessFrailty</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="9" locator="12:1-12:64" localIdentifier="PalliativeCare" path="NCQAPalliativeCare" version="1.0.0">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="9">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>NCQAPalliativeCare</a:s>
+               </a:s>
+               <a:s> version '1.0.0' called PalliativeCare</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="10" locator="13:1-13:58" localIdentifier="Terminology" path="NCQATerminology" version="1.0.0">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="10">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>NCQATerminology</a:s>
+               </a:s>
+               <a:s> version '1.0.0' called Terminology</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="11" locator="14:1-14:55" localIdentifier="Encounters" path="NCQAEncounter" version="1.0.0">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="11">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>NCQAEncounter</a:s>
+               </a:s>
+               <a:s> version '1.0.0' called Encounters</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="12" locator="15:1-15:48" localIdentifier="Claims" path="NCQAClaims" version="1.0.0">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="12">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>NCQAClaims</a:s>
+               </a:s>
+               <a:s> version '1.0.0' called Claims</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <parameters>
+      <def localId="30" locator="33:1-33:49" name="Measurement Period" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="30">
+               <a:s>parameter &quot;Measurement Period&quot; </a:s>
+               <a:s r="29">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="28">
+                     <a:s>DateTime</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+            <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <parameterTypeSpecifier localId="29" locator="33:32-33:49" xsi:type="IntervalTypeSpecifier">
+            <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+               <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <pointType localId="28" locator="33:41-33:48" resultTypeName="t:DateTime" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <valueSets>
+      <def localId="13" locator="17:1-17:105" resultTypeName="t:ValueSet" name="Absence of Left Breast" id="https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1329" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="13">
+               <a:s>valueset &quot;Absence of Left Breast&quot;: 'https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1329'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="14" locator="18:1-18:106" resultTypeName="t:ValueSet" name="Absence of Right Breast" id="https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1330" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="14">
+               <a:s>valueset &quot;Absence of Right Breast&quot;: 'https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1330'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="15" locator="19:1-19:103" resultTypeName="t:ValueSet" name="Bilateral Mastectomy" id="https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1042" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="15">
+               <a:s>valueset &quot;Bilateral Mastectomy&quot;: 'https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1042'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="16" locator="20:1-20:101" resultTypeName="t:ValueSet" name="Bilateral Modifier" id="https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1043" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="16">
+               <a:s>valueset &quot;Bilateral Modifier&quot;: 'https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1043'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="17" locator="21:1-21:110" resultTypeName="t:ValueSet" name="Clinical Bilateral Modifier" id="https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1951" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="17">
+               <a:s>valueset &quot;Clinical Bilateral Modifier&quot;: 'https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1951'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="18" locator="22:1-22:105" resultTypeName="t:ValueSet" name="Clinical Left Modifier" id="https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1949" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="18">
+               <a:s>valueset &quot;Clinical Left Modifier&quot;: 'https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1949'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="19" locator="23:1-23:106" resultTypeName="t:ValueSet" name="Clinical Right Modifier" id="https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1950" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="19">
+               <a:s>valueset &quot;Clinical Right Modifier&quot;: 'https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1950'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="20" locator="24:1-24:113" resultTypeName="t:ValueSet" name="Clinical Unilateral Mastectomy" id="https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1948" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="20">
+               <a:s>valueset &quot;Clinical Unilateral Mastectomy&quot;: 'https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1948'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="21" locator="25:1-25:114" resultTypeName="t:ValueSet" name="History of Bilateral Mastectomy" id="https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1331" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="21">
+               <a:s>valueset &quot;History of Bilateral Mastectomy&quot;: 'https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1331'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="22" locator="26:1-26:96" resultTypeName="t:ValueSet" name="Left Modifier" id="https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1148" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="22">
+               <a:s>valueset &quot;Left Modifier&quot;: 'https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1148'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="23" locator="27:1-27:94" resultTypeName="t:ValueSet" name="Mammography" id="https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1168" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="23">
+               <a:s>valueset &quot;Mammography&quot;: 'https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1168'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="24" locator="28:1-28:97" resultTypeName="t:ValueSet" name="Right Modifier" id="https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1230" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="24">
+               <a:s>valueset &quot;Right Modifier&quot;: 'https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1230'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="25" locator="29:1-29:104" resultTypeName="t:ValueSet" name="Unilateral Mastectomy" id="https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1256" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="25">
+               <a:s>valueset &quot;Unilateral Mastectomy&quot;: 'https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1256'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="26" locator="30:1-30:109" resultTypeName="t:ValueSet" name="Unilateral Mastectomy Left" id="https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1334" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="26">
+               <a:s>valueset &quot;Unilateral Mastectomy Left&quot;: 'https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1334'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="27" locator="31:1-31:110" resultTypeName="t:ValueSet" name="Unilateral Mastectomy Right" id="https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1335" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="27">
+               <a:s>valueset &quot;Unilateral Mastectomy Right&quot;: 'https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1335'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </valueSets>
+   <contexts>
+      <def locator="35:1-35:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="35:1-35:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="35:1-35:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/StructureDefinition/Patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="65" locator="63:1-64:79" resultTypeName="t:DateTime" name="October 1 Two Years Prior to the Measurement Period" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="65">
+               <a:s>define &quot;October 1 Two Years Prior to the Measurement Period&quot;:
+  </a:s>
+               <a:s r="64">
+                  <a:s>DateTime(</a:s>
+                  <a:s r="56">
+                     <a:s>(</a:s>
+                     <a:s r="56">
+                        <a:s r="54">
+                           <a:s>year from </a:s>
+                           <a:s r="53">
+                              <a:s>start of </a:s>
+                              <a:s r="52">
+                                 <a:s>&quot;Measurement Period&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="55"> - 2</a:s>
+                     </a:s>
+                     <a:s>)</a:s>
+                  </a:s>
+                  <a:s r="57">, 10, 1, 0, 0, 0, 0, 0)</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="64" locator="64:3-64:79" resultTypeName="t:DateTime" xsi:type="DateTime">
+            <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+            <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+            <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+            <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+            <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+            <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+            <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+            <signature name="t:Decimal" xsi:type="NamedTypeSpecifier"/>
+            <year localId="56" locator="64:12-64:56" resultTypeName="t:Integer" xsi:type="Subtract">
+               <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+               <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+               <operand localId="54" locator="64:13-64:51" resultTypeName="t:Integer" precision="Year" xsi:type="DateTimeComponentFrom">
+                  <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                  <operand localId="53" locator="64:23-64:51" resultTypeName="t:DateTime" xsi:type="Start">
+                     <signature xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     </signature>
+                     <operand localId="52" locator="64:32-64:51" name="Measurement Period" xsi:type="ParameterRef">
+                        <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                           <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand localId="55" locator="64:55" resultTypeName="t:Integer" valueType="t:Integer" value="2" xsi:type="Literal"/>
+            </year>
+            <month localId="57" locator="64:59-64:60" resultTypeName="t:Integer" valueType="t:Integer" value="10" xsi:type="Literal"/>
+            <day localId="58" locator="64:63" resultTypeName="t:Integer" valueType="t:Integer" value="1" xsi:type="Literal"/>
+            <hour localId="59" locator="64:66" resultTypeName="t:Integer" valueType="t:Integer" value="0" xsi:type="Literal"/>
+            <minute localId="60" locator="64:69" resultTypeName="t:Integer" valueType="t:Integer" value="0" xsi:type="Literal"/>
+            <second localId="61" locator="64:72" resultTypeName="t:Integer" valueType="t:Integer" value="0" xsi:type="Literal"/>
+            <millisecond localId="62" locator="64:75" resultTypeName="t:Integer" valueType="t:Integer" value="0" xsi:type="Literal"/>
+            <timezoneOffset xsi:type="ToDecimal">
+               <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+               <operand localId="63" locator="64:78" resultTypeName="t:Integer" valueType="t:Integer" value="0" xsi:type="Literal"/>
+            </timezoneOffset>
+         </expression>
+      </def>
+      <def localId="70" locator="59:1-61:30" name="Participation Period" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="70">
+               <a:s>define &quot;Participation Period&quot;:
+  </a:s>
+               <a:s r="69">
+                  <a:s>Interval[</a:s>
+                  <a:s r="66">
+                     <a:s>&quot;October 1 Two Years Prior to the Measurement Period&quot;</a:s>
+                  </a:s>
+                  <a:s>,
+  </a:s>
+                  <a:s r="68">
+                     <a:s>end of </a:s>
+                     <a:s r="67">
+                        <a:s>&quot;Measurement Period&quot;</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+            <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="69" locator="60:3-61:30" lowClosed="true" highClosed="true" xsi:type="Interval">
+            <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+               <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <low localId="66" locator="60:12-60:64" resultTypeName="t:DateTime" name="October 1 Two Years Prior to the Measurement Period" xsi:type="ExpressionRef"/>
+            <high localId="68" locator="61:3-61:29" resultTypeName="t:DateTime" xsi:type="End">
+               <signature xsi:type="IntervalTypeSpecifier">
+                  <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+               </signature>
+               <operand localId="67" locator="61:10-61:29" name="Measurement Period" xsi:type="ParameterRef">
+                  <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                     <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </operand>
+            </high>
+         </expression>
+      </def>
+      <def localId="74" locator="55:1-57:84" name="Member Coverage" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="74">
+               <a:s>define &quot;Member Coverage&quot;:
+  </a:s>
+               <a:s r="73">
+                  <a:s>
+                     <a:s r="47">
+                        <a:s r="46">
+                           <a:s r="46">
+                              <a:s>[Coverage]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> C</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="72">
+                     <a:s>where </a:s>
+                     <a:s r="72">
+                        <a:s r="51">
+                           <a:s r="48">
+                              <a:s>FHIRBase</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="51">
+                              <a:s>&quot;Normalize Interval&quot; ( </a:s>
+                              <a:s r="50">
+                                 <a:s r="49">
+                                    <a:s>C</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="50">
+                                    <a:s>period</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="72"> overlaps </a:s>
+                        <a:s r="71">
+                           <a:s>&quot;Participation Period&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Coverage" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="73" locator="56:3-57:84" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Coverage" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="47" locator="56:3-56:14" alias="C">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Coverage" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="46" locator="56:3-56:12" dataType="fhir:Coverage" templateId="http://hl7.org/fhir/StructureDefinition/Coverage" xsi:type="Retrieve">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Coverage" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </expression>
+            </source>
+            <where localId="72" locator="57:5-57:84" resultTypeName="t:Boolean" xsi:type="Overlaps">
+               <signature xsi:type="IntervalTypeSpecifier">
+                  <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+               </signature>
+               <signature xsi:type="IntervalTypeSpecifier">
+                  <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+               </signature>
+               <operand localId="51" locator="57:11-57:52" name="Normalize Interval" libraryName="FHIRBase" xsi:type="FunctionRef">
+                  <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                     <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <signature xsi:type="ChoiceTypeSpecifier">
+                     <choice name="fhir:dateTime" xsi:type="NamedTypeSpecifier"/>
+                     <choice name="fhir:date" xsi:type="NamedTypeSpecifier"/>
+                     <choice name="fhir:Period" xsi:type="NamedTypeSpecifier"/>
+                     <choice name="fhir:Timing" xsi:type="NamedTypeSpecifier"/>
+                     <choice name="fhir:instant" xsi:type="NamedTypeSpecifier"/>
+                     <choice name="fhir:string" xsi:type="NamedTypeSpecifier"/>
+                     <choice name="fhir:Age" xsi:type="NamedTypeSpecifier"/>
+                     <choice name="fhir:Range" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <operand xsi:type="As">
+                     <operand localId="50" locator="57:43-57:50" resultTypeName="fhir:Period" path="period" scope="C" xsi:type="Property"/>
+                     <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                        <choice name="fhir:dateTime" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:date" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Period" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Timing" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:instant" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:string" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Age" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Range" xsi:type="NamedTypeSpecifier"/>
+                     </asTypeSpecifier>
+                  </operand>
+               </operand>
+               <operand localId="71" locator="57:63-57:84" name="Participation Period" xsi:type="ExpressionRef">
+                  <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                     <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="123" locator="44:1-53:38" resultTypeName="t:Boolean" name="Enrolled During Participation Period" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="123">
+               <a:s>define &quot;Enrolled During Participation Period&quot;:
+  </a:s>
+               <a:s r="122">
+                  <a:s r="107">
+                     <a:s r="88">
+                        <a:s r="45">
+                           <a:s>Enrollment</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="88">
+                           <a:s>&quot;Health Plan Enrollment Criteria&quot; ( </a:s>
+                           <a:s r="75">
+                              <a:s>&quot;Member Coverage&quot;</a:s>
+                           </a:s>
+                           <a:s>, </a:s>
+                           <a:s r="78">
+                              <a:s>date from
+  </a:s>
+                              <a:s r="77">
+                                 <a:s>end of </a:s>
+                                 <a:s r="76">
+                                    <a:s>&quot;Measurement Period&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>, </a:s>
+                           <a:s r="86">
+                              <a:s>Interval[</a:s>
+                              <a:s r="80">
+                                 <a:s>date from </a:s>
+                                 <a:s r="79">
+                                    <a:s>&quot;October 1 Two Years Prior to the Measurement Period&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="85">
+                                 <a:s r="83">
+                                    <a:s>date from
+  </a:s>
+                                    <a:s r="82">
+                                       <a:s>end of </a:s>
+                                       <a:s r="81">
+                                          <a:s>&quot;Measurement Period&quot;</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> - </a:s>
+                                 <a:s r="84">
+                                    <a:s>2 years</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                           <a:s r="87">, 0 )</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    and </a:s>
+                     <a:s r="106">
+                        <a:s r="89">
+                           <a:s>Enrollment</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="106">
+                           <a:s>&quot;Health Plan Enrollment Criteria&quot; ( </a:s>
+                           <a:s r="90">
+                              <a:s>&quot;Member Coverage&quot;</a:s>
+                           </a:s>
+                           <a:s>, </a:s>
+                           <a:s r="93">
+                              <a:s>date from
+    </a:s>
+                              <a:s r="92">
+                                 <a:s>end of </a:s>
+                                 <a:s r="91">
+                                    <a:s>&quot;Measurement Period&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>, </a:s>
+                           <a:s r="104">
+                              <a:s>Interval[</a:s>
+                              <a:s r="98">
+                                 <a:s r="96">
+                                    <a:s>date from </a:s>
+                                    <a:s r="95">
+                                       <a:s>start of </a:s>
+                                       <a:s r="94">
+                                          <a:s>&quot;Measurement Period&quot;</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> - </a:s>
+                                 <a:s r="97">
+                                    <a:s>1 year</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="103">
+                                 <a:s r="101">
+                                    <a:s>date from
+    </a:s>
+                                    <a:s r="100">
+                                       <a:s>end of </a:s>
+                                       <a:s r="99">
+                                          <a:s>&quot;Measurement Period&quot;</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> - </a:s>
+                                 <a:s r="102">
+                                    <a:s>1 year</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                           <a:s r="105">, 45 )</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    and </a:s>
+                  <a:s r="121">
+                     <a:s r="108">
+                        <a:s>Enrollment</a:s>
+                     </a:s>
+                     <a:s>.</a:s>
+                     <a:s r="121">
+                        <a:s>&quot;Health Plan Enrollment Criteria&quot; ( </a:s>
+                        <a:s r="109">
+                           <a:s>&quot;Member Coverage&quot;</a:s>
+                        </a:s>
+                        <a:s>, </a:s>
+                        <a:s r="112">
+                           <a:s>date from
+    </a:s>
+                           <a:s r="111">
+                              <a:s>end of </a:s>
+                              <a:s r="110">
+                                 <a:s>&quot;Measurement Period&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>, </a:s>
+                        <a:s r="119">
+                           <a:s>Interval[</a:s>
+                           <a:s r="115">
+                              <a:s>date from </a:s>
+                              <a:s r="114">
+                                 <a:s>start of </a:s>
+                                 <a:s r="113">
+                                    <a:s>&quot;Measurement Period&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>, </a:s>
+                           <a:s r="118">
+                              <a:s>date from
+    </a:s>
+                              <a:s r="117">
+                                 <a:s>end of </a:s>
+                                 <a:s r="116">
+                                    <a:s>&quot;Measurement Period&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>]</a:s>
+                        </a:s>
+                        <a:s r="120">, 45 )</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="122" locator="45:3-53:38" resultTypeName="t:Boolean" xsi:type="And">
+            <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+            <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+            <operand localId="107" locator="45:3-50:47" resultTypeName="t:Boolean" xsi:type="And">
+               <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+               <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+               <operand localId="88" locator="45:3-47:45" resultTypeName="t:Boolean" name="Health Plan Enrollment Criteria" libraryName="Enrollment" xsi:type="FunctionRef">
+                  <signature xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Coverage" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                  <signature xsi:type="IntervalTypeSpecifier">
+                     <pointType name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+                  <operand localId="75" locator="45:50-45:66" name="Member Coverage" xsi:type="ExpressionRef">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Coverage" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                  </operand>
+                  <operand localId="78" locator="45:69-46:29" resultTypeName="t:Date" xsi:type="DateFrom">
+                     <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     <operand localId="77" locator="46:3-46:29" resultTypeName="t:DateTime" xsi:type="End">
+                        <signature xsi:type="IntervalTypeSpecifier">
+                           <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        </signature>
+                        <operand localId="76" locator="46:10-46:29" name="Measurement Period" xsi:type="ParameterRef">
+                           <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                              <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand localId="86" locator="46:32-47:40" lowClosed="true" highClosed="true" xsi:type="Interval">
+                     <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <low localId="80" locator="46:41-46:103" resultTypeName="t:Date" xsi:type="DateFrom">
+                        <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        <operand localId="79" locator="46:51-46:103" resultTypeName="t:DateTime" name="October 1 Two Years Prior to the Measurement Period" xsi:type="ExpressionRef"/>
+                     </low>
+                     <high localId="85" locator="46:106-47:39" resultTypeName="t:Date" xsi:type="Subtract">
+                        <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                        <signature name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                        <operand localId="83" locator="46:106-47:29" resultTypeName="t:Date" xsi:type="DateFrom">
+                           <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                           <operand localId="82" locator="47:3-47:29" resultTypeName="t:DateTime" xsi:type="End">
+                              <signature xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              </signature>
+                              <operand localId="81" locator="47:10-47:29" name="Measurement Period" xsi:type="ParameterRef">
+                                 <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                              </operand>
+                           </operand>
+                        </operand>
+                        <operand localId="84" locator="47:33-47:39" resultTypeName="t:Quantity" value="2" unit="years" xsi:type="Quantity"/>
+                     </high>
+                  </operand>
+                  <operand localId="87" locator="47:43" resultTypeName="t:Integer" valueType="t:Integer" value="0" xsi:type="Literal"/>
+               </operand>
+               <operand localId="106" locator="48:9-50:47" resultTypeName="t:Boolean" name="Health Plan Enrollment Criteria" libraryName="Enrollment" xsi:type="FunctionRef">
+                  <signature xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Coverage" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                  <signature xsi:type="IntervalTypeSpecifier">
+                     <pointType name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+                  <operand localId="90" locator="48:56-48:72" name="Member Coverage" xsi:type="ExpressionRef">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Coverage" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                  </operand>
+                  <operand localId="93" locator="48:75-49:31" resultTypeName="t:Date" xsi:type="DateFrom">
+                     <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     <operand localId="92" locator="49:5-49:31" resultTypeName="t:DateTime" xsi:type="End">
+                        <signature xsi:type="IntervalTypeSpecifier">
+                           <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        </signature>
+                        <operand localId="91" locator="49:12-49:31" name="Measurement Period" xsi:type="ParameterRef">
+                           <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                              <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand localId="104" locator="49:34-50:41" lowClosed="true" highClosed="true" xsi:type="Interval">
+                     <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <low localId="98" locator="49:43-49:90" resultTypeName="t:Date" xsi:type="Subtract">
+                        <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                        <signature name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                        <operand localId="96" locator="49:43-49:81" resultTypeName="t:Date" xsi:type="DateFrom">
+                           <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                           <operand localId="95" locator="49:53-49:81" resultTypeName="t:DateTime" xsi:type="Start">
+                              <signature xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              </signature>
+                              <operand localId="94" locator="49:62-49:81" name="Measurement Period" xsi:type="ParameterRef">
+                                 <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                              </operand>
+                           </operand>
+                        </operand>
+                        <operand localId="97" locator="49:85-49:90" resultTypeName="t:Quantity" value="1" unit="year" xsi:type="Quantity"/>
+                     </low>
+                     <high localId="103" locator="49:93-50:40" resultTypeName="t:Date" xsi:type="Subtract">
+                        <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                        <signature name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                        <operand localId="101" locator="49:93-50:31" resultTypeName="t:Date" xsi:type="DateFrom">
+                           <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                           <operand localId="100" locator="50:5-50:31" resultTypeName="t:DateTime" xsi:type="End">
+                              <signature xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              </signature>
+                              <operand localId="99" locator="50:12-50:31" name="Measurement Period" xsi:type="ParameterRef">
+                                 <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                              </operand>
+                           </operand>
+                        </operand>
+                        <operand localId="102" locator="50:35-50:40" resultTypeName="t:Quantity" value="1" unit="year" xsi:type="Quantity"/>
+                     </high>
+                  </operand>
+                  <operand localId="105" locator="50:44-50:45" resultTypeName="t:Integer" valueType="t:Integer" value="45" xsi:type="Literal"/>
+               </operand>
+            </operand>
+            <operand localId="121" locator="51:9-53:38" resultTypeName="t:Boolean" name="Health Plan Enrollment Criteria" libraryName="Enrollment" xsi:type="FunctionRef">
+               <signature xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Coverage" xsi:type="NamedTypeSpecifier"/>
+               </signature>
+               <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
+               <signature xsi:type="IntervalTypeSpecifier">
+                  <pointType name="t:Date" xsi:type="NamedTypeSpecifier"/>
+               </signature>
+               <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+               <operand localId="109" locator="51:56-51:72" name="Member Coverage" xsi:type="ExpressionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Coverage" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </operand>
+               <operand localId="112" locator="51:75-52:31" resultTypeName="t:Date" xsi:type="DateFrom">
+                  <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                  <operand localId="111" locator="52:5-52:31" resultTypeName="t:DateTime" xsi:type="End">
+                     <signature xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     </signature>
+                     <operand localId="110" locator="52:12-52:31" name="Measurement Period" xsi:type="ParameterRef">
+                        <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                           <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand localId="119" locator="52:34-53:32" lowClosed="true" highClosed="true" xsi:type="Interval">
+                  <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                     <pointType name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <low localId="115" locator="52:43-52:81" resultTypeName="t:Date" xsi:type="DateFrom">
+                     <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     <operand localId="114" locator="52:53-52:81" resultTypeName="t:DateTime" xsi:type="Start">
+                        <signature xsi:type="IntervalTypeSpecifier">
+                           <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        </signature>
+                        <operand localId="113" locator="52:62-52:81" name="Measurement Period" xsi:type="ParameterRef">
+                           <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                              <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                        </operand>
+                     </operand>
+                  </low>
+                  <high localId="118" locator="52:84-53:31" resultTypeName="t:Date" xsi:type="DateFrom">
+                     <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     <operand localId="117" locator="53:5-53:31" resultTypeName="t:DateTime" xsi:type="End">
+                        <signature xsi:type="IntervalTypeSpecifier">
+                           <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        </signature>
+                        <operand localId="116" locator="53:12-53:31" name="Measurement Period" xsi:type="ParameterRef">
+                           <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                              <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                        </operand>
+                     </operand>
+                  </high>
+               </operand>
+               <operand localId="120" locator="53:35-53:36" resultTypeName="t:Integer" valueType="t:Integer" value="45" xsi:type="Literal"/>
+            </operand>
+         </expression>
+      </def>
+      <def localId="126" locator="37:1-42:46" resultTypeName="t:Boolean" name="Initial Population" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="126">
+               <a:s>define &quot;Initial Population&quot;:
+  </a:s>
+               <a:s r="125">
+                  <a:s r="44">
+                     <a:s r="38">
+                        <a:s r="34">
+                           <a:s>AgeInYearsAt(</a:s>
+                           <a:s r="33">
+                              <a:s>date from
+    </a:s>
+                              <a:s r="32">
+                                 <a:s>end of </a:s>
+                                 <a:s r="31">
+                                    <a:s>&quot;Measurement Period&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+  )</a:s>
+                        </a:s>
+                        <a:s>in </a:s>
+                        <a:s r="37">
+                           <a:s r="35">Interval[52, 74]</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    and </a:s>
+                     <a:s r="43">
+                        <a:s r="41">
+                           <a:s r="40">
+                              <a:s r="39">
+                                 <a:s>Patient</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="40">
+                                 <a:s>gender</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="41">
+                              <a:s>value</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> = </a:s>
+                        <a:s r="42">
+                           <a:s>'female'</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    and </a:s>
+                  <a:s r="124">
+                     <a:s>&quot;Enrolled During Participation Period&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="125" locator="38:3-42:46" resultTypeName="t:Boolean" xsi:type="And">
+            <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+            <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+            <operand localId="44" locator="38:3-41:39" resultTypeName="t:Boolean" xsi:type="And">
+               <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+               <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+               <operand localId="38" locator="38:3-40:22" resultTypeName="t:Boolean" xsi:type="In">
+                  <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+                  <signature xsi:type="IntervalTypeSpecifier">
+                     <pointType name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <operand localId="34" locator="38:3-40:3" resultTypeName="t:Integer" precision="Year" xsi:type="CalculateAgeAt">
+                     <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                     <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                     <operand path="birthDate.value" xsi:type="Property">
+                        <source name="Patient" xsi:type="ExpressionRef"/>
+                     </operand>
+                     <operand localId="33" locator="38:16-39:31" resultTypeName="t:Date" xsi:type="DateFrom">
+                        <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        <operand localId="32" locator="39:5-39:31" resultTypeName="t:DateTime" xsi:type="End">
+                           <signature xsi:type="IntervalTypeSpecifier">
+                              <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                           </signature>
+                           <operand localId="31" locator="39:12-39:31" name="Measurement Period" xsi:type="ParameterRef">
+                              <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                           </operand>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand localId="37" locator="40:7-40:22" lowClosed="true" highClosed="true" xsi:type="Interval">
+                     <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <low localId="35" locator="40:16-40:17" resultTypeName="t:Integer" valueType="t:Integer" value="52" xsi:type="Literal"/>
+                     <high localId="36" locator="40:20-40:21" resultTypeName="t:Integer" valueType="t:Integer" value="74" xsi:type="Literal"/>
+                  </operand>
+               </operand>
+               <operand localId="43" locator="41:9-41:39" resultTypeName="t:Boolean" xsi:type="Equal">
+                  <signature name="t:String" xsi:type="NamedTypeSpecifier"/>
+                  <signature name="t:String" xsi:type="NamedTypeSpecifier"/>
+                  <operand localId="41" locator="41:9-41:28" resultTypeName="t:String" path="value" xsi:type="Property">
+                     <source localId="40" locator="41:9-41:22" resultTypeName="fhir:AdministrativeGender" path="gender" xsi:type="Property">
+                        <source localId="39" locator="41:9-41:15" resultTypeName="fhir:Patient" name="Patient" xsi:type="ExpressionRef"/>
+                     </source>
+                  </operand>
+                  <operand localId="42" locator="41:32-41:39" resultTypeName="t:String" valueType="t:String" value="female" xsi:type="Literal"/>
+               </operand>
+            </operand>
+            <operand localId="124" locator="42:9-42:46" resultTypeName="t:Boolean" name="Enrolled During Participation Period" xsi:type="ExpressionRef"/>
+         </expression>
+      </def>
+      <def localId="128" locator="66:1-67:22" resultTypeName="t:Boolean" name="Denominator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="128">
+               <a:s>define &quot;Denominator&quot;:
+  </a:s>
+               <a:s r="127">
+                  <a:s>&quot;Initial Population&quot;</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="127" locator="67:3-67:22" resultTypeName="t:Boolean" name="Initial Population" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="142" locator="86:1-89:31" name="Right Mastectomy Diagnosis" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="142">
+               <a:s>define &quot;Right Mastectomy Diagnosis&quot;:
+  </a:s>
+               <a:s r="141">
+                  <a:s>
+                     <a:s r="134">
+                        <a:s r="133">
+                           <a:s>( </a:s>
+                           <a:s r="133">
+                              <a:s r="131">
+                                 <a:s>Status</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="133">
+                                 <a:s>&quot;Active Condition&quot; ( </a:s>
+                                 <a:s r="132">
+                                    <a:s>[Condition: </a:s>
+                                    <a:s>
+                                       <a:s>&quot;Absence of Right Breast&quot;</a:s>
+                                    </a:s>
+                                    <a:s>]</a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> )</a:s>
+                        </a:s>
+                        <a:s> RightMastectomyDiagnosis</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="140">
+                     <a:s>where </a:s>
+                     <a:s r="140">
+                        <a:s r="137">
+                           <a:s r="135">
+                              <a:s>FHIRBase</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="137">
+                              <a:s>&quot;Prevalence Period&quot; ( </a:s>
+                              <a:s r="136">
+                                 <a:s>RightMastectomyDiagnosis</a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="140"> starts on or before
+    </a:s>
+                        <a:s r="139">
+                           <a:s>end of </a:s>
+                           <a:s r="138">
+                              <a:s>&quot;Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="141" locator="87:3-89:31" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="134" locator="87:3-87:99" alias="RightMastectomyDiagnosis">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="133" locator="87:3-87:74" name="Active Condition" libraryName="Status" xsi:type="FunctionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <signature xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <operand localId="132" locator="87:33-87:70" dataType="fhir:Condition" templateId="http://hl7.org/fhir/StructureDefinition/Condition" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <codes locator="87:45-87:69" resultTypeName="t:ValueSet" name="Absence of Right Breast" preserve="true" xsi:type="ValueSetRef"/>
+                  </operand>
+               </expression>
+            </source>
+            <where localId="140" locator="88:5-89:31" resultTypeName="t:Boolean" xsi:type="SameOrBefore">
+               <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+               <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+               <operand locator="88:69-88:74" xsi:type="Start">
+                  <signature xsi:type="IntervalTypeSpecifier">
+                     <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <operand localId="137" locator="88:11-88:67" name="Prevalence Period" libraryName="FHIRBase" xsi:type="FunctionRef">
+                     <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <signature name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                     <operand localId="136" locator="88:42-88:65" resultTypeName="fhir:Condition" name="RightMastectomyDiagnosis" xsi:type="AliasRef"/>
+                  </operand>
+               </operand>
+               <operand localId="139" locator="89:5-89:31" resultTypeName="t:DateTime" xsi:type="End">
+                  <signature xsi:type="IntervalTypeSpecifier">
+                     <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <operand localId="138" locator="89:12-89:31" name="Measurement Period" xsi:type="ParameterRef">
+                     <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                  </operand>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="177" locator="91:1-100:31" name="Right Mastectomy Procedure" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="177">
+               <a:s>define &quot;Right Mastectomy Procedure&quot;:
+  </a:s>
+               <a:s r="176">
+                  <a:s>
+                     <a:s r="168">
+                        <a:s r="167">
+                           <a:s>( </a:s>
+                           <a:s r="167">
+                              <a:s r="157">
+                                 <a:s r="147">
+                                    <a:s>( </a:s>
+                                    <a:s r="147">
+                                       <a:s r="145">
+                                          <a:s>Status</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="147">
+                                          <a:s>&quot;Completed Procedure&quot; ( </a:s>
+                                          <a:s r="146">
+                                             <a:s>[Procedure: </a:s>
+                                             <a:s>
+                                                <a:s>&quot;Unilateral Mastectomy Right&quot;</a:s>
+                                             </a:s>
+                                             <a:s>]</a:s>
+                                          </a:s>
+                                          <a:s> )</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> )</a:s>
+                                 </a:s>
+                                 <a:s>
+    union </a:s>
+                                 <a:s r="156">
+                                    <a:s>( </a:s>
+                                    <a:s r="156">
+                                       <a:s>
+                                          <a:s r="151">
+                                             <a:s r="150">
+                                                <a:s>( </a:s>
+                                                <a:s r="150">
+                                                   <a:s r="148">
+                                                      <a:s>Status</a:s>
+                                                   </a:s>
+                                                   <a:s>.</a:s>
+                                                   <a:s r="150">
+                                                      <a:s>&quot;Completed Procedure&quot; ( </a:s>
+                                                      <a:s r="149">
+                                                         <a:s>[Procedure: </a:s>
+                                                         <a:s>
+                                                            <a:s>&quot;Unilateral Mastectomy&quot;</a:s>
+                                                         </a:s>
+                                                         <a:s>]</a:s>
+                                                      </a:s>
+                                                      <a:s> )</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s> )</a:s>
+                                             </a:s>
+                                             <a:s> UnilateralMastectomyProcedure</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>
+        </a:s>
+                                       <a:s r="155">
+                                          <a:s>where </a:s>
+                                          <a:s r="155">
+                                             <a:s r="153">
+                                                <a:s r="152">
+                                                   <a:s>UnilateralMastectomyProcedure</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="153">
+                                                   <a:s>bodySite</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s> in </a:s>
+                                             <a:s r="154">
+                                                <a:s>&quot;Right Modifier&quot;</a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+    )</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+    union </a:s>
+                              <a:s r="166">
+                                 <a:s>( </a:s>
+                                 <a:s r="166">
+                                    <a:s>
+                                       <a:s r="161">
+                                          <a:s r="160">
+                                             <a:s>( </a:s>
+                                             <a:s r="160">
+                                                <a:s r="158">
+                                                   <a:s>Status</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="160">
+                                                   <a:s>&quot;Completed Procedure&quot; ( </a:s>
+                                                   <a:s r="159">
+                                                      <a:s>[Procedure: </a:s>
+                                                      <a:s>
+                                                         <a:s>&quot;Clinical Unilateral Mastectomy&quot;</a:s>
+                                                      </a:s>
+                                                      <a:s>]</a:s>
+                                                   </a:s>
+                                                   <a:s> )</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s> )</a:s>
+                                          </a:s>
+                                          <a:s> ClinicalUnilateralMastectomyProcedure</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+        </a:s>
+                                    <a:s r="165">
+                                       <a:s>where </a:s>
+                                       <a:s r="165">
+                                          <a:s r="163">
+                                             <a:s r="162">
+                                                <a:s>ClinicalUnilateralMastectomyProcedure</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="163">
+                                                <a:s>bodySite</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s> in </a:s>
+                                          <a:s r="164">
+                                             <a:s>&quot;Clinical Right Modifier&quot;</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+    )</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> )</a:s>
+                        </a:s>
+                        <a:s> RightMastectomyProcedure</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="175">
+                     <a:s>where </a:s>
+                     <a:s r="175">
+                        <a:s r="172">
+                           <a:s r="169">
+                              <a:s>FHIRBase</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="172">
+                              <a:s>&quot;Normalize Interval&quot; ( </a:s>
+                              <a:s r="171">
+                                 <a:s r="170">
+                                    <a:s>RightMastectomyProcedure</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="171">
+                                    <a:s>performed</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="175"> ends on or before
+    </a:s>
+                        <a:s r="174">
+                           <a:s>end of </a:s>
+                           <a:s r="173">
+                              <a:s>&quot;Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="176" locator="92:3-100:31" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="168" locator="92:3-98:32" alias="RightMastectomyProcedure">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="167" locator="92:3-98:7" xsi:type="Union">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <signature xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <signature xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <operand localId="157" locator="92:5-95:5" xsi:type="Union">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <signature xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                     </signature>
+                     <signature xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                     </signature>
+                     <operand localId="147" locator="92:5-92:83" name="Completed Procedure" libraryName="Status" xsi:type="FunctionRef">
+                        <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <signature xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                        </signature>
+                        <operand localId="146" locator="92:38-92:79" dataType="fhir:Procedure" templateId="http://hl7.org/fhir/StructureDefinition/Procedure" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <codes locator="92:50-92:78" resultTypeName="t:ValueSet" name="Unilateral Mastectomy Right" preserve="true" xsi:type="ValueSetRef"/>
+                        </operand>
+                     </operand>
+                     <operand localId="156" locator="93:11-95:5" xsi:type="Query">
+                        <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <source localId="151" locator="93:13-93:115" alias="UnilateralMastectomyProcedure">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <expression localId="150" locator="93:13-93:85" name="Completed Procedure" libraryName="Status" xsi:type="FunctionRef">
+                              <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                 <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                              <signature xsi:type="ListTypeSpecifier">
+                                 <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                              </signature>
+                              <operand localId="149" locator="93:46-93:81" dataType="fhir:Procedure" templateId="http://hl7.org/fhir/StructureDefinition/Procedure" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                                 <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                    <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                                 <codes locator="93:58-93:80" resultTypeName="t:ValueSet" name="Unilateral Mastectomy" preserve="true" xsi:type="ValueSetRef"/>
+                              </operand>
+                           </expression>
+                        </source>
+                        <where localId="155" locator="94:9-94:72" resultTypeName="t:Boolean" xsi:type="AnyInValueSet">
+                           <signature xsi:type="ListTypeSpecifier">
+                              <elementType name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                           </signature>
+                           <codes xsi:type="Query">
+                              <source alias="X">
+                                 <expression localId="153" locator="94:15-94:52" path="bodySite" scope="UnilateralMastectomyProcedure" xsi:type="Property">
+                                    <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                       <elementType name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
+                                    </resultTypeSpecifier>
+                                 </expression>
+                              </source>
+                              <return distinct="false">
+                                 <expression name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <signature name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
+                                    <operand name="X" xsi:type="AliasRef"/>
+                                 </expression>
+                              </return>
+                           </codes>
+                           <valueset localId="154" locator="94:57-94:72" resultTypeName="t:ValueSet" name="Right Modifier" preserve="true"/>
+                        </where>
+                     </operand>
+                  </operand>
+                  <operand localId="166" locator="96:11-98:5" xsi:type="Query">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <source localId="161" locator="96:13-96:132" alias="ClinicalUnilateralMastectomyProcedure">
+                        <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <expression localId="160" locator="96:13-96:94" name="Completed Procedure" libraryName="Status" xsi:type="FunctionRef">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <signature xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                           </signature>
+                           <operand localId="159" locator="96:46-96:90" dataType="fhir:Procedure" templateId="http://hl7.org/fhir/StructureDefinition/Procedure" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                              <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                 <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                              <codes locator="96:58-96:89" resultTypeName="t:ValueSet" name="Clinical Unilateral Mastectomy" preserve="true" xsi:type="ValueSetRef"/>
+                           </operand>
+                        </expression>
+                     </source>
+                     <where localId="165" locator="97:9-97:89" resultTypeName="t:Boolean" xsi:type="AnyInValueSet">
+                        <signature xsi:type="ListTypeSpecifier">
+                           <elementType name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                        </signature>
+                        <codes xsi:type="Query">
+                           <source alias="X">
+                              <expression localId="163" locator="97:15-97:60" path="bodySite" scope="ClinicalUnilateralMastectomyProcedure" xsi:type="Property">
+                                 <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                    <elementType name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                              </expression>
+                           </source>
+                           <return distinct="false">
+                              <expression name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <signature name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
+                                 <operand name="X" xsi:type="AliasRef"/>
+                              </expression>
+                           </return>
+                        </codes>
+                        <valueset localId="164" locator="97:65-97:89" resultTypeName="t:ValueSet" name="Clinical Right Modifier" preserve="true"/>
+                     </where>
+                  </operand>
+               </expression>
+            </source>
+            <where localId="175" locator="99:5-100:31" resultTypeName="t:Boolean" xsi:type="SameOrBefore">
+               <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+               <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+               <operand locator="99:80-99:83" xsi:type="End">
+                  <signature xsi:type="IntervalTypeSpecifier">
+                     <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <operand localId="172" locator="99:11-99:78" name="Normalize Interval" libraryName="FHIRBase" xsi:type="FunctionRef">
+                     <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <signature xsi:type="ChoiceTypeSpecifier">
+                        <choice name="fhir:dateTime" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:date" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Period" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Timing" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:instant" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:string" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Age" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Range" xsi:type="NamedTypeSpecifier"/>
+                     </signature>
+                     <operand localId="171" locator="99:43-99:76" path="performed" scope="RightMastectomyProcedure" xsi:type="Property">
+                        <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                           <choice name="fhir:dateTime" xsi:type="NamedTypeSpecifier"/>
+                           <choice name="fhir:Period" xsi:type="NamedTypeSpecifier"/>
+                           <choice name="fhir:string" xsi:type="NamedTypeSpecifier"/>
+                           <choice name="fhir:Age" xsi:type="NamedTypeSpecifier"/>
+                           <choice name="fhir:Range" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand localId="174" locator="100:5-100:31" resultTypeName="t:DateTime" xsi:type="End">
+                  <signature xsi:type="IntervalTypeSpecifier">
+                     <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <operand localId="173" locator="100:12-100:31" name="Measurement Period" xsi:type="ParameterRef">
+                     <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                  </operand>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="192" locator="102:1-105:31" name="Left Mastectomy Diagnosis" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="192">
+               <a:s>define &quot;Left Mastectomy Diagnosis&quot;:
+  </a:s>
+               <a:s r="191">
+                  <a:s>
+                     <a:s r="184">
+                        <a:s r="183">
+                           <a:s>( </a:s>
+                           <a:s r="183">
+                              <a:s r="181">
+                                 <a:s>Status</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="183">
+                                 <a:s>&quot;Active Condition&quot; ( </a:s>
+                                 <a:s r="182">
+                                    <a:s>[Condition: </a:s>
+                                    <a:s>
+                                       <a:s>&quot;Absence of Left Breast&quot;</a:s>
+                                    </a:s>
+                                    <a:s>]</a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> )</a:s>
+                        </a:s>
+                        <a:s> LeftMastectomyDiagnosis</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="190">
+                     <a:s>where </a:s>
+                     <a:s r="190">
+                        <a:s r="187">
+                           <a:s r="185">
+                              <a:s>FHIRBase</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="187">
+                              <a:s>&quot;Prevalence Period&quot; ( </a:s>
+                              <a:s r="186">
+                                 <a:s>LeftMastectomyDiagnosis</a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="190"> starts on or before
+    </a:s>
+                        <a:s r="189">
+                           <a:s>end of </a:s>
+                           <a:s r="188">
+                              <a:s>&quot;Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="191" locator="103:3-105:31" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="184" locator="103:3-103:97" alias="LeftMastectomyDiagnosis">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="183" locator="103:3-103:73" name="Active Condition" libraryName="Status" xsi:type="FunctionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <signature xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <operand localId="182" locator="103:33-103:69" dataType="fhir:Condition" templateId="http://hl7.org/fhir/StructureDefinition/Condition" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <codes locator="103:45-103:68" resultTypeName="t:ValueSet" name="Absence of Left Breast" preserve="true" xsi:type="ValueSetRef"/>
+                  </operand>
+               </expression>
+            </source>
+            <where localId="190" locator="104:5-105:31" resultTypeName="t:Boolean" xsi:type="SameOrBefore">
+               <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+               <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+               <operand locator="104:68-104:73" xsi:type="Start">
+                  <signature xsi:type="IntervalTypeSpecifier">
+                     <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <operand localId="187" locator="104:11-104:66" name="Prevalence Period" libraryName="FHIRBase" xsi:type="FunctionRef">
+                     <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <signature name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                     <operand localId="186" locator="104:42-104:64" resultTypeName="fhir:Condition" name="LeftMastectomyDiagnosis" xsi:type="AliasRef"/>
+                  </operand>
+               </operand>
+               <operand localId="189" locator="105:5-105:31" resultTypeName="t:DateTime" xsi:type="End">
+                  <signature xsi:type="IntervalTypeSpecifier">
+                     <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <operand localId="188" locator="105:12-105:31" name="Measurement Period" xsi:type="ParameterRef">
+                     <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                  </operand>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="227" locator="107:1-116:31" name="Left Mastectomy Procedure" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="227">
+               <a:s>define &quot;Left Mastectomy Procedure&quot;:
+  </a:s>
+               <a:s r="226">
+                  <a:s>
+                     <a:s r="218">
+                        <a:s r="217">
+                           <a:s>( </a:s>
+                           <a:s r="217">
+                              <a:s r="207">
+                                 <a:s r="197">
+                                    <a:s>( </a:s>
+                                    <a:s r="197">
+                                       <a:s r="195">
+                                          <a:s>Status</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="197">
+                                          <a:s>&quot;Completed Procedure&quot; ( </a:s>
+                                          <a:s r="196">
+                                             <a:s>[Procedure: </a:s>
+                                             <a:s>
+                                                <a:s>&quot;Unilateral Mastectomy Left&quot;</a:s>
+                                             </a:s>
+                                             <a:s>]</a:s>
+                                          </a:s>
+                                          <a:s> )</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> )</a:s>
+                                 </a:s>
+                                 <a:s>
+    union </a:s>
+                                 <a:s r="206">
+                                    <a:s>( </a:s>
+                                    <a:s r="206">
+                                       <a:s>
+                                          <a:s r="201">
+                                             <a:s r="200">
+                                                <a:s>( </a:s>
+                                                <a:s r="200">
+                                                   <a:s r="198">
+                                                      <a:s>Status</a:s>
+                                                   </a:s>
+                                                   <a:s>.</a:s>
+                                                   <a:s r="200">
+                                                      <a:s>&quot;Completed Procedure&quot; ( </a:s>
+                                                      <a:s r="199">
+                                                         <a:s>[Procedure: </a:s>
+                                                         <a:s>
+                                                            <a:s>&quot;Unilateral Mastectomy&quot;</a:s>
+                                                         </a:s>
+                                                         <a:s>]</a:s>
+                                                      </a:s>
+                                                      <a:s> )</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s> )</a:s>
+                                             </a:s>
+                                             <a:s> UnilateralMastectomyProcedure</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>
+        </a:s>
+                                       <a:s r="205">
+                                          <a:s>where </a:s>
+                                          <a:s r="205">
+                                             <a:s r="203">
+                                                <a:s r="202">
+                                                   <a:s>UnilateralMastectomyProcedure</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="203">
+                                                   <a:s>bodySite</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s> in </a:s>
+                                             <a:s r="204">
+                                                <a:s>&quot;Left Modifier&quot;</a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+    )</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+    union </a:s>
+                              <a:s r="216">
+                                 <a:s>( </a:s>
+                                 <a:s r="216">
+                                    <a:s>
+                                       <a:s r="211">
+                                          <a:s r="210">
+                                             <a:s>( </a:s>
+                                             <a:s r="210">
+                                                <a:s r="208">
+                                                   <a:s>Status</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="210">
+                                                   <a:s>&quot;Completed Procedure&quot; ( </a:s>
+                                                   <a:s r="209">
+                                                      <a:s>[Procedure: </a:s>
+                                                      <a:s>
+                                                         <a:s>&quot;Clinical Unilateral Mastectomy&quot;</a:s>
+                                                      </a:s>
+                                                      <a:s>]</a:s>
+                                                   </a:s>
+                                                   <a:s> )</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s> )</a:s>
+                                          </a:s>
+                                          <a:s> ClinicalUnilateralMastectomyProcedure</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+        </a:s>
+                                    <a:s r="215">
+                                       <a:s>where </a:s>
+                                       <a:s r="215">
+                                          <a:s r="213">
+                                             <a:s r="212">
+                                                <a:s>ClinicalUnilateralMastectomyProcedure</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="213">
+                                                <a:s>bodySite</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s> in </a:s>
+                                          <a:s r="214">
+                                             <a:s>&quot;Clinical Left Modifier&quot;</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+    )</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> )</a:s>
+                        </a:s>
+                        <a:s> LeftMastectomyProcedure</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="225">
+                     <a:s>where </a:s>
+                     <a:s r="225">
+                        <a:s r="222">
+                           <a:s r="219">
+                              <a:s>FHIRBase</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="222">
+                              <a:s>&quot;Normalize Interval&quot; ( </a:s>
+                              <a:s r="221">
+                                 <a:s r="220">
+                                    <a:s>LeftMastectomyProcedure</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="221">
+                                    <a:s>performed</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="225"> ends on or before
+    </a:s>
+                        <a:s r="224">
+                           <a:s>end of </a:s>
+                           <a:s r="223">
+                              <a:s>&quot;Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="226" locator="108:3-116:31" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="218" locator="108:3-114:31" alias="LeftMastectomyProcedure">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="217" locator="108:3-114:7" xsi:type="Union">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <signature xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <signature xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <operand localId="207" locator="108:5-111:5" xsi:type="Union">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <signature xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                     </signature>
+                     <signature xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                     </signature>
+                     <operand localId="197" locator="108:5-108:82" name="Completed Procedure" libraryName="Status" xsi:type="FunctionRef">
+                        <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <signature xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                        </signature>
+                        <operand localId="196" locator="108:38-108:78" dataType="fhir:Procedure" templateId="http://hl7.org/fhir/StructureDefinition/Procedure" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <codes locator="108:50-108:77" resultTypeName="t:ValueSet" name="Unilateral Mastectomy Left" preserve="true" xsi:type="ValueSetRef"/>
+                        </operand>
+                     </operand>
+                     <operand localId="206" locator="109:11-111:5" xsi:type="Query">
+                        <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <source localId="201" locator="109:13-109:115" alias="UnilateralMastectomyProcedure">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <expression localId="200" locator="109:13-109:85" name="Completed Procedure" libraryName="Status" xsi:type="FunctionRef">
+                              <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                 <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                              <signature xsi:type="ListTypeSpecifier">
+                                 <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                              </signature>
+                              <operand localId="199" locator="109:46-109:81" dataType="fhir:Procedure" templateId="http://hl7.org/fhir/StructureDefinition/Procedure" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                                 <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                    <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                                 <codes locator="109:58-109:80" resultTypeName="t:ValueSet" name="Unilateral Mastectomy" preserve="true" xsi:type="ValueSetRef"/>
+                              </operand>
+                           </expression>
+                        </source>
+                        <where localId="205" locator="110:9-110:71" resultTypeName="t:Boolean" xsi:type="AnyInValueSet">
+                           <signature xsi:type="ListTypeSpecifier">
+                              <elementType name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                           </signature>
+                           <codes xsi:type="Query">
+                              <source alias="X">
+                                 <expression localId="203" locator="110:15-110:52" path="bodySite" scope="UnilateralMastectomyProcedure" xsi:type="Property">
+                                    <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                       <elementType name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
+                                    </resultTypeSpecifier>
+                                 </expression>
+                              </source>
+                              <return distinct="false">
+                                 <expression name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <signature name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
+                                    <operand name="X" xsi:type="AliasRef"/>
+                                 </expression>
+                              </return>
+                           </codes>
+                           <valueset localId="204" locator="110:57-110:71" resultTypeName="t:ValueSet" name="Left Modifier" preserve="true"/>
+                        </where>
+                     </operand>
+                  </operand>
+                  <operand localId="216" locator="112:11-114:5" xsi:type="Query">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <source localId="211" locator="112:13-112:132" alias="ClinicalUnilateralMastectomyProcedure">
+                        <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <expression localId="210" locator="112:13-112:94" name="Completed Procedure" libraryName="Status" xsi:type="FunctionRef">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <signature xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                           </signature>
+                           <operand localId="209" locator="112:46-112:90" dataType="fhir:Procedure" templateId="http://hl7.org/fhir/StructureDefinition/Procedure" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                              <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                 <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                              <codes locator="112:58-112:89" resultTypeName="t:ValueSet" name="Clinical Unilateral Mastectomy" preserve="true" xsi:type="ValueSetRef"/>
+                           </operand>
+                        </expression>
+                     </source>
+                     <where localId="215" locator="113:9-113:88" resultTypeName="t:Boolean" xsi:type="AnyInValueSet">
+                        <signature xsi:type="ListTypeSpecifier">
+                           <elementType name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                        </signature>
+                        <codes xsi:type="Query">
+                           <source alias="X">
+                              <expression localId="213" locator="113:15-113:60" path="bodySite" scope="ClinicalUnilateralMastectomyProcedure" xsi:type="Property">
+                                 <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                    <elementType name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                              </expression>
+                           </source>
+                           <return distinct="false">
+                              <expression name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <signature name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
+                                 <operand name="X" xsi:type="AliasRef"/>
+                              </expression>
+                           </return>
+                        </codes>
+                        <valueset localId="214" locator="113:65-113:88" resultTypeName="t:ValueSet" name="Clinical Left Modifier" preserve="true"/>
+                     </where>
+                  </operand>
+               </expression>
+            </source>
+            <where localId="225" locator="115:5-116:31" resultTypeName="t:Boolean" xsi:type="SameOrBefore">
+               <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+               <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+               <operand locator="115:79-115:82" xsi:type="End">
+                  <signature xsi:type="IntervalTypeSpecifier">
+                     <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <operand localId="222" locator="115:11-115:77" name="Normalize Interval" libraryName="FHIRBase" xsi:type="FunctionRef">
+                     <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <signature xsi:type="ChoiceTypeSpecifier">
+                        <choice name="fhir:dateTime" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:date" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Period" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Timing" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:instant" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:string" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Age" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Range" xsi:type="NamedTypeSpecifier"/>
+                     </signature>
+                     <operand localId="221" locator="115:43-115:75" path="performed" scope="LeftMastectomyProcedure" xsi:type="Property">
+                        <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                           <choice name="fhir:dateTime" xsi:type="NamedTypeSpecifier"/>
+                           <choice name="fhir:Period" xsi:type="NamedTypeSpecifier"/>
+                           <choice name="fhir:string" xsi:type="NamedTypeSpecifier"/>
+                           <choice name="fhir:Age" xsi:type="NamedTypeSpecifier"/>
+                           <choice name="fhir:Range" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand localId="224" locator="116:5-116:31" resultTypeName="t:DateTime" xsi:type="End">
+                  <signature xsi:type="IntervalTypeSpecifier">
+                     <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <operand localId="223" locator="116:12-116:31" name="Measurement Period" xsi:type="ParameterRef">
+                     <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                  </operand>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="243" locator="118:1-121:31" name="Bilateral Mastectomy Diagnosis" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="243">
+               <a:s>define &quot;Bilateral Mastectomy Diagnosis&quot;:
+  </a:s>
+               <a:s r="242">
+                  <a:s>
+                     <a:s r="235">
+                        <a:s r="234">
+                           <a:s>( </a:s>
+                           <a:s r="234">
+                              <a:s r="232">
+                                 <a:s>Status</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="234">
+                                 <a:s>&quot;Active Condition&quot; ( </a:s>
+                                 <a:s r="233">
+                                    <a:s>[Condition: </a:s>
+                                    <a:s>
+                                       <a:s>&quot;History of Bilateral Mastectomy&quot;</a:s>
+                                    </a:s>
+                                    <a:s>]</a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> )</a:s>
+                        </a:s>
+                        <a:s> BilateralMastectomyHistory</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="241">
+                     <a:s>where </a:s>
+                     <a:s r="241">
+                        <a:s r="238">
+                           <a:s r="236">
+                              <a:s>FHIRBase</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="238">
+                              <a:s>&quot;Prevalence Period&quot; ( </a:s>
+                              <a:s r="237">
+                                 <a:s>BilateralMastectomyHistory</a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="241"> starts on or before
+    </a:s>
+                        <a:s r="240">
+                           <a:s>end of </a:s>
+                           <a:s r="239">
+                              <a:s>&quot;Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="242" locator="119:3-121:31" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="235" locator="119:3-119:109" alias="BilateralMastectomyHistory">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="234" locator="119:3-119:82" name="Active Condition" libraryName="Status" xsi:type="FunctionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <signature xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <operand localId="233" locator="119:33-119:78" dataType="fhir:Condition" templateId="http://hl7.org/fhir/StructureDefinition/Condition" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <codes locator="119:45-119:77" resultTypeName="t:ValueSet" name="History of Bilateral Mastectomy" preserve="true" xsi:type="ValueSetRef"/>
+                  </operand>
+               </expression>
+            </source>
+            <where localId="241" locator="120:5-121:31" resultTypeName="t:Boolean" xsi:type="SameOrBefore">
+               <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+               <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+               <operand locator="120:71-120:76" xsi:type="Start">
+                  <signature xsi:type="IntervalTypeSpecifier">
+                     <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <operand localId="238" locator="120:11-120:69" name="Prevalence Period" libraryName="FHIRBase" xsi:type="FunctionRef">
+                     <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <signature name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                     <operand localId="237" locator="120:42-120:67" resultTypeName="fhir:Condition" name="BilateralMastectomyHistory" xsi:type="AliasRef"/>
+                  </operand>
+               </operand>
+               <operand localId="240" locator="121:5-121:31" resultTypeName="t:DateTime" xsi:type="End">
+                  <signature xsi:type="IntervalTypeSpecifier">
+                     <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <operand localId="239" locator="121:12-121:31" name="Measurement Period" xsi:type="ParameterRef">
+                     <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                  </operand>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="279" locator="123:1-132:31" name="Bilateral Mastectomy Procedure" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="279">
+               <a:s>define &quot;Bilateral Mastectomy Procedure&quot;:
+  </a:s>
+               <a:s r="278">
+                  <a:s>
+                     <a:s r="270">
+                        <a:s r="269">
+                           <a:s>( </a:s>
+                           <a:s r="269">
+                              <a:s r="259">
+                                 <a:s r="249">
+                                    <a:s>( </a:s>
+                                    <a:s r="249">
+                                       <a:s r="247">
+                                          <a:s>Status</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="249">
+                                          <a:s>&quot;Completed Procedure&quot; ( </a:s>
+                                          <a:s r="248">
+                                             <a:s>[Procedure: </a:s>
+                                             <a:s>
+                                                <a:s>&quot;Bilateral Mastectomy&quot;</a:s>
+                                             </a:s>
+                                             <a:s>]</a:s>
+                                          </a:s>
+                                          <a:s> )</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> )</a:s>
+                                 </a:s>
+                                 <a:s>
+    union </a:s>
+                                 <a:s r="258">
+                                    <a:s>( </a:s>
+                                    <a:s r="258">
+                                       <a:s>
+                                          <a:s r="253">
+                                             <a:s r="252">
+                                                <a:s>( </a:s>
+                                                <a:s r="252">
+                                                   <a:s r="250">
+                                                      <a:s>Status</a:s>
+                                                   </a:s>
+                                                   <a:s>.</a:s>
+                                                   <a:s r="252">
+                                                      <a:s>&quot;Completed Procedure&quot; ( </a:s>
+                                                      <a:s r="251">
+                                                         <a:s>[Procedure: </a:s>
+                                                         <a:s>
+                                                            <a:s>&quot;Unilateral Mastectomy&quot;</a:s>
+                                                         </a:s>
+                                                         <a:s>]</a:s>
+                                                      </a:s>
+                                                      <a:s> )</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s> )</a:s>
+                                             </a:s>
+                                             <a:s> UnilateralMastectomyProcedure</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>
+        </a:s>
+                                       <a:s r="257">
+                                          <a:s>where </a:s>
+                                          <a:s r="257">
+                                             <a:s r="255">
+                                                <a:s r="254">
+                                                   <a:s>UnilateralMastectomyProcedure</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="255">
+                                                   <a:s>bodySite</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s> in </a:s>
+                                             <a:s r="256">
+                                                <a:s>&quot;Bilateral Modifier&quot;</a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+    )</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+    union </a:s>
+                              <a:s r="268">
+                                 <a:s>( </a:s>
+                                 <a:s r="268">
+                                    <a:s>
+                                       <a:s r="263">
+                                          <a:s r="262">
+                                             <a:s>( </a:s>
+                                             <a:s r="262">
+                                                <a:s r="260">
+                                                   <a:s>Status</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="262">
+                                                   <a:s>&quot;Completed Procedure&quot; ( </a:s>
+                                                   <a:s r="261">
+                                                      <a:s>[Procedure: </a:s>
+                                                      <a:s>
+                                                         <a:s>&quot;Clinical Unilateral Mastectomy&quot;</a:s>
+                                                      </a:s>
+                                                      <a:s>]</a:s>
+                                                   </a:s>
+                                                   <a:s> )</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s> )</a:s>
+                                          </a:s>
+                                          <a:s> ClinicalUnilateralMastectomyProcedure</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+        </a:s>
+                                    <a:s r="267">
+                                       <a:s>where </a:s>
+                                       <a:s r="267">
+                                          <a:s r="265">
+                                             <a:s r="264">
+                                                <a:s>ClinicalUnilateralMastectomyProcedure</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="265">
+                                                <a:s>bodySite</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s> in </a:s>
+                                          <a:s r="266">
+                                             <a:s>&quot;Clinical Bilateral Modifier&quot;</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+    )</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> )</a:s>
+                        </a:s>
+                        <a:s> BilateralMastectomyPerformed</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="277">
+                     <a:s>where </a:s>
+                     <a:s r="277">
+                        <a:s r="274">
+                           <a:s r="271">
+                              <a:s>FHIRBase</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="274">
+                              <a:s>&quot;Normalize Interval&quot; ( </a:s>
+                              <a:s r="273">
+                                 <a:s r="272">
+                                    <a:s>BilateralMastectomyPerformed</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="273">
+                                    <a:s>performed</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="277"> ends on or before
+    </a:s>
+                        <a:s r="276">
+                           <a:s>end of </a:s>
+                           <a:s r="275">
+                              <a:s>&quot;Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="278" locator="124:3-132:31" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="270" locator="124:3-130:36" alias="BilateralMastectomyPerformed">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="269" locator="124:3-130:7" xsi:type="Union">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <signature xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <signature xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <operand localId="259" locator="124:5-127:5" xsi:type="Union">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <signature xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                     </signature>
+                     <signature xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                     </signature>
+                     <operand localId="249" locator="124:5-124:76" name="Completed Procedure" libraryName="Status" xsi:type="FunctionRef">
+                        <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <signature xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                        </signature>
+                        <operand localId="248" locator="124:38-124:72" dataType="fhir:Procedure" templateId="http://hl7.org/fhir/StructureDefinition/Procedure" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <codes locator="124:50-124:71" resultTypeName="t:ValueSet" name="Bilateral Mastectomy" preserve="true" xsi:type="ValueSetRef"/>
+                        </operand>
+                     </operand>
+                     <operand localId="258" locator="125:11-127:5" xsi:type="Query">
+                        <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <source localId="253" locator="125:13-125:115" alias="UnilateralMastectomyProcedure">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <expression localId="252" locator="125:13-125:85" name="Completed Procedure" libraryName="Status" xsi:type="FunctionRef">
+                              <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                 <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                              <signature xsi:type="ListTypeSpecifier">
+                                 <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                              </signature>
+                              <operand localId="251" locator="125:46-125:81" dataType="fhir:Procedure" templateId="http://hl7.org/fhir/StructureDefinition/Procedure" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                                 <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                    <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                                 <codes locator="125:58-125:80" resultTypeName="t:ValueSet" name="Unilateral Mastectomy" preserve="true" xsi:type="ValueSetRef"/>
+                              </operand>
+                           </expression>
+                        </source>
+                        <where localId="257" locator="126:9-126:76" resultTypeName="t:Boolean" xsi:type="AnyInValueSet">
+                           <signature xsi:type="ListTypeSpecifier">
+                              <elementType name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                           </signature>
+                           <codes xsi:type="Query">
+                              <source alias="X">
+                                 <expression localId="255" locator="126:15-126:52" path="bodySite" scope="UnilateralMastectomyProcedure" xsi:type="Property">
+                                    <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                       <elementType name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
+                                    </resultTypeSpecifier>
+                                 </expression>
+                              </source>
+                              <return distinct="false">
+                                 <expression name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <signature name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
+                                    <operand name="X" xsi:type="AliasRef"/>
+                                 </expression>
+                              </return>
+                           </codes>
+                           <valueset localId="256" locator="126:57-126:76" resultTypeName="t:ValueSet" name="Bilateral Modifier" preserve="true"/>
+                        </where>
+                     </operand>
+                  </operand>
+                  <operand localId="268" locator="128:11-130:5" xsi:type="Query">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <source localId="263" locator="128:13-128:132" alias="ClinicalUnilateralMastectomyProcedure">
+                        <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <expression localId="262" locator="128:13-128:94" name="Completed Procedure" libraryName="Status" xsi:type="FunctionRef">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <signature xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                           </signature>
+                           <operand localId="261" locator="128:46-128:90" dataType="fhir:Procedure" templateId="http://hl7.org/fhir/StructureDefinition/Procedure" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                              <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                 <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                              <codes locator="128:58-128:89" resultTypeName="t:ValueSet" name="Clinical Unilateral Mastectomy" preserve="true" xsi:type="ValueSetRef"/>
+                           </operand>
+                        </expression>
+                     </source>
+                     <where localId="267" locator="129:9-129:93" resultTypeName="t:Boolean" xsi:type="AnyInValueSet">
+                        <signature xsi:type="ListTypeSpecifier">
+                           <elementType name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                        </signature>
+                        <codes xsi:type="Query">
+                           <source alias="X">
+                              <expression localId="265" locator="129:15-129:60" path="bodySite" scope="ClinicalUnilateralMastectomyProcedure" xsi:type="Property">
+                                 <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                    <elementType name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                              </expression>
+                           </source>
+                           <return distinct="false">
+                              <expression name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <signature name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
+                                 <operand name="X" xsi:type="AliasRef"/>
+                              </expression>
+                           </return>
+                        </codes>
+                        <valueset localId="266" locator="129:65-129:93" resultTypeName="t:ValueSet" name="Clinical Bilateral Modifier" preserve="true"/>
+                     </where>
+                  </operand>
+               </expression>
+            </source>
+            <where localId="277" locator="131:5-132:31" resultTypeName="t:Boolean" xsi:type="SameOrBefore">
+               <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+               <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+               <operand locator="131:84-131:87" xsi:type="End">
+                  <signature xsi:type="IntervalTypeSpecifier">
+                     <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <operand localId="274" locator="131:11-131:82" name="Normalize Interval" libraryName="FHIRBase" xsi:type="FunctionRef">
+                     <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <signature xsi:type="ChoiceTypeSpecifier">
+                        <choice name="fhir:dateTime" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:date" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Period" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Timing" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:instant" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:string" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Age" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Range" xsi:type="NamedTypeSpecifier"/>
+                     </signature>
+                     <operand localId="273" locator="131:43-131:80" path="performed" scope="BilateralMastectomyPerformed" xsi:type="Property">
+                        <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                           <choice name="fhir:dateTime" xsi:type="NamedTypeSpecifier"/>
+                           <choice name="fhir:Period" xsi:type="NamedTypeSpecifier"/>
+                           <choice name="fhir:string" xsi:type="NamedTypeSpecifier"/>
+                           <choice name="fhir:Age" xsi:type="NamedTypeSpecifier"/>
+                           <choice name="fhir:Range" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand localId="276" locator="132:5-132:31" resultTypeName="t:DateTime" xsi:type="End">
+                  <signature xsi:type="IntervalTypeSpecifier">
+                     <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <operand localId="275" locator="132:12-132:31" name="Measurement Period" xsi:type="ParameterRef">
+                     <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                  </operand>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="283" locator="75:1-84:46" resultTypeName="t:Boolean" name="Mastectomy Exclusion" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="283">
+               <a:s>define &quot;Mastectomy Exclusion&quot;:
+  </a:s>
+               <a:s r="282">
+                  <a:s r="246">
+                     <a:s r="231">
+                        <a:s>( </a:s>
+                        <a:s r="231">
+                           <a:s r="180">
+                              <a:s>( </a:s>
+                              <a:s r="180">
+                                 <a:s r="144">
+                                    <a:s>exists </a:s>
+                                    <a:s r="143">
+                                       <a:s>&quot;Right Mastectomy Diagnosis&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+        or </a:s>
+                                 <a:s r="179">
+                                    <a:s>exists </a:s>
+                                    <a:s r="178">
+                                       <a:s>&quot;Right Mastectomy Procedure&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+    )</a:s>
+                           </a:s>
+                           <a:s>
+      and </a:s>
+                           <a:s r="230">
+                              <a:s>( </a:s>
+                              <a:s r="230">
+                                 <a:s r="194">
+                                    <a:s>exists </a:s>
+                                    <a:s r="193">
+                                       <a:s>&quot;Left Mastectomy Diagnosis&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+          or </a:s>
+                                 <a:s r="229">
+                                    <a:s>exists </a:s>
+                                    <a:s r="228">
+                                       <a:s>&quot;Left Mastectomy Procedure&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+  )</a:s>
+                     </a:s>
+                     <a:s>
+    or </a:s>
+                     <a:s r="245">
+                        <a:s>exists </a:s>
+                        <a:s r="244">
+                           <a:s>&quot;Bilateral Mastectomy Diagnosis&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    or </a:s>
+                  <a:s r="281">
+                     <a:s>exists </a:s>
+                     <a:s r="280">
+                        <a:s>&quot;Bilateral Mastectomy Procedure&quot;</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="282" locator="76:3-84:46" resultTypeName="t:Boolean" xsi:type="Or">
+            <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+            <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+            <operand localId="246" locator="76:3-83:46" resultTypeName="t:Boolean" xsi:type="Or">
+               <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+               <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+               <operand localId="231" locator="76:3-82:3" resultTypeName="t:Boolean" xsi:type="And">
+                  <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                  <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                  <operand localId="180" locator="76:5-78:5" resultTypeName="t:Boolean" xsi:type="Or">
+                     <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                     <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                     <operand localId="144" locator="76:7-76:41" resultTypeName="t:Boolean" xsi:type="Exists">
+                        <signature xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                        </signature>
+                        <operand localId="143" locator="76:14-76:41" name="Right Mastectomy Diagnosis" xsi:type="ExpressionRef">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                        </operand>
+                     </operand>
+                     <operand localId="179" locator="77:12-77:46" resultTypeName="t:Boolean" xsi:type="Exists">
+                        <signature xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                        </signature>
+                        <operand localId="178" locator="77:19-77:46" name="Right Mastectomy Procedure" xsi:type="ExpressionRef">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand localId="230" locator="79:11-81:7" resultTypeName="t:Boolean" xsi:type="Or">
+                     <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                     <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                     <operand localId="194" locator="79:13-79:46" resultTypeName="t:Boolean" xsi:type="Exists">
+                        <signature xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                        </signature>
+                        <operand localId="193" locator="79:20-79:46" name="Left Mastectomy Diagnosis" xsi:type="ExpressionRef">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                        </operand>
+                     </operand>
+                     <operand localId="229" locator="80:14-80:47" resultTypeName="t:Boolean" xsi:type="Exists">
+                        <signature xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                        </signature>
+                        <operand localId="228" locator="80:21-80:47" name="Left Mastectomy Procedure" xsi:type="ExpressionRef">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                        </operand>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand localId="245" locator="83:8-83:46" resultTypeName="t:Boolean" xsi:type="Exists">
+                  <signature xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <operand localId="244" locator="83:15-83:46" name="Bilateral Mastectomy Diagnosis" xsi:type="ExpressionRef">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                  </operand>
+               </operand>
+            </operand>
+            <operand localId="281" locator="84:8-84:46" resultTypeName="t:Boolean" xsi:type="Exists">
+               <signature xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+               </signature>
+               <operand localId="280" locator="84:15-84:46" name="Bilateral Mastectomy Procedure" xsi:type="ExpressionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </operand>
+            </operand>
+         </expression>
+      </def>
+      <def localId="293" locator="69:1-73:83" resultTypeName="t:Boolean" name="Exclusions" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="293">
+               <a:s>define &quot;Exclusions&quot;:
+  </a:s>
+               <a:s r="292">
+                  <a:s r="288">
+                     <a:s r="285">
+                        <a:s r="130">
+                           <a:s r="129">
+                              <a:s>Hospice</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="130">
+                              <a:s>&quot;Hospice Intervention or Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+    or </a:s>
+                        <a:s r="284">
+                           <a:s>&quot;Mastectomy Exclusion&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    or </a:s>
+                     <a:s r="287">
+                        <a:s r="286">
+                           <a:s>AdvancedIllnessFrailty</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="287">
+                           <a:s>&quot;Advanced Illness and Frailty Exclusion Not Including Over Age 80&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    or </a:s>
+                  <a:s r="291">
+                     <a:s r="289">
+                        <a:s>PalliativeCare</a:s>
+                     </a:s>
+                     <a:s>.</a:s>
+                     <a:s r="291">
+                        <a:s>&quot;Palliative Care Overlapping Period&quot; ( </a:s>
+                        <a:s r="290">
+                           <a:s>&quot;Measurement Period&quot;</a:s>
+                        </a:s>
+                        <a:s> )</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="292" locator="70:3-73:83" resultTypeName="t:Boolean" xsi:type="Or">
+            <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+            <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+            <operand localId="288" locator="70:3-72:96" resultTypeName="t:Boolean" xsi:type="Or">
+               <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+               <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+               <operand localId="285" locator="70:3-71:29" resultTypeName="t:Boolean" xsi:type="Or">
+                  <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                  <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                  <operand localId="130" locator="70:3-70:45" resultTypeName="t:Boolean" name="Hospice Intervention or Encounter" libraryName="Hospice" xsi:type="ExpressionRef"/>
+                  <operand localId="284" locator="71:8-71:29" resultTypeName="t:Boolean" name="Mastectomy Exclusion" xsi:type="ExpressionRef"/>
+               </operand>
+               <operand localId="287" locator="72:8-72:96" resultTypeName="t:Boolean" name="Advanced Illness and Frailty Exclusion Not Including Over Age 80" libraryName="AdvancedIllnessFrailty" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand localId="291" locator="73:8-73:83" resultTypeName="t:Boolean" name="Palliative Care Overlapping Period" libraryName="PalliativeCare" xsi:type="FunctionRef">
+               <signature xsi:type="IntervalTypeSpecifier">
+                  <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+               </signature>
+               <operand localId="290" locator="73:62-73:81" name="Measurement Period" xsi:type="ParameterRef">
+                  <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                     <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </operand>
+            </operand>
+         </expression>
+      </def>
+      <def localId="304" locator="134:1-137:3" resultTypeName="t:Boolean" name="Numerator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="304">
+               <a:s>define &quot;Numerator&quot;:
+  </a:s>
+               <a:s r="303">
+                  <a:s>exists </a:s>
+                  <a:s r="302">
+                     <a:s>( </a:s>
+                     <a:s r="302">
+                        <a:s>
+                           <a:s r="295">
+                              <a:s r="294">
+                                 <a:s r="294">
+                                    <a:s>[Observation: </a:s>
+                                    <a:s>
+                                       <a:s>&quot;Mammography&quot;</a:s>
+                                    </a:s>
+                                    <a:s>]</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> Mammogram</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="301">
+                           <a:s>where </a:s>
+                           <a:s r="301">
+                              <a:s r="299">
+                                 <a:s r="296">
+                                    <a:s>FHIRBase</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="299">
+                                    <a:s>&quot;Normalize Interval&quot; ( </a:s>
+                                    <a:s r="298">
+                                       <a:s r="297">
+                                          <a:s>Mammogram</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="298">
+                                          <a:s>effective</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> )</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s r="301"> ends during </a:s>
+                              <a:s r="300">
+                                 <a:s>&quot;Participation Period&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="303" locator="135:3-137:3" resultTypeName="t:Boolean" xsi:type="Exists">
+            <signature xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+            </signature>
+            <operand localId="302" locator="135:10-137:3" xsi:type="Query">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <source localId="295" locator="135:12-135:49" alias="Mammogram">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <expression localId="294" locator="135:12-135:39" dataType="fhir:Observation" templateId="http://hl7.org/fhir/StructureDefinition/Observation" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <codes locator="135:26-135:38" resultTypeName="t:ValueSet" name="Mammography" preserve="true" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <where localId="301" locator="136:7-136:100" resultTypeName="t:Boolean" xsi:type="In">
+                  <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                  <signature xsi:type="IntervalTypeSpecifier">
+                     <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <operand locator="136:67-136:70" xsi:type="End">
+                     <signature xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     </signature>
+                     <operand localId="299" locator="136:13-136:65" name="Normalize Interval" libraryName="FHIRBase" xsi:type="FunctionRef">
+                        <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                           <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <signature xsi:type="ChoiceTypeSpecifier">
+                           <choice name="fhir:dateTime" xsi:type="NamedTypeSpecifier"/>
+                           <choice name="fhir:date" xsi:type="NamedTypeSpecifier"/>
+                           <choice name="fhir:Period" xsi:type="NamedTypeSpecifier"/>
+                           <choice name="fhir:Timing" xsi:type="NamedTypeSpecifier"/>
+                           <choice name="fhir:instant" xsi:type="NamedTypeSpecifier"/>
+                           <choice name="fhir:string" xsi:type="NamedTypeSpecifier"/>
+                           <choice name="fhir:Age" xsi:type="NamedTypeSpecifier"/>
+                           <choice name="fhir:Range" xsi:type="NamedTypeSpecifier"/>
+                        </signature>
+                        <operand localId="298" locator="136:45-136:63" path="effective" scope="Mammogram" xsi:type="Property">
+                           <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                              <choice name="fhir:dateTime" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="fhir:Period" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="fhir:Timing" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="fhir:instant" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand localId="300" locator="136:79-136:100" name="Participation Period" xsi:type="ExpressionRef">
+                     <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                  </operand>
+               </where>
+            </operand>
+         </expression>
+      </def>
+   </statements>
+</library>

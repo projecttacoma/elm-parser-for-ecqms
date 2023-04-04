@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion,DisableMethodInvocation" xsi:type="a:CqlToElmInfo"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="45">
+         <a:s>library ChildrenWhoHaveDentalDecayOrCavities version '11.0.000'</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="ChildrenWhoHaveDentalDecayOrCavities" version="11.0.000"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="3:1-3:23" localIdentifier="QDM" uri="urn:healthit-gov:qdm:v5_6" version="5.6">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>using </a:s>
+               <a:s>
+                  <a:s>QDM</a:s>
+               </a:s>
+               <a:s> version '5.6'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="5:1-5:64" localIdentifier="Global" path="MATGlobalCommonFunctions" version="7.0.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>MATGlobalCommonFunctions</a:s>
+               </a:s>
+               <a:s> version '7.0.000' called Global</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="3" locator="6:1-6:48" localIdentifier="Hospice" path="Hospice" version="4.0.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>Hospice</a:s>
+               </a:s>
+               <a:s> version '4.0.000' called Hospice</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <parameters>
+      <def localId="12" locator="15:1-15:49" name="Measurement Period" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="12">
+               <a:s>parameter &quot;Measurement Period&quot; </a:s>
+               <a:s r="11">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="10">
+                     <a:s>DateTime</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <parameterTypeSpecifier localId="11" locator="15:32-15:49" xsi:type="IntervalTypeSpecifier">
+            <pointType localId="10" locator="15:41-15:48" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <valueSets>
+      <def localId="4" locator="8:1-8:87" name="Clinical Oral Evaluation" id="urn:oid:2.16.840.1.113883.3.464.1003.125.12.1003" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>valueset &quot;Clinical Oral Evaluation&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.125.12.1003'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="5" locator="9:1-9:76" name="Dental Caries" id="urn:oid:2.16.840.1.113883.3.464.1003.125.12.1004" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>valueset &quot;Dental Caries&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.125.12.1004'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="6" locator="10:1-10:58" name="Ethnicity" id="urn:oid:2.16.840.1.114222.4.11.837" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>valueset &quot;Ethnicity&quot;: 'urn:oid:2.16.840.1.114222.4.11.837'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="7" locator="11:1-11:68" name="ONC Administrative Sex" id="urn:oid:2.16.840.1.113762.1.4.1" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="7">
+               <a:s>valueset &quot;ONC Administrative Sex&quot;: 'urn:oid:2.16.840.1.113762.1.4.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="8" locator="12:1-12:55" name="Payer" id="urn:oid:2.16.840.1.114222.4.11.3591" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="8">
+               <a:s>valueset &quot;Payer&quot;: 'urn:oid:2.16.840.1.114222.4.11.3591'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="9" locator="13:1-13:53" name="Race" id="urn:oid:2.16.840.1.114222.4.11.836" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="9">
+               <a:s>valueset &quot;Race&quot;: 'urn:oid:2.16.840.1.114222.4.11.836'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </valueSets>
+   <contexts>
+      <def locator="17:1-17:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="17:1-17:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="17:1-17:15" xmlns:ns0="urn:healthit-gov:qdm:v5_6" dataType="ns0:Patient" templateId="Patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="14" locator="19:1-20:51" name="SDE Ethnicity" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="14">
+               <a:s>define &quot;SDE Ethnicity&quot;:
+  </a:s>
+               <a:s r="13">
+                  <a:s>[&quot;Patient Characteristic Ethnicity&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Ethnicity&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="13" locator="20:3-20:51" xmlns:ns1="urn:healthit-gov:qdm:v5_6" dataType="ns1:PatientCharacteristicEthnicity" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="20:40-20:50" name="Ethnicity" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="16" locator="22:1-23:43" name="SDE Payer" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="16">
+               <a:s>define &quot;SDE Payer&quot;:
+  </a:s>
+               <a:s r="15">
+                  <a:s>[&quot;Patient Characteristic Payer&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Payer&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="15" locator="23:3-23:43" xmlns:ns2="urn:healthit-gov:qdm:v5_6" dataType="ns2:PatientCharacteristicPayer" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="23:36-23:42" name="Payer" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="18" locator="25:1-26:41" name="SDE Race" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="18">
+               <a:s>define &quot;SDE Race&quot;:
+  </a:s>
+               <a:s r="17">
+                  <a:s>[&quot;Patient Characteristic Race&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Race&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="17" locator="26:3-26:41" xmlns:ns3="urn:healthit-gov:qdm:v5_6" dataType="ns3:PatientCharacteristicRace" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="26:35-26:40" name="Race" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="20" locator="28:1-29:58" name="SDE Sex" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="20">
+               <a:s>define &quot;SDE Sex&quot;:
+  </a:s>
+               <a:s r="19">
+                  <a:s>[&quot;Patient Characteristic Sex&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;ONC Administrative Sex&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="19" locator="29:3-29:58" xmlns:ns4="urn:healthit-gov:qdm:v5_6" dataType="ns4:PatientCharacteristicSex" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="29:34-29:57" name="ONC Administrative Sex" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="41" locator="42:1-44:74" name="Qualifying Encounters" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="41">
+               <a:s>define &quot;Qualifying Encounters&quot;:
+  </a:s>
+               <a:s r="40">
+                  <a:s>
+                     <a:s r="35">
+                        <a:s r="34">
+                           <a:s r="34">
+                              <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Clinical Oral Evaluation&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> ValidEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="39">
+                     <a:s>where </a:s>
+                     <a:s r="39">
+                        <a:s r="37">
+                           <a:s r="36">
+                              <a:s>ValidEncounter</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="37">
+                              <a:s>relevantPeriod</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="39"> during day of </a:s>
+                        <a:s r="38">
+                           <a:s>&quot;Measurement Period&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="40" locator="43:3-44:74" xsi:type="Query">
+            <source localId="35" locator="43:3-43:69" alias="ValidEncounter">
+               <expression localId="34" locator="43:3-43:54" xmlns:ns5="urn:healthit-gov:qdm:v5_6" dataType="ns5:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="43:28-43:53" name="Clinical Oral Evaluation" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <where localId="39" locator="44:5-44:74" precision="Day" xsi:type="IncludedIn">
+               <operand localId="37" locator="44:11-44:39" path="relevantPeriod" scope="ValidEncounter" xsi:type="Property"/>
+               <operand localId="38" locator="44:55-44:74" name="Measurement Period" xsi:type="ParameterRef"/>
+            </where>
+         </expression>
+      </def>
+      <def localId="45" locator="46:1-49:42" name="Initial Population" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="45">
+               <a:s>define &quot;Initial Population&quot;:
+  </a:s>
+               <a:s r="44">
+                  <a:s r="33">
+                     <a:s r="26">
+                        <a:s r="24">
+                           <a:s>AgeInMonthsAt(</a:s>
+                           <a:s r="23">
+                              <a:s>date from </a:s>
+                              <a:s r="22">
+                                 <a:s>start of </a:s>
+                                 <a:s r="21">
+                                    <a:s>&quot;Measurement Period&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>)</a:s>
+                        </a:s>
+                        <a:s r="25">>= 6</a:s>
+                     </a:s>
+                     <a:s>
+    and </a:s>
+                     <a:s r="32">
+                        <a:s r="30">
+                           <a:s>AgeInYearsAt(</a:s>
+                           <a:s r="29">
+                              <a:s>date from </a:s>
+                              <a:s r="28">
+                                 <a:s>start of </a:s>
+                                 <a:s r="27">
+                                    <a:s>&quot;Measurement Period&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>)</a:s>
+                        </a:s>
+                        <a:s r="31">&lt;= 20</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    and </a:s>
+                  <a:s r="43">
+                     <a:s>exists </a:s>
+                     <a:s r="42">
+                        <a:s>( </a:s>
+                        <a:s r="42">
+                           <a:s>&quot;Qualifying Encounters&quot;</a:s>
+                        </a:s>
+                        <a:s> )</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="44" locator="47:3-49:42" xsi:type="And">
+            <operand localId="33" locator="47:3-48:66" xsi:type="And">
+               <operand localId="26" locator="47:3-47:60" xsi:type="GreaterOrEqual">
+                  <operand localId="24" locator="47:3-47:56" precision="Month" xsi:type="CalculateAgeAt">
+                     <operand xsi:type="ToDate">
+                        <operand path="birthDatetime" xsi:type="Property">
+                           <source name="Patient" xsi:type="ExpressionRef"/>
+                        </operand>
+                     </operand>
+                     <operand localId="23" locator="47:17-47:55" xsi:type="DateFrom">
+                        <operand localId="22" locator="47:27-47:55" xsi:type="Start">
+                           <operand localId="21" locator="47:36-47:55" name="Measurement Period" xsi:type="ParameterRef"/>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand localId="25" locator="47:60" valueType="t:Integer" value="6" xsi:type="Literal"/>
+               </operand>
+               <operand localId="32" locator="48:9-48:66" xsi:type="LessOrEqual">
+                  <operand localId="30" locator="48:9-48:61" precision="Year" xsi:type="CalculateAgeAt">
+                     <operand xsi:type="ToDate">
+                        <operand path="birthDatetime" xsi:type="Property">
+                           <source name="Patient" xsi:type="ExpressionRef"/>
+                        </operand>
+                     </operand>
+                     <operand localId="29" locator="48:22-48:60" xsi:type="DateFrom">
+                        <operand localId="28" locator="48:32-48:60" xsi:type="Start">
+                           <operand localId="27" locator="48:41-48:60" name="Measurement Period" xsi:type="ParameterRef"/>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand localId="31" locator="48:65-48:66" valueType="t:Integer" value="20" xsi:type="Literal"/>
+               </operand>
+            </operand>
+            <operand localId="43" locator="49:9-49:42" xsi:type="Exists">
+               <operand localId="42" locator="49:16-49:42" name="Qualifying Encounters" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
+      </def>
+      <def localId="47" locator="31:1-32:22" name="Denominator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="47">
+               <a:s>define &quot;Denominator&quot;:
+  </a:s>
+               <a:s r="46">
+                  <a:s>&quot;Initial Population&quot;</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="46" locator="32:3-32:22" name="Initial Population" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="56" locator="34:1-37:3" name="Numerator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="56">
+               <a:s>define &quot;Numerator&quot;:
+  </a:s>
+               <a:s r="55">
+                  <a:s>exists </a:s>
+                  <a:s r="54">
+                     <a:s>( </a:s>
+                     <a:s r="54">
+                        <a:s>
+                           <a:s r="49">
+                              <a:s r="48">
+                                 <a:s r="48">
+                                    <a:s>[&quot;Diagnosis&quot;: </a:s>
+                                    <a:s>
+                                       <a:s>&quot;Dental Caries&quot;</a:s>
+                                    </a:s>
+                                    <a:s>]</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> DentalCaries</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="53">
+                           <a:s>where </a:s>
+                           <a:s r="53">
+                              <a:s r="51">
+                                 <a:s r="50">
+                                    <a:s>DentalCaries</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="51">
+                                    <a:s>prevalencePeriod</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s r="53"> overlaps </a:s>
+                              <a:s r="52">
+                                 <a:s>&quot;Measurement Period&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="55" locator="35:3-37:3" xsi:type="Exists">
+            <operand localId="54" locator="35:10-37:3" xsi:type="Query">
+               <source localId="49" locator="35:12-35:54" alias="DentalCaries">
+                  <expression localId="48" locator="35:12-35:41" xmlns:ns6="urn:healthit-gov:qdm:v5_6" dataType="ns6:Diagnosis" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes locator="35:26-35:40" name="Dental Caries" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <where localId="53" locator="36:7-36:71" xsi:type="Overlaps">
+                  <operand localId="51" locator="36:13-36:41" path="prevalencePeriod" scope="DentalCaries" xsi:type="Property"/>
+                  <operand localId="52" locator="36:52-36:71" name="Measurement Period" xsi:type="ParameterRef"/>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def localId="59" locator="39:1-40:32" name="Denominator Exclusions" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="59">
+               <a:s>define &quot;Denominator Exclusions&quot;:
+  </a:s>
+               <a:s r="58">
+                  <a:s r="57">
+                     <a:s>Hospice</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="58">
+                     <a:s>&quot;Has Hospice Services&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="58" locator="40:3-40:32" name="Has Hospice Services" libraryName="Hospice" xsi:type="ExpressionRef"/>
+      </def>
+   </statements>
+</library>

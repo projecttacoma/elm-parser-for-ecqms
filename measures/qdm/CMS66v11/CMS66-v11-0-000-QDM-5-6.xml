@@ -1,0 +1,3560 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion,DisableMethodInvocation" xsi:type="a:CqlToElmInfo"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="96">
+         <a:s>library FunctionalStatusAssessmentforTotalKneeReplacement version '11.0.000'</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="FunctionalStatusAssessmentforTotalKneeReplacement" version="11.0.000"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="3:1-3:23" localIdentifier="QDM" uri="urn:healthit-gov:qdm:v5_6" version="5.6">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>using </a:s>
+               <a:s>
+                  <a:s>QDM</a:s>
+               </a:s>
+               <a:s> version '5.6'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="5:1-5:64" localIdentifier="Global" path="MATGlobalCommonFunctions" version="7.0.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>MATGlobalCommonFunctions</a:s>
+               </a:s>
+               <a:s> version '7.0.000' called Global</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="3" locator="6:1-6:48" localIdentifier="Hospice" path="Hospice" version="4.0.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>Hospice</a:s>
+               </a:s>
+               <a:s> version '4.0.000' called Hospice</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <parameters>
+      <def localId="47" locator="38:1-38:49" name="Measurement Period" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="47">
+               <a:s>parameter &quot;Measurement Period&quot; </a:s>
+               <a:s r="46">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="45">
+                     <a:s>DateTime</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <parameterTypeSpecifier localId="46" locator="38:32-38:49" xsi:type="IntervalTypeSpecifier">
+            <pointType localId="45" locator="38:41-38:48" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <codeSystems>
+      <def localId="4" locator="8:1-8:51" name="LOINC" id="urn:oid:2.16.840.1.113883.6.1" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>codesystem &quot;LOINC&quot;: 'urn:oid:2.16.840.1.113883.6.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="5" locator="9:1-9:50" name="CPT" id="urn:oid:2.16.840.1.113883.6.12" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>codesystem &quot;CPT&quot;: 'urn:oid:2.16.840.1.113883.6.12'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="6" locator="10:1-10:55" name="SNOMEDCT" id="urn:oid:2.16.840.1.113883.6.96" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>codesystem &quot;SNOMEDCT&quot;: 'urn:oid:2.16.840.1.113883.6.96'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </codeSystems>
+   <valueSets>
+      <def localId="7" locator="12:1-12:58" name="Ethnicity" id="urn:oid:2.16.840.1.114222.4.11.837" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="7">
+               <a:s>valueset &quot;Ethnicity&quot;: 'urn:oid:2.16.840.1.114222.4.11.837'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="8" locator="13:1-13:82" name="Lower Body Fracture" id="urn:oid:2.16.840.1.113883.3.464.1003.113.12.1037" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="8">
+               <a:s>valueset &quot;Lower Body Fracture&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.113.12.1037'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="9" locator="14:1-14:75" name="Office Visit" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1001" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="9">
+               <a:s>valueset &quot;Office Visit&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1001'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="10" locator="15:1-15:68" name="ONC Administrative Sex" id="urn:oid:2.16.840.1.113762.1.4.1" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="10">
+               <a:s>valueset &quot;ONC Administrative Sex&quot;: 'urn:oid:2.16.840.1.113762.1.4.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="11" locator="16:1-16:81" name="Online Assessments" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1089" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="11">
+               <a:s>valueset &quot;Online Assessments&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1089'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="12" locator="17:1-17:86" name="Outpatient Consultation" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1008" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="12">
+               <a:s>valueset &quot;Outpatient Consultation&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1008'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="13" locator="18:1-18:55" name="Payer" id="urn:oid:2.16.840.1.114222.4.11.3591" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="13">
+               <a:s>valueset &quot;Payer&quot;: 'urn:oid:2.16.840.1.114222.4.11.3591'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="14" locator="19:1-19:84" name="Primary TKA Procedure" id="urn:oid:2.16.840.1.113883.3.464.1003.198.12.1007" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="14">
+               <a:s>valueset &quot;Primary TKA Procedure&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.198.12.1007'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="15" locator="20:1-20:53" name="Race" id="urn:oid:2.16.840.1.114222.4.11.836" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="15">
+               <a:s>valueset &quot;Race&quot;: 'urn:oid:2.16.840.1.114222.4.11.836'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="16" locator="21:1-21:79" name="Telephone Visits" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1080" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="16">
+               <a:s>valueset &quot;Telephone Visits&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1080'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </valueSets>
+   <codes>
+      <def localId="18" locator="23:1-23:120" name="Activities of daily living score [KOOS]" id="72100-1" display="Activities of daily living score [KOOS]" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="18">
+               <a:s>code &quot;Activities of daily living score [KOOS]&quot;: '72100-1' from </a:s>
+               <a:s r="17">
+                  <a:s>&quot;LOINC&quot;</a:s>
+               </a:s>
+               <a:s> display 'Activities of daily living score [KOOS]'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="17" locator="23:64-23:70" name="LOINC"/>
+      </def>
+      <def localId="20" locator="24:1-24:192" name="Knee injury and osteoarthritis outcome score for joint replacement [KOOSJR]" id="82324-5" display="Knee injury and osteoarthritis outcome score for joint replacement [KOOSJR]" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="20">
+               <a:s>code &quot;Knee injury and osteoarthritis outcome score for joint replacement [KOOSJR]&quot;: '82324-5' from </a:s>
+               <a:s r="19">
+                  <a:s>&quot;LOINC&quot;</a:s>
+               </a:s>
+               <a:s> display 'Knee injury and osteoarthritis outcome score for joint replacement [KOOSJR]'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="19" locator="24:100-24:106" name="LOINC"/>
+      </def>
+      <def localId="22" locator="25:1-25:76" name="Pain score [KOOS]" id="72102-7" display="Pain score [KOOS]" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="22">
+               <a:s>code &quot;Pain score [KOOS]&quot;: '72102-7' from </a:s>
+               <a:s r="21">
+                  <a:s>&quot;LOINC&quot;</a:s>
+               </a:s>
+               <a:s> display 'Pain score [KOOS]'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="21" locator="25:42-25:48" name="LOINC"/>
+      </def>
+      <def localId="24" locator="26:1-26:480" name="Postoperative follow-up visit, normally included in the surgical package, to indicate that an evaluation and management service was performed during a postoperative period for a reason(s) related to the original procedure" id="99024" display="Postoperative follow-up visit, normally included in the surgical package, to indicate that an evaluation and management service was performed during a postoperative period for a reason(s) related to the original procedure" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="24">
+               <a:s>code &quot;Postoperative follow-up visit, normally included in the surgical package, to indicate that an evaluation and management service was performed during a postoperative period for a reason(s) related to the original procedure&quot;: '99024' from </a:s>
+               <a:s r="23">
+                  <a:s>&quot;CPT&quot;</a:s>
+               </a:s>
+               <a:s> display 'Postoperative follow-up visit, normally included in the surgical package, to indicate that an evaluation and management service was performed during a postoperative period for a reason(s) related to the original procedure'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="23" locator="26:244-26:248" name="CPT"/>
+      </def>
+      <def localId="26" locator="27:1-27:142" name="PROMIS-10 Global Mental Health (GMH) score T-score" id="71969-0" display="PROMIS-10 Global Mental Health (GMH) score T-score" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="26">
+               <a:s>code &quot;PROMIS-10 Global Mental Health (GMH) score T-score&quot;: '71969-0' from </a:s>
+               <a:s r="25">
+                  <a:s>&quot;LOINC&quot;</a:s>
+               </a:s>
+               <a:s> display 'PROMIS-10 Global Mental Health (GMH) score T-score'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="25" locator="27:75-27:81" name="LOINC"/>
+      </def>
+      <def localId="28" locator="28:1-28:146" name="PROMIS-10 Global Physical Health (GPH) score T-score" id="71971-6" display="PROMIS-10 Global Physical Health (GPH) score T-score" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="28">
+               <a:s>code &quot;PROMIS-10 Global Physical Health (GPH) score T-score&quot;: '71971-6' from </a:s>
+               <a:s r="27">
+                  <a:s>&quot;LOINC&quot;</a:s>
+               </a:s>
+               <a:s> display 'PROMIS-10 Global Physical Health (GPH) score T-score'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="27" locator="28:77-28:83" name="LOINC"/>
+      </def>
+      <def localId="30" locator="29:1-29:98" name="Quality of life score [KOOS]" id="72098-7" display="Quality of life score [KOOS]" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="30">
+               <a:s>code &quot;Quality of life score [KOOS]&quot;: '72098-7' from </a:s>
+               <a:s r="29">
+                  <a:s>&quot;LOINC&quot;</a:s>
+               </a:s>
+               <a:s> display 'Quality of life score [KOOS]'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="29" locator="29:53-29:59" name="LOINC"/>
+      </def>
+      <def localId="32" locator="30:1-30:105" name="Severe dementia (disorder)" id="428351000124105" display="Severe dementia (disorder)" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="32">
+               <a:s>code &quot;Severe dementia (disorder)&quot;: '428351000124105' from </a:s>
+               <a:s r="31">
+                  <a:s>&quot;SNOMEDCT&quot;</a:s>
+               </a:s>
+               <a:s> display 'Severe dementia (disorder)'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="31" locator="30:59-30:68" name="SNOMEDCT"/>
+      </def>
+      <def localId="34" locator="31:1-31:100" name="Sport-recreation score [KOOS]" id="72099-5" display="Sport-recreation score [KOOS]" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="34">
+               <a:s>code &quot;Sport-recreation score [KOOS]&quot;: '72099-5' from </a:s>
+               <a:s r="33">
+                  <a:s>&quot;LOINC&quot;</a:s>
+               </a:s>
+               <a:s> display 'Sport-recreation score [KOOS]'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="33" locator="31:54-31:60" name="LOINC"/>
+      </def>
+      <def localId="36" locator="32:1-32:84" name="Symptoms score [KOOS]" id="72101-9" display="Symptoms score [KOOS]" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="36">
+               <a:s>code &quot;Symptoms score [KOOS]&quot;: '72101-9' from </a:s>
+               <a:s r="35">
+                  <a:s>&quot;LOINC&quot;</a:s>
+               </a:s>
+               <a:s> display 'Symptoms score [KOOS]'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="35" locator="32:46-32:52" name="LOINC"/>
+      </def>
+      <def localId="38" locator="33:1-33:176" name="VR-12 Mental component summary (MCS) score - oblique method T-score" id="72026-8" display="VR-12 Mental component summary (MCS) score - oblique method T-score" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="38">
+               <a:s>code &quot;VR-12 Mental component summary (MCS) score - oblique method T-score&quot;: '72026-8' from </a:s>
+               <a:s r="37">
+                  <a:s>&quot;LOINC&quot;</a:s>
+               </a:s>
+               <a:s> display 'VR-12 Mental component summary (MCS) score - oblique method T-score'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="37" locator="33:92-33:98" name="LOINC"/>
+      </def>
+      <def localId="40" locator="34:1-34:182" name="VR-12 Mental component summary (MCS) score - orthogonal method T-score" id="72028-4" display="VR-12 Mental component summary (MCS) score - orthogonal method T-score" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="40">
+               <a:s>code &quot;VR-12 Mental component summary (MCS) score - orthogonal method T-score&quot;: '72028-4' from </a:s>
+               <a:s r="39">
+                  <a:s>&quot;LOINC&quot;</a:s>
+               </a:s>
+               <a:s> display 'VR-12 Mental component summary (MCS) score - orthogonal method T-score'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="39" locator="34:95-34:101" name="LOINC"/>
+      </def>
+      <def localId="42" locator="35:1-35:180" name="VR-12 Physical component summary (PCS) score - oblique method T-score" id="72025-0" display="VR-12 Physical component summary (PCS) score - oblique method T-score" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="42">
+               <a:s>code &quot;VR-12 Physical component summary (PCS) score - oblique method T-score&quot;: '72025-0' from </a:s>
+               <a:s r="41">
+                  <a:s>&quot;LOINC&quot;</a:s>
+               </a:s>
+               <a:s> display 'VR-12 Physical component summary (PCS) score - oblique method T-score'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="41" locator="35:94-35:100" name="LOINC"/>
+      </def>
+      <def localId="44" locator="36:1-36:186" name="VR-12 Physical component summary (PCS) score - orthogonal method T-score" id="72027-6" display="VR-12 Physical component summary (PCS) score - orthogonal method T-score" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="44">
+               <a:s>code &quot;VR-12 Physical component summary (PCS) score - orthogonal method T-score&quot;: '72027-6' from </a:s>
+               <a:s r="43">
+                  <a:s>&quot;LOINC&quot;</a:s>
+               </a:s>
+               <a:s> display 'VR-12 Physical component summary (PCS) score - orthogonal method T-score'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="43" locator="36:97-36:103" name="LOINC"/>
+      </def>
+   </codes>
+   <contexts>
+      <def locator="40:1-40:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="40:1-40:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="40:1-40:15" xmlns:ns0="urn:healthit-gov:qdm:v5_6" dataType="ns0:Patient" templateId="Patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="49" locator="42:1-43:51" name="SDE Ethnicity" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="49">
+               <a:s>define &quot;SDE Ethnicity&quot;:
+  </a:s>
+               <a:s r="48">
+                  <a:s>[&quot;Patient Characteristic Ethnicity&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Ethnicity&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="48" locator="43:3-43:51" xmlns:ns1="urn:healthit-gov:qdm:v5_6" dataType="ns1:PatientCharacteristicEthnicity" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="43:40-43:50" name="Ethnicity" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="51" locator="45:1-46:43" name="SDE Payer" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="51">
+               <a:s>define &quot;SDE Payer&quot;:
+  </a:s>
+               <a:s r="50">
+                  <a:s>[&quot;Patient Characteristic Payer&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Payer&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="50" locator="46:3-46:43" xmlns:ns2="urn:healthit-gov:qdm:v5_6" dataType="ns2:PatientCharacteristicPayer" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="46:36-46:42" name="Payer" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="53" locator="48:1-49:41" name="SDE Race" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="53">
+               <a:s>define &quot;SDE Race&quot;:
+  </a:s>
+               <a:s r="52">
+                  <a:s>[&quot;Patient Characteristic Race&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Race&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="52" locator="49:3-49:41" xmlns:ns3="urn:healthit-gov:qdm:v5_6" dataType="ns3:PatientCharacteristicRace" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="49:35-49:40" name="Race" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="55" locator="51:1-52:58" name="SDE Sex" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="55">
+               <a:s>define &quot;SDE Sex&quot;:
+  </a:s>
+               <a:s r="54">
+                  <a:s>[&quot;Patient Characteristic Sex&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;ONC Administrative Sex&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="54" locator="52:3-52:58" xmlns:ns4="urn:healthit-gov:qdm:v5_6" dataType="ns4:PatientCharacteristicSex" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="52:34-52:57" name="ONC Administrative Sex" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="64" locator="54:1-57:3" name="Has Dementia Diagnosis" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="64">
+               <a:s>define &quot;Has Dementia Diagnosis&quot;:
+  </a:s>
+               <a:s r="63">
+                  <a:s>exists </a:s>
+                  <a:s r="62">
+                     <a:s>( </a:s>
+                     <a:s r="62">
+                        <a:s>
+                           <a:s r="57">
+                              <a:s r="56">
+                                 <a:s r="56">
+                                    <a:s>[&quot;Diagnosis&quot;: </a:s>
+                                    <a:s>
+                                       <a:s>&quot;Severe dementia (disorder)&quot;</a:s>
+                                    </a:s>
+                                    <a:s>]</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> Dementia</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="61">
+                           <a:s>where </a:s>
+                           <a:s r="61">
+                              <a:s r="59">
+                                 <a:s r="58">
+                                    <a:s>Dementia</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="59">
+                                    <a:s>prevalencePeriod</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s r="61"> overlaps </a:s>
+                              <a:s r="60">
+                                 <a:s>&quot;Measurement Period&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="63" locator="55:3-57:3" xsi:type="Exists">
+            <operand localId="62" locator="55:10-57:3" xsi:type="Query">
+               <source localId="57" locator="55:12-55:63" alias="Dementia">
+                  <expression localId="56" locator="55:12-55:54" xmlns:ns5="urn:healthit-gov:qdm:v5_6" dataType="ns5:Diagnosis" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                     <codes xsi:type="ToList">
+                        <operand locator="55:26-55:53" name="Severe dementia (disorder)" xsi:type="CodeRef"/>
+                     </codes>
+                  </expression>
+               </source>
+               <where localId="61" locator="56:7-56:67" xsi:type="Overlaps">
+                  <operand localId="59" locator="56:13-56:37" path="prevalencePeriod" scope="Dementia" xsi:type="Property"/>
+                  <operand localId="60" locator="56:48-56:67" name="Measurement Period" xsi:type="ParameterRef"/>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def localId="81" locator="135:1-142:3" name="Has Qualifying Encounters" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="81">
+               <a:s>define &quot;Has Qualifying Encounters&quot;:
+  </a:s>
+               <a:s r="80">
+                  <a:s>exists </a:s>
+                  <a:s r="79">
+                     <a:s>( </a:s>
+                     <a:s r="79">
+                        <a:s>
+                           <a:s r="74">
+                              <a:s r="73">
+                                 <a:s>( </a:s>
+                                 <a:s r="73">
+                                    <a:s r="71">
+                                       <a:s r="69">
+                                          <a:s r="67">
+                                             <a:s r="65">
+                                                <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                                <a:s>
+                                                   <a:s>&quot;Outpatient Consultation&quot;</a:s>
+                                                </a:s>
+                                                <a:s>]</a:s>
+                                             </a:s>
+                                             <a:s>
+      union </a:s>
+                                             <a:s r="66">
+                                                <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                                <a:s>
+                                                   <a:s>&quot;Office Visit&quot;</a:s>
+                                                </a:s>
+                                                <a:s>]</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s>
+      union </a:s>
+                                          <a:s r="68">
+                                             <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                             <a:s>
+                                                <a:s>&quot;Postoperative follow-up visit, normally included in the surgical package, to indicate that an evaluation and management service was performed during a postoperative period for a reason(s) related to the original procedure&quot;</a:s>
+                                             </a:s>
+                                             <a:s>]</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>
+      union </a:s>
+                                       <a:s r="70">
+                                          <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                          <a:s>
+                                             <a:s>&quot;Telephone Visits&quot;</a:s>
+                                          </a:s>
+                                          <a:s>]</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+      union </a:s>
+                                    <a:s r="72">
+                                       <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                       <a:s>
+                                          <a:s>&quot;Online Assessments&quot;</a:s>
+                                       </a:s>
+                                       <a:s>]</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                              <a:s> ValidEncounters</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="78">
+                           <a:s>where </a:s>
+                           <a:s r="78">
+                              <a:s r="76">
+                                 <a:s r="75">
+                                    <a:s>ValidEncounters</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="76">
+                                    <a:s>relevantPeriod</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s r="78"> during day of </a:s>
+                              <a:s r="77">
+                                 <a:s>&quot;Measurement Period&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="80" locator="136:3-142:3" xsi:type="Exists">
+            <operand localId="79" locator="136:10-142:3" xsi:type="Query">
+               <source localId="74" locator="136:12-140:76" alias="ValidEncounters">
+                  <expression localId="73" locator="136:12-140:60" xsi:type="Union">
+                     <operand localId="71" locator="136:14-139:56" xsi:type="Union">
+                        <operand localId="67" locator="136:14-137:52" xsi:type="Union">
+                           <operand localId="65" locator="136:14-136:64" xmlns:ns6="urn:healthit-gov:qdm:v5_6" dataType="ns6:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                              <codes locator="136:39-136:63" name="Outpatient Consultation" xsi:type="ValueSetRef"/>
+                           </operand>
+                           <operand localId="66" locator="137:13-137:52" xmlns:ns7="urn:healthit-gov:qdm:v5_6" dataType="ns7:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                              <codes locator="137:38-137:51" name="Office Visit" xsi:type="ValueSetRef"/>
+                           </operand>
+                        </operand>
+                        <operand xsi:type="Union">
+                           <operand localId="68" locator="138:13-138:261" xmlns:ns8="urn:healthit-gov:qdm:v5_6" dataType="ns8:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                              <codes xsi:type="ToList">
+                                 <operand locator="138:38-138:260" name="Postoperative follow-up visit, normally included in the surgical package, to indicate that an evaluation and management service was performed during a postoperative period for a reason(s) related to the original procedure" xsi:type="CodeRef"/>
+                              </codes>
+                           </operand>
+                           <operand localId="70" locator="139:13-139:56" xmlns:ns9="urn:healthit-gov:qdm:v5_6" dataType="ns9:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                              <codes locator="139:38-139:55" name="Telephone Visits" xsi:type="ValueSetRef"/>
+                           </operand>
+                        </operand>
+                     </operand>
+                     <operand localId="72" locator="140:13-140:58" xmlns:ns10="urn:healthit-gov:qdm:v5_6" dataType="ns10:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                        <codes locator="140:38-140:57" name="Online Assessments" xsi:type="ValueSetRef"/>
+                     </operand>
+                  </expression>
+               </source>
+               <where localId="78" locator="141:7-141:77" precision="Day" xsi:type="IncludedIn">
+                  <operand localId="76" locator="141:13-141:42" path="relevantPeriod" scope="ValidEncounters" xsi:type="Property"/>
+                  <operand localId="77" locator="141:58-141:77" name="Measurement Period" xsi:type="ParameterRef"/>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def localId="96" locator="211:1-213:161" name="Total Knee Arthroplasty Procedure" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="96">
+               <a:s>define &quot;Total Knee Arthroplasty Procedure&quot;:
+  </a:s>
+               <a:s r="95">
+                  <a:s>
+                     <a:s r="84">
+                        <a:s r="83">
+                           <a:s r="83">
+                              <a:s>[&quot;Procedure, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Primary TKA Procedure&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> TKAProcedure</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="94">
+                     <a:s>where </a:s>
+                     <a:s r="94">
+                        <a:s r="90">
+                           <a:s r="85">
+                              <a:s>Global</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="90">
+                              <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                              <a:s r="87">
+                                 <a:s r="86">
+                                    <a:s>TKAProcedure</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="87">
+                                    <a:s>relevantDatetime</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="89">
+                                 <a:s r="88">
+                                    <a:s>TKAProcedure</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="89">
+                                    <a:s>relevantPeriod</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> </a:s>
+                        <a:s r="94">
+                           <a:s>starts </a:s>
+                           <a:s r="93">
+                              <a:s>12 months</a:s>
+                           </a:s>
+                           <a:s> or less before</a:s>
+                        </a:s>
+                        <a:s> </a:s>
+                        <a:s r="92">
+                           <a:s>start of </a:s>
+                           <a:s r="91">
+                              <a:s>&quot;Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="95" locator="212:3-213:161" xsi:type="Query">
+            <source localId="84" locator="212:3-212:64" alias="TKAProcedure">
+               <expression localId="83" locator="212:3-212:51" xmlns:ns11="urn:healthit-gov:qdm:v5_6" dataType="ns11:PositiveProcedurePerformed" templateId="PositiveProcedurePerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="212:28-212:50" name="Primary TKA Procedure" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <where localId="94" locator="213:5-213:161" xsi:type="And">
+               <operand locator="213:108-213:124" xsi:type="In">
+                  <operand locator="213:101-213:106" xsi:type="Start">
+                     <operand localId="90" locator="213:11-213:99" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                        <operand localId="87" locator="213:40-213:68" path="relevantDatetime" scope="TKAProcedure" xsi:type="Property"/>
+                        <operand localId="89" locator="213:71-213:97" path="relevantPeriod" scope="TKAProcedure" xsi:type="Property"/>
+                     </operand>
+                  </operand>
+                  <operand locator="213:108-213:124" lowClosed="true" highClosed="false" xsi:type="Interval">
+                     <low locator="213:133-213:161" xsi:type="Subtract">
+                        <operand localId="92" locator="213:133-213:161" xsi:type="Start">
+                           <operand localId="91" locator="213:142-213:161" name="Measurement Period" xsi:type="ParameterRef"/>
+                        </operand>
+                        <operand localId="93" locator="213:108-213:116" value="12" unit="months" xsi:type="Quantity"/>
+                     </low>
+                     <high localId="92" locator="213:133-213:161" xsi:type="Start">
+                        <operand localId="91" locator="213:142-213:161" name="Measurement Period" xsi:type="ParameterRef"/>
+                     </high>
+                  </operand>
+               </operand>
+               <operand locator="213:108-213:124" xsi:type="Not">
+                  <operand locator="213:108-213:124" xsi:type="IsNull">
+                     <operand localId="92" locator="213:133-213:161" xsi:type="Start">
+                        <operand localId="91" locator="213:142-213:161" name="Measurement Period" xsi:type="ParameterRef"/>
+                     </operand>
+                  </operand>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="107" locator="67:1-70:66" name="Initial Population" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="107">
+               <a:s>define &quot;Initial Population&quot;:
+  </a:s>
+               <a:s r="106">
+                  <a:s r="99">
+                     <a:s r="82">
+                        <a:s>&quot;Has Qualifying Encounters&quot;</a:s>
+                     </a:s>
+                     <a:s>
+    and </a:s>
+                     <a:s r="98">
+                        <a:s>exists </a:s>
+                        <a:s r="97">
+                           <a:s>( </a:s>
+                           <a:s r="97">
+                              <a:s>&quot;Total Knee Arthroplasty Procedure&quot;</a:s>
+                           </a:s>
+                           <a:s> )</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    and </a:s>
+                  <a:s r="105">
+                     <a:s r="103">
+                        <a:s>AgeInYearsAt(</a:s>
+                        <a:s r="102">
+                           <a:s>date from </a:s>
+                           <a:s r="101">
+                              <a:s>start of </a:s>
+                              <a:s r="100">
+                                 <a:s>&quot;Measurement Period&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>)</a:s>
+                     </a:s>
+                     <a:s r="104">>= 19</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="106" locator="68:3-70:66" xsi:type="And">
+            <operand localId="99" locator="68:3-69:54" xsi:type="And">
+               <operand localId="82" locator="68:3-68:29" name="Has Qualifying Encounters" xsi:type="ExpressionRef"/>
+               <operand localId="98" locator="69:9-69:54" xsi:type="Exists">
+                  <operand localId="97" locator="69:16-69:54" name="Total Knee Arthroplasty Procedure" xsi:type="ExpressionRef"/>
+               </operand>
+            </operand>
+            <operand localId="105" locator="70:9-70:66" xsi:type="GreaterOrEqual">
+               <operand localId="103" locator="70:9-70:61" precision="Year" xsi:type="CalculateAgeAt">
+                  <operand xsi:type="ToDate">
+                     <operand path="birthDatetime" xsi:type="Property">
+                        <source name="Patient" xsi:type="ExpressionRef"/>
+                     </operand>
+                  </operand>
+                  <operand localId="102" locator="70:22-70:60" xsi:type="DateFrom">
+                     <operand localId="101" locator="70:32-70:60" xsi:type="Start">
+                        <operand localId="100" locator="70:41-70:60" name="Measurement Period" xsi:type="ParameterRef"/>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand localId="104" locator="70:65-70:66" valueType="t:Integer" value="19" xsi:type="Literal"/>
+            </operand>
+         </expression>
+      </def>
+      <def localId="109" locator="59:1-60:22" name="Denominator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="109">
+               <a:s>define &quot;Denominator&quot;:
+  </a:s>
+               <a:s r="108">
+                  <a:s>&quot;Initial Population&quot;</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="108" locator="60:3-60:22" name="Initial Population" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="133" locator="149:1-154:3" name="Has Total Knee Arthroplasty with 2 or More Lower Body Fractures" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="133">
+               <a:s>define &quot;Has Total Knee Arthroplasty with 2 or More Lower Body Fractures&quot;:
+  </a:s>
+               <a:s r="132">
+                  <a:s>exists </a:s>
+                  <a:s r="131">
+                     <a:s>( </a:s>
+                     <a:s r="131">
+                        <a:s>
+                           <a:s r="113">
+                              <a:s r="112">
+                                 <a:s>
+                                    <a:s>&quot;Total Knee Arthroplasty Procedure&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> TKAProcedure</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="130">
+                           <a:s>where </a:s>
+                           <a:s r="130">
+                              <a:s r="128">
+                                 <a:s>Count(</a:s>
+                                 <a:s r="127">
+                                    <a:s>
+                                       <a:s r="115">
+                                          <a:s r="114">
+                                             <a:s r="114">
+                                                <a:s>[&quot;Diagnosis&quot;: </a:s>
+                                                <a:s>
+                                                   <a:s>&quot;Lower Body Fracture&quot;</a:s>
+                                                </a:s>
+                                                <a:s>]</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s> LowerBodyFracture</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+          </a:s>
+                                    <a:s r="126">
+                                       <a:s>where </a:s>
+                                       <a:s r="126">
+                                          <a:s r="117">
+                                             <a:s r="116">
+                                                <a:s>LowerBodyFracture</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="117">
+                                                <a:s>prevalencePeriod</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s> </a:s>
+                                          <a:s r="126">
+                                             <a:s>starts </a:s>
+                                             <a:s r="125">
+                                                <a:s>24 hours</a:s>
+                                             </a:s>
+                                             <a:s> or less on or before</a:s>
+                                          </a:s>
+                                          <a:s> </a:s>
+                                          <a:s r="124">
+                                             <a:s>start of </a:s>
+                                             <a:s r="123">
+                                                <a:s r="118">
+                                                   <a:s>Global</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="123">
+                                                   <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                                   <a:s r="120">
+                                                      <a:s r="119">
+                                                         <a:s>TKAProcedure</a:s>
+                                                      </a:s>
+                                                      <a:s>.</a:s>
+                                                      <a:s r="120">
+                                                         <a:s>relevantDatetime</a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                   <a:s>, </a:s>
+                                                   <a:s r="122">
+                                                      <a:s r="121">
+                                                         <a:s>TKAProcedure</a:s>
+                                                      </a:s>
+                                                      <a:s>.</a:s>
+                                                      <a:s r="122">
+                                                         <a:s>relevantPeriod</a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                   <a:s>)</a:s>
+                                                </a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+      )</a:s>
+                              </a:s>
+                              <a:s r="129">>= 2</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="132" locator="150:3-154:3" xsi:type="Exists">
+            <operand localId="131" locator="150:10-154:3" xsi:type="Query">
+               <source localId="113" locator="150:12-150:59" alias="TKAProcedure">
+                  <expression localId="112" locator="150:12-150:46" name="Total Knee Arthroplasty Procedure" xsi:type="ExpressionRef"/>
+               </source>
+               <where localId="130" locator="151:7-153:11" xsi:type="GreaterOrEqual">
+                  <operand localId="128" locator="151:13-153:7" xsi:type="Count">
+                     <source localId="127" locator="151:19-152:183" xsi:type="Query">
+                        <source localId="115" locator="151:19-151:72" alias="LowerBodyFracture">
+                           <expression localId="114" locator="151:19-151:54" xmlns:ns12="urn:healthit-gov:qdm:v5_6" dataType="ns12:Diagnosis" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                              <codes locator="151:33-151:53" name="Lower Body Fracture" xsi:type="ValueSetRef"/>
+                           </expression>
+                        </source>
+                        <where localId="126" locator="152:11-152:183" xsi:type="And">
+                           <operand locator="152:59-152:74" xsi:type="In">
+                              <operand locator="152:52-152:57" xsi:type="Start">
+                                 <operand localId="117" locator="152:17-152:50" path="prevalencePeriod" scope="LowerBodyFracture" xsi:type="Property"/>
+                              </operand>
+                              <operand locator="152:59-152:74" lowClosed="true" highClosed="true" xsi:type="Interval">
+                                 <low locator="152:89-152:183" xsi:type="Subtract">
+                                    <operand localId="124" locator="152:89-152:183" xsi:type="Start">
+                                       <operand localId="123" locator="152:98-152:183" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                          <operand localId="120" locator="152:125-152:153" path="relevantDatetime" scope="TKAProcedure" xsi:type="Property"/>
+                                          <operand localId="122" locator="152:156-152:182" path="relevantPeriod" scope="TKAProcedure" xsi:type="Property"/>
+                                       </operand>
+                                    </operand>
+                                    <operand localId="125" locator="152:59-152:66" value="24" unit="hours" xsi:type="Quantity"/>
+                                 </low>
+                                 <high localId="124" locator="152:89-152:183" xsi:type="Start">
+                                    <operand localId="123" locator="152:98-152:183" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                       <operand localId="120" locator="152:125-152:153" path="relevantDatetime" scope="TKAProcedure" xsi:type="Property"/>
+                                       <operand localId="122" locator="152:156-152:182" path="relevantPeriod" scope="TKAProcedure" xsi:type="Property"/>
+                                    </operand>
+                                 </high>
+                              </operand>
+                           </operand>
+                           <operand locator="152:59-152:74" xsi:type="Not">
+                              <operand locator="152:59-152:74" xsi:type="IsNull">
+                                 <operand localId="124" locator="152:89-152:183" xsi:type="Start">
+                                    <operand localId="123" locator="152:98-152:183" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                       <operand localId="120" locator="152:125-152:153" path="relevantDatetime" scope="TKAProcedure" xsi:type="Property"/>
+                                       <operand localId="122" locator="152:156-152:182" path="relevantPeriod" scope="TKAProcedure" xsi:type="Property"/>
+                                    </operand>
+                                 </operand>
+                              </operand>
+                           </operand>
+                        </where>
+                     </source>
+                  </operand>
+                  <operand localId="129" locator="153:11" valueType="t:Integer" value="2" xsi:type="Literal"/>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def localId="138" locator="62:1-65:31" name="Denominator Exclusions" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="138">
+               <a:s>define &quot;Denominator Exclusions&quot;:
+  </a:s>
+               <a:s r="137">
+                  <a:s r="135">
+                     <a:s r="111">
+                        <a:s r="110">
+                           <a:s>Hospice</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="111">
+                           <a:s>&quot;Has Hospice Services&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    or </a:s>
+                     <a:s r="134">
+                        <a:s>&quot;Has Total Knee Arthroplasty with 2 or More Lower Body Fractures&quot;</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    or </a:s>
+                  <a:s r="136">
+                     <a:s>&quot;Has Dementia Diagnosis&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="137" locator="63:3-65:31" xsi:type="Or">
+            <operand localId="135" locator="63:3-64:72" xsi:type="Or">
+               <operand localId="111" locator="63:3-63:32" name="Has Hospice Services" libraryName="Hospice" xsi:type="ExpressionRef"/>
+               <operand localId="134" locator="64:8-64:72" name="Has Total Knee Arthroplasty with 2 or More Lower Body Fractures" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand localId="136" locator="65:8-65:31" name="Has Dementia Diagnosis" xsi:type="ExpressionRef"/>
+         </expression>
+      </def>
+      <def localId="244" locator="79:1-100:109" name="Time KOOS Total Assessment Completed" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="244">
+               <a:s>define &quot;Time KOOS Total Assessment Completed&quot;:
+  </a:s>
+               <a:s r="243">
+                  <a:s>
+                     <a:s>from
+    </a:s>
+                     <a:s r="151">
+                        <a:s r="150">
+                           <a:s r="150">
+                              <a:s>[&quot;Assessment, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Quality of life score [KOOS]&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> KOOSLifeQuality</a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="153">
+                        <a:s r="152">
+                           <a:s r="152">
+                              <a:s>[&quot;Assessment, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Sport-recreation score [KOOS]&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> KOOSSport</a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="155">
+                        <a:s r="154">
+                           <a:s r="154">
+                              <a:s>[&quot;Assessment, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Activities of daily living score [KOOS]&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> KOOSActivityScore</a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="157">
+                        <a:s r="156">
+                           <a:s r="156">
+                              <a:s>[&quot;Assessment, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Symptoms score [KOOS]&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> KOOSSymptoms</a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="159">
+                        <a:s r="158">
+                           <a:s r="158">
+                              <a:s>[&quot;Assessment, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Pain score [KOOS]&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> KOOSPain</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s>
+                     <a:s>let </a:s>
+                     <a:s r="167">
+                        <a:s>KOOSLifeQualityTime: </a:s>
+                        <a:s r="166">
+                           <a:s>start of </a:s>
+                           <a:s r="165">
+                              <a:s r="160">
+                                 <a:s>Global</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="165">
+                                 <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                 <a:s r="162">
+                                    <a:s r="161">
+                                       <a:s>KOOSLifeQuality</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="162">
+                                       <a:s>relevantDatetime</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>, </a:s>
+                                 <a:s r="164">
+                                    <a:s r="163">
+                                       <a:s>KOOSLifeQuality</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="164">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="175">
+                        <a:s>KOOSSportTime: </a:s>
+                        <a:s r="174">
+                           <a:s>start of </a:s>
+                           <a:s r="173">
+                              <a:s r="168">
+                                 <a:s>Global</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="173">
+                                 <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                 <a:s r="170">
+                                    <a:s r="169">
+                                       <a:s>KOOSSport</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="170">
+                                       <a:s>relevantDatetime</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>, </a:s>
+                                 <a:s r="172">
+                                    <a:s r="171">
+                                       <a:s>KOOSSport</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="172">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="183">
+                        <a:s>KOOSActivityScoreTime: </a:s>
+                        <a:s r="182">
+                           <a:s>start of </a:s>
+                           <a:s r="181">
+                              <a:s r="176">
+                                 <a:s>Global</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="181">
+                                 <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                 <a:s r="178">
+                                    <a:s r="177">
+                                       <a:s>KOOSActivityScore</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="178">
+                                       <a:s>relevantDatetime</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>, </a:s>
+                                 <a:s r="180">
+                                    <a:s r="179">
+                                       <a:s>KOOSActivityScore</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="180">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="191">
+                        <a:s>KOOSSymptomsTime: </a:s>
+                        <a:s r="190">
+                           <a:s>start of </a:s>
+                           <a:s r="189">
+                              <a:s r="184">
+                                 <a:s>Global</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="189">
+                                 <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                 <a:s r="186">
+                                    <a:s r="185">
+                                       <a:s>KOOSSymptoms</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="186">
+                                       <a:s>relevantDatetime</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>, </a:s>
+                                 <a:s r="188">
+                                    <a:s r="187">
+                                       <a:s>KOOSSymptoms</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="188">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="199">
+                        <a:s>KOOSPainTime: </a:s>
+                        <a:s r="198">
+                           <a:s>start of </a:s>
+                           <a:s r="197">
+                              <a:s r="192">
+                                 <a:s>Global</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="197">
+                                 <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                 <a:s r="194">
+                                    <a:s r="193">
+                                       <a:s>KOOSPain</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="194">
+                                       <a:s>relevantDatetime</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>, </a:s>
+                                 <a:s r="196">
+                                    <a:s r="195">
+                                       <a:s>KOOSPain</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="196">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="234">
+                     <a:s>where </a:s>
+                     <a:s r="234">
+                        <a:s r="230">
+                           <a:s r="226">
+                              <a:s r="222">
+                                 <a:s r="218">
+                                    <a:s r="214">
+                                       <a:s r="210">
+                                          <a:s r="206">
+                                             <a:s r="202">
+                                                <a:s r="200">
+                                                   <a:s>KOOSLifeQualityTime</a:s>
+                                                </a:s>
+                                                <a:s r="202"> same day as </a:s>
+                                                <a:s r="201">
+                                                   <a:s>KOOSSportTime</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>
+      and </a:s>
+                                             <a:s r="205">
+                                                <a:s r="204">
+                                                   <a:s r="203">
+                                                      <a:s>KOOSSport</a:s>
+                                                   </a:s>
+                                                   <a:s>.</a:s>
+                                                   <a:s r="204">
+                                                      <a:s>result</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s> is not null</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s>
+      and </a:s>
+                                          <a:s r="209">
+                                             <a:s r="207">
+                                                <a:s>KOOSLifeQualityTime</a:s>
+                                             </a:s>
+                                             <a:s r="209"> same day as </a:s>
+                                             <a:s r="208">
+                                                <a:s>KOOSActivityScoreTime</a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>
+      and </a:s>
+                                       <a:s r="213">
+                                          <a:s r="212">
+                                             <a:s r="211">
+                                                <a:s>KOOSActivityScore</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="212">
+                                                <a:s>result</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s> is not null</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+      and </a:s>
+                                    <a:s r="217">
+                                       <a:s r="215">
+                                          <a:s>KOOSLifeQualityTime</a:s>
+                                       </a:s>
+                                       <a:s r="217"> same day as </a:s>
+                                       <a:s r="216">
+                                          <a:s>KOOSSymptomsTime</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+      and </a:s>
+                                 <a:s r="221">
+                                    <a:s r="220">
+                                       <a:s r="219">
+                                          <a:s>KOOSSymptoms</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="220">
+                                          <a:s>result</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> is not null</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      and </a:s>
+                              <a:s r="225">
+                                 <a:s r="223">
+                                    <a:s>KOOSLifeQualityTime</a:s>
+                                 </a:s>
+                                 <a:s r="225"> same day as </a:s>
+                                 <a:s r="224">
+                                    <a:s>KOOSPainTime</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+      and </a:s>
+                           <a:s r="229">
+                              <a:s r="228">
+                                 <a:s r="227">
+                                    <a:s>KOOSPain</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="228">
+                                    <a:s>result</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> is not null</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      and </a:s>
+                        <a:s r="233">
+                           <a:s r="232">
+                              <a:s r="231">
+                                 <a:s>KOOSLifeQuality</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="232">
+                                 <a:s>result</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> is not null</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="242">
+                     <a:s>return </a:s>
+                     <a:s r="241">
+                        <a:s>Max(</a:s>
+                        <a:s r="240">
+                           <a:s>{ </a:s>
+                           <a:s r="235">
+                              <a:s>KOOSLifeQualityTime</a:s>
+                           </a:s>
+                           <a:s>, </a:s>
+                           <a:s r="236">
+                              <a:s>KOOSSportTime</a:s>
+                           </a:s>
+                           <a:s>, </a:s>
+                           <a:s r="237">
+                              <a:s>KOOSActivityScoreTime</a:s>
+                           </a:s>
+                           <a:s>, </a:s>
+                           <a:s r="238">
+                              <a:s>KOOSSymptomsTime</a:s>
+                           </a:s>
+                           <a:s>, </a:s>
+                           <a:s r="239">
+                              <a:s>KOOSPainTime</a:s>
+                           </a:s>
+                           <a:s> }</a:s>
+                        </a:s>
+                        <a:s>)</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="243" locator="80:3-100:109" xsi:type="Query">
+            <source localId="151" locator="81:5-81:77" alias="KOOSLifeQuality">
+               <expression localId="150" locator="81:5-81:61" xmlns:ns13="urn:healthit-gov:qdm:v5_6" dataType="ns13:PositiveAssessmentPerformed" templateId="PositiveAssessmentPerformed" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                  <codes xsi:type="ToList">
+                     <operand locator="81:31-81:60" name="Quality of life score [KOOS]" xsi:type="CodeRef"/>
+                  </codes>
+               </expression>
+            </source>
+            <source localId="153" locator="82:5-82:72" alias="KOOSSport">
+               <expression localId="152" locator="82:5-82:62" xmlns:ns14="urn:healthit-gov:qdm:v5_6" dataType="ns14:PositiveAssessmentPerformed" templateId="PositiveAssessmentPerformed" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                  <codes xsi:type="ToList">
+                     <operand locator="82:31-82:61" name="Sport-recreation score [KOOS]" xsi:type="CodeRef"/>
+                  </codes>
+               </expression>
+            </source>
+            <source localId="155" locator="83:5-83:90" alias="KOOSActivityScore">
+               <expression localId="154" locator="83:5-83:72" xmlns:ns15="urn:healthit-gov:qdm:v5_6" dataType="ns15:PositiveAssessmentPerformed" templateId="PositiveAssessmentPerformed" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                  <codes xsi:type="ToList">
+                     <operand locator="83:31-83:71" name="Activities of daily living score [KOOS]" xsi:type="CodeRef"/>
+                  </codes>
+               </expression>
+            </source>
+            <source localId="157" locator="84:5-84:67" alias="KOOSSymptoms">
+               <expression localId="156" locator="84:5-84:54" xmlns:ns16="urn:healthit-gov:qdm:v5_6" dataType="ns16:PositiveAssessmentPerformed" templateId="PositiveAssessmentPerformed" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                  <codes xsi:type="ToList">
+                     <operand locator="84:31-84:53" name="Symptoms score [KOOS]" xsi:type="CodeRef"/>
+                  </codes>
+               </expression>
+            </source>
+            <source localId="159" locator="85:5-85:59" alias="KOOSPain">
+               <expression localId="158" locator="85:5-85:50" xmlns:ns17="urn:healthit-gov:qdm:v5_6" dataType="ns17:PositiveAssessmentPerformed" templateId="PositiveAssessmentPerformed" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                  <codes xsi:type="ToList">
+                     <operand locator="85:31-85:49" name="Pain score [KOOS]" xsi:type="CodeRef"/>
+                  </codes>
+               </expression>
+            </source>
+            <let localId="167" locator="86:9-86:133" identifier="KOOSLifeQualityTime">
+               <expression localId="166" locator="86:30-86:133" xsi:type="Start">
+                  <operand localId="165" locator="86:39-86:133" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                     <operand localId="162" locator="86:68-86:99" path="relevantDatetime" scope="KOOSLifeQuality" xsi:type="Property"/>
+                     <operand localId="164" locator="86:102-86:131" path="relevantPeriod" scope="KOOSLifeQuality" xsi:type="Property"/>
+                  </operand>
+               </expression>
+            </let>
+            <let localId="175" locator="87:5-87:111" identifier="KOOSSportTime">
+               <expression localId="174" locator="87:20-87:111" xsi:type="Start">
+                  <operand localId="173" locator="87:29-87:111" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                     <operand localId="170" locator="87:58-87:83" path="relevantDatetime" scope="KOOSSport" xsi:type="Property"/>
+                     <operand localId="172" locator="87:86-87:109" path="relevantPeriod" scope="KOOSSport" xsi:type="Property"/>
+                  </operand>
+               </expression>
+            </let>
+            <let localId="183" locator="88:5-88:135" identifier="KOOSActivityScoreTime">
+               <expression localId="182" locator="88:28-88:135" xsi:type="Start">
+                  <operand localId="181" locator="88:37-88:135" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                     <operand localId="178" locator="88:66-88:99" path="relevantDatetime" scope="KOOSActivityScore" xsi:type="Property"/>
+                     <operand localId="180" locator="88:102-88:133" path="relevantPeriod" scope="KOOSActivityScore" xsi:type="Property"/>
+                  </operand>
+               </expression>
+            </let>
+            <let localId="191" locator="89:5-89:120" identifier="KOOSSymptomsTime">
+               <expression localId="190" locator="89:23-89:120" xsi:type="Start">
+                  <operand localId="189" locator="89:32-89:120" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                     <operand localId="186" locator="89:61-89:89" path="relevantDatetime" scope="KOOSSymptoms" xsi:type="Property"/>
+                     <operand localId="188" locator="89:92-89:118" path="relevantPeriod" scope="KOOSSymptoms" xsi:type="Property"/>
+                  </operand>
+               </expression>
+            </let>
+            <let localId="199" locator="90:5-90:108" identifier="KOOSPainTime">
+               <expression localId="198" locator="90:19-90:108" xsi:type="Start">
+                  <operand localId="197" locator="90:28-90:108" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                     <operand localId="194" locator="90:57-90:81" path="relevantDatetime" scope="KOOSPain" xsi:type="Property"/>
+                     <operand localId="196" locator="90:84-90:106" path="relevantPeriod" scope="KOOSPain" xsi:type="Property"/>
+                  </operand>
+               </expression>
+            </let>
+            <where localId="234" locator="91:5-99:44" xsi:type="And">
+               <operand localId="230" locator="91:11-98:37" xsi:type="And">
+                  <operand localId="226" locator="91:11-97:54" xsi:type="And">
+                     <operand localId="222" locator="91:11-96:41" xsi:type="And">
+                        <operand localId="218" locator="91:11-95:58" xsi:type="And">
+                           <operand localId="214" locator="91:11-94:46" xsi:type="And">
+                              <operand localId="210" locator="91:11-93:63" xsi:type="And">
+                                 <operand localId="206" locator="91:11-92:38" xsi:type="And">
+                                    <operand localId="202" locator="91:11-91:55" precision="Day" xsi:type="SameAs">
+                                       <operand localId="200" locator="91:11-91:29" name="KOOSLifeQualityTime" xsi:type="QueryLetRef"/>
+                                       <operand localId="201" locator="91:43-91:55" name="KOOSSportTime" xsi:type="QueryLetRef"/>
+                                    </operand>
+                                    <operand localId="205" locator="92:11-92:38" xsi:type="Not">
+                                       <operand locator="92:11-92:38" xsi:type="IsNull">
+                                          <operand localId="204" locator="92:11-92:26" path="result" scope="KOOSSport" xsi:type="Property"/>
+                                       </operand>
+                                    </operand>
+                                 </operand>
+                                 <operand localId="209" locator="93:11-93:63" precision="Day" xsi:type="SameAs">
+                                    <operand localId="207" locator="93:11-93:29" name="KOOSLifeQualityTime" xsi:type="QueryLetRef"/>
+                                    <operand localId="208" locator="93:43-93:63" name="KOOSActivityScoreTime" xsi:type="QueryLetRef"/>
+                                 </operand>
+                              </operand>
+                              <operand localId="213" locator="94:11-94:46" xsi:type="Not">
+                                 <operand locator="94:11-94:46" xsi:type="IsNull">
+                                    <operand localId="212" locator="94:11-94:34" path="result" scope="KOOSActivityScore" xsi:type="Property"/>
+                                 </operand>
+                              </operand>
+                           </operand>
+                           <operand localId="217" locator="95:11-95:58" precision="Day" xsi:type="SameAs">
+                              <operand localId="215" locator="95:11-95:29" name="KOOSLifeQualityTime" xsi:type="QueryLetRef"/>
+                              <operand localId="216" locator="95:43-95:58" name="KOOSSymptomsTime" xsi:type="QueryLetRef"/>
+                           </operand>
+                        </operand>
+                        <operand localId="221" locator="96:11-96:41" xsi:type="Not">
+                           <operand locator="96:11-96:41" xsi:type="IsNull">
+                              <operand localId="220" locator="96:11-96:29" path="result" scope="KOOSSymptoms" xsi:type="Property"/>
+                           </operand>
+                        </operand>
+                     </operand>
+                     <operand localId="225" locator="97:11-97:54" precision="Day" xsi:type="SameAs">
+                        <operand localId="223" locator="97:11-97:29" name="KOOSLifeQualityTime" xsi:type="QueryLetRef"/>
+                        <operand localId="224" locator="97:43-97:54" name="KOOSPainTime" xsi:type="QueryLetRef"/>
+                     </operand>
+                  </operand>
+                  <operand localId="229" locator="98:11-98:37" xsi:type="Not">
+                     <operand locator="98:11-98:37" xsi:type="IsNull">
+                        <operand localId="228" locator="98:11-98:25" path="result" scope="KOOSPain" xsi:type="Property"/>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand localId="233" locator="99:11-99:44" xsi:type="Not">
+                  <operand locator="99:11-99:44" xsi:type="IsNull">
+                     <operand localId="232" locator="99:11-99:32" path="result" scope="KOOSLifeQuality" xsi:type="Property"/>
+                  </operand>
+               </operand>
+            </where>
+            <return localId="242" locator="100:5-100:109">
+               <expression localId="241" locator="100:12-100:109" xsi:type="Max">
+                  <source localId="240" locator="100:16-100:108" xsi:type="List">
+                     <element localId="235" locator="100:18-100:36" name="KOOSLifeQualityTime" xsi:type="QueryLetRef"/>
+                     <element localId="236" locator="100:39-100:51" name="KOOSSportTime" xsi:type="QueryLetRef"/>
+                     <element localId="237" locator="100:54-100:74" name="KOOSActivityScoreTime" xsi:type="QueryLetRef"/>
+                     <element localId="238" locator="100:77-100:92" name="KOOSSymptomsTime" xsi:type="QueryLetRef"/>
+                     <element localId="239" locator="100:95-100:106" name="KOOSPainTime" xsi:type="QueryLetRef"/>
+                  </source>
+               </expression>
+            </return>
+         </expression>
+      </def>
+      <def localId="268" locator="156:1-165:3" name="Has TKA with Initial and Follow Up KOOS Assessments" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="268">
+               <a:s>define &quot;Has TKA with Initial and Follow Up KOOS Assessments&quot;:
+  </a:s>
+               <a:s r="267">
+                  <a:s>exists </a:s>
+                  <a:s r="266">
+                     <a:s>( </a:s>
+                     <a:s r="266">
+                        <a:s>
+                           <a:s r="149">
+                              <a:s r="148">
+                                 <a:s>( </a:s>
+                                 <a:s r="148">
+                                    <a:s>
+                                       <a:s r="140">
+                                          <a:s r="139">
+                                             <a:s>
+                                                <a:s>&quot;Total Knee Arthroplasty Procedure&quot;</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s> TKAProcedure</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+      </a:s>
+                                    <a:s r="147">
+                                       <a:s>return </a:s>
+                                       <a:s r="146">
+                                          <a:s r="141">
+                                             <a:s>Global</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="146">
+                                             <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                             <a:s r="143">
+                                                <a:s r="142">
+                                                   <a:s>TKAProcedure</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="143">
+                                                   <a:s>relevantDatetime</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>, </a:s>
+                                             <a:s r="145">
+                                                <a:s r="144">
+                                                   <a:s>TKAProcedure</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="145">
+                                                   <a:s>relevantPeriod</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s> )</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                              <a:s> TotalKnee</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="251">
+                           <a:s>with </a:s>
+                           <a:s r="246">
+                              <a:s r="245">
+                                 <a:s>
+                                    <a:s>&quot;Time KOOS Total Assessment Completed&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> InitialKOOSAssessmentTime</a:s>
+                           </a:s>
+                           <a:s>
+        such that </a:s>
+                           <a:s r="250">
+                              <a:s r="247">
+                                 <a:s>TotalKnee</a:s>
+                              </a:s>
+                              <a:s> </a:s>
+                              <a:s r="250">
+                                 <a:s>starts </a:s>
+                                 <a:s r="249">
+                                    <a:s>90 days</a:s>
+                                 </a:s>
+                                 <a:s> or less on or after</a:s>
+                              </a:s>
+                              <a:s> </a:s>
+                              <a:s r="248">
+                                 <a:s>InitialKOOSAssessmentTime</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="265">
+                           <a:s>with </a:s>
+                           <a:s r="253">
+                              <a:s r="252">
+                                 <a:s>
+                                    <a:s>&quot;Time KOOS Total Assessment Completed&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> FollowUpKOOSAssessmentTime</a:s>
+                           </a:s>
+                           <a:s>
+        such that </a:s>
+                           <a:s r="264">
+                              <a:s r="254">
+                                 <a:s>FollowUpKOOSAssessmentTime</a:s>
+                              </a:s>
+                              <a:s r="264"> during day of </a:s>
+                              <a:s r="263">
+                                 <a:s>Interval[
+        </a:s>
+                                 <a:s r="258">
+                                    <a:s r="256">
+                                       <a:s>end of </a:s>
+                                       <a:s r="255">
+                                          <a:s>TotalKnee</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> + </a:s>
+                                    <a:s r="257">
+                                       <a:s>270 days</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>, 
+        </a:s>
+                                 <a:s r="262">
+                                    <a:s r="260">
+                                       <a:s>end of </a:s>
+                                       <a:s r="259">
+                                          <a:s>TotalKnee</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> + </a:s>
+                                    <a:s r="261">
+                                       <a:s>365 days</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="267" locator="157:3-165:3" xsi:type="Exists">
+            <operand localId="266" locator="157:10-165:3" xsi:type="Query">
+               <source localId="149" locator="157:12-158:114" alias="TotalKnee">
+                  <expression localId="148" locator="157:12-158:104" xsi:type="Query">
+                     <source localId="140" locator="157:14-157:61" alias="TKAProcedure">
+                        <expression localId="139" locator="157:14-157:48" name="Total Knee Arthroplasty Procedure" xsi:type="ExpressionRef"/>
+                     </source>
+                     <return localId="147" locator="158:7-158:102">
+                        <expression localId="146" locator="158:14-158:102" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                           <operand localId="143" locator="158:43-158:71" path="relevantDatetime" scope="TKAProcedure" xsi:type="Property"/>
+                           <operand localId="145" locator="158:74-158:100" path="relevantPeriod" scope="TKAProcedure" xsi:type="Property"/>
+                        </expression>
+                     </return>
+                  </expression>
+               </source>
+               <relationship localId="251" locator="159:7-160:88" alias="InitialKOOSAssessmentTime" xsi:type="With">
+                  <expression localId="245" locator="159:12-159:49" name="Time KOOS Total Assessment Completed" xsi:type="ExpressionRef"/>
+                  <suchThat localId="250" locator="160:19-160:88" xsi:type="And">
+                     <operand locator="160:36-160:50" xsi:type="In">
+                        <operand locator="160:29-160:34" xsi:type="Start">
+                           <operand localId="247" locator="160:19-160:27" name="TotalKnee" xsi:type="AliasRef"/>
+                        </operand>
+                        <operand locator="160:36-160:50" lowClosed="true" highClosed="true" xsi:type="Interval">
+                           <low localId="248" locator="160:64-160:88" name="InitialKOOSAssessmentTime" xsi:type="AliasRef"/>
+                           <high locator="160:64-160:88" xsi:type="Add">
+                              <operand localId="248" locator="160:64-160:88" name="InitialKOOSAssessmentTime" xsi:type="AliasRef"/>
+                              <operand localId="249" locator="160:36-160:42" value="90" unit="days" xsi:type="Quantity"/>
+                           </high>
+                        </operand>
+                     </operand>
+                     <operand locator="160:36-160:50" xsi:type="Not">
+                        <operand locator="160:36-160:50" xsi:type="IsNull">
+                           <operand localId="248" locator="160:64-160:88" name="InitialKOOSAssessmentTime" xsi:type="AliasRef"/>
+                        </operand>
+                     </operand>
+                  </suchThat>
+               </relationship>
+               <relationship localId="265" locator="161:7-164:36" alias="FollowUpKOOSAssessmentTime" xsi:type="With">
+                  <expression localId="252" locator="161:12-161:49" name="Time KOOS Total Assessment Completed" xsi:type="ExpressionRef"/>
+                  <suchThat localId="264" locator="162:19-164:36" precision="Day" xsi:type="In">
+                     <operand localId="254" locator="162:19-162:44" name="FollowUpKOOSAssessmentTime" xsi:type="AliasRef"/>
+                     <operand localId="263" locator="162:60-164:36" lowClosed="true" highClosed="true" xsi:type="Interval">
+                        <low localId="258" locator="163:9-163:35" xsi:type="Add">
+                           <operand localId="256" locator="163:9-163:24" xsi:type="End">
+                              <operand localId="255" locator="163:16-163:24" name="TotalKnee" xsi:type="AliasRef"/>
+                           </operand>
+                           <operand localId="257" locator="163:28-163:35" value="270" unit="days" xsi:type="Quantity"/>
+                        </low>
+                        <high localId="262" locator="164:9-164:35" xsi:type="Add">
+                           <operand localId="260" locator="164:9-164:24" xsi:type="End">
+                              <operand localId="259" locator="164:16-164:24" name="TotalKnee" xsi:type="AliasRef"/>
+                           </operand>
+                           <operand localId="261" locator="164:28-164:35" value="365" unit="days" xsi:type="Quantity"/>
+                        </high>
+                     </operand>
+                  </suchThat>
+               </relationship>
+            </operand>
+         </expression>
+      </def>
+      <def localId="297" locator="144:1-147:117" name="Time KOOSJr Total Assessment Completed" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="297">
+               <a:s>define &quot;Time KOOSJr Total Assessment Completed&quot;:
+  </a:s>
+               <a:s r="296">
+                  <a:s>
+                     <a:s r="287">
+                        <a:s r="286">
+                           <a:s>( </a:s>
+                           <a:s r="286">
+                              <a:s>
+                                 <a:s r="282">
+                                    <a:s r="281">
+                                       <a:s r="281">
+                                          <a:s>[&quot;Assessment, Performed&quot;: </a:s>
+                                          <a:s>
+                                             <a:s>&quot;Knee injury and osteoarthritis outcome score for joint replacement [KOOSJR]&quot;</a:s>
+                                          </a:s>
+                                          <a:s>]</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> KOOSJr</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+    </a:s>
+                              <a:s r="285">
+                                 <a:s>where </a:s>
+                                 <a:s r="285">
+                                    <a:s r="284">
+                                       <a:s r="283">
+                                          <a:s>KOOSJr</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="284">
+                                          <a:s>result</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> is not null</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> )</a:s>
+                        </a:s>
+                        <a:s> DocumentedKOOSJr</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="295">
+                     <a:s>return </a:s>
+                     <a:s r="294">
+                        <a:s>start of </a:s>
+                        <a:s r="293">
+                           <a:s r="288">
+                              <a:s>Global</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="293">
+                              <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                              <a:s r="290">
+                                 <a:s r="289">
+                                    <a:s>DocumentedKOOSJr</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="290">
+                                    <a:s>relevantDatetime</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="292">
+                                 <a:s r="291">
+                                    <a:s>DocumentedKOOSJr</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="292">
+                                    <a:s>relevantPeriod</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="296" locator="145:3-147:117" xsi:type="Query">
+            <source localId="287" locator="145:3-146:54" alias="DocumentedKOOSJr">
+               <expression localId="286" locator="145:3-146:37" xsi:type="Query">
+                  <source localId="282" locator="145:5-145:115" alias="KOOSJr">
+                     <expression localId="281" locator="145:5-145:108" xmlns:ns18="urn:healthit-gov:qdm:v5_6" dataType="ns18:PositiveAssessmentPerformed" templateId="PositiveAssessmentPerformed" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                        <codes xsi:type="ToList">
+                           <operand locator="145:31-145:107" name="Knee injury and osteoarthritis outcome score for joint replacement [KOOSJR]" xsi:type="CodeRef"/>
+                        </codes>
+                     </expression>
+                  </source>
+                  <where localId="285" locator="146:5-146:35" xsi:type="Not">
+                     <operand locator="146:11-146:35" xsi:type="IsNull">
+                        <operand localId="284" locator="146:11-146:23" path="result" scope="KOOSJr" xsi:type="Property"/>
+                     </operand>
+                  </where>
+               </expression>
+            </source>
+            <return localId="295" locator="147:5-147:117">
+               <expression localId="294" locator="147:12-147:117" xsi:type="Start">
+                  <operand localId="293" locator="147:21-147:117" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                     <operand localId="290" locator="147:50-147:82" path="relevantDatetime" scope="DocumentedKOOSJr" xsi:type="Property"/>
+                     <operand localId="292" locator="147:85-147:115" path="relevantPeriod" scope="DocumentedKOOSJr" xsi:type="Property"/>
+                  </operand>
+               </expression>
+            </return>
+         </expression>
+      </def>
+      <def localId="321" locator="167:1-176:3" name="Has TKA with Initial and Follow Up KOOSJr Assessments" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="321">
+               <a:s>define &quot;Has TKA with Initial and Follow Up KOOSJr Assessments&quot;:
+  </a:s>
+               <a:s r="320">
+                  <a:s>exists </a:s>
+                  <a:s r="319">
+                     <a:s>( </a:s>
+                     <a:s r="319">
+                        <a:s>
+                           <a:s r="280">
+                              <a:s r="279">
+                                 <a:s>( </a:s>
+                                 <a:s r="279">
+                                    <a:s>
+                                       <a:s r="271">
+                                          <a:s r="270">
+                                             <a:s>
+                                                <a:s>&quot;Total Knee Arthroplasty Procedure&quot;</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s> TKAProcedure</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+      </a:s>
+                                    <a:s r="278">
+                                       <a:s>return </a:s>
+                                       <a:s r="277">
+                                          <a:s r="272">
+                                             <a:s>Global</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="277">
+                                             <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                             <a:s r="274">
+                                                <a:s r="273">
+                                                   <a:s>TKAProcedure</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="274">
+                                                   <a:s>relevantDatetime</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>, </a:s>
+                                             <a:s r="276">
+                                                <a:s r="275">
+                                                   <a:s>TKAProcedure</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="276">
+                                                   <a:s>relevantPeriod</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s> )</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                              <a:s> TotalKnee</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="304">
+                           <a:s>with </a:s>
+                           <a:s r="299">
+                              <a:s r="298">
+                                 <a:s>
+                                    <a:s>&quot;Time KOOSJr Total Assessment Completed&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> InitialKOOSJrAssessment</a:s>
+                           </a:s>
+                           <a:s>
+        such that </a:s>
+                           <a:s r="303">
+                              <a:s r="300">
+                                 <a:s>TotalKnee</a:s>
+                              </a:s>
+                              <a:s> </a:s>
+                              <a:s r="303">
+                                 <a:s>starts </a:s>
+                                 <a:s r="302">
+                                    <a:s>90 days</a:s>
+                                 </a:s>
+                                 <a:s> or less on or after</a:s>
+                              </a:s>
+                              <a:s> </a:s>
+                              <a:s r="301">
+                                 <a:s>InitialKOOSJrAssessment</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="318">
+                           <a:s>with </a:s>
+                           <a:s r="306">
+                              <a:s r="305">
+                                 <a:s>
+                                    <a:s>&quot;Time KOOSJr Total Assessment Completed&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> FollowUpKOOSJrAssessment</a:s>
+                           </a:s>
+                           <a:s>
+        such that </a:s>
+                           <a:s r="317">
+                              <a:s r="307">
+                                 <a:s>FollowUpKOOSJrAssessment</a:s>
+                              </a:s>
+                              <a:s r="317"> during day of </a:s>
+                              <a:s r="316">
+                                 <a:s>Interval[
+        </a:s>
+                                 <a:s r="311">
+                                    <a:s r="309">
+                                       <a:s>end of </a:s>
+                                       <a:s r="308">
+                                          <a:s>TotalKnee</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> + </a:s>
+                                    <a:s r="310">
+                                       <a:s>270 days</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>, 
+        </a:s>
+                                 <a:s r="315">
+                                    <a:s r="313">
+                                       <a:s>end of </a:s>
+                                       <a:s r="312">
+                                          <a:s>TotalKnee</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> + </a:s>
+                                    <a:s r="314">
+                                       <a:s>365 days</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="320" locator="168:3-176:3" xsi:type="Exists">
+            <operand localId="319" locator="168:10-176:3" xsi:type="Query">
+               <source localId="280" locator="168:12-169:114" alias="TotalKnee">
+                  <expression localId="279" locator="168:12-169:104" xsi:type="Query">
+                     <source localId="271" locator="168:14-168:61" alias="TKAProcedure">
+                        <expression localId="270" locator="168:14-168:48" name="Total Knee Arthroplasty Procedure" xsi:type="ExpressionRef"/>
+                     </source>
+                     <return localId="278" locator="169:7-169:102">
+                        <expression localId="277" locator="169:14-169:102" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                           <operand localId="274" locator="169:43-169:71" path="relevantDatetime" scope="TKAProcedure" xsi:type="Property"/>
+                           <operand localId="276" locator="169:74-169:100" path="relevantPeriod" scope="TKAProcedure" xsi:type="Property"/>
+                        </expression>
+                     </return>
+                  </expression>
+               </source>
+               <relationship localId="304" locator="170:7-171:86" alias="InitialKOOSJrAssessment" xsi:type="With">
+                  <expression localId="298" locator="170:12-170:51" name="Time KOOSJr Total Assessment Completed" xsi:type="ExpressionRef"/>
+                  <suchThat localId="303" locator="171:19-171:86" xsi:type="And">
+                     <operand locator="171:36-171:50" xsi:type="In">
+                        <operand locator="171:29-171:34" xsi:type="Start">
+                           <operand localId="300" locator="171:19-171:27" name="TotalKnee" xsi:type="AliasRef"/>
+                        </operand>
+                        <operand locator="171:36-171:50" lowClosed="true" highClosed="true" xsi:type="Interval">
+                           <low localId="301" locator="171:64-171:86" name="InitialKOOSJrAssessment" xsi:type="AliasRef"/>
+                           <high locator="171:64-171:86" xsi:type="Add">
+                              <operand localId="301" locator="171:64-171:86" name="InitialKOOSJrAssessment" xsi:type="AliasRef"/>
+                              <operand localId="302" locator="171:36-171:42" value="90" unit="days" xsi:type="Quantity"/>
+                           </high>
+                        </operand>
+                     </operand>
+                     <operand locator="171:36-171:50" xsi:type="Not">
+                        <operand locator="171:36-171:50" xsi:type="IsNull">
+                           <operand localId="301" locator="171:64-171:86" name="InitialKOOSJrAssessment" xsi:type="AliasRef"/>
+                        </operand>
+                     </operand>
+                  </suchThat>
+               </relationship>
+               <relationship localId="318" locator="172:7-175:36" alias="FollowUpKOOSJrAssessment" xsi:type="With">
+                  <expression localId="305" locator="172:12-172:51" name="Time KOOSJr Total Assessment Completed" xsi:type="ExpressionRef"/>
+                  <suchThat localId="317" locator="173:19-175:36" precision="Day" xsi:type="In">
+                     <operand localId="307" locator="173:19-173:42" name="FollowUpKOOSJrAssessment" xsi:type="AliasRef"/>
+                     <operand localId="316" locator="173:58-175:36" lowClosed="true" highClosed="true" xsi:type="Interval">
+                        <low localId="311" locator="174:9-174:35" xsi:type="Add">
+                           <operand localId="309" locator="174:9-174:24" xsi:type="End">
+                              <operand localId="308" locator="174:16-174:24" name="TotalKnee" xsi:type="AliasRef"/>
+                           </operand>
+                           <operand localId="310" locator="174:28-174:35" value="270" unit="days" xsi:type="Quantity"/>
+                        </low>
+                        <high localId="315" locator="175:9-175:35" xsi:type="Add">
+                           <operand localId="313" locator="175:9-175:24" xsi:type="End">
+                              <operand localId="312" locator="175:16-175:24" name="TotalKnee" xsi:type="AliasRef"/>
+                           </operand>
+                           <operand localId="314" locator="175:28-175:35" value="365" unit="days" xsi:type="Quantity"/>
+                        </high>
+                     </operand>
+                  </suchThat>
+               </relationship>
+            </operand>
+         </expression>
+      </def>
+      <def localId="372" locator="102:1-111:70" name="Time PROMIS10 Total Assessment Completed" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="372">
+               <a:s>define &quot;Time PROMIS10 Total Assessment Completed&quot;:
+  </a:s>
+               <a:s r="371">
+                  <a:s>
+                     <a:s>from
+    </a:s>
+                     <a:s r="336">
+                        <a:s r="335">
+                           <a:s r="335">
+                              <a:s>[&quot;Assessment, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;PROMIS-10 Global Mental Health (GMH) score T-score&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> PROMIS10MentalScore</a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="338">
+                        <a:s r="337">
+                           <a:s r="337">
+                              <a:s>[&quot;Assessment, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;PROMIS-10 Global Physical Health (GPH) score T-score&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> PROMIS10PhysicalScore</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s>
+                     <a:s>let </a:s>
+                     <a:s r="346">
+                        <a:s>PROMIS10MentalScoreTime: </a:s>
+                        <a:s r="345">
+                           <a:s>start of </a:s>
+                           <a:s r="344">
+                              <a:s r="339">
+                                 <a:s>Global</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="344">
+                                 <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                 <a:s r="341">
+                                    <a:s r="340">
+                                       <a:s>PROMIS10MentalScore</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="341">
+                                       <a:s>relevantDatetime</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>, </a:s>
+                                 <a:s r="343">
+                                    <a:s r="342">
+                                       <a:s>PROMIS10MentalScore</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="343">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="354">
+                        <a:s>PROMIS10PhysicalScoreTime: </a:s>
+                        <a:s r="353">
+                           <a:s>start of </a:s>
+                           <a:s r="352">
+                              <a:s r="347">
+                                 <a:s>Global</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="352">
+                                 <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                 <a:s r="349">
+                                    <a:s r="348">
+                                       <a:s>PROMIS10PhysicalScore</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="349">
+                                       <a:s>relevantDatetime</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>, </a:s>
+                                 <a:s r="351">
+                                    <a:s r="350">
+                                       <a:s>PROMIS10PhysicalScore</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="351">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="365">
+                     <a:s>where </a:s>
+                     <a:s r="365">
+                        <a:s r="361">
+                           <a:s r="357">
+                              <a:s r="355">
+                                 <a:s>PROMIS10MentalScoreTime</a:s>
+                              </a:s>
+                              <a:s r="357"> same day as </a:s>
+                              <a:s r="356">
+                                 <a:s>PROMIS10PhysicalScoreTime</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+      and </a:s>
+                           <a:s r="360">
+                              <a:s r="359">
+                                 <a:s r="358">
+                                    <a:s>PROMIS10PhysicalScore</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="359">
+                                    <a:s>result</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> is not null</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      and </a:s>
+                        <a:s r="364">
+                           <a:s r="363">
+                              <a:s r="362">
+                                 <a:s>PROMIS10MentalScore</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="363">
+                                 <a:s>result</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> is not null</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="370">
+                     <a:s>return </a:s>
+                     <a:s r="369">
+                        <a:s>Max(</a:s>
+                        <a:s r="368">
+                           <a:s>{ </a:s>
+                           <a:s r="366">
+                              <a:s>PROMIS10MentalScoreTime</a:s>
+                           </a:s>
+                           <a:s>, </a:s>
+                           <a:s r="367">
+                              <a:s>PROMIS10PhysicalScoreTime</a:s>
+                           </a:s>
+                           <a:s> }</a:s>
+                        </a:s>
+                        <a:s>)</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="371" locator="103:3-111:70" xsi:type="Query">
+            <source localId="336" locator="104:5-104:103" alias="PROMIS10MentalScore">
+               <expression localId="335" locator="104:5-104:83" xmlns:ns19="urn:healthit-gov:qdm:v5_6" dataType="ns19:PositiveAssessmentPerformed" templateId="PositiveAssessmentPerformed" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                  <codes xsi:type="ToList">
+                     <operand locator="104:31-104:82" name="PROMIS-10 Global Mental Health (GMH) score T-score" xsi:type="CodeRef"/>
+                  </codes>
+               </expression>
+            </source>
+            <source localId="338" locator="105:5-105:107" alias="PROMIS10PhysicalScore">
+               <expression localId="337" locator="105:5-105:85" xmlns:ns20="urn:healthit-gov:qdm:v5_6" dataType="ns20:PositiveAssessmentPerformed" templateId="PositiveAssessmentPerformed" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                  <codes xsi:type="ToList">
+                     <operand locator="105:31-105:84" name="PROMIS-10 Global Physical Health (GPH) score T-score" xsi:type="CodeRef"/>
+                  </codes>
+               </expression>
+            </source>
+            <let localId="346" locator="106:9-106:145" identifier="PROMIS10MentalScoreTime">
+               <expression localId="345" locator="106:34-106:145" xsi:type="Start">
+                  <operand localId="344" locator="106:43-106:145" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                     <operand localId="341" locator="106:72-106:107" path="relevantDatetime" scope="PROMIS10MentalScore" xsi:type="Property"/>
+                     <operand localId="343" locator="106:110-106:143" path="relevantPeriod" scope="PROMIS10MentalScore" xsi:type="Property"/>
+                  </operand>
+               </expression>
+            </let>
+            <let localId="354" locator="107:5-107:147" identifier="PROMIS10PhysicalScoreTime">
+               <expression localId="353" locator="107:32-107:147" xsi:type="Start">
+                  <operand localId="352" locator="107:41-107:147" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                     <operand localId="349" locator="107:70-107:107" path="relevantDatetime" scope="PROMIS10PhysicalScore" xsi:type="Property"/>
+                     <operand localId="351" locator="107:110-107:145" path="relevantPeriod" scope="PROMIS10PhysicalScore" xsi:type="Property"/>
+                  </operand>
+               </expression>
+            </let>
+            <where localId="365" locator="108:5-110:48" xsi:type="And">
+               <operand localId="361" locator="108:11-109:50" xsi:type="And">
+                  <operand localId="357" locator="108:11-108:71" precision="Day" xsi:type="SameAs">
+                     <operand localId="355" locator="108:11-108:33" name="PROMIS10MentalScoreTime" xsi:type="QueryLetRef"/>
+                     <operand localId="356" locator="108:47-108:71" name="PROMIS10PhysicalScoreTime" xsi:type="QueryLetRef"/>
+                  </operand>
+                  <operand localId="360" locator="109:11-109:50" xsi:type="Not">
+                     <operand locator="109:11-109:50" xsi:type="IsNull">
+                        <operand localId="359" locator="109:11-109:38" path="result" scope="PROMIS10PhysicalScore" xsi:type="Property"/>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand localId="364" locator="110:11-110:48" xsi:type="Not">
+                  <operand locator="110:11-110:48" xsi:type="IsNull">
+                     <operand localId="363" locator="110:11-110:36" path="result" scope="PROMIS10MentalScore" xsi:type="Property"/>
+                  </operand>
+               </operand>
+            </where>
+            <return localId="370" locator="111:5-111:70">
+               <expression localId="369" locator="111:12-111:70" xsi:type="Max">
+                  <source localId="368" locator="111:16-111:69" xsi:type="List">
+                     <element localId="366" locator="111:18-111:40" name="PROMIS10MentalScoreTime" xsi:type="QueryLetRef"/>
+                     <element localId="367" locator="111:43-111:67" name="PROMIS10PhysicalScoreTime" xsi:type="QueryLetRef"/>
+                  </source>
+               </expression>
+            </return>
+         </expression>
+      </def>
+      <def localId="396" locator="178:1-187:3" name="Has TKA with Initial and Follow Up PROMIS10 Assessments" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="396">
+               <a:s>define &quot;Has TKA with Initial and Follow Up PROMIS10 Assessments&quot;:
+  </a:s>
+               <a:s r="395">
+                  <a:s>exists </a:s>
+                  <a:s r="394">
+                     <a:s>( </a:s>
+                     <a:s r="394">
+                        <a:s>
+                           <a:s r="334">
+                              <a:s r="333">
+                                 <a:s>( </a:s>
+                                 <a:s r="333">
+                                    <a:s>
+                                       <a:s r="325">
+                                          <a:s r="324">
+                                             <a:s>
+                                                <a:s>&quot;Total Knee Arthroplasty Procedure&quot;</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s> TKAProcedure</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+      </a:s>
+                                    <a:s r="332">
+                                       <a:s>return </a:s>
+                                       <a:s r="331">
+                                          <a:s r="326">
+                                             <a:s>Global</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="331">
+                                             <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                             <a:s r="328">
+                                                <a:s r="327">
+                                                   <a:s>TKAProcedure</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="328">
+                                                   <a:s>relevantDatetime</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>, </a:s>
+                                             <a:s r="330">
+                                                <a:s r="329">
+                                                   <a:s>TKAProcedure</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="330">
+                                                   <a:s>relevantPeriod</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s> )</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                              <a:s> TotalKnee</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="379">
+                           <a:s>with </a:s>
+                           <a:s r="374">
+                              <a:s r="373">
+                                 <a:s>
+                                    <a:s>&quot;Time PROMIS10 Total Assessment Completed&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> InitialPROMIS10AssessmentTime</a:s>
+                           </a:s>
+                           <a:s>
+        such that </a:s>
+                           <a:s r="378">
+                              <a:s r="375">
+                                 <a:s>TotalKnee</a:s>
+                              </a:s>
+                              <a:s> </a:s>
+                              <a:s r="378">
+                                 <a:s>starts </a:s>
+                                 <a:s r="377">
+                                    <a:s>90 days</a:s>
+                                 </a:s>
+                                 <a:s> or less on or after</a:s>
+                              </a:s>
+                              <a:s> </a:s>
+                              <a:s r="376">
+                                 <a:s>InitialPROMIS10AssessmentTime</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="393">
+                           <a:s>with </a:s>
+                           <a:s r="381">
+                              <a:s r="380">
+                                 <a:s>
+                                    <a:s>&quot;Time PROMIS10 Total Assessment Completed&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> FollowUpPROMIS10AssessmentTime</a:s>
+                           </a:s>
+                           <a:s>
+        such that </a:s>
+                           <a:s r="392">
+                              <a:s r="382">
+                                 <a:s>FollowUpPROMIS10AssessmentTime</a:s>
+                              </a:s>
+                              <a:s r="392"> during day of </a:s>
+                              <a:s r="391">
+                                 <a:s>Interval[
+        </a:s>
+                                 <a:s r="386">
+                                    <a:s r="384">
+                                       <a:s>end of </a:s>
+                                       <a:s r="383">
+                                          <a:s>TotalKnee</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> + </a:s>
+                                    <a:s r="385">
+                                       <a:s>270 days</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>, 
+        </a:s>
+                                 <a:s r="390">
+                                    <a:s r="388">
+                                       <a:s>end of </a:s>
+                                       <a:s r="387">
+                                          <a:s>TotalKnee</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> + </a:s>
+                                    <a:s r="389">
+                                       <a:s>365 days</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="395" locator="179:3-187:3" xsi:type="Exists">
+            <operand localId="394" locator="179:10-187:3" xsi:type="Query">
+               <source localId="334" locator="179:12-180:114" alias="TotalKnee">
+                  <expression localId="333" locator="179:12-180:104" xsi:type="Query">
+                     <source localId="325" locator="179:14-179:61" alias="TKAProcedure">
+                        <expression localId="324" locator="179:14-179:48" name="Total Knee Arthroplasty Procedure" xsi:type="ExpressionRef"/>
+                     </source>
+                     <return localId="332" locator="180:7-180:102">
+                        <expression localId="331" locator="180:14-180:102" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                           <operand localId="328" locator="180:43-180:71" path="relevantDatetime" scope="TKAProcedure" xsi:type="Property"/>
+                           <operand localId="330" locator="180:74-180:100" path="relevantPeriod" scope="TKAProcedure" xsi:type="Property"/>
+                        </expression>
+                     </return>
+                  </expression>
+               </source>
+               <relationship localId="379" locator="181:7-182:92" alias="InitialPROMIS10AssessmentTime" xsi:type="With">
+                  <expression localId="373" locator="181:12-181:53" name="Time PROMIS10 Total Assessment Completed" xsi:type="ExpressionRef"/>
+                  <suchThat localId="378" locator="182:19-182:92" xsi:type="And">
+                     <operand locator="182:36-182:50" xsi:type="In">
+                        <operand locator="182:29-182:34" xsi:type="Start">
+                           <operand localId="375" locator="182:19-182:27" name="TotalKnee" xsi:type="AliasRef"/>
+                        </operand>
+                        <operand locator="182:36-182:50" lowClosed="true" highClosed="true" xsi:type="Interval">
+                           <low localId="376" locator="182:64-182:92" name="InitialPROMIS10AssessmentTime" xsi:type="AliasRef"/>
+                           <high locator="182:64-182:92" xsi:type="Add">
+                              <operand localId="376" locator="182:64-182:92" name="InitialPROMIS10AssessmentTime" xsi:type="AliasRef"/>
+                              <operand localId="377" locator="182:36-182:42" value="90" unit="days" xsi:type="Quantity"/>
+                           </high>
+                        </operand>
+                     </operand>
+                     <operand locator="182:36-182:50" xsi:type="Not">
+                        <operand locator="182:36-182:50" xsi:type="IsNull">
+                           <operand localId="376" locator="182:64-182:92" name="InitialPROMIS10AssessmentTime" xsi:type="AliasRef"/>
+                        </operand>
+                     </operand>
+                  </suchThat>
+               </relationship>
+               <relationship localId="393" locator="183:7-186:36" alias="FollowUpPROMIS10AssessmentTime" xsi:type="With">
+                  <expression localId="380" locator="183:12-183:53" name="Time PROMIS10 Total Assessment Completed" xsi:type="ExpressionRef"/>
+                  <suchThat localId="392" locator="184:19-186:36" precision="Day" xsi:type="In">
+                     <operand localId="382" locator="184:19-184:48" name="FollowUpPROMIS10AssessmentTime" xsi:type="AliasRef"/>
+                     <operand localId="391" locator="184:64-186:36" lowClosed="true" highClosed="true" xsi:type="Interval">
+                        <low localId="386" locator="185:9-185:35" xsi:type="Add">
+                           <operand localId="384" locator="185:9-185:24" xsi:type="End">
+                              <operand localId="383" locator="185:16-185:24" name="TotalKnee" xsi:type="AliasRef"/>
+                           </operand>
+                           <operand localId="385" locator="185:28-185:35" value="270" unit="days" xsi:type="Quantity"/>
+                        </low>
+                        <high localId="390" locator="186:9-186:35" xsi:type="Add">
+                           <operand localId="388" locator="186:9-186:24" xsi:type="End">
+                              <operand localId="387" locator="186:16-186:24" name="TotalKnee" xsi:type="AliasRef"/>
+                           </operand>
+                           <operand localId="389" locator="186:28-186:35" value="365" unit="days" xsi:type="Quantity"/>
+                        </high>
+                     </operand>
+                  </suchThat>
+               </relationship>
+            </operand>
+         </expression>
+      </def>
+      <def localId="447" locator="113:1-122:72" name="Time VR12 Oblique Total Assessment Completed" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="447">
+               <a:s>define &quot;Time VR12 Oblique Total Assessment Completed&quot;:
+  </a:s>
+               <a:s r="446">
+                  <a:s>
+                     <a:s>from
+    </a:s>
+                     <a:s r="411">
+                        <a:s r="410">
+                           <a:s r="410">
+                              <a:s>[&quot;Assessment, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;VR-12 Mental component summary (MCS) score - oblique method T-score&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> VR12MentalAssessment</a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="413">
+                        <a:s r="412">
+                           <a:s r="412">
+                              <a:s>[&quot;Assessment, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;VR-12 Physical component summary (PCS) score - oblique method T-score&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> VR12PhysicalAssessment</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s>
+                     <a:s>let </a:s>
+                     <a:s r="421">
+                        <a:s>VR12MentalAssessmentTime: </a:s>
+                        <a:s r="420">
+                           <a:s>start of </a:s>
+                           <a:s r="419">
+                              <a:s r="414">
+                                 <a:s>Global</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="419">
+                                 <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                 <a:s r="416">
+                                    <a:s r="415">
+                                       <a:s>VR12MentalAssessment</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="416">
+                                       <a:s>relevantDatetime</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>, </a:s>
+                                 <a:s r="418">
+                                    <a:s r="417">
+                                       <a:s>VR12MentalAssessment</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="418">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="429">
+                        <a:s>VR12PhysicalAssessmentTime: </a:s>
+                        <a:s r="428">
+                           <a:s>start of </a:s>
+                           <a:s r="427">
+                              <a:s r="422">
+                                 <a:s>Global</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="427">
+                                 <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                 <a:s r="424">
+                                    <a:s r="423">
+                                       <a:s>VR12PhysicalAssessment</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="424">
+                                       <a:s>relevantDatetime</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>, </a:s>
+                                 <a:s r="426">
+                                    <a:s r="425">
+                                       <a:s>VR12PhysicalAssessment</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="426">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="440">
+                     <a:s>where </a:s>
+                     <a:s r="440">
+                        <a:s r="436">
+                           <a:s r="432">
+                              <a:s r="430">
+                                 <a:s>VR12MentalAssessmentTime</a:s>
+                              </a:s>
+                              <a:s r="432"> same day as </a:s>
+                              <a:s r="431">
+                                 <a:s>VR12PhysicalAssessmentTime</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+      and </a:s>
+                           <a:s r="435">
+                              <a:s r="434">
+                                 <a:s r="433">
+                                    <a:s>VR12MentalAssessment</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="434">
+                                    <a:s>result</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> is not null</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      and </a:s>
+                        <a:s r="439">
+                           <a:s r="438">
+                              <a:s r="437">
+                                 <a:s>VR12PhysicalAssessment</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="438">
+                                 <a:s>result</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> is not null</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="445">
+                     <a:s>return </a:s>
+                     <a:s r="444">
+                        <a:s>Max(</a:s>
+                        <a:s r="443">
+                           <a:s>{ </a:s>
+                           <a:s r="441">
+                              <a:s>VR12MentalAssessmentTime</a:s>
+                           </a:s>
+                           <a:s>, </a:s>
+                           <a:s r="442">
+                              <a:s>VR12PhysicalAssessmentTime</a:s>
+                           </a:s>
+                           <a:s> }</a:s>
+                        </a:s>
+                        <a:s>)</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="446" locator="114:3-122:72" xsi:type="Query">
+            <source localId="411" locator="115:5-115:121" alias="VR12MentalAssessment">
+               <expression localId="410" locator="115:5-115:100" xmlns:ns21="urn:healthit-gov:qdm:v5_6" dataType="ns21:PositiveAssessmentPerformed" templateId="PositiveAssessmentPerformed" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                  <codes xsi:type="ToList">
+                     <operand locator="115:31-115:99" name="VR-12 Mental component summary (MCS) score - oblique method T-score" xsi:type="CodeRef"/>
+                  </codes>
+               </expression>
+            </source>
+            <source localId="413" locator="116:5-116:125" alias="VR12PhysicalAssessment">
+               <expression localId="412" locator="116:5-116:102" xmlns:ns22="urn:healthit-gov:qdm:v5_6" dataType="ns22:PositiveAssessmentPerformed" templateId="PositiveAssessmentPerformed" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                  <codes xsi:type="ToList">
+                     <operand locator="116:31-116:101" name="VR-12 Physical component summary (PCS) score - oblique method T-score" xsi:type="CodeRef"/>
+                  </codes>
+               </expression>
+            </source>
+            <let localId="421" locator="117:9-117:148" identifier="VR12MentalAssessmentTime">
+               <expression localId="420" locator="117:35-117:148" xsi:type="Start">
+                  <operand localId="419" locator="117:44-117:148" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                     <operand localId="416" locator="117:73-117:109" path="relevantDatetime" scope="VR12MentalAssessment" xsi:type="Property"/>
+                     <operand localId="418" locator="117:112-117:146" path="relevantPeriod" scope="VR12MentalAssessment" xsi:type="Property"/>
+                  </operand>
+               </expression>
+            </let>
+            <let localId="429" locator="118:5-118:150" identifier="VR12PhysicalAssessmentTime">
+               <expression localId="428" locator="118:33-118:150" xsi:type="Start">
+                  <operand localId="427" locator="118:42-118:150" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                     <operand localId="424" locator="118:71-118:109" path="relevantDatetime" scope="VR12PhysicalAssessment" xsi:type="Property"/>
+                     <operand localId="426" locator="118:112-118:148" path="relevantPeriod" scope="VR12PhysicalAssessment" xsi:type="Property"/>
+                  </operand>
+               </expression>
+            </let>
+            <where localId="440" locator="119:5-121:51" xsi:type="And">
+               <operand localId="436" locator="119:11-120:49" xsi:type="And">
+                  <operand localId="432" locator="119:11-119:73" precision="Day" xsi:type="SameAs">
+                     <operand localId="430" locator="119:11-119:34" name="VR12MentalAssessmentTime" xsi:type="QueryLetRef"/>
+                     <operand localId="431" locator="119:48-119:73" name="VR12PhysicalAssessmentTime" xsi:type="QueryLetRef"/>
+                  </operand>
+                  <operand localId="435" locator="120:11-120:49" xsi:type="Not">
+                     <operand locator="120:11-120:49" xsi:type="IsNull">
+                        <operand localId="434" locator="120:11-120:37" path="result" scope="VR12MentalAssessment" xsi:type="Property"/>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand localId="439" locator="121:11-121:51" xsi:type="Not">
+                  <operand locator="121:11-121:51" xsi:type="IsNull">
+                     <operand localId="438" locator="121:11-121:39" path="result" scope="VR12PhysicalAssessment" xsi:type="Property"/>
+                  </operand>
+               </operand>
+            </where>
+            <return localId="445" locator="122:5-122:72">
+               <expression localId="444" locator="122:12-122:72" xsi:type="Max">
+                  <source localId="443" locator="122:16-122:71" xsi:type="List">
+                     <element localId="441" locator="122:18-122:41" name="VR12MentalAssessmentTime" xsi:type="QueryLetRef"/>
+                     <element localId="442" locator="122:44-122:69" name="VR12PhysicalAssessmentTime" xsi:type="QueryLetRef"/>
+                  </source>
+               </expression>
+            </return>
+         </expression>
+      </def>
+      <def localId="471" locator="189:1-198:3" name="Has TKA with Initial and Follow Up VR12 Oblique Assessments" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="471">
+               <a:s>define &quot;Has TKA with Initial and Follow Up VR12 Oblique Assessments&quot;:
+  </a:s>
+               <a:s r="470">
+                  <a:s>exists </a:s>
+                  <a:s r="469">
+                     <a:s>( </a:s>
+                     <a:s r="469">
+                        <a:s>
+                           <a:s r="409">
+                              <a:s r="408">
+                                 <a:s>( </a:s>
+                                 <a:s r="408">
+                                    <a:s>
+                                       <a:s r="400">
+                                          <a:s r="399">
+                                             <a:s>
+                                                <a:s>&quot;Total Knee Arthroplasty Procedure&quot;</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s> TKAProcedure</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+      </a:s>
+                                    <a:s r="407">
+                                       <a:s>return </a:s>
+                                       <a:s r="406">
+                                          <a:s r="401">
+                                             <a:s>Global</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="406">
+                                             <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                             <a:s r="403">
+                                                <a:s r="402">
+                                                   <a:s>TKAProcedure</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="403">
+                                                   <a:s>relevantDatetime</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>, </a:s>
+                                             <a:s r="405">
+                                                <a:s r="404">
+                                                   <a:s>TKAProcedure</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="405">
+                                                   <a:s>relevantPeriod</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s> )</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                              <a:s> TotalKnee</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="454">
+                           <a:s>with </a:s>
+                           <a:s r="449">
+                              <a:s r="448">
+                                 <a:s>
+                                    <a:s>&quot;Time VR12 Oblique Total Assessment Completed&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> InitialKneeAssessmentObliqueTime</a:s>
+                           </a:s>
+                           <a:s>
+        such that </a:s>
+                           <a:s r="453">
+                              <a:s r="450">
+                                 <a:s>TotalKnee</a:s>
+                              </a:s>
+                              <a:s> </a:s>
+                              <a:s r="453">
+                                 <a:s>starts </a:s>
+                                 <a:s r="452">
+                                    <a:s>90 days</a:s>
+                                 </a:s>
+                                 <a:s> or less on or after</a:s>
+                              </a:s>
+                              <a:s> </a:s>
+                              <a:s r="451">
+                                 <a:s>InitialKneeAssessmentObliqueTime</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="468">
+                           <a:s>with </a:s>
+                           <a:s r="456">
+                              <a:s r="455">
+                                 <a:s>
+                                    <a:s>&quot;Time VR12 Oblique Total Assessment Completed&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> FollowUpObliqueAssessmentTime</a:s>
+                           </a:s>
+                           <a:s>
+        such that </a:s>
+                           <a:s r="467">
+                              <a:s r="457">
+                                 <a:s>FollowUpObliqueAssessmentTime</a:s>
+                              </a:s>
+                              <a:s r="467"> during day of </a:s>
+                              <a:s r="466">
+                                 <a:s>Interval[
+        </a:s>
+                                 <a:s r="461">
+                                    <a:s r="459">
+                                       <a:s>end of </a:s>
+                                       <a:s r="458">
+                                          <a:s>TotalKnee</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> + </a:s>
+                                    <a:s r="460">
+                                       <a:s>270 days</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>, 
+        </a:s>
+                                 <a:s r="465">
+                                    <a:s r="463">
+                                       <a:s>end of </a:s>
+                                       <a:s r="462">
+                                          <a:s>TotalKnee</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> + </a:s>
+                                    <a:s r="464">
+                                       <a:s>365 days</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="470" locator="190:3-198:3" xsi:type="Exists">
+            <operand localId="469" locator="190:10-198:3" xsi:type="Query">
+               <source localId="409" locator="190:12-191:114" alias="TotalKnee">
+                  <expression localId="408" locator="190:12-191:104" xsi:type="Query">
+                     <source localId="400" locator="190:14-190:61" alias="TKAProcedure">
+                        <expression localId="399" locator="190:14-190:48" name="Total Knee Arthroplasty Procedure" xsi:type="ExpressionRef"/>
+                     </source>
+                     <return localId="407" locator="191:7-191:102">
+                        <expression localId="406" locator="191:14-191:102" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                           <operand localId="403" locator="191:43-191:71" path="relevantDatetime" scope="TKAProcedure" xsi:type="Property"/>
+                           <operand localId="405" locator="191:74-191:100" path="relevantPeriod" scope="TKAProcedure" xsi:type="Property"/>
+                        </expression>
+                     </return>
+                  </expression>
+               </source>
+               <relationship localId="454" locator="192:7-193:95" alias="InitialKneeAssessmentObliqueTime" xsi:type="With">
+                  <expression localId="448" locator="192:12-192:57" name="Time VR12 Oblique Total Assessment Completed" xsi:type="ExpressionRef"/>
+                  <suchThat localId="453" locator="193:19-193:95" xsi:type="And">
+                     <operand locator="193:36-193:50" xsi:type="In">
+                        <operand locator="193:29-193:34" xsi:type="Start">
+                           <operand localId="450" locator="193:19-193:27" name="TotalKnee" xsi:type="AliasRef"/>
+                        </operand>
+                        <operand locator="193:36-193:50" lowClosed="true" highClosed="true" xsi:type="Interval">
+                           <low localId="451" locator="193:64-193:95" name="InitialKneeAssessmentObliqueTime" xsi:type="AliasRef"/>
+                           <high locator="193:64-193:95" xsi:type="Add">
+                              <operand localId="451" locator="193:64-193:95" name="InitialKneeAssessmentObliqueTime" xsi:type="AliasRef"/>
+                              <operand localId="452" locator="193:36-193:42" value="90" unit="days" xsi:type="Quantity"/>
+                           </high>
+                        </operand>
+                     </operand>
+                     <operand locator="193:36-193:50" xsi:type="Not">
+                        <operand locator="193:36-193:50" xsi:type="IsNull">
+                           <operand localId="451" locator="193:64-193:95" name="InitialKneeAssessmentObliqueTime" xsi:type="AliasRef"/>
+                        </operand>
+                     </operand>
+                  </suchThat>
+               </relationship>
+               <relationship localId="468" locator="194:7-197:36" alias="FollowUpObliqueAssessmentTime" xsi:type="With">
+                  <expression localId="455" locator="194:12-194:57" name="Time VR12 Oblique Total Assessment Completed" xsi:type="ExpressionRef"/>
+                  <suchThat localId="467" locator="195:19-197:36" precision="Day" xsi:type="In">
+                     <operand localId="457" locator="195:19-195:47" name="FollowUpObliqueAssessmentTime" xsi:type="AliasRef"/>
+                     <operand localId="466" locator="195:63-197:36" lowClosed="true" highClosed="true" xsi:type="Interval">
+                        <low localId="461" locator="196:9-196:35" xsi:type="Add">
+                           <operand localId="459" locator="196:9-196:24" xsi:type="End">
+                              <operand localId="458" locator="196:16-196:24" name="TotalKnee" xsi:type="AliasRef"/>
+                           </operand>
+                           <operand localId="460" locator="196:28-196:35" value="270" unit="days" xsi:type="Quantity"/>
+                        </low>
+                        <high localId="465" locator="197:9-197:35" xsi:type="Add">
+                           <operand localId="463" locator="197:9-197:24" xsi:type="End">
+                              <operand localId="462" locator="197:16-197:24" name="TotalKnee" xsi:type="AliasRef"/>
+                           </operand>
+                           <operand localId="464" locator="197:28-197:35" value="365" unit="days" xsi:type="Quantity"/>
+                        </high>
+                     </operand>
+                  </suchThat>
+               </relationship>
+            </operand>
+         </expression>
+      </def>
+      <def localId="522" locator="124:1-133:72" name="Time VR12 Orthogonal Total Assessment Completed" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="522">
+               <a:s>define &quot;Time VR12 Orthogonal Total Assessment Completed&quot;:
+  </a:s>
+               <a:s r="521">
+                  <a:s>
+                     <a:s>from
+    </a:s>
+                     <a:s r="486">
+                        <a:s r="485">
+                           <a:s r="485">
+                              <a:s>[&quot;Assessment, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;VR-12 Mental component summary (MCS) score - orthogonal method T-score&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> VR12MentalAssessment</a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="488">
+                        <a:s r="487">
+                           <a:s r="487">
+                              <a:s>[&quot;Assessment, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;VR-12 Physical component summary (PCS) score - orthogonal method T-score&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> VR12PhysicalAssessment</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s>
+                     <a:s>let </a:s>
+                     <a:s r="496">
+                        <a:s>VR12MentalAssessmentTime: </a:s>
+                        <a:s r="495">
+                           <a:s>start of </a:s>
+                           <a:s r="494">
+                              <a:s r="489">
+                                 <a:s>Global</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="494">
+                                 <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                 <a:s r="491">
+                                    <a:s r="490">
+                                       <a:s>VR12MentalAssessment</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="491">
+                                       <a:s>relevantDatetime</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>, </a:s>
+                                 <a:s r="493">
+                                    <a:s r="492">
+                                       <a:s>VR12MentalAssessment</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="493">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="504">
+                        <a:s>VR12PhysicalAssessmentTime: </a:s>
+                        <a:s r="503">
+                           <a:s>start of </a:s>
+                           <a:s r="502">
+                              <a:s r="497">
+                                 <a:s>Global</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="502">
+                                 <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                 <a:s r="499">
+                                    <a:s r="498">
+                                       <a:s>VR12PhysicalAssessment</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="499">
+                                       <a:s>relevantDatetime</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>, </a:s>
+                                 <a:s r="501">
+                                    <a:s r="500">
+                                       <a:s>VR12PhysicalAssessment</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="501">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="515">
+                     <a:s>where </a:s>
+                     <a:s r="515">
+                        <a:s r="511">
+                           <a:s r="507">
+                              <a:s r="505">
+                                 <a:s>VR12MentalAssessmentTime</a:s>
+                              </a:s>
+                              <a:s r="507"> same day as </a:s>
+                              <a:s r="506">
+                                 <a:s>VR12PhysicalAssessmentTime</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+      and </a:s>
+                           <a:s r="510">
+                              <a:s r="509">
+                                 <a:s r="508">
+                                    <a:s>VR12MentalAssessment</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="509">
+                                    <a:s>result</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> is not null</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      and </a:s>
+                        <a:s r="514">
+                           <a:s r="513">
+                              <a:s r="512">
+                                 <a:s>VR12PhysicalAssessment</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="513">
+                                 <a:s>result</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> is not null</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="520">
+                     <a:s>return </a:s>
+                     <a:s r="519">
+                        <a:s>Max(</a:s>
+                        <a:s r="518">
+                           <a:s>{ </a:s>
+                           <a:s r="516">
+                              <a:s>VR12MentalAssessmentTime</a:s>
+                           </a:s>
+                           <a:s>, </a:s>
+                           <a:s r="517">
+                              <a:s>VR12PhysicalAssessmentTime</a:s>
+                           </a:s>
+                           <a:s> }</a:s>
+                        </a:s>
+                        <a:s>)</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="521" locator="125:3-133:72" xsi:type="Query">
+            <source localId="486" locator="126:5-126:124" alias="VR12MentalAssessment">
+               <expression localId="485" locator="126:5-126:103" xmlns:ns23="urn:healthit-gov:qdm:v5_6" dataType="ns23:PositiveAssessmentPerformed" templateId="PositiveAssessmentPerformed" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                  <codes xsi:type="ToList">
+                     <operand locator="126:31-126:102" name="VR-12 Mental component summary (MCS) score - orthogonal method T-score" xsi:type="CodeRef"/>
+                  </codes>
+               </expression>
+            </source>
+            <source localId="488" locator="127:5-127:128" alias="VR12PhysicalAssessment">
+               <expression localId="487" locator="127:5-127:105" xmlns:ns24="urn:healthit-gov:qdm:v5_6" dataType="ns24:PositiveAssessmentPerformed" templateId="PositiveAssessmentPerformed" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                  <codes xsi:type="ToList">
+                     <operand locator="127:31-127:104" name="VR-12 Physical component summary (PCS) score - orthogonal method T-score" xsi:type="CodeRef"/>
+                  </codes>
+               </expression>
+            </source>
+            <let localId="496" locator="128:9-128:148" identifier="VR12MentalAssessmentTime">
+               <expression localId="495" locator="128:35-128:148" xsi:type="Start">
+                  <operand localId="494" locator="128:44-128:148" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                     <operand localId="491" locator="128:73-128:109" path="relevantDatetime" scope="VR12MentalAssessment" xsi:type="Property"/>
+                     <operand localId="493" locator="128:112-128:146" path="relevantPeriod" scope="VR12MentalAssessment" xsi:type="Property"/>
+                  </operand>
+               </expression>
+            </let>
+            <let localId="504" locator="129:5-129:150" identifier="VR12PhysicalAssessmentTime">
+               <expression localId="503" locator="129:33-129:150" xsi:type="Start">
+                  <operand localId="502" locator="129:42-129:150" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                     <operand localId="499" locator="129:71-129:109" path="relevantDatetime" scope="VR12PhysicalAssessment" xsi:type="Property"/>
+                     <operand localId="501" locator="129:112-129:148" path="relevantPeriod" scope="VR12PhysicalAssessment" xsi:type="Property"/>
+                  </operand>
+               </expression>
+            </let>
+            <where localId="515" locator="130:5-132:51" xsi:type="And">
+               <operand localId="511" locator="130:11-131:49" xsi:type="And">
+                  <operand localId="507" locator="130:11-130:73" precision="Day" xsi:type="SameAs">
+                     <operand localId="505" locator="130:11-130:34" name="VR12MentalAssessmentTime" xsi:type="QueryLetRef"/>
+                     <operand localId="506" locator="130:48-130:73" name="VR12PhysicalAssessmentTime" xsi:type="QueryLetRef"/>
+                  </operand>
+                  <operand localId="510" locator="131:11-131:49" xsi:type="Not">
+                     <operand locator="131:11-131:49" xsi:type="IsNull">
+                        <operand localId="509" locator="131:11-131:37" path="result" scope="VR12MentalAssessment" xsi:type="Property"/>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand localId="514" locator="132:11-132:51" xsi:type="Not">
+                  <operand locator="132:11-132:51" xsi:type="IsNull">
+                     <operand localId="513" locator="132:11-132:39" path="result" scope="VR12PhysicalAssessment" xsi:type="Property"/>
+                  </operand>
+               </operand>
+            </where>
+            <return localId="520" locator="133:5-133:72">
+               <expression localId="519" locator="133:12-133:72" xsi:type="Max">
+                  <source localId="518" locator="133:16-133:71" xsi:type="List">
+                     <element localId="516" locator="133:18-133:41" name="VR12MentalAssessmentTime" xsi:type="QueryLetRef"/>
+                     <element localId="517" locator="133:44-133:69" name="VR12PhysicalAssessmentTime" xsi:type="QueryLetRef"/>
+                  </source>
+               </expression>
+            </return>
+         </expression>
+      </def>
+      <def localId="546" locator="200:1-209:3" name="Has TKA with Initial and Follow Up VR12 Orthogonal Assessments" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="546">
+               <a:s>define &quot;Has TKA with Initial and Follow Up VR12 Orthogonal Assessments&quot;:
+  </a:s>
+               <a:s r="545">
+                  <a:s>exists </a:s>
+                  <a:s r="544">
+                     <a:s>( </a:s>
+                     <a:s r="544">
+                        <a:s>
+                           <a:s r="484">
+                              <a:s r="483">
+                                 <a:s>( </a:s>
+                                 <a:s r="483">
+                                    <a:s>
+                                       <a:s r="475">
+                                          <a:s r="474">
+                                             <a:s>
+                                                <a:s>&quot;Total Knee Arthroplasty Procedure&quot;</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s> TKAProcedure</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+      </a:s>
+                                    <a:s r="482">
+                                       <a:s>return </a:s>
+                                       <a:s r="481">
+                                          <a:s r="476">
+                                             <a:s>Global</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="481">
+                                             <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                             <a:s r="478">
+                                                <a:s r="477">
+                                                   <a:s>TKAProcedure</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="478">
+                                                   <a:s>relevantDatetime</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>, </a:s>
+                                             <a:s r="480">
+                                                <a:s r="479">
+                                                   <a:s>TKAProcedure</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="480">
+                                                   <a:s>relevantPeriod</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s> )</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                              <a:s> TotalKnee</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="529">
+                           <a:s>with </a:s>
+                           <a:s r="524">
+                              <a:s r="523">
+                                 <a:s>
+                                    <a:s>&quot;Time VR12 Orthogonal Total Assessment Completed&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> InitialOrthogonalAssessmentTime</a:s>
+                           </a:s>
+                           <a:s>
+        such that </a:s>
+                           <a:s r="528">
+                              <a:s r="525">
+                                 <a:s>TotalKnee</a:s>
+                              </a:s>
+                              <a:s> </a:s>
+                              <a:s r="528">
+                                 <a:s>starts </a:s>
+                                 <a:s r="527">
+                                    <a:s>90 days</a:s>
+                                 </a:s>
+                                 <a:s> or less on or after</a:s>
+                              </a:s>
+                              <a:s> </a:s>
+                              <a:s r="526">
+                                 <a:s>InitialOrthogonalAssessmentTime</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="543">
+                           <a:s>with </a:s>
+                           <a:s r="531">
+                              <a:s r="530">
+                                 <a:s>
+                                    <a:s>&quot;Time VR12 Orthogonal Total Assessment Completed&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> FollowUpOrthogonalAssessmentTime</a:s>
+                           </a:s>
+                           <a:s>
+        such that </a:s>
+                           <a:s r="542">
+                              <a:s r="532">
+                                 <a:s>FollowUpOrthogonalAssessmentTime</a:s>
+                              </a:s>
+                              <a:s r="542"> during day of </a:s>
+                              <a:s r="541">
+                                 <a:s>Interval[
+        </a:s>
+                                 <a:s r="536">
+                                    <a:s r="534">
+                                       <a:s>end of </a:s>
+                                       <a:s r="533">
+                                          <a:s>TotalKnee</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> + </a:s>
+                                    <a:s r="535">
+                                       <a:s>270 days</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>, 
+        </a:s>
+                                 <a:s r="540">
+                                    <a:s r="538">
+                                       <a:s>end of </a:s>
+                                       <a:s r="537">
+                                          <a:s>TotalKnee</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> + </a:s>
+                                    <a:s r="539">
+                                       <a:s>365 days</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="545" locator="201:3-209:3" xsi:type="Exists">
+            <operand localId="544" locator="201:10-209:3" xsi:type="Query">
+               <source localId="484" locator="201:12-202:114" alias="TotalKnee">
+                  <expression localId="483" locator="201:12-202:104" xsi:type="Query">
+                     <source localId="475" locator="201:14-201:61" alias="TKAProcedure">
+                        <expression localId="474" locator="201:14-201:48" name="Total Knee Arthroplasty Procedure" xsi:type="ExpressionRef"/>
+                     </source>
+                     <return localId="482" locator="202:7-202:102">
+                        <expression localId="481" locator="202:14-202:102" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                           <operand localId="478" locator="202:43-202:71" path="relevantDatetime" scope="TKAProcedure" xsi:type="Property"/>
+                           <operand localId="480" locator="202:74-202:100" path="relevantPeriod" scope="TKAProcedure" xsi:type="Property"/>
+                        </expression>
+                     </return>
+                  </expression>
+               </source>
+               <relationship localId="529" locator="203:7-204:94" alias="InitialOrthogonalAssessmentTime" xsi:type="With">
+                  <expression localId="523" locator="203:12-203:60" name="Time VR12 Orthogonal Total Assessment Completed" xsi:type="ExpressionRef"/>
+                  <suchThat localId="528" locator="204:19-204:94" xsi:type="And">
+                     <operand locator="204:36-204:50" xsi:type="In">
+                        <operand locator="204:29-204:34" xsi:type="Start">
+                           <operand localId="525" locator="204:19-204:27" name="TotalKnee" xsi:type="AliasRef"/>
+                        </operand>
+                        <operand locator="204:36-204:50" lowClosed="true" highClosed="true" xsi:type="Interval">
+                           <low localId="526" locator="204:64-204:94" name="InitialOrthogonalAssessmentTime" xsi:type="AliasRef"/>
+                           <high locator="204:64-204:94" xsi:type="Add">
+                              <operand localId="526" locator="204:64-204:94" name="InitialOrthogonalAssessmentTime" xsi:type="AliasRef"/>
+                              <operand localId="527" locator="204:36-204:42" value="90" unit="days" xsi:type="Quantity"/>
+                           </high>
+                        </operand>
+                     </operand>
+                     <operand locator="204:36-204:50" xsi:type="Not">
+                        <operand locator="204:36-204:50" xsi:type="IsNull">
+                           <operand localId="526" locator="204:64-204:94" name="InitialOrthogonalAssessmentTime" xsi:type="AliasRef"/>
+                        </operand>
+                     </operand>
+                  </suchThat>
+               </relationship>
+               <relationship localId="543" locator="205:7-208:36" alias="FollowUpOrthogonalAssessmentTime" xsi:type="With">
+                  <expression localId="530" locator="205:12-205:60" name="Time VR12 Orthogonal Total Assessment Completed" xsi:type="ExpressionRef"/>
+                  <suchThat localId="542" locator="206:19-208:36" precision="Day" xsi:type="In">
+                     <operand localId="532" locator="206:19-206:50" name="FollowUpOrthogonalAssessmentTime" xsi:type="AliasRef"/>
+                     <operand localId="541" locator="206:66-208:36" lowClosed="true" highClosed="true" xsi:type="Interval">
+                        <low localId="536" locator="207:9-207:35" xsi:type="Add">
+                           <operand localId="534" locator="207:9-207:24" xsi:type="End">
+                              <operand localId="533" locator="207:16-207:24" name="TotalKnee" xsi:type="AliasRef"/>
+                           </operand>
+                           <operand localId="535" locator="207:28-207:35" value="270" unit="days" xsi:type="Quantity"/>
+                        </low>
+                        <high localId="540" locator="208:9-208:35" xsi:type="Add">
+                           <operand localId="538" locator="208:9-208:24" xsi:type="End">
+                              <operand localId="537" locator="208:16-208:24" name="TotalKnee" xsi:type="AliasRef"/>
+                           </operand>
+                           <operand localId="539" locator="208:28-208:35" value="365" unit="days" xsi:type="Quantity"/>
+                        </high>
+                     </operand>
+                  </suchThat>
+               </relationship>
+            </operand>
+         </expression>
+      </def>
+      <def localId="549" locator="72:1-77:71" name="Numerator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="549">
+               <a:s>define &quot;Numerator&quot;:
+  </a:s>
+               <a:s r="548">
+                  <a:s r="473">
+                     <a:s r="398">
+                        <a:s r="323">
+                           <a:s r="269">
+                              <a:s>&quot;Has TKA with Initial and Follow Up KOOS Assessments&quot;</a:s>
+                           </a:s>
+                           <a:s>
+    or </a:s>
+                           <a:s r="322">
+                              <a:s>&quot;Has TKA with Initial and Follow Up KOOSJr Assessments&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+    or </a:s>
+                        <a:s r="397">
+                           <a:s>&quot;Has TKA with Initial and Follow Up PROMIS10 Assessments&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    or </a:s>
+                     <a:s r="472">
+                        <a:s>&quot;Has TKA with Initial and Follow Up VR12 Oblique Assessments&quot;</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    or </a:s>
+                  <a:s r="547">
+                     <a:s>&quot;Has TKA with Initial and Follow Up VR12 Orthogonal Assessments&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="548" locator="73:3-77:71" xsi:type="Or">
+            <operand localId="473" locator="73:3-76:68" xsi:type="Or">
+               <operand localId="398" locator="73:3-75:64" xsi:type="Or">
+                  <operand localId="323" locator="73:3-74:62" xsi:type="Or">
+                     <operand localId="269" locator="73:3-73:55" name="Has TKA with Initial and Follow Up KOOS Assessments" xsi:type="ExpressionRef"/>
+                     <operand localId="322" locator="74:8-74:62" name="Has TKA with Initial and Follow Up KOOSJr Assessments" xsi:type="ExpressionRef"/>
+                  </operand>
+                  <operand localId="397" locator="75:8-75:64" name="Has TKA with Initial and Follow Up PROMIS10 Assessments" xsi:type="ExpressionRef"/>
+               </operand>
+               <operand localId="472" locator="76:8-76:68" name="Has TKA with Initial and Follow Up VR12 Oblique Assessments" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand localId="547" locator="77:8-77:71" name="Has TKA with Initial and Follow Up VR12 Orthogonal Assessments" xsi:type="ExpressionRef"/>
+         </expression>
+      </def>
+   </statements>
+</library>

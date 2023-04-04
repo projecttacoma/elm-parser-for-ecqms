@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion,DisableMethodInvocation" xsi:type="a:CqlToElmInfo"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="57">
+         <a:s>library PalliativeCareExclusionECQM version '2.0.000'</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="PalliativeCareExclusionECQM" version="2.0.000"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="3:1-3:23" localIdentifier="QDM" uri="urn:healthit-gov:qdm:v5_6" version="5.6">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>using </a:s>
+               <a:s>
+                  <a:s>QDM</a:s>
+               </a:s>
+               <a:s> version '5.6'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="5:1-5:64" localIdentifier="Global" path="MATGlobalCommonFunctions" version="7.0.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>MATGlobalCommonFunctions</a:s>
+               </a:s>
+               <a:s> version '7.0.000' called Global</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <parameters>
+      <def localId="13" locator="16:1-16:49" name="Measurement Period" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="13">
+               <a:s>parameter &quot;Measurement Period&quot; </a:s>
+               <a:s r="12">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="11">
+                     <a:s>DateTime</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <parameterTypeSpecifier localId="12" locator="16:32-16:49" xsi:type="IntervalTypeSpecifier">
+            <pointType localId="11" locator="16:41-16:48" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <codeSystems>
+      <def localId="3" locator="7:1-7:54" name="ICD10CM" id="urn:oid:2.16.840.1.113883.6.90" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>codesystem &quot;ICD10CM&quot;: 'urn:oid:2.16.840.1.113883.6.90'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="4" locator="8:1-8:51" name="LOINC" id="urn:oid:2.16.840.1.113883.6.1" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>codesystem &quot;LOINC&quot;: 'urn:oid:2.16.840.1.113883.6.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </codeSystems>
+   <valueSets>
+      <def localId="5" locator="10:1-10:88" name="Palliative Care Encounter" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1090" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>valueset &quot;Palliative Care Encounter&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1090'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="6" locator="11:1-11:91" name="Palliative Care Intervention" id="urn:oid:2.16.840.1.113883.3.464.1003.198.12.1135" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>valueset &quot;Palliative Care Intervention&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.198.12.1135'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </valueSets>
+   <codes>
+      <def localId="8" locator="13:1-13:100" name="Encounter for palliative care" id="Z51.5" display="Encounter for palliative care" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="8">
+               <a:s>code &quot;Encounter for palliative care&quot;: 'Z51.5' from </a:s>
+               <a:s r="7">
+                  <a:s>&quot;ICD10CM&quot;</a:s>
+               </a:s>
+               <a:s> display 'Encounter for palliative care'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="7" locator="13:52-13:60" name="ICD10CM"/>
+      </def>
+      <def localId="10" locator="14:1-14:226" name="Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)" id="71007-9" display="Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="10">
+               <a:s>code &quot;Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)&quot;: '71007-9' from </a:s>
+               <a:s r="9">
+                  <a:s>&quot;LOINC&quot;</a:s>
+               </a:s>
+               <a:s> display 'Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="9" locator="14:117-14:123" name="LOINC"/>
+      </def>
+   </codes>
+   <contexts>
+      <def locator="18:1-18:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="18:1-18:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="18:1-18:15" xmlns:ns0="urn:healthit-gov:qdm:v5_6" dataType="ns0:Patient" templateId="Patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="57" locator="20:1-31:5" name="Palliative Care in the Measurement Period" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="57">
+               <a:s>define &quot;Palliative Care in the Measurement Period&quot;:
+  </a:s>
+               <a:s r="56">
+                  <a:s r="43">
+                     <a:s r="34">
+                        <a:s r="25">
+                           <a:s>exists </a:s>
+                           <a:s r="24">
+                              <a:s>( </a:s>
+                              <a:s r="24">
+                                 <a:s>
+                                    <a:s r="15">
+                                       <a:s r="14">
+                                          <a:s r="14">
+                                             <a:s>[&quot;Assessment, Performed&quot;: </a:s>
+                                             <a:s>
+                                                <a:s>&quot;Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)&quot;</a:s>
+                                             </a:s>
+                                             <a:s>]</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> PalliativeAssessment</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+      </a:s>
+                                 <a:s r="23">
+                                    <a:s>where </a:s>
+                                    <a:s r="23">
+                                       <a:s r="21">
+                                          <a:s r="16">
+                                             <a:s>Global</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="21">
+                                             <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                             <a:s r="18">
+                                                <a:s r="17">
+                                                   <a:s>PalliativeAssessment</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="18">
+                                                   <a:s>relevantDatetime</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>, </a:s>
+                                             <a:s r="20">
+                                                <a:s r="19">
+                                                   <a:s>PalliativeAssessment</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="20">
+                                                   <a:s>relevantPeriod</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>)</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s r="23"> overlaps </a:s>
+                                       <a:s r="22">
+                                          <a:s>&quot;Measurement Period&quot;</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+  )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+  or </a:s>
+                        <a:s r="33">
+                           <a:s>exists </a:s>
+                           <a:s r="32">
+                              <a:s>(</a:s>
+                              <a:s r="32">
+                                 <a:s>
+                                    <a:s r="27">
+                                       <a:s r="26">
+                                          <a:s r="26">
+                                             <a:s>[&quot;Diagnosis&quot;: </a:s>
+                                             <a:s>
+                                                <a:s>&quot;Encounter for palliative care&quot;</a:s>
+                                             </a:s>
+                                             <a:s>]</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> PalliativeDiagnosis</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+  </a:s>
+                                 <a:s r="31">
+                                    <a:s>where </a:s>
+                                    <a:s r="31">
+                                       <a:s r="29">
+                                          <a:s r="28">
+                                             <a:s>PalliativeDiagnosis</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="29">
+                                             <a:s>prevalencePeriod</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s r="31"> overlaps </a:s>
+                                       <a:s r="30">
+                                          <a:s>&quot;Measurement Period&quot;</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    or </a:s>
+                     <a:s r="42">
+                        <a:s>exists </a:s>
+                        <a:s r="41">
+                           <a:s>( </a:s>
+                           <a:s r="41">
+                              <a:s>
+                                 <a:s r="36">
+                                    <a:s r="35">
+                                       <a:s r="35">
+                                          <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                          <a:s>
+                                             <a:s>&quot;Palliative Care Encounter&quot;</a:s>
+                                          </a:s>
+                                          <a:s>]</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> PalliativeEncounter</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+        </a:s>
+                              <a:s r="40">
+                                 <a:s>where </a:s>
+                                 <a:s r="40">
+                                    <a:s r="38">
+                                       <a:s r="37">
+                                          <a:s>PalliativeEncounter</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="38">
+                                          <a:s>relevantPeriod</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s r="40"> overlaps </a:s>
+                                    <a:s r="39">
+                                       <a:s>&quot;Measurement Period&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+    )</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    or </a:s>
+                  <a:s r="55">
+                     <a:s>exists </a:s>
+                     <a:s r="54">
+                        <a:s>( </a:s>
+                        <a:s r="54">
+                           <a:s>
+                              <a:s r="45">
+                                 <a:s r="44">
+                                    <a:s r="44">
+                                       <a:s>[&quot;Intervention, Performed&quot;: </a:s>
+                                       <a:s>
+                                          <a:s>&quot;Palliative Care Intervention&quot;</a:s>
+                                       </a:s>
+                                       <a:s>]</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> PalliativeIntervention</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+        </a:s>
+                           <a:s r="53">
+                              <a:s>where </a:s>
+                              <a:s r="53">
+                                 <a:s r="51">
+                                    <a:s r="46">
+                                       <a:s>Global</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="51">
+                                       <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                       <a:s r="48">
+                                          <a:s r="47">
+                                             <a:s>PalliativeIntervention</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="48">
+                                             <a:s>relevantDatetime</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>, </a:s>
+                                       <a:s r="50">
+                                          <a:s r="49">
+                                             <a:s>PalliativeIntervention</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="50">
+                                             <a:s>relevantPeriod</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>)</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s r="53"> overlaps </a:s>
+                                 <a:s r="52">
+                                    <a:s>&quot;Measurement Period&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+    )</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="56" locator="21:3-31:5" xsi:type="Or">
+            <operand localId="43" locator="21:3-28:5" xsi:type="Or">
+               <operand localId="34" locator="21:3-25:75" xsi:type="Or">
+                  <operand localId="25" locator="21:3-23:3" xsi:type="Exists">
+                     <operand localId="24" locator="21:10-23:3" xsi:type="Query">
+                        <source localId="15" locator="21:12-21:153" alias="PalliativeAssessment">
+                           <expression localId="14" locator="21:12-21:132" xmlns:ns1="urn:healthit-gov:qdm:v5_6" dataType="ns1:PositiveAssessmentPerformed" templateId="PositiveAssessmentPerformed" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                              <codes xsi:type="ToList">
+                                 <operand locator="21:38-21:131" name="Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)" xsi:type="CodeRef"/>
+                              </codes>
+                           </expression>
+                        </source>
+                        <where localId="23" locator="22:7-22:144" xsi:type="Overlaps">
+                           <operand localId="21" locator="22:13-22:114" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                              <operand localId="18" locator="22:40-22:76" path="relevantDatetime" scope="PalliativeAssessment" xsi:type="Property"/>
+                              <operand localId="20" locator="22:79-22:113" path="relevantPeriod" scope="PalliativeAssessment" xsi:type="Property"/>
+                           </operand>
+                           <operand localId="22" locator="22:125-22:144" name="Measurement Period" xsi:type="ParameterRef"/>
+                        </where>
+                     </operand>
+                  </operand>
+                  <operand localId="33" locator="24:6-25:75" xsi:type="Exists">
+                     <operand localId="32" locator="24:13-25:75" xsi:type="Query">
+                        <source localId="27" locator="24:14-24:79" alias="PalliativeDiagnosis">
+                           <expression localId="26" locator="24:14-24:59" xmlns:ns2="urn:healthit-gov:qdm:v5_6" dataType="ns2:Diagnosis" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                              <codes xsi:type="ToList">
+                                 <operand locator="24:28-24:58" name="Encounter for palliative care" xsi:type="CodeRef"/>
+                              </codes>
+                           </expression>
+                        </source>
+                        <where localId="31" locator="25:3-25:74" xsi:type="Overlaps">
+                           <operand localId="29" locator="25:9-25:44" path="prevalencePeriod" scope="PalliativeDiagnosis" xsi:type="Property"/>
+                           <operand localId="30" locator="25:55-25:74" name="Measurement Period" xsi:type="ParameterRef"/>
+                        </where>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand localId="42" locator="26:8-28:5" xsi:type="Exists">
+                  <operand localId="41" locator="26:15-28:5" xsi:type="Query">
+                     <source localId="36" locator="26:17-26:89" alias="PalliativeEncounter">
+                        <expression localId="35" locator="26:17-26:69" xmlns:ns3="urn:healthit-gov:qdm:v5_6" dataType="ns3:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                           <codes locator="26:42-26:68" name="Palliative Care Encounter" xsi:type="ValueSetRef"/>
+                        </expression>
+                     </source>
+                     <where localId="40" locator="27:9-27:78" xsi:type="Overlaps">
+                        <operand localId="38" locator="27:15-27:48" path="relevantPeriod" scope="PalliativeEncounter" xsi:type="Property"/>
+                        <operand localId="39" locator="27:59-27:78" name="Measurement Period" xsi:type="ParameterRef"/>
+                     </where>
+                  </operand>
+               </operand>
+            </operand>
+            <operand localId="55" locator="29:8-31:5" xsi:type="Exists">
+               <operand localId="54" locator="29:15-31:5" xsi:type="Query">
+                  <source localId="45" locator="29:17-29:98" alias="PalliativeIntervention">
+                     <expression localId="44" locator="29:17-29:75" xmlns:ns4="urn:healthit-gov:qdm:v5_6" dataType="ns4:PositiveInterventionPerformed" templateId="PositiveInterventionPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                        <codes locator="29:45-29:74" name="Palliative Care Intervention" xsi:type="ValueSetRef"/>
+                     </expression>
+                  </source>
+                  <where localId="53" locator="30:9-30:150" xsi:type="Overlaps">
+                     <operand localId="51" locator="30:15-30:120" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                        <operand localId="48" locator="30:42-30:80" path="relevantDatetime" scope="PalliativeIntervention" xsi:type="Property"/>
+                        <operand localId="50" locator="30:83-30:119" path="relevantPeriod" scope="PalliativeIntervention" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="52" locator="30:131-30:150" name="Measurement Period" xsi:type="ParameterRef"/>
+                  </where>
+               </operand>
+            </operand>
+         </expression>
+      </def>
+   </statements>
+</library>

@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="" xsi:type="a:CqlToElmInfo"/>
+   <identifier id="StatusFHIR" version="1.0.0"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localIdentifier="QICore" uri="http://hl7.org/fhir"/>
+   </usings>
+   <includes>
+      <def localIdentifier="FHIRHelpers" path="FHIRHelpers" version="4.1.000"/>
+   </includes>
+   <codeSystems>
+      <def name="ObservationCategoryCodes" id="http://terminology.hl7.org/CodeSystem/observation-category" accessLevel="Public"/>
+      <def name="ConditionClinicalStatusCodes" id="http://terminology.hl7.org/CodeSystem/condition-clinical" accessLevel="Public"/>
+   </codeSystems>
+   <codes>
+      <def name="laboratory" id="laboratory" display="laboratory" accessLevel="Public">
+         <codeSystem name="ObservationCategoryCodes"/>
+      </def>
+      <def name="exam" id="exam" display="exam" accessLevel="Public">
+         <codeSystem name="ObservationCategoryCodes"/>
+      </def>
+      <def name="survey" id="survey" display="survey" accessLevel="Public">
+         <codeSystem name="ObservationCategoryCodes"/>
+      </def>
+      <def name="vital-signs" id="vital-signs" display="vital-signs" accessLevel="Public">
+         <codeSystem name="ObservationCategoryCodes"/>
+      </def>
+      <def name="active" id="active" accessLevel="Public">
+         <codeSystem name="ConditionClinicalStatusCodes"/>
+      </def>
+   </codes>
+   <contexts>
+      <def name="Patient"/>
+   </contexts>
+   <statements>
+      <def name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand dataType="fhir:Patient" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def name="Active Condition" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <expression xsi:type="Query">
+            <source alias="C">
+               <expression name="Condition" xsi:type="OperandRef"/>
+            </source>
+            <where xsi:type="Equivalent">
+               <operand name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                  <operand path="clinicalStatus" scope="C" xsi:type="Property"/>
+               </operand>
+               <operand xsi:type="ToConcept">
+                  <operand name="active" xsi:type="CodeRef"/>
+               </operand>
+            </where>
+         </expression>
+         <operand name="Condition">
+            <operandTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+            </operandTypeSpecifier>
+         </operand>
+      </def>
+      <def name="Finished Encounter" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <expression xsi:type="Query">
+            <source alias="E">
+               <expression name="Enc" xsi:type="OperandRef"/>
+            </source>
+            <where xsi:type="Equivalent">
+               <operand path="value" xsi:type="Property">
+                  <source path="status" scope="E" xsi:type="Property"/>
+               </operand>
+               <operand valueType="t:String" value="finished" xsi:type="Literal"/>
+            </where>
+         </expression>
+         <operand name="Enc">
+            <operandTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+            </operandTypeSpecifier>
+         </operand>
+      </def>
+      <def name="Finished or Ongoing Encounter" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <expression xsi:type="Query">
+            <source alias="E">
+               <expression name="Enc" xsi:type="OperandRef"/>
+            </source>
+            <where xsi:type="In">
+               <operand path="value" xsi:type="Property">
+                  <source path="status" scope="E" xsi:type="Property"/>
+               </operand>
+               <operand xsi:type="List">
+                  <element valueType="t:String" value="finished" xsi:type="Literal"/>
+                  <element valueType="t:String" value="in-progress" xsi:type="Literal"/>
+               </operand>
+            </where>
+         </expression>
+         <operand name="Enc">
+            <operandTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+            </operandTypeSpecifier>
+         </operand>
+      </def>
+      <def name="Completed Immunization" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <expression xsi:type="Query">
+            <source alias="I">
+               <expression name="Immunization" xsi:type="OperandRef"/>
+            </source>
+            <where xsi:type="Equivalent">
+               <operand path="value" xsi:type="Property">
+                  <source path="status" scope="I" xsi:type="Property"/>
+               </operand>
+               <operand valueType="t:String" value="completed" xsi:type="Literal"/>
+            </where>
+         </expression>
+         <operand name="Immunization">
+            <operandTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Immunization" xsi:type="NamedTypeSpecifier"/>
+            </operandTypeSpecifier>
+         </operand>
+      </def>
+      <def name="Dispensed Medication" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <expression xsi:type="Query">
+            <source alias="M">
+               <expression name="Med" xsi:type="OperandRef"/>
+            </source>
+            <where xsi:type="Equivalent">
+               <operand path="value" xsi:type="Property">
+                  <source path="status" scope="M" xsi:type="Property"/>
+               </operand>
+               <operand valueType="t:String" value="completed" xsi:type="Literal"/>
+            </where>
+         </expression>
+         <operand name="Med">
+            <operandTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:MedicationDispense" xsi:type="NamedTypeSpecifier"/>
+            </operandTypeSpecifier>
+         </operand>
+      </def>
+      <def name="Initial or Final Observation" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <expression xsi:type="Query">
+            <source alias="O">
+               <expression name="Obs" xsi:type="OperandRef"/>
+            </source>
+            <where xsi:type="In">
+               <operand path="value" xsi:type="Property">
+                  <source path="status" scope="O" xsi:type="Property"/>
+               </operand>
+               <operand xsi:type="List">
+                  <element valueType="t:String" value="preliminary" xsi:type="Literal"/>
+                  <element valueType="t:String" value="final" xsi:type="Literal"/>
+                  <element valueType="t:String" value="amended" xsi:type="Literal"/>
+                  <element valueType="t:String" value="corrected" xsi:type="Literal"/>
+               </operand>
+            </where>
+         </expression>
+         <operand name="Obs">
+            <operandTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+            </operandTypeSpecifier>
+         </operand>
+      </def>
+      <def name="Final Observation" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <expression xsi:type="Query">
+            <source alias="O">
+               <expression name="Obs" xsi:type="OperandRef"/>
+            </source>
+            <where xsi:type="In">
+               <operand path="value" xsi:type="Property">
+                  <source path="status" scope="O" xsi:type="Property"/>
+               </operand>
+               <operand xsi:type="List">
+                  <element valueType="t:String" value="preliminary" xsi:type="Literal"/>
+                  <element valueType="t:String" value="final" xsi:type="Literal"/>
+                  <element valueType="t:String" value="amended" xsi:type="Literal"/>
+                  <element valueType="t:String" value="corrected" xsi:type="Literal"/>
+               </operand>
+            </where>
+         </expression>
+         <operand name="Obs">
+            <operandTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+            </operandTypeSpecifier>
+         </operand>
+      </def>
+      <def name="Final Lab Observation" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <expression xsi:type="Query">
+            <source alias="O">
+               <expression name="Obs" xsi:type="OperandRef"/>
+            </source>
+            <where xsi:type="And">
+               <operand xsi:type="In">
+                  <operand path="value" xsi:type="Property">
+                     <source path="status" scope="O" xsi:type="Property"/>
+                  </operand>
+                  <operand xsi:type="List">
+                     <element valueType="t:String" value="final" xsi:type="Literal"/>
+                     <element valueType="t:String" value="amended" xsi:type="Literal"/>
+                     <element valueType="t:String" value="corrected" xsi:type="Literal"/>
+                  </operand>
+               </operand>
+               <operand xsi:type="Exists">
+                  <operand xsi:type="Query">
+                     <source alias="ObservationCategory">
+                        <expression xsi:type="Query">
+                           <source alias="$this">
+                              <expression path="category" scope="O" xsi:type="Property"/>
+                           </source>
+                           <return distinct="false">
+                              <expression name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <operand name="$this" xsi:type="AliasRef"/>
+                              </expression>
+                           </return>
+                        </expression>
+                     </source>
+                     <where xsi:type="Equivalent">
+                        <operand name="ObservationCategory" xsi:type="AliasRef"/>
+                        <operand xsi:type="ToConcept">
+                           <operand name="laboratory" xsi:type="CodeRef"/>
+                        </operand>
+                     </where>
+                  </operand>
+               </operand>
+            </where>
+         </expression>
+         <operand name="Obs">
+            <operandTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+            </operandTypeSpecifier>
+         </operand>
+      </def>
+      <def name="Final Exam Observation" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <expression xsi:type="Query">
+            <source alias="O">
+               <expression name="Obs" xsi:type="OperandRef"/>
+            </source>
+            <where xsi:type="And">
+               <operand xsi:type="In">
+                  <operand path="value" xsi:type="Property">
+                     <source path="status" scope="O" xsi:type="Property"/>
+                  </operand>
+                  <operand xsi:type="List">
+                     <element valueType="t:String" value="final" xsi:type="Literal"/>
+                     <element valueType="t:String" value="amended" xsi:type="Literal"/>
+                     <element valueType="t:String" value="corrected" xsi:type="Literal"/>
+                  </operand>
+               </operand>
+               <operand xsi:type="Exists">
+                  <operand xsi:type="Query">
+                     <source alias="ObservationCategory">
+                        <expression xsi:type="Query">
+                           <source alias="$this">
+                              <expression path="category" scope="O" xsi:type="Property"/>
+                           </source>
+                           <return distinct="false">
+                              <expression name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <operand name="$this" xsi:type="AliasRef"/>
+                              </expression>
+                           </return>
+                        </expression>
+                     </source>
+                     <where xsi:type="Equivalent">
+                        <operand name="ObservationCategory" xsi:type="AliasRef"/>
+                        <operand xsi:type="ToConcept">
+                           <operand name="exam" xsi:type="CodeRef"/>
+                        </operand>
+                     </where>
+                  </operand>
+               </operand>
+            </where>
+         </expression>
+         <operand name="Obs">
+            <operandTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+            </operandTypeSpecifier>
+         </operand>
+      </def>
+      <def name="Final Survey Observation" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <expression xsi:type="Query">
+            <source alias="O">
+               <expression name="Obs" xsi:type="OperandRef"/>
+            </source>
+            <where xsi:type="And">
+               <operand xsi:type="In">
+                  <operand path="value" xsi:type="Property">
+                     <source path="status" scope="O" xsi:type="Property"/>
+                  </operand>
+                  <operand xsi:type="List">
+                     <element valueType="t:String" value="final" xsi:type="Literal"/>
+                     <element valueType="t:String" value="amended" xsi:type="Literal"/>
+                     <element valueType="t:String" value="corrected" xsi:type="Literal"/>
+                  </operand>
+               </operand>
+               <operand xsi:type="Exists">
+                  <operand xsi:type="Query">
+                     <source alias="ObservationCategory">
+                        <expression xsi:type="Query">
+                           <source alias="$this">
+                              <expression path="category" scope="O" xsi:type="Property"/>
+                           </source>
+                           <return distinct="false">
+                              <expression name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <operand name="$this" xsi:type="AliasRef"/>
+                              </expression>
+                           </return>
+                        </expression>
+                     </source>
+                     <where xsi:type="Equivalent">
+                        <operand name="ObservationCategory" xsi:type="AliasRef"/>
+                        <operand xsi:type="ToConcept">
+                           <operand name="survey" xsi:type="CodeRef"/>
+                        </operand>
+                     </where>
+                  </operand>
+               </operand>
+            </where>
+         </expression>
+         <operand name="Obs">
+            <operandTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+            </operandTypeSpecifier>
+         </operand>
+      </def>
+      <def name="Completed Procedure" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <expression xsi:type="Query">
+            <source alias="P">
+               <expression name="Proc" xsi:type="OperandRef"/>
+            </source>
+            <where xsi:type="Equivalent">
+               <operand path="value" xsi:type="Property">
+                  <source path="status" scope="P" xsi:type="Property"/>
+               </operand>
+               <operand valueType="t:String" value="completed" xsi:type="Literal"/>
+            </where>
+         </expression>
+         <operand name="Proc">
+            <operandTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+            </operandTypeSpecifier>
+         </operand>
+      </def>
+      <def name="Completed or Ongoing Service Request" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <expression xsi:type="Query">
+            <source alias="S">
+               <expression name="ServiceRequest" xsi:type="OperandRef"/>
+            </source>
+            <where xsi:type="And">
+               <operand xsi:type="In">
+                  <operand path="value" xsi:type="Property">
+                     <source path="status" scope="S" xsi:type="Property"/>
+                  </operand>
+                  <operand xsi:type="List">
+                     <element valueType="t:String" value="active" xsi:type="Literal"/>
+                     <element valueType="t:String" value="completed" xsi:type="Literal"/>
+                  </operand>
+               </operand>
+               <operand xsi:type="Equal">
+                  <operand path="value" xsi:type="Property">
+                     <source path="intent" scope="S" xsi:type="Property"/>
+                  </operand>
+                  <operand valueType="t:String" value="order" xsi:type="Literal"/>
+               </operand>
+            </where>
+         </expression>
+         <operand name="ServiceRequest">
+            <operandTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:ServiceRequest" xsi:type="NamedTypeSpecifier"/>
+            </operandTypeSpecifier>
+         </operand>
+      </def>
+      <def name="Completed or Ongoing Device Request" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <expression xsi:type="Query">
+            <source alias="D">
+               <expression name="DeviceRequest" xsi:type="OperandRef"/>
+            </source>
+            <where xsi:type="And">
+               <operand xsi:type="In">
+                  <operand path="value" xsi:type="Property">
+                     <source path="status" scope="D" xsi:type="Property"/>
+                  </operand>
+                  <operand xsi:type="List">
+                     <element valueType="t:String" value="active" xsi:type="Literal"/>
+                     <element valueType="t:String" value="completed" xsi:type="Literal"/>
+                  </operand>
+               </operand>
+               <operand xsi:type="Equal">
+                  <operand path="value" xsi:type="Property">
+                     <source path="intent" scope="D" xsi:type="Property"/>
+                  </operand>
+                  <operand valueType="t:String" value="order" xsi:type="Literal"/>
+               </operand>
+            </where>
+         </expression>
+         <operand name="DeviceRequest">
+            <operandTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:DeviceRequest" xsi:type="NamedTypeSpecifier"/>
+            </operandTypeSpecifier>
+         </operand>
+      </def>
+      <def name="Active Medication" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <expression xsi:type="Query">
+            <source alias="M">
+               <expression name="MedicationRequest" xsi:type="OperandRef"/>
+            </source>
+            <where xsi:type="Or">
+               <operand xsi:type="And">
+                  <operand xsi:type="Equal">
+                     <operand path="value" xsi:type="Property">
+                        <source path="status" scope="M" xsi:type="Property"/>
+                     </operand>
+                     <operand valueType="t:String" value="active" xsi:type="Literal"/>
+                  </operand>
+                  <operand xsi:type="Equal">
+                     <operand path="value" xsi:type="Property">
+                        <source path="intent" scope="M" xsi:type="Property"/>
+                     </operand>
+                     <operand valueType="t:String" value="order" xsi:type="Literal"/>
+                  </operand>
+               </operand>
+               <operand xsi:type="Equal">
+                  <operand path="value" xsi:type="Property">
+                     <source path="intent" scope="M" xsi:type="Property"/>
+                  </operand>
+                  <operand valueType="t:String" value="plan" xsi:type="Literal"/>
+               </operand>
+            </where>
+         </expression>
+         <operand name="MedicationRequest">
+            <operandTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+            </operandTypeSpecifier>
+         </operand>
+      </def>
+      <def name="Active or Completed Medication Request" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <expression xsi:type="Query">
+            <source alias="M">
+               <expression name="MedicationRequest" xsi:type="OperandRef"/>
+            </source>
+            <where xsi:type="And">
+               <operand xsi:type="In">
+                  <operand path="value" xsi:type="Property">
+                     <source path="status" scope="M" xsi:type="Property"/>
+                  </operand>
+                  <operand xsi:type="List">
+                     <element valueType="t:String" value="active" xsi:type="Literal"/>
+                     <element valueType="t:String" value="completed" xsi:type="Literal"/>
+                  </operand>
+               </operand>
+               <operand xsi:type="Equal">
+                  <operand path="value" xsi:type="Property">
+                     <source path="intent" scope="M" xsi:type="Property"/>
+                  </operand>
+                  <operand valueType="t:String" value="order" xsi:type="Literal"/>
+               </operand>
+            </where>
+         </expression>
+         <operand name="MedicationRequest">
+            <operandTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+            </operandTypeSpecifier>
+         </operand>
+      </def>
+   </statements>
+</library>

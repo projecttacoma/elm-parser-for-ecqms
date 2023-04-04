@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="" xsi:type="a:CqlToElmInfo"/>
+   <identifier id="EXM144v11QICore4" version="11.1.000"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localIdentifier="QICore" uri="http://hl7.org/fhir"/>
+   </usings>
+   <includes>
+      <def localIdentifier="FHIRHelpers" path="FHIRHelpers" version="4.1.000"/>
+      <def localIdentifier="SDE" path="SupplementalDataElements" version="3.1.000"/>
+      <def localIdentifier="Common" path="QICoreCommon" version="1.3.000"/>
+      <def localIdentifier="AHA" path="AHAOverallQICore4" version="1.0.000"/>
+   </includes>
+   <parameters>
+      <def name="Measurement Period" accessLevel="Public">
+         <default lowClosed="true" highClosed="false" xsi:type="Interval">
+            <low xsi:type="DateTime">
+               <year valueType="t:Integer" value="2022" xsi:type="Literal"/>
+               <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <day valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <hour valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <minute valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <second valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <millisecond valueType="t:Integer" value="0" xsi:type="Literal"/>
+            </low>
+            <high xsi:type="DateTime">
+               <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
+               <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <day valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <hour valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <minute valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <second valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <millisecond valueType="t:Integer" value="0" xsi:type="Literal"/>
+            </high>
+         </default>
+         <parameterTypeSpecifier xsi:type="IntervalTypeSpecifier">
+            <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <codeSystems>
+      <def name="SNOMEDCT" id="http://snomed.info/sct" accessLevel="Public"/>
+   </codeSystems>
+   <valueSets>
+      <def name="Allergy to Beta Blocker Therapy" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1177" accessLevel="Public"/>
+      <def name="Arrhythmia" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.366" accessLevel="Public"/>
+      <def name="Asthma" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.362" accessLevel="Public"/>
+      <def name="Atrioventricular Block" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.367" accessLevel="Public"/>
+      <def name="Beta Blocker Therapy for LVSD" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1184" accessLevel="Public"/>
+      <def name="Beta Blocker Therapy Ingredient" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1493" accessLevel="Public"/>
+      <def name="Bradycardia" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.412" accessLevel="Public"/>
+      <def name="Cardiac Pacer" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.53" accessLevel="Public"/>
+      <def name="Cardiac Pacer in Situ" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.368" accessLevel="Public"/>
+      <def name="Hypotension" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.370" accessLevel="Public"/>
+      <def name="Intolerance to Beta Blocker Therapy" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1178" accessLevel="Public"/>
+      <def name="Left Ventricular Assist Device Placement" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.61" accessLevel="Public"/>
+      <def name="Medical Reason" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007" accessLevel="Public"/>
+      <def name="Patient Reason" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1008" accessLevel="Public"/>
+   </valueSets>
+   <codes>
+      <def name="Substance with beta adrenergic receptor antagonist mechanism of action (substance)" id="373254001" display="Substance with beta adrenergic receptor antagonist mechanism of action (substance)" accessLevel="Public">
+         <codeSystem name="SNOMEDCT"/>
+      </def>
+   </codes>
+   <contexts>
+      <def name="Patient"/>
+   </contexts>
+   <statements>
+      <def name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand dataType="fhir:Patient" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def name="SDE Ethnicity" context="Patient" accessLevel="Public">
+         <expression name="SDE Ethnicity" libraryName="SDE" xsi:type="ExpressionRef"/>
+      </def>
+      <def name="SDE Payer" context="Patient" accessLevel="Public">
+         <expression name="SDE Payer" libraryName="SDE" xsi:type="ExpressionRef"/>
+      </def>
+      <def name="SDE Race" context="Patient" accessLevel="Public">
+         <expression name="SDE Race" libraryName="SDE" xsi:type="ExpressionRef"/>
+      </def>
+      <def name="SDE Sex" context="Patient" accessLevel="Public">
+         <expression name="SDE Sex" libraryName="SDE" xsi:type="ExpressionRef"/>
+      </def>
+      <def name="Initial Population" context="Patient" accessLevel="Public">
+         <expression xsi:type="And">
+            <operand xsi:type="And">
+               <operand xsi:type="GreaterOrEqual">
+                  <operand precision="Year" xsi:type="CalculateAgeAt">
+                     <operand path="value" xsi:type="Property">
+                        <source path="birthDate" xsi:type="Property">
+                           <source name="Patient" xsi:type="ExpressionRef"/>
+                        </source>
+                     </operand>
+                     <operand xsi:type="DateFrom">
+                        <operand xsi:type="Start">
+                           <operand name="Measurement Period" xsi:type="ParameterRef"/>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand valueType="t:Integer" value="18" xsi:type="Literal"/>
+               </operand>
+               <operand xsi:type="GreaterOrEqual">
+                  <operand xsi:type="Count">
+                     <source name="Qualifying Encounter During Measurement Period" libraryName="AHA" xsi:type="ExpressionRef"/>
+                  </operand>
+                  <operand valueType="t:Integer" value="2" xsi:type="Literal"/>
+               </operand>
+            </operand>
+            <operand xsi:type="Exists">
+               <operand name="Heart Failure Outpatient Encounter" libraryName="AHA" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
+      </def>
+      <def name="Denominator" context="Patient" accessLevel="Public">
+         <expression xsi:type="And">
+            <operand name="Initial Population" xsi:type="ExpressionRef"/>
+            <operand xsi:type="Exists">
+               <operand name="Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD" libraryName="AHA" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
+      </def>
+      <def name="Denominator Exclusions" context="Patient" accessLevel="Public">
+         <expression xsi:type="Or">
+            <operand xsi:type="Or">
+               <operand xsi:type="Or">
+                  <operand name="Has Heart Transplant" libraryName="AHA" xsi:type="ExpressionRef"/>
+                  <operand name="Has Heart Transplant Related Diagnosis" libraryName="AHA" xsi:type="ExpressionRef"/>
+               </operand>
+               <operand name="Has Left Ventricular Assist Device" libraryName="AHA" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand name="Has Left Ventricular Assist Device Related Diagnosis" libraryName="AHA" xsi:type="ExpressionRef"/>
+         </expression>
+      </def>
+      <def name="Has Beta Blocker Therapy for LVSD Ordered" context="Patient" accessLevel="Public">
+         <expression xsi:type="Exists">
+            <operand xsi:type="Query">
+               <source alias="BetaBlockerOrdered">
+                  <expression xsi:type="Union">
+                     <operand dataType="fhir:MedicationRequest" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest" codeProperty="medication" codeComparator="in" xsi:type="Retrieve">
+                        <codes name="Beta Blocker Therapy for LVSD" preserve="true" xsi:type="ValueSetRef"/>
+                     </operand>
+                     <operand dataType="fhir:MedicationRequest" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest" codeProperty="medication" codeComparator="in" xsi:type="Retrieve">
+                        <codes name="Beta Blocker Therapy for LVSD" preserve="true" xsi:type="ValueSetRef"/>
+                     </operand>
+                  </expression>
+               </source>
+               <where name="isOrderedDuringHeartFailureOutpatientEncounter" libraryName="AHA" xsi:type="FunctionRef">
+                  <operand name="BetaBlockerOrdered" xsi:type="AliasRef"/>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def name="Is Currently Taking Beta Blocker Therapy for LVSD" context="Patient" accessLevel="Public">
+         <expression xsi:type="Exists">
+            <operand xsi:type="Query">
+               <source alias="ActiveBetaBlocker">
+                  <expression xsi:type="Union">
+                     <operand dataType="fhir:MedicationRequest" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest" codeProperty="medication" codeComparator="in" xsi:type="Retrieve">
+                        <codes name="Beta Blocker Therapy for LVSD" preserve="true" xsi:type="ValueSetRef"/>
+                     </operand>
+                     <operand dataType="fhir:MedicationRequest" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest" codeProperty="medication" codeComparator="in" xsi:type="Retrieve">
+                        <codes name="Beta Blocker Therapy for LVSD" preserve="true" xsi:type="ValueSetRef"/>
+                     </operand>
+                  </expression>
+               </source>
+               <where name="overlapsAfterHeartFailureOutpatientEncounter" libraryName="AHA" xsi:type="FunctionRef">
+                  <operand xsi:type="As">
+                     <operand name="ActiveBetaBlocker" xsi:type="AliasRef"/>
+                     <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                        <choice name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:AllergyIntolerance" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+                     </asTypeSpecifier>
+                  </operand>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def name="Numerator" context="Patient" accessLevel="Public">
+         <expression xsi:type="Or">
+            <operand name="Has Beta Blocker Therapy for LVSD Ordered" xsi:type="ExpressionRef"/>
+            <operand name="Is Currently Taking Beta Blocker Therapy for LVSD" xsi:type="ExpressionRef"/>
+         </expression>
+      </def>
+      <def name="Has Consecutive Heart Rates Less than 50" context="Patient" accessLevel="Public">
+         <expression xsi:type="Exists">
+            <operand xsi:type="Query">
+               <source alias="HeartRate">
+                  <expression dataType="fhir:Observation" templateId="http://hl7.org/fhir/StructureDefinition/heartrate" xsi:type="Retrieve"/>
+               </source>
+               <source alias="ModerateOrSevereLVSDHFOutpatientEncounter">
+                  <expression name="Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD" libraryName="AHA" xsi:type="ExpressionRef"/>
+               </source>
+               <let identifier="PriorHeartRate">
+                  <expression xsi:type="Last">
+                     <source xsi:type="Query">
+                        <source alias="MostRecentPriorHeartRate">
+                           <expression dataType="fhir:Observation" templateId="http://hl7.org/fhir/StructureDefinition/heartrate" xsi:type="Retrieve"/>
+                        </source>
+                        <where xsi:type="And">
+                           <operand name="overlapsAfterHeartFailureOutpatientEncounter" libraryName="AHA" xsi:type="FunctionRef">
+                              <operand xsi:type="As">
+                                 <operand name="MostRecentPriorHeartRate" xsi:type="AliasRef"/>
+                                 <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                    <choice name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                                    <choice name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                                    <choice name="fhir:AllergyIntolerance" xsi:type="NamedTypeSpecifier"/>
+                                    <choice name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                                    <choice name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+                                 </asTypeSpecifier>
+                              </operand>
+                           </operand>
+                           <operand xsi:type="Before">
+                              <operand name="toInterval" libraryName="Common" xsi:type="FunctionRef">
+                                 <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <operand path="effective" scope="MostRecentPriorHeartRate" xsi:type="Property"/>
+                                 </operand>
+                              </operand>
+                              <operand name="toInterval" libraryName="Common" xsi:type="FunctionRef">
+                                 <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <operand path="effective" scope="HeartRate" xsi:type="Property"/>
+                                 </operand>
+                              </operand>
+                           </operand>
+                        </where>
+                        <sort>
+                           <by direction="asc" xsi:type="ByExpression">
+                              <expression xsi:type="Start">
+                                 <operand name="toInterval" libraryName="Common" xsi:type="FunctionRef">
+                                    <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                       <operand name="effective" xsi:type="IdentifierRef"/>
+                                    </operand>
+                                 </operand>
+                              </expression>
+                           </by>
+                        </sort>
+                     </source>
+                  </expression>
+               </let>
+               <where xsi:type="And">
+                  <operand xsi:type="And">
+                     <operand xsi:type="And">
+                        <operand xsi:type="IncludedIn">
+                           <operand name="toInterval" libraryName="Common" xsi:type="FunctionRef">
+                              <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <operand path="effective" scope="HeartRate" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                           <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                              <operand path="period" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                           </operand>
+                        </operand>
+                        <operand xsi:type="In">
+                           <operand path="value" xsi:type="Property">
+                              <source path="status" scope="HeartRate" xsi:type="Property"/>
+                           </operand>
+                           <operand xsi:type="List">
+                              <element valueType="t:String" value="final" xsi:type="Literal"/>
+                              <element valueType="t:String" value="amended" xsi:type="Literal"/>
+                              <element valueType="t:String" value="corrected" xsi:type="Literal"/>
+                           </operand>
+                        </operand>
+                     </operand>
+                     <operand xsi:type="Less">
+                        <operand name="ToQuantity" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                           <operand path="value" scope="HeartRate" xsi:type="Property"/>
+                        </operand>
+                        <operand value="50" unit="/min" xsi:type="Quantity"/>
+                     </operand>
+                  </operand>
+                  <operand xsi:type="Less">
+                     <operand name="ToQuantity" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                        <operand path="value" xsi:type="Property">
+                           <source name="PriorHeartRate" xsi:type="QueryLetRef"/>
+                        </operand>
+                     </operand>
+                     <operand value="50" unit="/min" xsi:type="Quantity"/>
+                  </operand>
+               </where>
+               <return>
+                  <expression name="HeartRate" xsi:type="AliasRef"/>
+               </return>
+            </operand>
+         </expression>
+      </def>
+      <def name="Has Medical or Patient Reason for Not Ordering Beta Blocker for LVSD" context="Patient" accessLevel="Public">
+         <expression xsi:type="Exists">
+            <operand xsi:type="Query">
+               <source alias="NoBetaBlockerOrdered">
+                  <expression dataType="fhir:MedicationRequest" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-mednotrequested" xsi:type="Retrieve"/>
+               </source>
+               <relationship alias="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="With">
+                  <expression name="Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD" libraryName="AHA" xsi:type="ExpressionRef"/>
+                  <suchThat xsi:type="In">
+                     <operand path="value" xsi:type="Property">
+                        <source path="authoredOn" scope="NoBetaBlockerOrdered" xsi:type="Property"/>
+                     </operand>
+                     <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                        <operand path="period" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                     </operand>
+                  </suchThat>
+               </relationship>
+               <where xsi:type="And">
+                  <operand xsi:type="InValueSet">
+                     <code name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                        <operand path="medication" scope="NoBetaBlockerOrdered" xsi:type="Property"/>
+                     </code>
+                     <valueset name="Beta Blocker Therapy for LVSD" preserve="true"/>
+                  </operand>
+                  <operand xsi:type="Or">
+                     <operand xsi:type="InValueSet">
+                        <code name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                           <operand path="reasonCode" scope="NoBetaBlockerOrdered" xsi:type="Property"/>
+                        </code>
+                        <valueset name="Medical Reason" preserve="true"/>
+                     </operand>
+                     <operand xsi:type="InValueSet">
+                        <code name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                           <operand path="reasonCode" scope="NoBetaBlockerOrdered" xsi:type="Property"/>
+                        </code>
+                        <valueset name="Patient Reason" preserve="true"/>
+                     </operand>
+                  </operand>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def name="Has Arrhythmia Diagnosis" context="Patient" accessLevel="Public">
+         <expression xsi:type="Exists">
+            <operand xsi:type="Query">
+               <source alias="Arrhythmia">
+                  <expression dataType="fhir:Condition" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes name="Arrhythmia" preserve="true" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <where name="overlapsHeartFailureOutpatientEncounter" libraryName="AHA" xsi:type="FunctionRef">
+                  <operand name="Arrhythmia" xsi:type="AliasRef"/>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def name="Has Hypotension Diagnosis" context="Patient" accessLevel="Public">
+         <expression xsi:type="Exists">
+            <operand xsi:type="Query">
+               <source alias="Hypotension">
+                  <expression dataType="fhir:Condition" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes name="Hypotension" preserve="true" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <where name="overlapsHeartFailureOutpatientEncounter" libraryName="AHA" xsi:type="FunctionRef">
+                  <operand name="Hypotension" xsi:type="AliasRef"/>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def name="Has Asthma Diagnosis" context="Patient" accessLevel="Public">
+         <expression xsi:type="Exists">
+            <operand xsi:type="Query">
+               <source alias="Asthma">
+                  <expression dataType="fhir:Condition" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes name="Asthma" preserve="true" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <where name="overlapsHeartFailureOutpatientEncounter" libraryName="AHA" xsi:type="FunctionRef">
+                  <operand name="Asthma" xsi:type="AliasRef"/>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def name="Has Diagnosis of Allergy or Intolerance to Beta Blocker Therapy" context="Patient" accessLevel="Public">
+         <expression xsi:type="Exists">
+            <operand xsi:type="Query">
+               <source alias="BetaBlockerAllergyOrIntoleranceDiagnosis">
+                  <expression xsi:type="Union">
+                     <operand dataType="fhir:Condition" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                        <codes name="Allergy to Beta Blocker Therapy" preserve="true" xsi:type="ValueSetRef"/>
+                     </operand>
+                     <operand dataType="fhir:Condition" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                        <codes name="Intolerance to Beta Blocker Therapy" preserve="true" xsi:type="ValueSetRef"/>
+                     </operand>
+                  </expression>
+               </source>
+               <where name="overlapsAfterHeartFailureOutpatientEncounter" libraryName="AHA" xsi:type="FunctionRef">
+                  <operand xsi:type="As">
+                     <operand name="BetaBlockerAllergyOrIntoleranceDiagnosis" xsi:type="AliasRef"/>
+                     <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                        <choice name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:AllergyIntolerance" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+                     </asTypeSpecifier>
+                  </operand>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def name="Has Bradycardia Diagnosis" context="Patient" accessLevel="Public">
+         <expression xsi:type="Exists">
+            <operand xsi:type="Query">
+               <source alias="Bradycardia">
+                  <expression dataType="fhir:Condition" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes name="Bradycardia" preserve="true" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <where name="overlapsHeartFailureOutpatientEncounter" libraryName="AHA" xsi:type="FunctionRef">
+                  <operand name="Bradycardia" xsi:type="AliasRef"/>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def name="Has Allergy or Intolerance to Beta Blocker Therapy Ingredient" context="Patient" accessLevel="Public">
+         <expression xsi:type="Exists">
+            <operand xsi:type="Query">
+               <source alias="BetaBlockerAllergyIntolerance">
+                  <expression xsi:type="Union">
+                     <operand dataType="fhir:AllergyIntolerance" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-allergyintolerance" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                        <codes name="Beta Blocker Therapy Ingredient" preserve="true" xsi:type="ValueSetRef"/>
+                     </operand>
+                     <operand dataType="fhir:AllergyIntolerance" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-allergyintolerance" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                        <codes xsi:type="ToList">
+                           <operand name="Substance with beta adrenergic receptor antagonist mechanism of action (substance)" xsi:type="CodeRef"/>
+                        </codes>
+                     </operand>
+                  </expression>
+               </source>
+               <where name="overlapsAfterHeartFailureOutpatientEncounter" libraryName="AHA" xsi:type="FunctionRef">
+                  <operand xsi:type="As">
+                     <operand name="BetaBlockerAllergyIntolerance" xsi:type="AliasRef"/>
+                     <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                        <choice name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:AllergyIntolerance" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+                     </asTypeSpecifier>
+                  </operand>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def name="Has Atrioventricular Block Diagnosis" context="Patient" accessLevel="Public">
+         <expression xsi:type="Exists">
+            <operand xsi:type="Query">
+               <source alias="AtrioventricularBlock">
+                  <expression dataType="fhir:Condition" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes name="Atrioventricular Block" preserve="true" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <where name="overlapsHeartFailureOutpatientEncounter" libraryName="AHA" xsi:type="FunctionRef">
+                  <operand name="AtrioventricularBlock" xsi:type="AliasRef"/>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def name="Has Diagnosis of Cardiac Pacer in Situ" context="Patient" accessLevel="Public">
+         <expression xsi:type="Exists">
+            <operand xsi:type="Query">
+               <source alias="CardiacPacerDiagnosis">
+                  <expression dataType="fhir:Condition" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes name="Cardiac Pacer in Situ" preserve="true" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <where name="overlapsAfterHeartFailureOutpatientEncounter" libraryName="AHA" xsi:type="FunctionRef">
+                  <operand xsi:type="As">
+                     <operand name="CardiacPacerDiagnosis" xsi:type="AliasRef"/>
+                     <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                        <choice name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:AllergyIntolerance" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+                     </asTypeSpecifier>
+                  </operand>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def name="Has Cardiac Pacer Device Implanted" context="Patient" accessLevel="Public">
+         <expression xsi:type="Exists">
+            <operand xsi:type="Query">
+               <source alias="ImplantedCardiacPacer">
+                  <expression dataType="fhir:Procedure" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes name="Cardiac Pacer" preserve="true" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <relationship alias="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="With">
+                  <expression name="Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD" libraryName="AHA" xsi:type="ExpressionRef"/>
+                  <suchThat xsi:type="Before">
+                     <operand xsi:type="Start">
+                        <operand name="toInterval" libraryName="Common" xsi:type="FunctionRef">
+                           <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                              <operand path="performed" scope="ImplantedCardiacPacer" xsi:type="Property"/>
+                           </operand>
+                        </operand>
+                     </operand>
+                     <operand xsi:type="End">
+                        <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                           <operand path="period" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                  </suchThat>
+               </relationship>
+            </operand>
+         </expression>
+      </def>
+      <def name="Atrioventricular Block without Cardiac Pacer" context="Patient" accessLevel="Public">
+         <expression xsi:type="And">
+            <operand xsi:type="And">
+               <operand name="Has Atrioventricular Block Diagnosis" xsi:type="ExpressionRef"/>
+               <operand xsi:type="Not">
+                  <operand name="Has Diagnosis of Cardiac Pacer in Situ" xsi:type="ExpressionRef"/>
+               </operand>
+            </operand>
+            <operand xsi:type="Not">
+               <operand name="Has Cardiac Pacer Device Implanted" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
+      </def>
+      <def name="Denominator Exceptions" context="Patient" accessLevel="Public">
+         <expression xsi:type="Or">
+            <operand xsi:type="Or">
+               <operand xsi:type="Or">
+                  <operand xsi:type="Or">
+                     <operand xsi:type="Or">
+                        <operand xsi:type="Or">
+                           <operand xsi:type="Or">
+                              <operand xsi:type="Or">
+                                 <operand name="Has Consecutive Heart Rates Less than 50" xsi:type="ExpressionRef"/>
+                                 <operand name="Has Medical or Patient Reason for Not Ordering Beta Blocker for LVSD" xsi:type="ExpressionRef"/>
+                              </operand>
+                              <operand name="Has Arrhythmia Diagnosis" xsi:type="ExpressionRef"/>
+                           </operand>
+                           <operand name="Has Hypotension Diagnosis" xsi:type="ExpressionRef"/>
+                        </operand>
+                        <operand name="Has Asthma Diagnosis" xsi:type="ExpressionRef"/>
+                     </operand>
+                     <operand name="Has Diagnosis of Allergy or Intolerance to Beta Blocker Therapy" xsi:type="ExpressionRef"/>
+                  </operand>
+                  <operand name="Has Bradycardia Diagnosis" xsi:type="ExpressionRef"/>
+               </operand>
+               <operand name="Has Allergy or Intolerance to Beta Blocker Therapy Ingredient" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand name="Atrioventricular Block without Cardiac Pacer" xsi:type="ExpressionRef"/>
+         </expression>
+      </def>
+   </statements>
+</library>

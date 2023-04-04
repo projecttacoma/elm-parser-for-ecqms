@@ -1,0 +1,821 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="" xsi:type="a:CqlToElmInfo"/>
+   <identifier id="AHAOverallQICore4" version="1.0.000"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localIdentifier="QICore" uri="http://hl7.org/fhir"/>
+   </usings>
+   <includes>
+      <def localIdentifier="FHIRHelpers" path="FHIRHelpers" version="4.1.000"/>
+      <def localIdentifier="Common" path="QICoreCommon" version="1.3.000"/>
+   </includes>
+   <parameters>
+      <def name="Measurement Period" accessLevel="Public">
+         <default lowClosed="true" highClosed="false" xsi:type="Interval">
+            <low xsi:type="DateTime">
+               <year valueType="t:Integer" value="2022" xsi:type="Literal"/>
+               <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <day valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <hour valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <minute valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <second valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <millisecond valueType="t:Integer" value="0" xsi:type="Literal"/>
+            </low>
+            <high xsi:type="DateTime">
+               <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
+               <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <day valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <hour valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <minute valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <second valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <millisecond valueType="t:Integer" value="0" xsi:type="Literal"/>
+            </high>
+         </default>
+         <parameterTypeSpecifier xsi:type="IntervalTypeSpecifier">
+            <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <codeSystems>
+      <def name="SNOMEDCT" id="http://snomed.info/sct" accessLevel="Public"/>
+   </codeSystems>
+   <valueSets>
+      <def name="Care Services in Long Term Residential Facility" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014" accessLevel="Public"/>
+      <def name="Ejection Fraction" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1134" accessLevel="Public"/>
+      <def name="Heart Failure" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.376" accessLevel="Public"/>
+      <def name="Heart Transplant" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.33" accessLevel="Public"/>
+      <def name="Heart Transplant Related Diagnoses" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.56" accessLevel="Public"/>
+      <def name="Home Healthcare Services" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016" accessLevel="Public"/>
+      <def name="Left Ventricular Assist Device Placement" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.61" accessLevel="Public"/>
+      <def name="Left Ventricular Assist Device Related Diagnoses" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.58" accessLevel="Public"/>
+      <def name="Moderate or Severe" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1092" accessLevel="Public"/>
+      <def name="Moderate or Severe LVSD" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1090" accessLevel="Public"/>
+      <def name="Nursing Facility Visit" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012" accessLevel="Public"/>
+      <def name="Office Visit" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001" accessLevel="Public"/>
+      <def name="Outpatient Consultation" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008" accessLevel="Public"/>
+      <def name="Patient Provider Interaction" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1012" accessLevel="Public"/>
+   </valueSets>
+   <codes>
+      <def name="Left ventricular systolic dysfunction (disorder)" id="134401001" display="Left ventricular systolic dysfunction (disorder)" accessLevel="Public">
+         <codeSystem name="SNOMEDCT"/>
+      </def>
+   </codes>
+   <contexts>
+      <def name="Patient"/>
+   </contexts>
+   <statements>
+      <def name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand dataType="fhir:Patient" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def name="isFinished" context="Patient" accessLevel="Public" fluent="true" xsi:type="FunctionDef">
+         <expression xsi:type="Not">
+            <operand xsi:type="IsNull">
+               <operand xsi:type="Query">
+                  <source alias="encounter">
+                     <expression name="Visit" xsi:type="OperandRef"/>
+                  </source>
+                  <where xsi:type="Equal">
+                     <operand path="value" xsi:type="Property">
+                        <source path="status" scope="encounter" xsi:type="Property"/>
+                     </operand>
+                     <operand valueType="t:String" value="finished" xsi:type="Literal"/>
+                  </where>
+               </operand>
+            </operand>
+         </expression>
+         <operand name="Visit">
+            <operandTypeSpecifier name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+      </def>
+      <def name="Qualifying Encounter During Measurement Period" context="Patient" accessLevel="Public">
+         <expression xsi:type="Query">
+            <source alias="ValidEncounter">
+               <expression xsi:type="Union">
+                  <operand xsi:type="Union">
+                     <operand xsi:type="Union">
+                        <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                           <codes name="Care Services in Long Term Residential Facility" preserve="true" xsi:type="ValueSetRef"/>
+                        </operand>
+                        <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                           <codes name="Home Healthcare Services" preserve="true" xsi:type="ValueSetRef"/>
+                        </operand>
+                     </operand>
+                     <operand xsi:type="Union">
+                        <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                           <codes name="Nursing Facility Visit" preserve="true" xsi:type="ValueSetRef"/>
+                        </operand>
+                        <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                           <codes name="Office Visit" preserve="true" xsi:type="ValueSetRef"/>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand xsi:type="Union">
+                     <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                        <codes name="Outpatient Consultation" preserve="true" xsi:type="ValueSetRef"/>
+                     </operand>
+                     <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                        <codes name="Patient Provider Interaction" preserve="true" xsi:type="ValueSetRef"/>
+                     </operand>
+                  </operand>
+               </expression>
+            </source>
+            <where xsi:type="And">
+               <operand xsi:type="IncludedIn">
+                  <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                     <operand path="period" scope="ValidEncounter" xsi:type="Property"/>
+                  </operand>
+                  <operand name="Measurement Period" xsi:type="ParameterRef"/>
+               </operand>
+               <operand name="isFinished" xsi:type="FunctionRef">
+                  <operand name="ValidEncounter" xsi:type="AliasRef"/>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def name="isConfirmedActiveDiagnosis" context="Patient" accessLevel="Public" fluent="true" xsi:type="FunctionDef">
+         <expression xsi:type="Not">
+            <operand xsi:type="IsNull">
+               <operand xsi:type="Query">
+                  <source alias="Dx">
+                     <expression name="Diagnosis" xsi:type="OperandRef"/>
+                  </source>
+                  <where xsi:type="And">
+                     <operand xsi:type="Equivalent">
+                        <operand name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                           <operand path="clinicalStatus" scope="Dx" xsi:type="Property"/>
+                        </operand>
+                        <operand xsi:type="ToConcept">
+                           <operand name="active" libraryName="Common" xsi:type="CodeRef"/>
+                        </operand>
+                     </operand>
+                     <operand xsi:type="Equivalent">
+                        <operand name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                           <operand path="verificationStatus" scope="Dx" xsi:type="Property"/>
+                        </operand>
+                        <operand xsi:type="ToConcept">
+                           <operand name="confirmed" libraryName="Common" xsi:type="CodeRef"/>
+                        </operand>
+                     </operand>
+                  </where>
+               </operand>
+            </operand>
+         </expression>
+         <operand name="Diagnosis">
+            <operandTypeSpecifier name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+      </def>
+      <def name="Heart Failure Outpatient Encounter" context="Patient" accessLevel="Public">
+         <expression xsi:type="Query">
+            <source alias="QualifyingEncounter">
+               <expression xsi:type="Union">
+                  <operand xsi:type="Union">
+                     <operand xsi:type="Union">
+                        <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                           <codes name="Care Services in Long Term Residential Facility" preserve="true" xsi:type="ValueSetRef"/>
+                        </operand>
+                        <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                           <codes name="Home Healthcare Services" preserve="true" xsi:type="ValueSetRef"/>
+                        </operand>
+                     </operand>
+                     <operand xsi:type="Union">
+                        <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                           <codes name="Nursing Facility Visit" preserve="true" xsi:type="ValueSetRef"/>
+                        </operand>
+                        <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                           <codes name="Office Visit" preserve="true" xsi:type="ValueSetRef"/>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                     <codes name="Outpatient Consultation" preserve="true" xsi:type="ValueSetRef"/>
+                  </operand>
+               </expression>
+            </source>
+            <relationship alias="HeartFailure" xsi:type="With">
+               <expression dataType="fhir:Condition" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes name="Heart Failure" preserve="true" xsi:type="ValueSetRef"/>
+               </expression>
+               <suchThat xsi:type="And">
+                  <operand xsi:type="Overlaps">
+                     <operand name="prevalenceInterval" libraryName="Common" xsi:type="FunctionRef">
+                        <operand name="HeartFailure" xsi:type="AliasRef"/>
+                     </operand>
+                     <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                        <operand path="period" scope="QualifyingEncounter" xsi:type="Property"/>
+                     </operand>
+                  </operand>
+                  <operand name="isConfirmedActiveDiagnosis" xsi:type="FunctionRef">
+                     <operand name="HeartFailure" xsi:type="AliasRef"/>
+                  </operand>
+               </suchThat>
+            </relationship>
+            <where xsi:type="And">
+               <operand xsi:type="IncludedIn">
+                  <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                     <operand path="period" scope="QualifyingEncounter" xsi:type="Property"/>
+                  </operand>
+                  <operand name="Measurement Period" xsi:type="ParameterRef"/>
+               </operand>
+               <operand name="isFinished" xsi:type="FunctionRef">
+                  <operand name="QualifyingEncounter" xsi:type="AliasRef"/>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def name="Moderate or Severe LVSD Observations" context="Patient" accessLevel="Public">
+         <expression xsi:type="Query">
+            <source alias="EjectionFraction">
+               <expression dataType="fhir:Observation" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes name="Ejection Fraction" preserve="true" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <where xsi:type="And">
+               <operand xsi:type="LessOrEqual">
+                  <operand asType="t:Quantity" xsi:type="As">
+                     <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                        <operand path="value" scope="EjectionFraction" xsi:type="Property"/>
+                     </operand>
+                  </operand>
+                  <operand value="40" unit="%" xsi:type="Quantity"/>
+               </operand>
+               <operand xsi:type="In">
+                  <operand path="value" xsi:type="Property">
+                     <source path="status" scope="EjectionFraction" xsi:type="Property"/>
+                  </operand>
+                  <operand xsi:type="List">
+                     <element valueType="t:String" value="final" xsi:type="Literal"/>
+                     <element valueType="t:String" value="amended" xsi:type="Literal"/>
+                     <element valueType="t:String" value="corrected" xsi:type="Literal"/>
+                  </operand>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def name="Moderate or Severe LVSD Conditions" context="Patient" accessLevel="Public">
+         <expression xsi:type="Query">
+            <source alias="LVSD">
+               <expression xsi:type="Union">
+                  <operand dataType="fhir:Condition" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes name="Moderate or Severe LVSD" preserve="true" xsi:type="ValueSetRef"/>
+                  </operand>
+                  <operand xsi:type="Query">
+                     <source alias="LeftVentricular">
+                        <expression dataType="fhir:Condition" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                           <codes xsi:type="ToList">
+                              <operand name="Left ventricular systolic dysfunction (disorder)" xsi:type="CodeRef"/>
+                           </codes>
+                        </expression>
+                     </source>
+                     <where xsi:type="InValueSet">
+                        <code name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                           <operand path="severity" scope="LeftVentricular" xsi:type="Property"/>
+                        </code>
+                        <valueset name="Moderate or Severe" preserve="true"/>
+                     </where>
+                  </operand>
+               </expression>
+            </source>
+            <where name="isConfirmedActiveDiagnosis" xsi:type="FunctionRef">
+               <operand name="LVSD" xsi:type="AliasRef"/>
+            </where>
+         </expression>
+      </def>
+      <def name="Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD" context="Patient" accessLevel="Public">
+         <expression xsi:type="Union">
+            <operand xsi:type="Query">
+               <source alias="HFOutpatientEncounter">
+                  <expression name="Heart Failure Outpatient Encounter" xsi:type="ExpressionRef"/>
+               </source>
+               <relationship alias="LVSDObservations" xsi:type="With">
+                  <expression name="Moderate or Severe LVSD Observations" xsi:type="ExpressionRef"/>
+                  <suchThat xsi:type="Before">
+                     <operand xsi:type="Start">
+                        <operand name="toInterval" libraryName="Common" xsi:type="FunctionRef">
+                           <operand xsi:type="Case">
+                              <caseItem>
+                                 <when isType="t:DateTime" xsi:type="Is">
+                                    <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                       <operand path="effective" scope="LVSDObservations" xsi:type="Property"/>
+                                    </operand>
+                                 </when>
+                                 <then xsi:type="As">
+                                    <operand asType="t:DateTime" xsi:type="As">
+                                       <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                          <operand path="effective" scope="LVSDObservations" xsi:type="Property"/>
+                                       </operand>
+                                    </operand>
+                                    <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                       <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                       <choice xsi:type="IntervalTypeSpecifier">
+                                          <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       </choice>
+                                       <choice xsi:type="IntervalTypeSpecifier">
+                                          <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                       </choice>
+                                    </asTypeSpecifier>
+                                 </then>
+                              </caseItem>
+                              <caseItem>
+                                 <when xsi:type="Is">
+                                    <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                       <operand path="effective" scope="LVSDObservations" xsi:type="Property"/>
+                                    </operand>
+                                    <isTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    </isTypeSpecifier>
+                                 </when>
+                                 <then xsi:type="As">
+                                    <operand xsi:type="As">
+                                       <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                          <operand path="effective" scope="LVSDObservations" xsi:type="Property"/>
+                                       </operand>
+                                       <asTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                          <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       </asTypeSpecifier>
+                                    </operand>
+                                    <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                       <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                       <choice xsi:type="IntervalTypeSpecifier">
+                                          <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       </choice>
+                                       <choice xsi:type="IntervalTypeSpecifier">
+                                          <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                       </choice>
+                                    </asTypeSpecifier>
+                                 </then>
+                              </caseItem>
+                              <caseItem>
+                                 <when isType="t:DateTime" xsi:type="Is">
+                                    <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                       <operand path="effective" scope="LVSDObservations" xsi:type="Property"/>
+                                    </operand>
+                                 </when>
+                                 <then xsi:type="As">
+                                    <operand asType="t:DateTime" xsi:type="As">
+                                       <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                          <operand path="effective" scope="LVSDObservations" xsi:type="Property"/>
+                                       </operand>
+                                    </operand>
+                                    <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                       <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                       <choice xsi:type="IntervalTypeSpecifier">
+                                          <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       </choice>
+                                       <choice xsi:type="IntervalTypeSpecifier">
+                                          <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                       </choice>
+                                    </asTypeSpecifier>
+                                 </then>
+                              </caseItem>
+                              <else xsi:type="Null">
+                                 <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                    <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                    <choice xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    </choice>
+                                    <choice xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                    </choice>
+                                 </resultTypeSpecifier>
+                              </else>
+                           </operand>
+                        </operand>
+                     </operand>
+                     <operand xsi:type="End">
+                        <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                           <operand path="period" scope="HFOutpatientEncounter" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                  </suchThat>
+               </relationship>
+            </operand>
+            <operand xsi:type="Query">
+               <source alias="HFOutpatientEncounter">
+                  <expression name="Heart Failure Outpatient Encounter" xsi:type="ExpressionRef"/>
+               </source>
+               <relationship alias="LVSDConditions" xsi:type="With">
+                  <expression name="Moderate or Severe LVSD Conditions" xsi:type="ExpressionRef"/>
+                  <suchThat xsi:type="Before">
+                     <operand xsi:type="Start">
+                        <operand name="toInterval" libraryName="Common" xsi:type="FunctionRef">
+                           <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                              <operand path="onset" scope="LVSDConditions" xsi:type="Property"/>
+                           </operand>
+                        </operand>
+                     </operand>
+                     <operand xsi:type="End">
+                        <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                           <operand path="period" scope="HFOutpatientEncounter" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                  </suchThat>
+               </relationship>
+            </operand>
+         </expression>
+      </def>
+      <def name="Has Left Ventricular Assist Device Related Diagnosis" context="Patient" accessLevel="Public">
+         <expression xsi:type="Exists">
+            <operand xsi:type="Query">
+               <source alias="LVADCondition">
+                  <expression dataType="fhir:Condition" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes name="Left Ventricular Assist Device Related Diagnoses" preserve="true" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <relationship alias="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="With">
+                  <expression name="Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD" xsi:type="ExpressionRef"/>
+                  <suchThat xsi:type="Before">
+                     <operand xsi:type="Start">
+                        <operand name="prevalenceInterval" libraryName="Common" xsi:type="FunctionRef">
+                           <operand name="LVADCondition" xsi:type="AliasRef"/>
+                        </operand>
+                     </operand>
+                     <operand xsi:type="End">
+                        <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                           <operand path="period" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                  </suchThat>
+               </relationship>
+               <where name="isConfirmedActiveDiagnosis" xsi:type="FunctionRef">
+                  <operand name="LVADCondition" xsi:type="AliasRef"/>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def name="Has Left Ventricular Assist Device" context="Patient" accessLevel="Public">
+         <expression xsi:type="Exists">
+            <operand xsi:type="Query">
+               <source alias="LVADOutpatient">
+                  <expression dataType="fhir:Procedure" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes name="Left Ventricular Assist Device Placement" preserve="true" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <relationship alias="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="With">
+                  <expression name="Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD" xsi:type="ExpressionRef"/>
+                  <suchThat xsi:type="Before">
+                     <operand xsi:type="Start">
+                        <operand name="toInterval" libraryName="Common" xsi:type="FunctionRef">
+                           <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                              <operand path="performed" scope="LVADOutpatient" xsi:type="Property"/>
+                           </operand>
+                        </operand>
+                     </operand>
+                     <operand xsi:type="End">
+                        <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                           <operand path="period" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                  </suchThat>
+               </relationship>
+               <where xsi:type="Equal">
+                  <operand path="value" xsi:type="Property">
+                     <source path="status" scope="LVADOutpatient" xsi:type="Property"/>
+                  </operand>
+                  <operand valueType="t:String" value="completed" xsi:type="Literal"/>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def name="Has Heart Transplant" context="Patient" accessLevel="Public">
+         <expression xsi:type="Exists">
+            <operand xsi:type="Query">
+               <source alias="HeartTransplant">
+                  <expression dataType="fhir:Procedure" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes name="Heart Transplant" preserve="true" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <relationship alias="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="With">
+                  <expression name="Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD" xsi:type="ExpressionRef"/>
+                  <suchThat xsi:type="Before">
+                     <operand xsi:type="Start">
+                        <operand name="toInterval" libraryName="Common" xsi:type="FunctionRef">
+                           <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                              <operand path="performed" scope="HeartTransplant" xsi:type="Property"/>
+                           </operand>
+                        </operand>
+                     </operand>
+                     <operand xsi:type="End">
+                        <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                           <operand path="period" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                  </suchThat>
+               </relationship>
+               <where xsi:type="Equal">
+                  <operand path="value" xsi:type="Property">
+                     <source path="status" scope="HeartTransplant" xsi:type="Property"/>
+                  </operand>
+                  <operand valueType="t:String" value="completed" xsi:type="Literal"/>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def name="Has Heart Transplant Related Diagnosis" context="Patient" accessLevel="Public">
+         <expression xsi:type="Exists">
+            <operand xsi:type="Query">
+               <source alias="HeartTransplantCondition">
+                  <expression dataType="fhir:Condition" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes name="Heart Transplant Related Diagnoses" preserve="true" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <relationship alias="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="With">
+                  <expression name="Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD" xsi:type="ExpressionRef"/>
+                  <suchThat xsi:type="Before">
+                     <operand xsi:type="Start">
+                        <operand name="prevalenceInterval" libraryName="Common" xsi:type="FunctionRef">
+                           <operand name="HeartTransplantCondition" xsi:type="AliasRef"/>
+                        </operand>
+                     </operand>
+                     <operand xsi:type="End">
+                        <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                           <operand path="period" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                  </suchThat>
+               </relationship>
+               <where name="isConfirmedActiveDiagnosis" xsi:type="FunctionRef">
+                  <operand name="HeartTransplantCondition" xsi:type="AliasRef"/>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def name="isOrderedDuringHeartFailureOutpatientEncounter" context="Patient" accessLevel="Public" fluent="true" xsi:type="FunctionDef">
+         <expression xsi:type="Exists">
+            <operand xsi:type="Query">
+               <source alias="ModerateOrSevereLVSDHFOutpatientEncounter">
+                  <expression name="Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD" xsi:type="ExpressionRef"/>
+               </source>
+               <where xsi:type="And">
+                  <operand xsi:type="And">
+                     <operand xsi:type="In">
+                        <operand path="value" xsi:type="Property">
+                           <source path="authoredOn" xsi:type="Property">
+                              <source name="Order" xsi:type="OperandRef"/>
+                           </source>
+                        </operand>
+                        <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                           <operand path="period" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                     <operand xsi:type="In">
+                        <operand path="value" xsi:type="Property">
+                           <source path="status" xsi:type="Property">
+                              <source name="Order" xsi:type="OperandRef"/>
+                           </source>
+                        </operand>
+                        <operand xsi:type="List">
+                           <element valueType="t:String" value="active" xsi:type="Literal"/>
+                           <element valueType="t:String" value="completed" xsi:type="Literal"/>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand xsi:type="Equal">
+                     <operand path="value" xsi:type="Property">
+                        <source path="intent" xsi:type="Property">
+                           <source name="Order" xsi:type="OperandRef"/>
+                        </source>
+                     </operand>
+                     <operand valueType="t:String" value="order" xsi:type="Literal"/>
+                  </operand>
+               </where>
+            </operand>
+         </expression>
+         <operand name="Order">
+            <operandTypeSpecifier name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+      </def>
+      <def name="overlapsHeartFailureOutpatientEncounter" context="Patient" accessLevel="Public" fluent="true" xsi:type="FunctionDef">
+         <expression xsi:type="Exists">
+            <operand xsi:type="Query">
+               <source alias="ModerateOrSevereLVSDHFOutpatientEncounter">
+                  <expression name="Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD" xsi:type="ExpressionRef"/>
+               </source>
+               <where xsi:type="And">
+                  <operand xsi:type="Overlaps">
+                     <operand name="prevalenceInterval" libraryName="Common" xsi:type="FunctionRef">
+                        <operand name="Diagnosis" xsi:type="OperandRef"/>
+                     </operand>
+                     <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                        <operand path="period" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                     </operand>
+                  </operand>
+                  <operand name="isConfirmedActiveDiagnosis" xsi:type="FunctionRef">
+                     <operand name="Diagnosis" xsi:type="OperandRef"/>
+                  </operand>
+               </where>
+            </operand>
+         </expression>
+         <operand name="Diagnosis">
+            <operandTypeSpecifier name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+      </def>
+      <def name="overlapsAfterHeartFailureOutpatientEncounter" context="Patient" accessLevel="Public" fluent="true" xsi:type="FunctionDef">
+         <expression xsi:type="Exists">
+            <operand xsi:type="Query">
+               <source alias="ModerateOrSevereLVSDHFOutpatientEncounter">
+                  <expression name="Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD" xsi:type="ExpressionRef"/>
+               </source>
+               <where xsi:type="Case">
+                  <caseItem>
+                     <when xsi:type="Is">
+                        <operand name="Event" xsi:type="OperandRef"/>
+                        <isTypeSpecifier name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                     </when>
+                     <then xsi:type="And">
+                        <operand xsi:type="OverlapsAfter">
+                           <operand name="prevalenceInterval" libraryName="Common" xsi:type="FunctionRef">
+                              <operand asType="fhir:Condition" xsi:type="As">
+                                 <operand name="Event" xsi:type="OperandRef"/>
+                              </operand>
+                           </operand>
+                           <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                              <operand path="period" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                           </operand>
+                        </operand>
+                        <operand name="isConfirmedActiveDiagnosis" xsi:type="FunctionRef">
+                           <operand asType="fhir:Condition" xsi:type="As">
+                              <operand name="Event" xsi:type="OperandRef"/>
+                           </operand>
+                        </operand>
+                     </then>
+                  </caseItem>
+                  <caseItem>
+                     <when xsi:type="Is">
+                        <operand name="Event" xsi:type="OperandRef"/>
+                        <isTypeSpecifier name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                     </when>
+                     <then xsi:type="And">
+                        <operand xsi:type="OverlapsAfter">
+                           <operand name="toInterval" libraryName="Common" xsi:type="FunctionRef">
+                              <operand path="FHIRHelpers.ToValue(%value)" xsi:type="Property">
+                                 <source name="Event" xsi:type="OperandRef"/>
+                              </operand>
+                           </operand>
+                           <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                              <operand path="period" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                           </operand>
+                        </operand>
+                        <operand xsi:type="Equal">
+                           <operand asType="t:String" xsi:type="As">
+                              <operand path="status" xsi:type="Property">
+                                 <source name="Event" xsi:type="OperandRef"/>
+                              </operand>
+                           </operand>
+                           <operand valueType="t:String" value="completed" xsi:type="Literal"/>
+                        </operand>
+                     </then>
+                  </caseItem>
+                  <caseItem>
+                     <when xsi:type="Is">
+                        <operand name="Event" xsi:type="OperandRef"/>
+                        <isTypeSpecifier name="fhir:AllergyIntolerance" xsi:type="NamedTypeSpecifier"/>
+                     </when>
+                     <then xsi:type="And">
+                        <operand xsi:type="And">
+                           <operand xsi:type="OverlapsAfter">
+                              <operand lowClosed="true" highClosed="true" xsi:type="Interval">
+                                 <low xsi:type="Start">
+                                    <operand name="toInterval" libraryName="Common" xsi:type="FunctionRef">
+                                       <operand path="FHIRHelpers.ToValue(%value)" xsi:type="Property">
+                                          <source name="Event" xsi:type="OperandRef"/>
+                                       </operand>
+                                    </operand>
+                                 </low>
+                                 <high path="%value.value" xsi:type="Property">
+                                    <source name="Event" xsi:type="OperandRef"/>
+                                 </high>
+                              </operand>
+                              <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <operand path="period" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                           <operand xsi:type="Equivalent">
+                              <operand path="FHIRHelpers.ToConcept(%value)" xsi:type="Property">
+                                 <source name="Event" xsi:type="OperandRef"/>
+                              </operand>
+                              <operand xsi:type="ToConcept">
+                                 <operand name="allergy-active" libraryName="Common" xsi:type="CodeRef"/>
+                              </operand>
+                           </operand>
+                        </operand>
+                        <operand xsi:type="Equivalent">
+                           <operand path="FHIRHelpers.ToConcept(%value)" xsi:type="Property">
+                              <source name="Event" xsi:type="OperandRef"/>
+                           </operand>
+                           <operand xsi:type="ToConcept">
+                              <operand name="allergy-confirmed" libraryName="Common" xsi:type="CodeRef"/>
+                           </operand>
+                        </operand>
+                     </then>
+                  </caseItem>
+                  <caseItem>
+                     <when xsi:type="Is">
+                        <operand name="Event" xsi:type="OperandRef"/>
+                        <isTypeSpecifier name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                     </when>
+                     <then xsi:type="And">
+                        <operand xsi:type="Exists">
+                           <operand xsi:type="Query">
+                              <source alias="T">
+                                 <expression xsi:type="Query">
+                                    <source alias="$this">
+                                       <expression path="dosageInstruction" xsi:type="Property">
+                                          <source name="Event" xsi:type="OperandRef"/>
+                                       </expression>
+                                    </source>
+                                    <where xsi:type="Not">
+                                       <operand xsi:type="IsNull">
+                                          <operand path="timing" xsi:type="Property">
+                                             <source name="$this" xsi:type="AliasRef"/>
+                                          </operand>
+                                       </operand>
+                                    </where>
+                                    <return distinct="false">
+                                       <expression path="timing" xsi:type="Property">
+                                          <source name="$this" xsi:type="AliasRef"/>
+                                       </expression>
+                                    </return>
+                                 </expression>
+                              </source>
+                              <where xsi:type="OverlapsAfter">
+                                 <operand name="toInterval" libraryName="Common" xsi:type="FunctionRef">
+                                    <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                       <operand path="bounds" xsi:type="Property">
+                                          <source path="repeat" scope="T" xsi:type="Property"/>
+                                       </operand>
+                                    </operand>
+                                 </operand>
+                                 <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <operand path="period" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                                 </operand>
+                              </where>
+                           </operand>
+                        </operand>
+                        <operand xsi:type="In">
+                           <operand asType="t:String" xsi:type="As">
+                              <operand path="status" xsi:type="Property">
+                                 <source name="Event" xsi:type="OperandRef"/>
+                              </operand>
+                           </operand>
+                           <operand xsi:type="List">
+                              <element valueType="t:String" value="active" xsi:type="Literal"/>
+                              <element valueType="t:String" value="completed" xsi:type="Literal"/>
+                              <element valueType="t:String" value="finished" xsi:type="Literal"/>
+                           </operand>
+                        </operand>
+                     </then>
+                  </caseItem>
+                  <caseItem>
+                     <when xsi:type="Is">
+                        <operand name="Event" xsi:type="OperandRef"/>
+                        <isTypeSpecifier name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+                     </when>
+                     <then xsi:type="And">
+                        <operand xsi:type="OverlapsAfter">
+                           <operand name="toInterval" libraryName="Common" xsi:type="FunctionRef">
+                              <operand path="FHIRHelpers.ToValue(%value)" xsi:type="Property">
+                                 <source name="Event" xsi:type="OperandRef"/>
+                              </operand>
+                           </operand>
+                           <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                              <operand path="period" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                           </operand>
+                        </operand>
+                        <operand xsi:type="In">
+                           <operand asType="t:String" xsi:type="As">
+                              <operand path="status" xsi:type="Property">
+                                 <source name="Event" xsi:type="OperandRef"/>
+                              </operand>
+                           </operand>
+                           <operand xsi:type="List">
+                              <element valueType="t:String" value="final" xsi:type="Literal"/>
+                              <element valueType="t:String" value="amended" xsi:type="Literal"/>
+                              <element valueType="t:String" value="corrected" xsi:type="Literal"/>
+                           </operand>
+                        </operand>
+                     </then>
+                  </caseItem>
+                  <else valueType="t:Boolean" value="false" xsi:type="Literal"/>
+               </where>
+            </operand>
+         </expression>
+         <operand name="Event">
+            <operandTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+               <choice name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+               <choice name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+               <choice name="fhir:AllergyIntolerance" xsi:type="NamedTypeSpecifier"/>
+               <choice name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+               <choice name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+            </operandTypeSpecifier>
+         </operand>
+      </def>
+   </statements>
+</library>

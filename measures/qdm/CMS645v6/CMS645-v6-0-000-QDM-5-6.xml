@@ -1,0 +1,1441 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion,DisableMethodInvocation" xsi:type="a:CqlToElmInfo"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="144">
+         <a:s>library BoneDensityProstateCancerAndrogenDeprivationTherapy version '6.0.000'</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="BoneDensityProstateCancerAndrogenDeprivationTherapy" version="6.0.000"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="3:1-3:23" localIdentifier="QDM" uri="urn:healthit-gov:qdm:v5_6" version="5.6">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>using </a:s>
+               <a:s>
+                  <a:s>QDM</a:s>
+               </a:s>
+               <a:s> version '5.6'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="5:1-5:64" localIdentifier="Global" path="MATGlobalCommonFunctions" version="7.0.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>MATGlobalCommonFunctions</a:s>
+               </a:s>
+               <a:s> version '7.0.000' called Global</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <parameters>
+      <def localId="20" locator="23:1-23:49" name="Measurement Period" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="20">
+               <a:s>parameter &quot;Measurement Period&quot; </a:s>
+               <a:s r="19">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="18">
+                     <a:s>DateTime</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <parameterTypeSpecifier localId="19" locator="23:32-23:49" xsi:type="IntervalTypeSpecifier">
+            <pointType localId="18" locator="23:41-23:48" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <codeSystems>
+      <def localId="3" locator="7:1-7:55" name="SNOMEDCT" id="urn:oid:2.16.840.1.113883.6.96" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>codesystem &quot;SNOMEDCT&quot;: 'urn:oid:2.16.840.1.113883.6.96'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="4" locator="8:1-8:66" name="AdministrativeGender" id="urn:oid:2.16.840.1.113883.5.1" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>codesystem &quot;AdministrativeGender&quot;: 'urn:oid:2.16.840.1.113883.5.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </codeSystems>
+   <valueSets>
+      <def localId="5" locator="10:1-10:97" name="Androgen deprivation therapy for Urology Care" id="urn:oid:2.16.840.1.113762.1.4.1151.48" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>valueset &quot;Androgen deprivation therapy for Urology Care&quot;: 'urn:oid:2.16.840.1.113762.1.4.1151.48'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="6" locator="11:1-11:119" name="DEXA Dual Energy Xray Absorptiometry, Bone Density for Urology Care" id="urn:oid:2.16.840.1.113762.1.4.1151.38" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>valueset &quot;DEXA Dual Energy Xray Absorptiometry, Bone Density for Urology Care&quot;: 'urn:oid:2.16.840.1.113762.1.4.1151.38'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="7" locator="12:1-12:58" name="Ethnicity" id="urn:oid:2.16.840.1.114222.4.11.837" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="7">
+               <a:s>valueset &quot;Ethnicity&quot;: 'urn:oid:2.16.840.1.114222.4.11.837'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="8" locator="13:1-13:75" name="Office Visit" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1001" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="8">
+               <a:s>valueset &quot;Office Visit&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1001'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="9" locator="14:1-14:68" name="ONC Administrative Sex" id="urn:oid:2.16.840.1.113762.1.4.1" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="9">
+               <a:s>valueset &quot;ONC Administrative Sex&quot;: 'urn:oid:2.16.840.1.113762.1.4.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="10" locator="15:1-15:69" name="Patient Declined" id="urn:oid:2.16.840.1.113883.3.526.3.1582" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="10">
+               <a:s>valueset &quot;Patient Declined&quot;: 'urn:oid:2.16.840.1.113883.3.526.3.1582'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="11" locator="16:1-16:55" name="Payer" id="urn:oid:2.16.840.1.114222.4.11.3591" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="11">
+               <a:s>valueset &quot;Payer&quot;: 'urn:oid:2.16.840.1.114222.4.11.3591'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="12" locator="17:1-17:67" name="Prostate Cancer" id="urn:oid:2.16.840.1.113883.3.526.3.319" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="12">
+               <a:s>valueset &quot;Prostate Cancer&quot;: 'urn:oid:2.16.840.1.113883.3.526.3.319'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="13" locator="18:1-18:53" name="Race" id="urn:oid:2.16.840.1.114222.4.11.836" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="13">
+               <a:s>valueset &quot;Race&quot;: 'urn:oid:2.16.840.1.114222.4.11.836'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </valueSets>
+   <codes>
+      <def localId="15" locator="20:1-20:197" name="Injection of leuprolide acetate for twelve month period (regime/therapy)" id="456381000124102" display="Injection of leuprolide acetate for twelve month period (regime/therapy)" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="15">
+               <a:s>code &quot;Injection of leuprolide acetate for twelve month period (regime/therapy)&quot;: '456381000124102' from </a:s>
+               <a:s r="14">
+                  <a:s>&quot;SNOMEDCT&quot;</a:s>
+               </a:s>
+               <a:s> display 'Injection of leuprolide acetate for twelve month period (regime/therapy)'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="14" locator="20:105-20:114" name="SNOMEDCT"/>
+      </def>
+      <def localId="17" locator="21:1-21:59" name="Male" id="M" display="Male" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="17">
+               <a:s>code &quot;Male&quot;: 'M' from </a:s>
+               <a:s r="16">
+                  <a:s>&quot;AdministrativeGender&quot;</a:s>
+               </a:s>
+               <a:s> display 'Male'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="16" locator="21:23-21:44" name="AdministrativeGender"/>
+      </def>
+   </codes>
+   <contexts>
+      <def locator="25:1-25:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="25:1-25:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="25:1-25:15" xmlns:ns0="urn:healthit-gov:qdm:v5_6" dataType="ns0:Patient" templateId="Patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="31" locator="27:1-29:85" name="Androgen Deprivation Therapy for Urology Care Medication Active Start Dates" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="31">
+               <a:s>define &quot;Androgen Deprivation Therapy for Urology Care Medication Active Start Dates&quot;:
+  </a:s>
+               <a:s r="30">
+                  <a:s>
+                     <a:s r="22">
+                        <a:s r="21">
+                           <a:s r="21">
+                              <a:s>[&quot;Medication, Active&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Androgen deprivation therapy for Urology Care&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> ADTActive</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="29">
+                     <a:s>return </a:s>
+                     <a:s r="28">
+                        <a:s r="23">
+                           <a:s>Global</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="28">
+                           <a:s>EarliestOf ( </a:s>
+                           <a:s r="25">
+                              <a:s r="24">
+                                 <a:s>ADTActive</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="25">
+                                 <a:s>relevantDatetime</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>, </a:s>
+                           <a:s r="27">
+                              <a:s r="26">
+                                 <a:s>ADTActive</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="27">
+                                 <a:s>relevantPeriod</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> )</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="30" locator="28:3-29:85" xsi:type="Query">
+            <source localId="22" locator="28:3-28:83" alias="ADTActive">
+               <expression localId="21" locator="28:3-28:73" xmlns:ns1="urn:healthit-gov:qdm:v5_6" dataType="ns1:MedicationActive" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="28:26-28:72" name="Androgen deprivation therapy for Urology Care" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <return localId="29" locator="29:5-29:85">
+               <expression localId="28" locator="29:12-29:85" name="EarliestOf" libraryName="Global" xsi:type="FunctionRef">
+                  <operand localId="25" locator="29:32-29:57" path="relevantDatetime" scope="ADTActive" xsi:type="Property"/>
+                  <operand localId="27" locator="29:60-29:83" path="relevantPeriod" scope="ADTActive" xsi:type="Property"/>
+               </expression>
+            </return>
+         </expression>
+      </def>
+      <def localId="42" locator="31:1-33:81" name="Androgen Deprivation Therapy for Urology Care Medication Order Start Dates" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="42">
+               <a:s>define &quot;Androgen Deprivation Therapy for Urology Care Medication Order Start Dates&quot;:
+  </a:s>
+               <a:s r="41">
+                  <a:s>
+                     <a:s r="33">
+                        <a:s r="32">
+                           <a:s r="32">
+                              <a:s>[&quot;Medication, Order&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Androgen deprivation therapy for Urology Care&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> ADTOrder</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="40">
+                     <a:s>return </a:s>
+                     <a:s r="39">
+                        <a:s r="34">
+                           <a:s>Global</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="39">
+                           <a:s>EarliestOf ( </a:s>
+                           <a:s r="36">
+                              <a:s r="35">
+                                 <a:s>ADTOrder</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="36">
+                                 <a:s>authorDatetime</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>, </a:s>
+                           <a:s r="38">
+                              <a:s r="37">
+                                 <a:s>ADTOrder</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="38">
+                                 <a:s>relevantPeriod</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> )</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="41" locator="32:3-33:81" xsi:type="Query">
+            <source localId="33" locator="32:3-32:81" alias="ADTOrder">
+               <expression localId="32" locator="32:3-32:72" xmlns:ns2="urn:healthit-gov:qdm:v5_6" dataType="ns2:PositiveMedicationOrder" templateId="PositiveMedicationOrder" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="32:25-32:71" name="Androgen deprivation therapy for Urology Care" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <return localId="40" locator="33:5-33:81">
+               <expression localId="39" locator="33:12-33:81" name="EarliestOf" libraryName="Global" xsi:type="FunctionRef">
+                  <operand localId="36" locator="33:32-33:54" path="authorDatetime" scope="ADTOrder" xsi:type="Property"/>
+                  <operand localId="38" locator="33:57-33:79" path="relevantPeriod" scope="ADTOrder" xsi:type="Property"/>
+               </expression>
+            </return>
+         </expression>
+      </def>
+      <def localId="45" locator="62:1-63:47" name="Patient is Male" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="45">
+               <a:s>define &quot;Patient is Male&quot;:
+  </a:s>
+               <a:s r="44">
+                  <a:s>exists </a:s>
+                  <a:s r="43">
+                     <a:s>[&quot;Patient Characteristic Sex&quot;: </a:s>
+                     <a:s>
+                        <a:s>&quot;Male&quot;</a:s>
+                     </a:s>
+                     <a:s>]</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="44" locator="63:3-63:47" xsi:type="Exists">
+            <operand localId="43" locator="63:10-63:47" xmlns:ns3="urn:healthit-gov:qdm:v5_6" dataType="ns3:PatientCharacteristicSex" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+               <codes xsi:type="ToList">
+                  <operand locator="63:41-63:46" name="Male" xsi:type="CodeRef"/>
+               </codes>
+            </operand>
+         </expression>
+      </def>
+      <def localId="55" locator="55:1-57:62" name="Has Qualifying Encounter" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="55">
+               <a:s>define &quot;Has Qualifying Encounter&quot;:
+  </a:s>
+               <a:s r="54">
+                  <a:s>exists </a:s>
+                  <a:s r="53">
+                     <a:s>
+                        <a:s r="48">
+                           <a:s r="47">
+                              <a:s r="47">
+                                 <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                 <a:s>
+                                    <a:s>&quot;Office Visit&quot;</a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> Encounter</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    </a:s>
+                     <a:s r="52">
+                        <a:s>where </a:s>
+                        <a:s r="52">
+                           <a:s r="50">
+                              <a:s r="49">
+                                 <a:s>Encounter</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="50">
+                                 <a:s>relevantPeriod</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="52"> during </a:s>
+                           <a:s r="51">
+                              <a:s>&quot;Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="54" locator="56:3-57:62" xsi:type="Exists">
+            <operand localId="53" locator="56:10-57:62" xsi:type="Query">
+               <source localId="48" locator="56:10-56:59" alias="Encounter">
+                  <expression localId="47" locator="56:10-56:49" xmlns:ns4="urn:healthit-gov:qdm:v5_6" dataType="ns4:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes locator="56:35-56:48" name="Office Visit" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <where localId="52" locator="57:5-57:62" xsi:type="IncludedIn">
+                  <operand localId="50" locator="57:11-57:34" path="relevantPeriod" scope="Encounter" xsi:type="Property"/>
+                  <operand localId="51" locator="57:43-57:62" name="Measurement Period" xsi:type="ParameterRef"/>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def localId="71" locator="65:1-67:71" name="Prostate Cancer Diagnosis" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="71">
+               <a:s>define &quot;Prostate Cancer Diagnosis&quot;:
+  </a:s>
+               <a:s r="70">
+                  <a:s>
+                     <a:s r="65">
+                        <a:s r="64">
+                           <a:s r="64">
+                              <a:s>[&quot;Diagnosis&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Prostate Cancer&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> ProstateCancer</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="69">
+                     <a:s>where </a:s>
+                     <a:s r="69">
+                        <a:s r="67">
+                           <a:s r="66">
+                              <a:s>ProstateCancer</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="67">
+                              <a:s>prevalencePeriod</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="69"> overlaps </a:s>
+                        <a:s r="68">
+                           <a:s>&quot;Measurement Period&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="70" locator="66:3-67:71" xsi:type="Query">
+            <source localId="65" locator="66:3-66:49" alias="ProstateCancer">
+               <expression localId="64" locator="66:3-66:34" xmlns:ns5="urn:healthit-gov:qdm:v5_6" dataType="ns5:Diagnosis" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="66:17-66:33" name="Prostate Cancer" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <where localId="69" locator="67:5-67:71" xsi:type="Overlaps">
+               <operand localId="67" locator="67:11-67:41" path="prevalencePeriod" scope="ProstateCancer" xsi:type="Property"/>
+               <operand localId="68" locator="67:52-67:71" name="Measurement Period" xsi:type="ParameterRef"/>
+            </where>
+         </expression>
+      </def>
+      <def localId="86" locator="92:1-99:3" name="First ADT During Measurement Period" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="86">
+               <a:s>define &quot;First ADT During Measurement Period&quot;:
+  </a:s>
+               <a:s r="85">
+                  <a:s>First(</a:s>
+                  <a:s r="84">
+                     <a:s>
+                        <a:s r="63">
+                           <a:s r="62">
+                              <a:s>(</a:s>
+                              <a:s r="62">
+                                 <a:s r="60">
+                                    <a:s>&quot;Androgen Deprivation Therapy for Urology Care Medication Active Start Dates&quot;</a:s>
+                                 </a:s>
+                                 <a:s>
+      union </a:s>
+                                 <a:s r="61">
+                                    <a:s>&quot;Androgen Deprivation Therapy for Urology Care Medication Order Start Dates&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                           <a:s>ADTDate</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+      </a:s>
+                     <a:s r="82">
+                        <a:s>with </a:s>
+                        <a:s r="73">
+                           <a:s r="72">
+                              <a:s>
+                                 <a:s>&quot;Prostate Cancer Diagnosis&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> ProstateCancer</a:s>
+                        </a:s>
+                        <a:s>
+        such that </a:s>
+                        <a:s r="81">
+                           <a:s r="77">
+                              <a:s r="74">
+                                 <a:s>ADTDate</a:s>
+                              </a:s>
+                              <a:s r="77"> during </a:s>
+                              <a:s r="76">
+                                 <a:s r="75">
+                                    <a:s>ProstateCancer</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="76">
+                                    <a:s>prevalencePeriod</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+          and </a:s>
+                           <a:s r="80">
+                              <a:s r="78">
+                                 <a:s>ADTDate</a:s>
+                              </a:s>
+                              <a:s r="80"> during </a:s>
+                              <a:s r="79">
+                                 <a:s>&quot;Measurement Period&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s r="83">
+      sort ascending</a:s>
+                  </a:s>
+                  <a:s>
+  )</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="85" locator="93:3-99:3" xsi:type="First">
+            <source localId="84" locator="93:9-98:20" xsi:type="Query">
+               <source localId="63" locator="93:9-94:96" alias="ADTDate">
+                  <expression localId="62" locator="93:9-94:89" xsi:type="Union">
+                     <operand localId="60" locator="93:10-93:86" name="Androgen Deprivation Therapy for Urology Care Medication Active Start Dates" xsi:type="ExpressionRef"/>
+                     <operand localId="61" locator="94:13-94:88" name="Androgen Deprivation Therapy for Urology Care Medication Order Start Dates" xsi:type="ExpressionRef"/>
+                  </expression>
+               </source>
+               <relationship localId="82" locator="95:7-97:49" alias="ProstateCancer" xsi:type="With">
+                  <expression localId="72" locator="95:12-95:38" name="Prostate Cancer Diagnosis" xsi:type="ExpressionRef"/>
+                  <suchThat localId="81" locator="96:19-97:49" xsi:type="And">
+                     <operand localId="77" locator="96:19-96:64" xsi:type="In">
+                        <operand localId="74" locator="96:19-96:25" name="ADTDate" xsi:type="AliasRef"/>
+                        <operand localId="76" locator="96:34-96:64" path="prevalencePeriod" scope="ProstateCancer" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="80" locator="97:15-97:49" xsi:type="In">
+                        <operand localId="78" locator="97:15-97:21" name="ADTDate" xsi:type="AliasRef"/>
+                        <operand localId="79" locator="97:30-97:49" name="Measurement Period" xsi:type="ParameterRef"/>
+                     </operand>
+                  </suchThat>
+               </relationship>
+               <sort localId="83" locator="98:7-98:20">
+                  <by direction="ascending" xsi:type="ByDirection"/>
+               </sort>
+            </source>
+         </expression>
+      </def>
+      <def localId="100" locator="86:1-90:74" name="Order for 12 Months of ADT During Measurement Period" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="100">
+               <a:s>define &quot;Order for 12 Months of ADT During Measurement Period&quot;:
+  </a:s>
+               <a:s r="99">
+                  <a:s>
+                     <a:s r="59">
+                        <a:s r="58">
+                           <a:s r="58">
+                              <a:s>[&quot;Procedure, Order&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Injection of leuprolide acetate for twelve month period (regime/therapy)&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> OrderTwelveMonthADT</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="98">
+                     <a:s>with </a:s>
+                     <a:s r="88">
+                        <a:s r="87">
+                           <a:s>
+                              <a:s>&quot;First ADT During Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> FirstADTMP</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="97">
+                        <a:s r="92">
+                           <a:s r="90">
+                              <a:s r="89">
+                                 <a:s>OrderTwelveMonthADT</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="90">
+                                 <a:s>authorDatetime</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="92"> on or after </a:s>
+                           <a:s r="91">
+                              <a:s>FirstADTMP</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+        and </a:s>
+                        <a:s r="96">
+                           <a:s r="94">
+                              <a:s r="93">
+                                 <a:s>OrderTwelveMonthADT</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="94">
+                                 <a:s>authorDatetime</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="96"> during </a:s>
+                           <a:s r="95">
+                              <a:s>&quot;Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="99" locator="87:3-90:74" xsi:type="Query">
+            <source localId="59" locator="87:3-87:118" alias="OrderTwelveMonthADT">
+               <expression localId="58" locator="87:3-87:98" xmlns:ns6="urn:healthit-gov:qdm:v5_6" dataType="ns6:PositiveProcedureOrder" templateId="PositiveProcedureOrder" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                  <codes xsi:type="ToList">
+                     <operand locator="87:24-87:97" name="Injection of leuprolide acetate for twelve month period (regime/therapy)" xsi:type="CodeRef"/>
+                  </codes>
+               </expression>
+            </source>
+            <relationship localId="98" locator="88:5-90:74" alias="FirstADTMP" xsi:type="With">
+               <expression localId="87" locator="88:10-88:46" name="First ADT During Measurement Period" xsi:type="ExpressionRef"/>
+               <suchThat localId="97" locator="89:17-90:74" xsi:type="And">
+                  <operand localId="92" locator="89:17-89:73" xsi:type="SameOrAfter">
+                     <operand localId="90" locator="89:17-89:50" path="authorDatetime" scope="OrderTwelveMonthADT" xsi:type="Property"/>
+                     <operand localId="91" locator="89:64-89:73" name="FirstADTMP" xsi:type="AliasRef"/>
+                  </operand>
+                  <operand localId="96" locator="90:13-90:74" xsi:type="In">
+                     <operand localId="94" locator="90:13-90:46" path="authorDatetime" scope="OrderTwelveMonthADT" xsi:type="Property"/>
+                     <operand localId="95" locator="90:55-90:74" name="Measurement Period" xsi:type="ParameterRef"/>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="104" locator="81:1-84:69" name="Initial Population" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="104">
+               <a:s>define &quot;Initial Population&quot;:
+  </a:s>
+               <a:s r="103">
+                  <a:s r="57">
+                     <a:s r="46">
+                        <a:s>&quot;Patient is Male&quot;</a:s>
+                     </a:s>
+                     <a:s>
+    and </a:s>
+                     <a:s r="56">
+                        <a:s>&quot;Has Qualifying Encounter&quot;</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    and </a:s>
+                  <a:s r="102">
+                     <a:s>exists </a:s>
+                     <a:s r="101">
+                        <a:s>&quot;Order for 12 Months of ADT During Measurement Period&quot;</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="103" locator="82:3-84:69" xsi:type="And">
+            <operand localId="57" locator="82:3-83:34" xsi:type="And">
+               <operand localId="46" locator="82:3-82:19" name="Patient is Male" xsi:type="ExpressionRef"/>
+               <operand localId="56" locator="83:9-83:34" name="Has Qualifying Encounter" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand localId="102" locator="84:9-84:69" xsi:type="Exists">
+               <operand localId="101" locator="84:16-84:69" name="Order for 12 Months of ADT During Measurement Period" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
+      </def>
+      <def localId="106" locator="35:1-36:22" name="Denominator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="106">
+               <a:s>define &quot;Denominator&quot;:
+  </a:s>
+               <a:s r="105">
+                  <a:s>&quot;Initial Population&quot;</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="105" locator="36:3-36:22" name="Initial Population" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="124" locator="101:1-105:66" name="No Bone Density Scan Ordered Due to Patient Refusal" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="124">
+               <a:s>define &quot;No Bone Density Scan Ordered Due to Patient Refusal&quot;:
+  </a:s>
+               <a:s r="123">
+                  <a:s>
+                     <a:s r="108">
+                        <a:s r="107">
+                           <a:s r="107">
+                              <a:s>[&quot;Diagnostic Study, Not Ordered&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;DEXA Dual Energy Xray Absorptiometry, Bone Density for Urology Care&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> DEXANotOrdered</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="122">
+                     <a:s>with </a:s>
+                     <a:s r="110">
+                        <a:s r="109">
+                           <a:s>
+                              <a:s>&quot;Order for 12 Months of ADT During Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> OrderTwelveMonthsADT</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="121">
+                        <a:s r="116">
+                           <a:s r="112">
+                              <a:s r="111">
+                                 <a:s>DEXANotOrdered</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="112">
+                                 <a:s>authorDatetime</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> </a:s>
+                           <a:s r="116">
+                              <a:s r="115">
+                                 <a:s>3 months</a:s>
+                              </a:s>
+                              <a:s> or less after</a:s>
+                           </a:s>
+                           <a:s> </a:s>
+                           <a:s r="114">
+                              <a:s r="113">
+                                 <a:s>OrderTwelveMonthsADT</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="114">
+                                 <a:s>authorDatetime</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+        and </a:s>
+                        <a:s r="120">
+                           <a:s r="118">
+                              <a:s r="117">
+                                 <a:s>DEXANotOrdered</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="118">
+                                 <a:s>negationRationale</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> in </a:s>
+                           <a:s r="119">
+                              <a:s>&quot;Patient Declined&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="123" locator="102:3-105:66" xsi:type="Query">
+            <source localId="108" locator="102:3-102:121" alias="DEXANotOrdered">
+               <expression localId="107" locator="102:3-102:106" xmlns:ns7="urn:healthit-gov:qdm:v5_6" dataType="ns7:NegativeDiagnosticStudyOrder" templateId="NegativeDiagnosticStudyOrder" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="102:37-102:105" name="DEXA Dual Energy Xray Absorptiometry, Bone Density for Urology Care" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <relationship localId="122" locator="103:5-105:66" alias="OrderTwelveMonthsADT" xsi:type="With">
+               <expression localId="109" locator="103:10-103:63" name="Order for 12 Months of ADT During Measurement Period" xsi:type="ExpressionRef"/>
+               <suchThat localId="121" locator="104:17-105:66" xsi:type="And">
+                  <operand localId="116" locator="104:17-104:104" xsi:type="And">
+                     <operand locator="104:47-104:62" xsi:type="In">
+                        <operand localId="112" locator="104:17-104:45" path="authorDatetime" scope="DEXANotOrdered" xsi:type="Property"/>
+                        <operand locator="104:47-104:62" lowClosed="false" highClosed="true" xsi:type="Interval">
+                           <low localId="114" locator="104:70-104:104" path="authorDatetime" scope="OrderTwelveMonthsADT" xsi:type="Property"/>
+                           <high locator="104:91-104:104" xsi:type="Add">
+                              <operand localId="114" locator="104:70-104:104" path="authorDatetime" scope="OrderTwelveMonthsADT" xsi:type="Property"/>
+                              <operand localId="115" locator="104:47-104:54" value="3" unit="months" xsi:type="Quantity"/>
+                           </high>
+                        </operand>
+                     </operand>
+                     <operand locator="104:47-104:62" xsi:type="Not">
+                        <operand locator="104:47-104:62" xsi:type="IsNull">
+                           <operand localId="114" locator="104:70-104:104" path="authorDatetime" scope="OrderTwelveMonthsADT" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand localId="120" locator="105:13-105:66" xsi:type="InValueSet">
+                     <code localId="118" locator="105:13-105:44" path="negationRationale" scope="DEXANotOrdered" xsi:type="Property"/>
+                     <valueset localId="119" locator="105:49-105:66" name="Patient Declined" xsi:type="ValueSetRef"/>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="144" locator="107:1-111:68" name="No Bone Density Scan Performed Due to Patient Refusal" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="144">
+               <a:s>define &quot;No Bone Density Scan Performed Due to Patient Refusal&quot;:
+  </a:s>
+               <a:s r="143">
+                  <a:s>
+                     <a:s r="128">
+                        <a:s r="127">
+                           <a:s r="127">
+                              <a:s>[&quot;Diagnostic Study, Not Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;DEXA Dual Energy Xray Absorptiometry, Bone Density for Urology Care&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> DEXANotPerformed</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="142">
+                     <a:s>with </a:s>
+                     <a:s r="130">
+                        <a:s r="129">
+                           <a:s>
+                              <a:s>&quot;Order for 12 Months of ADT During Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> OrderTwelveMonthsADT</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="141">
+                        <a:s r="136">
+                           <a:s r="132">
+                              <a:s r="131">
+                                 <a:s>DEXANotPerformed</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="132">
+                                 <a:s>authorDatetime</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> </a:s>
+                           <a:s r="136">
+                              <a:s r="135">
+                                 <a:s>3 months</a:s>
+                              </a:s>
+                              <a:s> or less after</a:s>
+                           </a:s>
+                           <a:s> </a:s>
+                           <a:s r="134">
+                              <a:s r="133">
+                                 <a:s>OrderTwelveMonthsADT</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="134">
+                                 <a:s>authorDatetime</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+        and </a:s>
+                        <a:s r="140">
+                           <a:s r="138">
+                              <a:s r="137">
+                                 <a:s>DEXANotPerformed</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="138">
+                                 <a:s>negationRationale</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> in </a:s>
+                           <a:s r="139">
+                              <a:s>&quot;Patient Declined&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="143" locator="108:3-111:68" xsi:type="Query">
+            <source localId="128" locator="108:3-108:125" alias="DEXANotPerformed">
+               <expression localId="127" locator="108:3-108:108" xmlns:ns8="urn:healthit-gov:qdm:v5_6" dataType="ns8:NegativeDiagnosticStudyPerformed" templateId="NegativeDiagnosticStudyPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="108:39-108:107" name="DEXA Dual Energy Xray Absorptiometry, Bone Density for Urology Care" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <relationship localId="142" locator="109:5-111:68" alias="OrderTwelveMonthsADT" xsi:type="With">
+               <expression localId="129" locator="109:10-109:63" name="Order for 12 Months of ADT During Measurement Period" xsi:type="ExpressionRef"/>
+               <suchThat localId="141" locator="110:17-111:68" xsi:type="And">
+                  <operand localId="136" locator="110:17-110:106" xsi:type="And">
+                     <operand locator="110:49-110:64" xsi:type="In">
+                        <operand localId="132" locator="110:17-110:47" path="authorDatetime" scope="DEXANotPerformed" xsi:type="Property"/>
+                        <operand locator="110:49-110:64" lowClosed="false" highClosed="true" xsi:type="Interval">
+                           <low localId="134" locator="110:72-110:106" path="authorDatetime" scope="OrderTwelveMonthsADT" xsi:type="Property"/>
+                           <high locator="110:93-110:106" xsi:type="Add">
+                              <operand localId="134" locator="110:72-110:106" path="authorDatetime" scope="OrderTwelveMonthsADT" xsi:type="Property"/>
+                              <operand localId="135" locator="110:49-110:56" value="3" unit="months" xsi:type="Quantity"/>
+                           </high>
+                        </operand>
+                     </operand>
+                     <operand locator="110:49-110:64" xsi:type="Not">
+                        <operand locator="110:49-110:64" xsi:type="IsNull">
+                           <operand localId="134" locator="110:72-110:106" path="authorDatetime" scope="OrderTwelveMonthsADT" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand localId="140" locator="111:13-111:68" xsi:type="InValueSet">
+                     <code localId="138" locator="111:13-111:46" path="negationRationale" scope="DEXANotPerformed" xsi:type="Property"/>
+                     <valueset localId="139" locator="111:51-111:68" name="Patient Declined" xsi:type="ValueSetRef"/>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="148" locator="38:1-40:73" name="Denominator Exception" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="148">
+               <a:s>define &quot;Denominator Exception&quot;:
+  </a:s>
+               <a:s r="147">
+                  <a:s r="126">
+                     <a:s>exists </a:s>
+                     <a:s r="125">
+                        <a:s>( </a:s>
+                        <a:s r="125">
+                           <a:s>&quot;No Bone Density Scan Ordered Due to Patient Refusal&quot;</a:s>
+                        </a:s>
+                        <a:s> )</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    or </a:s>
+                  <a:s r="146">
+                     <a:s>exists </a:s>
+                     <a:s r="145">
+                        <a:s>( </a:s>
+                        <a:s r="145">
+                           <a:s>&quot;No Bone Density Scan Performed Due to Patient Refusal&quot;</a:s>
+                        </a:s>
+                        <a:s> )</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="147" locator="39:3-40:73" xsi:type="Or">
+            <operand localId="126" locator="39:3-39:66" xsi:type="Exists">
+               <operand localId="125" locator="39:10-39:66" name="No Bone Density Scan Ordered Due to Patient Refusal" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand localId="146" locator="40:8-40:73" xsi:type="Exists">
+               <operand localId="145" locator="40:15-40:73" name="No Bone Density Scan Performed Due to Patient Refusal" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
+      </def>
+      <def localId="197" locator="42:1-53:3" name="Has Baseline DEXA Scan Two Years Prior to the Start of or Less than Three Months After the Start of ADT" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="197">
+               <a:s>define &quot;Has Baseline DEXA Scan Two Years Prior to the Start of or Less than Three Months After the Start of ADT&quot;:
+  </a:s>
+               <a:s r="196">
+                  <a:s>exists </a:s>
+                  <a:s r="195">
+                     <a:s>( </a:s>
+                     <a:s r="195">
+                        <a:s r="167">
+                           <a:s>( </a:s>
+                           <a:s r="167">
+                              <a:s>
+                                 <a:s r="150">
+                                    <a:s r="149">
+                                       <a:s r="149">
+                                          <a:s>[&quot;Diagnostic Study, Order&quot;: </a:s>
+                                          <a:s>
+                                             <a:s>&quot;DEXA Dual Energy Xray Absorptiometry, Bone Density for Urology Care&quot;</a:s>
+                                          </a:s>
+                                          <a:s>]</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> DEXAOrdered</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+        </a:s>
+                              <a:s r="166">
+                                 <a:s>with </a:s>
+                                 <a:s r="152">
+                                    <a:s r="151">
+                                       <a:s>
+                                          <a:s>&quot;Order for 12 Months of ADT During Measurement Period&quot;</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> OrderTwelveMonthsADT</a:s>
+                                 </a:s>
+                                 <a:s>
+          such that </a:s>
+                                 <a:s r="165">
+                                    <a:s r="158">
+                                       <a:s r="154">
+                                          <a:s r="153">
+                                             <a:s>DEXAOrdered</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="154">
+                                             <a:s>authorDatetime</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> </a:s>
+                                       <a:s r="158">
+                                          <a:s r="157">
+                                             <a:s>3 months</a:s>
+                                          </a:s>
+                                          <a:s> or less after</a:s>
+                                       </a:s>
+                                       <a:s> </a:s>
+                                       <a:s r="156">
+                                          <a:s r="155">
+                                             <a:s>OrderTwelveMonthsADT</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="156">
+                                             <a:s>authorDatetime</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+            or </a:s>
+                                    <a:s r="164">
+                                       <a:s r="160">
+                                          <a:s r="159">
+                                             <a:s>DEXAOrdered</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="160">
+                                             <a:s>authorDatetime</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> </a:s>
+                                       <a:s r="164">
+                                          <a:s r="163">
+                                             <a:s>2 years</a:s>
+                                          </a:s>
+                                          <a:s> or less before</a:s>
+                                       </a:s>
+                                       <a:s> </a:s>
+                                       <a:s r="162">
+                                          <a:s r="161">
+                                             <a:s>OrderTwelveMonthsADT</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="162">
+                                             <a:s>authorDatetime</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+    )</a:s>
+                        </a:s>
+                        <a:s>
+      union </a:s>
+                        <a:s r="194">
+                           <a:s>( </a:s>
+                           <a:s r="194">
+                              <a:s>
+                                 <a:s r="169">
+                                    <a:s r="168">
+                                       <a:s r="168">
+                                          <a:s>[&quot;Diagnostic Study, Performed&quot;: </a:s>
+                                          <a:s>
+                                             <a:s>&quot;DEXA Dual Energy Xray Absorptiometry, Bone Density for Urology Care&quot;</a:s>
+                                          </a:s>
+                                          <a:s>]</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> DEXAPerformed</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+          </a:s>
+                              <a:s r="193">
+                                 <a:s>with </a:s>
+                                 <a:s r="171">
+                                    <a:s r="170">
+                                       <a:s>
+                                          <a:s>&quot;Order for 12 Months of ADT During Measurement Period&quot;</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> OrderTwelveMonthsADT</a:s>
+                                 </a:s>
+                                 <a:s>
+            such that </a:s>
+                                 <a:s r="192">
+                                    <a:s r="181">
+                                       <a:s r="177">
+                                          <a:s r="172">
+                                             <a:s>Global</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="177">
+                                             <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                             <a:s r="174">
+                                                <a:s r="173">
+                                                   <a:s>DEXAPerformed</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="174">
+                                                   <a:s>relevantDatetime</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>, </a:s>
+                                             <a:s r="176">
+                                                <a:s r="175">
+                                                   <a:s>DEXAPerformed</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="176">
+                                                   <a:s>relevantPeriod</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s> )</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> </a:s>
+                                       <a:s r="181">
+                                          <a:s r="180">
+                                             <a:s>3 months</a:s>
+                                          </a:s>
+                                          <a:s> or less after</a:s>
+                                       </a:s>
+                                       <a:s> </a:s>
+                                       <a:s r="179">
+                                          <a:s r="178">
+                                             <a:s>OrderTwelveMonthsADT</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="179">
+                                             <a:s>authorDatetime</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+              or </a:s>
+                                    <a:s r="191">
+                                       <a:s r="187">
+                                          <a:s r="182">
+                                             <a:s>Global</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="187">
+                                             <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                             <a:s r="184">
+                                                <a:s r="183">
+                                                   <a:s>DEXAPerformed</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="184">
+                                                   <a:s>relevantDatetime</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>, </a:s>
+                                             <a:s r="186">
+                                                <a:s r="185">
+                                                   <a:s>DEXAPerformed</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="186">
+                                                   <a:s>relevantPeriod</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s> )</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> </a:s>
+                                       <a:s r="191">
+                                          <a:s r="190">
+                                             <a:s>2 years</a:s>
+                                          </a:s>
+                                          <a:s> or less before</a:s>
+                                       </a:s>
+                                       <a:s> </a:s>
+                                       <a:s r="189">
+                                          <a:s r="188">
+                                             <a:s>OrderTwelveMonthsADT</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="189">
+                                             <a:s>authorDatetime</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+      )</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="196" locator="43:3-53:3" xsi:type="Exists">
+            <operand localId="195" locator="43:10-53:3" xsi:type="Union">
+               <operand xsi:type="As">
+                  <operand localId="167" locator="43:12-47:5" xsi:type="Query">
+                     <source localId="150" locator="43:14-43:123" alias="DEXAOrdered">
+                        <expression localId="149" locator="43:14-43:111" xmlns:ns9="urn:healthit-gov:qdm:v5_6" dataType="ns9:PositiveDiagnosticStudyOrder" templateId="PositiveDiagnosticStudyOrder" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                           <codes locator="43:42-43:110" name="DEXA Dual Energy Xray Absorptiometry, Bone Density for Urology Care" xsi:type="ValueSetRef"/>
+                        </expression>
+                     </source>
+                     <relationship localId="166" locator="44:9-46:100" alias="OrderTwelveMonthsADT" xsi:type="With">
+                        <expression localId="151" locator="44:14-44:67" name="Order for 12 Months of ADT During Measurement Period" xsi:type="ExpressionRef"/>
+                        <suchThat localId="165" locator="45:21-46:100" xsi:type="Or">
+                           <operand localId="158" locator="45:21-45:105" xsi:type="And">
+                              <operand locator="45:48-45:63" xsi:type="In">
+                                 <operand localId="154" locator="45:21-45:46" path="authorDatetime" scope="DEXAOrdered" xsi:type="Property"/>
+                                 <operand locator="45:48-45:63" lowClosed="false" highClosed="true" xsi:type="Interval">
+                                    <low localId="156" locator="45:71-45:105" path="authorDatetime" scope="OrderTwelveMonthsADT" xsi:type="Property"/>
+                                    <high locator="45:92-45:105" xsi:type="Add">
+                                       <operand localId="156" locator="45:71-45:105" path="authorDatetime" scope="OrderTwelveMonthsADT" xsi:type="Property"/>
+                                       <operand localId="157" locator="45:48-45:55" value="3" unit="months" xsi:type="Quantity"/>
+                                    </high>
+                                 </operand>
+                              </operand>
+                              <operand locator="45:48-45:63" xsi:type="Not">
+                                 <operand locator="45:48-45:63" xsi:type="IsNull">
+                                    <operand localId="156" locator="45:71-45:105" path="authorDatetime" scope="OrderTwelveMonthsADT" xsi:type="Property"/>
+                                 </operand>
+                              </operand>
+                           </operand>
+                           <operand localId="164" locator="46:16-46:100" xsi:type="And">
+                              <operand locator="46:43-46:57" xsi:type="In">
+                                 <operand localId="160" locator="46:16-46:41" path="authorDatetime" scope="DEXAOrdered" xsi:type="Property"/>
+                                 <operand locator="46:43-46:57" lowClosed="true" highClosed="false" xsi:type="Interval">
+                                    <low locator="46:87-46:100" xsi:type="Subtract">
+                                       <operand localId="162" locator="46:66-46:100" path="authorDatetime" scope="OrderTwelveMonthsADT" xsi:type="Property"/>
+                                       <operand localId="163" locator="46:43-46:49" value="2" unit="years" xsi:type="Quantity"/>
+                                    </low>
+                                    <high localId="162" locator="46:66-46:100" path="authorDatetime" scope="OrderTwelveMonthsADT" xsi:type="Property"/>
+                                 </operand>
+                              </operand>
+                              <operand locator="46:43-46:57" xsi:type="Not">
+                                 <operand locator="46:43-46:57" xsi:type="IsNull">
+                                    <operand localId="162" locator="46:66-46:100" path="authorDatetime" scope="OrderTwelveMonthsADT" xsi:type="Property"/>
+                                 </operand>
+                              </operand>
+                           </operand>
+                        </suchThat>
+                     </relationship>
+                  </operand>
+                  <asTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType xsi:type="ChoiceTypeSpecifier">
+                        <choice xmlns:ns10="urn:healthit-gov:qdm:v5_6" name="ns10:PositiveDiagnosticStudyPerformed" xsi:type="NamedTypeSpecifier"/>
+                        <choice xmlns:ns11="urn:healthit-gov:qdm:v5_6" name="ns11:PositiveDiagnosticStudyOrder" xsi:type="NamedTypeSpecifier"/>
+                     </elementType>
+                  </asTypeSpecifier>
+               </operand>
+               <operand xsi:type="As">
+                  <operand localId="194" locator="48:13-52:7" xsi:type="Query">
+                     <source localId="169" locator="48:15-48:130" alias="DEXAPerformed">
+                        <expression localId="168" locator="48:15-48:116" xmlns:ns12="urn:healthit-gov:qdm:v5_6" dataType="ns12:PositiveDiagnosticStudyPerformed" templateId="PositiveDiagnosticStudyPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                           <codes locator="48:47-48:115" name="DEXA Dual Energy Xray Absorptiometry, Bone Density for Urology Care" xsi:type="ValueSetRef"/>
+                        </expression>
+                     </source>
+                     <relationship localId="193" locator="49:11-51:167" alias="OrderTwelveMonthsADT" xsi:type="With">
+                        <expression localId="170" locator="49:16-49:69" name="Order for 12 Months of ADT During Measurement Period" xsi:type="ExpressionRef"/>
+                        <suchThat localId="192" locator="50:23-51:167" xsi:type="Or">
+                           <operand localId="181" locator="50:23-50:172" xsi:type="And">
+                              <operand locator="50:115-50:130" xsi:type="In">
+                                 <operand locator="50:30-50:113" xsi:type="Start">
+                                    <operand localId="177" locator="50:23-50:113" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                       <operand localId="174" locator="50:52-50:81" path="relevantDatetime" scope="DEXAPerformed" xsi:type="Property"/>
+                                       <operand localId="176" locator="50:84-50:111" path="relevantPeriod" scope="DEXAPerformed" xsi:type="Property"/>
+                                    </operand>
+                                 </operand>
+                                 <operand locator="50:115-50:130" lowClosed="false" highClosed="true" xsi:type="Interval">
+                                    <low localId="179" locator="50:138-50:172" path="authorDatetime" scope="OrderTwelveMonthsADT" xsi:type="Property"/>
+                                    <high locator="50:159-50:172" xsi:type="Add">
+                                       <operand localId="179" locator="50:138-50:172" path="authorDatetime" scope="OrderTwelveMonthsADT" xsi:type="Property"/>
+                                       <operand localId="180" locator="50:115-50:122" value="3" unit="months" xsi:type="Quantity"/>
+                                    </high>
+                                 </operand>
+                              </operand>
+                              <operand locator="50:115-50:130" xsi:type="Not">
+                                 <operand locator="50:115-50:130" xsi:type="IsNull">
+                                    <operand localId="179" locator="50:138-50:172" path="authorDatetime" scope="OrderTwelveMonthsADT" xsi:type="Property"/>
+                                 </operand>
+                              </operand>
+                           </operand>
+                           <operand localId="191" locator="51:18-51:167" xsi:type="And">
+                              <operand locator="51:110-51:124" xsi:type="In">
+                                 <operand locator="51:25-51:108" xsi:type="End">
+                                    <operand localId="187" locator="51:18-51:108" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                       <operand localId="184" locator="51:47-51:76" path="relevantDatetime" scope="DEXAPerformed" xsi:type="Property"/>
+                                       <operand localId="186" locator="51:79-51:106" path="relevantPeriod" scope="DEXAPerformed" xsi:type="Property"/>
+                                    </operand>
+                                 </operand>
+                                 <operand locator="51:110-51:124" lowClosed="true" highClosed="false" xsi:type="Interval">
+                                    <low locator="51:154-51:167" xsi:type="Subtract">
+                                       <operand localId="189" locator="51:133-51:167" path="authorDatetime" scope="OrderTwelveMonthsADT" xsi:type="Property"/>
+                                       <operand localId="190" locator="51:110-51:116" value="2" unit="years" xsi:type="Quantity"/>
+                                    </low>
+                                    <high localId="189" locator="51:133-51:167" path="authorDatetime" scope="OrderTwelveMonthsADT" xsi:type="Property"/>
+                                 </operand>
+                              </operand>
+                              <operand locator="51:110-51:124" xsi:type="Not">
+                                 <operand locator="51:110-51:124" xsi:type="IsNull">
+                                    <operand localId="189" locator="51:133-51:167" path="authorDatetime" scope="OrderTwelveMonthsADT" xsi:type="Property"/>
+                                 </operand>
+                              </operand>
+                           </operand>
+                        </suchThat>
+                     </relationship>
+                  </operand>
+                  <asTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType xsi:type="ChoiceTypeSpecifier">
+                        <choice xmlns:ns13="urn:healthit-gov:qdm:v5_6" name="ns13:PositiveDiagnosticStudyPerformed" xsi:type="NamedTypeSpecifier"/>
+                        <choice xmlns:ns14="urn:healthit-gov:qdm:v5_6" name="ns14:PositiveDiagnosticStudyOrder" xsi:type="NamedTypeSpecifier"/>
+                     </elementType>
+                  </asTypeSpecifier>
+               </operand>
+            </operand>
+         </expression>
+      </def>
+      <def localId="199" locator="59:1-60:107" name="Numerator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="199">
+               <a:s>define &quot;Numerator&quot;:
+  </a:s>
+               <a:s r="198">
+                  <a:s>&quot;Has Baseline DEXA Scan Two Years Prior to the Start of or Less than Three Months After the Start of ADT&quot;</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="198" locator="60:3-60:107" name="Has Baseline DEXA Scan Two Years Prior to the Start of or Less than Three Months After the Start of ADT" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="201" locator="69:1-70:51" name="SDE Ethnicity" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="201">
+               <a:s>define &quot;SDE Ethnicity&quot;:
+  </a:s>
+               <a:s r="200">
+                  <a:s>[&quot;Patient Characteristic Ethnicity&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Ethnicity&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="200" locator="70:3-70:51" xmlns:ns15="urn:healthit-gov:qdm:v5_6" dataType="ns15:PatientCharacteristicEthnicity" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="70:40-70:50" name="Ethnicity" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="203" locator="72:1-73:43" name="SDE Payer" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="203">
+               <a:s>define &quot;SDE Payer&quot;:
+  </a:s>
+               <a:s r="202">
+                  <a:s>[&quot;Patient Characteristic Payer&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Payer&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="202" locator="73:3-73:43" xmlns:ns16="urn:healthit-gov:qdm:v5_6" dataType="ns16:PatientCharacteristicPayer" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="73:36-73:42" name="Payer" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="205" locator="75:1-76:41" name="SDE Race" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="205">
+               <a:s>define &quot;SDE Race&quot;:
+  </a:s>
+               <a:s r="204">
+                  <a:s>[&quot;Patient Characteristic Race&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Race&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="204" locator="76:3-76:41" xmlns:ns17="urn:healthit-gov:qdm:v5_6" dataType="ns17:PatientCharacteristicRace" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="76:35-76:40" name="Race" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="207" locator="78:1-79:58" name="SDE Sex" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="207">
+               <a:s>define &quot;SDE Sex&quot;:
+  </a:s>
+               <a:s r="206">
+                  <a:s>[&quot;Patient Characteristic Sex&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;ONC Administrative Sex&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="206" locator="79:3-79:58" xmlns:ns18="urn:healthit-gov:qdm:v5_6" dataType="ns18:PatientCharacteristicSex" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="79:34-79:57" name="ONC Administrative Sex" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+   </statements>
+</library>

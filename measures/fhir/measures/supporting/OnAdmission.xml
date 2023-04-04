@@ -1,0 +1,750 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,EnableResultTypes,DisableListDemotion,DisableListPromotion" xsi:type="a:CqlToElmInfo"/>
+   <annotation libraryId="MATGlobalCommonFunctionsFHIR4" libraryVersion="6.1.000" startLine="344" startChar="19" endLine="344" endChar="53" message="Could not resolve membership operator for terminology target of the retrieve." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="79">
+         <a:s>library OnAdmission</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="OnAdmission"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="3:1-3:26" localIdentifier="FHIR" uri="http://hl7.org/fhir" version="4.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>using </a:s>
+               <a:s>
+                  <a:s>FHIR</a:s>
+               </a:s>
+               <a:s> version '4.0.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="5:1-5:37" localIdentifier="FHIRHelpers" path="FHIRHelpers" version="4.0.001">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>FHIRHelpers</a:s>
+               </a:s>
+               <a:s> version '4.0.001'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="3" locator="7:1-7:69" localIdentifier="Global" path="MATGlobalCommonFunctionsFHIR4" version="6.1.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>MATGlobalCommonFunctionsFHIR4</a:s>
+               </a:s>
+               <a:s> version '6.1.000' called Global</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="4" locator="8:1-8:70" localIdentifier="CMD" path="CumulativeMedicationDurationFHIR4" version="1.0.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>CumulativeMedicationDurationFHIR4</a:s>
+               </a:s>
+               <a:s> version '1.0.000' called CMD</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <parameters>
+      <def localId="13" locator="14:1-15:66" name="Measurement Period" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="13">
+               <a:s>parameter &quot;Measurement Period&quot; </a:s>
+               <a:s r="12">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="11">
+                     <a:s>DateTime</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+               <a:s>
+  default </a:s>
+               <a:s r="10">
+                  <a:s r="8">Interval[@2019-01-01T00:00:00.0, @2020-01-01T00:00:00.0)</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+            <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <default localId="10" locator="15:11-15:66" lowClosed="true" highClosed="false" xsi:type="Interval">
+            <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+               <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <low localId="8" locator="15:20-15:41" resultTypeName="t:DateTime" xsi:type="DateTime">
+               <year valueType="t:Integer" value="2019" xsi:type="Literal"/>
+               <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <day valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <hour valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <minute valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <second valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <millisecond valueType="t:Integer" value="0" xsi:type="Literal"/>
+            </low>
+            <high localId="9" locator="15:44-15:65" resultTypeName="t:DateTime" xsi:type="DateTime">
+               <year valueType="t:Integer" value="2020" xsi:type="Literal"/>
+               <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <day valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <hour valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <minute valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <second valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <millisecond valueType="t:Integer" value="0" xsi:type="Literal"/>
+            </high>
+         </default>
+         <parameterTypeSpecifier localId="12" locator="14:32-14:49" xsi:type="IntervalTypeSpecifier">
+            <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+               <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <pointType localId="11" locator="14:41-14:48" resultTypeName="t:DateTime" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <valueSets>
+      <def localId="5" locator="10:1-10:100" resultTypeName="t:ValueSet" name="Diabetes" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>valueset &quot;Diabetes&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="6" locator="11:1-11:129" resultTypeName="t:ValueSet" name="Present on Admission or Clinically Undetermined" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.197" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>valueset &quot;Present on Admission or Clinically Undetermined&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.197'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="7" locator="12:1-12:99" resultTypeName="t:ValueSet" name="Immune Modulators" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.124" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="7">
+               <a:s>valueset &quot;Immune Modulators&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.124'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </valueSets>
+   <contexts>
+      <def locator="17:1-17:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="17:1-17:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="17:1-17:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/StructureDefinition/Patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="34" locator="49:1-54:5" name="Encounter With Diabetes Diagnosis Present on Admission (3)" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="34">
+               <a:s>/*
+https://oncprojectracking.healthit.gov/support/projects/CQLIT/issues/CQLIT-315
+
+How do we make use of the DiagnosisPresentOnAdmission extension to determine whether
+a diagnosis was present on admission?
+
+http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission
+*/
+
+//define &quot;Encounter With Diabetes Diagnosis Present on Admission&quot;:
+//  Global.&quot;Inpatient Encounter&quot; IPEncounter
+//    where exists (IPEncounter.diagnosis Diagnosis
+//      where (singleton from ([Condition] C where C.id = Global.GetId(Diagnosis.condition.reference))).code in &quot;Diabetes&quot;
+//        and Global.GetExtension(Diagnosis, 'http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission').value in Global.&quot;Present on Admission or Clinically Undetermined&quot;
+//    )
+
+/*
+Potential improvement?
+*/
+
+//define &quot;EncounterDiagnosis&quot;:
+//  Global.&quot;Inpatient Encounter&quot; IPEncounter
+//    return IPEncounter.diagnosis
+
+//define &quot;Encounter With Diabetes Diagnosis Present on Admission (2)&quot;:
+//  Global.&quot;Inpatient Encounter&quot; IPEncounter
+//    where exists ((Global.PresentOnAdmissionDiagnosis(IPEncounter)) POADiagnosis
+//      where POADiagnosis.code in &quot;Diabetes&quot;
+//    )define &quot;Encounter With Diabetes Diagnosis Present on Admission (3)&quot;:
+  </a:s>
+               <a:s r="33">
+                  <a:s>
+                     <a:s r="15">
+                        <a:s r="14">
+                           <a:s>
+                              <a:s>Global.&quot;Inpatient Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> IPEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="32">
+                     <a:s>where </a:s>
+                     <a:s r="32">
+                        <a:s>exists </a:s>
+                        <a:s r="31">
+                           <a:s>(</a:s>
+                           <a:s r="31">
+                              <a:s>
+                                 <a:s r="17">
+                                    <a:s r="16">
+                                       <a:s>
+                                          <a:s>IPEncounter.diagnosis</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> D</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      </a:s>
+                              <a:s r="30">
+                                 <a:s>where </a:s>
+                                 <a:s r="30">
+                                    <a:s r="24">
+                                       <a:s r="22">
+                                          <a:s r="21">
+                                             <a:s r="18">
+                                                <a:s>Global</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="21">
+                                                <a:s>GetCondition(</a:s>
+                                                <a:s r="20">
+                                                   <a:s r="19">
+                                                      <a:s>D</a:s>
+                                                   </a:s>
+                                                   <a:s>.</a:s>
+                                                   <a:s r="20">
+                                                      <a:s>condition</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s>)</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="22">
+                                             <a:s>code</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> in </a:s>
+                                       <a:s r="23">
+                                          <a:s>&quot;Diabetes&quot;</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+        and </a:s>
+                                    <a:s r="29">
+                                       <a:s r="27">
+                                          <a:s r="25">
+                                             <a:s>Global</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="27">
+                                             <a:s>PresentOnAdmissionIndicator(</a:s>
+                                             <a:s r="26">
+                                                <a:s>D</a:s>
+                                             </a:s>
+                                             <a:s>)</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> in </a:s>
+                                       <a:s r="28">
+                                          <a:s>&quot;Present on Admission or Clinically Undetermined&quot;</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+    )</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="33" locator="50:3-54:5" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="15" locator="50:3-50:42" alias="IPEncounter">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="14" locator="50:3-50:30" name="Inpatient Encounter" libraryName="Global" xsi:type="ExpressionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </expression>
+            </source>
+            <where localId="32" locator="51:5-54:5" resultTypeName="t:Boolean" xsi:type="Exists">
+               <signature xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter.Diagnosis" xsi:type="NamedTypeSpecifier"/>
+               </signature>
+               <operand localId="31" locator="51:18-54:5" xsi:type="Query">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter.Diagnosis" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <source localId="17" locator="51:19-51:41" alias="D">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Encounter.Diagnosis" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <expression localId="16" locator="51:19-51:39" path="diagnosis" scope="IPEncounter" xsi:type="Property">
+                        <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Encounter.Diagnosis" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                     </expression>
+                  </source>
+                  <where localId="30" locator="52:7-53:102" resultTypeName="t:Boolean" xsi:type="And">
+                     <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                     <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                     <operand localId="24" locator="52:13-52:63" resultTypeName="t:Boolean" xsi:type="InValueSet">
+                        <signature name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                        <code name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                           <signature name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
+                           <operand localId="22" locator="52:13-52:49" resultTypeName="fhir:CodeableConcept" path="code" xsi:type="Property">
+                              <source localId="21" locator="52:13-52:44" resultTypeName="fhir:Condition" name="GetCondition" libraryName="Global" xsi:type="FunctionRef">
+                                 <signature name="fhir:Reference" xsi:type="NamedTypeSpecifier"/>
+                                 <operand localId="20" locator="52:33-52:43" resultTypeName="fhir:Reference" path="condition" scope="D" xsi:type="Property"/>
+                              </source>
+                           </operand>
+                        </code>
+                        <valueset localId="23" locator="52:54-52:63" resultTypeName="t:ValueSet" name="Diabetes" preserve="true"/>
+                     </operand>
+                     <operand localId="29" locator="53:13-53:102" resultTypeName="t:Boolean" xsi:type="InValueSet">
+                        <signature name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                        <code name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                           <signature name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
+                           <operand localId="27" locator="53:13-53:49" resultTypeName="fhir:CodeableConcept" name="PresentOnAdmissionIndicator" libraryName="Global" xsi:type="FunctionRef">
+                              <signature name="fhir:Element" xsi:type="NamedTypeSpecifier"/>
+                              <operand localId="26" locator="53:48" resultTypeName="fhir:Encounter.Diagnosis" name="D" xsi:type="AliasRef"/>
+                           </operand>
+                        </code>
+                        <valueset localId="28" locator="53:54-53:102" resultTypeName="t:ValueSet" name="Present on Admission or Clinically Undetermined" preserve="true"/>
+                     </operand>
+                  </where>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="79" locator="87:1-93:86" name="Encounter With Immune Modifier Active on Admission (2)" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="79">
+               <a:s>//define &quot;Encounter With Diabetes Diagnosis Present on Admission (4)&quot;:
+//  Global.&quot;Inpatient Encounter&quot; IPEncounter
+//    where exists (IPEncounter.diagnosis D
+//      where Global.GetCondition(D.condition).code in &quot;Diabetes&quot;
+//        and diagnosis.presentOnAdmission in &quot;Present on Admission or Clinically Undetermined&quot;
+//    )
+
+
+/*
+https://oncprojectracking.healthit.gov/support/projects/CQLIT/issues/CQLIT-316
+Medication Active on Admission
+*/
+
+/*
+define &quot;Encounter With Immune Modifier Active on Admission&quot;:
+  Global.&quot;Inpatient Encounter&quot; IPEncounter
+    with [&quot;MedicationRequest&quot;: &quot;Immune Modulators&quot;] ImmunoMeds
+      such that ImmunoMeds.authoredOn same day as start of Global.&quot;HospitalizationWithObservation&quot; ( IPEncounter )
+        and exists (ImmunoMeds.category C where C ~ Global.&quot;Community&quot;)
+        and ImmunoMeds.status = 'active'
+        and ImmunoMeds.intent = 'order'
+*/
+
+/*
+The issue I see is that the use of authoredOn implies this will only work for prescriptions that are recorded on admission
+It's not clear that MedicationRequest would be used for that purpose, that seems like more of a MedicationStatement use case
+Further, if MedicationRequest records are available from the patient record, we would need to use something like the
+CumulativeMedicationDuration logic to look at all MedicationRequest, and potentially dispense records to dtermine whether
+this is a medication that is &quot;active&quot;:
+*/
+define &quot;Encounter With Immune Modifier Active on Admission (2)&quot;:
+  </a:s>
+               <a:s r="78">
+                  <a:s>
+                     <a:s r="36">
+                        <a:s r="35">
+                           <a:s>
+                              <a:s>Global.&quot;Inpatient Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> IPEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="77">
+                     <a:s>with </a:s>
+                     <a:s r="38">
+                        <a:s r="37">
+                           <a:s r="37">
+                              <a:s>[&quot;MedicationRequest&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Immune Modulators&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> ImmunoMeds</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="76">
+                        <a:s r="69">
+                           <a:s r="60">
+                              <a:s r="42">
+                                 <a:s r="40">
+                                    <a:s r="39">
+                                       <a:s>ImmunoMeds</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="40">
+                                       <a:s>status</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> = </a:s>
+                                 <a:s r="41">
+                                    <a:s>'active'</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+        and </a:s>
+                              <a:s r="59">
+                                 <a:s>(</a:s>
+                                 <a:s r="59">
+                                    <a:s r="46">
+                                       <a:s r="44">
+                                          <a:s r="43">
+                                             <a:s>ImmunoMeds</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="44">
+                                             <a:s>intent</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> = </a:s>
+                                       <a:s r="45">
+                                          <a:s>'order'</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> or </a:s>
+                                    <a:s r="58">
+                                       <a:s>(</a:s>
+                                       <a:s r="58">
+                                          <a:s r="50">
+                                             <a:s r="48">
+                                                <a:s r="47">
+                                                   <a:s>ImmunoMeds</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="48">
+                                                   <a:s>intent</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s> = </a:s>
+                                             <a:s r="49">
+                                                <a:s>'plan'</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s> and </a:s>
+                                          <a:s r="57">
+                                             <a:s>(</a:s>
+                                             <a:s r="57">
+                                                <a:s r="53">
+                                                   <a:s r="52">
+                                                      <a:s r="51">
+                                                         <a:s>ImmunoMeds</a:s>
+                                                      </a:s>
+                                                      <a:s>.</a:s>
+                                                      <a:s r="52">
+                                                         <a:s>reported</a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                   <a:s> is true</a:s>
+                                                </a:s>
+                                                <a:s> or </a:s>
+                                                <a:s r="56">
+                                                   <a:s r="55">
+                                                      <a:s r="54">
+                                                         <a:s>ImmunoMeds</a:s>
+                                                      </a:s>
+                                                      <a:s>.</a:s>
+                                                      <a:s r="55">
+                                                         <a:s>reported</a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                   <a:s> is not null</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>)</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>)</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>)</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+        and </a:s>
+                           <a:s r="68">
+                              <a:s>exists </a:s>
+                              <a:s r="67">
+                                 <a:s>(</a:s>
+                                 <a:s r="67">
+                                    <a:s>
+                                       <a:s r="62">
+                                          <a:s r="61">
+                                             <a:s>
+                                                <a:s>ImmunoMeds.category</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s> C</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> </a:s>
+                                    <a:s r="66">
+                                       <a:s>where </a:s>
+                                       <a:s r="66">
+                                          <a:s r="63">
+                                             <a:s>C</a:s>
+                                          </a:s>
+                                          <a:s> ~ </a:s>
+                                          <a:s r="65">
+                                             <a:s r="64">
+                                                <a:s>Global</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="65">
+                                                <a:s>&quot;Community&quot;</a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>)</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+        and </a:s>
+                        <a:s r="75">
+                           <a:s r="72">
+                              <a:s r="70">
+                                 <a:s>CMD</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="72">
+                                 <a:s>MedicationRequestPeriod(</a:s>
+                                 <a:s r="71">
+                                    <a:s>ImmunoMeds</a:s>
+                                 </a:s>
+                                 <a:s>)</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="75"> overlaps before </a:s>
+                           <a:s r="74">
+                              <a:s r="73">
+                                 <a:s>IPEncounter</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="74">
+                                 <a:s>period</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="78" locator="88:3-93:86" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="36" locator="88:3-88:42" alias="IPEncounter">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="35" locator="88:3-88:30" name="Inpatient Encounter" libraryName="Global" xsi:type="ExpressionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </expression>
+            </source>
+            <relationship localId="77" locator="89:5-93:86" alias="ImmunoMeds" xsi:type="With">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="37" locator="89:10-89:51" xsi:type="Union">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <signature xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <signature xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <operand dataType="fhir:MedicationRequest" templateId="http://hl7.org/fhir/StructureDefinition/MedicationRequest" codeProperty="medication" codeComparator="in" xsi:type="Retrieve">
+                     <codes locator="89:32-89:50" resultTypeName="t:ValueSet" name="Immune Modulators" preserve="true" xsi:type="ValueSetRef"/>
+                  </operand>
+                  <operand locator="89:10-89:51" dataType="fhir:MedicationRequest" templateId="http://hl7.org/fhir/StructureDefinition/MedicationRequest" codeProperty="medication" codeComparator="in" xsi:type="Retrieve">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <codes locator="89:32-89:50" resultTypeName="t:ValueSet" name="Immune Modulators" preserve="true" xsi:type="ValueSetRef"/>
+                  </operand>
+               </expression>
+               <suchThat localId="76" locator="90:17-93:86" resultTypeName="t:Boolean" xsi:type="And">
+                  <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                  <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                  <operand localId="69" locator="90:17-92:71" resultTypeName="t:Boolean" xsi:type="And">
+                     <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                     <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                     <operand localId="60" locator="90:17-91:142" resultTypeName="t:Boolean" xsi:type="And">
+                        <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                        <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                        <operand localId="42" locator="90:17-90:44" resultTypeName="t:Boolean" xsi:type="Equal">
+                           <signature name="t:String" xsi:type="NamedTypeSpecifier"/>
+                           <signature name="t:String" xsi:type="NamedTypeSpecifier"/>
+                           <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                              <signature name="fhir:MedicationRequestStatus" xsi:type="NamedTypeSpecifier"/>
+                              <operand localId="40" locator="90:17-90:33" resultTypeName="fhir:MedicationRequestStatus" path="status" scope="ImmunoMeds" xsi:type="Property"/>
+                           </operand>
+                           <operand localId="41" locator="90:37-90:44" resultTypeName="t:String" valueType="t:String" value="active" xsi:type="Literal"/>
+                        </operand>
+                        <operand localId="59" locator="91:13-91:142" resultTypeName="t:Boolean" xsi:type="Or">
+                           <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                           <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                           <operand localId="46" locator="91:14-91:40" resultTypeName="t:Boolean" xsi:type="Equal">
+                              <signature name="t:String" xsi:type="NamedTypeSpecifier"/>
+                              <signature name="t:String" xsi:type="NamedTypeSpecifier"/>
+                              <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <signature name="fhir:MedicationRequestIntent" xsi:type="NamedTypeSpecifier"/>
+                                 <operand localId="44" locator="91:14-91:30" resultTypeName="fhir:MedicationRequestIntent" path="intent" scope="ImmunoMeds" xsi:type="Property"/>
+                              </operand>
+                              <operand localId="45" locator="91:34-91:40" resultTypeName="t:String" valueType="t:String" value="order" xsi:type="Literal"/>
+                           </operand>
+                           <operand localId="58" locator="91:45-91:141" resultTypeName="t:Boolean" xsi:type="And">
+                              <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                              <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                              <operand localId="50" locator="91:46-91:71" resultTypeName="t:Boolean" xsi:type="Equal">
+                                 <signature name="t:String" xsi:type="NamedTypeSpecifier"/>
+                                 <signature name="t:String" xsi:type="NamedTypeSpecifier"/>
+                                 <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <signature name="fhir:MedicationRequestIntent" xsi:type="NamedTypeSpecifier"/>
+                                    <operand localId="48" locator="91:46-91:62" resultTypeName="fhir:MedicationRequestIntent" path="intent" scope="ImmunoMeds" xsi:type="Property"/>
+                                 </operand>
+                                 <operand localId="49" locator="91:66-91:71" resultTypeName="t:String" valueType="t:String" value="plan" xsi:type="Literal"/>
+                              </operand>
+                              <operand localId="57" locator="91:77-91:140" resultTypeName="t:Boolean" xsi:type="Or">
+                                 <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                                 <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                                 <operand localId="53" locator="91:78-91:104" resultTypeName="t:Boolean" xsi:type="IsTrue">
+                                    <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                                    <operand name="ToBoolean" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                       <signature name="fhir:boolean" xsi:type="NamedTypeSpecifier"/>
+                                       <operand asType="fhir:boolean" xsi:type="As">
+                                          <operand localId="52" locator="91:78-91:96" path="reported" scope="ImmunoMeds" xsi:type="Property">
+                                             <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                                <choice name="fhir:boolean" xsi:type="NamedTypeSpecifier"/>
+                                                <choice name="fhir:Reference" xsi:type="NamedTypeSpecifier"/>
+                                             </resultTypeSpecifier>
+                                          </operand>
+                                       </operand>
+                                    </operand>
+                                 </operand>
+                                 <operand localId="56" locator="91:109-91:139" resultTypeName="t:Boolean" xsi:type="Not">
+                                    <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                                    <operand locator="91:109-91:139" resultTypeName="t:Boolean" xsi:type="IsNull">
+                                       <signature name="t:Any" xsi:type="NamedTypeSpecifier"/>
+                                       <operand localId="55" locator="91:109-91:127" path="reported" scope="ImmunoMeds" xsi:type="Property">
+                                          <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                             <choice name="fhir:boolean" xsi:type="NamedTypeSpecifier"/>
+                                             <choice name="fhir:Reference" xsi:type="NamedTypeSpecifier"/>
+                                          </resultTypeSpecifier>
+                                       </operand>
+                                    </operand>
+                                 </operand>
+                              </operand>
+                           </operand>
+                        </operand>
+                     </operand>
+                     <operand localId="68" locator="92:13-92:71" resultTypeName="t:Boolean" xsi:type="Exists">
+                        <signature xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
+                        </signature>
+                        <operand localId="67" locator="92:20-92:71" xsi:type="Query">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <source localId="62" locator="92:21-92:41" alias="C">
+                              <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                 <elementType name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                              <expression localId="61" locator="92:21-92:39" path="category" scope="ImmunoMeds" xsi:type="Property">
+                                 <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                    <elementType name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                              </expression>
+                           </source>
+                           <where localId="66" locator="92:43-92:70" resultTypeName="t:Boolean" xsi:type="Equivalent">
+                              <signature name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                              <signature name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                              <operand name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <signature name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
+                                 <operand localId="63" locator="92:49" resultTypeName="fhir:CodeableConcept" name="C" xsi:type="AliasRef"/>
+                              </operand>
+                              <operand xsi:type="ToConcept">
+                                 <signature name="t:Code" xsi:type="NamedTypeSpecifier"/>
+                                 <operand localId="65" locator="92:53-92:70" resultTypeName="t:Code" name="Community" libraryName="Global" xsi:type="CodeRef"/>
+                              </operand>
+                           </where>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand localId="75" locator="93:13-93:86" resultTypeName="t:Boolean" xsi:type="OverlapsBefore">
+                     <signature xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     </signature>
+                     <signature xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     </signature>
+                     <operand localId="72" locator="93:13-93:51" name="MedicationRequestPeriod" libraryName="CMD" xsi:type="FunctionRef">
+                        <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                           <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <signature name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                        <operand localId="71" locator="93:41-93:50" resultTypeName="fhir:MedicationRequest" name="ImmunoMeds" xsi:type="AliasRef"/>
+                     </operand>
+                     <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                        <signature name="fhir:Period" xsi:type="NamedTypeSpecifier"/>
+                        <operand localId="74" locator="93:69-93:86" resultTypeName="fhir:Period" path="period" scope="IPEncounter" xsi:type="Property"/>
+                     </operand>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+   </statements>
+</library>

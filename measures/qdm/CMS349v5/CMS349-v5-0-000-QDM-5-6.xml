@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion,DisableMethodInvocation" xsi:type="a:CqlToElmInfo"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="99">
+         <a:s>library HIVScreening version '5.0.000'</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="HIVScreening" version="5.0.000"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="3:1-3:23" localIdentifier="QDM" uri="urn:healthit-gov:qdm:v5_6" version="5.6">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>using </a:s>
+               <a:s>
+                  <a:s>QDM</a:s>
+               </a:s>
+               <a:s> version '5.6'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="5:1-5:64" localIdentifier="Global" path="MATGlobalCommonFunctions" version="7.0.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>MATGlobalCommonFunctions</a:s>
+               </a:s>
+               <a:s> version '7.0.000' called Global</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <parameters>
+      <def localId="19" locator="23:1-23:49" name="Measurement Period" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="19">
+               <a:s>parameter &quot;Measurement Period&quot; </a:s>
+               <a:s r="18">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="17">
+                     <a:s>DateTime</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <parameterTypeSpecifier localId="18" locator="23:32-23:49" xsi:type="IntervalTypeSpecifier">
+            <pointType localId="17" locator="23:41-23:48" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <codeSystems>
+      <def localId="3" locator="7:1-7:51" name="LOINC" id="urn:oid:2.16.840.1.113883.6.1" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>codesystem &quot;LOINC&quot;: 'urn:oid:2.16.840.1.113883.6.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </codeSystems>
+   <valueSets>
+      <def localId="4" locator="9:1-9:58" name="Ethnicity" id="urn:oid:2.16.840.1.114222.4.11.837" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>valueset &quot;Ethnicity&quot;: 'urn:oid:2.16.840.1.114222.4.11.837'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="5" locator="10:1-10:66" name="HIV" id="urn:oid:2.16.840.1.113883.3.464.1003.120.12.1003" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>valueset &quot;HIV&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.120.12.1003'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="6" locator="11:1-11:120" name="Human Immunodeficiency Virus (HIV) Laboratory Test Codes (Ab and Ag)" id="urn:oid:2.16.840.1.113762.1.4.1056.50" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>valueset &quot;Human Immunodeficiency Virus (HIV) Laboratory Test Codes (Ab and Ag)&quot;: 'urn:oid:2.16.840.1.113762.1.4.1056.50'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="7" locator="12:1-12:75" name="Office Visit" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1001" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="7">
+               <a:s>valueset &quot;Office Visit&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1001'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="8" locator="13:1-13:68" name="ONC Administrative Sex" id="urn:oid:2.16.840.1.113762.1.4.1" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="8">
+               <a:s>valueset &quot;ONC Administrative Sex&quot;: 'urn:oid:2.16.840.1.113762.1.4.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="9" locator="14:1-14:55" name="Payer" id="urn:oid:2.16.840.1.114222.4.11.3591" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="9">
+               <a:s>valueset &quot;Payer&quot;: 'urn:oid:2.16.840.1.114222.4.11.3591'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="10" locator="15:1-15:125" name="Preventive Care Services - Established Office Visit, 18 and Up" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1025" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="10">
+               <a:s>valueset &quot;Preventive Care Services - Established Office Visit, 18 and Up&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1025'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="11" locator="16:1-16:118" name="Preventive Care Services, Initial Office Visit, 0 to 17" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1022" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="11">
+               <a:s>valueset &quot;Preventive Care Services, Initial Office Visit, 0 to 17&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1022'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="12" locator="17:1-17:119" name="Preventive Care Services-Initial Office Visit, 18 and Up" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1023" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="12">
+               <a:s>valueset &quot;Preventive Care Services-Initial Office Visit, 18 and Up&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1023'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="13" locator="18:1-18:113" name="Preventive Care, Established Office Visit, 0 to 17" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1024" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="13">
+               <a:s>valueset &quot;Preventive Care, Established Office Visit, 0 to 17&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1024'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="14" locator="19:1-19:53" name="Race" id="urn:oid:2.16.840.1.114222.4.11.836" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="14">
+               <a:s>valueset &quot;Race&quot;: 'urn:oid:2.16.840.1.114222.4.11.836'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </valueSets>
+   <codes>
+      <def localId="16" locator="21:1-21:118" name="HIV 1 and 2 tests - Meaningful Use set" id="75622-1" display="HIV 1 and 2 tests - Meaningful Use set" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="16">
+               <a:s>code &quot;HIV 1 and 2 tests - Meaningful Use set&quot;: '75622-1' from </a:s>
+               <a:s r="15">
+                  <a:s>&quot;LOINC&quot;</a:s>
+               </a:s>
+               <a:s> display 'HIV 1 and 2 tests - Meaningful Use set'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="15" locator="21:63-21:69" name="LOINC"/>
+      </def>
+   </codes>
+   <contexts>
+      <def locator="25:1-25:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="25:1-25:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="25:1-25:15" xmlns:ns0="urn:healthit-gov:qdm:v5_6" dataType="ns0:Patient" templateId="Patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="43" locator="40:1-46:62" name="Qualifying Encounters" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="43">
+               <a:s>define &quot;Qualifying Encounters&quot;:
+  </a:s>
+               <a:s r="42">
+                  <a:s>
+                     <a:s r="37">
+                        <a:s r="36">
+                           <a:s>( </a:s>
+                           <a:s r="36">
+                              <a:s r="34">
+                                 <a:s r="32">
+                                    <a:s r="30">
+                                       <a:s r="28">
+                                          <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                          <a:s>
+                                             <a:s>&quot;Preventive Care Services, Initial Office Visit, 0 to 17&quot;</a:s>
+                                          </a:s>
+                                          <a:s>]</a:s>
+                                       </a:s>
+                                       <a:s>
+    union </a:s>
+                                       <a:s r="29">
+                                          <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                          <a:s>
+                                             <a:s>&quot;Preventive Care Services-Initial Office Visit, 18 and Up&quot;</a:s>
+                                          </a:s>
+                                          <a:s>]</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+    union </a:s>
+                                    <a:s r="31">
+                                       <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                       <a:s>
+                                          <a:s>&quot;Preventive Care, Established Office Visit, 0 to 17&quot;</a:s>
+                                       </a:s>
+                                       <a:s>]</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+    union </a:s>
+                                 <a:s r="33">
+                                    <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                    <a:s>
+                                       <a:s>&quot;Preventive Care Services - Established Office Visit, 18 and Up&quot;</a:s>
+                                    </a:s>
+                                    <a:s>]</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+    union </a:s>
+                              <a:s r="35">
+                                 <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                 <a:s>
+                                    <a:s>&quot;Office Visit&quot;</a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> )</a:s>
+                        </a:s>
+                        <a:s> Encounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="41">
+                     <a:s>where </a:s>
+                     <a:s r="41">
+                        <a:s r="39">
+                           <a:s r="38">
+                              <a:s>Encounter</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="39">
+                              <a:s>relevantPeriod</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="41"> during </a:s>
+                        <a:s r="40">
+                           <a:s>&quot;Measurement Period&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="42" locator="41:3-46:62" xsi:type="Query">
+            <source localId="37" locator="41:3-45:62" alias="Encounter">
+               <expression localId="36" locator="41:3-45:52" xsi:type="Union">
+                  <operand localId="34" locator="41:5-44:100" xsi:type="Union">
+                     <operand localId="30" locator="41:5-42:94" xsi:type="Union">
+                        <operand localId="28" locator="41:5-41:87" xmlns:ns1="urn:healthit-gov:qdm:v5_6" dataType="ns1:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                           <codes locator="41:30-41:86" name="Preventive Care Services, Initial Office Visit, 0 to 17" xsi:type="ValueSetRef"/>
+                        </operand>
+                        <operand localId="29" locator="42:11-42:94" xmlns:ns2="urn:healthit-gov:qdm:v5_6" dataType="ns2:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                           <codes locator="42:36-42:93" name="Preventive Care Services-Initial Office Visit, 18 and Up" xsi:type="ValueSetRef"/>
+                        </operand>
+                     </operand>
+                     <operand xsi:type="Union">
+                        <operand localId="31" locator="43:11-43:88" xmlns:ns3="urn:healthit-gov:qdm:v5_6" dataType="ns3:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                           <codes locator="43:36-43:87" name="Preventive Care, Established Office Visit, 0 to 17" xsi:type="ValueSetRef"/>
+                        </operand>
+                        <operand localId="33" locator="44:11-44:100" xmlns:ns4="urn:healthit-gov:qdm:v5_6" dataType="ns4:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                           <codes locator="44:36-44:99" name="Preventive Care Services - Established Office Visit, 18 and Up" xsi:type="ValueSetRef"/>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand localId="35" locator="45:11-45:50" xmlns:ns5="urn:healthit-gov:qdm:v5_6" dataType="ns5:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes locator="45:36-45:49" name="Office Visit" xsi:type="ValueSetRef"/>
+                  </operand>
+               </expression>
+            </source>
+            <where localId="41" locator="46:5-46:62" xsi:type="IncludedIn">
+               <operand localId="39" locator="46:11-46:34" path="relevantPeriod" scope="Encounter" xsi:type="Property"/>
+               <operand localId="40" locator="46:43-46:62" name="Measurement Period" xsi:type="ParameterRef"/>
+            </where>
+         </expression>
+      </def>
+      <def localId="47" locator="60:1-62:38" name="Initial Population" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="47">
+               <a:s>define &quot;Initial Population&quot;:
+  </a:s>
+               <a:s r="46">
+                  <a:s r="27">
+                     <a:s r="23">
+                        <a:s>AgeInYearsAt(</a:s>
+                        <a:s r="22">
+                           <a:s>date from </a:s>
+                           <a:s r="21">
+                              <a:s>start of </a:s>
+                              <a:s r="20">
+                                 <a:s>&quot;Measurement Period&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>)</a:s>
+                     </a:s>
+                     <a:s>in </a:s>
+                     <a:s r="26">
+                        <a:s r="24">Interval[15, 65]</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    and </a:s>
+                  <a:s r="45">
+                     <a:s>exists </a:s>
+                     <a:s r="44">
+                        <a:s>&quot;Qualifying Encounters&quot;</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="46" locator="61:3-62:38" xsi:type="And">
+            <operand localId="27" locator="61:3-61:74" xsi:type="In">
+               <operand localId="23" locator="61:3-61:55" precision="Year" xsi:type="CalculateAgeAt">
+                  <operand xsi:type="ToDate">
+                     <operand path="birthDatetime" xsi:type="Property">
+                        <source name="Patient" xsi:type="ExpressionRef"/>
+                     </operand>
+                  </operand>
+                  <operand localId="22" locator="61:16-61:54" xsi:type="DateFrom">
+                     <operand localId="21" locator="61:26-61:54" xsi:type="Start">
+                        <operand localId="20" locator="61:35-61:54" name="Measurement Period" xsi:type="ParameterRef"/>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand localId="26" locator="61:59-61:74" lowClosed="true" highClosed="true" xsi:type="Interval">
+                  <low localId="24" locator="61:68-61:69" valueType="t:Integer" value="15" xsi:type="Literal"/>
+                  <high localId="25" locator="61:72-61:73" valueType="t:Integer" value="65" xsi:type="Literal"/>
+               </operand>
+            </operand>
+            <operand localId="45" locator="62:9-62:38" xsi:type="Exists">
+               <operand localId="44" locator="62:16-62:38" name="Qualifying Encounters" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
+      </def>
+      <def localId="49" locator="27:1-28:22" name="Denominator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="49">
+               <a:s>define &quot;Denominator&quot;:
+  </a:s>
+               <a:s r="48">
+                  <a:s>&quot;Initial Population&quot;</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="48" locator="28:3-28:22" name="Initial Population" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="79" locator="30:1-35:33" name="Has HIV Test Performed" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="79">
+               <a:s>define &quot;Has HIV Test Performed&quot;:
+  </a:s>
+               <a:s r="78">
+                  <a:s>exists </a:s>
+                  <a:s r="77">
+                     <a:s>
+                        <a:s r="53">
+                           <a:s r="52">
+                              <a:s>( </a:s>
+                              <a:s r="52">
+                                 <a:s r="50">
+                                    <a:s>[&quot;Laboratory Test, Performed&quot;: </a:s>
+                                    <a:s>
+                                       <a:s>&quot;Human Immunodeficiency Virus (HIV) Laboratory Test Codes (Ab and Ag)&quot;</a:s>
+                                    </a:s>
+                                    <a:s>]</a:s>
+                                 </a:s>
+                                 <a:s>
+    union </a:s>
+                                 <a:s r="51">
+                                    <a:s>[&quot;Laboratory Test, Performed&quot;: </a:s>
+                                    <a:s>
+                                       <a:s>&quot;HIV 1 and 2 tests - Meaningful Use set&quot;</a:s>
+                                    </a:s>
+                                    <a:s>]</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                           <a:s> HIVTest</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    </a:s>
+                     <a:s r="76">
+                        <a:s>where </a:s>
+                        <a:s r="76">
+                           <a:s r="66">
+                              <a:s r="62">
+                                 <a:s>AgeInYearsAt(</a:s>
+                                 <a:s r="61">
+                                    <a:s>date from </a:s>
+                                    <a:s r="60">
+                                       <a:s>start of </a:s>
+                                       <a:s r="59">
+                                          <a:s r="54">
+                                             <a:s>Global</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="59">
+                                             <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                             <a:s r="56">
+                                                <a:s r="55">
+                                                   <a:s>HIVTest</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="56">
+                                                   <a:s>relevantDatetime</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>, </a:s>
+                                             <a:s r="58">
+                                                <a:s r="57">
+                                                   <a:s>HIVTest</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="58">
+                                                   <a:s>relevantPeriod</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>)</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>)</a:s>
+                              </a:s>
+                              <a:s>in </a:s>
+                              <a:s r="65">
+                                 <a:s r="63">Interval[15, 65]</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+      and </a:s>
+                           <a:s r="75">
+                              <a:s r="72">
+                                 <a:s r="67">
+                                    <a:s>Global</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="72">
+                                    <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                    <a:s r="69">
+                                       <a:s r="68">
+                                          <a:s>HIVTest</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="69">
+                                          <a:s>relevantDatetime</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>, </a:s>
+                                    <a:s r="71">
+                                       <a:s r="70">
+                                          <a:s>HIVTest</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="71">
+                                          <a:s>relevantPeriod</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> )</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s r="75"> starts before 
+      </a:s>
+                              <a:s r="74">
+                                 <a:s>end of </a:s>
+                                 <a:s r="73">
+                                    <a:s>&quot;Measurement Period&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="78" locator="31:3-35:33" xsi:type="Exists">
+            <operand localId="77" locator="31:10-35:33" xsi:type="Query">
+               <source localId="53" locator="31:10-32:92" alias="HIVTest">
+                  <expression localId="52" locator="31:10-32:84" xsi:type="Union">
+                     <operand localId="50" locator="31:12-31:113" xmlns:ns6="urn:healthit-gov:qdm:v5_6" dataType="ns6:PositiveLaboratoryTestPerformed" templateId="PositiveLaboratoryTestPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                        <codes locator="31:43-31:112" name="Human Immunodeficiency Virus (HIV) Laboratory Test Codes (Ab and Ag)" xsi:type="ValueSetRef"/>
+                     </operand>
+                     <operand localId="51" locator="32:11-32:82" xmlns:ns7="urn:healthit-gov:qdm:v5_6" dataType="ns7:PositiveLaboratoryTestPerformed" templateId="PositiveLaboratoryTestPerformed" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                        <codes xsi:type="ToList">
+                           <operand locator="32:42-32:81" name="HIV 1 and 2 tests - Meaningful Use set" xsi:type="CodeRef"/>
+                        </codes>
+                     </operand>
+                  </expression>
+               </source>
+               <where localId="76" locator="33:5-35:33" xsi:type="And">
+                  <operand localId="66" locator="33:11-33:138" xsi:type="In">
+                     <operand localId="62" locator="33:11-33:119" precision="Year" xsi:type="CalculateAgeAt">
+                        <operand xsi:type="ToDate">
+                           <operand path="birthDatetime" xsi:type="Property">
+                              <source name="Patient" xsi:type="ExpressionRef"/>
+                           </operand>
+                        </operand>
+                        <operand localId="61" locator="33:24-33:118" xsi:type="DateFrom">
+                           <operand localId="60" locator="33:34-33:118" xsi:type="Start">
+                              <operand localId="59" locator="33:43-33:118" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                 <operand localId="56" locator="33:70-33:93" path="relevantDatetime" scope="HIVTest" xsi:type="Property"/>
+                                 <operand localId="58" locator="33:96-33:117" path="relevantPeriod" scope="HIVTest" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                        </operand>
+                     </operand>
+                     <operand localId="65" locator="33:123-33:138" lowClosed="true" highClosed="true" xsi:type="Interval">
+                        <low localId="63" locator="33:132-33:133" valueType="t:Integer" value="15" xsi:type="Literal"/>
+                        <high localId="64" locator="33:136-33:137" valueType="t:Integer" value="65" xsi:type="Literal"/>
+                     </operand>
+                  </operand>
+                  <operand localId="75" locator="34:11-35:33" xsi:type="Before">
+                     <operand locator="34:91-34:96" xsi:type="Start">
+                        <operand localId="72" locator="34:11-34:89" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                           <operand localId="69" locator="34:40-34:63" path="relevantDatetime" scope="HIVTest" xsi:type="Property"/>
+                           <operand localId="71" locator="34:66-34:87" path="relevantPeriod" scope="HIVTest" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                     <operand localId="74" locator="35:7-35:33" xsi:type="End">
+                        <operand localId="73" locator="35:14-35:33" name="Measurement Period" xsi:type="ParameterRef"/>
+                     </operand>
+                  </operand>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def localId="81" locator="37:1-38:30" name="Numerator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="81">
+               <a:s>define &quot;Numerator&quot;:
+  </a:s>
+               <a:s r="80">
+                  <a:s>( </a:s>
+                  <a:s r="80">
+                     <a:s>&quot;Has HIV Test Performed&quot;</a:s>
+                  </a:s>
+                  <a:s> )</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="80" locator="38:3-38:30" name="Has HIV Test Performed" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="83" locator="48:1-49:51" name="SDE Ethnicity" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="83">
+               <a:s>define &quot;SDE Ethnicity&quot;:
+  </a:s>
+               <a:s r="82">
+                  <a:s>[&quot;Patient Characteristic Ethnicity&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Ethnicity&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="82" locator="49:3-49:51" xmlns:ns8="urn:healthit-gov:qdm:v5_6" dataType="ns8:PatientCharacteristicEthnicity" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="49:40-49:50" name="Ethnicity" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="85" locator="51:1-52:43" name="SDE Payer" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="85">
+               <a:s>define &quot;SDE Payer&quot;:
+  </a:s>
+               <a:s r="84">
+                  <a:s>[&quot;Patient Characteristic Payer&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Payer&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="84" locator="52:3-52:43" xmlns:ns9="urn:healthit-gov:qdm:v5_6" dataType="ns9:PatientCharacteristicPayer" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="52:36-52:42" name="Payer" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="87" locator="54:1-55:41" name="SDE Race" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="87">
+               <a:s>define &quot;SDE Race&quot;:
+  </a:s>
+               <a:s r="86">
+                  <a:s>[&quot;Patient Characteristic Race&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Race&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="86" locator="55:3-55:41" xmlns:ns10="urn:healthit-gov:qdm:v5_6" dataType="ns10:PatientCharacteristicRace" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="55:35-55:40" name="Race" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="89" locator="57:1-58:58" name="SDE Sex" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="89">
+               <a:s>define &quot;SDE Sex&quot;:
+  </a:s>
+               <a:s r="88">
+                  <a:s>[&quot;Patient Characteristic Sex&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;ONC Administrative Sex&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="88" locator="58:3-58:58" xmlns:ns11="urn:healthit-gov:qdm:v5_6" dataType="ns11:PatientCharacteristicSex" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="58:34-58:57" name="ONC Administrative Sex" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="99" locator="64:1-67:3" name="Denominator Exclusions" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="99">
+               <a:s>define &quot;Denominator Exclusions&quot;:
+  </a:s>
+               <a:s r="98">
+                  <a:s>exists </a:s>
+                  <a:s r="97">
+                     <a:s>( </a:s>
+                     <a:s r="97">
+                        <a:s>
+                           <a:s r="91">
+                              <a:s r="90">
+                                 <a:s r="90">
+                                    <a:s>[&quot;Diagnosis&quot;: </a:s>
+                                    <a:s>
+                                       <a:s>&quot;HIV&quot;</a:s>
+                                    </a:s>
+                                    <a:s>]</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> HIV</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="96">
+                           <a:s>where </a:s>
+                           <a:s r="96">
+                              <a:s r="93">
+                                 <a:s r="92">
+                                    <a:s>HIV</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="93">
+                                    <a:s>prevalencePeriod</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s r="96"> starts before </a:s>
+                              <a:s r="95">
+                                 <a:s>start of </a:s>
+                                 <a:s r="94">
+                                    <a:s>&quot;Measurement Period&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="98" locator="65:3-67:3" xsi:type="Exists">
+            <operand localId="97" locator="65:10-67:3" xsi:type="Query">
+               <source localId="91" locator="65:12-65:35" alias="HIV">
+                  <expression localId="90" locator="65:12-65:31" xmlns:ns12="urn:healthit-gov:qdm:v5_6" dataType="ns12:Diagnosis" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes locator="65:26-65:30" name="HIV" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <where localId="96" locator="66:7-66:76" xsi:type="Before">
+                  <operand locator="66:34-66:39" xsi:type="Start">
+                     <operand localId="93" locator="66:13-66:32" path="prevalencePeriod" scope="HIV" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="95" locator="66:48-66:76" xsi:type="Start">
+                     <operand localId="94" locator="66:57-66:76" name="Measurement Period" xsi:type="ParameterRef"/>
+                  </operand>
+               </where>
+            </operand>
+         </expression>
+      </def>
+   </statements>
+</library>

@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="" xsi:type="a:CqlToElmInfo"/>
+   <annotation libraryId="HospiceQICore4" libraryVersion="3.0.000" startLine="47" startChar="64" endLine="47" endChar="106" message="Could not resolve code path type for the type of the retrieve QICore.ServiceRequest." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation libraryId="HospiceQICore4" libraryVersion="3.0.000" startLine="47" startChar="64" endLine="47" endChar="106" message="Could not resolve membership operator for terminology target of the retrieve." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <identifier id="CervicalCancerScreeningFHIR" version="0.0.001"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localIdentifier="QICore" uri="http://hl7.org/fhir"/>
+   </usings>
+   <includes>
+      <def localIdentifier="FHIRHelpers" path="FHIRHelpers" version="4.1.000"/>
+      <def localIdentifier="CQMCommon" path="CQMCommon" version="1.1.000"/>
+      <def localIdentifier="SDE" path="SupplementalDataElements" version="3.1.000"/>
+      <def localIdentifier="Status" path="StatusFHIR" version="1.0.0"/>
+      <def localIdentifier="Hospice" path="HospiceQICore4" version="3.0.000"/>
+      <def localIdentifier="PalliativeCare" path="PalliativeCareQICore4" version="1.0.000"/>
+      <def localIdentifier="QICoreCommon" path="QICoreCommon" version="1.3.000"/>
+   </includes>
+   <parameters>
+      <def name="Measurement Period" accessLevel="Public">
+         <default lowClosed="true" highClosed="false" xsi:type="Interval">
+            <low xsi:type="DateTime">
+               <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
+               <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <day valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <hour valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <minute valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <second valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <millisecond valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <timezoneOffset valueType="t:Decimal" value="0.0" xsi:type="Literal"/>
+            </low>
+            <high xsi:type="DateTime">
+               <year valueType="t:Integer" value="2024" xsi:type="Literal"/>
+               <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <day valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <hour valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <minute valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <second valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <millisecond valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <timezoneOffset valueType="t:Decimal" value="0.0" xsi:type="Literal"/>
+            </high>
+         </default>
+         <parameterTypeSpecifier xsi:type="IntervalTypeSpecifier">
+            <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <valueSets>
+      <def name="Congenital or Acquired Absence of Cervix" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.111.12.1016" accessLevel="Public"/>
+      <def name="Home Healthcare Services" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016" accessLevel="Public"/>
+      <def name="HPV Test" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1059" accessLevel="Public"/>
+      <def name="Hysterectomy with No Residual Cervix" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1014" accessLevel="Public"/>
+      <def name="Office Visit" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001" accessLevel="Public"/>
+      <def name="Online Assessments" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089" accessLevel="Public"/>
+      <def name="Pap Test" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1017" accessLevel="Public"/>
+      <def name="Preventive Care Services Established Office Visit, 18 and Up" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025" accessLevel="Public"/>
+      <def name="Preventive Care Services Initial Office Visit, 18 and Up" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023" accessLevel="Public"/>
+      <def name="Telephone Visits" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080" accessLevel="Public"/>
+   </valueSets>
+   <contexts>
+      <def name="Patient"/>
+   </contexts>
+   <statements>
+      <def name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand dataType="fhir:Patient" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def name="Qualifying Encounters" context="Patient" accessLevel="Public">
+         <expression xsi:type="Query">
+            <source alias="ValidEncounters">
+               <expression name="Finished Encounter" libraryName="Status" xsi:type="FunctionRef">
+                  <operand xsi:type="Union">
+                     <operand xsi:type="Union">
+                        <operand xsi:type="Union">
+                           <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                              <codes name="Office Visit" preserve="true" xsi:type="ValueSetRef"/>
+                           </operand>
+                           <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                              <codes name="Preventive Care Services Established Office Visit, 18 and Up" preserve="true" xsi:type="ValueSetRef"/>
+                           </operand>
+                        </operand>
+                        <operand xsi:type="Union">
+                           <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                              <codes name="Preventive Care Services Initial Office Visit, 18 and Up" preserve="true" xsi:type="ValueSetRef"/>
+                           </operand>
+                           <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                              <codes name="Home Healthcare Services" preserve="true" xsi:type="ValueSetRef"/>
+                           </operand>
+                        </operand>
+                     </operand>
+                     <operand xsi:type="Union">
+                        <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                           <codes name="Telephone Visits" preserve="true" xsi:type="ValueSetRef"/>
+                        </operand>
+                        <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                           <codes name="Online Assessments" preserve="true" xsi:type="ValueSetRef"/>
+                        </operand>
+                     </operand>
+                  </operand>
+               </expression>
+            </source>
+            <where precision="Day" xsi:type="IncludedIn">
+               <operand name="ToInterval" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                  <operand xsi:type="As">
+                     <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                        <operand path="period" scope="ValidEncounters" xsi:type="Property"/>
+                     </operand>
+                     <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                        <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                        <choice xsi:type="IntervalTypeSpecifier">
+                           <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        </choice>
+                        <choice xsi:type="IntervalTypeSpecifier">
+                           <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                        </choice>
+                     </asTypeSpecifier>
+                  </operand>
+               </operand>
+               <operand name="Measurement Period" xsi:type="ParameterRef"/>
+            </where>
+         </expression>
+      </def>
+      <def name="Initial Population" context="Patient" accessLevel="Public">
+         <expression xsi:type="And">
+            <operand xsi:type="And">
+               <operand xsi:type="In">
+                  <operand precision="Year" xsi:type="CalculateAgeAt">
+                     <operand path="birthDate" xsi:type="Property">
+                        <source name="Patient" xsi:type="ExpressionRef"/>
+                     </operand>
+                     <operand xsi:type="DateFrom">
+                        <operand xsi:type="End">
+                           <operand name="Measurement Period" xsi:type="ParameterRef"/>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand lowClosed="true" highClosed="true" xsi:type="Interval">
+                     <low valueType="t:Integer" value="24" xsi:type="Literal"/>
+                     <high valueType="t:Integer" value="64" xsi:type="Literal"/>
+                  </operand>
+               </operand>
+               <operand xsi:type="Equal">
+                  <operand path="value" xsi:type="Property">
+                     <source path="gender" xsi:type="Property">
+                        <source name="Patient" xsi:type="ExpressionRef"/>
+                     </source>
+                  </operand>
+                  <operand valueType="t:String" value="female" xsi:type="Literal"/>
+               </operand>
+            </operand>
+            <operand xsi:type="Exists">
+               <operand name="Qualifying Encounters" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
+      </def>
+      <def name="Denominator" context="Patient" accessLevel="Public">
+         <expression name="Initial Population" xsi:type="ExpressionRef"/>
+      </def>
+      <def name="Absence of Cervix" context="Patient" accessLevel="Public">
+         <expression xsi:type="Union">
+            <operand xsi:type="As">
+               <operand xsi:type="Query">
+                  <source alias="NoCervixProcedure">
+                     <expression name="Completed Procedure" libraryName="Status" xsi:type="FunctionRef">
+                        <operand dataType="fhir:Procedure" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                           <codes name="Hysterectomy with No Residual Cervix" preserve="true" xsi:type="ValueSetRef"/>
+                        </operand>
+                     </expression>
+                  </source>
+                  <where xsi:type="SameOrBefore">
+                     <operand xsi:type="End">
+                        <operand name="ToInterval" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                           <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                              <operand path="performed" scope="NoCervixProcedure" xsi:type="Property"/>
+                           </operand>
+                        </operand>
+                     </operand>
+                     <operand xsi:type="End">
+                        <operand name="Measurement Period" xsi:type="ParameterRef"/>
+                     </operand>
+                  </where>
+               </operand>
+               <asTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType xsi:type="ChoiceTypeSpecifier">
+                     <choice name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                     <choice name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                  </elementType>
+               </asTypeSpecifier>
+            </operand>
+            <operand xsi:type="As">
+               <operand xsi:type="Query">
+                  <source alias="NoCervixDiagnosis">
+                     <expression dataType="fhir:Condition" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                        <codes name="Congenital or Acquired Absence of Cervix" preserve="true" xsi:type="ValueSetRef"/>
+                     </expression>
+                  </source>
+                  <where xsi:type="SameOrBefore">
+                     <operand xsi:type="Start">
+                        <operand name="ToPrevalenceInterval" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                           <operand name="NoCervixDiagnosis" xsi:type="AliasRef"/>
+                        </operand>
+                     </operand>
+                     <operand xsi:type="End">
+                        <operand name="Measurement Period" xsi:type="ParameterRef"/>
+                     </operand>
+                  </where>
+               </operand>
+               <asTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType xsi:type="ChoiceTypeSpecifier">
+                     <choice name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                     <choice name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                  </elementType>
+               </asTypeSpecifier>
+            </operand>
+         </expression>
+      </def>
+      <def name="Denominator Exclusions" context="Patient" accessLevel="Public">
+         <expression xsi:type="Or">
+            <operand xsi:type="Or">
+               <operand name="Has Hospice Services" libraryName="Hospice" xsi:type="ExpressionRef"/>
+               <operand xsi:type="Exists">
+                  <operand name="Absence of Cervix" xsi:type="ExpressionRef"/>
+               </operand>
+            </operand>
+            <operand name="Palliative Care in the Measurement Period" libraryName="PalliativeCare" xsi:type="ExpressionRef"/>
+         </expression>
+      </def>
+      <def name="Cervical Cytology Within 3 Years" context="Patient" accessLevel="Public">
+         <expression xsi:type="Query">
+            <source alias="CervicalCytology">
+               <expression name="Final Lab Observation" libraryName="Status" xsi:type="FunctionRef">
+                  <operand dataType="fhir:Observation" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes name="Pap Test" preserve="true" xsi:type="ValueSetRef"/>
+                  </operand>
+               </expression>
+            </source>
+            <where xsi:type="And">
+               <operand precision="Day" xsi:type="In">
+                  <operand name="Latest" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                     <operand xsi:type="Case">
+                        <caseItem>
+                           <when isType="t:DateTime" xsi:type="Is">
+                              <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <operand path="effective" scope="CervicalCytology" xsi:type="Property"/>
+                              </operand>
+                           </when>
+                           <then xsi:type="As">
+                              <operand asType="t:DateTime" xsi:type="As">
+                                 <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <operand path="effective" scope="CervicalCytology" xsi:type="Property"/>
+                                 </operand>
+                              </operand>
+                              <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                 <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                              </asTypeSpecifier>
+                           </then>
+                        </caseItem>
+                        <caseItem>
+                           <when xsi:type="Is">
+                              <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <operand path="effective" scope="CervicalCytology" xsi:type="Property"/>
+                              </operand>
+                              <isTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              </isTypeSpecifier>
+                           </when>
+                           <then xsi:type="As">
+                              <operand xsi:type="As">
+                                 <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <operand path="effective" scope="CervicalCytology" xsi:type="Property"/>
+                                 </operand>
+                                 <asTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </asTypeSpecifier>
+                              </operand>
+                              <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                 <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                              </asTypeSpecifier>
+                           </then>
+                        </caseItem>
+                        <caseItem>
+                           <when isType="t:DateTime" xsi:type="Is">
+                              <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <operand path="effective" scope="CervicalCytology" xsi:type="Property"/>
+                              </operand>
+                           </when>
+                           <then xsi:type="As">
+                              <operand asType="t:DateTime" xsi:type="As">
+                                 <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <operand path="effective" scope="CervicalCytology" xsi:type="Property"/>
+                                 </operand>
+                              </operand>
+                              <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                 <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                              </asTypeSpecifier>
+                           </then>
+                        </caseItem>
+                        <else xsi:type="Null">
+                           <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                              <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                              <choice xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              </choice>
+                              <choice xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                              </choice>
+                           </resultTypeSpecifier>
+                        </else>
+                     </operand>
+                  </operand>
+                  <operand lowClosed="true" highClosed="true" xsi:type="Interval">
+                     <low xsi:type="Subtract">
+                        <operand xsi:type="Start">
+                           <operand name="Measurement Period" xsi:type="ParameterRef"/>
+                        </operand>
+                        <operand value="2" unit="years" xsi:type="Quantity"/>
+                     </low>
+                     <high xsi:type="End">
+                        <operand name="Measurement Period" xsi:type="ParameterRef"/>
+                     </high>
+                  </operand>
+               </operand>
+               <operand xsi:type="Not">
+                  <operand xsi:type="IsNull">
+                     <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                        <operand path="value" scope="CervicalCytology" xsi:type="Property"/>
+                     </operand>
+                  </operand>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def name="HPV Test Within 5 Years for Women Age 30 and Older" context="Patient" accessLevel="Public">
+         <expression xsi:type="Query">
+            <source alias="HPVTest">
+               <expression name="Final Lab Observation" libraryName="Status" xsi:type="FunctionRef">
+                  <operand dataType="fhir:Observation" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes name="HPV Test" preserve="true" xsi:type="ValueSetRef"/>
+                  </operand>
+               </expression>
+            </source>
+            <where xsi:type="And">
+               <operand xsi:type="And">
+                  <operand xsi:type="GreaterOrEqual">
+                     <operand precision="Year" xsi:type="CalculateAgeAt">
+                        <operand path="value" xsi:type="Property">
+                           <source path="birthDate" xsi:type="Property">
+                              <source name="Patient" xsi:type="ExpressionRef"/>
+                           </source>
+                        </operand>
+                        <operand xsi:type="DateFrom">
+                           <operand name="Latest" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                              <operand xsi:type="Case">
+                                 <caseItem>
+                                    <when isType="t:DateTime" xsi:type="Is">
+                                       <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                          <operand path="effective" scope="HPVTest" xsi:type="Property"/>
+                                       </operand>
+                                    </when>
+                                    <then xsi:type="As">
+                                       <operand asType="t:DateTime" xsi:type="As">
+                                          <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                             <operand path="effective" scope="HPVTest" xsi:type="Property"/>
+                                          </operand>
+                                       </operand>
+                                       <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                          <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                          <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                          <choice xsi:type="IntervalTypeSpecifier">
+                                             <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                          </choice>
+                                          <choice xsi:type="IntervalTypeSpecifier">
+                                             <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                          </choice>
+                                       </asTypeSpecifier>
+                                    </then>
+                                 </caseItem>
+                                 <caseItem>
+                                    <when xsi:type="Is">
+                                       <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                          <operand path="effective" scope="HPVTest" xsi:type="Property"/>
+                                       </operand>
+                                       <isTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                          <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       </isTypeSpecifier>
+                                    </when>
+                                    <then xsi:type="As">
+                                       <operand xsi:type="As">
+                                          <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                             <operand path="effective" scope="HPVTest" xsi:type="Property"/>
+                                          </operand>
+                                          <asTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                             <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                          </asTypeSpecifier>
+                                       </operand>
+                                       <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                          <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                          <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                          <choice xsi:type="IntervalTypeSpecifier">
+                                             <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                          </choice>
+                                          <choice xsi:type="IntervalTypeSpecifier">
+                                             <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                          </choice>
+                                       </asTypeSpecifier>
+                                    </then>
+                                 </caseItem>
+                                 <caseItem>
+                                    <when isType="t:DateTime" xsi:type="Is">
+                                       <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                          <operand path="effective" scope="HPVTest" xsi:type="Property"/>
+                                       </operand>
+                                    </when>
+                                    <then xsi:type="As">
+                                       <operand asType="t:DateTime" xsi:type="As">
+                                          <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                             <operand path="effective" scope="HPVTest" xsi:type="Property"/>
+                                          </operand>
+                                       </operand>
+                                       <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                          <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                          <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                          <choice xsi:type="IntervalTypeSpecifier">
+                                             <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                          </choice>
+                                          <choice xsi:type="IntervalTypeSpecifier">
+                                             <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                          </choice>
+                                       </asTypeSpecifier>
+                                    </then>
+                                 </caseItem>
+                                 <else xsi:type="Null">
+                                    <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                       <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                       <choice xsi:type="IntervalTypeSpecifier">
+                                          <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       </choice>
+                                       <choice xsi:type="IntervalTypeSpecifier">
+                                          <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                       </choice>
+                                    </resultTypeSpecifier>
+                                 </else>
+                              </operand>
+                           </operand>
+                        </operand>
+                     </operand>
+                     <operand valueType="t:Integer" value="30" xsi:type="Literal"/>
+                  </operand>
+                  <operand precision="Day" xsi:type="In">
+                     <operand name="Latest" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                        <operand xsi:type="Case">
+                           <caseItem>
+                              <when isType="t:DateTime" xsi:type="Is">
+                                 <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <operand path="effective" scope="HPVTest" xsi:type="Property"/>
+                                 </operand>
+                              </when>
+                              <then xsi:type="As">
+                                 <operand asType="t:DateTime" xsi:type="As">
+                                    <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                       <operand path="effective" scope="HPVTest" xsi:type="Property"/>
+                                    </operand>
+                                 </operand>
+                                 <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                    <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                    <choice xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    </choice>
+                                    <choice xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                    </choice>
+                                 </asTypeSpecifier>
+                              </then>
+                           </caseItem>
+                           <caseItem>
+                              <when xsi:type="Is">
+                                 <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <operand path="effective" scope="HPVTest" xsi:type="Property"/>
+                                 </operand>
+                                 <isTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </isTypeSpecifier>
+                              </when>
+                              <then xsi:type="As">
+                                 <operand xsi:type="As">
+                                    <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                       <operand path="effective" scope="HPVTest" xsi:type="Property"/>
+                                    </operand>
+                                    <asTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    </asTypeSpecifier>
+                                 </operand>
+                                 <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                    <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                    <choice xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    </choice>
+                                    <choice xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                    </choice>
+                                 </asTypeSpecifier>
+                              </then>
+                           </caseItem>
+                           <caseItem>
+                              <when isType="t:DateTime" xsi:type="Is">
+                                 <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <operand path="effective" scope="HPVTest" xsi:type="Property"/>
+                                 </operand>
+                              </when>
+                              <then xsi:type="As">
+                                 <operand asType="t:DateTime" xsi:type="As">
+                                    <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                       <operand path="effective" scope="HPVTest" xsi:type="Property"/>
+                                    </operand>
+                                 </operand>
+                                 <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                    <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                    <choice xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    </choice>
+                                    <choice xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                    </choice>
+                                 </asTypeSpecifier>
+                              </then>
+                           </caseItem>
+                           <else xsi:type="Null">
+                              <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                 <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                              </resultTypeSpecifier>
+                           </else>
+                        </operand>
+                     </operand>
+                     <operand lowClosed="true" highClosed="true" xsi:type="Interval">
+                        <low xsi:type="Subtract">
+                           <operand xsi:type="Start">
+                              <operand name="Measurement Period" xsi:type="ParameterRef"/>
+                           </operand>
+                           <operand value="4" unit="years" xsi:type="Quantity"/>
+                        </low>
+                        <high xsi:type="End">
+                           <operand name="Measurement Period" xsi:type="ParameterRef"/>
+                        </high>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand xsi:type="Not">
+                  <operand xsi:type="IsNull">
+                     <operand name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                        <operand path="value" scope="HPVTest" xsi:type="Property"/>
+                     </operand>
+                  </operand>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def name="Numerator" context="Patient" accessLevel="Public">
+         <expression xsi:type="Or">
+            <operand xsi:type="Exists">
+               <operand name="Cervical Cytology Within 3 Years" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand xsi:type="Exists">
+               <operand name="HPV Test Within 5 Years for Women Age 30 and Older" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
+      </def>
+      <def name="SDE Ethnicity" context="Patient" accessLevel="Public">
+         <expression name="SDE Ethnicity" libraryName="SDE" xsi:type="ExpressionRef"/>
+      </def>
+      <def name="SDE Payer" context="Patient" accessLevel="Public">
+         <expression name="SDE Payer" libraryName="SDE" xsi:type="ExpressionRef"/>
+      </def>
+      <def name="SDE Race" context="Patient" accessLevel="Public">
+         <expression name="SDE Race" libraryName="SDE" xsi:type="ExpressionRef"/>
+      </def>
+      <def name="SDE Sex" context="Patient" accessLevel="Public">
+         <expression name="SDE Sex" libraryName="SDE" xsi:type="ExpressionRef"/>
+      </def>
+   </statements>
+</library>

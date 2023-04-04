@@ -1,0 +1,774 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="" xsi:type="a:CqlToElmInfo"/>
+   <annotation libraryId="HospiceQICore4" libraryVersion="3.0.000" startLine="47" startChar="64" endLine="47" endChar="106" message="Could not resolve code path type for the type of the retrieve QICore.ServiceRequest." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation libraryId="HospiceQICore4" libraryVersion="3.0.000" startLine="47" startChar="64" endLine="47" endChar="106" message="Could not resolve membership operator for terminology target of the retrieve." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <identifier id="AntidepressantMedicationManagementFHIR" version="0.0.001"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localIdentifier="QICore" uri="http://hl7.org/fhir"/>
+   </usings>
+   <includes>
+      <def localIdentifier="FHIRHelpers" path="FHIRHelpers" version="4.1.000"/>
+      <def localIdentifier="QICoreCommon" path="QICoreCommon" version="1.3.000"/>
+      <def localIdentifier="CQMCommon" path="CQMCommon" version="1.1.000"/>
+      <def localIdentifier="SDE" path="SupplementalDataElements" version="3.1.000"/>
+      <def localIdentifier="Hospice" path="HospiceQICore4" version="3.0.000"/>
+      <def localIdentifier="CMD" path="CumulativeMedicationDuration" version="3.0.000"/>
+      <def localIdentifier="Status" path="StatusFHIR" version="1.0.0"/>
+   </includes>
+   <parameters>
+      <def name="Measurement Period" accessLevel="Public">
+         <default lowClosed="true" highClosed="false" xsi:type="Interval">
+            <low xsi:type="DateTime">
+               <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
+               <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <day valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <hour valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <minute valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <second valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <millisecond valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <timezoneOffset valueType="t:Decimal" value="0.0" xsi:type="Literal"/>
+            </low>
+            <high xsi:type="DateTime">
+               <year valueType="t:Integer" value="2024" xsi:type="Literal"/>
+               <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <day valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <hour valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <minute valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <second valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <millisecond valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <timezoneOffset valueType="t:Decimal" value="0.0" xsi:type="Literal"/>
+            </high>
+         </default>
+         <parameterTypeSpecifier xsi:type="IntervalTypeSpecifier">
+            <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <valueSets>
+      <def name="Annual Wellness Visit" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240" accessLevel="Public"/>
+      <def name="Antidepressant Medication" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1213" accessLevel="Public"/>
+      <def name="Electroconvulsive Therapy" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1004.1294" accessLevel="Public"/>
+      <def name="Home Healthcare Services" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016" accessLevel="Public"/>
+      <def name="Major Depression" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1007" accessLevel="Public"/>
+      <def name="Nursing Facility Visit" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012" accessLevel="Public"/>
+      <def name="Office Visit" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001" accessLevel="Public"/>
+      <def name="Online Assessments" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089" accessLevel="Public"/>
+      <def name="Preventive Care Services Established Office Visit, 18 and Up" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025" accessLevel="Public"/>
+      <def name="Preventive Care Services Initial Office Visit, 18 and Up" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023" accessLevel="Public"/>
+      <def name="Psych Visit Diagnostic Evaluation" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492" accessLevel="Public"/>
+      <def name="Psych Visit Psychotherapy" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496" accessLevel="Public"/>
+      <def name="Telephone Visits" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080" accessLevel="Public"/>
+   </valueSets>
+   <contexts>
+      <def name="Patient"/>
+   </contexts>
+   <statements>
+      <def name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand dataType="fhir:Patient" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def name="April 30 of the Measurement Period" context="Patient" accessLevel="Public">
+         <expression xsi:type="DateTime">
+            <year precision="Year" xsi:type="DateTimeComponentFrom">
+               <operand xsi:type="Start">
+                  <operand name="Measurement Period" xsi:type="ParameterRef"/>
+               </operand>
+            </year>
+            <month valueType="t:Integer" value="4" xsi:type="Literal"/>
+            <day valueType="t:Integer" value="30" xsi:type="Literal"/>
+            <hour valueType="t:Integer" value="23" xsi:type="Literal"/>
+            <minute valueType="t:Integer" value="59" xsi:type="Literal"/>
+            <second valueType="t:Integer" value="59" xsi:type="Literal"/>
+            <millisecond valueType="t:Integer" value="0" xsi:type="Literal"/>
+            <timezoneOffset xsi:type="ToDecimal">
+               <operand valueType="t:Integer" value="0" xsi:type="Literal"/>
+            </timezoneOffset>
+         </expression>
+      </def>
+      <def name="MedicationDispensePeriod" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <expression xsi:type="Query">
+            <source alias="D">
+               <expression name="Dispense" xsi:type="OperandRef"/>
+            </source>
+            <let identifier="dosage">
+               <expression xsi:type="SingletonFrom">
+                  <operand path="dosageInstruction" scope="D" xsi:type="Property"/>
+               </expression>
+            </let>
+            <let identifier="doseAndRate">
+               <expression xsi:type="SingletonFrom">
+                  <operand path="doseAndRate" xsi:type="Property">
+                     <source name="dosage" xsi:type="QueryLetRef"/>
+                  </operand>
+               </expression>
+            </let>
+            <let identifier="timing">
+               <expression path="timing" xsi:type="Property">
+                  <source name="dosage" xsi:type="QueryLetRef"/>
+               </expression>
+            </let>
+            <let identifier="frequency">
+               <expression xsi:type="Coalesce">
+                  <operand path="value" xsi:type="Property">
+                     <source path="frequencyMax" xsi:type="Property">
+                        <source path="repeat" xsi:type="Property">
+                           <source name="timing" xsi:type="QueryLetRef"/>
+                        </source>
+                     </source>
+                  </operand>
+                  <operand path="value" xsi:type="Property">
+                     <source path="frequency" xsi:type="Property">
+                        <source path="repeat" xsi:type="Property">
+                           <source name="timing" xsi:type="QueryLetRef"/>
+                        </source>
+                     </source>
+                  </operand>
+               </expression>
+            </let>
+            <let identifier="period">
+               <expression name="Quantity" libraryName="CMD" xsi:type="FunctionRef">
+                  <operand path="value" xsi:type="Property">
+                     <source path="period" xsi:type="Property">
+                        <source path="repeat" xsi:type="Property">
+                           <source name="timing" xsi:type="QueryLetRef"/>
+                        </source>
+                     </source>
+                  </operand>
+                  <operand path="value" xsi:type="Property">
+                     <source path="periodUnit" xsi:type="Property">
+                        <source path="repeat" xsi:type="Property">
+                           <source name="timing" xsi:type="QueryLetRef"/>
+                        </source>
+                     </source>
+                  </operand>
+               </expression>
+            </let>
+            <let identifier="doseRange">
+               <expression name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                  <operand path="dose" xsi:type="Property">
+                     <source name="doseAndRate" xsi:type="QueryLetRef"/>
+                  </operand>
+               </expression>
+            </let>
+            <let identifier="doseQuantity">
+               <expression name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                  <operand path="dose" xsi:type="Property">
+                     <source name="doseAndRate" xsi:type="QueryLetRef"/>
+                  </operand>
+               </expression>
+            </let>
+            <let identifier="dose">
+               <expression xsi:type="Coalesce">
+                  <operand xsi:type="End">
+                     <operand xsi:type="As">
+                        <operand name="doseRange" xsi:type="QueryLetRef"/>
+                        <asTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                           <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                        </asTypeSpecifier>
+                     </operand>
+                  </operand>
+                  <operand asType="t:Quantity" xsi:type="As">
+                     <operand name="doseQuantity" xsi:type="QueryLetRef"/>
+                  </operand>
+               </expression>
+            </let>
+            <let identifier="daysSupply">
+               <expression path="value" xsi:type="Property">
+                  <source xsi:type="ConvertQuantity">
+                     <operand name="ToQuantity" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                        <operand path="daysSupply" scope="D" xsi:type="Property"/>
+                     </operand>
+                     <operand valueType="t:String" value="d" xsi:type="Literal"/>
+                  </source>
+               </expression>
+            </let>
+            <let identifier="dosesPerDay">
+               <expression xsi:type="Coalesce">
+                  <operand name="ToDaily" libraryName="CMD" xsi:type="FunctionRef">
+                     <operand name="frequency" xsi:type="QueryLetRef"/>
+                     <operand name="period" xsi:type="QueryLetRef"/>
+                  </operand>
+                  <operand xsi:type="ToDecimal">
+                     <operand xsi:type="Count">
+                        <source path="value" xsi:type="Property">
+                           <source path="timeOfDay" xsi:type="Property">
+                              <source path="repeat" xsi:type="Property">
+                                 <source name="timing" xsi:type="QueryLetRef"/>
+                              </source>
+                           </source>
+                        </source>
+                     </operand>
+                  </operand>
+                  <operand valueType="t:Decimal" value="1.0" xsi:type="Literal"/>
+               </expression>
+            </let>
+            <let identifier="startDate">
+               <expression xsi:type="Coalesce">
+                  <operand xsi:type="DateFrom">
+                     <operand path="value" xsi:type="Property">
+                        <source path="whenHandedOver" scope="D" xsi:type="Property"/>
+                     </operand>
+                  </operand>
+                  <operand xsi:type="DateFrom">
+                     <operand path="value" xsi:type="Property">
+                        <source path="whenPrepared" scope="D" xsi:type="Property"/>
+                     </operand>
+                  </operand>
+               </expression>
+            </let>
+            <let identifier="totalDaysSupplied">
+               <expression xsi:type="Coalesce">
+                  <operand path="value" xsi:type="Property">
+                     <source name="ToQuantity" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                        <operand path="daysSupply" scope="D" xsi:type="Property"/>
+                     </source>
+                  </operand>
+                  <operand xsi:type="Divide">
+                     <operand path="value" xsi:type="Property">
+                        <source name="ToQuantity" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                           <operand path="quantity" scope="D" xsi:type="Property"/>
+                        </source>
+                     </operand>
+                     <operand xsi:type="Multiply">
+                        <operand path="value" xsi:type="Property">
+                           <source name="dose" xsi:type="QueryLetRef"/>
+                        </operand>
+                        <operand name="dosesPerDay" xsi:type="QueryLetRef"/>
+                     </operand>
+                  </operand>
+               </expression>
+            </let>
+            <return>
+               <expression xsi:type="If">
+                  <condition xsi:type="And">
+                     <operand xsi:type="Not">
+                        <operand xsi:type="IsNull">
+                           <operand name="startDate" xsi:type="QueryLetRef"/>
+                        </operand>
+                     </operand>
+                     <operand xsi:type="Not">
+                        <operand xsi:type="IsNull">
+                           <operand name="totalDaysSupplied" xsi:type="QueryLetRef"/>
+                        </operand>
+                     </operand>
+                  </condition>
+                  <then lowClosed="true" highClosed="true" xsi:type="Interval">
+                     <low name="startDate" xsi:type="QueryLetRef"/>
+                     <high xsi:type="Add">
+                        <operand name="startDate" xsi:type="QueryLetRef"/>
+                        <operand name="Quantity" libraryName="CMD" xsi:type="FunctionRef">
+                           <operand xsi:type="Subtract">
+                              <operand name="totalDaysSupplied" xsi:type="QueryLetRef"/>
+                              <operand xsi:type="ToDecimal">
+                                 <operand valueType="t:Integer" value="1" xsi:type="Literal"/>
+                              </operand>
+                           </operand>
+                           <operand valueType="t:String" value="day" xsi:type="Literal"/>
+                        </operand>
+                     </high>
+                  </then>
+                  <else xsi:type="As">
+                     <operand xsi:type="Null"/>
+                     <asTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                     </asTypeSpecifier>
+                  </else>
+               </expression>
+            </return>
+         </expression>
+         <operand name="Dispense">
+            <operandTypeSpecifier name="fhir:MedicationDispense" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+      </def>
+      <def name="May 1 of the Year Prior to the Measurement Period" context="Patient" accessLevel="Public">
+         <expression xsi:type="DateTime">
+            <year xsi:type="Subtract">
+               <operand precision="Year" xsi:type="DateTimeComponentFrom">
+                  <operand xsi:type="Start">
+                     <operand name="Measurement Period" xsi:type="ParameterRef"/>
+                  </operand>
+               </operand>
+               <operand valueType="t:Integer" value="1" xsi:type="Literal"/>
+            </year>
+            <month valueType="t:Integer" value="5" xsi:type="Literal"/>
+            <day valueType="t:Integer" value="1" xsi:type="Literal"/>
+            <hour valueType="t:Integer" value="0" xsi:type="Literal"/>
+            <minute valueType="t:Integer" value="0" xsi:type="Literal"/>
+            <second valueType="t:Integer" value="0" xsi:type="Literal"/>
+            <millisecond valueType="t:Integer" value="0" xsi:type="Literal"/>
+            <timezoneOffset xsi:type="ToDecimal">
+               <operand valueType="t:Integer" value="0" xsi:type="Literal"/>
+            </timezoneOffset>
+         </expression>
+      </def>
+      <def name="Intake Period" context="Patient" accessLevel="Public">
+         <expression lowClosed="true" highClosed="true" xsi:type="Interval">
+            <low name="May 1 of the Year Prior to the Measurement Period" xsi:type="ExpressionRef"/>
+            <high name="April 30 of the Measurement Period" xsi:type="ExpressionRef"/>
+         </expression>
+      </def>
+      <def name="Earliest Antidepressant Dispensed During Intake Period" context="Patient" accessLevel="Public">
+         <expression path="AntidepressantDate" xsi:type="Property">
+            <source xsi:type="First">
+               <source xsi:type="Query">
+                  <source alias="Antidepressant">
+                     <expression name="Dispensed Medication" libraryName="Status" xsi:type="FunctionRef">
+                        <operand xsi:type="Union">
+                           <operand dataType="fhir:MedicationDispense" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationdispense" codeProperty="medication" codeComparator="in" xsi:type="Retrieve">
+                              <codes name="Antidepressant Medication" preserve="true" xsi:type="ValueSetRef"/>
+                           </operand>
+                           <operand dataType="fhir:MedicationDispense" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationdispense" codeProperty="medication" codeComparator="in" xsi:type="Retrieve">
+                              <codes name="Antidepressant Medication" preserve="true" xsi:type="ValueSetRef"/>
+                           </operand>
+                        </operand>
+                     </expression>
+                  </source>
+                  <where precision="Day" xsi:type="In">
+                     <operand xsi:type="ToDateTime">
+                        <operand xsi:type="Start">
+                           <operand name="MedicationDispensePeriod" xsi:type="FunctionRef">
+                              <operand name="Antidepressant" xsi:type="AliasRef"/>
+                           </operand>
+                        </operand>
+                     </operand>
+                     <operand name="Intake Period" xsi:type="ExpressionRef"/>
+                  </where>
+                  <return>
+                     <expression xsi:type="Tuple">
+                        <element name="AntidepressantDate">
+                           <value xsi:type="DateFrom">
+                              <operand xsi:type="ToDateTime">
+                                 <operand xsi:type="Start">
+                                    <operand name="MedicationDispensePeriod" xsi:type="FunctionRef">
+                                       <operand name="Antidepressant" xsi:type="AliasRef"/>
+                                    </operand>
+                                 </operand>
+                              </operand>
+                           </value>
+                        </element>
+                     </expression>
+                  </return>
+                  <sort>
+                     <by direction="asc" path="AntidepressantDate" xsi:type="ByColumn"/>
+                  </sort>
+               </source>
+            </source>
+         </expression>
+      </def>
+      <def name="Has Initial Major Depression Diagnosis" context="Patient" accessLevel="Public">
+         <expression xsi:type="Exists">
+            <operand xsi:type="Query">
+               <source alias="MajorDepression">
+                  <expression dataType="fhir:Condition" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes name="Major Depression" preserve="true" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <let identifier="IPSD">
+                  <expression name="Earliest Antidepressant Dispensed During Intake Period" xsi:type="ExpressionRef"/>
+               </let>
+               <where xsi:type="And">
+                  <operand xsi:type="Not">
+                     <operand xsi:type="IsNull">
+                        <operand name="IPSD" xsi:type="QueryLetRef"/>
+                     </operand>
+                  </operand>
+                  <operand xsi:type="And">
+                     <operand xsi:type="In">
+                        <operand xsi:type="DateFrom">
+                           <operand xsi:type="Start">
+                              <operand name="ToPrevalenceInterval" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                                 <operand name="MajorDepression" xsi:type="AliasRef"/>
+                              </operand>
+                           </operand>
+                        </operand>
+                        <operand lowClosed="true" highClosed="true" xsi:type="Interval">
+                           <low xsi:type="Subtract">
+                              <operand name="IPSD" xsi:type="QueryLetRef"/>
+                              <operand value="60" unit="days" xsi:type="Quantity"/>
+                           </low>
+                           <high xsi:type="Add">
+                              <operand name="IPSD" xsi:type="QueryLetRef"/>
+                              <operand value="60" unit="days" xsi:type="Quantity"/>
+                           </high>
+                        </operand>
+                     </operand>
+                     <operand xsi:type="Not">
+                        <operand xsi:type="IsNull">
+                           <operand name="IPSD" xsi:type="QueryLetRef"/>
+                        </operand>
+                     </operand>
+                  </operand>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def name="Qualifying Encounters" context="Patient" accessLevel="Public">
+         <expression xsi:type="Query">
+            <source alias="ValidEncounter">
+               <expression xsi:type="Union">
+                  <operand xsi:type="Union">
+                     <operand xsi:type="Union">
+                        <operand xsi:type="Union">
+                           <operand xsi:type="Union">
+                              <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                                 <codes name="Office Visit" preserve="true" xsi:type="ValueSetRef"/>
+                              </operand>
+                              <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                                 <codes name="Preventive Care Services Established Office Visit, 18 and Up" preserve="true" xsi:type="ValueSetRef"/>
+                              </operand>
+                           </operand>
+                           <operand xsi:type="Union">
+                              <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                                 <codes name="Preventive Care Services Initial Office Visit, 18 and Up" preserve="true" xsi:type="ValueSetRef"/>
+                              </operand>
+                              <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                                 <codes name="Home Healthcare Services" preserve="true" xsi:type="ValueSetRef"/>
+                              </operand>
+                           </operand>
+                        </operand>
+                        <operand xsi:type="Union">
+                           <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                              <codes name="Annual Wellness Visit" preserve="true" xsi:type="ValueSetRef"/>
+                           </operand>
+                           <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                              <codes name="Nursing Facility Visit" preserve="true" xsi:type="ValueSetRef"/>
+                           </operand>
+                        </operand>
+                     </operand>
+                     <operand xsi:type="Union">
+                        <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                           <codes name="Psych Visit Diagnostic Evaluation" preserve="true" xsi:type="ValueSetRef"/>
+                        </operand>
+                        <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                           <codes name="Psych Visit Psychotherapy" preserve="true" xsi:type="ValueSetRef"/>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand xsi:type="Union">
+                     <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                        <codes name="Telephone Visits" preserve="true" xsi:type="ValueSetRef"/>
+                     </operand>
+                     <operand dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                        <codes name="Online Assessments" preserve="true" xsi:type="ValueSetRef"/>
+                     </operand>
+                  </operand>
+               </expression>
+            </source>
+            <let identifier="IPSD">
+               <expression name="Earliest Antidepressant Dispensed During Intake Period" xsi:type="ExpressionRef"/>
+            </let>
+            <where xsi:type="And">
+               <operand xsi:type="In">
+                  <operand xsi:type="DateFrom">
+                     <operand xsi:type="Start">
+                        <operand name="ToInterval" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                           <operand xsi:type="As">
+                              <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <operand path="period" scope="ValidEncounter" xsi:type="Property"/>
+                              </operand>
+                              <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                 <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                              </asTypeSpecifier>
+                           </operand>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand lowClosed="true" highClosed="true" xsi:type="Interval">
+                     <low xsi:type="Subtract">
+                        <operand name="IPSD" xsi:type="QueryLetRef"/>
+                        <operand value="60" unit="days" xsi:type="Quantity"/>
+                     </low>
+                     <high xsi:type="Add">
+                        <operand name="IPSD" xsi:type="QueryLetRef"/>
+                        <operand value="60" unit="days" xsi:type="Quantity"/>
+                     </high>
+                  </operand>
+               </operand>
+               <operand xsi:type="Not">
+                  <operand xsi:type="IsNull">
+                     <operand name="IPSD" xsi:type="QueryLetRef"/>
+                  </operand>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def name="Initial Population" context="Patient" accessLevel="Public">
+         <expression xsi:type="And">
+            <operand xsi:type="And">
+               <operand xsi:type="GreaterOrEqual">
+                  <operand precision="Year" xsi:type="CalculateAgeAt">
+                     <operand path="value" xsi:type="Property">
+                        <source path="birthDate" xsi:type="Property">
+                           <source name="Patient" xsi:type="ExpressionRef"/>
+                        </source>
+                     </operand>
+                     <operand xsi:type="DateFrom">
+                        <operand name="April 30 of the Measurement Period" xsi:type="ExpressionRef"/>
+                     </operand>
+                  </operand>
+                  <operand valueType="t:Integer" value="18" xsi:type="Literal"/>
+               </operand>
+               <operand name="Has Initial Major Depression Diagnosis" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand xsi:type="Exists">
+               <operand name="Qualifying Encounters" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
+      </def>
+      <def name="Denominator" context="Patient" accessLevel="Public">
+         <expression name="Initial Population" xsi:type="ExpressionRef"/>
+      </def>
+      <def name="Denominator Exclusions" context="Patient" accessLevel="Public">
+         <expression xsi:type="Or">
+            <operand name="Has Hospice Services" libraryName="Hospice" xsi:type="ExpressionRef"/>
+            <operand xsi:type="Exists">
+               <operand xsi:type="Query">
+                  <source alias="ActiveAntidepressant">
+                     <expression name="Active Medication" libraryName="Status" xsi:type="FunctionRef">
+                        <operand xsi:type="Union">
+                           <operand dataType="fhir:MedicationRequest" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest" codeProperty="medication" codeComparator="in" xsi:type="Retrieve">
+                              <codes name="Antidepressant Medication" preserve="true" xsi:type="ValueSetRef"/>
+                           </operand>
+                           <operand dataType="fhir:MedicationRequest" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest" codeProperty="medication" codeComparator="in" xsi:type="Retrieve">
+                              <codes name="Antidepressant Medication" preserve="true" xsi:type="ValueSetRef"/>
+                           </operand>
+                        </operand>
+                     </expression>
+                  </source>
+                  <let identifier="dosage">
+                     <expression xsi:type="SingletonFrom">
+                        <operand path="dosageInstruction" scope="ActiveAntidepressant" xsi:type="Property"/>
+                     </expression>
+                  </let>
+                  <let identifier="timing">
+                     <expression path="timing" xsi:type="Property">
+                        <source name="dosage" xsi:type="QueryLetRef"/>
+                     </expression>
+                  </let>
+                  <let identifier="boundsPeriod">
+                     <expression name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                        <operand path="bounds" xsi:type="Property">
+                           <source path="repeat" xsi:type="Property">
+                              <source name="timing" xsi:type="QueryLetRef"/>
+                           </source>
+                        </operand>
+                     </expression>
+                  </let>
+                  <let identifier="ActiveMedPeriod">
+                     <expression xsi:type="Query">
+                        <source alias="Meds">
+                           <expression name="boundsPeriod" xsi:type="QueryLetRef"/>
+                        </source>
+                        <return>
+                           <expression xsi:type="Intersect">
+                              <operand xsi:type="As">
+                                 <operand name="Meds" xsi:type="AliasRef"/>
+                                 <asTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </asTypeSpecifier>
+                              </operand>
+                              <operand lowClosed="true" highClosed="true" xsi:type="Interval">
+                                 <low xsi:type="Start">
+                                    <operand name="Intake Period" xsi:type="ExpressionRef"/>
+                                 </low>
+                                 <high xsi:type="End">
+                                    <operand name="Measurement Period" xsi:type="ParameterRef"/>
+                                 </high>
+                              </operand>
+                           </expression>
+                        </return>
+                     </expression>
+                  </let>
+                  <let identifier="IPSD">
+                     <expression name="Earliest Antidepressant Dispensed During Intake Period" xsi:type="ExpressionRef"/>
+                  </let>
+                  <where xsi:type="And">
+                     <operand xsi:type="Not">
+                        <operand xsi:type="IsNull">
+                           <operand name="IPSD" xsi:type="QueryLetRef"/>
+                        </operand>
+                     </operand>
+                     <operand xsi:type="Overlaps">
+                        <operand name="ToDateInterval" libraryName="CQMCommon" xsi:type="FunctionRef">
+                           <operand name="ActiveMedPeriod" xsi:type="QueryLetRef"/>
+                        </operand>
+                        <operand lowClosed="true" highClosed="false" xsi:type="Interval">
+                           <low xsi:type="Subtract">
+                              <operand name="IPSD" xsi:type="QueryLetRef"/>
+                              <operand value="105" unit="days" xsi:type="Quantity"/>
+                           </low>
+                           <high name="IPSD" xsi:type="QueryLetRef"/>
+                        </operand>
+                     </operand>
+                  </where>
+               </operand>
+            </operand>
+         </expression>
+      </def>
+      <def name="Antidepressant Medication Period Between IPSD and 114 Days After IPSD" context="Patient" accessLevel="Public">
+         <expression xsi:type="Query">
+            <source alias="Antidepressant">
+               <expression name="Dispensed Medication" libraryName="Status" xsi:type="FunctionRef">
+                  <operand xsi:type="Union">
+                     <operand dataType="fhir:MedicationDispense" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationdispense" codeProperty="medication" codeComparator="in" xsi:type="Retrieve">
+                        <codes name="Antidepressant Medication" preserve="true" xsi:type="ValueSetRef"/>
+                     </operand>
+                     <operand dataType="fhir:MedicationDispense" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationdispense" codeProperty="medication" codeComparator="in" xsi:type="Retrieve">
+                        <codes name="Antidepressant Medication" preserve="true" xsi:type="ValueSetRef"/>
+                     </operand>
+                  </operand>
+               </expression>
+            </source>
+            <let identifier="IPSD">
+               <expression name="Earliest Antidepressant Dispensed During Intake Period" xsi:type="ExpressionRef"/>
+            </let>
+            <let identifier="MedicationPeriod">
+               <expression name="MedicationDispensePeriod" xsi:type="FunctionRef">
+                  <operand name="Antidepressant" xsi:type="AliasRef"/>
+               </expression>
+            </let>
+            <return>
+               <expression xsi:type="Intersect">
+                  <operand name="MedicationPeriod" xsi:type="QueryLetRef"/>
+                  <operand lowClosed="true" highClosed="true" xsi:type="Interval">
+                     <low name="IPSD" xsi:type="QueryLetRef"/>
+                     <high xsi:type="Add">
+                        <operand name="IPSD" xsi:type="QueryLetRef"/>
+                        <operand value="114" unit="days" xsi:type="Quantity"/>
+                     </high>
+                  </operand>
+               </expression>
+            </return>
+         </expression>
+      </def>
+      <def name="Cumulative Medication Duration Greater Than or Equal to 84 Days" context="Patient" accessLevel="Public">
+         <expression xsi:type="GreaterOrEqual">
+            <operand name="CumulativeDuration" libraryName="CMD" xsi:type="FunctionRef">
+               <operand xsi:type="Query">
+                  <source alias="X">
+                     <expression name="Antidepressant Medication Period Between IPSD and 114 Days After IPSD" xsi:type="ExpressionRef"/>
+                  </source>
+                  <return distinct="false">
+                     <expression xsi:type="Interval">
+                        <low xsi:type="ToDateTime">
+                           <operand path="low" xsi:type="Property">
+                              <source name="X" xsi:type="AliasRef"/>
+                           </operand>
+                        </low>
+                        <lowClosedExpression path="lowClosed" xsi:type="Property">
+                           <source name="X" xsi:type="AliasRef"/>
+                        </lowClosedExpression>
+                        <high xsi:type="ToDateTime">
+                           <operand path="high" xsi:type="Property">
+                              <source name="X" xsi:type="AliasRef"/>
+                           </operand>
+                        </high>
+                        <highClosedExpression path="highClosed" xsi:type="Property">
+                           <source name="X" xsi:type="AliasRef"/>
+                        </highClosedExpression>
+                     </expression>
+                  </return>
+               </operand>
+            </operand>
+            <operand valueType="t:Integer" value="84" xsi:type="Literal"/>
+         </expression>
+      </def>
+      <def name="Numerator 1" context="Patient" accessLevel="Public">
+         <expression name="Cumulative Medication Duration Greater Than or Equal to 84 Days" xsi:type="ExpressionRef"/>
+      </def>
+      <def name="Antidepressant Medication Period Between IPSD and 231 Days After IPSD" context="Patient" accessLevel="Public">
+         <expression xsi:type="Query">
+            <source alias="Antidepressant">
+               <expression name="Dispensed Medication" libraryName="Status" xsi:type="FunctionRef">
+                  <operand xsi:type="Union">
+                     <operand dataType="fhir:MedicationDispense" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationdispense" codeProperty="medication" codeComparator="in" xsi:type="Retrieve">
+                        <codes name="Antidepressant Medication" preserve="true" xsi:type="ValueSetRef"/>
+                     </operand>
+                     <operand dataType="fhir:MedicationDispense" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationdispense" codeProperty="medication" codeComparator="in" xsi:type="Retrieve">
+                        <codes name="Antidepressant Medication" preserve="true" xsi:type="ValueSetRef"/>
+                     </operand>
+                  </operand>
+               </expression>
+            </source>
+            <let identifier="IPSD">
+               <expression name="Earliest Antidepressant Dispensed During Intake Period" xsi:type="ExpressionRef"/>
+            </let>
+            <let identifier="MedicationPeriod">
+               <expression name="MedicationDispensePeriod" xsi:type="FunctionRef">
+                  <operand name="Antidepressant" xsi:type="AliasRef"/>
+               </expression>
+            </let>
+            <return>
+               <expression xsi:type="Intersect">
+                  <operand name="MedicationPeriod" xsi:type="QueryLetRef"/>
+                  <operand lowClosed="true" highClosed="true" xsi:type="Interval">
+                     <low name="IPSD" xsi:type="QueryLetRef"/>
+                     <high xsi:type="Add">
+                        <operand name="IPSD" xsi:type="QueryLetRef"/>
+                        <operand value="231" unit="days" xsi:type="Quantity"/>
+                     </high>
+                  </operand>
+               </expression>
+            </return>
+         </expression>
+      </def>
+      <def name="Cumulative Medication Duration Greater Than or Equal to 180 Days" context="Patient" accessLevel="Public">
+         <expression xsi:type="GreaterOrEqual">
+            <operand name="CumulativeDuration" libraryName="CMD" xsi:type="FunctionRef">
+               <operand xsi:type="Query">
+                  <source alias="X">
+                     <expression name="Antidepressant Medication Period Between IPSD and 231 Days After IPSD" xsi:type="ExpressionRef"/>
+                  </source>
+                  <return distinct="false">
+                     <expression xsi:type="Interval">
+                        <low xsi:type="ToDateTime">
+                           <operand path="low" xsi:type="Property">
+                              <source name="X" xsi:type="AliasRef"/>
+                           </operand>
+                        </low>
+                        <lowClosedExpression path="lowClosed" xsi:type="Property">
+                           <source name="X" xsi:type="AliasRef"/>
+                        </lowClosedExpression>
+                        <high xsi:type="ToDateTime">
+                           <operand path="high" xsi:type="Property">
+                              <source name="X" xsi:type="AliasRef"/>
+                           </operand>
+                        </high>
+                        <highClosedExpression path="highClosed" xsi:type="Property">
+                           <source name="X" xsi:type="AliasRef"/>
+                        </highClosedExpression>
+                     </expression>
+                  </return>
+               </operand>
+            </operand>
+            <operand valueType="t:Integer" value="180" xsi:type="Literal"/>
+         </expression>
+      </def>
+      <def name="Numerator 2" context="Patient" accessLevel="Public">
+         <expression name="Cumulative Medication Duration Greater Than or Equal to 180 Days" xsi:type="ExpressionRef"/>
+      </def>
+      <def name="SDE Ethnicity" context="Patient" accessLevel="Public">
+         <expression name="SDE Ethnicity" libraryName="SDE" xsi:type="ExpressionRef"/>
+      </def>
+      <def name="SDE Payer" context="Patient" accessLevel="Public">
+         <expression name="SDE Payer" libraryName="SDE" xsi:type="ExpressionRef"/>
+      </def>
+      <def name="SDE Race" context="Patient" accessLevel="Public">
+         <expression name="SDE Race" libraryName="SDE" xsi:type="ExpressionRef"/>
+      </def>
+      <def name="SDE Sex" context="Patient" accessLevel="Public">
+         <expression name="SDE Sex" libraryName="SDE" xsi:type="ExpressionRef"/>
+      </def>
+   </statements>
+</library>

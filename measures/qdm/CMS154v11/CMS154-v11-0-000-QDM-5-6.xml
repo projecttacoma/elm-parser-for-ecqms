@@ -1,0 +1,1734 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion,DisableMethodInvocation" xsi:type="a:CqlToElmInfo"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="141">
+         <a:s>library AppropriateTreatmentforUpperRespiratoryInfectionURI version '11.0.000'</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="AppropriateTreatmentforUpperRespiratoryInfectionURI" version="11.0.000"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="3:1-3:23" localIdentifier="QDM" uri="urn:healthit-gov:qdm:v5_6" version="5.6">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>using </a:s>
+               <a:s>
+                  <a:s>QDM</a:s>
+               </a:s>
+               <a:s> version '5.6'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="5:1-5:64" localIdentifier="Global" path="MATGlobalCommonFunctions" version="7.0.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>MATGlobalCommonFunctions</a:s>
+               </a:s>
+               <a:s> version '7.0.000' called Global</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="3" locator="6:1-6:48" localIdentifier="Hospice" path="Hospice" version="4.0.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>Hospice</a:s>
+               </a:s>
+               <a:s> version '4.0.000' called Hospice</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <parameters>
+      <def localId="34" locator="37:1-37:49" name="Measurement Period" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="34">
+               <a:s>parameter &quot;Measurement Period&quot; </a:s>
+               <a:s r="33">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="32">
+                     <a:s>DateTime</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <parameterTypeSpecifier localId="33" locator="37:32-37:49" xsi:type="IntervalTypeSpecifier">
+            <pointType localId="32" locator="37:41-37:48" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <codeSystems>
+      <def localId="4" locator="8:1-8:50" name="CPT" id="urn:oid:2.16.840.1.113883.6.12" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>codesystem &quot;CPT&quot;: 'urn:oid:2.16.840.1.113883.6.12'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </codeSystems>
+   <valueSets>
+      <def localId="5" locator="10:1-10:101" name="Antibiotic Medications for Pharyngitis" id="urn:oid:2.16.840.1.113883.3.464.1003.196.12.1001" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>valueset &quot;Antibiotic Medications for Pharyngitis&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.196.12.1001'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="6" locator="11:1-11:109" name="Comorbid Conditions for Respiratory Conditions" id="urn:oid:2.16.840.1.113883.3.464.1003.102.12.1025" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>valueset &quot;Comorbid Conditions for Respiratory Conditions&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.102.12.1025'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="7" locator="12:1-12:110" name="Competing Conditions for Respiratory Conditions" id="urn:oid:2.16.840.1.113883.3.464.1003.102.12.1017" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="7">
+               <a:s>valueset &quot;Competing Conditions for Respiratory Conditions&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.102.12.1017'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="8" locator="13:1-13:89" name="Emergency Department Visit" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1010" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="8">
+               <a:s>valueset &quot;Emergency Department Visit&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1010'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="9" locator="14:1-14:58" name="Ethnicity" id="urn:oid:2.16.840.1.114222.4.11.837" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="9">
+               <a:s>valueset &quot;Ethnicity&quot;: 'urn:oid:2.16.840.1.114222.4.11.837'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="10" locator="15:1-15:87" name="Home Healthcare Services" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1016" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="10">
+               <a:s>valueset &quot;Home Healthcare Services&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1016'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="11" locator="16:1-16:96" name="Initial Hospital Observation Care" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1002" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="11">
+               <a:s>valueset &quot;Initial Hospital Observation Care&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1002'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="12" locator="17:1-17:86" name="Medical Disability Exam" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1073" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="12">
+               <a:s>valueset &quot;Medical Disability Exam&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1073'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="13" locator="18:1-18:74" name="Observation" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1086" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="13">
+               <a:s>valueset &quot;Observation&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1086'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="14" locator="19:1-19:75" name="Office Visit" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1001" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="14">
+               <a:s>valueset &quot;Office Visit&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1001'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="15" locator="20:1-20:68" name="ONC Administrative Sex" id="urn:oid:2.16.840.1.113762.1.4.1" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="15">
+               <a:s>valueset &quot;ONC Administrative Sex&quot;: 'urn:oid:2.16.840.1.113762.1.4.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="16" locator="21:1-21:81" name="Online Assessments" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1089" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="16">
+               <a:s>valueset &quot;Online Assessments&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1089'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="17" locator="22:1-22:86" name="Outpatient Consultation" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1008" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="17">
+               <a:s>valueset &quot;Outpatient Consultation&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1008'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="18" locator="23:1-23:55" name="Payer" id="urn:oid:2.16.840.1.114222.4.11.3591" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="18">
+               <a:s>valueset &quot;Payer&quot;: 'urn:oid:2.16.840.1.114222.4.11.3591'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="19" locator="24:1-24:123" name="Preventive Care Services Established Office Visit, 18 and Up" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1025" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="19">
+               <a:s>valueset &quot;Preventive Care Services Established Office Visit, 18 and Up&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1025'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="20" locator="25:1-25:104" name="Preventive Care Services Group Counseling" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1027" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="20">
+               <a:s>valueset &quot;Preventive Care Services Group Counseling&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1027'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="21" locator="26:1-26:109" name="Preventive Care Services Individual Counseling" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1026" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="21">
+               <a:s>valueset &quot;Preventive Care Services Individual Counseling&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1026'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="22" locator="27:1-27:119" name="Preventive Care Services Initial Office Visit, 18 and Up" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1023" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="22">
+               <a:s>valueset &quot;Preventive Care Services Initial Office Visit, 18 and Up&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1023'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="23" locator="28:1-28:118" name="Preventive Care Services, Initial Office Visit, 0 to 17" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1022" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="23">
+               <a:s>valueset &quot;Preventive Care Services, Initial Office Visit, 0 to 17&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1022'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="24" locator="29:1-29:113" name="Preventive Care, Established Office Visit, 0 to 17" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1024" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="24">
+               <a:s>valueset &quot;Preventive Care, Established Office Visit, 0 to 17&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1024'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="25" locator="30:1-30:53" name="Race" id="urn:oid:2.16.840.1.114222.4.11.836" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="25">
+               <a:s>valueset &quot;Race&quot;: 'urn:oid:2.16.840.1.114222.4.11.836'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="26" locator="31:1-31:79" name="Telephone Visits" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1080" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="26">
+               <a:s>valueset &quot;Telephone Visits&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1080'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="27" locator="32:1-32:90" name="Upper Respiratory Infection" id="urn:oid:2.16.840.1.113883.3.464.1003.102.12.1022" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="27">
+               <a:s>valueset &quot;Upper Respiratory Infection&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.102.12.1022'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </valueSets>
+   <codes>
+      <def localId="29" locator="34:1-34:1030" name="Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])" id="99217" display="Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="29">
+               <a:s>code &quot;Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])&quot;: '99217' from </a:s>
+               <a:s r="28">
+                  <a:s>&quot;CPT&quot;</a:s>
+               </a:s>
+               <a:s> display 'Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="28" locator="34:519-34:523" name="CPT"/>
+      </def>
+      <def localId="31" locator="35:1-35:110" name="Unlisted preventive medicine service" id="99429" display="Unlisted preventive medicine service" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="31">
+               <a:s>code &quot;Unlisted preventive medicine service&quot;: '99429' from </a:s>
+               <a:s r="30">
+                  <a:s>&quot;CPT&quot;</a:s>
+               </a:s>
+               <a:s> display 'Unlisted preventive medicine service'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="30" locator="35:59-35:63" name="CPT"/>
+      </def>
+   </codes>
+   <contexts>
+      <def locator="39:1-39:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="39:1-39:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="39:1-39:15" xmlns:ns0="urn:healthit-gov:qdm:v5_6" dataType="ns0:Patient" templateId="Patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="74" locator="107:1-125:75" name="Qualifying Encounters" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="74">
+               <a:s>define &quot;Qualifying Encounters&quot;:
+  </a:s>
+               <a:s r="73">
+                  <a:s>
+                     <a:s r="68">
+                        <a:s r="67">
+                           <a:s>( </a:s>
+                           <a:s r="67">
+                              <a:s r="65">
+                                 <a:s r="63">
+                                    <a:s r="61">
+                                       <a:s r="59">
+                                          <a:s r="57">
+                                             <a:s r="55">
+                                                <a:s r="53">
+                                                   <a:s r="51">
+                                                      <a:s r="49">
+                                                         <a:s r="47">
+                                                            <a:s r="45">
+                                                               <a:s r="43">
+                                                                  <a:s r="41">
+                                                                     <a:s r="39">
+                                                                        <a:s r="37">
+                                                                           <a:s r="35">
+                                                                              <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                                                              <a:s>
+                                                                                 <a:s>&quot;Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])&quot;</a:s>
+                                                                              </a:s>
+                                                                              <a:s>]</a:s>
+                                                                           </a:s>
+                                                                           <a:s>
+    union </a:s>
+                                                                           <a:s r="36">
+                                                                              <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                                                              <a:s>
+                                                                                 <a:s>&quot;Emergency Department Visit&quot;</a:s>
+                                                                              </a:s>
+                                                                              <a:s>]</a:s>
+                                                                           </a:s>
+                                                                        </a:s>
+                                                                        <a:s>
+    union </a:s>
+                                                                        <a:s r="38">
+                                                                           <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                                                           <a:s>
+                                                                              <a:s>&quot;Home Healthcare Services&quot;</a:s>
+                                                                           </a:s>
+                                                                           <a:s>]</a:s>
+                                                                        </a:s>
+                                                                     </a:s>
+                                                                     <a:s>
+    union </a:s>
+                                                                     <a:s r="40">
+                                                                        <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                                                        <a:s>
+                                                                           <a:s>&quot;Initial Hospital Observation Care&quot;</a:s>
+                                                                        </a:s>
+                                                                        <a:s>]</a:s>
+                                                                     </a:s>
+                                                                  </a:s>
+                                                                  <a:s>
+    union </a:s>
+                                                                  <a:s r="42">
+                                                                     <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                                                     <a:s>
+                                                                        <a:s>&quot;Medical Disability Exam&quot;</a:s>
+                                                                     </a:s>
+                                                                     <a:s>]</a:s>
+                                                                  </a:s>
+                                                               </a:s>
+                                                               <a:s>
+    union </a:s>
+                                                               <a:s r="44">
+                                                                  <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                                                  <a:s>
+                                                                     <a:s>&quot;Observation&quot;</a:s>
+                                                                  </a:s>
+                                                                  <a:s>]</a:s>
+                                                               </a:s>
+                                                            </a:s>
+                                                            <a:s>
+    union </a:s>
+                                                            <a:s r="46">
+                                                               <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                                               <a:s>
+                                                                  <a:s>&quot;Office Visit&quot;</a:s>
+                                                               </a:s>
+                                                               <a:s>]</a:s>
+                                                            </a:s>
+                                                         </a:s>
+                                                         <a:s>
+    union </a:s>
+                                                         <a:s r="48">
+                                                            <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                                            <a:s>
+                                                               <a:s>&quot;Outpatient Consultation&quot;</a:s>
+                                                            </a:s>
+                                                            <a:s>]</a:s>
+                                                         </a:s>
+                                                      </a:s>
+                                                      <a:s>
+    union </a:s>
+                                                      <a:s r="50">
+                                                         <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                                         <a:s>
+                                                            <a:s>&quot;Preventive Care Services Group Counseling&quot;</a:s>
+                                                         </a:s>
+                                                         <a:s>]</a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                   <a:s>
+    union </a:s>
+                                                   <a:s r="52">
+                                                      <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                                      <a:s>
+                                                         <a:s>&quot;Preventive Care Services Individual Counseling&quot;</a:s>
+                                                      </a:s>
+                                                      <a:s>]</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s>
+    union </a:s>
+                                                <a:s r="54">
+                                                   <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                                   <a:s>
+                                                      <a:s>&quot;Preventive Care Services, Initial Office Visit, 0 to 17&quot;</a:s>
+                                                   </a:s>
+                                                   <a:s>]</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>
+    union </a:s>
+                                             <a:s r="56">
+                                                <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                                <a:s>
+                                                   <a:s>&quot;Preventive Care, Established Office Visit, 0 to 17&quot;</a:s>
+                                                </a:s>
+                                                <a:s>]</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s>
+    union </a:s>
+                                          <a:s r="58">
+                                             <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                             <a:s>
+                                                <a:s>&quot;Preventive Care Services Established Office Visit, 18 and Up&quot;</a:s>
+                                             </a:s>
+                                             <a:s>]</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>
+    union </a:s>
+                                       <a:s r="60">
+                                          <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                          <a:s>
+                                             <a:s>&quot;Preventive Care Services Initial Office Visit, 18 and Up&quot;</a:s>
+                                          </a:s>
+                                          <a:s>]</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+    union </a:s>
+                                    <a:s r="62">
+                                       <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                       <a:s>
+                                          <a:s>&quot;Telephone Visits&quot;</a:s>
+                                       </a:s>
+                                       <a:s>]</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+    union </a:s>
+                                 <a:s r="64">
+                                    <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                    <a:s>
+                                       <a:s>&quot;Online Assessments&quot;</a:s>
+                                    </a:s>
+                                    <a:s>]</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+    union </a:s>
+                              <a:s r="66">
+                                 <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                 <a:s>
+                                    <a:s>&quot;Unlisted preventive medicine service&quot;</a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> )</a:s>
+                        </a:s>
+                        <a:s> ValidEncounters</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="72">
+                     <a:s>where </a:s>
+                     <a:s r="72">
+                        <a:s r="70">
+                           <a:s r="69">
+                              <a:s>ValidEncounters</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="70">
+                              <a:s>relevantPeriod</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="72"> during day of </a:s>
+                        <a:s r="71">
+                           <a:s>&quot;Measurement Period&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="73" locator="108:3-125:75" xsi:type="Query">
+            <source localId="68" locator="108:3-124:92" alias="ValidEncounters">
+               <expression localId="67" locator="108:3-124:76" xsi:type="Union">
+                  <operand localId="65" locator="108:5-123:56" xsi:type="Union">
+                     <operand localId="61" locator="108:5-121:94" xsi:type="Union">
+                        <operand localId="57" locator="108:5-119:88" xsi:type="Union">
+                           <operand localId="53" locator="108:5-117:84" xsi:type="Union">
+                              <operand localId="49" locator="108:5-115:61" xsi:type="Union">
+                                 <operand localId="45" locator="108:5-113:49" xsi:type="Union">
+                                    <operand localId="41" locator="108:5-111:71" xsi:type="Union">
+                                       <operand localId="37" locator="108:5-109:64" xsi:type="Union">
+                                          <operand localId="35" locator="108:5-108:528" xmlns:ns1="urn:healthit-gov:qdm:v5_6" dataType="ns1:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                                             <codes xsi:type="ToList">
+                                                <operand locator="108:30-108:527" name="Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])" xsi:type="CodeRef"/>
+                                             </codes>
+                                          </operand>
+                                          <operand localId="36" locator="109:11-109:64" xmlns:ns2="urn:healthit-gov:qdm:v5_6" dataType="ns2:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                                             <codes locator="109:36-109:63" name="Emergency Department Visit" xsi:type="ValueSetRef"/>
+                                          </operand>
+                                       </operand>
+                                       <operand xsi:type="Union">
+                                          <operand localId="38" locator="110:11-110:62" xmlns:ns3="urn:healthit-gov:qdm:v5_6" dataType="ns3:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                                             <codes locator="110:36-110:61" name="Home Healthcare Services" xsi:type="ValueSetRef"/>
+                                          </operand>
+                                          <operand localId="40" locator="111:11-111:71" xmlns:ns4="urn:healthit-gov:qdm:v5_6" dataType="ns4:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                                             <codes locator="111:36-111:70" name="Initial Hospital Observation Care" xsi:type="ValueSetRef"/>
+                                          </operand>
+                                       </operand>
+                                    </operand>
+                                    <operand xsi:type="Union">
+                                       <operand localId="42" locator="112:11-112:61" xmlns:ns5="urn:healthit-gov:qdm:v5_6" dataType="ns5:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                                          <codes locator="112:36-112:60" name="Medical Disability Exam" xsi:type="ValueSetRef"/>
+                                       </operand>
+                                       <operand localId="44" locator="113:11-113:49" xmlns:ns6="urn:healthit-gov:qdm:v5_6" dataType="ns6:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                                          <codes locator="113:36-113:48" name="Observation" xsi:type="ValueSetRef"/>
+                                       </operand>
+                                    </operand>
+                                 </operand>
+                                 <operand xsi:type="Union">
+                                    <operand localId="46" locator="114:11-114:50" xmlns:ns7="urn:healthit-gov:qdm:v5_6" dataType="ns7:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                                       <codes locator="114:36-114:49" name="Office Visit" xsi:type="ValueSetRef"/>
+                                    </operand>
+                                    <operand localId="48" locator="115:11-115:61" xmlns:ns8="urn:healthit-gov:qdm:v5_6" dataType="ns8:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                                       <codes locator="115:36-115:60" name="Outpatient Consultation" xsi:type="ValueSetRef"/>
+                                    </operand>
+                                 </operand>
+                              </operand>
+                              <operand xsi:type="Union">
+                                 <operand localId="50" locator="116:11-116:79" xmlns:ns9="urn:healthit-gov:qdm:v5_6" dataType="ns9:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                                    <codes locator="116:36-116:78" name="Preventive Care Services Group Counseling" xsi:type="ValueSetRef"/>
+                                 </operand>
+                                 <operand localId="52" locator="117:11-117:84" xmlns:ns10="urn:healthit-gov:qdm:v5_6" dataType="ns10:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                                    <codes locator="117:36-117:83" name="Preventive Care Services Individual Counseling" xsi:type="ValueSetRef"/>
+                                 </operand>
+                              </operand>
+                           </operand>
+                           <operand xsi:type="Union">
+                              <operand localId="54" locator="118:11-118:93" xmlns:ns11="urn:healthit-gov:qdm:v5_6" dataType="ns11:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                                 <codes locator="118:36-118:92" name="Preventive Care Services, Initial Office Visit, 0 to 17" xsi:type="ValueSetRef"/>
+                              </operand>
+                              <operand localId="56" locator="119:11-119:88" xmlns:ns12="urn:healthit-gov:qdm:v5_6" dataType="ns12:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                                 <codes locator="119:36-119:87" name="Preventive Care, Established Office Visit, 0 to 17" xsi:type="ValueSetRef"/>
+                              </operand>
+                           </operand>
+                        </operand>
+                        <operand xsi:type="Union">
+                           <operand localId="58" locator="120:11-120:98" xmlns:ns13="urn:healthit-gov:qdm:v5_6" dataType="ns13:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                              <codes locator="120:36-120:97" name="Preventive Care Services Established Office Visit, 18 and Up" xsi:type="ValueSetRef"/>
+                           </operand>
+                           <operand localId="60" locator="121:11-121:94" xmlns:ns14="urn:healthit-gov:qdm:v5_6" dataType="ns14:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                              <codes locator="121:36-121:93" name="Preventive Care Services Initial Office Visit, 18 and Up" xsi:type="ValueSetRef"/>
+                           </operand>
+                        </operand>
+                     </operand>
+                     <operand xsi:type="Union">
+                        <operand localId="62" locator="122:11-122:54" xmlns:ns15="urn:healthit-gov:qdm:v5_6" dataType="ns15:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                           <codes locator="122:36-122:53" name="Telephone Visits" xsi:type="ValueSetRef"/>
+                        </operand>
+                        <operand localId="64" locator="123:11-123:56" xmlns:ns16="urn:healthit-gov:qdm:v5_6" dataType="ns16:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                           <codes locator="123:36-123:55" name="Online Assessments" xsi:type="ValueSetRef"/>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand localId="66" locator="124:11-124:74" xmlns:ns17="urn:healthit-gov:qdm:v5_6" dataType="ns17:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                     <codes xsi:type="ToList">
+                        <operand locator="124:36-124:73" name="Unlisted preventive medicine service" xsi:type="CodeRef"/>
+                     </codes>
+                  </operand>
+               </expression>
+            </source>
+            <where localId="72" locator="125:5-125:75" precision="Day" xsi:type="IncludedIn">
+               <operand localId="70" locator="125:11-125:40" path="relevantPeriod" scope="ValidEncounters" xsi:type="Property"/>
+               <operand localId="71" locator="125:56-125:75" name="Measurement Period" xsi:type="ParameterRef"/>
+            </where>
+         </expression>
+      </def>
+      <def localId="93" locator="127:1-133:31" name="Encounter with Upper Respiratory Infection" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="93">
+               <a:s>define &quot;Encounter with Upper Respiratory Infection&quot;:
+  </a:s>
+               <a:s r="92">
+                  <a:s>
+                     <a:s>from
+    </a:s>
+                     <a:s r="76">
+                        <a:s r="75">
+                           <a:s>
+                              <a:s>&quot;Qualifying Encounters&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> QualifyingEncounters</a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="78">
+                        <a:s r="77">
+                           <a:s r="77">
+                              <a:s>[&quot;Diagnosis&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Upper Respiratory Infection&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> URI</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="89">
+                     <a:s>where </a:s>
+                     <a:s r="89">
+                        <a:s r="83">
+                           <a:s r="80">
+                              <a:s r="79">
+                                 <a:s>URI</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="80">
+                                 <a:s>prevalencePeriod</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="83"> starts during day of </a:s>
+                           <a:s r="82">
+                              <a:s r="81">
+                                 <a:s>QualifyingEncounters</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="82">
+                                 <a:s>relevantPeriod</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      or </a:s>
+                        <a:s r="88">
+                           <a:s r="85">
+                              <a:s r="84">
+                                 <a:s>URI</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="85">
+                                 <a:s>prevalencePeriod</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="88"> overlaps before </a:s>
+                           <a:s r="87">
+                              <a:s r="86">
+                                 <a:s>QualifyingEncounters</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="87">
+                                 <a:s>relevantPeriod</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="91">
+                     <a:s>return </a:s>
+                     <a:s r="90">
+                        <a:s>QualifyingEncounters</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="92" locator="128:3-133:31" xsi:type="Query">
+            <source localId="76" locator="129:5-129:48" alias="QualifyingEncounters">
+               <expression localId="75" locator="129:5-129:27" name="Qualifying Encounters" xsi:type="ExpressionRef"/>
+            </source>
+            <source localId="78" locator="130:5-130:52" alias="URI">
+               <expression localId="77" locator="130:5-130:48" xmlns:ns18="urn:healthit-gov:qdm:v5_6" dataType="ns18:Diagnosis" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="130:19-130:47" name="Upper Respiratory Infection" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <where localId="89" locator="131:5-132:81" xsi:type="Or">
+               <operand localId="83" locator="131:11-131:87" precision="Day" xsi:type="In">
+                  <operand locator="131:32-131:37" xsi:type="Start">
+                     <operand localId="80" locator="131:11-131:30" path="prevalencePeriod" scope="URI" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="82" locator="131:53-131:87" path="relevantPeriod" scope="QualifyingEncounters" xsi:type="Property"/>
+               </operand>
+               <operand localId="88" locator="132:10-132:81" xsi:type="OverlapsBefore">
+                  <operand localId="85" locator="132:10-132:29" path="prevalencePeriod" scope="URI" xsi:type="Property"/>
+                  <operand localId="87" locator="132:47-132:81" path="relevantPeriod" scope="QualifyingEncounters" xsi:type="Property"/>
+               </operand>
+            </where>
+            <return localId="91" locator="133:5-133:31">
+               <expression localId="90" locator="133:12-133:31" name="QualifyingEncounters" xsi:type="AliasRef"/>
+            </return>
+         </expression>
+      </def>
+      <def localId="105" locator="61:1-64:27" name="Initial Population" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="105">
+               <a:s>define &quot;Initial Population&quot;:
+  </a:s>
+               <a:s r="104">
+                  <a:s>
+                     <a:s r="95">
+                        <a:s r="94">
+                           <a:s>
+                              <a:s>&quot;Encounter with Upper Respiratory Infection&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> EncounterWithURI</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="101">
+                     <a:s>where </a:s>
+                     <a:s r="101">
+                        <a:s r="99">
+                           <a:s>AgeInMonthsAt(</a:s>
+                           <a:s r="98">
+                              <a:s>date from </a:s>
+                              <a:s r="97">
+                                 <a:s>start of </a:s>
+                                 <a:s r="96">
+                                    <a:s>&quot;Measurement Period&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>)</a:s>
+                        </a:s>
+                        <a:s r="100">>= 3</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="103">
+                     <a:s>return </a:s>
+                     <a:s r="102">
+                        <a:s>EncounterWithURI</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="104" locator="62:3-64:27" xsi:type="Query">
+            <source localId="95" locator="62:3-62:63" alias="EncounterWithURI">
+               <expression localId="94" locator="62:3-62:46" name="Encounter with Upper Respiratory Infection" xsi:type="ExpressionRef"/>
+            </source>
+            <where localId="101" locator="63:5-63:68" xsi:type="GreaterOrEqual">
+               <operand localId="99" locator="63:11-63:64" precision="Month" xsi:type="CalculateAgeAt">
+                  <operand xsi:type="ToDate">
+                     <operand path="birthDatetime" xsi:type="Property">
+                        <source name="Patient" xsi:type="ExpressionRef"/>
+                     </operand>
+                  </operand>
+                  <operand localId="98" locator="63:25-63:63" xsi:type="DateFrom">
+                     <operand localId="97" locator="63:35-63:63" xsi:type="Start">
+                        <operand localId="96" locator="63:44-63:63" name="Measurement Period" xsi:type="ParameterRef"/>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand localId="100" locator="63:68" valueType="t:Integer" value="3" xsi:type="Literal"/>
+            </where>
+            <return localId="103" locator="64:5-64:27">
+               <expression localId="102" locator="64:12-64:27" name="EncounterWithURI" xsi:type="AliasRef"/>
+            </return>
+         </expression>
+      </def>
+      <def localId="107" locator="41:1-42:22" name="Denominator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="107">
+               <a:s>define &quot;Denominator&quot;:
+  </a:s>
+               <a:s r="106">
+                  <a:s>&quot;Initial Population&quot;</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="106" locator="42:3-42:22" name="Initial Population" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="113" locator="57:1-59:40" name="In Hospice" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="113">
+               <a:s>define &quot;In Hospice&quot;:
+  </a:s>
+               <a:s r="112">
+                  <a:s>
+                     <a:s r="109">
+                        <a:s r="108">
+                           <a:s>
+                              <a:s>&quot;Initial Population&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> InitialPopulation</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="111">
+                     <a:s>where </a:s>
+                     <a:s r="111">
+                        <a:s r="110">
+                           <a:s>Hospice</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="111">
+                           <a:s>&quot;Has Hospice Services&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="112" locator="58:3-59:40" xsi:type="Query">
+            <source localId="109" locator="58:3-58:40" alias="InitialPopulation">
+               <expression localId="108" locator="58:3-58:22" name="Initial Population" xsi:type="ExpressionRef"/>
+            </source>
+            <where localId="111" locator="59:5-59:40" name="Has Hospice Services" libraryName="Hospice" xsi:type="ExpressionRef"/>
+         </expression>
+      </def>
+      <def localId="141" locator="135:1-139:27" name="Encounter with Upper Respiratory Infection and Antibiotics Active 30 Days Prior Or The First Day of the Encounter" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="141">
+               <a:s>define &quot;Encounter with Upper Respiratory Infection and Antibiotics Active 30 Days Prior Or The First Day of the Encounter&quot;:
+  </a:s>
+               <a:s r="140">
+                  <a:s>
+                     <a:s r="116">
+                        <a:s r="115">
+                           <a:s>
+                              <a:s>&quot;Encounter with Upper Respiratory Infection&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> EncounterWithURI</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="137">
+                     <a:s>with </a:s>
+                     <a:s r="118">
+                        <a:s r="117">
+                           <a:s r="117">
+                              <a:s>[&quot;Medication, Active&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Antibiotic Medications for Pharyngitis&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> ActiveAntibiotic</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="136">
+                        <a:s>( </a:s>
+                        <a:s r="136">
+                           <a:s r="124">
+                              <a:s r="119">
+                                 <a:s>Global</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="124">
+                                 <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                 <a:s r="121">
+                                    <a:s r="120">
+                                       <a:s>ActiveAntibiotic</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="121">
+                                       <a:s>relevantDatetime</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>, </a:s>
+                                 <a:s r="123">
+                                    <a:s r="122">
+                                       <a:s>ActiveAntibiotic</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="123">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="136"> overlaps day of </a:s>
+                           <a:s r="135">
+                              <a:s>Interval[</a:s>
+                              <a:s r="129">
+                                 <a:s r="127">
+                                    <a:s>start of </a:s>
+                                    <a:s r="126">
+                                       <a:s r="125">
+                                          <a:s>EncounterWithURI</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="126">
+                                          <a:s>relevantPeriod</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> - </a:s>
+                                 <a:s r="128">
+                                    <a:s>30 days</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="134">
+                                 <a:s r="132">
+                                    <a:s>start of </a:s>
+                                    <a:s r="131">
+                                       <a:s r="130">
+                                          <a:s>EncounterWithURI</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="131">
+                                          <a:s>relevantPeriod</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> - </a:s>
+                                 <a:s r="133">
+                                    <a:s>1 day</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>)</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="139">
+                     <a:s>return </a:s>
+                     <a:s r="138">
+                        <a:s>EncounterWithURI</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="140" locator="136:3-139:27" xsi:type="Query">
+            <source localId="116" locator="136:3-136:63" alias="EncounterWithURI">
+               <expression localId="115" locator="136:3-136:46" name="Encounter with Upper Respiratory Infection" xsi:type="ExpressionRef"/>
+            </source>
+            <relationship localId="137" locator="137:5-138:243" alias="ActiveAntibiotic" xsi:type="With">
+               <expression localId="117" locator="137:10-137:73" xmlns:ns19="urn:healthit-gov:qdm:v5_6" dataType="ns19:MedicationActive" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="137:33-137:72" name="Antibiotic Medications for Pharyngitis" xsi:type="ValueSetRef"/>
+               </expression>
+               <suchThat localId="136" locator="138:17-138:243" precision="Day" xsi:type="Overlaps">
+                  <operand localId="124" locator="138:19-138:115" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                     <operand localId="121" locator="138:48-138:80" path="relevantDatetime" scope="ActiveAntibiotic" xsi:type="Property"/>
+                     <operand localId="123" locator="138:83-138:113" path="relevantPeriod" scope="ActiveAntibiotic" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="135" locator="138:133-138:242" lowClosed="true" highClosed="true" xsi:type="Interval">
+                     <low localId="129" locator="138:142-138:191" xsi:type="Subtract">
+                        <operand localId="127" locator="138:142-138:181" xsi:type="Start">
+                           <operand localId="126" locator="138:151-138:181" path="relevantPeriod" scope="EncounterWithURI" xsi:type="Property"/>
+                        </operand>
+                        <operand localId="128" locator="138:185-138:191" value="30" unit="days" xsi:type="Quantity"/>
+                     </low>
+                     <high localId="134" locator="138:194-138:241" xsi:type="Subtract">
+                        <operand localId="132" locator="138:194-138:233" xsi:type="Start">
+                           <operand localId="131" locator="138:203-138:233" path="relevantPeriod" scope="EncounterWithURI" xsi:type="Property"/>
+                        </operand>
+                        <operand localId="133" locator="138:237-138:241" value="1" unit="day" xsi:type="Quantity"/>
+                     </high>
+                  </operand>
+               </suchThat>
+            </relationship>
+            <return localId="139" locator="139:5-139:27">
+               <expression localId="138" locator="139:12-139:27" name="EncounterWithURI" xsi:type="AliasRef"/>
+            </return>
+         </expression>
+      </def>
+      <def localId="159" locator="50:1-55:3" name="Encounter with Competing Diagnosis for Upper Respiratory Infection" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="159">
+               <a:s>define &quot;Encounter with Competing Diagnosis for Upper Respiratory Infection&quot;:
+  </a:s>
+               <a:s r="158">
+                  <a:s>( </a:s>
+                  <a:s r="158">
+                     <a:s>
+                        <a:s r="145">
+                           <a:s r="144">
+                              <a:s>
+                                 <a:s>&quot;Encounter with Upper Respiratory Infection&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> EncounterWithURI</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+      </a:s>
+                     <a:s r="155">
+                        <a:s>with </a:s>
+                        <a:s r="147">
+                           <a:s r="146">
+                              <a:s r="146">
+                                 <a:s>[&quot;Diagnosis&quot;: </a:s>
+                                 <a:s>
+                                    <a:s>&quot;Competing Conditions for Respiratory Conditions&quot;</a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> CompetingCondition</a:s>
+                        </a:s>
+                        <a:s>
+        such that </a:s>
+                        <a:s r="154">
+                           <a:s r="149">
+                              <a:s r="148">
+                                 <a:s>CompetingCondition</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="149">
+                                 <a:s>prevalencePeriod</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> </a:s>
+                           <a:s r="154">
+                              <a:s>starts </a:s>
+                              <a:s r="153">
+                                 <a:s>3 days</a:s>
+                              </a:s>
+                              <a:s> or less on or after day of</a:s>
+                           </a:s>
+                           <a:s> </a:s>
+                           <a:s r="152">
+                              <a:s>start of </a:s>
+                              <a:s r="151">
+                                 <a:s r="150">
+                                    <a:s>EncounterWithURI</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="151">
+                                    <a:s>relevantPeriod</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+      </a:s>
+                     <a:s r="157">
+                        <a:s>return </a:s>
+                        <a:s r="156">
+                           <a:s>EncounterWithURI</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+  )</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="158" locator="51:3-55:3" xsi:type="Query">
+            <source localId="145" locator="51:5-51:65" alias="EncounterWithURI">
+               <expression localId="144" locator="51:5-51:48" name="Encounter with Upper Respiratory Infection" xsi:type="ExpressionRef"/>
+            </source>
+            <relationship localId="155" locator="52:7-53:135" alias="CompetingCondition" xsi:type="With">
+               <expression localId="146" locator="52:12-52:75" xmlns:ns20="urn:healthit-gov:qdm:v5_6" dataType="ns20:Diagnosis" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="52:26-52:74" name="Competing Conditions for Respiratory Conditions" xsi:type="ValueSetRef"/>
+               </expression>
+               <suchThat localId="154" locator="53:19-53:135" xsi:type="And">
+                  <operand locator="53:62-53:75" precision="Day" xsi:type="In">
+                     <operand locator="53:55-53:60" xsi:type="Start">
+                        <operand localId="149" locator="53:19-53:53" path="prevalencePeriod" scope="CompetingCondition" xsi:type="Property"/>
+                     </operand>
+                     <operand locator="53:62-53:75" lowClosed="true" highClosed="true" xsi:type="Interval">
+                        <low localId="152" locator="53:96-53:135" xsi:type="Start">
+                           <operand localId="151" locator="53:105-53:135" path="relevantPeriod" scope="EncounterWithURI" xsi:type="Property"/>
+                        </low>
+                        <high locator="53:96-53:135" xsi:type="Add">
+                           <operand localId="152" locator="53:96-53:135" xsi:type="Start">
+                              <operand localId="151" locator="53:105-53:135" path="relevantPeriod" scope="EncounterWithURI" xsi:type="Property"/>
+                           </operand>
+                           <operand localId="153" locator="53:62-53:67" value="3" unit="days" xsi:type="Quantity"/>
+                        </high>
+                     </operand>
+                  </operand>
+                  <operand locator="53:62-53:75" xsi:type="Not">
+                     <operand locator="53:62-53:75" xsi:type="IsNull">
+                        <operand localId="152" locator="53:96-53:135" xsi:type="Start">
+                           <operand localId="151" locator="53:105-53:135" path="relevantPeriod" scope="EncounterWithURI" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                  </operand>
+               </suchThat>
+            </relationship>
+            <return localId="157" locator="54:7-54:29">
+               <expression localId="156" locator="54:14-54:29" name="EncounterWithURI" xsi:type="AliasRef"/>
+            </return>
+         </expression>
+      </def>
+      <def localId="183" locator="100:1-105:3" name="Encounter with Comorbid Condition for Upper Respiratory Infection Prior" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="183">
+               <a:s>define &quot;Encounter with Comorbid Condition for Upper Respiratory Infection Prior&quot;:
+  </a:s>
+               <a:s r="182">
+                  <a:s>( </a:s>
+                  <a:s r="182">
+                     <a:s>
+                        <a:s r="163">
+                           <a:s r="162">
+                              <a:s>
+                                 <a:s>&quot;Encounter with Upper Respiratory Infection&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> EncounterWithURI</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+      </a:s>
+                     <a:s r="179">
+                        <a:s>with </a:s>
+                        <a:s r="165">
+                           <a:s r="164">
+                              <a:s r="164">
+                                 <a:s>[&quot;Diagnosis&quot;: </a:s>
+                                 <a:s>
+                                    <a:s>&quot;Comorbid Conditions for Respiratory Conditions&quot;</a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> ComorbidCondition</a:s>
+                        </a:s>
+                        <a:s>
+        such that </a:s>
+                        <a:s r="178">
+                           <a:s r="168">
+                              <a:s>start of </a:s>
+                              <a:s r="167">
+                                 <a:s r="166">
+                                    <a:s>ComorbidCondition</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="167">
+                                    <a:s>prevalencePeriod</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> in day of </a:s>
+                           <a:s r="177">
+                              <a:s>Interval[</a:s>
+                              <a:s r="173">
+                                 <a:s r="171">
+                                    <a:s>start of </a:s>
+                                    <a:s r="170">
+                                       <a:s r="169">
+                                          <a:s>EncounterWithURI</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="170">
+                                          <a:s>relevantPeriod</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> - </a:s>
+                                 <a:s r="172">
+                                    <a:s>1 year</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="176">
+                                 <a:s>start of </a:s>
+                                 <a:s r="175">
+                                    <a:s r="174">
+                                       <a:s>EncounterWithURI</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="175">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+      </a:s>
+                     <a:s r="181">
+                        <a:s>return </a:s>
+                        <a:s r="180">
+                           <a:s>EncounterWithURI</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+  )</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="182" locator="101:3-105:3" xsi:type="Query">
+            <source localId="163" locator="101:5-101:65" alias="EncounterWithURI">
+               <expression localId="162" locator="101:5-101:48" name="Encounter with Upper Respiratory Infection" xsi:type="ExpressionRef"/>
+            </source>
+            <relationship localId="179" locator="102:7-103:173" alias="ComorbidCondition" xsi:type="With">
+               <expression localId="164" locator="102:12-102:74" xmlns:ns21="urn:healthit-gov:qdm:v5_6" dataType="ns21:Diagnosis" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="102:26-102:73" name="Comorbid Conditions for Respiratory Conditions" xsi:type="ValueSetRef"/>
+               </expression>
+               <suchThat localId="178" locator="103:19-103:173" precision="Day" xsi:type="In">
+                  <operand localId="168" locator="103:19-103:61" xsi:type="Start">
+                     <operand localId="167" locator="103:28-103:61" path="prevalencePeriod" scope="ComorbidCondition" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="177" locator="103:73-103:173" lowClosed="true" highClosed="true" xsi:type="Interval">
+                     <low localId="173" locator="103:82-103:130" xsi:type="Subtract">
+                        <operand localId="171" locator="103:82-103:121" xsi:type="Start">
+                           <operand localId="170" locator="103:91-103:121" path="relevantPeriod" scope="EncounterWithURI" xsi:type="Property"/>
+                        </operand>
+                        <operand localId="172" locator="103:125-103:130" value="1" unit="year" xsi:type="Quantity"/>
+                     </low>
+                     <high localId="176" locator="103:133-103:172" xsi:type="Start">
+                        <operand localId="175" locator="103:142-103:172" path="relevantPeriod" scope="EncounterWithURI" xsi:type="Property"/>
+                     </high>
+                  </operand>
+               </suchThat>
+            </relationship>
+            <return localId="181" locator="104:7-104:29">
+               <expression localId="180" locator="104:14-104:29" name="EncounterWithURI" xsi:type="AliasRef"/>
+            </return>
+         </expression>
+      </def>
+      <def localId="186" locator="44:1-48:83" name="Denominator Exclusions" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="186">
+               <a:s>define &quot;Denominator Exclusions&quot;:
+  </a:s>
+               <a:s r="185">
+                  <a:s r="161">
+                     <a:s r="143">
+                        <a:s r="114">
+                           <a:s>&quot;In Hospice&quot;</a:s>
+                        </a:s>
+                        <a:s>
+    union </a:s>
+                        <a:s r="142">
+                           <a:s>&quot;Encounter with Upper Respiratory Infection and Antibiotics Active 30 Days Prior Or The First Day of the Encounter&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    union </a:s>
+                     <a:s r="160">
+                        <a:s>&quot;Encounter with Competing Diagnosis for Upper Respiratory Infection&quot;</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    union </a:s>
+                  <a:s r="184">
+                     <a:s>&quot;Encounter with Comorbid Condition for Upper Respiratory Infection Prior&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="185" locator="45:3-48:83" xsi:type="Union">
+            <operand localId="143" locator="45:3-46:125" xsi:type="Union">
+               <operand localId="114" locator="45:3-45:14" name="In Hospice" xsi:type="ExpressionRef"/>
+               <operand localId="142" locator="46:11-46:125" name="Encounter with Upper Respiratory Infection and Antibiotics Active 30 Days Prior Or The First Day of the Encounter" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand xsi:type="Union">
+               <operand localId="160" locator="47:11-47:78" name="Encounter with Competing Diagnosis for Upper Respiratory Infection" xsi:type="ExpressionRef"/>
+               <operand localId="184" locator="48:11-48:83" name="Encounter with Comorbid Condition for Upper Respiratory Infection Prior" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
+      </def>
+      <def localId="202" locator="66:1-70:27" name="Numerator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="202">
+               <a:s>define &quot;Numerator&quot;:
+  </a:s>
+               <a:s r="201">
+                  <a:s>
+                     <a:s r="188">
+                        <a:s r="187">
+                           <a:s>
+                              <a:s>&quot;Encounter with Upper Respiratory Infection&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> EncounterWithURI</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="198">
+                     <a:s>without </a:s>
+                     <a:s r="190">
+                        <a:s r="189">
+                           <a:s r="189">
+                              <a:s>[&quot;Medication, Order&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Antibiotic Medications for Pharyngitis&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> OrderedAntibiotic</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="197">
+                        <a:s r="192">
+                           <a:s r="191">
+                              <a:s>OrderedAntibiotic</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="192">
+                              <a:s>authorDatetime</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> </a:s>
+                        <a:s r="197">
+                           <a:s r="196">
+                              <a:s>3 days</a:s>
+                           </a:s>
+                           <a:s> or less on or after</a:s>
+                        </a:s>
+                        <a:s> </a:s>
+                        <a:s r="195">
+                           <a:s>start of </a:s>
+                           <a:s r="194">
+                              <a:s r="193">
+                                 <a:s>EncounterWithURI</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="194">
+                                 <a:s>relevantPeriod</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="200">
+                     <a:s>return </a:s>
+                     <a:s r="199">
+                        <a:s>EncounterWithURI</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="201" locator="67:3-70:27" xsi:type="Query">
+            <source localId="188" locator="67:3-67:63" alias="EncounterWithURI">
+               <expression localId="187" locator="67:3-67:46" name="Encounter with Upper Respiratory Infection" xsi:type="ExpressionRef"/>
+            </source>
+            <relationship localId="198" locator="68:5-69:116" alias="OrderedAntibiotic" xsi:type="Without">
+               <expression localId="189" locator="68:13-68:75" xmlns:ns22="urn:healthit-gov:qdm:v5_6" dataType="ns22:PositiveMedicationOrder" templateId="PositiveMedicationOrder" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="68:35-68:74" name="Antibiotic Medications for Pharyngitis" xsi:type="ValueSetRef"/>
+               </expression>
+               <suchThat localId="197" locator="69:17-69:116" xsi:type="And">
+                  <operand locator="69:50-69:63" xsi:type="In">
+                     <operand localId="192" locator="69:17-69:48" path="authorDatetime" scope="OrderedAntibiotic" xsi:type="Property"/>
+                     <operand locator="69:50-69:63" lowClosed="true" highClosed="true" xsi:type="Interval">
+                        <low localId="195" locator="69:77-69:116" xsi:type="Start">
+                           <operand localId="194" locator="69:86-69:116" path="relevantPeriod" scope="EncounterWithURI" xsi:type="Property"/>
+                        </low>
+                        <high locator="69:77-69:116" xsi:type="Add">
+                           <operand localId="195" locator="69:77-69:116" xsi:type="Start">
+                              <operand localId="194" locator="69:86-69:116" path="relevantPeriod" scope="EncounterWithURI" xsi:type="Property"/>
+                           </operand>
+                           <operand localId="196" locator="69:50-69:55" value="3" unit="days" xsi:type="Quantity"/>
+                        </high>
+                     </operand>
+                  </operand>
+                  <operand locator="69:50-69:63" xsi:type="Not">
+                     <operand locator="69:50-69:63" xsi:type="IsNull">
+                        <operand localId="195" locator="69:77-69:116" xsi:type="Start">
+                           <operand localId="194" locator="69:86-69:116" path="relevantPeriod" scope="EncounterWithURI" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                  </operand>
+               </suchThat>
+            </relationship>
+            <return localId="200" locator="70:5-70:27">
+               <expression localId="199" locator="70:12-70:27" name="EncounterWithURI" xsi:type="AliasRef"/>
+            </return>
+         </expression>
+      </def>
+      <def localId="204" locator="72:1-73:51" name="SDE Ethnicity" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="204">
+               <a:s>define &quot;SDE Ethnicity&quot;:
+  </a:s>
+               <a:s r="203">
+                  <a:s>[&quot;Patient Characteristic Ethnicity&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Ethnicity&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="203" locator="73:3-73:51" xmlns:ns23="urn:healthit-gov:qdm:v5_6" dataType="ns23:PatientCharacteristicEthnicity" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="73:40-73:50" name="Ethnicity" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="206" locator="75:1-76:43" name="SDE Payer" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="206">
+               <a:s>define &quot;SDE Payer&quot;:
+  </a:s>
+               <a:s r="205">
+                  <a:s>[&quot;Patient Characteristic Payer&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Payer&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="205" locator="76:3-76:43" xmlns:ns24="urn:healthit-gov:qdm:v5_6" dataType="ns24:PatientCharacteristicPayer" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="76:36-76:42" name="Payer" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="208" locator="78:1-79:41" name="SDE Race" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="208">
+               <a:s>define &quot;SDE Race&quot;:
+  </a:s>
+               <a:s r="207">
+                  <a:s>[&quot;Patient Characteristic Race&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Race&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="207" locator="79:3-79:41" xmlns:ns25="urn:healthit-gov:qdm:v5_6" dataType="ns25:PatientCharacteristicRace" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="79:35-79:40" name="Race" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="210" locator="81:1-82:58" name="SDE Sex" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="210">
+               <a:s>define &quot;SDE Sex&quot;:
+  </a:s>
+               <a:s r="209">
+                  <a:s>[&quot;Patient Characteristic Sex&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;ONC Administrative Sex&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="209" locator="82:3-82:58" xmlns:ns26="urn:healthit-gov:qdm:v5_6" dataType="ns26:PatientCharacteristicSex" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="82:34-82:57" name="ONC Administrative Sex" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="229" locator="84:1-88:27" name="Stratification 1" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="229">
+               <a:s>define &quot;Stratification 1&quot;:
+  </a:s>
+               <a:s r="228">
+                  <a:s>
+                     <a:s r="212">
+                        <a:s r="211">
+                           <a:s>
+                              <a:s>&quot;Encounter with Upper Respiratory Infection&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> EncounterWithURI</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="225">
+                     <a:s>where </a:s>
+                     <a:s r="225">
+                        <a:s r="218">
+                           <a:s r="216">
+                              <a:s>AgeInMonthsAt(</a:s>
+                              <a:s r="215">
+                                 <a:s>date from </a:s>
+                                 <a:s r="214">
+                                    <a:s>start of </a:s>
+                                    <a:s r="213">
+                                       <a:s>&quot;Measurement Period&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                           <a:s r="217">>= 3</a:s>
+                        </a:s>
+                        <a:s>
+      and </a:s>
+                        <a:s r="224">
+                           <a:s r="222">
+                              <a:s>AgeInYearsAt(</a:s>
+                              <a:s r="221">
+                                 <a:s>date from </a:s>
+                                 <a:s r="220">
+                                    <a:s>start of </a:s>
+                                    <a:s r="219">
+                                       <a:s>&quot;Measurement Period&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                           <a:s r="223">&lt;= 17</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="227">
+                     <a:s>return </a:s>
+                     <a:s r="226">
+                        <a:s>EncounterWithURI</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="228" locator="85:3-88:27" xsi:type="Query">
+            <source localId="212" locator="85:3-85:63" alias="EncounterWithURI">
+               <expression localId="211" locator="85:3-85:46" name="Encounter with Upper Respiratory Infection" xsi:type="ExpressionRef"/>
+            </source>
+            <where localId="225" locator="86:5-87:68" xsi:type="And">
+               <operand localId="218" locator="86:11-86:68" xsi:type="GreaterOrEqual">
+                  <operand localId="216" locator="86:11-86:64" precision="Month" xsi:type="CalculateAgeAt">
+                     <operand xsi:type="ToDate">
+                        <operand path="birthDatetime" xsi:type="Property">
+                           <source name="Patient" xsi:type="ExpressionRef"/>
+                        </operand>
+                     </operand>
+                     <operand localId="215" locator="86:25-86:63" xsi:type="DateFrom">
+                        <operand localId="214" locator="86:35-86:63" xsi:type="Start">
+                           <operand localId="213" locator="86:44-86:63" name="Measurement Period" xsi:type="ParameterRef"/>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand localId="217" locator="86:68" valueType="t:Integer" value="3" xsi:type="Literal"/>
+               </operand>
+               <operand localId="224" locator="87:11-87:68" xsi:type="LessOrEqual">
+                  <operand localId="222" locator="87:11-87:63" precision="Year" xsi:type="CalculateAgeAt">
+                     <operand xsi:type="ToDate">
+                        <operand path="birthDatetime" xsi:type="Property">
+                           <source name="Patient" xsi:type="ExpressionRef"/>
+                        </operand>
+                     </operand>
+                     <operand localId="221" locator="87:24-87:62" xsi:type="DateFrom">
+                        <operand localId="220" locator="87:34-87:62" xsi:type="Start">
+                           <operand localId="219" locator="87:43-87:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand localId="223" locator="87:67-87:68" valueType="t:Integer" value="17" xsi:type="Literal"/>
+               </operand>
+            </where>
+            <return localId="227" locator="88:5-88:27">
+               <expression localId="226" locator="88:12-88:27" name="EncounterWithURI" xsi:type="AliasRef"/>
+            </return>
+         </expression>
+      </def>
+      <def localId="243" locator="90:1-93:27" name="Stratification 2" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="243">
+               <a:s>define &quot;Stratification 2&quot;:
+  </a:s>
+               <a:s r="242">
+                  <a:s>
+                     <a:s r="231">
+                        <a:s r="230">
+                           <a:s>
+                              <a:s>&quot;Encounter with Upper Respiratory Infection&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> EncounterWithURI</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="239">
+                     <a:s>where </a:s>
+                     <a:s r="239">
+                        <a:s r="235">
+                           <a:s>AgeInYearsAt(</a:s>
+                           <a:s r="234">
+                              <a:s>date from </a:s>
+                              <a:s r="233">
+                                 <a:s>start of </a:s>
+                                 <a:s r="232">
+                                    <a:s>&quot;Measurement Period&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>)</a:s>
+                        </a:s>
+                        <a:s>in </a:s>
+                        <a:s r="238">
+                           <a:s r="236">Interval[18, 64]</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="241">
+                     <a:s>return </a:s>
+                     <a:s r="240">
+                        <a:s>EncounterWithURI</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="242" locator="91:3-93:27" xsi:type="Query">
+            <source localId="231" locator="91:3-91:63" alias="EncounterWithURI">
+               <expression localId="230" locator="91:3-91:46" name="Encounter with Upper Respiratory Infection" xsi:type="ExpressionRef"/>
+            </source>
+            <where localId="239" locator="92:5-92:82" xsi:type="In">
+               <operand localId="235" locator="92:11-92:63" precision="Year" xsi:type="CalculateAgeAt">
+                  <operand xsi:type="ToDate">
+                     <operand path="birthDatetime" xsi:type="Property">
+                        <source name="Patient" xsi:type="ExpressionRef"/>
+                     </operand>
+                  </operand>
+                  <operand localId="234" locator="92:24-92:62" xsi:type="DateFrom">
+                     <operand localId="233" locator="92:34-92:62" xsi:type="Start">
+                        <operand localId="232" locator="92:43-92:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand localId="238" locator="92:67-92:82" lowClosed="true" highClosed="true" xsi:type="Interval">
+                  <low localId="236" locator="92:76-92:77" valueType="t:Integer" value="18" xsi:type="Literal"/>
+                  <high localId="237" locator="92:80-92:81" valueType="t:Integer" value="64" xsi:type="Literal"/>
+               </operand>
+            </where>
+            <return localId="241" locator="93:5-93:27">
+               <expression localId="240" locator="93:12-93:27" name="EncounterWithURI" xsi:type="AliasRef"/>
+            </return>
+         </expression>
+      </def>
+      <def localId="255" locator="95:1-98:27" name="Stratification 3" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="255">
+               <a:s>define &quot;Stratification 3&quot;:
+  </a:s>
+               <a:s r="254">
+                  <a:s>
+                     <a:s r="245">
+                        <a:s r="244">
+                           <a:s>
+                              <a:s>&quot;Encounter with Upper Respiratory Infection&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> EncounterWithURI</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="251">
+                     <a:s>where </a:s>
+                     <a:s r="251">
+                        <a:s r="249">
+                           <a:s>AgeInYearsAt(</a:s>
+                           <a:s r="248">
+                              <a:s>date from </a:s>
+                              <a:s r="247">
+                                 <a:s>start of </a:s>
+                                 <a:s r="246">
+                                    <a:s>&quot;Measurement Period&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>)</a:s>
+                        </a:s>
+                        <a:s r="250">>= 65</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="253">
+                     <a:s>return </a:s>
+                     <a:s r="252">
+                        <a:s>EncounterWithURI</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="254" locator="96:3-98:27" xsi:type="Query">
+            <source localId="245" locator="96:3-96:63" alias="EncounterWithURI">
+               <expression localId="244" locator="96:3-96:46" name="Encounter with Upper Respiratory Infection" xsi:type="ExpressionRef"/>
+            </source>
+            <where localId="251" locator="97:5-97:68" xsi:type="GreaterOrEqual">
+               <operand localId="249" locator="97:11-97:63" precision="Year" xsi:type="CalculateAgeAt">
+                  <operand xsi:type="ToDate">
+                     <operand path="birthDatetime" xsi:type="Property">
+                        <source name="Patient" xsi:type="ExpressionRef"/>
+                     </operand>
+                  </operand>
+                  <operand localId="248" locator="97:24-97:62" xsi:type="DateFrom">
+                     <operand localId="247" locator="97:34-97:62" xsi:type="Start">
+                        <operand localId="246" locator="97:43-97:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand localId="250" locator="97:67-97:68" valueType="t:Integer" value="65" xsi:type="Literal"/>
+            </where>
+            <return localId="253" locator="98:5-98:27">
+               <expression localId="252" locator="98:12-98:27" name="EncounterWithURI" xsi:type="AliasRef"/>
+            </return>
+         </expression>
+      </def>
+   </statements>
+</library>

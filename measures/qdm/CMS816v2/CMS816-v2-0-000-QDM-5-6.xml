@@ -1,0 +1,865 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion,DisableMethodInvocation" xsi:type="a:CqlToElmInfo"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="124">
+         <a:s>library HospitalHarmSevereHypoglycemia version '2.0.000'</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="HospitalHarmSevereHypoglycemia" version="2.0.000"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="3:1-3:23" localIdentifier="QDM" uri="urn:healthit-gov:qdm:v5_6" version="5.6">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>using </a:s>
+               <a:s>
+                  <a:s>QDM</a:s>
+               </a:s>
+               <a:s> version '5.6'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="5:1-5:64" localIdentifier="Global" path="MATGlobalCommonFunctions" version="7.0.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>MATGlobalCommonFunctions</a:s>
+               </a:s>
+               <a:s> version '7.0.000' called Global</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <parameters>
+      <def localId="12" locator="15:1-15:49" name="Measurement Period" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="12">
+               <a:s>parameter &quot;Measurement Period&quot; </a:s>
+               <a:s r="11">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="10">
+                     <a:s>DateTime</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <parameterTypeSpecifier localId="11" locator="15:32-15:49" xsi:type="IntervalTypeSpecifier">
+            <pointType localId="10" locator="15:41-15:48" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <valueSets>
+      <def localId="3" locator="7:1-7:71" name="Encounter Inpatient" id="urn:oid:2.16.840.1.113883.3.666.5.307" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>valueset &quot;Encounter Inpatient&quot;: 'urn:oid:2.16.840.1.113883.3.666.5.307'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="4" locator="8:1-8:58" name="Ethnicity" id="urn:oid:2.16.840.1.114222.4.11.837" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>valueset &quot;Ethnicity&quot;: 'urn:oid:2.16.840.1.114222.4.11.837'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="5" locator="9:1-9:84" name="Glucose Lab Test Mass Per Volume" id="urn:oid:2.16.840.1.113762.1.4.1248.34" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>valueset &quot;Glucose Lab Test Mass Per Volume&quot;: 'urn:oid:2.16.840.1.113762.1.4.1248.34'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="6" locator="10:1-10:86" name="Hypoglycemics Severe Hypoglycemia" id="urn:oid:2.16.840.1.113762.1.4.1196.393" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>valueset &quot;Hypoglycemics Severe Hypoglycemia&quot;: 'urn:oid:2.16.840.1.113762.1.4.1196.393'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="7" locator="11:1-11:68" name="ONC Administrative Sex" id="urn:oid:2.16.840.1.113762.1.4.1" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="7">
+               <a:s>valueset &quot;ONC Administrative Sex&quot;: 'urn:oid:2.16.840.1.113762.1.4.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="8" locator="12:1-12:55" name="Payer" id="urn:oid:2.16.840.1.114222.4.11.3591" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="8">
+               <a:s>valueset &quot;Payer&quot;: 'urn:oid:2.16.840.1.114222.4.11.3591'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="9" locator="13:1-13:53" name="Race" id="urn:oid:2.16.840.1.114222.4.11.836" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="9">
+               <a:s>valueset &quot;Race&quot;: 'urn:oid:2.16.840.1.114222.4.11.836'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </valueSets>
+   <contexts>
+      <def locator="17:1-17:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="17:1-17:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="17:1-17:15" xmlns:ns0="urn:healthit-gov:qdm:v5_6" dataType="ns0:Patient" templateId="Patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="29" locator="48:1-51:107" name="Qualifying Encounter" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="29">
+               <a:s>define &quot;Qualifying Encounter&quot;:
+  </a:s>
+               <a:s r="28">
+                  <a:s>
+                     <a:s r="14">
+                        <a:s r="13">
+                           <a:s r="13">
+                              <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Encounter Inpatient&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> InpatientEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="27">
+                     <a:s>where </a:s>
+                     <a:s r="27">
+                        <a:s r="18">
+                           <a:s r="16">
+                              <a:s r="15">
+                                 <a:s>InpatientEncounter</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="16">
+                                 <a:s>relevantPeriod</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="18"> ends during day of </a:s>
+                           <a:s r="17">
+                              <a:s>&quot;Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      and </a:s>
+                        <a:s r="26">
+                           <a:s r="24">
+                              <a:s>AgeInYearsAt(</a:s>
+                              <a:s r="23">
+                                 <a:s>date from </a:s>
+                                 <a:s r="22">
+                                    <a:s>start of </a:s>
+                                    <a:s r="21">
+                                       <a:s r="19">
+                                          <a:s>Global</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="21">
+                                          <a:s>&quot;HospitalizationWithObservation&quot;(</a:s>
+                                          <a:s r="20">
+                                             <a:s>InpatientEncounter</a:s>
+                                          </a:s>
+                                          <a:s>)</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                           <a:s r="25">>= 18</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="28" locator="49:3-51:107" xsi:type="Query">
+            <source localId="14" locator="49:3-49:68" alias="InpatientEncounter">
+               <expression localId="13" locator="49:3-49:49" xmlns:ns1="urn:healthit-gov:qdm:v5_6" dataType="ns1:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="49:28-49:48" name="Encounter Inpatient" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <where localId="27" locator="50:5-51:107" xsi:type="And">
+               <operand localId="18" locator="50:11-50:83" precision="Day" xsi:type="In">
+                  <operand locator="50:45-50:48" xsi:type="End">
+                     <operand localId="16" locator="50:11-50:43" path="relevantPeriod" scope="InpatientEncounter" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="17" locator="50:64-50:83" name="Measurement Period" xsi:type="ParameterRef"/>
+               </operand>
+               <operand localId="26" locator="51:11-51:107" xsi:type="GreaterOrEqual">
+                  <operand localId="24" locator="51:11-51:102" precision="Year" xsi:type="CalculateAgeAt">
+                     <operand xsi:type="ToDate">
+                        <operand path="birthDatetime" xsi:type="Property">
+                           <source name="Patient" xsi:type="ExpressionRef"/>
+                        </operand>
+                     </operand>
+                     <operand localId="23" locator="51:24-51:101" xsi:type="DateFrom">
+                        <operand localId="22" locator="51:34-51:101" xsi:type="Start">
+                           <operand localId="21" locator="51:43-51:101" name="HospitalizationWithObservation" libraryName="Global" xsi:type="FunctionRef">
+                              <operand localId="20" locator="51:83-51:100" name="InpatientEncounter" xsi:type="AliasRef"/>
+                           </operand>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand localId="25" locator="51:106-51:107" valueType="t:Integer" value="18" xsi:type="Literal"/>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="33" locator="34:1-35:67" name="Hypoglycemic Medication Administration" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="33">
+               <a:s>define &quot;Hypoglycemic Medication Administration&quot;:
+  </a:s>
+               <a:s r="32">
+                  <a:s>[&quot;Medication, Administered&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Hypoglycemics Severe Hypoglycemia&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="32" locator="35:3-35:67" xmlns:ns2="urn:healthit-gov:qdm:v5_6" dataType="ns2:PositiveMedicationAdministered" templateId="PositiveMedicationAdministered" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="35:32-35:66" name="Hypoglycemics Severe Hypoglycemia" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="48" locator="40:1-43:186" name="Encounter With Hypoglycemic Medication Administration" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="48">
+               <a:s>define &quot;Encounter With Hypoglycemic Medication Administration&quot;:
+  </a:s>
+               <a:s r="47">
+                  <a:s>
+                     <a:s r="31">
+                        <a:s r="30">
+                           <a:s>
+                              <a:s>&quot;Qualifying Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> InpatientEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="46">
+                     <a:s>with </a:s>
+                     <a:s r="35">
+                        <a:s r="34">
+                           <a:s>
+                              <a:s>&quot;Hypoglycemic Medication Administration&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> HypoglycemicMed</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="45">
+                        <a:s r="41">
+                           <a:s r="36">
+                              <a:s>Global</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="41">
+                              <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                              <a:s r="38">
+                                 <a:s r="37">
+                                    <a:s>HypoglycemicMed</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="38">
+                                    <a:s>relevantDatetime</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="40">
+                                 <a:s r="39">
+                                    <a:s>HypoglycemicMed</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="40">
+                                    <a:s>relevantPeriod</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="45"> starts during </a:s>
+                        <a:s r="44">
+                           <a:s r="42">
+                              <a:s>Global</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="44">
+                              <a:s>HospitalizationWithObservation ( </a:s>
+                              <a:s r="43">
+                                 <a:s>InpatientEncounter</a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="47" locator="41:3-43:186" xsi:type="Query">
+            <source localId="31" locator="41:3-41:43" alias="InpatientEncounter">
+               <expression localId="30" locator="41:3-41:24" name="Qualifying Encounter" xsi:type="ExpressionRef"/>
+            </source>
+            <relationship localId="46" locator="42:5-43:186" alias="HypoglycemicMed" xsi:type="With">
+               <expression localId="34" locator="42:10-42:49" name="Hypoglycemic Medication Administration" xsi:type="ExpressionRef"/>
+               <suchThat localId="45" locator="43:17-43:186" xsi:type="In">
+                  <operand locator="43:113-43:118" xsi:type="Start">
+                     <operand localId="41" locator="43:17-43:111" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                        <operand localId="38" locator="43:46-43:77" path="relevantDatetime" scope="HypoglycemicMed" xsi:type="Property"/>
+                        <operand localId="40" locator="43:80-43:109" path="relevantPeriod" scope="HypoglycemicMed" xsi:type="Property"/>
+                     </operand>
+                  </operand>
+                  <operand localId="44" locator="43:127-43:186" name="HospitalizationWithObservation" libraryName="Global" xsi:type="FunctionRef">
+                     <operand localId="43" locator="43:167-43:184" name="InpatientEncounter" xsi:type="AliasRef"/>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="50" locator="45:1-46:57" name="Initial Population" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="50">
+               <a:s>define &quot;Initial Population&quot;:
+  </a:s>
+               <a:s r="49">
+                  <a:s>&quot;Encounter With Hypoglycemic Medication Administration&quot;</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="49" locator="46:3-46:57" name="Encounter With Hypoglycemic Medication Administration" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="52" locator="19:1-20:22" name="Denominator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="52">
+               <a:s>define &quot;Denominator&quot;:
+  </a:s>
+               <a:s r="51">
+                  <a:s>&quot;Initial Population&quot;</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="51" locator="20:3-20:22" name="Initial Population" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="54" locator="22:1-23:51" name="SDE Ethnicity" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="54">
+               <a:s>define &quot;SDE Ethnicity&quot;:
+  </a:s>
+               <a:s r="53">
+                  <a:s>[&quot;Patient Characteristic Ethnicity&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Ethnicity&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="53" locator="23:3-23:51" xmlns:ns3="urn:healthit-gov:qdm:v5_6" dataType="ns3:PatientCharacteristicEthnicity" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="23:40-23:50" name="Ethnicity" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="56" locator="25:1-26:43" name="SDE Payer" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="56">
+               <a:s>define &quot;SDE Payer&quot;:
+  </a:s>
+               <a:s r="55">
+                  <a:s>[&quot;Patient Characteristic Payer&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Payer&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="55" locator="26:3-26:43" xmlns:ns4="urn:healthit-gov:qdm:v5_6" dataType="ns4:PatientCharacteristicPayer" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="26:36-26:42" name="Payer" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="58" locator="28:1-29:41" name="SDE Race" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="58">
+               <a:s>define &quot;SDE Race&quot;:
+  </a:s>
+               <a:s r="57">
+                  <a:s>[&quot;Patient Characteristic Race&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Race&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="57" locator="29:3-29:41" xmlns:ns5="urn:healthit-gov:qdm:v5_6" dataType="ns5:PatientCharacteristicRace" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="29:35-29:40" name="Race" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="60" locator="31:1-32:58" name="SDE Sex" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="60">
+               <a:s>define &quot;SDE Sex&quot;:
+  </a:s>
+               <a:s r="59">
+                  <a:s>[&quot;Patient Characteristic Sex&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;ONC Administrative Sex&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="59" locator="32:3-32:58" xmlns:ns6="urn:healthit-gov:qdm:v5_6" dataType="ns6:PatientCharacteristicSex" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="32:34-32:57" name="ONC Administrative Sex" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="124" locator="53:1-65:5" name="Encounter With Severe Hypoglycemic Harm Event" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="124">
+               <a:s>define &quot;Encounter With Severe Hypoglycemic Harm Event&quot;:
+  </a:s>
+               <a:s r="123">
+                  <a:s>
+                     <a:s r="62">
+                        <a:s r="61">
+                           <a:s>
+                              <a:s>&quot;Encounter With Hypoglycemic Medication Administration&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> QualifyingEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="122">
+                     <a:s>where </a:s>
+                     <a:s r="122">
+                        <a:s>exists </a:s>
+                        <a:s r="121">
+                           <a:s>( </a:s>
+                           <a:s r="121">
+                              <a:s>
+                                 <a:s r="64">
+                                    <a:s r="63">
+                                       <a:s r="63">
+                                          <a:s>[&quot;Laboratory Test, Performed&quot;: </a:s>
+                                          <a:s>
+                                             <a:s>&quot;Glucose Lab Test Mass Per Volume&quot;</a:s>
+                                          </a:s>
+                                          <a:s>]</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> BloodGlucoseLab1</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+        </a:s>
+                              <a:s r="88">
+                                 <a:s>with </a:s>
+                                 <a:s r="66">
+                                    <a:s r="65">
+                                       <a:s r="65">
+                                          <a:s>[&quot;Medication, Administered&quot;: </a:s>
+                                          <a:s>
+                                             <a:s>&quot;Hypoglycemics Severe Hypoglycemia&quot;</a:s>
+                                          </a:s>
+                                          <a:s>]</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> HypoglycemicMed</a:s>
+                                 </a:s>
+                                 <a:s>
+          such that </a:s>
+                                 <a:s r="87">
+                                    <a:s r="76">
+                                       <a:s r="72">
+                                          <a:s r="67">
+                                             <a:s>Global</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="72">
+                                             <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                             <a:s r="69">
+                                                <a:s r="68">
+                                                   <a:s>HypoglycemicMed</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="69">
+                                                   <a:s>relevantDatetime</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>, </a:s>
+                                             <a:s r="71">
+                                                <a:s r="70">
+                                                   <a:s>HypoglycemicMed</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="71">
+                                                   <a:s>relevantPeriod</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s> )</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> </a:s>
+                                       <a:s r="76">
+                                          <a:s>starts </a:s>
+                                          <a:s r="75">
+                                             <a:s>24 hours</a:s>
+                                          </a:s>
+                                          <a:s> or less before or on</a:s>
+                                       </a:s>
+                                       <a:s> </a:s>
+                                       <a:s r="74">
+                                          <a:s r="73">
+                                             <a:s>BloodGlucoseLab1</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="74">
+                                             <a:s>relevantDatetime</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+            and </a:s>
+                                    <a:s r="86">
+                                       <a:s r="82">
+                                          <a:s r="77">
+                                             <a:s>Global</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="82">
+                                             <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                             <a:s r="79">
+                                                <a:s r="78">
+                                                   <a:s>HypoglycemicMed</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="79">
+                                                   <a:s>relevantDatetime</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>, </a:s>
+                                             <a:s r="81">
+                                                <a:s r="80">
+                                                   <a:s>HypoglycemicMed</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="81">
+                                                   <a:s>relevantPeriod</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s> )</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s r="86"> starts during </a:s>
+                                       <a:s r="85">
+                                          <a:s r="83">
+                                             <a:s>Global</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="85">
+                                             <a:s>&quot;HospitalizationWithObservation&quot; ( </a:s>
+                                             <a:s r="84">
+                                                <a:s>QualifyingEncounter</a:s>
+                                             </a:s>
+                                             <a:s> )</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+        </a:s>
+                              <a:s r="109">
+                                 <a:s>without </a:s>
+                                 <a:s r="90">
+                                    <a:s r="89">
+                                       <a:s r="89">
+                                          <a:s>[&quot;Laboratory Test, Performed&quot;: </a:s>
+                                          <a:s>
+                                             <a:s>&quot;Glucose Lab Test Mass Per Volume&quot;</a:s>
+                                          </a:s>
+                                          <a:s>]</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> BloodGlucoseLab2</a:s>
+                                 </a:s>
+                                 <a:s>
+          such that </a:s>
+                                 <a:s r="108">
+                                    <a:s r="103">
+                                       <a:s r="96">
+                                          <a:s r="92">
+                                             <a:s r="91">
+                                                <a:s>BloodGlucoseLab2</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="92">
+                                                <a:s>relevantDatetime</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s r="96"> during </a:s>
+                                          <a:s r="95">
+                                             <a:s r="93">
+                                                <a:s>Global</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="95">
+                                                <a:s>&quot;HospitalizationWithObservation&quot; ( </a:s>
+                                                <a:s r="94">
+                                                   <a:s>QualifyingEncounter</a:s>
+                                                </a:s>
+                                                <a:s> )</a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>
+            and </a:s>
+                                       <a:s r="102">
+                                          <a:s r="98">
+                                             <a:s r="97">
+                                                <a:s>BloodGlucoseLab2</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="98">
+                                                <a:s>relevantDatetime</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s> </a:s>
+                                          <a:s r="102">
+                                             <a:s r="101">
+                                                <a:s>5 minutes</a:s>
+                                             </a:s>
+                                             <a:s> or less after</a:s>
+                                          </a:s>
+                                          <a:s> </a:s>
+                                          <a:s r="100">
+                                             <a:s r="99">
+                                                <a:s>BloodGlucoseLab1</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="100">
+                                                <a:s>relevantDatetime</a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+            and </a:s>
+                                    <a:s r="107">
+                                       <a:s r="105">
+                                          <a:s r="104">
+                                             <a:s>BloodGlucoseLab2</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="105">
+                                             <a:s>result</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> > </a:s>
+                                       <a:s r="106">
+                                          <a:s>80 'mg/dL'</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+        </a:s>
+                              <a:s r="120">
+                                 <a:s>where </a:s>
+                                 <a:s r="120">
+                                    <a:s r="115">
+                                       <a:s r="111">
+                                          <a:s r="110">
+                                             <a:s>BloodGlucoseLab1</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="111">
+                                             <a:s>relevantDatetime</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s r="115"> during </a:s>
+                                       <a:s r="114">
+                                          <a:s r="112">
+                                             <a:s>Global</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="114">
+                                             <a:s>&quot;HospitalizationWithObservation&quot; ( </a:s>
+                                             <a:s r="113">
+                                                <a:s>QualifyingEncounter</a:s>
+                                             </a:s>
+                                             <a:s> )</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+          and </a:s>
+                                    <a:s r="119">
+                                       <a:s r="117">
+                                          <a:s r="116">
+                                             <a:s>BloodGlucoseLab1</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="117">
+                                             <a:s>result</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> &lt; </a:s>
+                                       <a:s r="118">
+                                          <a:s>40 'mg/dL'</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+    )</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="123" locator="54:3-65:5" xsi:type="Query">
+            <source localId="62" locator="54:3-54:77" alias="QualifyingEncounter">
+               <expression localId="61" locator="54:3-54:57" name="Encounter With Hypoglycemic Medication Administration" xsi:type="ExpressionRef"/>
+            </source>
+            <where localId="122" locator="55:5-65:5" xsi:type="Exists">
+               <operand localId="121" locator="55:18-65:5" xsi:type="Query">
+                  <source localId="64" locator="55:20-55:102" alias="BloodGlucoseLab1">
+                     <expression localId="63" locator="55:20-55:85" xmlns:ns7="urn:healthit-gov:qdm:v5_6" dataType="ns7:PositiveLaboratoryTestPerformed" templateId="PositiveLaboratoryTestPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                        <codes locator="55:51-55:84" name="Glucose Lab Test Mass Per Volume" xsi:type="ValueSetRef"/>
+                     </expression>
+                  </source>
+                  <relationship localId="88" locator="56:9-58:189" alias="HypoglycemicMed" xsi:type="With">
+                     <expression localId="65" locator="56:14-56:78" xmlns:ns8="urn:healthit-gov:qdm:v5_6" dataType="ns8:PositiveMedicationAdministered" templateId="PositiveMedicationAdministered" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                        <codes locator="56:43-56:77" name="Hypoglycemics Severe Hypoglycemia" xsi:type="ValueSetRef"/>
+                     </expression>
+                     <suchThat localId="87" locator="57:21-58:189" xsi:type="And">
+                        <operand localId="76" locator="57:21-57:186" xsi:type="And">
+                           <operand locator="57:124-57:139" xsi:type="In">
+                              <operand locator="57:117-57:122" xsi:type="Start">
+                                 <operand localId="72" locator="57:21-57:115" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                    <operand localId="69" locator="57:50-57:81" path="relevantDatetime" scope="HypoglycemicMed" xsi:type="Property"/>
+                                    <operand localId="71" locator="57:84-57:113" path="relevantPeriod" scope="HypoglycemicMed" xsi:type="Property"/>
+                                 </operand>
+                              </operand>
+                              <operand locator="57:124-57:139" lowClosed="true" highClosed="true" xsi:type="Interval">
+                                 <low locator="57:171-57:186" xsi:type="Subtract">
+                                    <operand localId="74" locator="57:154-57:186" path="relevantDatetime" scope="BloodGlucoseLab1" xsi:type="Property"/>
+                                    <operand localId="75" locator="57:124-57:131" value="24" unit="hours" xsi:type="Quantity"/>
+                                 </low>
+                                 <high localId="74" locator="57:154-57:186" path="relevantDatetime" scope="BloodGlucoseLab1" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                           <operand locator="57:124-57:139" xsi:type="Not">
+                              <operand locator="57:124-57:139" xsi:type="IsNull">
+                                 <operand localId="74" locator="57:154-57:186" path="relevantDatetime" scope="BloodGlucoseLab1" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                        </operand>
+                        <operand localId="86" locator="58:17-58:189" xsi:type="In">
+                           <operand locator="58:113-58:118" xsi:type="Start">
+                              <operand localId="82" locator="58:17-58:111" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                 <operand localId="79" locator="58:46-58:77" path="relevantDatetime" scope="HypoglycemicMed" xsi:type="Property"/>
+                                 <operand localId="81" locator="58:80-58:109" path="relevantPeriod" scope="HypoglycemicMed" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                           <operand localId="85" locator="58:127-58:189" name="HospitalizationWithObservation" libraryName="Global" xsi:type="FunctionRef">
+                              <operand localId="84" locator="58:169-58:187" name="QualifyingEncounter" xsi:type="AliasRef"/>
+                           </operand>
+                        </operand>
+                     </suchThat>
+                  </relationship>
+                  <relationship localId="109" locator="59:9-62:52" alias="BloodGlucoseLab2" xsi:type="Without">
+                     <expression localId="89" locator="59:17-59:82" xmlns:ns9="urn:healthit-gov:qdm:v5_6" dataType="ns9:PositiveLaboratoryTestPerformed" templateId="PositiveLaboratoryTestPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                        <codes locator="59:48-59:81" name="Glucose Lab Test Mass Per Volume" xsi:type="ValueSetRef"/>
+                     </expression>
+                     <suchThat localId="108" locator="60:21-62:52" xsi:type="And">
+                        <operand localId="103" locator="60:21-61:107" xsi:type="And">
+                           <operand localId="96" locator="60:21-60:124" xsi:type="In">
+                              <operand localId="92" locator="60:21-60:53" path="relevantDatetime" scope="BloodGlucoseLab2" xsi:type="Property"/>
+                              <operand localId="95" locator="60:62-60:124" name="HospitalizationWithObservation" libraryName="Global" xsi:type="FunctionRef">
+                                 <operand localId="94" locator="60:104-60:122" name="QualifyingEncounter" xsi:type="AliasRef"/>
+                              </operand>
+                           </operand>
+                           <operand localId="102" locator="61:17-61:107" xsi:type="And">
+                              <operand locator="61:51-61:67" xsi:type="In">
+                                 <operand localId="98" locator="61:17-61:49" path="relevantDatetime" scope="BloodGlucoseLab2" xsi:type="Property"/>
+                                 <operand locator="61:51-61:67" lowClosed="false" highClosed="true" xsi:type="Interval">
+                                    <low localId="100" locator="61:75-61:107" path="relevantDatetime" scope="BloodGlucoseLab1" xsi:type="Property"/>
+                                    <high locator="61:92-61:107" xsi:type="Add">
+                                       <operand localId="100" locator="61:75-61:107" path="relevantDatetime" scope="BloodGlucoseLab1" xsi:type="Property"/>
+                                       <operand localId="101" locator="61:51-61:59" value="5" unit="minutes" xsi:type="Quantity"/>
+                                    </high>
+                                 </operand>
+                              </operand>
+                              <operand locator="61:51-61:67" xsi:type="Not">
+                                 <operand locator="61:51-61:67" xsi:type="IsNull">
+                                    <operand localId="100" locator="61:75-61:107" path="relevantDatetime" scope="BloodGlucoseLab1" xsi:type="Property"/>
+                                 </operand>
+                              </operand>
+                           </operand>
+                        </operand>
+                        <operand localId="107" locator="62:17-62:52" xsi:type="Greater">
+                           <operand asType="t:Quantity" xsi:type="As">
+                              <operand localId="105" locator="62:17-62:39" path="result" scope="BloodGlucoseLab2" xsi:type="Property"/>
+                           </operand>
+                           <operand localId="106" locator="62:43-62:52" value="80" unit="mg/dL" xsi:type="Quantity"/>
+                        </operand>
+                     </suchThat>
+                  </relationship>
+                  <where localId="120" locator="63:9-64:50" xsi:type="And">
+                     <operand localId="115" locator="63:15-63:118" xsi:type="In">
+                        <operand localId="111" locator="63:15-63:47" path="relevantDatetime" scope="BloodGlucoseLab1" xsi:type="Property"/>
+                        <operand localId="114" locator="63:56-63:118" name="HospitalizationWithObservation" libraryName="Global" xsi:type="FunctionRef">
+                           <operand localId="113" locator="63:98-63:116" name="QualifyingEncounter" xsi:type="AliasRef"/>
+                        </operand>
+                     </operand>
+                     <operand localId="119" locator="64:15-64:50" xsi:type="Less">
+                        <operand asType="t:Quantity" xsi:type="As">
+                           <operand localId="117" locator="64:15-64:37" path="result" scope="BloodGlucoseLab1" xsi:type="Property"/>
+                        </operand>
+                        <operand localId="118" locator="64:41-64:50" value="40" unit="mg/dL" xsi:type="Quantity"/>
+                     </operand>
+                  </where>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="126" locator="37:1-38:49" name="Numerator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="126">
+               <a:s>define &quot;Numerator&quot;:
+  </a:s>
+               <a:s r="125">
+                  <a:s>&quot;Encounter With Severe Hypoglycemic Harm Event&quot;</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="125" locator="38:3-38:49" name="Encounter With Severe Hypoglycemic Harm Event" xsi:type="ExpressionRef"/>
+      </def>
+   </statements>
+</library>
