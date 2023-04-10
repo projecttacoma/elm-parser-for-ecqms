@@ -37,7 +37,8 @@ class MeasureElmHelper
     referenced_statement = @measure.get_statement(elm['name'], library_name)
     return unless referenced_statement
 
-    data_type_expressions = referenced_statement.elm.xpath(".//*[@xsi:type='Retrieve']")
+    alias_expression = referenced_statement.elm.xpath(".//elm:source[@alias='#{path_statement[:scope]}']")
+    data_type_expressions = alias_expression.xpath(".//*[@xsi:type='Retrieve']")
     data_type_expressions.each do |data_type_expression|
       add_attribute_to_appropriate_data_requirement(data_type_expression, path_statement[:path], path_statement[:extension])
     end
