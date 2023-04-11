@@ -37,8 +37,12 @@ class MeasureElmHelper
     referenced_statement = @measure.get_statement(elm['name'], library_name)
     return unless referenced_statement
 
-    alias_expression = referenced_statement.elm.xpath(".//elm:source[@alias='#{path_statement[:scope]}']")
-    data_type_expressions = alias_expression.xpath(".//*[@xsi:type='Retrieve']")
+    data_type_expressions = if referenced_statement.elm.xpath('.//elm:source[@alias]').empty?
+                              referenced_statement.elm.xpath(".//*[@xsi:type='Retrieve']")
+                            else
+                              alias_expression = referenced_statement.elm.xpath(".//elm:source[@alias='#{path_statement[:scope]}']")
+                              alias_expression.xpath(".//*[@xsi:type='Retrieve']")
+                            end
     data_type_expressions.each do |data_type_expression|
       add_attribute_to_appropriate_data_requirement(data_type_expression, path_statement[:path], path_statement[:extension])
     end
@@ -57,6 +61,7 @@ class MeasureElmHelper
     end
     operand_name = statement.elm.at_xpath('./elm:operand/@name')&.value
     return unless operand_name
+
     if !statement.elm.xpath(".//elm:source[@name='#{operand_name}' and @xsi:type='OperandRef']").empty?
       extract_information_from_function_operand(statement, path_statement, operand_name)
     end
