@@ -40,8 +40,7 @@ class MeasureElmHelper
     data_type_expressions = if referenced_statement.elm.xpath('.//elm:source[@alias]').empty?
                               referenced_statement.elm.xpath(".//*[@xsi:type='Retrieve']")
                             else
-                              alias_expression = referenced_statement.elm.xpath(".//elm:source[@alias='#{path_statement[:scope]}']")
-                              alias_expression.xpath(".//*[@xsi:type='Retrieve']")
+                              alias_expression = referenced_statement.elm.xpath(".//elm:source[@alias]//*[@xsi:type='Retrieve']")
                             end
     data_type_expressions.each do |data_type_expression|
       add_attribute_to_appropriate_data_requirement(data_type_expression, path_statement[:path], path_statement[:extension])
