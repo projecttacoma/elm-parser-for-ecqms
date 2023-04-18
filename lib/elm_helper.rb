@@ -115,10 +115,15 @@ class MeasureElmHelper
   end
 
   def add_attributes_from_og_expression(function_reference, path_statement)
-    alias_expression = function_reference.og_expression.xpath(".//elm:source[@alias='#{function_reference.scope}']")
+    alias_expression = function_reference.og_statement.elm.xpath(".//elm:source[@alias='#{function_reference.scope}'] | .//elm:relationship[@alias='#{function_reference.scope}']")
     data_type_expressions = alias_expression.xpath(".//*[@xsi:type='Retrieve']")
     data_type_expressions.each do |data_type_expression|
       add_attribute_to_appropriate_data_requirement(data_type_expression, path_statement[:path], path_statement[:extension])
+    end
+
+    exp_ref_expressions = alias_expression.xpath(".//*[@xsi:type='ExpressionRef']")
+    exp_ref_expressions.each do |exp_ref_expression|
+      follow_expression_ref(exp_ref_expression, path_statement, function_reference.og_statement.local_id_map)
     end
   end
 

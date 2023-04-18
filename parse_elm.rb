@@ -42,6 +42,7 @@ end
 def parse_statements_from_root_file(measure, file_path, dependencies)
   # Get dependencies from root file
   doc = build_document(file_path)
+  measure.add_valuesets_from_elm(doc)
 
   # Find locally used identifiers for supporting libraries
   local_id_map = measure.elm_helper.local_ids(doc)
@@ -70,6 +71,7 @@ def extract_dependency_from_supporting_file(measure, files, file_directory, depe
   files.each_with_index do |file_name, _index|
     next unless file_name.include? '.xml'
     doc = build_document("#{file_directory}#{file_name}")
+    measure.add_valuesets_from_elm(doc)
     local_id_map = measure.elm_helper.local_ids(doc)
 
     # TODO: Definitions with apostrophes throws off parser
@@ -110,7 +112,7 @@ def output_csv_for_measure(measure)
 end
 
 def output_csv_for_qdm_measures(measures, bundle)
-  headers = ['Measure', 'Data Type', 'Template Id', 'Data Type Value Set', 'Attribute', 'Mapped QI Core Profile', 'Mapped QI Core Attribute']
+  headers = ['Measure', 'Data Type', 'Template Id', 'Data Type Value Set', 'Data Type Value OID', 'Attribute', 'Mapped QI Core Profile', 'Mapped QI Core Attribute']
   qdm_map = QdmMapper.new
 
   CSV.open("data_requirements/#{bundle}_all.csv", 'w', col_sep: '|', write_headers: true,
@@ -125,7 +127,8 @@ def output_csv_for_qdm_measures(measures, bundle)
           profile = data_requirement.attributes.any? { |att| att == 'negationRationale' } ? qi_negation_profile_name : qi_profile_name
           qi_attributes&.each do |qi_attribute|
             combined_csv << [measure.root_file, data_requirement.data_type, data_requirement.template,
-                             data_requirement.valueset, attribute, profile, qi_attribute.qi_field.gsub('[x]', '')]
+                             data_requirement.valueset, measure.valuesets[data_requirement.valueset],
+                             attribute, profile, qi_attribute.qi_field.gsub('[x]', '')]
           end
         end
       end
@@ -134,7 +137,7 @@ def output_csv_for_qdm_measures(measures, bundle)
 end
 
 def output_csv_for_fhir_measures(measures, bundle)
-  headers = ['Measure', 'Data Type', 'Template Id', 'Data Type Value Set', 'Attribute']
+  headers = ['Measure', 'Data Type', 'Template Id', 'Data Type Value Set', 'Data Type Value OID', 'Attribute']
 
   CSV.open("data_requirements/#{bundle}_all.csv", 'w', col_sep: '|', write_headers: true,
                                                        headers: headers) do |combined_csv|
@@ -144,7 +147,8 @@ def output_csv_for_fhir_measures(measures, bundle)
         data_requirement.attributes.each do |attribute|
           next if attribute.nil?
 
-          combined_csv << [measure.root_file, data_requirement.data_type, data_requirement.template, data_requirement.valueset, attribute]
+          combined_csv << [measure.root_file, data_requirement.data_type, data_requirement.template, data_requirement.valueset,
+                           measure.valuesets[data_requirement.valueset], attribute]
         end
       end
     end
