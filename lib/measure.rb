@@ -3,9 +3,10 @@
 class Measure
   include ElmHelper
   attr_accessor :root_file, :data_model, :elm_helper
-  attr_reader :data_requirements, :statements, :definitions, :function_references
+  attr_reader :data_requirements, :statements, :definitions, :function_references, :valuesets
 
   def initialize(root_file, data_model)
+    @valuesets = {}
     @data_requirements = []
     @statements = []
     @definitions = []
@@ -13,6 +14,21 @@ class Measure
     @root_file = root_file
     @data_model = data_model
     @elm_helper = MeasureElmHelper.new(self)
+  end
+
+  def add_valuesets_from_elm(doc)
+    doc.xpath('//elm:valueSets/elm:def').each do |valueset_statement|
+      valueset_name = valueset_statement['name']
+      valueset_oid = valueset_statement['id']
+      @valuesets[valueset_name] = valueset_oid
+    end
+    # Direct Reference Codes
+    doc.xpath('//elm:codes/elm:def').each do |code_statement|
+      code_name = code_statement['name']
+      code = code_statement['id']
+      code_system = code_statement.at_xpath('elm:codeSystem/@name').value
+      @valuesets[code_name] = "#{code}:#{code_system}"
+    end
   end
 
   def add_data_requirement(data_requirement)
@@ -102,7 +118,7 @@ class Measure
       function_op_expressions = function_expression.xpath(".//elm:operand[@xsi:type='OperandRef']")
       function_alias_expressions.each do |function_alias_expression|
         @function_references << FunctionReference.new('AliasRef', function_alias_expression['name'],
-                                                      function_expression['name'], function_library, statement.elm)
+                                                      function_expression['name'], function_library, statement)
       end
       function_dt_expressions.each do |function_dt_expression|
         dt = function_dt_expression['dataType'].split(':')[1]
@@ -110,11 +126,11 @@ class Measure
           dth.data_type == dt && dth.valueset == valueset_from_retrieve(function_dt_expression)
         end.first
         @function_references << FunctionReference.new('Retrieve', data_type_hash, function_expression['name'],
-                                                      function_library, statement.elm)
+                                                      function_library, statement)
       end
       function_op_expressions.each do |function_op_expression|
         @function_references << FunctionReference.new('OperandRef', function_op_expression['name'],
-                                                      function_expression['name'], function_library, statement.elm)
+                                                      function_expression['name'], function_library, statement)
       end
     end
   end
@@ -123,14 +139,14 @@ end
 # rubocop:enable Metrics/AbcSize
 
 class FunctionReference
-  attr_accessor :type, :scope, :function, :library, :og_expression
+  attr_accessor :type, :scope, :function, :library, :og_statement
 
-  def initialize(type, scope, function, library, og_expression)
+  def initialize(type, scope, function, library, og_statement)
     @type = type
     @scope = scope
     @function = function
     @library = library
-    @og_expression = og_expression
+    @og_statement = og_statement
   end
 end
 
