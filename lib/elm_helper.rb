@@ -141,7 +141,7 @@ class MeasureElmHelper
   def add_attribute_to_appropriate_data_requirement(data_type_expression, attribute, extension = nil)
     dt = data_type_expression['dataType'].split(':')[1]
     data_requirement_to_update = @measure.data_requirements.select do |dth|
-      dth.data_type == dt && dth.valueset == valueset_from_retrieve(data_type_expression)
+      dth.data_type == dt && dth.valueset == valueset_from_retrieve(data_type_expression) && data_type_expression['templateId'] == dth.template
     end.first
     data_requirement_to_update.add_attribute(data_type_expression['codeProperty'])
     return unless attribute && attribute_appropriate_for_dt(data_requirement_to_update.data_type, attribute)
