@@ -1,0 +1,1107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,EnableResultTypes" xsi:type="a:CqlToElmInfo"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="99">
+         <a:s>library Antibiotic version '1.1.000'</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="Antibiotic" version="1.1.000"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="9:1-9:28" localIdentifier="QICore" uri="http://hl7.org/fhir">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>/*
+This content is a work in progress and should not be considered a final specification
+or recommendation for guidance.
+*/
+using </a:s>
+               <a:s>
+                  <a:s>QICore</a:s>
+               </a:s>
+               <a:s> version '4.1.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="11:1-11:56" localIdentifier="FHIRHelpers" path="FHIRHelpers" version="4.1.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>FHIRHelpers</a:s>
+               </a:s>
+               <a:s> version '4.1.000' called FHIRHelpers</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="3" locator="12:1-12:58" localIdentifier="QICoreCommon" path="QICoreCommon" version="1.2.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>QICoreCommon</a:s>
+               </a:s>
+               <a:s> version '1.2.000' called QICoreCommon</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <parameters>
+      <def localId="6" locator="14:1-14:49" name="Measurement Period" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>parameter &quot;Measurement Period&quot; </a:s>
+               <a:s r="5">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="4">
+                     <a:s>DateTime</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+            <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <parameterTypeSpecifier localId="5" locator="14:32-14:49" xsi:type="IntervalTypeSpecifier">
+            <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+               <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <pointType localId="4" locator="14:41-14:48" resultTypeName="t:DateTime" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <contexts>
+      <def locator="16:1-16:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="16:1-16:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="16:1-16:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="40" locator="18:1-22:18" name="Has Comorbid Condition History" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="40">
+               <a:s>define function &quot;Has Comorbid Condition History&quot;(episodeDate </a:s>
+               <a:s r="8">
+                  <a:s>List&lt;</a:s>
+                  <a:s r="7">
+                     <a:s>Encounter</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+               <a:s>, comorbidConditions </a:s>
+               <a:s r="10">
+                  <a:s>List&lt;</a:s>
+                  <a:s r="9">
+                     <a:s>Condition</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+               <a:s>):
+  </a:s>
+               <a:s r="39">
+                  <a:s r="39">
+                     <a:s>
+                        <a:s r="12">
+                           <a:s r="11">
+                              <a:s>
+                                 <a:s>episodeDate</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> eDate</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+      </a:s>
+                     <a:s r="36">
+                        <a:s>with </a:s>
+                        <a:s r="14">
+                           <a:s r="13">
+                              <a:s>
+                                 <a:s>comorbidConditions</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> comcondition</a:s>
+                        </a:s>
+                        <a:s>
+        such that </a:s>
+                        <a:s r="35">
+                           <a:s r="19">
+                              <a:s>date from </a:s>
+                              <a:s r="18">
+                                 <a:s>start of </a:s>
+                                 <a:s r="17">
+                                    <a:s>( </a:s>
+                                    <a:s r="17">
+                                       <a:s r="15">
+                                          <a:s>QICoreCommon</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="17">
+                                          <a:s>&quot;ToPrevalenceInterval&quot; ( </a:s>
+                                          <a:s r="16">
+                                             <a:s>comcondition</a:s>
+                                          </a:s>
+                                          <a:s> )</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> )</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="35"> during </a:s>
+                           <a:s r="34">
+                              <a:s>Interval[</a:s>
+                              <a:s r="27">
+                                 <a:s r="25">
+                                    <a:s>date from </a:s>
+                                    <a:s r="24">
+                                       <a:s>start of </a:s>
+                                       <a:s r="23">
+                                          <a:s r="20">
+                                             <a:s>QICoreCommon</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="23">
+                                             <a:s>&quot;ToInterval&quot; ( </a:s>
+                                             <a:s r="22">
+                                                <a:s r="21">
+                                                   <a:s>eDate</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="22">
+                                                   <a:s>period</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s> )</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> - </a:s>
+                                 <a:s r="26">
+                                    <a:s>1 year</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="33">
+                                 <a:s>date from </a:s>
+                                 <a:s r="32">
+                                    <a:s>start of </a:s>
+                                    <a:s r="31">
+                                       <a:s r="28">
+                                          <a:s>QICoreCommon</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="31">
+                                          <a:s>&quot;ToInterval&quot; ( </a:s>
+                                          <a:s r="30">
+                                             <a:s r="29">
+                                                <a:s>eDate</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="30">
+                                                <a:s>period</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s> )</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+      </a:s>
+                     <a:s r="38">
+                        <a:s>return </a:s>
+                        <a:s r="37">
+                           <a:s>eDate</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="39" locator="19:3-22:18" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="12" locator="19:3-19:19" alias="eDate">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="11" locator="19:3-19:13" name="episodeDate" xsi:type="OperandRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </expression>
+            </source>
+            <relationship localId="36" locator="20:7-21:244" alias="comcondition" xsi:type="With">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="13" locator="20:12-20:29" name="comorbidConditions" xsi:type="OperandRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </expression>
+               <suchThat localId="35" locator="21:19-21:244" resultTypeName="t:Boolean" xsi:type="In">
+                  <operand localId="19" locator="21:19-21:93" resultTypeName="t:Date" xsi:type="DateFrom">
+                     <operand localId="18" locator="21:29-21:93" resultTypeName="t:DateTime" xsi:type="Start">
+                        <operand localId="17" locator="21:38-21:93" name="ToPrevalenceInterval" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                           <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                              <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <operand localId="16" locator="21:78-21:89" resultTypeName="fhir:Condition" name="comcondition" xsi:type="AliasRef"/>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand localId="34" locator="21:102-21:244" lowClosed="true" highClosed="true" xsi:type="Interval">
+                     <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <low localId="27" locator="21:111-21:180" resultTypeName="t:Date" xsi:type="Subtract">
+                        <operand localId="25" locator="21:111-21:171" resultTypeName="t:Date" xsi:type="DateFrom">
+                           <operand localId="24" locator="21:121-21:171" resultTypeName="t:DateTime" xsi:type="Start">
+                              <operand localId="23" locator="21:130-21:171" name="ToInterval" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                                 <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                                 <operand xsi:type="As">
+                                    <operand localId="22" locator="21:158-21:169" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                       <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                          <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       </resultTypeSpecifier>
+                                       <operand path="period" scope="eDate" xsi:type="Property"/>
+                                    </operand>
+                                    <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                       <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                       <choice xsi:type="IntervalTypeSpecifier">
+                                          <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       </choice>
+                                       <choice xsi:type="IntervalTypeSpecifier">
+                                          <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                       </choice>
+                                    </asTypeSpecifier>
+                                 </operand>
+                              </operand>
+                           </operand>
+                        </operand>
+                        <operand localId="26" locator="21:175-21:180" resultTypeName="t:Quantity" value="1" unit="year" xsi:type="Quantity"/>
+                     </low>
+                     <high localId="33" locator="21:183-21:243" resultTypeName="t:Date" xsi:type="DateFrom">
+                        <operand localId="32" locator="21:193-21:243" resultTypeName="t:DateTime" xsi:type="Start">
+                           <operand localId="31" locator="21:202-21:243" name="ToInterval" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                              <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                              <operand xsi:type="As">
+                                 <operand localId="30" locator="21:230-21:241" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    </resultTypeSpecifier>
+                                    <operand path="period" scope="eDate" xsi:type="Property"/>
+                                 </operand>
+                                 <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                    <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                    <choice xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    </choice>
+                                    <choice xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                    </choice>
+                                 </asTypeSpecifier>
+                              </operand>
+                           </operand>
+                        </operand>
+                     </high>
+                  </operand>
+               </suchThat>
+            </relationship>
+            <return localId="38" locator="22:7-22:18">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="37" locator="22:14-22:18" resultTypeName="fhir:Encounter" name="eDate" xsi:type="AliasRef"/>
+            </return>
+         </expression>
+         <operand name="episodeDate">
+            <operandTypeSpecifier localId="8" locator="18:62-18:76" xsi:type="ListTypeSpecifier">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <elementType localId="7" locator="18:67-18:75" resultTypeName="fhir:Encounter" name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+            </operandTypeSpecifier>
+         </operand>
+         <operand name="comorbidConditions">
+            <operandTypeSpecifier localId="10" locator="18:98-18:112" xsi:type="ListTypeSpecifier">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <elementType localId="9" locator="18:103-18:111" resultTypeName="fhir:Condition" name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+            </operandTypeSpecifier>
+         </operand>
+      </def>
+      <def localId="61" locator="24:1-28:18" name="Has Competing Diagnosis History" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="61">
+               <a:s>define function &quot;Has Competing Diagnosis History&quot;(episodeDate </a:s>
+               <a:s r="42">
+                  <a:s>List&lt;</a:s>
+                  <a:s r="41">
+                     <a:s>Encounter</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+               <a:s>, competingConditions </a:s>
+               <a:s r="44">
+                  <a:s>List&lt;</a:s>
+                  <a:s r="43">
+                     <a:s>Condition</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+               <a:s>):
+  </a:s>
+               <a:s r="60">
+                  <a:s r="60">
+                     <a:s>
+                        <a:s r="46">
+                           <a:s r="45">
+                              <a:s>
+                                 <a:s>episodeDate</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> eDate</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+      </a:s>
+                     <a:s r="57">
+                        <a:s>with </a:s>
+                        <a:s r="48">
+                           <a:s r="47">
+                              <a:s>
+                                 <a:s>competingConditions</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> competcondition</a:s>
+                        </a:s>
+                        <a:s>
+        such that </a:s>
+                        <a:s r="56">
+                           <a:s r="51">
+                              <a:s>( </a:s>
+                              <a:s r="51">
+                                 <a:s r="49">
+                                    <a:s>QICoreCommon</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="51">
+                                    <a:s>&quot;ToPrevalenceInterval&quot; ( </a:s>
+                                    <a:s r="50">
+                                       <a:s>competcondition</a:s>
+                                    </a:s>
+                                    <a:s> )</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                           <a:s> </a:s>
+                           <a:s r="56">
+                              <a:s>starts </a:s>
+                              <a:s r="55">
+                                 <a:s>3 days</a:s>
+                              </a:s>
+                              <a:s> or less on or after day of</a:s>
+                           </a:s>
+                           <a:s> </a:s>
+                           <a:s r="54">
+                              <a:s>start of </a:s>
+                              <a:s r="53">
+                                 <a:s r="52">
+                                    <a:s>eDate</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="53">
+                                    <a:s>period</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+      </a:s>
+                     <a:s r="59">
+                        <a:s>return </a:s>
+                        <a:s r="58">
+                           <a:s>eDate</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="60" locator="25:3-28:18" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="46" locator="25:3-25:19" alias="eDate">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="45" locator="25:3-25:13" name="episodeDate" xsi:type="OperandRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </expression>
+            </source>
+            <relationship localId="57" locator="26:7-27:140" alias="competcondition" xsi:type="With">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="47" locator="26:12-26:30" name="competingConditions" xsi:type="OperandRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </expression>
+               <suchThat localId="56" locator="27:19-27:140" resultTypeName="t:Boolean" xsi:type="And">
+                  <operand locator="27:86-27:99" precision="Day" xsi:type="In">
+                     <operand locator="27:79-27:84" xsi:type="Start">
+                        <operand localId="51" locator="27:19-27:77" name="ToPrevalenceInterval" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                           <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                              <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <operand localId="50" locator="27:59-27:73" resultTypeName="fhir:Condition" name="competcondition" xsi:type="AliasRef"/>
+                        </operand>
+                     </operand>
+                     <operand locator="27:86-27:99" lowClosed="true" highClosed="true" xsi:type="Interval">
+                        <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                           <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <low localId="54" locator="27:120-27:140" resultTypeName="t:DateTime" xsi:type="Start">
+                           <operand localId="53" locator="27:129-27:140" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                              <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                              <operand path="period" scope="eDate" xsi:type="Property"/>
+                           </operand>
+                        </low>
+                        <high locator="27:120-27:140" xsi:type="Add">
+                           <operand localId="54" locator="27:120-27:140" resultTypeName="t:DateTime" xsi:type="Start">
+                              <operand localId="53" locator="27:129-27:140" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                                 <operand path="period" scope="eDate" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                           <operand localId="55" locator="27:86-27:91" resultTypeName="t:Quantity" value="3" unit="days" xsi:type="Quantity"/>
+                        </high>
+                     </operand>
+                  </operand>
+                  <operand locator="27:86-27:99" xsi:type="Not">
+                     <operand locator="27:86-27:99" xsi:type="IsNull">
+                        <operand localId="54" locator="27:120-27:140" resultTypeName="t:DateTime" xsi:type="Start">
+                           <operand localId="53" locator="27:129-27:140" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                              <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                              <operand path="period" scope="eDate" xsi:type="Property"/>
+                           </operand>
+                        </operand>
+                     </operand>
+                  </operand>
+               </suchThat>
+            </relationship>
+            <return localId="59" locator="28:7-28:18">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="58" locator="28:14-28:18" resultTypeName="fhir:Encounter" name="eDate" xsi:type="AliasRef"/>
+            </return>
+         </expression>
+         <operand name="episodeDate">
+            <operandTypeSpecifier localId="42" locator="24:63-24:77" xsi:type="ListTypeSpecifier">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <elementType localId="41" locator="24:68-24:76" resultTypeName="fhir:Encounter" name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+            </operandTypeSpecifier>
+         </operand>
+         <operand name="competingConditions">
+            <operandTypeSpecifier localId="44" locator="24:100-24:114" xsi:type="ListTypeSpecifier">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <elementType localId="43" locator="24:105-24:113" resultTypeName="fhir:Condition" name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+            </operandTypeSpecifier>
+         </operand>
+      </def>
+      <def localId="99" locator="30:1-35:7" name="Has Antibiotic Medication History" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="99">
+               <a:s>define function &quot;Has Antibiotic Medication History&quot;(episodeDate </a:s>
+               <a:s r="63">
+                  <a:s>List&lt;</a:s>
+                  <a:s r="62">
+                     <a:s>Encounter</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+               <a:s>, antibioticMedications </a:s>
+               <a:s r="65">
+                  <a:s>List&lt;</a:s>
+                  <a:s r="64">
+                     <a:s>MedicationRequest</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+               <a:s>):
+   </a:s>
+               <a:s r="98">
+                  <a:s r="98">
+                     <a:s>
+                        <a:s r="67">
+                           <a:s r="66">
+                              <a:s>
+                                 <a:s>episodeDate</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> DateOfEpisode</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    </a:s>
+                     <a:s r="97">
+                        <a:s>with </a:s>
+                        <a:s r="69">
+                           <a:s r="68">
+                              <a:s>
+                                 <a:s>antibioticMedications</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> ActiveMedication</a:s>
+                        </a:s>
+                        <a:s>
+      such that </a:s>
+                        <a:s r="96">
+                           <a:s>exists </a:s>
+                           <a:s r="95">
+                              <a:s>( </a:s>
+                              <a:s r="95">
+                                 <a:s>
+                                    <a:s r="71">
+                                       <a:s r="70">
+                                          <a:s>
+                                             <a:s>ActiveMedication.dosageInstruction.timing</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> T</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+          </a:s>
+                                 <a:s r="94">
+                                    <a:s>where </a:s>
+                                    <a:s r="94">
+                                       <a:s r="76">
+                                          <a:s>( </a:s>
+                                          <a:s r="76">
+                                             <a:s r="72">
+                                                <a:s>QICoreCommon</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="76">
+                                                <a:s>&quot;ToInterval&quot; ( </a:s>
+                                                <a:s r="75">
+                                                   <a:s r="74">
+                                                      <a:s r="73">
+                                                         <a:s>T</a:s>
+                                                      </a:s>
+                                                      <a:s>.</a:s>
+                                                      <a:s r="74">
+                                                         <a:s>repeat</a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                   <a:s>.</a:s>
+                                                   <a:s r="75">
+                                                      <a:s>bounds</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s> )</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s> )</a:s>
+                                       </a:s>
+                                       <a:s r="94"> overlaps day of </a:s>
+                                       <a:s r="93">
+                                          <a:s>Interval[</a:s>
+                                          <a:s r="84">
+                                             <a:s r="82">
+                                                <a:s>date from </a:s>
+                                                <a:s r="81">
+                                                   <a:s>start of </a:s>
+                                                   <a:s r="80">
+                                                      <a:s r="77">
+                                                         <a:s>QICoreCommon</a:s>
+                                                      </a:s>
+                                                      <a:s>.</a:s>
+                                                      <a:s r="80">
+                                                         <a:s>&quot;ToInterval&quot; ( </a:s>
+                                                         <a:s r="79">
+                                                            <a:s r="78">
+                                                               <a:s>DateOfEpisode</a:s>
+                                                            </a:s>
+                                                            <a:s>.</a:s>
+                                                            <a:s r="79">
+                                                               <a:s>period</a:s>
+                                                            </a:s>
+                                                         </a:s>
+                                                         <a:s> )</a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s> - </a:s>
+                                             <a:s r="83">
+                                                <a:s>30 days</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s>, </a:s>
+                                          <a:s r="92">
+                                             <a:s r="90">
+                                                <a:s>date from </a:s>
+                                                <a:s r="89">
+                                                   <a:s>start of </a:s>
+                                                   <a:s r="88">
+                                                      <a:s r="85">
+                                                         <a:s>QICoreCommon</a:s>
+                                                      </a:s>
+                                                      <a:s>.</a:s>
+                                                      <a:s r="88">
+                                                         <a:s>&quot;ToInterval&quot; ( </a:s>
+                                                         <a:s r="87">
+                                                            <a:s r="86">
+                                                               <a:s>DateOfEpisode</a:s>
+                                                            </a:s>
+                                                            <a:s>.</a:s>
+                                                            <a:s r="87">
+                                                               <a:s>period</a:s>
+                                                            </a:s>
+                                                         </a:s>
+                                                         <a:s> )</a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s> - </a:s>
+                                             <a:s r="91">
+                                                <a:s>1 day</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s>]</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      )</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="98" locator="31:4-35:7" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="67" locator="31:4-31:28" alias="DateOfEpisode">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="66" locator="31:4-31:14" name="episodeDate" xsi:type="OperandRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </expression>
+            </source>
+            <relationship localId="97" locator="32:5-35:7" alias="ActiveMedication" xsi:type="With">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="68" locator="32:10-32:30" name="antibioticMedications" xsi:type="OperandRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </expression>
+               <suchThat localId="96" locator="33:17-35:7" resultTypeName="t:Boolean" xsi:type="Exists">
+                  <operand localId="95" locator="33:24-35:7" xsi:type="Query">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Timing" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <source localId="71" locator="33:26-33:68" alias="T">
+                        <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Timing" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <expression localId="70" locator="33:26-33:66" xsi:type="Query">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:Timing" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <source alias="$this">
+                              <expression path="dosageInstruction" scope="ActiveMedication" xsi:type="Property"/>
+                           </source>
+                           <where xsi:type="Not">
+                              <operand xsi:type="IsNull">
+                                 <operand path="timing" xsi:type="Property">
+                                    <source name="$this" xsi:type="AliasRef"/>
+                                 </operand>
+                              </operand>
+                           </where>
+                           <return distinct="false">
+                              <expression path="timing" xsi:type="Property">
+                                 <source name="$this" xsi:type="AliasRef"/>
+                              </expression>
+                           </return>
+                        </expression>
+                     </source>
+                     <where localId="94" locator="34:11-34:250" resultTypeName="t:Boolean" precision="Day" xsi:type="Overlaps">
+                        <operand localId="76" locator="34:17-34:65" name="ToInterval" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                           <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                              <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <operand localId="75" locator="34:47-34:61" name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                              <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                 <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                              </resultTypeSpecifier>
+                              <operand path="bounds" xsi:type="Property">
+                                 <source localId="74" locator="34:47-34:54" resultTypeName="fhir:Timing.Repeat" path="repeat" scope="T" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                        </operand>
+                        <operand xsi:type="Interval">
+                           <low xsi:type="ToDateTime">
+                              <operand path="low" xsi:type="Property">
+                                 <source localId="93" locator="34:83-34:250" lowClosed="true" highClosed="true" xsi:type="Interval">
+                                    <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                                    </resultTypeSpecifier>
+                                    <low localId="84" locator="34:92-34:170" resultTypeName="t:Date" xsi:type="Subtract">
+                                       <operand localId="82" locator="34:92-34:160" resultTypeName="t:Date" xsi:type="DateFrom">
+                                          <operand localId="81" locator="34:102-34:160" resultTypeName="t:DateTime" xsi:type="Start">
+                                             <operand localId="80" locator="34:111-34:160" name="ToInterval" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                                                <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                                   <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                                </resultTypeSpecifier>
+                                                <operand xsi:type="As">
+                                                   <operand localId="79" locator="34:139-34:158" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                                      <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                                         <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                                      </resultTypeSpecifier>
+                                                      <operand path="period" scope="DateOfEpisode" xsi:type="Property"/>
+                                                   </operand>
+                                                   <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                                      <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                                      <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                                      <choice xsi:type="IntervalTypeSpecifier">
+                                                         <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                                      </choice>
+                                                      <choice xsi:type="IntervalTypeSpecifier">
+                                                         <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                                      </choice>
+                                                   </asTypeSpecifier>
+                                                </operand>
+                                             </operand>
+                                          </operand>
+                                       </operand>
+                                       <operand localId="83" locator="34:164-34:170" resultTypeName="t:Quantity" value="30" unit="days" xsi:type="Quantity"/>
+                                    </low>
+                                    <high localId="92" locator="34:173-34:249" resultTypeName="t:Date" xsi:type="Subtract">
+                                       <operand localId="90" locator="34:173-34:241" resultTypeName="t:Date" xsi:type="DateFrom">
+                                          <operand localId="89" locator="34:183-34:241" resultTypeName="t:DateTime" xsi:type="Start">
+                                             <operand localId="88" locator="34:192-34:241" name="ToInterval" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                                                <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                                   <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                                </resultTypeSpecifier>
+                                                <operand xsi:type="As">
+                                                   <operand localId="87" locator="34:220-34:239" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                                      <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                                         <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                                      </resultTypeSpecifier>
+                                                      <operand path="period" scope="DateOfEpisode" xsi:type="Property"/>
+                                                   </operand>
+                                                   <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                                      <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                                      <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                                      <choice xsi:type="IntervalTypeSpecifier">
+                                                         <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                                      </choice>
+                                                      <choice xsi:type="IntervalTypeSpecifier">
+                                                         <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                                      </choice>
+                                                   </asTypeSpecifier>
+                                                </operand>
+                                             </operand>
+                                          </operand>
+                                       </operand>
+                                       <operand localId="91" locator="34:245-34:249" resultTypeName="t:Quantity" value="1" unit="day" xsi:type="Quantity"/>
+                                    </high>
+                                 </source>
+                              </operand>
+                           </low>
+                           <lowClosedExpression path="lowClosed" xsi:type="Property">
+                              <source localId="93" locator="34:83-34:250" lowClosed="true" highClosed="true" xsi:type="Interval">
+                                 <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                                 <low localId="84" locator="34:92-34:170" resultTypeName="t:Date" xsi:type="Subtract">
+                                    <operand localId="82" locator="34:92-34:160" resultTypeName="t:Date" xsi:type="DateFrom">
+                                       <operand localId="81" locator="34:102-34:160" resultTypeName="t:DateTime" xsi:type="Start">
+                                          <operand localId="80" locator="34:111-34:160" name="ToInterval" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                                             <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                                <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                             </resultTypeSpecifier>
+                                             <operand xsi:type="As">
+                                                <operand localId="79" locator="34:139-34:158" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                                   <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                                      <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                                   </resultTypeSpecifier>
+                                                   <operand path="period" scope="DateOfEpisode" xsi:type="Property"/>
+                                                </operand>
+                                                <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                                   <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                                   <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                                   <choice xsi:type="IntervalTypeSpecifier">
+                                                      <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                                   </choice>
+                                                   <choice xsi:type="IntervalTypeSpecifier">
+                                                      <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                                   </choice>
+                                                </asTypeSpecifier>
+                                             </operand>
+                                          </operand>
+                                       </operand>
+                                    </operand>
+                                    <operand localId="83" locator="34:164-34:170" resultTypeName="t:Quantity" value="30" unit="days" xsi:type="Quantity"/>
+                                 </low>
+                                 <high localId="92" locator="34:173-34:249" resultTypeName="t:Date" xsi:type="Subtract">
+                                    <operand localId="90" locator="34:173-34:241" resultTypeName="t:Date" xsi:type="DateFrom">
+                                       <operand localId="89" locator="34:183-34:241" resultTypeName="t:DateTime" xsi:type="Start">
+                                          <operand localId="88" locator="34:192-34:241" name="ToInterval" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                                             <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                                <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                             </resultTypeSpecifier>
+                                             <operand xsi:type="As">
+                                                <operand localId="87" locator="34:220-34:239" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                                   <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                                      <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                                   </resultTypeSpecifier>
+                                                   <operand path="period" scope="DateOfEpisode" xsi:type="Property"/>
+                                                </operand>
+                                                <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                                   <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                                   <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                                   <choice xsi:type="IntervalTypeSpecifier">
+                                                      <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                                   </choice>
+                                                   <choice xsi:type="IntervalTypeSpecifier">
+                                                      <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                                   </choice>
+                                                </asTypeSpecifier>
+                                             </operand>
+                                          </operand>
+                                       </operand>
+                                    </operand>
+                                    <operand localId="91" locator="34:245-34:249" resultTypeName="t:Quantity" value="1" unit="day" xsi:type="Quantity"/>
+                                 </high>
+                              </source>
+                           </lowClosedExpression>
+                           <high xsi:type="ToDateTime">
+                              <operand path="high" xsi:type="Property">
+                                 <source localId="93" locator="34:83-34:250" lowClosed="true" highClosed="true" xsi:type="Interval">
+                                    <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                                    </resultTypeSpecifier>
+                                    <low localId="84" locator="34:92-34:170" resultTypeName="t:Date" xsi:type="Subtract">
+                                       <operand localId="82" locator="34:92-34:160" resultTypeName="t:Date" xsi:type="DateFrom">
+                                          <operand localId="81" locator="34:102-34:160" resultTypeName="t:DateTime" xsi:type="Start">
+                                             <operand localId="80" locator="34:111-34:160" name="ToInterval" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                                                <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                                   <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                                </resultTypeSpecifier>
+                                                <operand xsi:type="As">
+                                                   <operand localId="79" locator="34:139-34:158" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                                      <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                                         <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                                      </resultTypeSpecifier>
+                                                      <operand path="period" scope="DateOfEpisode" xsi:type="Property"/>
+                                                   </operand>
+                                                   <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                                      <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                                      <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                                      <choice xsi:type="IntervalTypeSpecifier">
+                                                         <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                                      </choice>
+                                                      <choice xsi:type="IntervalTypeSpecifier">
+                                                         <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                                      </choice>
+                                                   </asTypeSpecifier>
+                                                </operand>
+                                             </operand>
+                                          </operand>
+                                       </operand>
+                                       <operand localId="83" locator="34:164-34:170" resultTypeName="t:Quantity" value="30" unit="days" xsi:type="Quantity"/>
+                                    </low>
+                                    <high localId="92" locator="34:173-34:249" resultTypeName="t:Date" xsi:type="Subtract">
+                                       <operand localId="90" locator="34:173-34:241" resultTypeName="t:Date" xsi:type="DateFrom">
+                                          <operand localId="89" locator="34:183-34:241" resultTypeName="t:DateTime" xsi:type="Start">
+                                             <operand localId="88" locator="34:192-34:241" name="ToInterval" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                                                <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                                   <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                                </resultTypeSpecifier>
+                                                <operand xsi:type="As">
+                                                   <operand localId="87" locator="34:220-34:239" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                                      <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                                         <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                                      </resultTypeSpecifier>
+                                                      <operand path="period" scope="DateOfEpisode" xsi:type="Property"/>
+                                                   </operand>
+                                                   <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                                      <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                                      <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                                      <choice xsi:type="IntervalTypeSpecifier">
+                                                         <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                                      </choice>
+                                                      <choice xsi:type="IntervalTypeSpecifier">
+                                                         <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                                      </choice>
+                                                   </asTypeSpecifier>
+                                                </operand>
+                                             </operand>
+                                          </operand>
+                                       </operand>
+                                       <operand localId="91" locator="34:245-34:249" resultTypeName="t:Quantity" value="1" unit="day" xsi:type="Quantity"/>
+                                    </high>
+                                 </source>
+                              </operand>
+                           </high>
+                           <highClosedExpression path="highClosed" xsi:type="Property">
+                              <source localId="93" locator="34:83-34:250" lowClosed="true" highClosed="true" xsi:type="Interval">
+                                 <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                                 <low localId="84" locator="34:92-34:170" resultTypeName="t:Date" xsi:type="Subtract">
+                                    <operand localId="82" locator="34:92-34:160" resultTypeName="t:Date" xsi:type="DateFrom">
+                                       <operand localId="81" locator="34:102-34:160" resultTypeName="t:DateTime" xsi:type="Start">
+                                          <operand localId="80" locator="34:111-34:160" name="ToInterval" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                                             <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                                <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                             </resultTypeSpecifier>
+                                             <operand xsi:type="As">
+                                                <operand localId="79" locator="34:139-34:158" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                                   <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                                      <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                                   </resultTypeSpecifier>
+                                                   <operand path="period" scope="DateOfEpisode" xsi:type="Property"/>
+                                                </operand>
+                                                <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                                   <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                                   <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                                   <choice xsi:type="IntervalTypeSpecifier">
+                                                      <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                                   </choice>
+                                                   <choice xsi:type="IntervalTypeSpecifier">
+                                                      <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                                   </choice>
+                                                </asTypeSpecifier>
+                                             </operand>
+                                          </operand>
+                                       </operand>
+                                    </operand>
+                                    <operand localId="83" locator="34:164-34:170" resultTypeName="t:Quantity" value="30" unit="days" xsi:type="Quantity"/>
+                                 </low>
+                                 <high localId="92" locator="34:173-34:249" resultTypeName="t:Date" xsi:type="Subtract">
+                                    <operand localId="90" locator="34:173-34:241" resultTypeName="t:Date" xsi:type="DateFrom">
+                                       <operand localId="89" locator="34:183-34:241" resultTypeName="t:DateTime" xsi:type="Start">
+                                          <operand localId="88" locator="34:192-34:241" name="ToInterval" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                                             <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                                <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                             </resultTypeSpecifier>
+                                             <operand xsi:type="As">
+                                                <operand localId="87" locator="34:220-34:239" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                                   <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                                      <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                                   </resultTypeSpecifier>
+                                                   <operand path="period" scope="DateOfEpisode" xsi:type="Property"/>
+                                                </operand>
+                                                <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                                   <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                                   <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                                   <choice xsi:type="IntervalTypeSpecifier">
+                                                      <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                                   </choice>
+                                                   <choice xsi:type="IntervalTypeSpecifier">
+                                                      <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                                   </choice>
+                                                </asTypeSpecifier>
+                                             </operand>
+                                          </operand>
+                                       </operand>
+                                    </operand>
+                                    <operand localId="91" locator="34:245-34:249" resultTypeName="t:Quantity" value="1" unit="day" xsi:type="Quantity"/>
+                                 </high>
+                              </source>
+                           </highClosedExpression>
+                        </operand>
+                     </where>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+         <operand name="episodeDate">
+            <operandTypeSpecifier localId="63" locator="30:65-30:79" xsi:type="ListTypeSpecifier">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <elementType localId="62" locator="30:70-30:78" resultTypeName="fhir:Encounter" name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+            </operandTypeSpecifier>
+         </operand>
+         <operand name="antibioticMedications">
+            <operandTypeSpecifier localId="65" locator="30:104-30:126" xsi:type="ListTypeSpecifier">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <elementType localId="64" locator="30:109-30:125" resultTypeName="fhir:MedicationRequest" name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+            </operandTypeSpecifier>
+         </operand>
+      </def>
+   </statements>
+</library>
