@@ -58,13 +58,19 @@ class Measure
   def extract_data_requirements_from_statements
     statements.each do |statement|
       # If a statement doesn't have any path statments, only the 'codeProperty' will be added to the appropriate retrieve
-      if statement.path_statements.empty?
-        data_type_expressions = statement.elm.xpath(".//*[@xsi:type='Retrieve']")
-        data_type_expressions.each do |data_type_expression|
-          @elm_helper.add_attribute_to_appropriate_data_requirement(data_type_expression, nil)
-        end
+      data_type_expressions = statement.elm.xpath(".//*[@xsi:type='Retrieve']")
+      data_type_expressions.each do |data_type_expression|
+        @elm_helper.add_attribute_to_appropriate_data_requirement(data_type_expression, nil)
       end
+      # if statement.path_statements.empty?
+      #   @elm_helper.get_stuff_from_function(statement, nil) if elm_helper.function?(statement.elm)
+      # end
       statement.path_statements.each do |path_statement|
+        # If the path statement directly references function
+        @data_requirements.select { |dr| dr&.function_ref&.name == path_statement[:scope] }.each do |dr|
+          dr.add_attribute(path_statement[:path], path_statement[:valueset])
+        end
+
         if path_statement[:scope] == 'Patient' && path_statement[:path] == 'extension'
           data_requirement_to_update = @data_requirements.select do |dth|
             dth.data_type == 'Patient'
@@ -77,7 +83,7 @@ class Measure
         # The source can reference data types directly with a retrive
         data_type_expressions = alias_ex.xpath(".//*[@xsi:type='Retrieve']")
         data_type_expressions.each do |data_type_expression|
-          @elm_helper.add_attribute_to_appropriate_data_requirement(data_type_expression, path_statement[:path], path_statement[:extension])
+          @elm_helper.add_attribute_to_appropriate_data_requirement(data_type_expression, path_statement)
         end
 
         # If the statement is a function, the data types can come from the functions or statements that call the function
@@ -101,7 +107,7 @@ class Measure
   def data_requirements_from_statement(statement)
     data_type_operands = statement.elm.xpath(".//*[@xsi:type='Retrieve']")
     data_type_operands.each do |data_type_operand|
-      @data_requirements << DataRequirement.new(data_type_operand)
+      @data_requirements << DataRequirement.new(data_type_operand, statement)
     end
   end
 
@@ -116,6 +122,7 @@ class Measure
       function_alias_expressions = function_expression.xpath(".//elm:operand[@xsi:type='AliasRef']")
       function_dt_expressions = function_expression.xpath(".//elm:operand[@xsi:type='Retrieve']")
       function_op_expressions = function_expression.xpath(".//elm:operand[@xsi:type='OperandRef']")
+      function_property_expressions = function_expression.xpath(".//elm:operand[@xsi:type='Property']")
       function_alias_expressions.each do |function_alias_expression|
         @function_references << FunctionReference.new('AliasRef', function_alias_expression['name'],
                                                       function_expression['name'], function_library, statement)
@@ -130,6 +137,10 @@ class Measure
       end
       function_op_expressions.each do |function_op_expression|
         @function_references << FunctionReference.new('OperandRef', function_op_expression['name'],
+                                                      function_expression['name'], function_library, statement)
+      end
+      function_property_expressions.each do |function_property_expression|
+        @function_references << FunctionReference.new('OperandRef', "#{function_property_expression['scope']}.#{function_property_expression['path']}",
                                                       function_expression['name'], function_library, statement)
       end
     end
@@ -152,20 +163,38 @@ end
 
 class DataRequirement
   include ElmHelper
-  attr_accessor :data_type, :valueset, :template
+  attr_accessor :data_type, :valueset, :template, :function_ref
   attr_reader :attributes
 
-  def initialize(elm)
+  def initialize(elm, statement)
     @data_type = elm['dataType'].split(':')[1]
     @valueset = valueset_from_retrieve(elm)
     @template = elm['templateId']
     @attributes = []
+    @function_ref = Reference.new(statement.name, statement.library) if (function?(statement.elm) && @valueset.nil?)
   end
 
-  def add_attribute(attribute)
-    return if @attributes.include?(attribute)
+  def add_attribute(attribute, valueset = nil, literals = nil)
+    return unless attribute
+    if @attributes.any? { |att| att.name == attribute }
+      attribute_to_update = @attributes.select { |th| th.name == attribute }.first
+      attribute_to_update.valuesets << valueset if valueset
+      attribute_to_update.literals.merge(literals) if literals && !literals.empty?
+    else
+      @attributes << Attribute.new(attribute, valueset, literals)
+    end
+  end
+end
 
-    @attributes << attribute
+class Attribute
+  attr_accessor :name, :valuesets, :literals
+
+  def initialize(name, valueset = nil, literals = nil)
+    @name = name
+    @valuesets = Set.new
+    @literals = Set.new
+    @valuesets << valueset if valueset
+    @literals.merge(literals) if literals && !literals.empty?
   end
 end
 
@@ -199,22 +228,101 @@ class Statement
     extension_expressions = @elm.xpath(".//*[elm:source[@alias='$this']/elm:expression[@path='extension']]")
     extension_expressions.each do |extension_expression|
       path_expression = extension_expression.at_xpath(".//*[@xsi:type='Property']")
-      path_hashes << { path: path_expression['path'], scope: path_scope(path_expression),
-                       localId: path_expression['localId'], extension: extension_expression.at_xpath(".//elm:where/elm:operand[@xsi:type='Literal']")['value'] }
+      vs = if extension_expression.parent.parent.parent.at_xpath("@xsi:type")&.value == 'InValueSet'
+            extension_expression.parent.parent.parent.at_xpath('.//elm:valueset')['name']
+           else
+            nil
+           end
+      scope = path_scope(path_expression)
+      next unless scope
+      path_hashes << { path: path_expression['path'], scope: scope,
+                       localId: path_expression['localId'], extension: extension_expression.at_xpath(".//elm:where/elm:operand[@xsi:type='Literal']")['value'], valueset: vs }
     end
     path_expressions = @elm.xpath(".//*[@xsi:type='Property']")
+    operand_expressions = @elm.xpath(".//*[@xsi:type='OperandRef']")
+    if path_expressions.empty?
+      operand_expressions.each do |operand_expression|
+        subelements = []
+        vs = nil
+        literal = nil
+        if operand_expression.parent.at_xpath("@xsi:type")&.value == 'Equivalent'
+          ex = operand_expression.parent.xpath(".//*[@xsi:type='CodeRef']")
+          vs = expression_value_at_locator(ex, operand_expression['locator'], 'name')
+        end
+        path_hashes << { path: nil, scope: operand_expression['name'],
+                         localId: operand_expression['localId'], valueset: vs, literals: literal, subelements: subelements }
+      end
+    end
     path_expressions.each do |path_expression|
       next if path_expression['path'] == 'extension'
-      path_hashes << { path: path_expression['path'], scope: path_scope(path_expression),
-                       localId: path_expression['localId'] }
+
+      subelements = []
+      if path_expression.parent['alias']
+        parent_alias = path_expression.parent['alias']
+        subelement_expressions = path_expression.parent.parent.xpath(".//*[@xsi:type='Property' and @scope='#{parent_alias}']")
+        subelement_expressions.each do |subelement_expression|
+          subelement_vs = subelement_expression.parent.at_xpath('elm:valueset/@name')
+          subelement_vs ||= subelement_expression.parent.at_xpath("elm:operand[@xsi:type='CodeRef']/@name")
+          subelements << { name: subelement_expression['path'], valueset: subelement_vs&.value }
+        end
+      end
+      vs = nil
+      literals = []
+      if path_expression.name == 'code'            
+        vs = path_expression.parent.at_xpath('elm:valueset')['name']
+      elsif path_expression.parent.at_xpath("@xsi:type")&.value == 'Equivalent' || path_expression.parent.parent.at_xpath("@xsi:type")&.value == 'Equivalent' || path_expression.parent.parent.parent.at_xpath("@xsi:type")&.value == 'Equivalent'
+        if path_expression.parent.parent.parent.at_xpath(".//*[@xsi:type='CodeRef']")
+          ex = path_expression.parent.parent.parent.xpath(".//*[@xsi:type='CodeRef']")
+          vs = expression_value_at_locator(ex, nearest_locator(path_expression), 'name')
+        elsif path_expression.parent.parent.parent.at_xpath(".//*[@xsi:type='Literal']")
+          ex = path_expression.parent.parent.parent.xpath(".//*[@xsi:type='Literal']")
+          literals << expression_value_at_locator(ex, nearest_locator(path_expression), 'value')
+        end
+      elsif path_expression.parent.parent.at_xpath("@xsi:type")&.value == 'InValueSet' || path_expression.parent.parent.parent.at_xpath("@xsi:type")&.value == 'InValueSet'
+        ex = path_expression.parent.parent.parent.xpath('.//elm:valueset')
+        vs = expression_value_at_locator(ex, nearest_locator(path_expression), 'name')
+      elsif path_expression.parent.at_xpath("@xsi:type")&.value == 'Equal' || path_expression.parent.parent.at_xpath("@xsi:type")&.value == 'Equal'
+        ex = path_expression.parent.parent.xpath(".//*[@xsi:type='Literal']")
+        literals << expression_value_at_locator(ex, path_expression.parent['locator'], 'value') if ex
+      elsif path_expression.parent.parent.parent.at_xpath("@xsi:type")&.value == 'AnyInValueSet' || path_expression.parent.parent.parent.parent.at_xpath("@xsi:type")&.value == 'AnyInValueSet'
+        ex = path_expression.parent.parent.parent.parent.xpath('.//elm:valueset')
+        vs = expression_value_at_locator(ex, nearest_locator(path_expression), 'name')
+      elsif path_expression.parent.parent.at_xpath("@xsi:type")&.value == 'In'
+        literals.concat(path_expression.parent.parent.xpath(".//*[@xsi:type='Literal']").map { |pe| pe['value'] })
+      elsif path_expression.parent.parent.parent.parent.at_xpath("@xsi:type")&.value == 'Query'
+        if path_expression.parent.parent.parent.parent.at_xpath(".//*[@xsi:type='CodeRef']")
+          ex = path_expression.parent.parent.parent.parent.xpath(".//*[@xsi:type='CodeRef']")
+          vs = expression_value_at_locator(ex, nearest_locator(path_expression), 'name')
+        elsif path_expression.parent.parent.parent.parent.at_xpath(".//*[@xsi:type='Literal']")
+          ex = path_expression.parent.parent.parent.parent.xpath(".//*[@xsi:type='Literal']")
+          literals << expression_value_at_locator(ex, nearest_locator(path_expression), 'value')
+        end
+      end
+      scope = path_scope(path_expression)
+      next unless scope
+      path_hashes << { path: path_expression['path'], scope: scope,
+                       localId: path_expression['localId'], valueset: vs, literals: literals, subelements: subelements }
     end
     path_hashes
+  end
+
+  def nearest_locator(path_expression)
+    return path_expression['locator'] if path_expression['locator']
+    nearest_locator(path_expression.parent)
+  end
+
+  def expression_value_at_locator(expressions, referencing_locator, attribute)
+    expressions.each do |expression|
+      return expression[attribute] if referencing_locator && (nearest_locator(expression).split(':')[0].to_i == referencing_locator.split(':')[0].to_i)
+    end
+    nil
   end
 
   def path_scope(path_expression)
     return path_expression['scope'] if path_expression['scope']
     return if path_expression.at_xpath(".//elm:source[@xsi:type='Property']")
     return if path_expression.at_xpath(".//elm:source/@name").nil?
+    return path_expression.at_xpath(".//elm:source[@xsi:type='FunctionRef']/elm:operand/@name").value if path_expression.at_xpath(".//elm:source[@xsi:type='FunctionRef']/elm:operand/@name")
     return path_expression.at_xpath(".//elm:source/@name").value
   end
 end

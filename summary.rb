@@ -15,7 +15,7 @@ def compile_data_type_information_from_qdm_csv(file_path)
   CSV.foreach(file_path, col_sep: '|', headers: :first_row, return_headers: false) do |row|
     measure = row[0]
     qdm_profile_name = row[1]
-    qdm_attribute = row[4]
+    qdm_attribute = row[5]
 
     profile_name, attributes, qi_negation_profile_name = qdm_map.qdm_profile_attribute_as_qi_core(qdm_profile_name, qdm_attribute)
 
@@ -26,12 +26,12 @@ def compile_data_type_information_from_qdm_csv(file_path)
       attribute_measure_hash[hash_lookup][:measures] << measure unless attribute_measure_hash[hash_lookup][:measures].include? measure
 
       unless dt_hash[profile]
-        dt_hash[profile] = { qi_core_attributes: [], attributes: [], measures: [], valuesets: [], eh_count: 0, ec_count: 0, us_core_profile: '' }
+        dt_hash[profile] = { qi_core_attributes: [], attributes: [], measures: [], valuesets: { eh: {}, ep: {} }, eh_count: 0, ec_count: 0, us_core_profile: '' }
       end
 
       dt_hash[profile][:attributes] << attribute.qi_field
       dt_hash[profile][:measures] << measure
-      dt_hash[profile][:valuesets] << row[3]
+      eh_measure?(measure) ? dt_hash[profile][:valuesets][:eh][row[3]] = row[4] : dt_hash[profile][:valuesets][:ep][row[3]] = row[4]
     end
   end
   [dt_hash, attribute_measure_hash]
@@ -54,6 +54,7 @@ def generate_qdm_summary(bundle, qi_to_uscore_mappings)
     end
   end
   csv_for_qdm_hash(dt_hash, attribute_measure_hash, bundle)
+  valueset_csv_for_qdm_hash(dt_hash, attribute_measure_hash, bundle)
 end
 
 def csv_for_qdm_hash(dt_hash, attribute_measure_hash, bundle)
@@ -73,6 +74,23 @@ def csv_for_qdm_hash(dt_hash, attribute_measure_hash, bundle)
   end
 end
 
+def valueset_csv_for_qdm_hash(dt_hash, attribute_measure_hash, bundle)
+  headers = ['QI Core Profile', 'Program', 'Valueset Name', 'Valueset OID']
+  CSV.open("data_requirements/#{bundle}_valueset_summary.csv", 'w', col_sep: '|', write_headers: true,
+                                                           headers: headers) do |csv|
+    dt_hash.each do |profile_name, hash|
+      hash[:valuesets].each do |program, valueset_hash|
+        valueset_hash.each do |valueset_name, valueset_oid|
+          csv << [profile_name,
+                  program.to_s,
+                  valueset_name,
+                  valueset_oid]
+        end
+      end
+    end
+  end
+end
+
 def compile_data_type_information_from_qicore_csv(file_path)
   dt_hash = {}
   attribute_measure_hash = {}
@@ -80,7 +98,7 @@ def compile_data_type_information_from_qicore_csv(file_path)
   CSV.foreach(file_path, col_sep: '|', headers: :first_row, return_headers: false) do |row|
     measure = row[0]
     profile_url = row[2]
-    attribute = row[4]
+    attribute = row[5]
 
     hash_lookup = "#{profile_url}|#{attribute}"
     attribute_measure_hash[hash_lookup] = { measures: [] } unless attribute_measure_hash[hash_lookup]
@@ -165,7 +183,26 @@ def eh_measure?(measure_name)
                       'CMS819-v1-0-000-QDM-5-6.xml',
                       'CMS844-v3-1-000-QDM-5-6.xml',
                       'CMS529-v3-1-000-QDM-5-6.xml',
-                      'CMS996-v3-2-000-QDM-5-6.xml']
+                      'CMS996-v3-2-000-QDM-5-6.xml',
+                      'CMS1028-v2-0-000-QDM-5-6.xml',
+                      'CMS104-v12-0-000-QDM-5-6.xml',
+                      'CMS1074-v1-1-000-QDM-5-6.xml',
+                      'CMS108-v12-1-000-QDM-5-6.xml',
+                      'CMS1206-v1-1-000-QDM-5-6.xml',
+                      'CMS190-v12-1-000-QDM-5-6.xml',
+                      'CMS334-v5-1-000-QDM-5-6.xml',
+                      'CMS506-v6-1-000-QDM-5-6.xml',
+                      'CMS529-v4-0-000-QDM-5-6.xml',
+                      'CMS71-v13-1-000-QDM-5-6.xml',
+                      'CMS72-v12-0-000-QDM-5-6.xml',
+                      'CMS816-v3-0-000-QDM-5-6.xml',
+                      'CMS819-v2-0-000-QDM-5-6.xml',
+                      'CMS826-v1-1-000-QDM-5-6.xml',
+                      'CMS832-v1-2-000-QDM-5-6.xml',
+                      'CMS844-v4-0-000-QDM-5-6.xml',
+                      'CMS871-v3-0-000-QDM-5-6.xml',
+                      'CMS986-v2-1-000-QDM-5-6.xml',
+                      'CMS996-v4-0-000-QDM-5-6.xml']
   return true if eh_measure_names.include?(measure_name)
 end
 # rubocop:enable Metrics/MethodLength

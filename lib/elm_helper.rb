@@ -43,7 +43,7 @@ class MeasureElmHelper
                               alias_expression = referenced_statement.elm.xpath(".//elm:source[@alias]//*[@xsi:type='Retrieve']")
                             end
     data_type_expressions.each do |data_type_expression|
-      add_attribute_to_appropriate_data_requirement(data_type_expression, path_statement[:path], path_statement[:extension])
+      add_attribute_to_appropriate_data_requirement(data_type_expression, path_statement)
     end
     exp_ref_expressions = referenced_statement.elm.xpath(".//*[@xsi:type='ExpressionRef']")
     exp_ref_expressions.each do |exp_ref_expression|
@@ -53,16 +53,21 @@ class MeasureElmHelper
   end
 
   def get_stuff_from_function(statement, path_statement)
-    if !statement.elm.xpath('./elm:expression/elm:source').empty?
-      extract_information_from_function_source(statement, path_statement)
-    elsif path_statement[:scope].nil?
-      extract_information_from_function_body(statement, path_statement)
-    end
-    operand_name = statement.elm.at_xpath('./elm:operand/@name')&.value
-    return unless operand_name
-
-    if !statement.elm.xpath(".//elm:source[@name='#{operand_name}' and @xsi:type='OperandRef']").empty?
+    if path_statement[:path].nil?
+      operand_name = path_statement[:scope]
       extract_information_from_function_operand(statement, path_statement, operand_name)
+    else
+      if !statement.elm.xpath('./elm:expression/elm:source').empty?
+        extract_information_from_function_source(statement, path_statement)
+      elsif path_statement[:scope].nil?
+        extract_information_from_function_body(statement, path_statement)
+      end
+      operand_name = statement.elm.at_xpath('./elm:operand/@name')&.value
+      return unless operand_name
+
+      if !statement.elm.xpath(".//elm:source[@name='#{operand_name}' and @xsi:type='OperandRef']").empty?
+        extract_information_from_function_operand(statement, path_statement, operand_name)
+      end
     end
   end
 
@@ -73,8 +78,9 @@ class MeasureElmHelper
       elsif function_reference.type == 'Retrieve' && operand_name == path_statement[:scope]
         next unless attribute_appropriate_for_dt(function_reference.scope.data_type, path_statement[:path])
 
-        function_reference.scope.add_attribute(path_statement[:path])
+        function_reference.scope.add_attribute(path_statement[:path], path_statement[:valueset], path_statement[:literals])
       else
+        # byebug if operand_name == 'Strength'
         extract_information_from_function_parent(function_reference, path_statement)
       end
     end
@@ -92,7 +98,7 @@ class MeasureElmHelper
       elsif function_reference.type == 'Retrieve' && function_alias == path_statement[:scope]
         next unless attribute_appropriate_for_dt(function_reference.scope.data_type, path_statement[:path])
 
-        function_reference.scope.add_attribute(path_statement[:path])
+        function_reference.scope.add_attribute(path_statement[:path], path_statement[:valueset], path_statement[:literals])
       else
         extract_information_from_function_parent(function_reference, path_statement)
       end
@@ -107,7 +113,7 @@ class MeasureElmHelper
       when 'Retrieve'
         next unless attribute_appropriate_for_dt(function_reference.scope.data_type, path_statement[:path])
 
-        function_reference.scope.add_attribute(path_statement[:path])
+        function_reference.scope.add_attribute(path_statement[:path], path_statement[:valueset], path_statement[:literals])
       else
         extract_information_from_function_parent(function_reference, path_statement)
       end
@@ -118,7 +124,7 @@ class MeasureElmHelper
     alias_expression = function_reference.og_statement.elm.xpath(".//elm:source[@alias='#{function_reference.scope}'] | .//elm:relationship[@alias='#{function_reference.scope}']")
     data_type_expressions = alias_expression.xpath(".//*[@xsi:type='Retrieve']")
     data_type_expressions.each do |data_type_expression|
-      add_attribute_to_appropriate_data_requirement(data_type_expression, path_statement[:path], path_statement[:extension])
+      add_attribute_to_appropriate_data_requirement(data_type_expression, path_statement)
     end
 
     exp_ref_expressions = alias_expression.xpath(".//*[@xsi:type='ExpressionRef']")
@@ -134,19 +140,33 @@ class MeasureElmHelper
       end
     end
     parents.each do |parent|
+      if path_statement[:path].nil?
+        new_scope, new_path = function_reference.scope.split('.')
+        path_statement[:path] = new_path
+        path_statement[:scope] = new_scope
+      end
       get_stuff_from_function(parent, path_statement)
     end
   end
 
-  def add_attribute_to_appropriate_data_requirement(data_type_expression, attribute, extension = nil)
+  def add_attribute_to_appropriate_data_requirement(data_type_expression, path_statement)
     dt = data_type_expression['dataType'].split(':')[1]
     data_requirement_to_update = @measure.data_requirements.select do |dth|
       dth.data_type == dt && dth.valueset == valueset_from_retrieve(data_type_expression) && data_type_expression['templateId'] == dth.template
     end.first
-    data_requirement_to_update.add_attribute(data_type_expression['codeProperty'])
-    return unless attribute && attribute_appropriate_for_dt(data_requirement_to_update.data_type, attribute)
+    data_requirement_to_update.add_attribute(data_type_expression['codeProperty'], valueset_from_retrieve(data_type_expression))
+    return unless path_statement && attribute_appropriate_for_dt(data_requirement_to_update.data_type, path_statement[:path])
 
-    extension ? data_requirement_to_update.add_attribute(extension) : data_requirement_to_update.add_attribute(attribute)
+    if path_statement[:extension]
+      data_requirement_to_update.add_attribute(path_statement[:path], path_statement[:valueset], path_statement[:literals])
+    else
+      data_requirement_to_update.add_attribute(path_statement[:path], path_statement[:valueset], path_statement[:literals])
+    end
+
+    path_statement[:subelements]&.each do |subelement|
+      subelement_name = "#{path_statement[:path]}.#{subelement[:name]}"
+      data_requirement_to_update.add_attribute(subelement_name, subelement[:valueset])
+    end
   end
 
   def establish_function_hierarchy

@@ -20,6 +20,7 @@ def generate_elm_data_csv(bundle)
     measure = Measure.new(measure_artifacts[:root], data_model)
 
     dependencies = []
+    # next unless measure_artifacts[:root] == 'HospitalHarmOpioidRelatedAdverseEventsFHIR-0.0.000.xml'
     root_file_path = "measures/#{bundle}/#{measure_artifacts[:measure_folder]}/#{measure_artifacts[:root]}"
     parse_statements_from_root_file(measure, root_file_path, dependencies)
 
@@ -101,11 +102,12 @@ end
 def output_csv_for_measure(measure)
   CSV.open("data_requirements/by_measure/#{measure.root_file}.csv", 'w', col_sep: '|') do |csv|
     measure.data_requirements.each do |data_requirement|
-      # csv << [data_type_hash[:dataType],data_type_hash[:vs_name], 'code']
       data_requirement.attributes.each do |attribute|
-        next if attribute.nil?
+        next unless attribute.name
 
-        csv << [data_requirement.data_type, data_requirement.template, data_requirement.valueset, attribute]
+        attribute.valuesets.each do |att_valueset, att|
+          csv << [data_requirement.data_type, data_requirement.template, measure.valuesets[att_valueset], attribute]
+        end
       end
     end
   end
@@ -118,17 +120,40 @@ def output_csv_for_qdm_measures(measures, bundle)
   CSV.open("data_requirements/#{bundle}_all.csv", 'w', col_sep: '|', write_headers: true,
                                                        headers: headers) do |combined_csv|
     measures.each do |measure|
+      already_printed = []
       measure.data_requirements.each do |data_requirement|
-        data_requirement.attributes << 'qdmcontext'
-        data_requirement.attributes.compact.each do |attribute|
+        data_requirement.add_attribute('qdmcontext')
+        data_requirement.attributes.each do |attribute|
+          next unless attribute.name
 
           qi_profile_name, qi_attributes, qi_negation_profile_name = qdm_map.qdm_profile_attribute_as_qi_core(data_requirement.data_type,
-                                                                                                              attribute)
-          profile = data_requirement.attributes.any? { |att| att == 'negationRationale' } ? qi_negation_profile_name : qi_profile_name
+                                                                                                              attribute.name.split('.')[0])
+          profile = data_requirement.attributes.any? { |attribute| attribute.name == 'negationRationale' } ? qi_negation_profile_name : qi_profile_name
           qi_attributes&.each do |qi_attribute|
-            combined_csv << [measure.root_file, data_requirement.data_type, data_requirement.template,
-                             data_requirement.valueset, measure.valuesets[data_requirement.valueset],
-                             attribute, profile, qi_attribute.qi_field.gsub('[x]', '')]
+            attribute.valuesets.each do |valueset|
+              string_rep = "#{measure.root_file}#{data_requirement.data_type}#{valueset}#{attribute.name}"
+              next if already_printed.any? { |ap| ap == string_rep }
+
+              already_printed << string_rep
+              combined_csv << [measure.root_file, data_requirement.data_type, data_requirement.template, valueset,
+                               measure.valuesets[valueset], attribute.name, profile, qi_attribute.qi_field.gsub('[x]', '')]
+            end
+            attribute.literals.each do |literal|
+              string_rep = "#{measure.root_file}#{data_requirement.data_type}#{literal}#{attribute.name}"
+              next if already_printed.any? { |ap| ap == string_rep }
+
+              already_printed << string_rep
+              combined_csv << [measure.root_file, data_requirement.data_type, data_requirement.template, literal,
+                               nil, attribute.name, profile, qi_attribute.qi_field.gsub('[x]', '')]
+            end
+            if attribute.literals.empty? && attribute.valuesets.empty?
+              string_rep = "#{measure.root_file}#{data_requirement.data_type}#{attribute.name}"
+              next if already_printed.any? { |ap| ap == string_rep }
+
+              already_printed << string_rep
+              combined_csv << [measure.root_file, data_requirement.data_type, data_requirement.template, nil,
+                               nil, attribute.name, profile, qi_attribute.qi_field.gsub('[x]', '')]
+            end
           end
         end
       end
@@ -142,13 +167,33 @@ def output_csv_for_fhir_measures(measures, bundle)
   CSV.open("data_requirements/#{bundle}_all.csv", 'w', col_sep: '|', write_headers: true,
                                                        headers: headers) do |combined_csv|
     measures.each do |measure|
+      already_printed = []
       measure.data_requirements.each do |data_requirement|
-        # csv << [folder, data_type_hash[:dataType],data_type_hash[:vs_name], 'code']
         data_requirement.attributes.each do |attribute|
-          next if attribute.nil?
+          attribute.valuesets.each do |valueset|
+            string_rep = "#{measure.root_file}#{data_requirement.data_type}#{valueset}#{attribute.name}"
+            next if already_printed.any? { |ap| ap == string_rep }
 
-          combined_csv << [measure.root_file, data_requirement.data_type, data_requirement.template, data_requirement.valueset,
-                           measure.valuesets[data_requirement.valueset], attribute]
+            already_printed << string_rep
+            combined_csv << [measure.root_file, data_requirement.data_type, data_requirement.template, valueset,
+                             measure.valuesets[valueset], attribute.name]
+          end
+          attribute.literals.each do |literal|
+            string_rep = "#{measure.root_file}#{data_requirement.data_type}#{literal}#{attribute.name}"
+            next if already_printed.any? { |ap| ap == string_rep }
+
+            already_printed << string_rep
+            combined_csv << [measure.root_file, data_requirement.data_type, data_requirement.template, literal,
+                             nil, attribute.name]
+          end
+          if attribute.literals.empty? && attribute.valuesets.empty?
+            string_rep = "#{measure.root_file}#{data_requirement.data_type}#{attribute.name}"
+            next if already_printed.any? { |ap| ap == string_rep }
+
+            already_printed << string_rep
+            combined_csv << [measure.root_file, data_requirement.data_type, data_requirement.template, nil,
+                             nil, attribute.name]
+          end
         end
       end
     end
