@@ -20,7 +20,7 @@ def generate_elm_data_csv(bundle)
     measure = Measure.new(measure_artifacts[:root], data_model)
 
     dependencies = []
-    # next unless measure_artifacts[:root] == 'HospitalHarmOpioidRelatedAdverseEventsFHIR-0.0.000.xml'
+    # next unless measure_artifacts[:root] == 'AppropriateTestingforPharyngitisFHIR-0.0.000.xml'
     root_file_path = "measures/#{bundle}/#{measure_artifacts[:measure_folder]}/#{measure_artifacts[:root]}"
     parse_statements_from_root_file(measure, root_file_path, dependencies)
 
@@ -138,6 +138,14 @@ def output_csv_for_qdm_measures(measures, bundle)
               combined_csv << [measure.root_file, data_requirement.data_type, data_requirement.template, valueset,
                                measure.valuesets[valueset], attribute.name, profile, qi_attribute.qi_field.gsub('[x]', '')]
             end
+            attribute.codes.each do |code|
+              string_rep = "#{measure.root_file}#{data_requirement.data_type}#{code}#{attribute.name}"
+              next if already_printed.any? { |ap| ap == string_rep }
+
+              already_printed << string_rep
+              combined_csv << [measure.root_file, data_requirement.data_type, data_requirement.template, code,
+                               measure.valuesets[code], attribute.name, profile, qi_attribute.qi_field.gsub('[x]', '')]
+            end
             attribute.literals.each do |literal|
               string_rep = "#{measure.root_file}#{data_requirement.data_type}#{literal}#{attribute.name}"
               next if already_printed.any? { |ap| ap == string_rep }
@@ -146,7 +154,7 @@ def output_csv_for_qdm_measures(measures, bundle)
               combined_csv << [measure.root_file, data_requirement.data_type, data_requirement.template, literal,
                                nil, attribute.name, profile, qi_attribute.qi_field.gsub('[x]', '')]
             end
-            if attribute.literals.empty? && attribute.valuesets.empty?
+            if attribute.literals.empty? && attribute.valuesets.empty? && attribute.codes.empty?
               string_rep = "#{measure.root_file}#{data_requirement.data_type}#{attribute.name}"
               next if already_printed.any? { |ap| ap == string_rep }
 
@@ -168,7 +176,16 @@ def output_csv_for_fhir_measures(measures, bundle)
                                                        headers: headers) do |combined_csv|
     measures.each do |measure|
       already_printed = []
+      # puts '--------------------------------------------------------------------------------'
+      # puts measure.root_file
+      measure_lib = FHIR::Library.new('name' => measure.root_file, 'status' => 'draft', 'type' => FHIR::CodeableConcept.new('coding' => FHIR::Coding.new('code' => 'module-definition', 'system' => 'http://terminology.hl7.org/CodeSystem/library-type')))
       measure.data_requirements.each do |data_requirement|
+        unless data_requirement.attributes.empty?
+          fhir_dr = data_requirement.as_fhir_dr(measure)
+          measure_lib.dataRequirement << fhir_dr
+          # puts data_requirement.to_type_fiter(fhir_dr)
+        end
+
         data_requirement.attributes.each do |attribute|
           attribute.valuesets.each do |valueset|
             string_rep = "#{measure.root_file}#{data_requirement.data_type}#{valueset}#{attribute.name}"
@@ -178,6 +195,14 @@ def output_csv_for_fhir_measures(measures, bundle)
             combined_csv << [measure.root_file, data_requirement.data_type, data_requirement.template, valueset,
                              measure.valuesets[valueset], attribute.name]
           end
+          attribute.codes.each do |code|
+            string_rep = "#{measure.root_file}#{data_requirement.data_type}#{code}#{attribute.name}"
+            next if already_printed.any? { |ap| ap == string_rep }
+
+            already_printed << string_rep
+            combined_csv << [measure.root_file, data_requirement.data_type, data_requirement.template, code,
+                             measure.valuesets[code], attribute.name]
+          end
           attribute.literals.each do |literal|
             string_rep = "#{measure.root_file}#{data_requirement.data_type}#{literal}#{attribute.name}"
             next if already_printed.any? { |ap| ap == string_rep }
@@ -186,16 +211,18 @@ def output_csv_for_fhir_measures(measures, bundle)
             combined_csv << [measure.root_file, data_requirement.data_type, data_requirement.template, literal,
                              nil, attribute.name]
           end
-          if attribute.literals.empty? && attribute.valuesets.empty?
+          if attribute.literals.empty? && attribute.valuesets.empty? && attribute.codes.empty?
             string_rep = "#{measure.root_file}#{data_requirement.data_type}#{attribute.name}"
             next if already_printed.any? { |ap| ap == string_rep }
 
             already_printed << string_rep
             combined_csv << [measure.root_file, data_requirement.data_type, data_requirement.template, nil,
-                             nil, attribute.name]
+                             nil, attribute.name, attribute.mp_constrained]
           end
         end
       end
+      # puts measure_lib.to_json
+      File.write("data_requirements/library/#{measure.root_file}.json", JSON.dump(measure_lib))
     end
   end
 end

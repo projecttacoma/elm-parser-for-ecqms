@@ -1,4 +1,7 @@
 # frozen_string_literal: true
+require 'fhir_models'
+require 'uri'
+require 'addressable/uri'
 
 class Measure
   include ElmHelper
@@ -66,6 +69,15 @@ class Measure
       #   @elm_helper.get_stuff_from_function(statement, nil) if elm_helper.function?(statement.elm)
       # end
       statement.path_statements.each do |path_statement|
+        comp_alias_ex = statement.elm.xpath(".//elm:source[@alias='#{path_statement[:comparision_scope]}'] | .//elm:relationship[@alias='#{path_statement[:comparision_scope]}']")
+        exp_ref_expressions = comp_alias_ex.xpath(".//*[@xsi:type='ExpressionRef']")
+        exp_ref_expressions.each do |exp_ref_expression|
+          comp_statement = statements.select { |st| st.name == exp_ref_expression['name'] }.first
+          com_path_statement = comp_statement.path_statements.select { |ps| ps[:path] == path_statement[:comparision_path] }.first
+          next unless com_path_statement
+          path_statement[:mp_constrained] = com_path_statement[:mp_constrained]
+        end
+
         # If the path statement directly references function
         @data_requirements.select { |dr| dr&.function_ref&.name == path_statement[:scope] }.each do |dr|
           dr.add_attribute(path_statement[:path], path_statement[:valueset])
@@ -174,27 +186,112 @@ class DataRequirement
     @function_ref = Reference.new(statement.name, statement.library) if (function?(statement.elm) && @valueset.nil?)
   end
 
-  def add_attribute(attribute, valueset = nil, literals = nil)
+  def add_attribute(attribute, valueset = nil, code = nil, literals = nil, mp_constrained = false)
     return unless attribute
     if @attributes.any? { |att| att.name == attribute }
       attribute_to_update = @attributes.select { |th| th.name == attribute }.first
       attribute_to_update.valuesets << valueset if valueset
       attribute_to_update.literals.merge(literals) if literals && !literals.empty?
+      attribute_to_update.codes << code if code
+      attribute_to_update.mp_constrained = mp_constrained unless attribute_to_update.mp_constrained
     else
-      @attributes << Attribute.new(attribute, valueset, literals)
+      @attributes << Attribute.new(attribute, valueset, code, literals, mp_constrained)
     end
+  end
+
+  def as_fhir_dr(measure)
+    dr = FHIR::DataRequirement.new
+    dr.type = @data_type
+    @attributes.each do |att|
+      dr.mustSupport << att.name unless att.name == 'extension'
+      if att.mp_constrained
+        df = FHIR::DataRequirement::DateFilter.new
+        df.path = att.name
+        df.valuePeriod = FHIR::Period.new('start' => '2019-01-01T00:00:00.000Z', 'end' => '2019-12-31T00:00:00.000Z')
+        dr.dateFilter << df
+      end
+      if att.valuesets.size.positive?
+        cf = FHIR::DataRequirement::CodeFilter.new
+        cf.path = att.name
+        att.valuesets.each do |vs|
+          cf.valueSet = measure.valuesets[vs]
+        end
+        dr.codeFilter << cf
+      end
+      if att.codes.size.positive?
+        cf = FHIR::DataRequirement::CodeFilter.new
+        cf.path = att.name
+        att.codes.each do |code|
+          next unless code
+          cv, cs = measure.valuesets[code].split(':')
+          cd = FHIR::Coding.new
+          cd.code = cv
+          cd.system = cs
+          cf.code << cd
+        end
+        dr.codeFilter << cf unless cf.code.empty?
+      end
+      if att.literals.size.positive?
+        cf = FHIR::DataRequirement::CodeFilter.new
+        cf.path = att.name
+        att.literals.each do |lit|
+          next unless lit
+          cd = FHIR::Coding.new
+          cd.code = lit
+          cf.code << cd
+        end
+        dr.codeFilter << cf unless cf.code.empty?
+      end
+    end
+    dr
+  end
+
+  def to_type_fiter(data_requirement)
+    query_string = "#{data_requirement.type}?"
+    first_param = true
+    parameters = []
+    data_requirement.codeFilter.each do |code_filter|
+      next if code_filter.path == 'extension'
+      if code_filter.valueSet
+        query_string += "&" unless first_param
+        first_param = false
+        query_string += "#{code_filter.path}:in="
+        query_string += code_filter.valueSet
+      end
+      if !code_filter.code.empty?
+        query_string += "&" unless first_param
+        first_param = false
+        query_string += "#{code_filter.path}="
+        query_string += code_filter.code.first.code
+      end
+    end
+    data_requirement.dateFilter.each do |date_filter|
+      query_string += "&" unless first_param
+      first_param = false
+      query_string += "#{date_filter.path}="
+      query_string += "ge#{date_filter.valuePeriod.start}"
+      query_string += "&" 
+      query_string += "#{date_filter.path}="
+      query_string += "le#{date_filter.valuePeriod.end}"
+    end
+    return unless query_string.length.positive?
+    return query_string
+    # puts Addressable::URI.encode_component(query_string, Addressable::URI::CharacterClasses::UNRESERVED)
   end
 end
 
 class Attribute
-  attr_accessor :name, :valuesets, :literals
+  attr_accessor :name, :valuesets, :codes, :literals, :mp_constrained
 
-  def initialize(name, valueset = nil, literals = nil)
+  def initialize(name, valueset = nil, code = nil, literals = nil, mp_constrained = false)
     @name = name
     @valuesets = Set.new
+    @codes = Set.new
     @literals = Set.new
     @valuesets << valueset if valueset
+    @codes << code if code
     @literals.merge(literals) if literals && !literals.empty?
+    @mp_constrained = mp_constrained
   end
 end
 
@@ -243,14 +340,14 @@ class Statement
     if path_expressions.empty?
       operand_expressions.each do |operand_expression|
         subelements = []
-        vs = nil
+        code = nil
         literal = nil
         if operand_expression.parent.at_xpath("@xsi:type")&.value == 'Equivalent'
           ex = operand_expression.parent.xpath(".//*[@xsi:type='CodeRef']")
-          vs = expression_value_at_locator(ex, operand_expression['locator'], 'name')
+          code = expression_value_at_locator(ex, operand_expression['locator'], 'name')
         end
         path_hashes << { path: nil, scope: operand_expression['name'],
-                         localId: operand_expression['localId'], valueset: vs, literals: literal, subelements: subelements }
+                         localId: operand_expression['localId'], code: code, literals: literal, subelements: subelements }
       end
     end
     path_expressions.each do |path_expression|
@@ -262,18 +359,40 @@ class Statement
         subelement_expressions = path_expression.parent.parent.xpath(".//*[@xsi:type='Property' and @scope='#{parent_alias}']")
         subelement_expressions.each do |subelement_expression|
           subelement_vs = subelement_expression.parent.at_xpath('elm:valueset/@name')
-          subelement_vs ||= subelement_expression.parent.at_xpath("elm:operand[@xsi:type='CodeRef']/@name")
-          subelements << { name: subelement_expression['path'], valueset: subelement_vs&.value }
+          subelement_code = subelement_expression.parent.at_xpath("elm:operand[@xsi:type='CodeRef']/@name") unless
+          subelements << { name: subelement_expression['path'], valueset: subelement_vs&.value, code: subelement_code }
         end
       end
       vs = nil
+      code = nil
       literals = []
-      if path_expression.name == 'code'            
+      scope = path_scope(path_expression)
+
+      if path_expression.parent.xpath(".//*[@xsi:type='NamedTypeSpecifier' and @name='t:DateTime']")
+        if ['IncludedIn', 'In'].include? path_expression.parent.at_xpath("@xsi:type")&.value
+          mp_constrained = !path_expression.parent.xpath(".//*[@xsi:type='ParameterRef' and @name='Measurement Period']").empty?
+          c_scope, c_path = comparision_scope(path_expression.parent, scope)
+        elsif ['IncludedIn', 'In'].include? path_expression.parent.parent.at_xpath("@xsi:type")&.value
+          mp_constrained = !path_expression.parent.parent.xpath(".//*[@xsi:type='ParameterRef' and @name='Measurement Period']").empty?
+          c_scope, c_path = comparision_scope(path_expression.parent.parent, scope)
+        elsif ['IncludedIn', 'In'].include? path_expression.parent.parent.parent.at_xpath("@xsi:type")&.value
+          mp_constrained = !path_expression.parent.parent.parent.xpath(".//*[@xsi:type='ParameterRef' and @name='Measurement Period']").empty?
+          c_scope, c_path = comparision_scope(path_expression.parent.parent.parent, scope)
+        elsif ['IncludedIn', 'In'].include? path_expression.parent.parent.parent.parent.at_xpath("@xsi:type")&.value
+          mp_constrained = !path_expression.parent.parent.parent.parent.xpath(".//*[@xsi:type='ParameterRef' and @name='Measurement Period']").empty?
+          c_scope, c_path = comparision_scope(path_expression.parent.parent.parent.parent, scope)
+        elsif path_expression.parent.parent.parent.parent.name != 'document' && (['IncludedIn', 'In'].include? path_expression.parent.parent.parent.parent.parent.at_xpath("@xsi:type")&.value)
+          mp_constrained = !path_expression.parent.parent.parent.parent.parent.xpath(".//*[@xsi:type='ParameterRef' and @name='Measurement Period']").empty?
+        elsif path_expression.parent.parent.parent.parent.name != 'document' && (['IncludedIn', 'In'].include? path_expression.parent.parent.parent.parent&.parent&.parent&.at_xpath("@xsi:type")&.value)
+          mp_constrained = !path_expression.parent.parent.parent.parent.parent.parent.xpath(".//*[@xsi:type='ParameterRef' and @name='Measurement Period']").empty?
+        end
+      end
+      if path_expression.name == 'code'
         vs = path_expression.parent.at_xpath('elm:valueset')['name']
       elsif path_expression.parent.at_xpath("@xsi:type")&.value == 'Equivalent' || path_expression.parent.parent.at_xpath("@xsi:type")&.value == 'Equivalent' || path_expression.parent.parent.parent.at_xpath("@xsi:type")&.value == 'Equivalent'
         if path_expression.parent.parent.parent.at_xpath(".//*[@xsi:type='CodeRef']")
           ex = path_expression.parent.parent.parent.xpath(".//*[@xsi:type='CodeRef']")
-          vs = expression_value_at_locator(ex, nearest_locator(path_expression), 'name')
+          code = expression_value_at_locator(ex, nearest_locator(path_expression), 'name')
         elsif path_expression.parent.parent.parent.at_xpath(".//*[@xsi:type='Literal']")
           ex = path_expression.parent.parent.parent.xpath(".//*[@xsi:type='Literal']")
           literals << expression_value_at_locator(ex, nearest_locator(path_expression), 'value')
@@ -292,18 +411,26 @@ class Statement
       elsif path_expression.parent.parent.parent.parent.at_xpath("@xsi:type")&.value == 'Query'
         if path_expression.parent.parent.parent.parent.at_xpath(".//*[@xsi:type='CodeRef']")
           ex = path_expression.parent.parent.parent.parent.xpath(".//*[@xsi:type='CodeRef']")
-          vs = expression_value_at_locator(ex, nearest_locator(path_expression), 'name')
+          code = expression_value_at_locator(ex, nearest_locator(path_expression), 'name')
         elsif path_expression.parent.parent.parent.parent.at_xpath(".//*[@xsi:type='Literal']")
           ex = path_expression.parent.parent.parent.parent.xpath(".//*[@xsi:type='Literal']")
           literals << expression_value_at_locator(ex, nearest_locator(path_expression), 'value')
         end
       end
-      scope = path_scope(path_expression)
+
       next unless scope
-      path_hashes << { path: path_expression['path'], scope: scope,
-                       localId: path_expression['localId'], valueset: vs, literals: literals, subelements: subelements }
+      path_hashes << { path: path_expression['path'], scope: scope, comparision_scope: c_scope, comparision_path: c_path,
+                       localId: path_expression['localId'], valueset: vs, code: code, literals: literals, subelements: subelements, mp_constrained: mp_constrained }
     end
     path_hashes
+  end
+
+  def comparision_scope(expression, original_scope)
+    comparision_expressions = expression.xpath(".//*[@xsi:type='Property']")
+    comparision_expressions.each do |comparision_expression|
+      next if comparision_expression['scope'] == original_scope
+      return [comparision_expression['scope'], comparision_expression['path']]
+    end
   end
 
   def nearest_locator(path_expression)

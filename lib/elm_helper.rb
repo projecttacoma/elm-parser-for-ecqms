@@ -23,6 +23,14 @@ module ElmHelper
     end
     vs_name
   end
+
+  def retrieve_valueset?(data_type_expression)
+    if data_type_expression.at_xpath('elm:codes')
+      vs_name = data_type_expression.at_xpath('elm:codes')['name']
+      return true if vs_name
+    end
+    false
+  end
 end
 
 class MeasureElmHelper
@@ -78,7 +86,7 @@ class MeasureElmHelper
       elsif function_reference.type == 'Retrieve' && operand_name == path_statement[:scope]
         next unless attribute_appropriate_for_dt(function_reference.scope.data_type, path_statement[:path])
 
-        function_reference.scope.add_attribute(path_statement[:path], path_statement[:valueset], path_statement[:literals])
+        function_reference.scope.add_attribute(path_statement[:path], path_statement[:valueset], path_statement[:code], path_statement[:literals], path_statement[:mp_constrained])
       else
         # byebug if operand_name == 'Strength'
         extract_information_from_function_parent(function_reference, path_statement)
@@ -98,7 +106,7 @@ class MeasureElmHelper
       elsif function_reference.type == 'Retrieve' && function_alias == path_statement[:scope]
         next unless attribute_appropriate_for_dt(function_reference.scope.data_type, path_statement[:path])
 
-        function_reference.scope.add_attribute(path_statement[:path], path_statement[:valueset], path_statement[:literals])
+        function_reference.scope.add_attribute(path_statement[:path], path_statement[:valueset], path_statement[:code], path_statement[:literals], path_statement[:mp_constrained])
       else
         extract_information_from_function_parent(function_reference, path_statement)
       end
@@ -113,7 +121,7 @@ class MeasureElmHelper
       when 'Retrieve'
         next unless attribute_appropriate_for_dt(function_reference.scope.data_type, path_statement[:path])
 
-        function_reference.scope.add_attribute(path_statement[:path], path_statement[:valueset], path_statement[:literals])
+        function_reference.scope.add_attribute(path_statement[:path], path_statement[:valueset], path_statement[:code], path_statement[:literals], path_statement[:mp_constrained])
       else
         extract_information_from_function_parent(function_reference, path_statement)
       end
@@ -154,13 +162,17 @@ class MeasureElmHelper
     data_requirement_to_update = @measure.data_requirements.select do |dth|
       dth.data_type == dt && dth.valueset == valueset_from_retrieve(data_type_expression) && data_type_expression['templateId'] == dth.template
     end.first
-    data_requirement_to_update.add_attribute(data_type_expression['codeProperty'], valueset_from_retrieve(data_type_expression))
+    if retrieve_valueset?(data_type_expression)
+      data_requirement_to_update.add_attribute(data_type_expression['codeProperty'], valueset_from_retrieve(data_type_expression))
+    else
+      data_requirement_to_update.add_attribute(data_type_expression['codeProperty'], nil, valueset_from_retrieve(data_type_expression))
+    end
     return unless path_statement && attribute_appropriate_for_dt(data_requirement_to_update.data_type, path_statement[:path])
 
     if path_statement[:extension]
-      data_requirement_to_update.add_attribute(path_statement[:path], path_statement[:valueset], path_statement[:literals])
+      data_requirement_to_update.add_attribute(path_statement[:path], path_statement[:valueset], path_statement[:code], path_statement[:literals], path_statement[:mp_constrained])
     else
-      data_requirement_to_update.add_attribute(path_statement[:path], path_statement[:valueset], path_statement[:literals])
+      data_requirement_to_update.add_attribute(path_statement[:path], path_statement[:valueset], path_statement[:code], path_statement[:literals], path_statement[:mp_constrained])
     end
 
     path_statement[:subelements]&.each do |subelement|
