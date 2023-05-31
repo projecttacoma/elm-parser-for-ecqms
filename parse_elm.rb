@@ -222,7 +222,7 @@ def output_csv_for_fhir_measures(measures, bundle)
         end
       end
       # puts measure_lib.to_json
-      File.write("data_requirements/library/#{measure.root_file}.json", JSON.dump(measure_lib))
+      File.write("data_requirements/library/#{measure.root_file}.json", JSON.pretty_generate(measure_lib))
     end
   end
 end

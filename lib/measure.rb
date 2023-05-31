@@ -243,6 +243,7 @@ class DataRequirement
         dr.codeFilter << cf unless cf.code.empty?
       end
     end
+    self.to_type_fiter(dr)
     dr
   end
 
@@ -274,7 +275,8 @@ class DataRequirement
       query_string += "#{date_filter.path}="
       query_string += "le#{date_filter.valuePeriod.end}"
     end
-    return unless query_string.length.positive?
+    return if first_param
+    data_requirement.extension << FHIR::Extension.new( 'url' => 'http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-fhirQueryPattern', 'valueString' => query_string )
     return query_string
     # puts Addressable::URI.encode_component(query_string, Addressable::URI::CharacterClasses::UNRESERVED)
   end
