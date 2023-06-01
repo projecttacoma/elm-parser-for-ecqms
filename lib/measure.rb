@@ -262,8 +262,13 @@ class DataRequirement
       if !code_filter.code.empty?
         query_string += "&" unless first_param
         first_param = false
+        first_code = true
         query_string += "#{code_filter.path}="
-        query_string += code_filter.code.first.code
+        code_filter.code.each do |coding|
+          query_string += "," unless first_code
+          first_code = false
+          query_string += coding.code
+        end
       end
     end
     data_requirement.dateFilter.each do |date_filter|
