@@ -366,7 +366,14 @@ class Statement
         subelement_expressions = path_expression.parent.parent.xpath(".//*[@xsi:type='Property' and @scope='#{parent_alias}']")
         subelement_expressions.each do |subelement_expression|
           subelement_vs = subelement_expression.parent.at_xpath('elm:valueset/@name')
-          subelement_code = subelement_expression.parent.at_xpath("elm:operand[@xsi:type='CodeRef']/@name") unless
+          subelement_code = nil
+          if subelement_vs.nil? && (subelement_expression.parent.at_xpath("@xsi:type")&.value == 'Equivalent' || subelement_expression.parent.parent.at_xpath("@xsi:type")&.value == 'Equivalent' || subelement_expression.parent.parent.parent.at_xpath("@xsi:type")&.value == 'Equivalent')
+            if subelement_expression.parent.parent.parent.at_xpath(".//*[@xsi:type='CodeRef']")
+              ex = subelement_expression.parent.parent.parent.xpath(".//*[@xsi:type='CodeRef']")
+              subelement_code = expression_value_at_locator(ex, nearest_locator(subelement_expression), 'name')
+            end
+          end
+          subelement_code = subelement_expression.parent.at_xpath("elm:operand[@xsi:type='CodeRef']/@name") unless subelement_code
           subelements << { name: subelement_expression['path'], valueset: subelement_vs&.value, code: subelement_code }
         end
       end
@@ -390,8 +397,8 @@ class Statement
           c_scope, c_path = comparision_scope(path_expression.parent.parent.parent.parent, scope)
         elsif path_expression.parent.parent.parent.parent.name != 'document' && (['IncludedIn', 'In'].include? path_expression.parent.parent.parent.parent.parent.at_xpath("@xsi:type")&.value)
           mp_constrained = !path_expression.parent.parent.parent.parent.parent.xpath(".//*[@xsi:type='ParameterRef' and @name='Measurement Period']").empty?
-        elsif path_expression.parent.parent.parent.parent.name != 'document' && (['IncludedIn', 'In'].include? path_expression.parent.parent.parent.parent&.parent&.parent&.at_xpath("@xsi:type")&.value)
-          mp_constrained = !path_expression.parent.parent.parent.parent.parent.parent.xpath(".//*[@xsi:type='ParameterRef' and @name='Measurement Period']").empty?
+        # elsif path_expression.parent.parent.parent.parent.name != 'document' && (['IncludedIn', 'In'].include? path_expression.parent.parent.parent.parent&.parent&.parent&.at_xpath("@xsi:type")&.value)
+        #   mp_constrained = !path_expression.parent.parent.parent.parent.parent.parent.xpath(".//*[@xsi:type='ParameterRef' and @name='Measurement Period']").empty?
         end
       end
       if path_expression.name == 'code'

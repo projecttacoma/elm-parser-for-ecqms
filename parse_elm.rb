@@ -179,13 +179,12 @@ def output_csv_for_fhir_measures(measures, bundle)
       # puts '--------------------------------------------------------------------------------'
       # puts measure.root_file
       measure_lib = FHIR::Library.new('name' => measure.root_file, 'status' => 'draft', 'type' => FHIR::CodeableConcept.new('coding' => FHIR::Coding.new('code' => 'module-definition', 'system' => 'http://terminology.hl7.org/CodeSystem/library-type')))
-      measure.data_requirements.each do |data_requirement|
+      measure.data_requirements.sort_by { |dr| "#{dr.data_type}#{dr.valueset}" }.each do |data_requirement|
         unless data_requirement.attributes.empty?
           fhir_dr = data_requirement.as_fhir_dr(measure)
           measure_lib.dataRequirement << fhir_dr
           # puts data_requirement.to_type_fiter(fhir_dr)
         end
-
         data_requirement.attributes.each do |attribute|
           attribute.valuesets.each do |valueset|
             string_rep = "#{measure.root_file}#{data_requirement.data_type}#{valueset}#{attribute.name}"

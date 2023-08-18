@@ -177,7 +177,7 @@ class MeasureElmHelper
 
     path_statement[:subelements]&.each do |subelement|
       subelement_name = "#{path_statement[:path]}.#{subelement[:name]}"
-      data_requirement_to_update.add_attribute(subelement_name, subelement[:valueset])
+      data_requirement_to_update.add_attribute(subelement_name, subelement[:valueset], subelement[:code])
     end
   end
 
