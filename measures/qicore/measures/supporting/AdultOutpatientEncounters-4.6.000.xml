@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,EnableResultTypes" xsi:type="a:CqlToElmInfo"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="38">
+         <a:s>library AdultOutpatientEncounters version '4.6.000'</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="AdultOutpatientEncounters" version="4.6.000"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="3:1-3:28" localIdentifier="QICore" uri="http://hl7.org/fhir">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>using </a:s>
+               <a:s>
+                  <a:s>QICore</a:s>
+               </a:s>
+               <a:s> version '4.1.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="5:1-5:56" localIdentifier="FHIRHelpers" path="FHIRHelpers" version="4.3.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>FHIRHelpers</a:s>
+               </a:s>
+               <a:s> version '4.3.000' called FHIRHelpers</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="3" locator="6:1-6:58" localIdentifier="QICoreCommon" path="QICoreCommon" version="1.5.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>QICoreCommon</a:s>
+               </a:s>
+               <a:s> version '1.5.000' called QICoreCommon</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="4" locator="7:1-7:46" localIdentifier="Status" path="Status" version="1.6.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>Status</a:s>
+               </a:s>
+               <a:s> version '1.6.000' called Status</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <parameters>
+      <def localId="14" locator="17:1-17:49" name="Measurement Period" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="14">
+               <a:s>parameter &quot;Measurement Period&quot; </a:s>
+               <a:s r="13">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="12">
+                     <a:s>DateTime</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+            <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <parameterTypeSpecifier localId="13" locator="17:32-17:49" xsi:type="IntervalTypeSpecifier">
+            <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+               <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <pointType localId="12" locator="17:41-17:48" resultTypeName="t:DateTime" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <valueSets>
+      <def localId="5" locator="9:1-9:103" resultTypeName="t:ValueSet" name="Annual Wellness Visit" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>valueset &quot;Annual Wellness Visit&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="6" locator="10:1-10:116" resultTypeName="t:ValueSet" name="Home Healthcare Services" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>valueset &quot;Home Healthcare Services&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="7" locator="11:1-11:104" resultTypeName="t:ValueSet" name="Office Visit" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="7">
+               <a:s>valueset &quot;Office Visit&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="8" locator="12:1-12:110" resultTypeName="t:ValueSet" name="Online Assessments" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="8">
+               <a:s>valueset &quot;Online Assessments&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="9" locator="13:1-13:152" resultTypeName="t:ValueSet" name="Preventive Care Services Established Office Visit, 18 and Up" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="9">
+               <a:s>valueset &quot;Preventive Care Services Established Office Visit, 18 and Up&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="10" locator="14:1-14:148" resultTypeName="t:ValueSet" name="Preventive Care Services Initial Office Visit, 18 and Up" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="10">
+               <a:s>valueset &quot;Preventive Care Services Initial Office Visit, 18 and Up&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="11" locator="15:1-15:108" resultTypeName="t:ValueSet" name="Telephone Visits" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="11">
+               <a:s>valueset &quot;Telephone Visits&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </valueSets>
+   <contexts>
+      <def locator="19:1-19:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="19:1-19:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="19:1-19:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="38" locator="21:1-29:79" name="Qualifying Encounters" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="38">
+               <a:s>define &quot;Qualifying Encounters&quot;:
+  </a:s>
+               <a:s r="37">
+                  <a:s>
+                     <a:s r="31">
+                        <a:s r="30">
+                           <a:s>( </a:s>
+                           <a:s r="30">
+                              <a:s r="29">
+                                 <a:s>( </a:s>
+                                 <a:s r="29">
+                                    <a:s r="27">
+                                       <a:s r="24">
+                                          <a:s r="22">
+                                             <a:s r="19">
+                                                <a:s r="17">
+                                                   <a:s r="15">
+                                                      <a:s>[Encounter: </a:s>
+                                                      <a:s>
+                                                         <a:s>&quot;Office Visit&quot;</a:s>
+                                                      </a:s>
+                                                      <a:s>]</a:s>
+                                                   </a:s>
+                                                   <a:s>
+    union </a:s>
+                                                   <a:s r="16">
+                                                      <a:s>[Encounter: </a:s>
+                                                      <a:s>
+                                                         <a:s>&quot;Annual Wellness Visit&quot;</a:s>
+                                                      </a:s>
+                                                      <a:s>]</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s>
+    union </a:s>
+                                                <a:s r="18">
+                                                   <a:s>[Encounter: </a:s>
+                                                   <a:s>
+                                                      <a:s>&quot;Preventive Care Services Established Office Visit, 18 and Up&quot;</a:s>
+                                                   </a:s>
+                                                   <a:s>]</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>
+    union </a:s>
+                                             <a:s r="20">
+                                                <a:s>[Encounter: </a:s>
+                                                <a:s>
+                                                   <a:s>&quot;Preventive Care Services Initial Office Visit, 18 and Up&quot;</a:s>
+                                                </a:s>
+                                                <a:s>]</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s>
+    union </a:s>
+                                          <a:s r="23">
+                                             <a:s>[Encounter: </a:s>
+                                             <a:s>
+                                                <a:s>&quot;Home Healthcare Services&quot;</a:s>
+                                             </a:s>
+                                             <a:s>]</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>
+    union </a:s>
+                                       <a:s r="25">
+                                          <a:s>[Encounter: </a:s>
+                                          <a:s>
+                                             <a:s>&quot;Online Assessments&quot;</a:s>
+                                          </a:s>
+                                          <a:s>]</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+    union </a:s>
+                                    <a:s r="28">
+                                       <a:s>[Encounter: </a:s>
+                                       <a:s>
+                                          <a:s>&quot;Telephone Visits&quot;</a:s>
+                                       </a:s>
+                                       <a:s>]</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="30">
+                                 <a:s>isEncounterPerformed()</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> )</a:s>
+                        </a:s>
+                        <a:s> ValidEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="36">
+                     <a:s>where </a:s>
+                     <a:s r="36">
+                        <a:s r="34">
+                           <a:s r="33">
+                              <a:s r="32">
+                                 <a:s>ValidEncounter</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="33">
+                                 <a:s>period</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="34">
+                              <a:s>toInterval()</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="36"> during day of </a:s>
+                        <a:s r="35">
+                           <a:s>&quot;Measurement Period&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="37" locator="22:3-29:79" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="31" locator="22:3-28:83" alias="ValidEncounter">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="30" locator="22:3-28:68" name="isEncounterPerformed" libraryName="Status" xsi:type="FunctionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <operand localId="29" locator="22:5-28:43" xsi:type="Union">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <operand localId="27" locator="22:7-27:43" xsi:type="Union">
+                        <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <operand localId="22" locator="22:7-25:81" xsi:type="Union">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <operand localId="17" locator="22:7-23:46" xsi:type="Union">
+                              <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                 <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                              <operand localId="15" locator="22:7-22:33" dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                                 <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                    <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                                 <codes locator="22:19-22:32" resultTypeName="t:ValueSet" name="Office Visit" preserve="true" xsi:type="ValueSetRef"/>
+                              </operand>
+                              <operand localId="16" locator="23:11-23:46" dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                                 <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                    <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                                 <codes locator="23:23-23:45" resultTypeName="t:ValueSet" name="Annual Wellness Visit" preserve="true" xsi:type="ValueSetRef"/>
+                              </operand>
+                           </operand>
+                           <operand localId="21" xsi:type="Union">
+                              <operand localId="18" locator="24:11-24:85" dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                                 <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                    <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                                 <codes locator="24:23-24:84" resultTypeName="t:ValueSet" name="Preventive Care Services Established Office Visit, 18 and Up" preserve="true" xsi:type="ValueSetRef"/>
+                              </operand>
+                              <operand localId="20" locator="25:11-25:81" dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                                 <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                    <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                                 <codes locator="25:23-25:80" resultTypeName="t:ValueSet" name="Preventive Care Services Initial Office Visit, 18 and Up" preserve="true" xsi:type="ValueSetRef"/>
+                              </operand>
+                           </operand>
+                        </operand>
+                        <operand localId="26" xsi:type="Union">
+                           <operand localId="23" locator="26:11-26:49" dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                              <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                 <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                              <codes locator="26:23-26:48" resultTypeName="t:ValueSet" name="Home Healthcare Services" preserve="true" xsi:type="ValueSetRef"/>
+                           </operand>
+                           <operand localId="25" locator="27:11-27:43" dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                              <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                 <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                              <codes locator="27:23-27:42" resultTypeName="t:ValueSet" name="Online Assessments" preserve="true" xsi:type="ValueSetRef"/>
+                           </operand>
+                        </operand>
+                     </operand>
+                     <operand localId="28" locator="28:11-28:41" dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                        <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <codes locator="28:23-28:40" resultTypeName="t:ValueSet" name="Telephone Visits" preserve="true" xsi:type="ValueSetRef"/>
+                     </operand>
+                  </operand>
+               </expression>
+            </source>
+            <where localId="36" locator="29:5-29:79" resultTypeName="t:Boolean" precision="Day" xsi:type="IncludedIn">
+               <operand localId="34" locator="29:11-29:44" name="toInterval" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                  <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                     <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <operand xsi:type="As">
+                     <operand localId="33" locator="29:11-29:31" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                        <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                           <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <operand path="period" scope="ValidEncounter" xsi:type="Property"/>
+                     </operand>
+                     <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                        <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                        <choice xsi:type="IntervalTypeSpecifier">
+                           <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        </choice>
+                        <choice xsi:type="IntervalTypeSpecifier">
+                           <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                        </choice>
+                     </asTypeSpecifier>
+                  </operand>
+               </operand>
+               <operand localId="35" locator="29:60-29:79" name="Measurement Period" xsi:type="ParameterRef">
+                  <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                     <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </operand>
+            </where>
+         </expression>
+      </def>
+   </statements>
+</library>

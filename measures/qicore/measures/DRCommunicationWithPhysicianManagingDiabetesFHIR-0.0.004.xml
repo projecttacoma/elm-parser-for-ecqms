@@ -1,0 +1,2435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,EnableResultTypes" xsi:type="a:CqlToElmInfo"/>
+   <annotation libraryId="DRCommunicationWithPhysicianManagingDiabetesFHIR" libraryVersion="0.0.004" startLine="136" startChar="3" endLine="136" endChar="69" message="Retrieve has a terminology target but does not specify a code path and the type of the retrieve does not have a primary code path defined." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation libraryId="DRCommunicationWithPhysicianManagingDiabetesFHIR" libraryVersion="0.0.004" startLine="136" startChar="3" endLine="136" endChar="69" message="Could not resolve membership operator for terminology target of the retrieve." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation libraryId="DRCommunicationWithPhysicianManagingDiabetesFHIR" libraryVersion="0.0.004" startLine="158" startChar="3" endLine="158" endChar="60" message="Retrieve has a terminology target but does not specify a code path and the type of the retrieve does not have a primary code path defined." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation libraryId="DRCommunicationWithPhysicianManagingDiabetesFHIR" libraryVersion="0.0.004" startLine="158" startChar="3" endLine="158" endChar="60" message="Could not resolve membership operator for terminology target of the retrieve." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation libraryId="DRCommunicationWithPhysicianManagingDiabetesFHIR" libraryVersion="0.0.004" startLine="144" startChar="3" endLine="144" endChar="58" message="Retrieve has a terminology target but does not specify a code path and the type of the retrieve does not have a primary code path defined." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation libraryId="DRCommunicationWithPhysicianManagingDiabetesFHIR" libraryVersion="0.0.004" startLine="144" startChar="3" endLine="144" endChar="58" message="Could not resolve membership operator for terminology target of the retrieve." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="253">
+         <a:s>library DRCommunicationWithPhysicianManagingDiabetesFHIR version '0.0.004'</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="DRCommunicationWithPhysicianManagingDiabetesFHIR" version="0.0.004"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="3:1-3:28" localIdentifier="QICore" uri="http://hl7.org/fhir">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>using </a:s>
+               <a:s>
+                  <a:s>QICore</a:s>
+               </a:s>
+               <a:s> version '4.1.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="19:1-19:56" localIdentifier="FHIRHelpers" path="FHIRHelpers" version="4.3.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>/*This spec aligns with AU2022/PY2023 QDM version*/
+
+
+/*
+Notes: 
+-This spec aligns with AU2022/PY2023 QDM version
+- Per BonnieMat-1455 and ticket  https://github.com/cqframework/cql-execution/issues/296  
+--https://oncprojectracking.healthit.gov/support/browse/CQLIT-371 (formerly BonnieMat-1420)
+--surrounding negation with QI-Core 4.1.1 DRC are not supported as resource filters and must be replaced with valueset or used on unfiltered resource in predicate
+--cardinality issues surrounding negation coding to be addressed in future execution engine update
+*/
+include </a:s>
+               <a:s>
+                  <a:s>FHIRHelpers</a:s>
+               </a:s>
+               <a:s> version '4.3.000' called FHIRHelpers</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="3" locator="20:1-20:61" localIdentifier="SDE" path="SupplementalDataElements" version="3.4.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>SupplementalDataElements</a:s>
+               </a:s>
+               <a:s> version '3.4.000' called SDE</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="4" locator="21:1-21:58" localIdentifier="QICoreCommon" path="QICoreCommon" version="1.5.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>QICoreCommon</a:s>
+               </a:s>
+               <a:s> version '1.5.000' called QICoreCommon</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <parameters>
+      <def localId="35" locator="49:1-49:49" name="Measurement Period" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="35">
+               <a:s>parameter &quot;Measurement Period&quot; </a:s>
+               <a:s r="34">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="33">
+                     <a:s>DateTime</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+            <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <parameterTypeSpecifier localId="34" locator="49:32-49:49" xsi:type="IntervalTypeSpecifier">
+            <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+               <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <pointType localId="33" locator="49:41-49:48" resultTypeName="t:DateTime" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <codeSystems>
+      <def localId="5" locator="23:1-23:47" resultTypeName="t:CodeSystem" name="SNOMEDCT" id="http://snomed.info/sct" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>codesystem &quot;SNOMEDCT&quot;: 'http://snomed.info/sct'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="6" locator="24:1-24:72" resultTypeName="t:CodeSystem" name="ActCode" id="http://terminology.hl7.org/CodeSystem/v3-ActCode" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>codesystem &quot;ActCode&quot;: 'http://terminology.hl7.org/CodeSystem/v3-ActCode'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </codeSystems>
+   <valueSets>
+      <def localId="7" locator="26:1-26:139" resultTypeName="t:ValueSet" name="Care Services in Long-Term Residential Facility" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="7">
+               <a:s>valueset &quot;Care Services in Long-Term Residential Facility&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="8" locator="27:1-27:101" resultTypeName="t:ValueSet" name="Diabetic Retinopathy" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.327" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="8">
+               <a:s>valueset &quot;Diabetic Retinopathy&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.327'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="9" locator="28:1-28:123" resultTypeName="t:ValueSet" name="Level of Severity of Retinopathy Findings" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1283" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="9">
+               <a:s>valueset &quot;Level of Severity of Retinopathy Findings&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1283'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="10" locator="29:1-29:112" resultTypeName="t:ValueSet" name="Macular Edema Findings Present" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1320" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="10">
+               <a:s>valueset &quot;Macular Edema Findings Present&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1320'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="11" locator="30:1-30:94" resultTypeName="t:ValueSet" name="Macular Exam" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1251" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="11">
+               <a:s>valueset &quot;Macular Exam&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1251'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="12" locator="31:1-31:96" resultTypeName="t:ValueSet" name="Medical Reason" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="12">
+               <a:s>valueset &quot;Medical Reason&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="13" locator="32:1-32:114" resultTypeName="t:ValueSet" name="Nursing Facility Visit" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="13">
+               <a:s>valueset &quot;Nursing Facility Visit&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="14" locator="33:1-33:104" resultTypeName="t:ValueSet" name="Office Visit" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="14">
+               <a:s>valueset &quot;Office Visit&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="15" locator="34:1-34:107" resultTypeName="t:ValueSet" name="Ophthalmological Services" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="15">
+               <a:s>valueset &quot;Ophthalmological Services&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="16" locator="35:1-35:115" resultTypeName="t:ValueSet" name="Outpatient Consultation" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="16">
+               <a:s>valueset &quot;Outpatient Consultation&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="17" locator="36:1-36:96" resultTypeName="t:ValueSet" name="Patient Reason" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1008" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="17">
+               <a:s>valueset &quot;Patient Reason&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1008'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="18" locator="37:1-37:114" resultTypeName="t:ValueSet" name="Macular edema absent (situation)" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.2.1391" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="18">
+               <a:s>valueset &quot;Macular edema absent (situation)&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.2.1391'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </valueSets>
+   <codes>
+      <def localId="20" locator="39:1-39:119" resultTypeName="t:Code" name="Healthcare professional (occupation)" id="223366009" display="Healthcare professional (occupation)" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="20">
+               <a:s>code &quot;Healthcare professional (occupation)&quot;: '223366009' from </a:s>
+               <a:s r="19">
+                  <a:s>&quot;SNOMEDCT&quot;</a:s>
+               </a:s>
+               <a:s> display 'Healthcare professional (occupation)'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="19" locator="39:63-39:72" resultTypeName="t:CodeSystem" name="SNOMEDCT"/>
+      </def>
+      <def localId="22" locator="40:1-40:113" resultTypeName="t:Code" name="Medical practitioner (occupation)" id="158965000" display="Medical practitioner (occupation)" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="22">
+               <a:s>code &quot;Medical practitioner (occupation)&quot;: '158965000' from </a:s>
+               <a:s r="21">
+                  <a:s>&quot;SNOMEDCT&quot;</a:s>
+               </a:s>
+               <a:s> display 'Medical practitioner (occupation)'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="21" locator="40:60-40:69" resultTypeName="t:CodeSystem" name="SNOMEDCT"/>
+      </def>
+      <def localId="24" locator="41:1-41:103" resultTypeName="t:Code" name="Ophthalmologist (occupation)" id="422234006" display="Ophthalmologist (occupation)" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="24">
+               <a:s>code &quot;Ophthalmologist (occupation)&quot;: '422234006' from </a:s>
+               <a:s r="23">
+                  <a:s>&quot;SNOMEDCT&quot;</a:s>
+               </a:s>
+               <a:s> display 'Ophthalmologist (occupation)'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="23" locator="41:55-41:64" resultTypeName="t:CodeSystem" name="SNOMEDCT"/>
+      </def>
+      <def localId="26" locator="42:1-42:94" resultTypeName="t:Code" name="Optometrist (occupation)" id="28229004" display="Optometrist (occupation)" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="26">
+               <a:s>code &quot;Optometrist (occupation)&quot;: '28229004' from </a:s>
+               <a:s r="25">
+                  <a:s>&quot;SNOMEDCT&quot;</a:s>
+               </a:s>
+               <a:s> display 'Optometrist (occupation)'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="25" locator="42:50-42:59" resultTypeName="t:CodeSystem" name="SNOMEDCT"/>
+      </def>
+      <def localId="28" locator="43:1-43:91" resultTypeName="t:Code" name="Physician (occupation)" id="309343006" display="Physician (occupation)" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="28">
+               <a:s>code &quot;Physician (occupation)&quot;: '309343006' from </a:s>
+               <a:s r="27">
+                  <a:s>&quot;SNOMEDCT&quot;</a:s>
+               </a:s>
+               <a:s> display 'Physician (occupation)'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="27" locator="43:49-43:58" resultTypeName="t:CodeSystem" name="SNOMEDCT"/>
+      </def>
+      <def localId="30" locator="44:1-44:53" resultTypeName="t:Code" name="virtual" id="VR" display="virtual" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="30">
+               <a:s>code &quot;virtual&quot;: 'VR' from </a:s>
+               <a:s r="29">
+                  <a:s>&quot;ActCode&quot;</a:s>
+               </a:s>
+               <a:s> display 'virtual'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="29" locator="44:27-44:35" resultTypeName="t:CodeSystem" name="ActCode"/>
+      </def>
+      <def localId="32" locator="47:1-47:53" resultTypeName="t:Code" name="AMB" id="AMB" display="Ambulatory" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="32">
+               <a:s>// code &quot;Macular edema absent (situation)&quot;: '428341000124108' from &quot;SNOMEDCT&quot; display 'Macular edema absent (situation)'
+code &quot;AMB&quot;: 'AMB' from </a:s>
+               <a:s r="31">
+                  <a:s>&quot;ActCode&quot;</a:s>
+               </a:s>
+               <a:s> display 'Ambulatory'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="31" locator="47:24-47:32" resultTypeName="t:CodeSystem" name="ActCode"/>
+      </def>
+   </codes>
+   <contexts>
+      <def locator="51:1-51:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="51:1-51:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="51:1-51:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="38" locator="53:1-54:21" name="SDE Ethnicity" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="38">
+               <a:s>define &quot;SDE Ethnicity&quot;:
+  </a:s>
+               <a:s r="37">
+                  <a:s r="36">
+                     <a:s>SDE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="37">
+                     <a:s>&quot;SDE Ethnicity&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="TupleTypeSpecifier">
+            <element name="codes">
+               <elementType xsi:type="ListTypeSpecifier">
+                  <elementType name="t:Code" xsi:type="NamedTypeSpecifier"/>
+               </elementType>
+            </element>
+            <element name="display">
+               <elementType name="t:String" xsi:type="NamedTypeSpecifier"/>
+            </element>
+         </resultTypeSpecifier>
+         <expression localId="37" locator="54:3-54:21" name="SDE Ethnicity" libraryName="SDE" xsi:type="ExpressionRef">
+            <resultTypeSpecifier xsi:type="TupleTypeSpecifier">
+               <element name="codes">
+                  <elementType xsi:type="ListTypeSpecifier">
+                     <elementType name="t:Code" xsi:type="NamedTypeSpecifier"/>
+                  </elementType>
+               </element>
+               <element name="display">
+                  <elementType name="t:String" xsi:type="NamedTypeSpecifier"/>
+               </element>
+            </resultTypeSpecifier>
+         </expression>
+      </def>
+      <def localId="41" locator="56:1-57:17" name="SDE Payer" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="41">
+               <a:s>define &quot;SDE Payer&quot;:
+  </a:s>
+               <a:s r="40">
+                  <a:s r="39">
+                     <a:s>SDE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="40">
+                     <a:s>&quot;SDE Payer&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType xsi:type="TupleTypeSpecifier">
+               <element name="code">
+                  <elementType name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+               </element>
+               <element name="period">
+                  <elementType xsi:type="IntervalTypeSpecifier">
+                     <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                  </elementType>
+               </element>
+            </elementType>
+         </resultTypeSpecifier>
+         <expression localId="40" locator="57:3-57:17" name="SDE Payer" libraryName="SDE" xsi:type="ExpressionRef">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType xsi:type="TupleTypeSpecifier">
+                  <element name="code">
+                     <elementType name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                  </element>
+                  <element name="period">
+                     <elementType xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     </elementType>
+                  </element>
+               </elementType>
+            </resultTypeSpecifier>
+         </expression>
+      </def>
+      <def localId="44" locator="59:1-60:16" name="SDE Race" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="44">
+               <a:s>define &quot;SDE Race&quot;:
+  </a:s>
+               <a:s r="43">
+                  <a:s r="42">
+                     <a:s>SDE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="43">
+                     <a:s>&quot;SDE Race&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="TupleTypeSpecifier">
+            <element name="codes">
+               <elementType xsi:type="ListTypeSpecifier">
+                  <elementType name="t:Code" xsi:type="NamedTypeSpecifier"/>
+               </elementType>
+            </element>
+            <element name="display">
+               <elementType name="t:String" xsi:type="NamedTypeSpecifier"/>
+            </element>
+         </resultTypeSpecifier>
+         <expression localId="43" locator="60:3-60:16" name="SDE Race" libraryName="SDE" xsi:type="ExpressionRef">
+            <resultTypeSpecifier xsi:type="TupleTypeSpecifier">
+               <element name="codes">
+                  <elementType xsi:type="ListTypeSpecifier">
+                     <elementType name="t:Code" xsi:type="NamedTypeSpecifier"/>
+                  </elementType>
+               </element>
+               <element name="display">
+                  <elementType name="t:String" xsi:type="NamedTypeSpecifier"/>
+               </element>
+            </resultTypeSpecifier>
+         </expression>
+      </def>
+      <def localId="47" locator="62:1-63:15" resultTypeName="t:Code" name="SDE Sex" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="47">
+               <a:s>define &quot;SDE Sex&quot;:
+  </a:s>
+               <a:s r="46">
+                  <a:s r="45">
+                     <a:s>SDE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="46">
+                     <a:s>&quot;SDE Sex&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="46" locator="63:3-63:15" resultTypeName="t:Code" name="SDE Sex" libraryName="SDE" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="81" locator="84:1-92:48" name="Qualifying Encounter During Measurement Period" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="81">
+               <a:s>define &quot;Qualifying Encounter During Measurement Period&quot;:
+  </a:s>
+               <a:s r="80">
+                  <a:s>
+                     <a:s r="64">
+                        <a:s r="63">
+                           <a:s>( </a:s>
+                           <a:s r="63">
+                              <a:s r="61">
+                                 <a:s r="58">
+                                    <a:s r="56">
+                                       <a:s r="54">
+                                          <a:s>[&quot;Encounter&quot;: </a:s>
+                                          <a:s>
+                                             <a:s>&quot;Office Visit&quot;</a:s>
+                                          </a:s>
+                                          <a:s>]</a:s>
+                                       </a:s>
+                                       <a:s>
+    union </a:s>
+                                       <a:s r="55">
+                                          <a:s>[&quot;Encounter&quot;: </a:s>
+                                          <a:s>
+                                             <a:s>&quot;Ophthalmological Services&quot;</a:s>
+                                          </a:s>
+                                          <a:s>]</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+    union </a:s>
+                                    <a:s r="57">
+                                       <a:s>[&quot;Encounter&quot;: </a:s>
+                                       <a:s>
+                                          <a:s>&quot;Outpatient Consultation&quot;</a:s>
+                                       </a:s>
+                                       <a:s>]</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+    union </a:s>
+                                 <a:s r="59">
+                                    <a:s>[&quot;Encounter&quot;: </a:s>
+                                    <a:s>
+                                       <a:s>&quot;Care Services in Long-Term Residential Facility&quot;</a:s>
+                                    </a:s>
+                                    <a:s>]</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+    union </a:s>
+                              <a:s r="62">
+                                 <a:s>[&quot;Encounter&quot;: </a:s>
+                                 <a:s>
+                                    <a:s>&quot;Nursing Facility Visit&quot;</a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> )</a:s>
+                        </a:s>
+                        <a:s> QualifyingEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="79">
+                     <a:s>where </a:s>
+                     <a:s r="79">
+                        <a:s r="73">
+                           <a:s r="68">
+                              <a:s r="66">
+                                 <a:s r="65">
+                                    <a:s>QualifyingEncounter</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="66">
+                                    <a:s>period</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s r="68"> during </a:s>
+                              <a:s r="67">
+                                 <a:s>&quot;Measurement Period&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+      and </a:s>
+                           <a:s r="72">
+                              <a:s r="70">
+                                 <a:s r="69">
+                                    <a:s>QualifyingEncounter</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="70">
+                                    <a:s>status</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> = </a:s>
+                              <a:s r="71">
+                                 <a:s>'finished'</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      and </a:s>
+                        <a:s r="78">
+                           <a:s r="75">
+                              <a:s r="74">
+                                 <a:s>QualifyingEncounter</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="75">
+                                 <a:s>class</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> !~ </a:s>
+                           <a:s r="76">
+                              <a:s>&quot;virtual&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="80" locator="85:3-92:48" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="64" locator="85:3-89:71" alias="QualifyingEncounter">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="63" locator="85:3-89:51" xsi:type="Union">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <operand localId="61" locator="85:5-88:74" xsi:type="Union">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <operand localId="56" locator="85:5-86:52" xsi:type="Union">
+                        <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <operand localId="54" locator="85:5-85:33" dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <codes locator="85:19-85:32" resultTypeName="t:ValueSet" name="Office Visit" preserve="true" xsi:type="ValueSetRef"/>
+                        </operand>
+                        <operand localId="55" locator="86:11-86:52" dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <codes locator="86:25-86:51" resultTypeName="t:ValueSet" name="Ophthalmological Services" preserve="true" xsi:type="ValueSetRef"/>
+                        </operand>
+                     </operand>
+                     <operand localId="60" xsi:type="Union">
+                        <operand localId="57" locator="87:11-87:50" dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <codes locator="87:25-87:49" resultTypeName="t:ValueSet" name="Outpatient Consultation" preserve="true" xsi:type="ValueSetRef"/>
+                        </operand>
+                        <operand localId="59" locator="88:11-88:74" dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <codes locator="88:25-88:73" resultTypeName="t:ValueSet" name="Care Services in Long-Term Residential Facility" preserve="true" xsi:type="ValueSetRef"/>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand localId="62" locator="89:11-89:49" dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <codes locator="89:25-89:48" resultTypeName="t:ValueSet" name="Nursing Facility Visit" preserve="true" xsi:type="ValueSetRef"/>
+                  </operand>
+               </expression>
+            </source>
+            <where localId="79" locator="90:5-92:48" resultTypeName="t:Boolean" xsi:type="And">
+               <operand localId="73" locator="90:11-91:49" resultTypeName="t:Boolean" xsi:type="And">
+                  <operand localId="68" locator="90:11-90:64" resultTypeName="t:Boolean" xsi:type="IncludedIn">
+                     <operand localId="66" locator="90:11-90:36" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                        <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                           <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <operand path="period" scope="QualifyingEncounter" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="67" locator="90:45-90:64" name="Measurement Period" xsi:type="ParameterRef">
+                        <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                           <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                     </operand>
+                  </operand>
+                  <operand localId="72" locator="91:11-91:49" resultTypeName="t:Boolean" xsi:type="Equal">
+                     <operand localId="70" locator="91:11-91:36" resultTypeName="fhir:EncounterStatus" path="value" xsi:type="Property">
+                        <source path="status" scope="QualifyingEncounter" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="71" locator="91:40-91:49" resultTypeName="t:String" valueType="t:String" value="finished" xsi:type="Literal"/>
+                  </operand>
+               </operand>
+               <operand localId="78" locator="92:11-92:48" resultTypeName="t:Boolean" xsi:type="Not">
+                  <operand localId="77" locator="92:11-92:48" resultTypeName="t:Boolean" xsi:type="Equivalent">
+                     <operand localId="75" locator="92:11-92:35" resultTypeName="t:Code" name="ToCode" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                        <operand path="class" scope="QualifyingEncounter" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="76" locator="92:40-92:48" resultTypeName="t:Code" name="virtual" xsi:type="CodeRef"/>
+                  </operand>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="115" locator="94:1-102:9" name="Diabetic Retinopathy Encounter" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="115">
+               <a:s>define &quot;Diabetic Retinopathy Encounter&quot;:
+  </a:s>
+               <a:s r="114">
+                  <a:s>
+                     <a:s r="83">
+                        <a:s r="82">
+                           <a:s>
+                              <a:s>&quot;Qualifying Encounter During Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> ValidQualifyingEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="113">
+                     <a:s>with </a:s>
+                     <a:s r="85">
+                        <a:s r="84">
+                           <a:s r="84">
+                              <a:s>[&quot;Condition&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Diabetic Retinopathy&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> DiabeticRetinopathy</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="112">
+                        <a:s r="93">
+                           <a:s r="90">
+                              <a:s r="87">
+                                 <a:s r="86">
+                                    <a:s>DiabeticRetinopathy</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="87">
+                                    <a:s>prevalenceInterval ( )</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s r="90"> overlaps </a:s>
+                              <a:s r="89">
+                                 <a:s r="88">
+                                    <a:s>ValidQualifyingEncounter</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="89">
+                                    <a:s>period</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+        and </a:s>
+                           <a:s r="92">
+                              <a:s r="91">
+                                 <a:s>DiabeticRetinopathy</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="92">
+                                 <a:s>isActive ( )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+        and </a:s>
+                        <a:s r="111">
+                           <a:s>not </a:s>
+                           <a:s r="110">
+                              <a:s>( </a:s>
+                              <a:s r="110">
+                                 <a:s r="104">
+                                    <a:s r="98">
+                                       <a:s r="95">
+                                          <a:s r="94">
+                                             <a:s>DiabeticRetinopathy</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="95">
+                                             <a:s>verificationStatus</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> ~ </a:s>
+                                       <a:s r="97">
+                                          <a:s r="96">
+                                             <a:s>QICoreCommon</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="97">
+                                             <a:s>&quot;unconfirmed&quot;</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+            or </a:s>
+                                    <a:s r="103">
+                                       <a:s r="100">
+                                          <a:s r="99">
+                                             <a:s>DiabeticRetinopathy</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="100">
+                                             <a:s>verificationStatus</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> ~ </a:s>
+                                       <a:s r="102">
+                                          <a:s r="101">
+                                             <a:s>QICoreCommon</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="102">
+                                             <a:s>&quot;refuted&quot;</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+            or </a:s>
+                                 <a:s r="109">
+                                    <a:s r="106">
+                                       <a:s r="105">
+                                          <a:s>DiabeticRetinopathy</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="106">
+                                          <a:s>verificationStatus</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> ~ </a:s>
+                                    <a:s r="108">
+                                       <a:s r="107">
+                                          <a:s>QICoreCommon</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="108">
+                                          <a:s>&quot;entered-in-error&quot;</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+        )</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="114" locator="95:3-102:9" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="83" locator="95:3-95:75" alias="ValidQualifyingEncounter">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="82" locator="95:3-95:50" name="Qualifying Encounter During Measurement Period" xsi:type="ExpressionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </expression>
+            </source>
+            <relationship localId="113" locator="96:5-102:9" alias="DiabeticRetinopathy" xsi:type="With">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="84" locator="96:10-96:46" dataType="fhir:Condition" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <codes locator="96:24-96:45" resultTypeName="t:ValueSet" name="Diabetic Retinopathy" preserve="true" xsi:type="ValueSetRef"/>
+               </expression>
+               <suchThat localId="112" locator="97:17-102:9" resultTypeName="t:Boolean" xsi:type="And">
+                  <operand localId="93" locator="97:17-98:44" resultTypeName="t:Boolean" xsi:type="And">
+                     <operand localId="90" locator="97:17-97:99" resultTypeName="t:Boolean" xsi:type="Overlaps">
+                        <operand localId="87" locator="97:17-97:58" name="prevalenceInterval" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                           <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                              <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <operand localId="86" locator="97:17-97:35" resultTypeName="fhir:Condition" name="DiabeticRetinopathy" xsi:type="AliasRef"/>
+                        </operand>
+                        <operand localId="89" locator="97:69-97:99" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                           <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                              <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <operand path="period" scope="ValidQualifyingEncounter" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                     <operand localId="92" locator="98:13-98:44" resultTypeName="t:Boolean" name="isActive" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                        <operand localId="91" locator="98:13-98:31" resultTypeName="fhir:Condition" name="DiabeticRetinopathy" xsi:type="AliasRef"/>
+                     </operand>
+                  </operand>
+                  <operand localId="111" locator="99:13-102:9" resultTypeName="t:Boolean" xsi:type="Not">
+                     <operand localId="110" locator="99:17-102:9" resultTypeName="t:Boolean" xsi:type="Or">
+                        <operand localId="104" locator="99:19-100:78" resultTypeName="t:Boolean" xsi:type="Or">
+                           <operand localId="98" locator="99:19-99:85" resultTypeName="t:Boolean" xsi:type="Equivalent">
+                              <operand localId="95" locator="99:19-99:56" resultTypeName="t:Concept" name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <operand path="verificationStatus" scope="DiabeticRetinopathy" xsi:type="Property"/>
+                              </operand>
+                              <operand xsi:type="ToConcept">
+                                 <operand localId="97" locator="99:60-99:85" resultTypeName="t:Code" name="unconfirmed" libraryName="QICoreCommon" xsi:type="CodeRef"/>
+                              </operand>
+                           </operand>
+                           <operand localId="103" locator="100:16-100:78" resultTypeName="t:Boolean" xsi:type="Equivalent">
+                              <operand localId="100" locator="100:16-100:53" resultTypeName="t:Concept" name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <operand path="verificationStatus" scope="DiabeticRetinopathy" xsi:type="Property"/>
+                              </operand>
+                              <operand xsi:type="ToConcept">
+                                 <operand localId="102" locator="100:57-100:78" resultTypeName="t:Code" name="refuted" libraryName="QICoreCommon" xsi:type="CodeRef"/>
+                              </operand>
+                           </operand>
+                        </operand>
+                        <operand localId="109" locator="101:16-101:87" resultTypeName="t:Boolean" xsi:type="Equivalent">
+                           <operand localId="106" locator="101:16-101:53" resultTypeName="t:Concept" name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                              <operand path="verificationStatus" scope="DiabeticRetinopathy" xsi:type="Property"/>
+                           </operand>
+                           <operand xsi:type="ToConcept">
+                              <operand localId="108" locator="101:57-101:87" resultTypeName="t:Code" name="entered-in-error" libraryName="QICoreCommon" xsi:type="CodeRef"/>
+                           </operand>
+                        </operand>
+                     </operand>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="119" locator="65:1-67:47" resultTypeName="t:Boolean" name="Initial Population" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="119">
+               <a:s>define &quot;Initial Population&quot;:
+  </a:s>
+               <a:s r="118">
+                  <a:s r="53">
+                     <a:s r="51">
+                        <a:s>AgeInYearsAt(</a:s>
+                        <a:s r="50">
+                           <a:s>date from </a:s>
+                           <a:s r="49">
+                              <a:s>start of </a:s>
+                              <a:s r="48">
+                                 <a:s>&quot;Measurement Period&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>)</a:s>
+                     </a:s>
+                     <a:s r="52"> >= 18</a:s>
+                  </a:s>
+                  <a:s>
+    and </a:s>
+                  <a:s r="117">
+                     <a:s>exists </a:s>
+                     <a:s r="116">
+                        <a:s>&quot;Diabetic Retinopathy Encounter&quot;</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="118" locator="66:3-67:47" resultTypeName="t:Boolean" xsi:type="And">
+            <operand localId="53" locator="66:3-66:61" resultTypeName="t:Boolean" xsi:type="GreaterOrEqual">
+               <operand localId="51" locator="66:3-66:55" resultTypeName="t:Integer" precision="Year" xsi:type="CalculateAgeAt">
+                  <operand path="birthDate" xsi:type="Property">
+                     <source name="Patient" xsi:type="ExpressionRef"/>
+                  </operand>
+                  <operand localId="50" locator="66:16-66:54" resultTypeName="t:Date" xsi:type="DateFrom">
+                     <operand localId="49" locator="66:26-66:54" resultTypeName="t:DateTime" xsi:type="Start">
+                        <operand localId="48" locator="66:35-66:54" name="Measurement Period" xsi:type="ParameterRef">
+                           <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                              <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                        </operand>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand localId="52" locator="66:60-66:61" resultTypeName="t:Integer" valueType="t:Integer" value="18" xsi:type="Literal"/>
+            </operand>
+            <operand localId="117" locator="67:9-67:47" resultTypeName="t:Boolean" xsi:type="Exists">
+               <operand localId="116" locator="67:16-67:47" name="Diabetic Retinopathy Encounter" xsi:type="ExpressionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </operand>
+            </operand>
+         </expression>
+      </def>
+      <def localId="145" locator="104:1-109:82" name="Macular Exam Performed" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="145">
+               <a:s>define &quot;Macular Exam Performed&quot;:
+  </a:s>
+               <a:s r="144">
+                  <a:s>
+                     <a:s r="122">
+                        <a:s r="121">
+                           <a:s r="121">
+                              <a:s>[&quot;Observation&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Macular Exam&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> MacularExam</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="131">
+                     <a:s>with </a:s>
+                     <a:s r="124">
+                        <a:s r="123">
+                           <a:s>
+                              <a:s>&quot;Diabetic Retinopathy Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> EncounterDiabeticRetinopathy</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="130">
+                        <a:s r="127">
+                           <a:s r="126">
+                              <a:s r="125">
+                                 <a:s>MacularExam</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="126">
+                                 <a:s>effective</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="127">
+                              <a:s>toInterval ( )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="130"> during </a:s>
+                        <a:s r="129">
+                           <a:s r="128">
+                              <a:s>EncounterDiabeticRetinopathy</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="129">
+                              <a:s>period</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="143">
+                     <a:s>where </a:s>
+                     <a:s r="143">
+                        <a:s r="134">
+                           <a:s r="133">
+                              <a:s r="132">
+                                 <a:s>MacularExam</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="133">
+                                 <a:s>value</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> is not null</a:s>
+                        </a:s>
+                        <a:s>
+      and </a:s>
+                        <a:s r="142">
+                           <a:s r="136">
+                              <a:s r="135">
+                                 <a:s>MacularExam</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="136">
+                                 <a:s>status</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> in </a:s>
+                           <a:s r="141">
+                              <a:s>{ </a:s>
+                              <a:s r="137">
+                                 <a:s>'final'</a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="138">
+                                 <a:s>'amended'</a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="139">
+                                 <a:s>'corrected'</a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="140">
+                                 <a:s>'preliminary'</a:s>
+                              </a:s>
+                              <a:s> }</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="144" locator="105:3-109:82" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="122" locator="105:3-105:45" alias="MacularExam">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="121" locator="105:3-105:33" dataType="fhir:Observation" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <codes locator="105:19-105:32" resultTypeName="t:ValueSet" name="Macular Exam" preserve="true" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <relationship localId="131" locator="106:5-107:95" alias="EncounterDiabeticRetinopathy" xsi:type="With">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="123" locator="106:10-106:41" name="Diabetic Retinopathy Encounter" xsi:type="ExpressionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </expression>
+               <suchThat localId="130" locator="107:17-107:95" resultTypeName="t:Boolean" xsi:type="IncludedIn">
+                  <operand localId="127" locator="107:17-107:52" name="toInterval" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                     <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <operand xsi:type="Case">
+                        <caseItem>
+                           <when isType="t:DateTime" xsi:type="Is">
+                              <operand localId="126" locator="107:17-107:37" name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                    <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    <choice xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    </choice>
+                                    <choice name="fhir:Timing" xsi:type="NamedTypeSpecifier"/>
+                                    <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                                 <operand path="effective" scope="MacularExam" xsi:type="Property"/>
+                              </operand>
+                           </when>
+                           <then xsi:type="As">
+                              <operand asType="t:DateTime" xsi:type="As">
+                                 <operand localId="126" locator="107:17-107:37" name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                       <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       <choice xsi:type="IntervalTypeSpecifier">
+                                          <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       </choice>
+                                       <choice name="fhir:Timing" xsi:type="NamedTypeSpecifier"/>
+                                       <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    </resultTypeSpecifier>
+                                    <operand path="effective" scope="MacularExam" xsi:type="Property"/>
+                                 </operand>
+                              </operand>
+                              <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                 <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                              </asTypeSpecifier>
+                           </then>
+                        </caseItem>
+                        <caseItem>
+                           <when xsi:type="Is">
+                              <operand localId="126" locator="107:17-107:37" name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                    <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    <choice xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    </choice>
+                                    <choice name="fhir:Timing" xsi:type="NamedTypeSpecifier"/>
+                                    <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                                 <operand path="effective" scope="MacularExam" xsi:type="Property"/>
+                              </operand>
+                              <isTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              </isTypeSpecifier>
+                           </when>
+                           <then xsi:type="As">
+                              <operand xsi:type="As">
+                                 <operand localId="126" locator="107:17-107:37" name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                       <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       <choice xsi:type="IntervalTypeSpecifier">
+                                          <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       </choice>
+                                       <choice name="fhir:Timing" xsi:type="NamedTypeSpecifier"/>
+                                       <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    </resultTypeSpecifier>
+                                    <operand path="effective" scope="MacularExam" xsi:type="Property"/>
+                                 </operand>
+                                 <asTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </asTypeSpecifier>
+                              </operand>
+                              <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                 <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                              </asTypeSpecifier>
+                           </then>
+                        </caseItem>
+                        <caseItem>
+                           <when isType="t:DateTime" xsi:type="Is">
+                              <operand localId="126" locator="107:17-107:37" name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                    <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    <choice xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    </choice>
+                                    <choice name="fhir:Timing" xsi:type="NamedTypeSpecifier"/>
+                                    <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                                 <operand path="effective" scope="MacularExam" xsi:type="Property"/>
+                              </operand>
+                           </when>
+                           <then xsi:type="As">
+                              <operand asType="t:DateTime" xsi:type="As">
+                                 <operand localId="126" locator="107:17-107:37" name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                       <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       <choice xsi:type="IntervalTypeSpecifier">
+                                          <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       </choice>
+                                       <choice name="fhir:Timing" xsi:type="NamedTypeSpecifier"/>
+                                       <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    </resultTypeSpecifier>
+                                    <operand path="effective" scope="MacularExam" xsi:type="Property"/>
+                                 </operand>
+                              </operand>
+                              <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                 <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                              </asTypeSpecifier>
+                           </then>
+                        </caseItem>
+                        <else xsi:type="Null">
+                           <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                              <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                              <choice xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              </choice>
+                              <choice xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                              </choice>
+                           </resultTypeSpecifier>
+                        </else>
+                     </operand>
+                  </operand>
+                  <operand localId="129" locator="107:61-107:95" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                     <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <operand path="period" scope="EncounterDiabeticRetinopathy" xsi:type="Property"/>
+                  </operand>
+               </suchThat>
+            </relationship>
+            <where localId="143" locator="108:5-109:82" resultTypeName="t:Boolean" xsi:type="And">
+               <operand localId="134" locator="108:11-108:39" resultTypeName="t:Boolean" xsi:type="Not">
+                  <operand locator="108:11-108:39" resultTypeName="t:Boolean" xsi:type="IsNull">
+                     <operand localId="133" locator="108:11-108:27" name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                        <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                           <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                           <choice name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                           <choice name="t:String" xsi:type="NamedTypeSpecifier"/>
+                           <choice name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                           <choice name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+                           <choice xsi:type="IntervalTypeSpecifier">
+                              <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                           </choice>
+                           <choice name="t:Ratio" xsi:type="NamedTypeSpecifier"/>
+                           <choice name="fhir:SampledData" xsi:type="NamedTypeSpecifier"/>
+                           <choice name="t:Time" xsi:type="NamedTypeSpecifier"/>
+                           <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                           <choice xsi:type="IntervalTypeSpecifier">
+                              <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                           </choice>
+                        </resultTypeSpecifier>
+                        <operand path="value" scope="MacularExam" xsi:type="Property"/>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand localId="142" locator="109:11-109:82" resultTypeName="t:Boolean" xsi:type="In">
+                  <operand localId="136" locator="109:11-109:28" resultTypeName="fhir:ObservationStatus" path="value" xsi:type="Property">
+                     <source path="status" scope="MacularExam" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="141" locator="109:33-109:82" xsi:type="List">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="t:String" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <element localId="137" locator="109:35-109:41" resultTypeName="t:String" valueType="t:String" value="final" xsi:type="Literal"/>
+                     <element localId="138" locator="109:44-109:52" resultTypeName="t:String" valueType="t:String" value="amended" xsi:type="Literal"/>
+                     <element localId="139" locator="109:55-109:65" resultTypeName="t:String" valueType="t:String" value="corrected" xsi:type="Literal"/>
+                     <element localId="140" locator="109:68-109:80" resultTypeName="t:String" valueType="t:String" value="preliminary" xsi:type="Literal"/>
+                  </operand>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="149" locator="69:1-71:39" resultTypeName="t:Boolean" name="Denominator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="149">
+               <a:s>define &quot;Denominator&quot;:
+  </a:s>
+               <a:s r="148">
+                  <a:s r="120">
+                     <a:s>&quot;Initial Population&quot;</a:s>
+                  </a:s>
+                  <a:s>
+    and </a:s>
+                  <a:s r="147">
+                     <a:s>exists </a:s>
+                     <a:s r="146">
+                        <a:s>&quot;Macular Exam Performed&quot;</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="148" locator="70:3-71:39" resultTypeName="t:Boolean" xsi:type="And">
+            <operand localId="120" locator="70:3-70:22" resultTypeName="t:Boolean" name="Initial Population" xsi:type="ExpressionRef"/>
+            <operand localId="147" locator="71:9-71:39" resultTypeName="t:Boolean" xsi:type="Exists">
+               <operand localId="146" locator="71:16-71:39" name="Macular Exam Performed" xsi:type="ExpressionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </operand>
+            </operand>
+         </expression>
+      </def>
+      <def localId="166" locator="117:1-121:58" name="Level of Severity of Retinopathy Findings Communicated" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="166">
+               <a:s>define &quot;Level of Severity of Retinopathy Findings Communicated&quot;:
+  </a:s>
+               <a:s r="165">
+                  <a:s>
+                     <a:s r="151">
+                        <a:s r="150">
+                           <a:s r="150">
+                              <a:s>[&quot;Communication&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Level of Severity of Retinopathy Findings&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> LevelOfSeverityCommunicated</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="160">
+                     <a:s>with </a:s>
+                     <a:s r="153">
+                        <a:s r="152">
+                           <a:s>
+                              <a:s>&quot;Diabetic Retinopathy Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> EncounterDiabeticRetinopathy</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="159">
+                        <a:s r="155">
+                           <a:s r="154">
+                              <a:s>LevelOfSeverityCommunicated</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="155">
+                              <a:s>sent</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="159"> after </a:s>
+                        <a:s r="158">
+                           <a:s>start of </a:s>
+                           <a:s r="157">
+                              <a:s r="156">
+                                 <a:s>EncounterDiabeticRetinopathy</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="157">
+                                 <a:s>period</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="164">
+                     <a:s>where </a:s>
+                     <a:s r="164">
+                        <a:s r="162">
+                           <a:s r="161">
+                              <a:s>LevelOfSeverityCommunicated</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="162">
+                              <a:s>status</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> = </a:s>
+                        <a:s r="163">
+                           <a:s>'completed'</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="165" locator="118:3-121:58" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="151" locator="118:3-118:92" alias="LevelOfSeverityCommunicated">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="150" locator="118:3-118:64" dataType="fhir:Communication" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-communication" codeProperty="category" codeComparator="in" xsi:type="Retrieve">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <codes locator="118:21-118:63" resultTypeName="t:ValueSet" name="Level of Severity of Retinopathy Findings" preserve="true" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <relationship localId="160" locator="119:5-120:99" alias="EncounterDiabeticRetinopathy" xsi:type="With">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="152" locator="119:10-119:41" name="Diabetic Retinopathy Encounter" xsi:type="ExpressionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </expression>
+               <suchThat localId="159" locator="120:17-120:99" resultTypeName="t:Boolean" xsi:type="After">
+                  <operand localId="155" locator="120:17-120:48" resultTypeName="t:DateTime" path="value" xsi:type="Property">
+                     <source path="sent" scope="LevelOfSeverityCommunicated" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="158" locator="120:56-120:99" resultTypeName="t:DateTime" xsi:type="Start">
+                     <operand localId="157" locator="120:65-120:99" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                        <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                           <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <operand path="period" scope="EncounterDiabeticRetinopathy" xsi:type="Property"/>
+                     </operand>
+                  </operand>
+               </suchThat>
+            </relationship>
+            <where localId="164" locator="121:5-121:58" resultTypeName="t:Boolean" xsi:type="Equal">
+               <operand localId="162" locator="121:11-121:44" resultTypeName="fhir:CommunicationStatus" path="value" xsi:type="Property">
+                  <source path="status" scope="LevelOfSeverityCommunicated" xsi:type="Property"/>
+               </operand>
+               <operand localId="163" locator="121:48-121:58" resultTypeName="t:String" valueType="t:String" value="completed" xsi:type="Literal"/>
+            </where>
+         </expression>
+      </def>
+      <def localId="185" locator="123:1-127:61" name="Macular Edema Absence Communicated" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="185">
+               <a:s>define &quot;Macular Edema Absence Communicated&quot;:
+  </a:s>
+               <a:s r="184">
+                  <a:s>
+                     <a:s r="170">
+                        <a:s r="169">
+                           <a:s r="169">
+                              <a:s>[&quot;Communication&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Macular edema absent (situation)&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> MacularEdemaAbsentCommunicated</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="179">
+                     <a:s>with </a:s>
+                     <a:s r="172">
+                        <a:s r="171">
+                           <a:s>
+                              <a:s>&quot;Diabetic Retinopathy Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> EncounterDiabeticRetinopathy</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="178">
+                        <a:s r="174">
+                           <a:s r="173">
+                              <a:s>MacularEdemaAbsentCommunicated</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="174">
+                              <a:s>sent</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="178"> after </a:s>
+                        <a:s r="177">
+                           <a:s>start of </a:s>
+                           <a:s r="176">
+                              <a:s r="175">
+                                 <a:s>EncounterDiabeticRetinopathy</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="176">
+                                 <a:s>period</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="183">
+                     <a:s>where </a:s>
+                     <a:s r="183">
+                        <a:s r="181">
+                           <a:s r="180">
+                              <a:s>MacularEdemaAbsentCommunicated</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="181">
+                              <a:s>status</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> = </a:s>
+                        <a:s r="182">
+                           <a:s>'completed'</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="184" locator="124:3-127:61" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="170" locator="124:3-124:86" alias="MacularEdemaAbsentCommunicated">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="169" locator="124:3-124:55" dataType="fhir:Communication" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-communication" codeProperty="category" codeComparator="in" xsi:type="Retrieve">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <codes locator="124:21-124:54" resultTypeName="t:ValueSet" name="Macular edema absent (situation)" preserve="true" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <relationship localId="179" locator="125:5-126:102" alias="EncounterDiabeticRetinopathy" xsi:type="With">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="171" locator="125:10-125:41" name="Diabetic Retinopathy Encounter" xsi:type="ExpressionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </expression>
+               <suchThat localId="178" locator="126:17-126:102" resultTypeName="t:Boolean" xsi:type="After">
+                  <operand localId="174" locator="126:17-126:51" resultTypeName="t:DateTime" path="value" xsi:type="Property">
+                     <source path="sent" scope="MacularEdemaAbsentCommunicated" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="177" locator="126:59-126:102" resultTypeName="t:DateTime" xsi:type="Start">
+                     <operand localId="176" locator="126:68-126:102" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                        <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                           <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <operand path="period" scope="EncounterDiabeticRetinopathy" xsi:type="Property"/>
+                     </operand>
+                  </operand>
+               </suchThat>
+            </relationship>
+            <where localId="183" locator="127:5-127:61" resultTypeName="t:Boolean" xsi:type="Equal">
+               <operand localId="181" locator="127:11-127:47" resultTypeName="fhir:CommunicationStatus" path="value" xsi:type="Property">
+                  <source path="status" scope="MacularEdemaAbsentCommunicated" xsi:type="Property"/>
+               </operand>
+               <operand localId="182" locator="127:51-127:61" resultTypeName="t:String" valueType="t:String" value="completed" xsi:type="Literal"/>
+            </where>
+         </expression>
+      </def>
+      <def localId="204" locator="129:1-133:62" name="Macular Edema Presence Communicated" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="204">
+               <a:s>define &quot;Macular Edema Presence Communicated&quot;:
+  </a:s>
+               <a:s r="203">
+                  <a:s>
+                     <a:s r="189">
+                        <a:s r="188">
+                           <a:s r="188">
+                              <a:s>[&quot;Communication&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Macular Edema Findings Present&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> MacularEdemaPresentCommunicated</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="198">
+                     <a:s>with </a:s>
+                     <a:s r="191">
+                        <a:s r="190">
+                           <a:s>
+                              <a:s>&quot;Diabetic Retinopathy Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> EncounterDiabeticRetinopathy</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="197">
+                        <a:s r="193">
+                           <a:s r="192">
+                              <a:s>MacularEdemaPresentCommunicated</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="193">
+                              <a:s>sent</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="197"> after </a:s>
+                        <a:s r="196">
+                           <a:s>start of </a:s>
+                           <a:s r="195">
+                              <a:s r="194">
+                                 <a:s>EncounterDiabeticRetinopathy</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="195">
+                                 <a:s>period</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="202">
+                     <a:s>where </a:s>
+                     <a:s r="202">
+                        <a:s r="200">
+                           <a:s r="199">
+                              <a:s>MacularEdemaPresentCommunicated</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="200">
+                              <a:s>status</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> = </a:s>
+                        <a:s r="201">
+                           <a:s>'completed'</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="203" locator="130:3-133:62" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="189" locator="130:3-130:85" alias="MacularEdemaPresentCommunicated">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="188" locator="130:3-130:53" dataType="fhir:Communication" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-communication" codeProperty="category" codeComparator="in" xsi:type="Retrieve">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <codes locator="130:21-130:52" resultTypeName="t:ValueSet" name="Macular Edema Findings Present" preserve="true" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <relationship localId="198" locator="131:5-132:103" alias="EncounterDiabeticRetinopathy" xsi:type="With">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="190" locator="131:10-131:41" name="Diabetic Retinopathy Encounter" xsi:type="ExpressionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </expression>
+               <suchThat localId="197" locator="132:17-132:103" resultTypeName="t:Boolean" xsi:type="After">
+                  <operand localId="193" locator="132:17-132:52" resultTypeName="t:DateTime" path="value" xsi:type="Property">
+                     <source path="sent" scope="MacularEdemaPresentCommunicated" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="196" locator="132:60-132:103" resultTypeName="t:DateTime" xsi:type="Start">
+                     <operand localId="195" locator="132:69-132:103" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                        <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                           <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <operand path="period" scope="EncounterDiabeticRetinopathy" xsi:type="Property"/>
+                     </operand>
+                  </operand>
+               </suchThat>
+            </relationship>
+            <where localId="202" locator="133:5-133:62" resultTypeName="t:Boolean" xsi:type="Equal">
+               <operand localId="200" locator="133:11-133:48" resultTypeName="fhir:CommunicationStatus" path="value" xsi:type="Property">
+                  <source path="status" scope="MacularEdemaPresentCommunicated" xsi:type="Property"/>
+               </operand>
+               <operand localId="201" locator="133:52-133:62" resultTypeName="t:String" valueType="t:String" value="completed" xsi:type="Literal"/>
+            </where>
+         </expression>
+      </def>
+      <def localId="209" locator="73:1-77:5" resultTypeName="t:Boolean" name="Numerator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="209">
+               <a:s>define &quot;Numerator&quot;:
+  </a:s>
+               <a:s r="208">
+                  <a:s r="168">
+                     <a:s>exists </a:s>
+                     <a:s r="167">
+                        <a:s>&quot;Level of Severity of Retinopathy Findings Communicated&quot;</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    and </a:s>
+                  <a:s r="207">
+                     <a:s>( </a:s>
+                     <a:s r="207">
+                        <a:s r="187">
+                           <a:s>exists </a:s>
+                           <a:s r="186">
+                              <a:s>&quot;Macular Edema Absence Communicated&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+        or </a:s>
+                        <a:s r="206">
+                           <a:s>exists </a:s>
+                           <a:s r="205">
+                              <a:s>&quot;Macular Edema Presence Communicated&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    )</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="208" locator="74:3-77:5" resultTypeName="t:Boolean" xsi:type="And">
+            <operand localId="168" locator="74:3-74:65" resultTypeName="t:Boolean" xsi:type="Exists">
+               <operand localId="167" locator="74:10-74:65" name="Level of Severity of Retinopathy Findings Communicated" xsi:type="ExpressionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </operand>
+            </operand>
+            <operand localId="207" locator="75:9-77:5" resultTypeName="t:Boolean" xsi:type="Or">
+               <operand localId="187" locator="75:11-75:53" resultTypeName="t:Boolean" xsi:type="Exists">
+                  <operand localId="186" locator="75:18-75:53" name="Macular Edema Absence Communicated" xsi:type="ExpressionRef">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                  </operand>
+               </operand>
+               <operand localId="206" locator="76:12-76:55" resultTypeName="t:Boolean" xsi:type="Exists">
+                  <operand localId="205" locator="76:19-76:55" name="Macular Edema Presence Communicated" xsi:type="ExpressionRef">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                  </operand>
+               </operand>
+            </operand>
+         </expression>
+      </def>
+      <def localId="230" locator="135:1-141:5" name="Medical or Patient Reason for Not Communicating Level of Severity of Retinopathy" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="230">
+               <a:s>define &quot;Medical or Patient Reason for Not Communicating Level of Severity of Retinopathy&quot;:
+  </a:s>
+               <a:s r="229">
+                  <a:s>
+                     <a:s r="211">
+                        <a:s r="210">
+                           <a:s r="210">
+                              <a:s>[CommunicationNotDone: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Level of Severity of Retinopathy Findings&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> LevelOfSeverityNotCommunicated</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="219">
+                     <a:s>with </a:s>
+                     <a:s r="213">
+                        <a:s r="212">
+                           <a:s>
+                              <a:s>&quot;Diabetic Retinopathy Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> EncounterDiabeticRetinopathy</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="218">
+                        <a:s r="215">
+                           <a:s r="214">
+                              <a:s>LevelOfSeverityNotCommunicated</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="215">
+                              <a:s>recorded</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="218"> during </a:s>
+                        <a:s r="217">
+                           <a:s r="216">
+                              <a:s>EncounterDiabeticRetinopathy</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="217">
+                              <a:s>period</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="228">
+                     <a:s>where </a:s>
+                     <a:s r="228">
+                        <a:s>( </a:s>
+                        <a:s r="228">
+                           <a:s r="223">
+                              <a:s r="221">
+                                 <a:s r="220">
+                                    <a:s>LevelOfSeverityNotCommunicated</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="221">
+                                    <a:s>statusReason</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> in </a:s>
+                              <a:s r="222">
+                                 <a:s>&quot;Medical Reason&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+        or </a:s>
+                           <a:s r="227">
+                              <a:s r="225">
+                                 <a:s r="224">
+                                    <a:s>LevelOfSeverityNotCommunicated</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="225">
+                                    <a:s>statusReason</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> in </a:s>
+                              <a:s r="226">
+                                 <a:s>&quot;Patient Reason&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+    )</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="229" locator="136:3-141:5" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="211" locator="136:3-136:100" alias="LevelOfSeverityNotCommunicated">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="210" locator="136:3-136:69" dataType="fhir:Communication" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-communicationnotdone" codeComparator="in" xsi:type="Retrieve">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <codes locator="136:26-136:68" resultTypeName="t:ValueSet" name="Level of Severity of Retinopathy Findings" preserve="true" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <relationship localId="219" locator="137:5-138:98" alias="EncounterDiabeticRetinopathy" xsi:type="With">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="212" locator="137:10-137:41" name="Diabetic Retinopathy Encounter" xsi:type="ExpressionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </expression>
+               <suchThat localId="218" locator="138:17-138:98" resultTypeName="t:Boolean" xsi:type="In">
+                  <operand localId="215" locator="138:17-138:55" resultTypeName="fhir:NotDoneRecorded" xsi:type="SingletonFrom">
+                     <operand xsi:type="Query">
+                        <source alias="$this">
+                           <expression path="extension" xsi:type="Property">
+                              <source name="LevelOfSeverityNotCommunicated" xsi:type="AliasRef"/>
+                           </expression>
+                        </source>
+                        <where xsi:type="Equal">
+                           <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                              <operand path="url" scope="$this" xsi:type="Property"/>
+                           </operand>
+                           <operand valueType="t:String" value="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded" xsi:type="Literal"/>
+                        </where>
+                        <return distinct="false">
+                           <expression path="value.value" xsi:type="Property">
+                              <source name="$this" xsi:type="AliasRef"/>
+                           </expression>
+                        </return>
+                     </operand>
+                  </operand>
+                  <operand localId="217" locator="138:64-138:98" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                     <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <operand path="period" scope="EncounterDiabeticRetinopathy" xsi:type="Property"/>
+                  </operand>
+               </suchThat>
+            </relationship>
+            <where localId="228" locator="139:5-141:5" resultTypeName="t:Boolean" xsi:type="Or">
+               <operand localId="223" locator="139:13-139:75" resultTypeName="t:Boolean" xsi:type="InValueSet">
+                  <code localId="221" locator="139:13-139:55" resultTypeName="t:Concept" name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                     <operand path="statusReason" scope="LevelOfSeverityNotCommunicated" xsi:type="Property"/>
+                  </code>
+                  <valueset localId="222" locator="139:60-139:75" resultTypeName="t:ValueSet" name="Medical Reason" preserve="true"/>
+               </operand>
+               <operand localId="227" locator="140:12-140:74" resultTypeName="t:Boolean" xsi:type="InValueSet">
+                  <code localId="225" locator="140:12-140:54" resultTypeName="t:Concept" name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                     <operand path="statusReason" scope="LevelOfSeverityNotCommunicated" xsi:type="Property"/>
+                  </code>
+                  <valueset localId="226" locator="140:59-140:74" resultTypeName="t:ValueSet" name="Patient Reason" preserve="true"/>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="253" locator="157:1-163:5" name="Medical or Patient Reason for Not Communicating Absence of Macular Edema" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="253">
+               <a:s>/* Note: 
+below definition workaround for 
+https://oncprojectracking.healthit.gov/support/browse/CQLIT-371. Using value set workaround has been applied for now
+but when QI Core STU 5 gets in the tool, it may be reverted back to a DRC */
+define &quot;Medical or Patient Reason for Not Communicating Absence of Macular Edema&quot;:
+  </a:s>
+               <a:s r="252">
+                  <a:s>
+                     <a:s r="234">
+                        <a:s r="233">
+                           <a:s r="233">
+                              <a:s>[CommunicationNotDone: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Macular edema absent (situation)&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> MacularEdemaAbsentNotCommunicated</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="242">
+                     <a:s>with </a:s>
+                     <a:s r="236">
+                        <a:s r="235">
+                           <a:s>
+                              <a:s>&quot;Diabetic Retinopathy Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> EncounterDiabeticRetinopathy</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="241">
+                        <a:s r="238">
+                           <a:s r="237">
+                              <a:s>MacularEdemaAbsentNotCommunicated</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="238">
+                              <a:s>recorded</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="241"> during </a:s>
+                        <a:s r="240">
+                           <a:s r="239">
+                              <a:s>EncounterDiabeticRetinopathy</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="240">
+                              <a:s>period</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="251">
+                     <a:s>where </a:s>
+                     <a:s r="251">
+                        <a:s>( </a:s>
+                        <a:s r="251">
+                           <a:s r="246">
+                              <a:s r="244">
+                                 <a:s r="243">
+                                    <a:s>MacularEdemaAbsentNotCommunicated</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="244">
+                                    <a:s>statusReason</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> in </a:s>
+                              <a:s r="245">
+                                 <a:s>&quot;Medical Reason&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+        or </a:s>
+                           <a:s r="250">
+                              <a:s r="248">
+                                 <a:s r="247">
+                                    <a:s>MacularEdemaAbsentNotCommunicated</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="248">
+                                    <a:s>statusReason</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> in </a:s>
+                              <a:s r="249">
+                                 <a:s>&quot;Patient Reason&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+    )</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="252" locator="158:3-163:5" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="234" locator="158:3-158:94" alias="MacularEdemaAbsentNotCommunicated">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="233" locator="158:3-158:60" dataType="fhir:Communication" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-communicationnotdone" codeComparator="in" xsi:type="Retrieve">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <codes locator="158:26-158:59" resultTypeName="t:ValueSet" name="Macular edema absent (situation)" preserve="true" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <relationship localId="242" locator="159:5-160:101" alias="EncounterDiabeticRetinopathy" xsi:type="With">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="235" locator="159:10-159:41" name="Diabetic Retinopathy Encounter" xsi:type="ExpressionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </expression>
+               <suchThat localId="241" locator="160:17-160:101" resultTypeName="t:Boolean" xsi:type="In">
+                  <operand localId="238" locator="160:17-160:58" resultTypeName="fhir:NotDoneRecorded" xsi:type="SingletonFrom">
+                     <operand xsi:type="Query">
+                        <source alias="$this">
+                           <expression path="extension" xsi:type="Property">
+                              <source name="MacularEdemaAbsentNotCommunicated" xsi:type="AliasRef"/>
+                           </expression>
+                        </source>
+                        <where xsi:type="Equal">
+                           <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                              <operand path="url" scope="$this" xsi:type="Property"/>
+                           </operand>
+                           <operand valueType="t:String" value="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded" xsi:type="Literal"/>
+                        </where>
+                        <return distinct="false">
+                           <expression path="value.value" xsi:type="Property">
+                              <source name="$this" xsi:type="AliasRef"/>
+                           </expression>
+                        </return>
+                     </operand>
+                  </operand>
+                  <operand localId="240" locator="160:67-160:101" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                     <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <operand path="period" scope="EncounterDiabeticRetinopathy" xsi:type="Property"/>
+                  </operand>
+               </suchThat>
+            </relationship>
+            <where localId="251" locator="161:5-163:5" resultTypeName="t:Boolean" xsi:type="Or">
+               <operand localId="246" locator="161:13-161:78" resultTypeName="t:Boolean" xsi:type="InValueSet">
+                  <code localId="244" locator="161:13-161:58" resultTypeName="t:Concept" name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                     <operand path="statusReason" scope="MacularEdemaAbsentNotCommunicated" xsi:type="Property"/>
+                  </code>
+                  <valueset localId="245" locator="161:63-161:78" resultTypeName="t:ValueSet" name="Medical Reason" preserve="true"/>
+               </operand>
+               <operand localId="250" locator="162:12-162:77" resultTypeName="t:Boolean" xsi:type="InValueSet">
+                  <code localId="248" locator="162:12-162:57" resultTypeName="t:Concept" name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                     <operand path="statusReason" scope="MacularEdemaAbsentNotCommunicated" xsi:type="Property"/>
+                  </code>
+                  <valueset localId="249" locator="162:62-162:77" resultTypeName="t:ValueSet" name="Patient Reason" preserve="true"/>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="277" locator="143:1-149:5" name="Medical or Patient Reason for Not Communicating Presence of Macular Edema" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="277">
+               <a:s>define &quot;Medical or Patient Reason for Not Communicating Presence of Macular Edema&quot;:
+  </a:s>
+               <a:s r="276">
+                  <a:s>
+                     <a:s r="258">
+                        <a:s r="257">
+                           <a:s r="257">
+                              <a:s>[CommunicationNotDone: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Macular Edema Findings Present&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> MacularEdemaPresentNotCommunicated</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="266">
+                     <a:s>with </a:s>
+                     <a:s r="260">
+                        <a:s r="259">
+                           <a:s>
+                              <a:s>&quot;Diabetic Retinopathy Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> EncounterDiabeticRetinopathy</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="265">
+                        <a:s r="262">
+                           <a:s r="261">
+                              <a:s>MacularEdemaPresentNotCommunicated</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="262">
+                              <a:s>recorded</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="265"> during </a:s>
+                        <a:s r="264">
+                           <a:s r="263">
+                              <a:s>EncounterDiabeticRetinopathy</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="264">
+                              <a:s>period</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="275">
+                     <a:s>where </a:s>
+                     <a:s r="275">
+                        <a:s>( </a:s>
+                        <a:s r="275">
+                           <a:s r="270">
+                              <a:s r="268">
+                                 <a:s r="267">
+                                    <a:s>MacularEdemaPresentNotCommunicated</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="268">
+                                    <a:s>statusReason</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> in </a:s>
+                              <a:s r="269">
+                                 <a:s>&quot;Medical Reason&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+        or </a:s>
+                           <a:s r="274">
+                              <a:s r="272">
+                                 <a:s r="271">
+                                    <a:s>MacularEdemaPresentNotCommunicated</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="272">
+                                    <a:s>statusReason</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> in </a:s>
+                              <a:s r="273">
+                                 <a:s>&quot;Patient Reason&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+    )</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="276" locator="144:3-149:5" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="258" locator="144:3-144:93" alias="MacularEdemaPresentNotCommunicated">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="257" locator="144:3-144:58" dataType="fhir:Communication" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-communicationnotdone" codeComparator="in" xsi:type="Retrieve">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <codes locator="144:26-144:57" resultTypeName="t:ValueSet" name="Macular Edema Findings Present" preserve="true" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <relationship localId="266" locator="145:5-146:102" alias="EncounterDiabeticRetinopathy" xsi:type="With">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="259" locator="145:10-145:41" name="Diabetic Retinopathy Encounter" xsi:type="ExpressionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </expression>
+               <suchThat localId="265" locator="146:17-146:102" resultTypeName="t:Boolean" xsi:type="In">
+                  <operand localId="262" locator="146:17-146:59" resultTypeName="fhir:NotDoneRecorded" xsi:type="SingletonFrom">
+                     <operand xsi:type="Query">
+                        <source alias="$this">
+                           <expression path="extension" xsi:type="Property">
+                              <source name="MacularEdemaPresentNotCommunicated" xsi:type="AliasRef"/>
+                           </expression>
+                        </source>
+                        <where xsi:type="Equal">
+                           <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                              <operand path="url" scope="$this" xsi:type="Property"/>
+                           </operand>
+                           <operand valueType="t:String" value="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded" xsi:type="Literal"/>
+                        </where>
+                        <return distinct="false">
+                           <expression path="value.value" xsi:type="Property">
+                              <source name="$this" xsi:type="AliasRef"/>
+                           </expression>
+                        </return>
+                     </operand>
+                  </operand>
+                  <operand localId="264" locator="146:68-146:102" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                     <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <operand path="period" scope="EncounterDiabeticRetinopathy" xsi:type="Property"/>
+                  </operand>
+               </suchThat>
+            </relationship>
+            <where localId="275" locator="147:5-149:5" resultTypeName="t:Boolean" xsi:type="Or">
+               <operand localId="270" locator="147:13-147:79" resultTypeName="t:Boolean" xsi:type="InValueSet">
+                  <code localId="268" locator="147:13-147:59" resultTypeName="t:Concept" name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                     <operand path="statusReason" scope="MacularEdemaPresentNotCommunicated" xsi:type="Property"/>
+                  </code>
+                  <valueset localId="269" locator="147:64-147:79" resultTypeName="t:ValueSet" name="Medical Reason" preserve="true"/>
+               </operand>
+               <operand localId="274" locator="148:12-148:78" resultTypeName="t:Boolean" xsi:type="InValueSet">
+                  <code localId="272" locator="148:12-148:58" resultTypeName="t:Concept" name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                     <operand path="statusReason" scope="MacularEdemaPresentNotCommunicated" xsi:type="Property"/>
+                  </code>
+                  <valueset localId="273" locator="148:63-148:78" resultTypeName="t:ValueSet" name="Patient Reason" preserve="true"/>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="281" locator="79:1-82:89" resultTypeName="t:Boolean" name="Denominator Exceptions" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="281">
+               <a:s>define &quot;Denominator Exceptions&quot;:
+  </a:s>
+               <a:s r="280">
+                  <a:s r="256">
+                     <a:s r="232">
+                        <a:s>exists </a:s>
+                        <a:s r="231">
+                           <a:s>&quot;Medical or Patient Reason for Not Communicating Level of Severity of Retinopathy&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    or </a:s>
+                     <a:s r="255">
+                        <a:s>exists </a:s>
+                        <a:s r="254">
+                           <a:s>&quot;Medical or Patient Reason for Not Communicating Absence of Macular Edema&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    or </a:s>
+                  <a:s r="279">
+                     <a:s>exists </a:s>
+                     <a:s r="278">
+                        <a:s>&quot;Medical or Patient Reason for Not Communicating Presence of Macular Edema&quot;</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="280" locator="80:3-82:89" resultTypeName="t:Boolean" xsi:type="Or">
+            <operand localId="256" locator="80:3-81:88" resultTypeName="t:Boolean" xsi:type="Or">
+               <operand localId="232" locator="80:3-80:91" resultTypeName="t:Boolean" xsi:type="Exists">
+                  <operand localId="231" locator="80:10-80:91" name="Medical or Patient Reason for Not Communicating Level of Severity of Retinopathy" xsi:type="ExpressionRef">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                  </operand>
+               </operand>
+               <operand localId="255" locator="81:8-81:88" resultTypeName="t:Boolean" xsi:type="Exists">
+                  <operand localId="254" locator="81:15-81:88" name="Medical or Patient Reason for Not Communicating Absence of Macular Edema" xsi:type="ExpressionRef">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                  </operand>
+               </operand>
+            </operand>
+            <operand localId="279" locator="82:8-82:89" resultTypeName="t:Boolean" xsi:type="Exists">
+               <operand localId="278" locator="82:15-82:89" name="Medical or Patient Reason for Not Communicating Presence of Macular Edema" xsi:type="ExpressionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </operand>
+            </operand>
+         </expression>
+      </def>
+      <def localId="290" locator="111:1-115:5" resultTypeName="t:Boolean" name="Results of Dilated Macular or Fundus Exam Communicated" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="290">
+               <a:s>define &quot;Results of Dilated Macular or Fundus Exam Communicated&quot;:
+  </a:s>
+               <a:s r="289">
+                  <a:s r="283">
+                     <a:s>exists </a:s>
+                     <a:s r="282">
+                        <a:s>&quot;Level of Severity of Retinopathy Findings Communicated&quot;</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    and </a:s>
+                  <a:s r="288">
+                     <a:s>( </a:s>
+                     <a:s r="288">
+                        <a:s r="285">
+                           <a:s>exists </a:s>
+                           <a:s r="284">
+                              <a:s>&quot;Macular Edema Absence Communicated&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+        or </a:s>
+                        <a:s r="287">
+                           <a:s>exists </a:s>
+                           <a:s r="286">
+                              <a:s>&quot;Macular Edema Presence Communicated&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    )</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="289" locator="112:3-115:5" resultTypeName="t:Boolean" xsi:type="And">
+            <operand localId="283" locator="112:3-112:65" resultTypeName="t:Boolean" xsi:type="Exists">
+               <operand localId="282" locator="112:10-112:65" name="Level of Severity of Retinopathy Findings Communicated" xsi:type="ExpressionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </operand>
+            </operand>
+            <operand localId="288" locator="113:9-115:5" resultTypeName="t:Boolean" xsi:type="Or">
+               <operand localId="285" locator="113:11-113:53" resultTypeName="t:Boolean" xsi:type="Exists">
+                  <operand localId="284" locator="113:18-113:53" name="Macular Edema Absence Communicated" xsi:type="ExpressionRef">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                  </operand>
+               </operand>
+               <operand localId="287" locator="114:12-114:55" resultTypeName="t:Boolean" xsi:type="Exists">
+                  <operand localId="286" locator="114:19-114:55" name="Macular Edema Presence Communicated" xsi:type="ExpressionRef">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Communication" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                  </operand>
+               </operand>
+            </operand>
+         </expression>
+      </def>
+   </statements>
+</library>
