@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
-   <annotation translatorOptions="EnableAnnotations,EnableLocators,EnableResultTypes" xsi:type="a:CqlToElmInfo"/>
+   <annotation translatorVersion="2.10.0" translatorOptions="EnableAnnotations,EnableLocators,EnableResultTypes" xsi:type="a:CqlToElmInfo"/>
    <annotation xsi:type="a:Annotation">
       <a:s r="460">
          <a:s>library AppropriateTreatmentforSTEMIFHIR version '0.0.008'</a:s>
@@ -595,20 +595,27 @@ include </a:s>
                         <valueset localId="63" locator="164:39-164:45" resultTypeName="t:ValueSet" name="STEMI" preserve="true"/>
                      </operand>
                      <operand localId="73" locator="165:14-167:11" resultTypeName="t:Boolean" xsi:type="Exists">
-                        <operand xsi:type="ToList">
-                           <operand localId="72" locator="165:21-167:11" resultTypeName="fhir:Condition" xsi:type="Query">
-                              <source localId="67" locator="165:23-165:73" resultTypeName="fhir:Condition" alias="EncDiagnosis">
-                                 <expression localId="66" locator="165:23-165:60" resultTypeName="fhir:Condition" name="encounterDiagnosis" libraryName="CQMCommon" xsi:type="FunctionRef">
-                                    <operand localId="65" locator="165:25-165:35" resultTypeName="fhir:Encounter" name="EDEncounter" xsi:type="AliasRef"/>
-                                 </expression>
-                              </source>
-                              <where localId="71" locator="166:15-166:48" resultTypeName="t:Boolean" xsi:type="InValueSet">
-                                 <code localId="69" locator="166:21-166:37" resultTypeName="t:Concept" name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                                    <operand path="code" scope="EncDiagnosis" xsi:type="Property"/>
-                                 </code>
-                                 <valueset localId="70" locator="166:42-166:48" resultTypeName="t:ValueSet" name="STEMI" preserve="true"/>
-                              </where>
-                           </operand>
+                        <operand localId="72" locator="165:21-167:11" xsi:type="Query">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <source localId="67" locator="165:23-165:73" alias="EncDiagnosis">
+                              <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                 <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                              <expression localId="66" locator="165:23-165:60" name="encounterDiagnosis" libraryName="CQMCommon" xsi:type="FunctionRef">
+                                 <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                    <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                                 <operand localId="65" locator="165:25-165:35" resultTypeName="fhir:Encounter" name="EDEncounter" xsi:type="AliasRef"/>
+                              </expression>
+                           </source>
+                           <where localId="71" locator="166:15-166:48" resultTypeName="t:Boolean" xsi:type="InValueSet">
+                              <code localId="69" locator="166:21-166:37" resultTypeName="t:Concept" name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <operand path="code" scope="EncDiagnosis" xsi:type="Property"/>
+                              </code>
+                              <valueset localId="70" locator="166:42-166:48" resultTypeName="t:ValueSet" name="STEMI" preserve="true"/>
+                           </where>
                         </operand>
                      </operand>
                   </operand>
@@ -968,8 +975,10 @@ define &quot;Initial Population&quot;:
             </source>
             <where localId="128" locator="61:5-61:68" resultTypeName="t:Boolean" xsi:type="GreaterOrEqual">
                <operand localId="126" locator="61:11-61:62" resultTypeName="t:Integer" precision="Year" xsi:type="CalculateAgeAt">
-                  <operand path="birthDate" xsi:type="Property">
-                     <source name="Patient" xsi:type="ExpressionRef"/>
+                  <operand path="value" xsi:type="Property">
+                     <source path="birthDate" xsi:type="Property">
+                        <source name="Patient" xsi:type="ExpressionRef"/>
+                     </source>
                   </operand>
                   <operand localId="125" locator="61:24-61:61" resultTypeName="t:Date" xsi:type="DateFrom">
                      <operand localId="124" locator="61:34-61:61" resultTypeName="t:DateTime" xsi:type="Start">
@@ -1651,11 +1660,19 @@ define &quot;Active Exclusion Diagnosis at Start of ED Encounter&quot;:
                <resultTypeSpecifier xsi:type="ListTypeSpecifier">
                   <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
                </resultTypeSpecifier>
-               <expression localId="201" locator="113:10-113:64" dataType="fhir:MedicationRequest" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest" codeProperty="medication" codeComparator="in" xsi:type="Retrieve">
+               <expression localId="201" locator="113:10-113:64" xsi:type="Union">
                   <resultTypeSpecifier xsi:type="ListTypeSpecifier">
                      <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
                   </resultTypeSpecifier>
-                  <codes locator="113:32-113:63" resultTypeName="t:ValueSet" name="Oral Anticoagulant Medications" preserve="true" xsi:type="ValueSetRef"/>
+                  <operand dataType="fhir:MedicationRequest" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest" codeProperty="medication" codeComparator="in" xsi:type="Retrieve">
+                     <codes locator="113:32-113:63" resultTypeName="t:ValueSet" name="Oral Anticoagulant Medications" preserve="true" xsi:type="ValueSetRef"/>
+                  </operand>
+                  <operand locator="113:10-113:64" dataType="fhir:MedicationRequest" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest" codeProperty="medication" codeComparator="in" xsi:type="Retrieve">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <codes locator="113:32-113:63" resultTypeName="t:ValueSet" name="Oral Anticoagulant Medications" preserve="true" xsi:type="ValueSetRef"/>
+                  </operand>
                </expression>
                <suchThat localId="218" locator="114:17-116:81" resultTypeName="t:Boolean" xsi:type="And">
                   <operand localId="211" locator="114:17-115:46" resultTypeName="t:Boolean" xsi:type="And">
@@ -3338,11 +3355,19 @@ define &quot;Fibrinolytic Therapy within 30 Minutes of Arrival&quot;:
                <resultTypeSpecifier xsi:type="ListTypeSpecifier">
                   <elementType name="fhir:MedicationAdministration" xsi:type="NamedTypeSpecifier"/>
                </resultTypeSpecifier>
-               <expression localId="371" locator="187:10-187:61" dataType="fhir:MedicationAdministration" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration" codeProperty="medication" codeComparator="in" xsi:type="Retrieve">
+               <expression localId="371" locator="187:10-187:61" xsi:type="Union">
                   <resultTypeSpecifier xsi:type="ListTypeSpecifier">
                      <elementType name="fhir:MedicationAdministration" xsi:type="NamedTypeSpecifier"/>
                   </resultTypeSpecifier>
-                  <codes locator="187:39-187:60" resultTypeName="t:ValueSet" name="Fibrinolytic Therapy" preserve="true" xsi:type="ValueSetRef"/>
+                  <operand dataType="fhir:MedicationAdministration" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration" codeProperty="medication" codeComparator="in" xsi:type="Retrieve">
+                     <codes locator="187:39-187:60" resultTypeName="t:ValueSet" name="Fibrinolytic Therapy" preserve="true" xsi:type="ValueSetRef"/>
+                  </operand>
+                  <operand locator="187:10-187:61" dataType="fhir:MedicationAdministration" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration" codeProperty="medication" codeComparator="in" xsi:type="Retrieve">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:MedicationAdministration" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <codes locator="187:39-187:60" resultTypeName="t:ValueSet" name="Fibrinolytic Therapy" preserve="true" xsi:type="ValueSetRef"/>
+                  </operand>
                </expression>
                <suchThat localId="401" locator="188:17-189:141" resultTypeName="t:Boolean" xsi:type="And">
                   <operand localId="376" locator="188:17-188:49" resultTypeName="t:Boolean" xsi:type="Equal">

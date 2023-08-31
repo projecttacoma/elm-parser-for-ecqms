@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
-   <annotation translatorOptions="EnableAnnotations,EnableLocators,EnableResultTypes" xsi:type="a:CqlToElmInfo"/>
+   <annotation translatorVersion="2.10.0" translatorOptions="EnableAnnotations,EnableLocators,EnableResultTypes" xsi:type="a:CqlToElmInfo"/>
    <annotation xsi:type="a:Annotation">
       <a:s r="128">
          <a:s>library ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFHIR version '0.0.003'</a:s>
@@ -595,20 +595,27 @@
                         <valueset localId="58" locator="59:42-59:75" resultTypeName="t:ValueSet" name="Major Depressive Disorder Active" preserve="true"/>
                      </operand>
                      <operand localId="69" locator="60:14-62:11" resultTypeName="t:Boolean" xsi:type="Exists">
-                        <operand xsi:type="ToList">
-                           <operand localId="68" locator="60:21-62:11" resultTypeName="fhir:Condition" xsi:type="Query">
-                              <source localId="63" locator="60:23-60:94" resultTypeName="fhir:Condition" alias="EncounterDiagnosis">
-                                 <expression localId="62" locator="60:23-60:75" resultTypeName="fhir:Condition" name="EncounterDiagnosis" libraryName="CQMCommon" xsi:type="FunctionRef">
-                                    <operand localId="61" locator="60:58-60:71" resultTypeName="fhir:Encounter" name="ValidEncounter" xsi:type="AliasRef"/>
-                                 </expression>
-                              </source>
-                              <where localId="67" locator="61:15-61:81" resultTypeName="t:Boolean" xsi:type="InValueSet">
-                                 <code localId="65" locator="61:21-61:43" resultTypeName="t:Concept" name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                                    <operand path="code" scope="EncounterDiagnosis" xsi:type="Property"/>
-                                 </code>
-                                 <valueset localId="66" locator="61:48-61:81" resultTypeName="t:ValueSet" name="Major Depressive Disorder Active" preserve="true"/>
-                              </where>
-                           </operand>
+                        <operand localId="68" locator="60:21-62:11" xsi:type="Query">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <source localId="63" locator="60:23-60:94" alias="EncounterDiagnosis">
+                              <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                 <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                              <expression localId="62" locator="60:23-60:75" name="EncounterDiagnosis" libraryName="CQMCommon" xsi:type="FunctionRef">
+                                 <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                    <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                                 <operand localId="61" locator="60:58-60:71" resultTypeName="fhir:Encounter" name="ValidEncounter" xsi:type="AliasRef"/>
+                              </expression>
+                           </source>
+                           <where localId="67" locator="61:15-61:81" resultTypeName="t:Boolean" xsi:type="InValueSet">
+                              <code localId="65" locator="61:21-61:43" resultTypeName="t:Concept" name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <operand path="code" scope="EncounterDiagnosis" xsi:type="Property"/>
+                              </code>
+                              <valueset localId="66" locator="61:48-61:81" resultTypeName="t:ValueSet" name="Major Depressive Disorder Active" preserve="true"/>
+                           </where>
                         </operand>
                      </operand>
                   </operand>
@@ -714,8 +721,10 @@
             <where localId="93" locator="35:5-37:5" resultTypeName="t:Boolean" xsi:type="And">
                <operand localId="86" locator="35:13-35:72" resultTypeName="t:Boolean" xsi:type="GreaterOrEqual">
                   <operand localId="84" locator="35:13-35:67" resultTypeName="t:Integer" precision="Year" xsi:type="CalculateAgeAt">
-                     <operand path="birthDate" xsi:type="Property">
-                        <source name="Patient" xsi:type="ExpressionRef"/>
+                     <operand path="value" xsi:type="Property">
+                        <source path="birthDate" xsi:type="Property">
+                           <source name="Patient" xsi:type="ExpressionRef"/>
+                        </source>
                      </operand>
                      <operand localId="83" locator="35:28-35:66" resultTypeName="t:Date" xsi:type="DateFrom">
                         <operand localId="82" locator="35:38-35:66" resultTypeName="t:DateTime" xsi:type="Start">
@@ -731,8 +740,10 @@
                </operand>
                <operand localId="92" locator="36:13-36:72" resultTypeName="t:Boolean" xsi:type="Less">
                   <operand localId="90" locator="36:13-36:67" resultTypeName="t:Integer" precision="Year" xsi:type="CalculateAgeAt">
-                     <operand path="birthDate" xsi:type="Property">
-                        <source name="Patient" xsi:type="ExpressionRef"/>
+                     <operand path="value" xsi:type="Property">
+                        <source path="birthDate" xsi:type="Property">
+                           <source name="Patient" xsi:type="ExpressionRef"/>
+                        </source>
                      </operand>
                      <operand localId="89" locator="36:28-36:66" resultTypeName="t:Date" xsi:type="DateFrom">
                         <operand localId="88" locator="36:38-36:66" resultTypeName="t:DateTime" xsi:type="Start">

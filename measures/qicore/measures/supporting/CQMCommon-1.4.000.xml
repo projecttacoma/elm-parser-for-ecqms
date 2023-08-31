@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
-   <annotation translatorOptions="EnableAnnotations,EnableLocators,EnableResultTypes" xsi:type="a:CqlToElmInfo"/>
+   <annotation translatorVersion="2.10.0" translatorOptions="EnableAnnotations,EnableLocators,EnableResultTypes" xsi:type="a:CqlToElmInfo"/>
    <annotation xsi:type="a:Annotation">
       <a:s r="814">
          <a:s>library CQMCommon version '1.4.000'</a:s>
@@ -5410,7 +5410,7 @@ define fluent function firstInpatientIntensiveCareUnit(Encounter </a:s>
             <operandTypeSpecifier localId="622" locator="320:66-320:74" resultTypeName="fhir:Encounter" name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
          </operand>
       </def>
-      <def localId="661" locator="331:1-333:81" resultTypeName="fhir:Condition" name="EncounterDiagnosis" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+      <def localId="661" locator="331:1-333:81" name="EncounterDiagnosis" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
          <annotation xsi:type="a:Annotation">
             <a:t name="description" value="Returns the Condition resource referenced by the `diagnosis.condition` element of the Encounter"/>
             <a:t name="deprecated" value="This function is deprecated. Use the fluent function `encounterDiagnosis()` instead."/>
@@ -5502,13 +5502,28 @@ define function &quot;EncounterDiagnosis&quot;(Encounter </a:s>
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="660" locator="332:3-333:81" resultTypeName="fhir:Condition" xsi:type="Query">
-            <source localId="647" locator="332:3-332:23" resultTypeName="fhir:Encounter.Diagnosis" alias="D">
-               <expression localId="646" locator="332:3-332:21" resultTypeName="fhir:Encounter.Diagnosis" path="diagnosis" xsi:type="Property">
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="660" locator="332:3-333:81" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="647" locator="332:3-332:23" alias="D">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter.Diagnosis" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="646" locator="332:3-332:21" path="diagnosis" xsi:type="Property">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter.Diagnosis" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
                   <source name="Encounter" xsi:type="OperandRef"/>
                </expression>
             </source>
-            <return localId="659" locator="333:2-333:81" resultTypeName="fhir:Condition">
+            <return localId="659" locator="333:2-333:81">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
                <expression localId="658" locator="333:9-333:81" resultTypeName="fhir:Condition" xsi:type="SingletonFrom">
                   <operand localId="657" locator="333:24-333:81" xsi:type="Query">
                      <resultTypeSpecifier xsi:type="ListTypeSpecifier">
@@ -5544,7 +5559,7 @@ define function &quot;EncounterDiagnosis&quot;(Encounter </a:s>
             <operandTypeSpecifier localId="645" locator="331:48-331:56" resultTypeName="fhir:Encounter" name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
          </operand>
       </def>
-      <def localId="678" locator="338:1-340:84" resultTypeName="fhir:Condition" name="encounterDiagnosis" context="Patient" accessLevel="Public" fluent="true" xsi:type="FunctionDef">
+      <def localId="678" locator="338:1-340:84" name="encounterDiagnosis" context="Patient" accessLevel="Public" fluent="true" xsi:type="FunctionDef">
          <annotation xsi:type="a:Annotation">
             <a:t name="description" value="Returns the Condition resources referenced by the diagnosis element of the Encounter"/>
             <a:s r="678">
@@ -5634,13 +5649,28 @@ define fluent function encounterDiagnosis(Encounter </a:s>
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="677" locator="339:3-340:84" resultTypeName="fhir:Condition" xsi:type="Query">
-            <source localId="664" locator="339:3-339:23" resultTypeName="fhir:Encounter.Diagnosis" alias="D">
-               <expression localId="663" locator="339:3-339:21" resultTypeName="fhir:Encounter.Diagnosis" path="diagnosis" xsi:type="Property">
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="677" locator="339:3-340:84" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="664" locator="339:3-339:23" alias="D">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter.Diagnosis" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="663" locator="339:3-339:21" path="diagnosis" xsi:type="Property">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter.Diagnosis" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
                   <source name="Encounter" xsi:type="OperandRef"/>
                </expression>
             </source>
-            <return localId="676" locator="340:5-340:84" resultTypeName="fhir:Condition">
+            <return localId="676" locator="340:5-340:84">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
                <expression localId="675" locator="340:12-340:84" resultTypeName="fhir:Condition" xsi:type="SingletonFrom">
                   <operand localId="674" locator="340:27-340:84" xsi:type="Query">
                      <resultTypeSpecifier xsi:type="ListTypeSpecifier">
@@ -6006,55 +6036,71 @@ define function &quot;PrincipalDiagnosis&quot;(Encounter </a:s>
             </a:s>
          </annotation>
          <expression localId="725" locator="360:2-362:2" resultTypeName="fhir:Condition" xsi:type="SingletonFrom">
-            <operand xsi:type="ToList">
-               <operand localId="724" locator="360:17-362:2" resultTypeName="fhir:Condition" xsi:type="Query">
-                  <source localId="711" locator="360:18-360:60" resultTypeName="fhir:Encounter.Diagnosis" alias="PD">
-                     <expression localId="710" locator="360:18-360:57" resultTypeName="fhir:Encounter.Diagnosis" xsi:type="Query">
-                        <source localId="705" locator="360:19-360:39" resultTypeName="fhir:Encounter.Diagnosis" alias="D">
-                           <expression localId="704" locator="360:19-360:37" resultTypeName="fhir:Encounter.Diagnosis" path="diagnosis" xsi:type="Property">
-                              <source name="Encounter" xsi:type="OperandRef"/>
-                           </expression>
-                        </source>
-                        <where localId="709" locator="360:41-360:56" resultTypeName="t:Boolean" xsi:type="Equal">
-                           <operand localId="707" locator="360:47-360:52" resultTypeName="t:Integer" path="value" xsi:type="Property">
-                              <source path="rank" scope="D" xsi:type="Property"/>
-                           </operand>
-                           <operand localId="708" locator="360:56" resultTypeName="t:Integer" valueType="t:Integer" value="1" xsi:type="Literal"/>
-                        </where>
-                     </expression>
-                  </source>
-                  <return localId="723" locator="361:7-361:87" resultTypeName="fhir:Condition">
-                     <expression localId="722" locator="361:14-361:87" resultTypeName="fhir:Condition" xsi:type="SingletonFrom">
-                        <operand localId="721" locator="361:29-361:87" xsi:type="Query">
+            <operand localId="724" locator="360:17-362:2" xsi:type="Query">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <source localId="711" locator="360:18-360:60" alias="PD">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter.Diagnosis" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <expression localId="710" locator="360:18-360:57" xsi:type="Query">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Encounter.Diagnosis" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <source localId="705" locator="360:19-360:39" alias="D">
+                        <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Encounter.Diagnosis" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <expression localId="704" locator="360:19-360:37" path="diagnosis" xsi:type="Property">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:Encounter.Diagnosis" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <source name="Encounter" xsi:type="OperandRef"/>
+                        </expression>
+                     </source>
+                     <where localId="709" locator="360:41-360:56" resultTypeName="t:Boolean" xsi:type="Equal">
+                        <operand localId="707" locator="360:47-360:52" resultTypeName="t:Integer" path="value" xsi:type="Property">
+                           <source path="rank" scope="D" xsi:type="Property"/>
+                        </operand>
+                        <operand localId="708" locator="360:56" resultTypeName="t:Integer" valueType="t:Integer" value="1" xsi:type="Literal"/>
+                     </where>
+                  </expression>
+               </source>
+               <return localId="723" locator="361:7-361:87">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <expression localId="722" locator="361:14-361:87" resultTypeName="fhir:Condition" xsi:type="SingletonFrom">
+                     <operand localId="721" locator="361:29-361:87" xsi:type="Query">
+                        <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <source localId="713" locator="361:30-361:42" alias="C">
                            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
                               <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
                            </resultTypeSpecifier>
-                           <source localId="713" locator="361:30-361:42" alias="C">
+                           <expression localId="712" locator="361:30-361:40" dataType="fhir:Condition" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition" xsi:type="Retrieve">
                               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
                                  <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
                               </resultTypeSpecifier>
-                              <expression localId="712" locator="361:30-361:40" dataType="fhir:Condition" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition" xsi:type="Retrieve">
-                                 <resultTypeSpecifier xsi:type="ListTypeSpecifier">
-                                    <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
-                                 </resultTypeSpecifier>
-                              </expression>
-                           </source>
-                           <where localId="720" locator="361:44-361:86" resultTypeName="t:Boolean" xsi:type="Equal">
-                              <operand localId="715" locator="361:50-361:53" resultTypeName="t:String" path="value" xsi:type="Property">
-                                 <source path="id" scope="C" xsi:type="Property"/>
+                           </expression>
+                        </source>
+                        <where localId="720" locator="361:44-361:86" resultTypeName="t:Boolean" xsi:type="Equal">
+                           <operand localId="715" locator="361:50-361:53" resultTypeName="t:String" path="value" xsi:type="Property">
+                              <source path="id" scope="C" xsi:type="Property"/>
+                           </operand>
+                           <operand localId="719" locator="361:57-361:86" resultTypeName="t:String" name="getId" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                              <operand localId="718" locator="361:57-361:78" resultTypeName="t:String" path="value" xsi:type="Property">
+                                 <source path="reference" xsi:type="Property">
+                                    <source localId="717" locator="361:57-361:68" resultTypeName="fhir:Reference" path="condition" scope="PD" xsi:type="Property"/>
+                                 </source>
                               </operand>
-                              <operand localId="719" locator="361:57-361:86" resultTypeName="t:String" name="getId" libraryName="QICoreCommon" xsi:type="FunctionRef">
-                                 <operand localId="718" locator="361:57-361:78" resultTypeName="t:String" path="value" xsi:type="Property">
-                                    <source path="reference" xsi:type="Property">
-                                       <source localId="717" locator="361:57-361:68" resultTypeName="fhir:Reference" path="condition" scope="PD" xsi:type="Property"/>
-                                    </source>
-                                 </operand>
-                              </operand>
-                           </where>
-                        </operand>
-                     </expression>
-                  </return>
-               </operand>
+                           </operand>
+                        </where>
+                     </operand>
+                  </expression>
+               </return>
             </operand>
          </expression>
          <operand name="Encounter">
@@ -6187,55 +6233,71 @@ define fluent function principalDiagnosis(Encounter </a:s>
             </a:s>
          </annotation>
          <expression localId="749" locator="368:2-370:2" resultTypeName="fhir:Condition" xsi:type="SingletonFrom">
-            <operand xsi:type="ToList">
-               <operand localId="748" locator="368:17-370:2" resultTypeName="fhir:Condition" xsi:type="Query">
-                  <source localId="735" locator="368:18-368:60" resultTypeName="fhir:Encounter.Diagnosis" alias="PD">
-                     <expression localId="734" locator="368:18-368:57" resultTypeName="fhir:Encounter.Diagnosis" xsi:type="Query">
-                        <source localId="729" locator="368:19-368:39" resultTypeName="fhir:Encounter.Diagnosis" alias="D">
-                           <expression localId="728" locator="368:19-368:37" resultTypeName="fhir:Encounter.Diagnosis" path="diagnosis" xsi:type="Property">
-                              <source name="Encounter" xsi:type="OperandRef"/>
-                           </expression>
-                        </source>
-                        <where localId="733" locator="368:41-368:56" resultTypeName="t:Boolean" xsi:type="Equal">
-                           <operand localId="731" locator="368:47-368:52" resultTypeName="t:Integer" path="value" xsi:type="Property">
-                              <source path="rank" scope="D" xsi:type="Property"/>
-                           </operand>
-                           <operand localId="732" locator="368:56" resultTypeName="t:Integer" valueType="t:Integer" value="1" xsi:type="Literal"/>
-                        </where>
-                     </expression>
-                  </source>
-                  <return localId="747" locator="369:7-369:87" resultTypeName="fhir:Condition">
-                     <expression localId="746" locator="369:14-369:87" resultTypeName="fhir:Condition" xsi:type="SingletonFrom">
-                        <operand localId="745" locator="369:29-369:87" xsi:type="Query">
+            <operand localId="748" locator="368:17-370:2" xsi:type="Query">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <source localId="735" locator="368:18-368:60" alias="PD">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter.Diagnosis" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <expression localId="734" locator="368:18-368:57" xsi:type="Query">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Encounter.Diagnosis" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <source localId="729" locator="368:19-368:39" alias="D">
+                        <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Encounter.Diagnosis" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <expression localId="728" locator="368:19-368:37" path="diagnosis" xsi:type="Property">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:Encounter.Diagnosis" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <source name="Encounter" xsi:type="OperandRef"/>
+                        </expression>
+                     </source>
+                     <where localId="733" locator="368:41-368:56" resultTypeName="t:Boolean" xsi:type="Equal">
+                        <operand localId="731" locator="368:47-368:52" resultTypeName="t:Integer" path="value" xsi:type="Property">
+                           <source path="rank" scope="D" xsi:type="Property"/>
+                        </operand>
+                        <operand localId="732" locator="368:56" resultTypeName="t:Integer" valueType="t:Integer" value="1" xsi:type="Literal"/>
+                     </where>
+                  </expression>
+               </source>
+               <return localId="747" locator="369:7-369:87">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <expression localId="746" locator="369:14-369:87" resultTypeName="fhir:Condition" xsi:type="SingletonFrom">
+                     <operand localId="745" locator="369:29-369:87" xsi:type="Query">
+                        <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <source localId="737" locator="369:30-369:42" alias="C">
                            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
                               <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
                            </resultTypeSpecifier>
-                           <source localId="737" locator="369:30-369:42" alias="C">
+                           <expression localId="736" locator="369:30-369:40" dataType="fhir:Condition" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition" xsi:type="Retrieve">
                               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
                                  <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
                               </resultTypeSpecifier>
-                              <expression localId="736" locator="369:30-369:40" dataType="fhir:Condition" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition" xsi:type="Retrieve">
-                                 <resultTypeSpecifier xsi:type="ListTypeSpecifier">
-                                    <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
-                                 </resultTypeSpecifier>
-                              </expression>
-                           </source>
-                           <where localId="744" locator="369:44-369:86" resultTypeName="t:Boolean" xsi:type="Equal">
-                              <operand localId="739" locator="369:50-369:53" resultTypeName="t:String" path="value" xsi:type="Property">
-                                 <source path="id" scope="C" xsi:type="Property"/>
+                           </expression>
+                        </source>
+                        <where localId="744" locator="369:44-369:86" resultTypeName="t:Boolean" xsi:type="Equal">
+                           <operand localId="739" locator="369:50-369:53" resultTypeName="t:String" path="value" xsi:type="Property">
+                              <source path="id" scope="C" xsi:type="Property"/>
+                           </operand>
+                           <operand localId="743" locator="369:57-369:86" resultTypeName="t:String" name="getId" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                              <operand localId="742" locator="369:57-369:78" resultTypeName="t:String" path="value" xsi:type="Property">
+                                 <source path="reference" xsi:type="Property">
+                                    <source localId="741" locator="369:57-369:68" resultTypeName="fhir:Reference" path="condition" scope="PD" xsi:type="Property"/>
+                                 </source>
                               </operand>
-                              <operand localId="743" locator="369:57-369:86" resultTypeName="t:String" name="getId" libraryName="QICoreCommon" xsi:type="FunctionRef">
-                                 <operand localId="742" locator="369:57-369:78" resultTypeName="t:String" path="value" xsi:type="Property">
-                                    <source path="reference" xsi:type="Property">
-                                       <source localId="741" locator="369:57-369:68" resultTypeName="fhir:Reference" path="condition" scope="PD" xsi:type="Property"/>
-                                    </source>
-                                 </operand>
-                              </operand>
-                           </where>
-                        </operand>
-                     </expression>
-                  </return>
-               </operand>
+                           </operand>
+                        </where>
+                     </operand>
+                  </expression>
+               </return>
             </operand>
          </expression>
          <operand name="Encounter">

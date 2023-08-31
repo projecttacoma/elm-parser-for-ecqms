@@ -1,0 +1,1807 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorVersion="2.10.0" translatorOptions="EnableAnnotations,EnableLocators,EnableResultTypes" xsi:type="a:CqlToElmInfo"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="208">
+         <a:s>library SafeUseofOpioidsConcurrentPrescribingFHIR version '0.1.000'</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="SafeUseofOpioidsConcurrentPrescribingFHIR" version="0.1.000"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="3:1-3:28" localIdentifier="QICore" uri="http://hl7.org/fhir">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>using </a:s>
+               <a:s>
+                  <a:s>QICore</a:s>
+               </a:s>
+               <a:s> version '4.1.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="5:1-5:52" localIdentifier="CQMCommon" path="CQMCommon" version="1.4.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>CQMCommon</a:s>
+               </a:s>
+               <a:s> version '1.4.000' called CQMCommon</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="3" locator="6:1-6:56" localIdentifier="FHIRHelpers" path="FHIRHelpers" version="4.3.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>FHIRHelpers</a:s>
+               </a:s>
+               <a:s> version '4.3.000' called FHIRHelpers</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="4" locator="7:1-7:48" localIdentifier="Hospice" path="Hospice" version="6.7.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>Hospice</a:s>
+               </a:s>
+               <a:s> version '6.7.000' called Hospice</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="5" locator="8:1-8:58" localIdentifier="QICoreCommon" path="QICoreCommon" version="1.5.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>QICoreCommon</a:s>
+               </a:s>
+               <a:s> version '1.5.000' called QICoreCommon</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="6" locator="9:1-9:61" localIdentifier="SDE" path="SupplementalDataElements" version="3.4.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>SupplementalDataElements</a:s>
+               </a:s>
+               <a:s> version '3.4.000' called SDE</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <parameters>
+      <def localId="20" locator="24:1-24:49" name="Measurement Period" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="20">
+               <a:s>parameter &quot;Measurement Period&quot; </a:s>
+               <a:s r="19">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="18">
+                     <a:s>DateTime</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+            <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <parameterTypeSpecifier localId="19" locator="24:32-24:49" xsi:type="IntervalTypeSpecifier">
+            <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+               <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <pointType localId="18" locator="24:41-24:48" resultTypeName="t:DateTime" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <codeSystems>
+      <def localId="7" locator="11:1-11:38" resultTypeName="t:CodeSystem" name="LOINC" id="http://loinc.org" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="7">
+               <a:s>codesystem &quot;LOINC&quot;: 'http://loinc.org'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </codeSystems>
+   <valueSets>
+      <def localId="8" locator="13:1-13:114" resultTypeName="t:ValueSet" name="All Primary and Secondary Cancer" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.161" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="8">
+               <a:s>valueset &quot;All Primary and Secondary Cancer&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.161'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="9" locator="14:1-14:116" resultTypeName="t:ValueSet" name="Discharge To Acute Care Facility" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="9">
+               <a:s>valueset &quot;Discharge To Acute Care Facility&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="10" locator="15:1-15:100" resultTypeName="t:ValueSet" name="Encounter Inpatient" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="10">
+               <a:s>valueset &quot;Encounter Inpatient&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="11" locator="16:1-16:116" resultTypeName="t:ValueSet" name="Hospice Care Referral or Admission" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.365" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="11">
+               <a:s>valueset &quot;Hospice Care Referral or Admission&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.365'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="12" locator="17:1-17:108" resultTypeName="t:ValueSet" name="Palliative or Hospice Care" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1579" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="12">
+               <a:s>valueset &quot;Palliative or Hospice Care&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1579'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="13" locator="18:1-18:100" resultTypeName="t:ValueSet" name="Patient Expired" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="13">
+               <a:s>valueset &quot;Patient Expired&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="14" locator="19:1-19:118" resultTypeName="t:ValueSet" name="Schedule II &amp; III Opioid Medications" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.165" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="14">
+               <a:s>valueset &quot;Schedule II &amp; III Opioid Medications&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.165'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="15" locator="20:1-20:107" resultTypeName="t:ValueSet" name="Schedule IV Benzodiazepines" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1125.1" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="15">
+               <a:s>valueset &quot;Schedule IV Benzodiazepines&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1125.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </valueSets>
+   <codes>
+      <def localId="17" locator="22:1-22:62" resultTypeName="t:Code" name="Birth date" id="21112-8" display="Birth date" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="17">
+               <a:s>code &quot;Birth date&quot;: '21112-8' from </a:s>
+               <a:s r="16">
+                  <a:s>&quot;LOINC&quot;</a:s>
+               </a:s>
+               <a:s> display 'Birth date'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="16" locator="22:35-22:41" resultTypeName="t:CodeSystem" name="LOINC"/>
+      </def>
+   </codes>
+   <contexts>
+      <def locator="26:1-26:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="26:1-26:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="26:1-26:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="31" locator="80:1-82:82" name="Inpatient Encounter with Age Greater than or Equal to 18" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="31">
+               <a:s>define &quot;Inpatient Encounter with Age Greater than or Equal to 18&quot;:
+  </a:s>
+               <a:s r="30">
+                  <a:s>
+                     <a:s r="22">
+                        <a:s r="21">
+                           <a:s>
+                              <a:s>CQMCommon.&quot;Inpatient Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> InpatientHospitalEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="29">
+                     <a:s>where </a:s>
+                     <a:s r="29">
+                        <a:s r="27">
+                           <a:s>AgeInYearsAt(</a:s>
+                           <a:s r="26">
+                              <a:s>date from </a:s>
+                              <a:s r="25">
+                                 <a:s>start of </a:s>
+                                 <a:s r="24">
+                                    <a:s r="23">
+                                       <a:s>InpatientHospitalEncounter</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="24">
+                                       <a:s>period</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>)</a:s>
+                        </a:s>
+                        <a:s r="28"> >= 18</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="30" locator="81:3-82:82" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="22" locator="81:3-81:60" alias="InpatientHospitalEncounter">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="21" locator="81:3-81:33" name="Inpatient Encounter" libraryName="CQMCommon" xsi:type="ExpressionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </expression>
+            </source>
+            <where localId="29" locator="82:5-82:82" resultTypeName="t:Boolean" xsi:type="GreaterOrEqual">
+               <operand localId="27" locator="82:11-82:76" resultTypeName="t:Integer" precision="Year" xsi:type="CalculateAgeAt">
+                  <operand path="value" xsi:type="Property">
+                     <source path="birthDate" xsi:type="Property">
+                        <source name="Patient" xsi:type="ExpressionRef"/>
+                     </source>
+                  </operand>
+                  <operand localId="26" locator="82:24-82:75" resultTypeName="t:Date" xsi:type="DateFrom">
+                     <operand localId="25" locator="82:34-82:75" resultTypeName="t:DateTime" xsi:type="Start">
+                        <operand localId="24" locator="82:43-82:75" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                           <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                              <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <operand path="period" scope="InpatientHospitalEncounter" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand localId="28" locator="82:81-82:82" resultTypeName="t:Integer" valueType="t:Integer" value="18" xsi:type="Literal"/>
+            </where>
+         </expression>
+      </def>
+      <def localId="55" locator="94:1-100:52" name="Opioid at Discharge" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="55">
+               <a:s>define &quot;Opioid at Discharge&quot;:
+  </a:s>
+               <a:s r="54">
+                  <a:s>
+                     <a:s r="42">
+                        <a:s r="41">
+                           <a:s>( </a:s>
+                           <a:s r="41">
+                              <a:s>
+                                 <a:s r="35">
+                                    <a:s r="34">
+                                       <a:s r="34">
+                                          <a:s>[MedicationRequest: </a:s>
+                                          <a:s>
+                                             <a:s>&quot;Schedule II &amp; III Opioid Medications&quot;</a:s>
+                                          </a:s>
+                                          <a:s>]</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> OpioidMedications</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+    </a:s>
+                              <a:s r="40">
+                                 <a:s>where </a:s>
+                                 <a:s r="40">
+                                    <a:s>( </a:s>
+                                    <a:s r="40">
+                                       <a:s r="37">
+                                          <a:s r="36">
+                                             <a:s>OpioidMedications</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="37">
+                                             <a:s>isCommunity ( )</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>
+        or </a:s>
+                                       <a:s r="39">
+                                          <a:s r="38">
+                                             <a:s>OpioidMedications</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="39">
+                                             <a:s>isDischarge ( )</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+    )</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> )</a:s>
+                        </a:s>
+                        <a:s> OpioidDischargeMedication</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="53">
+                     <a:s>where </a:s>
+                     <a:s r="53">
+                        <a:s r="48">
+                           <a:s r="44">
+                              <a:s r="43">
+                                 <a:s>OpioidDischargeMedication</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="44">
+                                 <a:s>status</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> in </a:s>
+                           <a:s r="47">
+                              <a:s>{ </a:s>
+                              <a:s r="45">
+                                 <a:s>'active'</a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="46">
+                                 <a:s>'completed'</a:s>
+                              </a:s>
+                              <a:s> }</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      and </a:s>
+                        <a:s r="52">
+                           <a:s r="50">
+                              <a:s r="49">
+                                 <a:s>OpioidDischargeMedication</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="50">
+                                 <a:s>intent</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> = </a:s>
+                           <a:s r="51">
+                              <a:s>'order'</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="54" locator="95:3-100:52" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="42" locator="95:3-98:33" alias="OpioidDischargeMedication">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="41" locator="95:3-98:7" xsi:type="Query">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <source localId="35" locator="95:5-95:81" alias="OpioidMedications">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <expression localId="34" locator="95:5-95:63" xsi:type="Union">
+                        <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <operand dataType="fhir:MedicationRequest" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest" codeProperty="medication" codeComparator="in" xsi:type="Retrieve">
+                           <codes locator="95:25-95:62" resultTypeName="t:ValueSet" name="Schedule II &amp; III Opioid Medications" preserve="true" xsi:type="ValueSetRef"/>
+                        </operand>
+                        <operand locator="95:5-95:63" dataType="fhir:MedicationRequest" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest" codeProperty="medication" codeComparator="in" xsi:type="Retrieve">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <codes locator="95:25-95:62" resultTypeName="t:ValueSet" name="Schedule II &amp; III Opioid Medications" preserve="true" xsi:type="ValueSetRef"/>
+                        </operand>
+                     </expression>
+                  </source>
+                  <where localId="40" locator="96:5-98:5" resultTypeName="t:Boolean" xsi:type="Or">
+                     <operand localId="37" locator="96:13-96:45" resultTypeName="t:Boolean" name="isCommunity" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                        <operand localId="36" locator="96:13-96:29" resultTypeName="fhir:MedicationRequest" name="OpioidMedications" xsi:type="AliasRef"/>
+                     </operand>
+                     <operand localId="39" locator="97:12-97:44" resultTypeName="t:Boolean" name="isDischarge" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                        <operand localId="38" locator="97:12-97:28" resultTypeName="fhir:MedicationRequest" name="OpioidMedications" xsi:type="AliasRef"/>
+                     </operand>
+                  </where>
+               </expression>
+            </source>
+            <where localId="53" locator="99:5-100:52" resultTypeName="t:Boolean" xsi:type="And">
+               <operand localId="48" locator="99:11-99:71" resultTypeName="t:Boolean" xsi:type="In">
+                  <operand localId="44" locator="99:11-99:42" resultTypeName="t:String" path="value" xsi:type="Property">
+                     <source path="status" scope="OpioidDischargeMedication" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="47" locator="99:47-99:71" xsi:type="List">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="t:String" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <element localId="45" locator="99:49-99:56" resultTypeName="t:String" valueType="t:String" value="active" xsi:type="Literal"/>
+                     <element localId="46" locator="99:59-99:69" resultTypeName="t:String" valueType="t:String" value="completed" xsi:type="Literal"/>
+                  </operand>
+               </operand>
+               <operand localId="52" locator="100:11-100:52" resultTypeName="t:Boolean" xsi:type="Equal">
+                  <operand localId="50" locator="100:11-100:42" resultTypeName="t:String" path="value" xsi:type="Property">
+                     <source path="intent" scope="OpioidDischargeMedication" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="51" locator="100:46-100:52" resultTypeName="t:String" valueType="t:String" value="order" xsi:type="Literal"/>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="78" locator="72:1-78:60" name="Benzodiazepine at Discharge" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="78">
+               <a:s>define &quot;Benzodiazepine at Discharge&quot;:
+  </a:s>
+               <a:s r="77">
+                  <a:s>
+                     <a:s r="65">
+                        <a:s r="64">
+                           <a:s>( </a:s>
+                           <a:s r="64">
+                              <a:s>
+                                 <a:s r="58">
+                                    <a:s r="57">
+                                       <a:s r="57">
+                                          <a:s>[MedicationRequest: </a:s>
+                                          <a:s>
+                                             <a:s>medication</a:s>
+                                          </a:s>
+                                          <a:s> in </a:s>
+                                          <a:s>
+                                             <a:s>&quot;Schedule IV Benzodiazepines&quot;</a:s>
+                                          </a:s>
+                                          <a:s>]</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> BenzoMedications</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+    </a:s>
+                              <a:s r="63">
+                                 <a:s>where </a:s>
+                                 <a:s r="63">
+                                    <a:s>( </a:s>
+                                    <a:s r="63">
+                                       <a:s r="60">
+                                          <a:s r="59">
+                                             <a:s>BenzoMedications</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="60">
+                                             <a:s>isCommunity ( )</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>
+        or </a:s>
+                                       <a:s r="62">
+                                          <a:s r="61">
+                                             <a:s>BenzoMedications</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="62">
+                                             <a:s>isDischarge ( )</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+    )</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> )</a:s>
+                        </a:s>
+                        <a:s> BenzodiazepineDischargeMedication</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="76">
+                     <a:s>where </a:s>
+                     <a:s r="76">
+                        <a:s r="71">
+                           <a:s r="67">
+                              <a:s r="66">
+                                 <a:s>BenzodiazepineDischargeMedication</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="67">
+                                 <a:s>status</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> in </a:s>
+                           <a:s r="70">
+                              <a:s>{ </a:s>
+                              <a:s r="68">
+                                 <a:s>'active'</a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="69">
+                                 <a:s>'completed'</a:s>
+                              </a:s>
+                              <a:s> }</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      and </a:s>
+                        <a:s r="75">
+                           <a:s r="73">
+                              <a:s r="72">
+                                 <a:s>BenzodiazepineDischargeMedication</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="73">
+                                 <a:s>intent</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> = </a:s>
+                           <a:s r="74">
+                              <a:s>'order'</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="77" locator="73:3-78:60" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="65" locator="73:3-76:41" alias="BenzodiazepineDischargeMedication">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="64" locator="73:3-76:7" xsi:type="Query">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <source localId="58" locator="73:5-73:85" alias="BenzoMedications">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <expression localId="57" locator="73:5-73:68" dataType="fhir:MedicationRequest" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest" codeProperty="medication" codeComparator="in" xsi:type="Retrieve">
+                        <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <codes locator="73:39-73:67" resultTypeName="t:ValueSet" name="Schedule IV Benzodiazepines" preserve="true" xsi:type="ValueSetRef"/>
+                     </expression>
+                  </source>
+                  <where localId="63" locator="74:5-76:5" resultTypeName="t:Boolean" xsi:type="Or">
+                     <operand localId="60" locator="74:13-74:44" resultTypeName="t:Boolean" name="isCommunity" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                        <operand localId="59" locator="74:13-74:28" resultTypeName="fhir:MedicationRequest" name="BenzoMedications" xsi:type="AliasRef"/>
+                     </operand>
+                     <operand localId="62" locator="75:12-75:43" resultTypeName="t:Boolean" name="isDischarge" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                        <operand localId="61" locator="75:12-75:27" resultTypeName="fhir:MedicationRequest" name="BenzoMedications" xsi:type="AliasRef"/>
+                     </operand>
+                  </where>
+               </expression>
+            </source>
+            <where localId="76" locator="77:5-78:60" resultTypeName="t:Boolean" xsi:type="And">
+               <operand localId="71" locator="77:11-77:79" resultTypeName="t:Boolean" xsi:type="In">
+                  <operand localId="67" locator="77:11-77:50" resultTypeName="t:String" path="value" xsi:type="Property">
+                     <source path="status" scope="BenzodiazepineDischargeMedication" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="70" locator="77:55-77:79" xsi:type="List">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="t:String" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <element localId="68" locator="77:57-77:64" resultTypeName="t:String" valueType="t:String" value="active" xsi:type="Literal"/>
+                     <element localId="69" locator="77:67-77:77" resultTypeName="t:String" valueType="t:String" value="completed" xsi:type="Literal"/>
+                  </operand>
+               </operand>
+               <operand localId="75" locator="78:11-78:60" resultTypeName="t:Boolean" xsi:type="Equal">
+                  <operand localId="73" locator="78:11-78:50" resultTypeName="t:String" path="value" xsi:type="Property">
+                     <source path="intent" scope="BenzodiazepineDischargeMedication" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="74" locator="78:54-78:60" resultTypeName="t:String" valueType="t:String" value="order" xsi:type="Literal"/>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="89" locator="84:1-88:100" name="Inpatient Encounters with an Opioid or Benzodiazepine at Discharge" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="89">
+               <a:s>define &quot;Inpatient Encounters with an Opioid or Benzodiazepine at Discharge&quot;:
+  </a:s>
+               <a:s r="88">
+                  <a:s>
+                     <a:s r="33">
+                        <a:s r="32">
+                           <a:s>
+                              <a:s>&quot;Inpatient Encounter with Age Greater than or Equal to 18&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> InpatientEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="87">
+                     <a:s>with </a:s>
+                     <a:s r="81">
+                        <a:s r="80">
+                           <a:s>( </a:s>
+                           <a:s r="80">
+                              <a:s r="56">
+                                 <a:s>&quot;Opioid at Discharge&quot;</a:s>
+                              </a:s>
+                              <a:s>
+      union </a:s>
+                              <a:s r="79">
+                                 <a:s>&quot;Benzodiazepine at Discharge&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> )</a:s>
+                        </a:s>
+                        <a:s> OpioidOrBenzodiazepineAtDischarge</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="86">
+                        <a:s r="83">
+                           <a:s r="82">
+                              <a:s>OpioidOrBenzodiazepineAtDischarge</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="83">
+                              <a:s>authoredOn</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="86"> during day of </a:s>
+                        <a:s r="85">
+                           <a:s r="84">
+                              <a:s>InpatientEncounter</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="85">
+                              <a:s>period</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="88" locator="85:3-88:100" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="33" locator="85:3-85:79" alias="InpatientEncounter">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="32" locator="85:3-85:60" name="Inpatient Encounter with Age Greater than or Equal to 18" xsi:type="ExpressionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </expression>
+            </source>
+            <relationship localId="87" locator="86:5-88:100" alias="OpioidOrBenzodiazepineAtDischarge" xsi:type="With">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="80" locator="86:10-87:43" xsi:type="Union">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <operand localId="56" locator="86:12-86:32" name="Opioid at Discharge" xsi:type="ExpressionRef">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                  </operand>
+                  <operand localId="79" locator="87:13-87:41" name="Benzodiazepine at Discharge" xsi:type="ExpressionRef">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                  </operand>
+               </expression>
+               <suchThat localId="86" locator="88:17-88:100" resultTypeName="t:Boolean" precision="Day" xsi:type="In">
+                  <operand localId="83" locator="88:17-88:60" resultTypeName="t:DateTime" path="value" xsi:type="Property">
+                     <source path="authoredOn" scope="OpioidOrBenzodiazepineAtDischarge" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="85" locator="88:76-88:100" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                     <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <operand path="period" scope="InpatientEncounter" xsi:type="Property"/>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="91" locator="28:1-29:70" name="Initial Population" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="91">
+               <a:s>define &quot;Initial Population&quot;:
+  </a:s>
+               <a:s r="90">
+                  <a:s>&quot;Inpatient Encounters with an Opioid or Benzodiazepine at Discharge&quot;</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="90" locator="29:3-29:70" name="Inpatient Encounters with an Opioid or Benzodiazepine at Discharge" xsi:type="ExpressionRef">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+         </expression>
+      </def>
+      <def localId="93" locator="31:1-32:22" name="Denominator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="93">
+               <a:s>define &quot;Denominator&quot;:
+  </a:s>
+               <a:s r="92">
+                  <a:s>&quot;Initial Population&quot;</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="92" locator="32:3-32:22" name="Initial Population" xsi:type="ExpressionRef">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+         </expression>
+      </def>
+      <def localId="127" locator="90:1-92:51" name="Intervention Palliative or Hospice Care" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="127">
+               <a:s>define &quot;Intervention Palliative or Hospice Care&quot;:
+  </a:s>
+               <a:s r="126">
+                  <a:s r="124">
+                     <a:s>[ServiceRequest: </a:s>
+                     <a:s>
+                        <a:s>&quot;Palliative or Hospice Care&quot;</a:s>
+                     </a:s>
+                     <a:s>]</a:s>
+                  </a:s>
+                  <a:s>
+    union </a:s>
+                  <a:s r="125">
+                     <a:s>[Procedure: </a:s>
+                     <a:s>
+                        <a:s>&quot;Palliative or Hospice Care&quot;</a:s>
+                     </a:s>
+                     <a:s>]</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType xsi:type="ChoiceTypeSpecifier">
+               <choice name="fhir:ServiceRequest" xsi:type="NamedTypeSpecifier"/>
+               <choice name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+            </elementType>
+         </resultTypeSpecifier>
+         <expression localId="126" locator="91:3-92:51" xsi:type="Union">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType xsi:type="ChoiceTypeSpecifier">
+                  <choice name="fhir:ServiceRequest" xsi:type="NamedTypeSpecifier"/>
+                  <choice name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+               </elementType>
+            </resultTypeSpecifier>
+            <operand xsi:type="As">
+               <operand localId="124" locator="91:3-91:48" dataType="fhir:ServiceRequest" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:ServiceRequest" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <codes locator="91:20-91:47" resultTypeName="t:ValueSet" name="Palliative or Hospice Care" preserve="true" xsi:type="ValueSetRef"/>
+               </operand>
+               <asTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType xsi:type="ChoiceTypeSpecifier">
+                     <choice name="fhir:ServiceRequest" xsi:type="NamedTypeSpecifier"/>
+                     <choice name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                  </elementType>
+               </asTypeSpecifier>
+            </operand>
+            <operand xsi:type="As">
+               <operand localId="125" locator="92:11-92:51" dataType="fhir:Procedure" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <codes locator="92:23-92:50" resultTypeName="t:ValueSet" name="Palliative or Hospice Care" preserve="true" xsi:type="ValueSetRef"/>
+               </operand>
+               <asTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType xsi:type="ChoiceTypeSpecifier">
+                     <choice name="fhir:ServiceRequest" xsi:type="NamedTypeSpecifier"/>
+                     <choice name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                  </elementType>
+               </asTypeSpecifier>
+            </operand>
+         </expression>
+      </def>
+      <def localId="163" locator="34:1-54:7" name="Denominator Exclusion" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="163">
+               <a:s>define &quot;Denominator Exclusion&quot;:
+  /*Excludes encounters of patients with cancer or who are receiving palliative or hospice care at the time of the encounter*/
+  
+  </a:s>
+               <a:s r="162">
+                  <a:s>
+                     <a:s r="95">
+                        <a:s r="94">
+                           <a:s>
+                              <a:s>&quot;Inpatient Encounters with an Opioid or Benzodiazepine at Discharge&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> InpatientEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="161">
+                     <a:s>where </a:s>
+                     <a:s r="161">
+                        <a:s r="143">
+                           <a:s r="123">
+                              <a:s r="113">
+                                 <a:s>exists </a:s>
+                                 <a:s r="112">
+                                    <a:s>( </a:s>
+                                    <a:s r="112">
+                                       <a:s>
+                                          <a:s r="97">
+                                             <a:s r="96">
+                                                <a:s r="96">
+                                                   <a:s>[Condition: </a:s>
+                                                   <a:s>
+                                                      <a:s>&quot;All Primary and Secondary Cancer&quot;</a:s>
+                                                   </a:s>
+                                                   <a:s>]</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s> Cancer</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>
+        </a:s>
+                                       <a:s r="111">
+                                          <a:s>where </a:s>
+                                          <a:s r="111">
+                                             <a:s r="105">
+                                                <a:s r="102">
+                                                   <a:s>( </a:s>
+                                                   <a:s r="102">
+                                                      <a:s r="99">
+                                                         <a:s r="98">
+                                                            <a:s>Cancer</a:s>
+                                                         </a:s>
+                                                         <a:s>.</a:s>
+                                                         <a:s r="99">
+                                                            <a:s>isProblemListItem ( )</a:s>
+                                                         </a:s>
+                                                      </a:s>
+                                                      <a:s>
+            or </a:s>
+                                                      <a:s r="101">
+                                                         <a:s r="100">
+                                                            <a:s>Cancer</a:s>
+                                                         </a:s>
+                                                         <a:s>.</a:s>
+                                                         <a:s r="101">
+                                                            <a:s>isHealthConcern ( )</a:s>
+                                                         </a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                   <a:s>
+        )</a:s>
+                                                </a:s>
+                                                <a:s>
+          and </a:s>
+                                                <a:s r="104">
+                                                   <a:s r="103">
+                                                      <a:s>Cancer</a:s>
+                                                   </a:s>
+                                                   <a:s>.</a:s>
+                                                   <a:s r="104">
+                                                      <a:s>isActive ( )</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>
+          and </a:s>
+                                             <a:s r="110">
+                                                <a:s r="107">
+                                                   <a:s r="106">
+                                                      <a:s>Cancer</a:s>
+                                                   </a:s>
+                                                   <a:s>.</a:s>
+                                                   <a:s r="107">
+                                                      <a:s>prevalenceInterval ( )</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s r="110"> overlaps </a:s>
+                                                <a:s r="109">
+                                                   <a:s r="108">
+                                                      <a:s>InpatientEncounter</a:s>
+                                                   </a:s>
+                                                   <a:s>.</a:s>
+                                                   <a:s r="109">
+                                                      <a:s>period</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+    )</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      or </a:s>
+                              <a:s r="122">
+                                 <a:s>exists </a:s>
+                                 <a:s r="121">
+                                    <a:s>( </a:s>
+                                    <a:s r="121">
+                                       <a:s>
+                                          <a:s r="116">
+                                             <a:s r="115">
+                                                <a:s>( </a:s>
+                                                <a:s r="115">
+                                                   <a:s r="114">
+                                                      <a:s>InpatientEncounter</a:s>
+                                                   </a:s>
+                                                   <a:s>.</a:s>
+                                                   <a:s r="115">
+                                                      <a:s>encounterDiagnosis ( )</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s> )</a:s>
+                                             </a:s>
+                                             <a:s> InpatientEncounterDiagnosis</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>
+          </a:s>
+                                       <a:s r="120">
+                                          <a:s>where </a:s>
+                                          <a:s r="120">
+                                             <a:s r="118">
+                                                <a:s r="117">
+                                                   <a:s>InpatientEncounterDiagnosis</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="118">
+                                                   <a:s>code</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s> in </a:s>
+                                             <a:s r="119">
+                                                <a:s>&quot;All Primary and Secondary Cancer&quot;</a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+      )</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+      or </a:s>
+                           <a:s r="142">
+                              <a:s>exists </a:s>
+                              <a:s r="141">
+                                 <a:s>( </a:s>
+                                 <a:s r="141">
+                                    <a:s>
+                                       <a:s r="129">
+                                          <a:s r="128">
+                                             <a:s>
+                                                <a:s>&quot;Intervention Palliative or Hospice Care&quot;</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s> PalliativeOrHospiceCare</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+          </a:s>
+                                    <a:s r="140">
+                                       <a:s>where </a:s>
+                                       <a:s r="140">
+                                          <a:s r="136">
+                                             <a:s>Coalesce(</a:s>
+                                             <a:s r="132">
+                                                <a:s r="131">
+                                                   <a:s r="130">
+                                                      <a:s>PalliativeOrHospiceCare</a:s>
+                                                   </a:s>
+                                                   <a:s>.</a:s>
+                                                   <a:s r="131">
+                                                      <a:s>performed</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="132">
+                                                   <a:s>toInterval()</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>, </a:s>
+                                             <a:s r="135">
+                                                <a:s r="134">
+                                                   <a:s r="133">
+                                                      <a:s>PalliativeOrHospiceCare</a:s>
+                                                   </a:s>
+                                                   <a:s>.</a:s>
+                                                   <a:s r="134">
+                                                      <a:s>authoredOn</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="135">
+                                                   <a:s>toInterval()</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>)</a:s>
+                                          </a:s>
+                                          <a:s r="140"> during day of </a:s>
+                                          <a:s r="139">
+                                             <a:s r="137">
+                                                <a:s>CQMCommon</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="139">
+                                                <a:s>&quot;HospitalizationWithObservation&quot; ( </a:s>
+                                                <a:s r="138">
+                                                   <a:s>InpatientEncounter</a:s>
+                                                </a:s>
+                                                <a:s> )</a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+      )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      or </a:s>
+                        <a:s r="160">
+                           <a:s>( </a:s>
+                           <a:s r="160">
+                              <a:s r="154">
+                                 <a:s r="148">
+                                    <a:s r="146">
+                                       <a:s r="145">
+                                          <a:s r="144">
+                                             <a:s>InpatientEncounter</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="145">
+                                             <a:s>hospitalization</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="146">
+                                          <a:s>dischargeDisposition</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> in </a:s>
+                                    <a:s r="147">
+                                       <a:s>&quot;Discharge To Acute Care Facility&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+          or </a:s>
+                                 <a:s r="153">
+                                    <a:s r="151">
+                                       <a:s r="150">
+                                          <a:s r="149">
+                                             <a:s>InpatientEncounter</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="150">
+                                             <a:s>hospitalization</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="151">
+                                          <a:s>dischargeDisposition</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> in </a:s>
+                                    <a:s r="152">
+                                       <a:s>&quot;Hospice Care Referral or Admission&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+          or </a:s>
+                              <a:s r="159">
+                                 <a:s r="157">
+                                    <a:s r="156">
+                                       <a:s r="155">
+                                          <a:s>InpatientEncounter</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="156">
+                                          <a:s>hospitalization</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="157">
+                                       <a:s>dischargeDisposition</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> in </a:s>
+                                 <a:s r="158">
+                                    <a:s>&quot;Patient Expired&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+      )</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="162" locator="37:3-54:7" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="95" locator="37:3-37:89" alias="InpatientEncounter">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="94" locator="37:3-37:70" name="Inpatient Encounters with an Opioid or Benzodiazepine at Discharge" xsi:type="ExpressionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </expression>
+            </source>
+            <where localId="161" locator="38:5-54:7" resultTypeName="t:Boolean" xsi:type="Or">
+               <operand localId="143" locator="38:11-50:7" resultTypeName="t:Boolean" xsi:type="Or">
+                  <operand localId="123" locator="38:11-47:7" resultTypeName="t:Boolean" xsi:type="Or">
+                     <operand localId="113" locator="38:11-44:5" resultTypeName="t:Boolean" xsi:type="Exists">
+                        <operand localId="112" locator="38:18-44:5" xsi:type="Query">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <source localId="97" locator="38:20-38:73" alias="Cancer">
+                              <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                 <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                              <expression localId="96" locator="38:20-38:66" dataType="fhir:Condition" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                                 <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                    <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                                 <codes locator="38:32-38:65" resultTypeName="t:ValueSet" name="All Primary and Secondary Cancer" preserve="true" xsi:type="ValueSetRef"/>
+                              </expression>
+                           </source>
+                           <where localId="111" locator="39:9-43:78" resultTypeName="t:Boolean" xsi:type="And">
+                              <operand localId="105" locator="39:15-42:33" resultTypeName="t:Boolean" xsi:type="And">
+                                 <operand localId="102" locator="39:15-41:9" resultTypeName="t:Boolean" xsi:type="Or">
+                                    <operand localId="99" locator="39:17-39:44" resultTypeName="t:Boolean" name="isProblemListItem" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                                       <operand localId="98" locator="39:17-39:22" resultTypeName="fhir:Condition" name="Cancer" xsi:type="AliasRef"/>
+                                    </operand>
+                                    <operand localId="101" locator="40:16-40:41" resultTypeName="t:Boolean" name="isHealthConcern" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                                       <operand localId="100" locator="40:16-40:21" resultTypeName="fhir:Condition" name="Cancer" xsi:type="AliasRef"/>
+                                    </operand>
+                                 </operand>
+                                 <operand localId="104" locator="42:15-42:33" resultTypeName="t:Boolean" name="isActive" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                                    <operand localId="103" locator="42:15-42:20" resultTypeName="fhir:Condition" name="Cancer" xsi:type="AliasRef"/>
+                                 </operand>
+                              </operand>
+                              <operand localId="110" locator="43:15-43:78" resultTypeName="t:Boolean" xsi:type="Overlaps">
+                                 <operand localId="107" locator="43:15-43:43" name="prevalenceInterval" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                                    <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    </resultTypeSpecifier>
+                                    <operand localId="106" locator="43:15-43:20" resultTypeName="fhir:Condition" name="Cancer" xsi:type="AliasRef"/>
+                                 </operand>
+                                 <operand localId="109" locator="43:54-43:78" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    </resultTypeSpecifier>
+                                    <operand path="period" scope="InpatientEncounter" xsi:type="Property"/>
+                                 </operand>
+                              </operand>
+                           </where>
+                        </operand>
+                     </operand>
+                     <operand localId="122" locator="45:10-47:7" resultTypeName="t:Boolean" xsi:type="Exists">
+                        <operand localId="121" locator="45:17-47:7" xsi:type="Query">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <source localId="116" locator="45:19-45:91" alias="InpatientEncounterDiagnosis">
+                              <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                 <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                              <expression localId="115" locator="45:19-45:63" name="encounterDiagnosis" libraryName="CQMCommon" xsi:type="FunctionRef">
+                                 <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                    <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                                 <operand localId="114" locator="45:21-45:38" resultTypeName="fhir:Encounter" name="InpatientEncounter" xsi:type="AliasRef"/>
+                              </expression>
+                           </source>
+                           <where localId="120" locator="46:11-46:86" resultTypeName="t:Boolean" xsi:type="InValueSet">
+                              <code localId="118" locator="46:17-46:48" resultTypeName="t:Concept" name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <operand path="code" scope="InpatientEncounterDiagnosis" xsi:type="Property"/>
+                              </code>
+                              <valueset localId="119" locator="46:53-46:86" resultTypeName="t:ValueSet" name="All Primary and Secondary Cancer" preserve="true"/>
+                           </where>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand localId="142" locator="48:10-50:7" resultTypeName="t:Boolean" xsi:type="Exists">
+                     <operand localId="141" locator="48:17-50:7" xsi:type="Query">
+                        <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                           <elementType xsi:type="ChoiceTypeSpecifier">
+                              <choice name="fhir:ServiceRequest" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                           </elementType>
+                        </resultTypeSpecifier>
+                        <source localId="129" locator="48:19-48:83" alias="PalliativeOrHospiceCare">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType xsi:type="ChoiceTypeSpecifier">
+                                 <choice name="fhir:ServiceRequest" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                              </elementType>
+                           </resultTypeSpecifier>
+                           <expression localId="128" locator="48:19-48:59" name="Intervention Palliative or Hospice Care" xsi:type="ExpressionRef">
+                              <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                 <elementType xsi:type="ChoiceTypeSpecifier">
+                                    <choice name="fhir:ServiceRequest" xsi:type="NamedTypeSpecifier"/>
+                                    <choice name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                                 </elementType>
+                              </resultTypeSpecifier>
+                           </expression>
+                        </source>
+                        <where localId="140" locator="49:11-49:201" resultTypeName="t:Boolean" precision="Day" xsi:type="IncludedIn">
+                           <operand localId="136" locator="49:17-49:121" xsi:type="Coalesce">
+                              <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                              <operand localId="132" locator="49:26-49:71" name="toInterval" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                                 <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                                 <operand localId="131" locator="49:26-49:58" name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                       <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       <choice xsi:type="IntervalTypeSpecifier">
+                                          <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       </choice>
+                                    </resultTypeSpecifier>
+                                    <operand path="performed" scope="PalliativeOrHospiceCare" xsi:type="Property"/>
+                                 </operand>
+                              </operand>
+                              <operand localId="135" locator="49:74-49:120" name="toInterval" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                                 <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                                 <operand xsi:type="As">
+                                    <operand localId="134" locator="49:74-49:107" resultTypeName="t:DateTime" path="value" xsi:type="Property">
+                                       <source path="authoredOn" scope="PalliativeOrHospiceCare" xsi:type="Property"/>
+                                    </operand>
+                                    <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                       <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                       <choice xsi:type="IntervalTypeSpecifier">
+                                          <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       </choice>
+                                       <choice xsi:type="IntervalTypeSpecifier">
+                                          <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                       </choice>
+                                    </asTypeSpecifier>
+                                 </operand>
+                              </operand>
+                           </operand>
+                           <operand localId="139" locator="49:137-49:201" name="HospitalizationWithObservation" libraryName="CQMCommon" xsi:type="FunctionRef">
+                              <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                              <operand localId="138" locator="49:182-49:199" resultTypeName="fhir:Encounter" name="InpatientEncounter" xsi:type="AliasRef"/>
+                           </operand>
+                        </where>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand localId="160" locator="51:10-54:7" resultTypeName="t:Boolean" xsi:type="Or">
+                  <operand localId="154" locator="51:12-52:108" resultTypeName="t:Boolean" xsi:type="Or">
+                     <operand localId="148" locator="51:12-51:104" resultTypeName="t:Boolean" xsi:type="InValueSet">
+                        <code localId="146" locator="51:12-51:66" resultTypeName="t:Concept" name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                           <operand path="dischargeDisposition" xsi:type="Property">
+                              <source localId="145" locator="51:12-51:45" resultTypeName="fhir:Encounter.Hospitalization" path="hospitalization" scope="InpatientEncounter" xsi:type="Property"/>
+                           </operand>
+                        </code>
+                        <valueset localId="147" locator="51:71-51:104" resultTypeName="t:ValueSet" name="Discharge To Acute Care Facility" preserve="true"/>
+                     </operand>
+                     <operand localId="153" locator="52:14-52:108" resultTypeName="t:Boolean" xsi:type="InValueSet">
+                        <code localId="151" locator="52:14-52:68" resultTypeName="t:Concept" name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                           <operand path="dischargeDisposition" xsi:type="Property">
+                              <source localId="150" locator="52:14-52:47" resultTypeName="fhir:Encounter.Hospitalization" path="hospitalization" scope="InpatientEncounter" xsi:type="Property"/>
+                           </operand>
+                        </code>
+                        <valueset localId="152" locator="52:73-52:108" resultTypeName="t:ValueSet" name="Hospice Care Referral or Admission" preserve="true"/>
+                     </operand>
+                  </operand>
+                  <operand localId="159" locator="53:14-53:89" resultTypeName="t:Boolean" xsi:type="InValueSet">
+                     <code localId="157" locator="53:14-53:68" resultTypeName="t:Concept" name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                        <operand path="dischargeDisposition" xsi:type="Property">
+                           <source localId="156" locator="53:14-53:47" resultTypeName="fhir:Encounter.Hospitalization" path="hospitalization" scope="InpatientEncounter" xsi:type="Property"/>
+                        </operand>
+                     </code>
+                     <valueset localId="158" locator="53:73-53:89" resultTypeName="t:ValueSet" name="Patient Expired" preserve="true"/>
+                  </operand>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="196" locator="56:1-70:5" name="Numerator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="196">
+               <a:s>define &quot;Numerator&quot;:
+  /*Encounters of patients prescribed two or more opioids or an opioid and benzodiazepine at discharge.*/
+  
+  </a:s>
+               <a:s r="195">
+                  <a:s r="175">
+                     <a:s>( </a:s>
+                     <a:s r="175">
+                        <a:s>
+                           <a:s r="165">
+                              <a:s r="164">
+                                 <a:s>
+                                    <a:s>&quot;Inpatient Encounter with Age Greater than or Equal to 18&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> InpatientEncounter</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="174">
+                           <a:s>where </a:s>
+                           <a:s r="174">
+                              <a:s>( </a:s>
+                              <a:s r="174">
+                                 <a:s r="172">
+                                    <a:s>Count(</a:s>
+                                    <a:s r="171">
+                                       <a:s>
+                                          <a:s r="167">
+                                             <a:s r="166">
+                                                <a:s>
+                                                   <a:s>&quot;Opioid at Discharge&quot;</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s> Opioids</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>
+            </a:s>
+                                       <a:s r="170">
+                                          <a:s>return distinct </a:s>
+                                          <a:s r="169">
+                                             <a:s r="168">
+                                                <a:s>Opioids</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="169">
+                                                <a:s>medication</a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+        )</a:s>
+                                 </a:s>
+                                 <a:s r="173"> >= 2</a:s>
+                              </a:s>
+                              <a:s>
+      )</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+                  <a:s>
+    union </a:s>
+                  <a:s r="194">
+                     <a:s>( </a:s>
+                     <a:s r="194">
+                        <a:s>
+                           <a:s r="177">
+                              <a:s r="176">
+                                 <a:s>
+                                    <a:s>&quot;Inpatient Encounter with Age Greater than or Equal to 18&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> InpatientEncounter</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+        </a:s>
+                        <a:s r="185">
+                           <a:s>with </a:s>
+                           <a:s r="179">
+                              <a:s r="178">
+                                 <a:s>
+                                    <a:s>&quot;Opioid at Discharge&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> OpioidsDischarge</a:s>
+                           </a:s>
+                           <a:s>
+          such that </a:s>
+                           <a:s r="184">
+                              <a:s r="181">
+                                 <a:s r="180">
+                                    <a:s>OpioidsDischarge</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="181">
+                                    <a:s>authoredOn</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s r="184"> during </a:s>
+                              <a:s r="183">
+                                 <a:s r="182">
+                                    <a:s>InpatientEncounter</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="183">
+                                    <a:s>period</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+        </a:s>
+                        <a:s r="193">
+                           <a:s>with </a:s>
+                           <a:s r="187">
+                              <a:s r="186">
+                                 <a:s>
+                                    <a:s>&quot;Benzodiazepine at Discharge&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> BenzodiazepinesDischarge</a:s>
+                           </a:s>
+                           <a:s>
+          such that </a:s>
+                           <a:s r="192">
+                              <a:s r="189">
+                                 <a:s r="188">
+                                    <a:s>BenzodiazepinesDischarge</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="189">
+                                    <a:s>authoredOn</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s r="192"> during day of </a:s>
+                              <a:s r="191">
+                                 <a:s r="190">
+                                    <a:s>InpatientEncounter</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="191">
+                                    <a:s>period</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    )</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="195" locator="59:3-70:5" xsi:type="Union">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <operand localId="175" locator="59:3-64:3" xsi:type="Query">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <source localId="165" locator="59:5-59:81" alias="InpatientEncounter">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <expression localId="164" locator="59:5-59:62" name="Inpatient Encounter with Age Greater than or Equal to 18" xsi:type="ExpressionRef">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                  </expression>
+               </source>
+               <where localId="174" locator="60:7-63:7" resultTypeName="t:Boolean" xsi:type="GreaterOrEqual">
+                  <operand localId="172" locator="60:15-62:9" resultTypeName="t:Integer" xsi:type="Count">
+                     <source localId="171" locator="60:21-61:46" xsi:type="Query">
+                        <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                           <elementType xsi:type="ChoiceTypeSpecifier">
+                              <choice name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="fhir:Reference" xsi:type="NamedTypeSpecifier"/>
+                           </elementType>
+                        </resultTypeSpecifier>
+                        <source localId="167" locator="60:21-60:49" alias="Opioids">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <expression localId="166" locator="60:21-60:41" name="Opioid at Discharge" xsi:type="ExpressionRef">
+                              <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                 <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                           </expression>
+                        </source>
+                        <return localId="170" locator="61:13-61:46" distinct="true">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType xsi:type="ChoiceTypeSpecifier">
+                                 <choice name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="fhir:Reference" xsi:type="NamedTypeSpecifier"/>
+                              </elementType>
+                           </resultTypeSpecifier>
+                           <expression localId="169" locator="61:29-61:46" name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                              <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                 <choice name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="fhir:Reference" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                              <operand path="medication" scope="Opioids" xsi:type="Property"/>
+                           </expression>
+                        </return>
+                     </source>
+                  </operand>
+                  <operand localId="173" locator="62:14" resultTypeName="t:Integer" valueType="t:Integer" value="2" xsi:type="Literal"/>
+               </where>
+            </operand>
+            <operand localId="194" locator="65:11-70:5" xsi:type="Query">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <source localId="177" locator="65:13-65:89" alias="InpatientEncounter">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <expression localId="176" locator="65:13-65:70" name="Inpatient Encounter with Age Greater than or Equal to 18" xsi:type="ExpressionRef">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                  </expression>
+               </source>
+               <relationship localId="185" locator="66:9-67:80" alias="OpioidsDischarge" xsi:type="With">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <expression localId="178" locator="66:14-66:34" name="Opioid at Discharge" xsi:type="ExpressionRef">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                  </expression>
+                  <suchThat localId="184" locator="67:21-67:80" resultTypeName="t:Boolean" xsi:type="In">
+                     <operand localId="181" locator="67:21-67:47" resultTypeName="t:DateTime" path="value" xsi:type="Property">
+                        <source path="authoredOn" scope="OpioidsDischarge" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="183" locator="67:56-67:80" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                        <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                           <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <operand path="period" scope="InpatientEncounter" xsi:type="Property"/>
+                     </operand>
+                  </suchThat>
+               </relationship>
+               <relationship localId="193" locator="68:9-69:95" alias="BenzodiazepinesDischarge" xsi:type="With">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <expression localId="186" locator="68:14-68:42" name="Benzodiazepine at Discharge" xsi:type="ExpressionRef">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                  </expression>
+                  <suchThat localId="192" locator="69:21-69:95" resultTypeName="t:Boolean" precision="Day" xsi:type="In">
+                     <operand localId="189" locator="69:21-69:55" resultTypeName="t:DateTime" path="value" xsi:type="Property">
+                        <source path="authoredOn" scope="BenzodiazepinesDischarge" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="191" locator="69:71-69:95" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                        <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                           <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <operand path="period" scope="InpatientEncounter" xsi:type="Property"/>
+                     </operand>
+                  </suchThat>
+               </relationship>
+            </operand>
+         </expression>
+      </def>
+      <def localId="199" locator="102:1-103:21" name="SDE Ethnicity" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="199">
+               <a:s>define &quot;SDE Ethnicity&quot;:
+  </a:s>
+               <a:s r="198">
+                  <a:s r="197">
+                     <a:s>SDE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="198">
+                     <a:s>&quot;SDE Ethnicity&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="TupleTypeSpecifier">
+            <element name="codes">
+               <elementType xsi:type="ListTypeSpecifier">
+                  <elementType name="t:Code" xsi:type="NamedTypeSpecifier"/>
+               </elementType>
+            </element>
+            <element name="display">
+               <elementType name="t:String" xsi:type="NamedTypeSpecifier"/>
+            </element>
+         </resultTypeSpecifier>
+         <expression localId="198" locator="103:3-103:21" name="SDE Ethnicity" libraryName="SDE" xsi:type="ExpressionRef">
+            <resultTypeSpecifier xsi:type="TupleTypeSpecifier">
+               <element name="codes">
+                  <elementType xsi:type="ListTypeSpecifier">
+                     <elementType name="t:Code" xsi:type="NamedTypeSpecifier"/>
+                  </elementType>
+               </element>
+               <element name="display">
+                  <elementType name="t:String" xsi:type="NamedTypeSpecifier"/>
+               </element>
+            </resultTypeSpecifier>
+         </expression>
+      </def>
+      <def localId="202" locator="105:1-106:17" name="SDE Payer" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="202">
+               <a:s>define &quot;SDE Payer&quot;:
+  </a:s>
+               <a:s r="201">
+                  <a:s r="200">
+                     <a:s>SDE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="201">
+                     <a:s>&quot;SDE Payer&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType xsi:type="TupleTypeSpecifier">
+               <element name="code">
+                  <elementType name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+               </element>
+               <element name="period">
+                  <elementType xsi:type="IntervalTypeSpecifier">
+                     <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                  </elementType>
+               </element>
+            </elementType>
+         </resultTypeSpecifier>
+         <expression localId="201" locator="106:3-106:17" name="SDE Payer" libraryName="SDE" xsi:type="ExpressionRef">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType xsi:type="TupleTypeSpecifier">
+                  <element name="code">
+                     <elementType name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                  </element>
+                  <element name="period">
+                     <elementType xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     </elementType>
+                  </element>
+               </elementType>
+            </resultTypeSpecifier>
+         </expression>
+      </def>
+      <def localId="205" locator="108:1-109:16" name="SDE Race" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="205">
+               <a:s>define &quot;SDE Race&quot;:
+  </a:s>
+               <a:s r="204">
+                  <a:s r="203">
+                     <a:s>SDE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="204">
+                     <a:s>&quot;SDE Race&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="TupleTypeSpecifier">
+            <element name="codes">
+               <elementType xsi:type="ListTypeSpecifier">
+                  <elementType name="t:Code" xsi:type="NamedTypeSpecifier"/>
+               </elementType>
+            </element>
+            <element name="display">
+               <elementType name="t:String" xsi:type="NamedTypeSpecifier"/>
+            </element>
+         </resultTypeSpecifier>
+         <expression localId="204" locator="109:3-109:16" name="SDE Race" libraryName="SDE" xsi:type="ExpressionRef">
+            <resultTypeSpecifier xsi:type="TupleTypeSpecifier">
+               <element name="codes">
+                  <elementType xsi:type="ListTypeSpecifier">
+                     <elementType name="t:Code" xsi:type="NamedTypeSpecifier"/>
+                  </elementType>
+               </element>
+               <element name="display">
+                  <elementType name="t:String" xsi:type="NamedTypeSpecifier"/>
+               </element>
+            </resultTypeSpecifier>
+         </expression>
+      </def>
+      <def localId="208" locator="111:1-112:15" resultTypeName="t:Code" name="SDE Sex" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="208">
+               <a:s>define &quot;SDE Sex&quot;:
+  </a:s>
+               <a:s r="207">
+                  <a:s r="206">
+                     <a:s>SDE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="207">
+                     <a:s>&quot;SDE Sex&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="207" locator="112:3-112:15" resultTypeName="t:Code" name="SDE Sex" libraryName="SDE" xsi:type="ExpressionRef"/>
+      </def>
+   </statements>
+</library>

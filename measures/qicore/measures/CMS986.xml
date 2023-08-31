@@ -1,0 +1,2536 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorVersion="2.10.0" translatorOptions="EnableAnnotations,EnableLocators,EnableResultTypes" xsi:type="a:CqlToElmInfo"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="294">
+         <a:s>library CMS986FHIR version '0.0.000'</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="CMS986FHIR" version="0.0.000"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="3:1-3:28" localIdentifier="QICore" uri="http://hl7.org/fhir">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>using </a:s>
+               <a:s>
+                  <a:s>QICore</a:s>
+               </a:s>
+               <a:s> version '4.1.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="5:1-5:56" localIdentifier="FHIRHelpers" path="FHIRHelpers" version="4.3.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>FHIRHelpers</a:s>
+               </a:s>
+               <a:s> version '4.3.000' called FHIRHelpers</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="3" locator="6:1-6:61" localIdentifier="SDE" path="SupplementalDataElements" version="3.4.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>SupplementalDataElements</a:s>
+               </a:s>
+               <a:s> version '3.4.000' called SDE</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="4" locator="7:1-7:58" localIdentifier="QICoreCommon" path="QICoreCommon" version="1.5.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>QICoreCommon</a:s>
+               </a:s>
+               <a:s> version '1.5.000' called QICoreCommon</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="5" locator="8:1-8:52" localIdentifier="CQMCommon" path="CQMCommon" version="1.4.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>CQMCommon</a:s>
+               </a:s>
+               <a:s> version '1.4.000' called CQMCommon</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <parameters>
+      <def localId="31" locator="32:1-32:114" name="Measurement Period" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="31">
+               <a:s>parameter &quot;Measurement Period&quot; </a:s>
+               <a:s r="30">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="29">
+                     <a:s>DateTime</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+               <a:s>default </a:s>
+               <a:s r="28">
+                  <a:s r="26">Interval[@2021-01-01T00:00:00.0, @2022-01-01T00:00:00.0 )</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+            <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <default localId="28" locator="32:58-32:114" lowClosed="true" highClosed="false" xsi:type="Interval">
+            <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+               <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <low localId="26" locator="32:67-32:88" resultTypeName="t:DateTime" xsi:type="DateTime">
+               <year valueType="t:Integer" value="2021" xsi:type="Literal"/>
+               <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <day valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <hour valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <minute valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <second valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <millisecond valueType="t:Integer" value="0" xsi:type="Literal"/>
+            </low>
+            <high localId="27" locator="32:91-32:112" resultTypeName="t:DateTime" xsi:type="DateTime">
+               <year valueType="t:Integer" value="2022" xsi:type="Literal"/>
+               <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <day valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <hour valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <minute valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <second valueType="t:Integer" value="0" xsi:type="Literal"/>
+               <millisecond valueType="t:Integer" value="0" xsi:type="Literal"/>
+            </high>
+         </default>
+         <parameterTypeSpecifier localId="30" locator="32:32-32:49" xsi:type="IntervalTypeSpecifier">
+            <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+               <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <pointType localId="29" locator="32:41-32:48" resultTypeName="t:DateTime" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <codeSystems>
+      <def localId="6" locator="10:1-10:38" resultTypeName="t:CodeSystem" name="LOINC" id="http://loinc.org" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>codesystem &quot;LOINC&quot;: 'http://loinc.org'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="7" locator="11:1-11:47" resultTypeName="t:CodeSystem" name="SNOMEDCT" id="http://snomed.info/sct" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="7">
+               <a:s>codesystem &quot;SNOMEDCT&quot;: 'http://snomed.info/sct'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="8" locator="12:1-12:57" resultTypeName="t:CodeSystem" name="ICD10CM" id="http://hl7.org/fhir/sid/icd-10-cm" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="8">
+               <a:s>codesystem &quot;ICD10CM&quot;: 'http://hl7.org/fhir/sid/icd-10-cm'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </codeSystems>
+   <valueSets>
+      <def localId="9" locator="14:1-14:100" resultTypeName="t:ValueSet" name="Encounter Inpatient" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="9">
+               <a:s>valueset &quot;Encounter Inpatient&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="10" locator="15:1-15:87" resultTypeName="t:ValueSet" name="Ethnicity" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="10">
+               <a:s>valueset &quot;Ethnicity&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="11" locator="16:1-16:108" resultTypeName="t:ValueSet" name="Hospital Dietitian Referral" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.91" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="11">
+               <a:s>valueset &quot;Hospital Dietitian Referral&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.91'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="12" locator="17:1-17:103" resultTypeName="t:ValueSet" name="Malnutrition Diagnosis" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.55" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="12">
+               <a:s>valueset &quot;Malnutrition Diagnosis&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.55'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="13" locator="18:1-18:108" resultTypeName="t:ValueSet" name="Malnutrition Risk Screening" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.92" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="13">
+               <a:s>valueset &quot;Malnutrition Risk Screening&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.92'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="14" locator="19:1-19:118" resultTypeName="t:ValueSet" name="Malnutrition Screening At Risk Result" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.38" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="14">
+               <a:s>valueset &quot;Malnutrition Screening At Risk Result&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.38'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="15" locator="20:1-20:122" resultTypeName="t:ValueSet" name="Malnutrition Screening Not At Risk Result" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.34" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="15">
+               <a:s>valueset &quot;Malnutrition Screening Not At Risk Result&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.34'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="16" locator="21:1-21:101" resultTypeName="t:ValueSet" name="Nutrition Assessment" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.21" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="16">
+               <a:s>valueset &quot;Nutrition Assessment&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.21'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="17" locator="22:1-22:132" resultTypeName="t:ValueSet" name="Nutrition Assessment Status Moderately Malnourished" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.44" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="17">
+               <a:s>valueset &quot;Nutrition Assessment Status Moderately Malnourished&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.44'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="18" locator="23:1-23:135" resultTypeName="t:ValueSet" name="Nutrition Assessment Status Not or Mildly Malnourished" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.48" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="18">
+               <a:s>valueset &quot;Nutrition Assessment Status Not or Mildly Malnourished&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.48'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="19" locator="24:1-24:130" resultTypeName="t:ValueSet" name="Nutrition Assessment Status Severely Malnourished" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.42" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="19">
+               <a:s>valueset &quot;Nutrition Assessment Status Severely Malnourished&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.42'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="20" locator="25:1-25:100" resultTypeName="t:ValueSet" name="Nutrition Care Plan" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.93" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="20">
+               <a:s>valueset &quot;Nutrition Care Plan&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.93'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="21" locator="26:1-26:97" resultTypeName="t:ValueSet" name="ONC Administrative Sex" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="21">
+               <a:s>valueset &quot;ONC Administrative Sex&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="22" locator="27:1-27:84" resultTypeName="t:ValueSet" name="Payer" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="22">
+               <a:s>valueset &quot;Payer&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="23" locator="28:1-28:82" resultTypeName="t:ValueSet" name="Race" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="23">
+               <a:s>valueset &quot;Race&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </valueSets>
+   <codes>
+      <def localId="25" locator="30:1-30:62" resultTypeName="t:Code" name="Birth date" id="21112-8" display="Birth date" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="25">
+               <a:s>code &quot;Birth date&quot;: '21112-8' from </a:s>
+               <a:s r="24">
+                  <a:s>&quot;LOINC&quot;</a:s>
+               </a:s>
+               <a:s> display 'Birth date'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="24" locator="30:35-30:41" resultTypeName="t:CodeSystem" name="LOINC"/>
+      </def>
+   </codes>
+   <contexts>
+      <def locator="34:1-34:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="34:1-34:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="34:1-34:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="34" locator="36:1-37:21" name="SDE Ethnicity" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="34">
+               <a:s>define &quot;SDE Ethnicity&quot;:
+  </a:s>
+               <a:s r="33">
+                  <a:s r="32">
+                     <a:s>SDE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="33">
+                     <a:s>&quot;SDE Ethnicity&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="TupleTypeSpecifier">
+            <element name="codes">
+               <elementType xsi:type="ListTypeSpecifier">
+                  <elementType name="t:Code" xsi:type="NamedTypeSpecifier"/>
+               </elementType>
+            </element>
+            <element name="display">
+               <elementType name="t:String" xsi:type="NamedTypeSpecifier"/>
+            </element>
+         </resultTypeSpecifier>
+         <expression localId="33" locator="37:3-37:21" name="SDE Ethnicity" libraryName="SDE" xsi:type="ExpressionRef">
+            <resultTypeSpecifier xsi:type="TupleTypeSpecifier">
+               <element name="codes">
+                  <elementType xsi:type="ListTypeSpecifier">
+                     <elementType name="t:Code" xsi:type="NamedTypeSpecifier"/>
+                  </elementType>
+               </element>
+               <element name="display">
+                  <elementType name="t:String" xsi:type="NamedTypeSpecifier"/>
+               </element>
+            </resultTypeSpecifier>
+         </expression>
+      </def>
+      <def localId="37" locator="39:1-40:17" name="SDE Payer" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="37">
+               <a:s>define &quot;SDE Payer&quot;:
+  </a:s>
+               <a:s r="36">
+                  <a:s r="35">
+                     <a:s>SDE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="36">
+                     <a:s>&quot;SDE Payer&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType xsi:type="TupleTypeSpecifier">
+               <element name="code">
+                  <elementType name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+               </element>
+               <element name="period">
+                  <elementType xsi:type="IntervalTypeSpecifier">
+                     <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                  </elementType>
+               </element>
+            </elementType>
+         </resultTypeSpecifier>
+         <expression localId="36" locator="40:3-40:17" name="SDE Payer" libraryName="SDE" xsi:type="ExpressionRef">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType xsi:type="TupleTypeSpecifier">
+                  <element name="code">
+                     <elementType name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                  </element>
+                  <element name="period">
+                     <elementType xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     </elementType>
+                  </element>
+               </elementType>
+            </resultTypeSpecifier>
+         </expression>
+      </def>
+      <def localId="40" locator="42:1-43:16" name="SDE Race" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="40">
+               <a:s>define &quot;SDE Race&quot;:
+  </a:s>
+               <a:s r="39">
+                  <a:s r="38">
+                     <a:s>SDE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="39">
+                     <a:s>&quot;SDE Race&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="TupleTypeSpecifier">
+            <element name="codes">
+               <elementType xsi:type="ListTypeSpecifier">
+                  <elementType name="t:Code" xsi:type="NamedTypeSpecifier"/>
+               </elementType>
+            </element>
+            <element name="display">
+               <elementType name="t:String" xsi:type="NamedTypeSpecifier"/>
+            </element>
+         </resultTypeSpecifier>
+         <expression localId="39" locator="43:3-43:16" name="SDE Race" libraryName="SDE" xsi:type="ExpressionRef">
+            <resultTypeSpecifier xsi:type="TupleTypeSpecifier">
+               <element name="codes">
+                  <elementType xsi:type="ListTypeSpecifier">
+                     <elementType name="t:Code" xsi:type="NamedTypeSpecifier"/>
+                  </elementType>
+               </element>
+               <element name="display">
+                  <elementType name="t:String" xsi:type="NamedTypeSpecifier"/>
+               </element>
+            </resultTypeSpecifier>
+         </expression>
+      </def>
+      <def localId="43" locator="45:1-46:15" resultTypeName="t:Code" name="SDE Sex" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="43">
+               <a:s>define &quot;SDE Sex&quot;:
+  </a:s>
+               <a:s r="42">
+                  <a:s r="41">
+                     <a:s>SDE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="42">
+                     <a:s>&quot;SDE Sex&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="42" locator="46:3-46:15" resultTypeName="t:Code" name="SDE Sex" libraryName="SDE" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="70" locator="48:1-53:48" name="Global Malnutrition Encounter During Measurement Period" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="70">
+               <a:s>define &quot;Global Malnutrition Encounter During Measurement Period&quot;:
+  </a:s>
+               <a:s r="69">
+                  <a:s>
+                     <a:s r="45">
+                        <a:s r="44">
+                           <a:s r="44">
+                              <a:s>[Encounter: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Encounter Inpatient&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> EncounterInpatient</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="68">
+                     <a:s>where </a:s>
+                     <a:s r="68">
+                        <a:s r="63">
+                           <a:s r="57">
+                              <a:s r="49">
+                                 <a:s r="47">
+                                    <a:s r="46">
+                                       <a:s>EncounterInpatient</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="47">
+                                       <a:s>period</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s r="49"> ends during day of </a:s>
+                                 <a:s r="48">
+                                    <a:s>&quot;Measurement Period&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      and </a:s>
+                              <a:s r="56">
+                                 <a:s r="54">
+                                    <a:s>AgeInYearsAt(</a:s>
+                                    <a:s r="53">
+                                       <a:s>date from </a:s>
+                                       <a:s r="52">
+                                          <a:s>start of </a:s>
+                                          <a:s r="51">
+                                             <a:s r="50">
+                                                <a:s>EncounterInpatient</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="51">
+                                                <a:s>period</a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>)</a:s>
+                                 </a:s>
+                                 <a:s r="55"> >= 65</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+      and </a:s>
+                           <a:s r="62">
+                              <a:s>( </a:s>
+                              <a:s r="62">
+                                 <a:s r="60">
+                                    <a:s>duration in hours of </a:s>
+                                    <a:s r="59">
+                                       <a:s r="58">
+                                          <a:s>EncounterInpatient</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="59">
+                                          <a:s>hospitalization ( )</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s r="61"> >= 24</a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      and </a:s>
+                        <a:s r="67">
+                           <a:s r="65">
+                              <a:s r="64">
+                                 <a:s>EncounterInpatient</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="65">
+                                 <a:s>status</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> = </a:s>
+                           <a:s r="66">
+                              <a:s>'finished'</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="69" locator="49:3-53:48" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="45" locator="49:3-49:55" alias="EncounterInpatient">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="44" locator="49:3-49:36" dataType="fhir:Encounter" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" codeProperty="type" codeComparator="in" xsi:type="Retrieve">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <codes locator="49:15-49:35" resultTypeName="t:ValueSet" name="Encounter Inpatient" preserve="true" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <where localId="68" locator="50:5-53:48" resultTypeName="t:Boolean" xsi:type="And">
+               <operand localId="63" locator="50:11-52:79" resultTypeName="t:Boolean" xsi:type="And">
+                  <operand localId="57" locator="50:11-51:74" resultTypeName="t:Boolean" xsi:type="And">
+                     <operand localId="49" locator="50:11-50:75" resultTypeName="t:Boolean" precision="Day" xsi:type="In">
+                        <operand locator="50:37-50:40" xsi:type="End">
+                           <operand localId="47" locator="50:11-50:35" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                              <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                              <operand path="period" scope="EncounterInpatient" xsi:type="Property"/>
+                           </operand>
+                        </operand>
+                        <operand localId="48" locator="50:56-50:75" name="Measurement Period" xsi:type="ParameterRef">
+                           <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                              <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                        </operand>
+                     </operand>
+                     <operand localId="56" locator="51:11-51:74" resultTypeName="t:Boolean" xsi:type="GreaterOrEqual">
+                        <operand localId="54" locator="51:11-51:68" resultTypeName="t:Integer" precision="Year" xsi:type="CalculateAgeAt">
+                           <operand path="value" xsi:type="Property">
+                              <source path="birthDate" xsi:type="Property">
+                                 <source name="Patient" xsi:type="ExpressionRef"/>
+                              </source>
+                           </operand>
+                           <operand localId="53" locator="51:24-51:67" resultTypeName="t:Date" xsi:type="DateFrom">
+                              <operand localId="52" locator="51:34-51:67" resultTypeName="t:DateTime" xsi:type="Start">
+                                 <operand localId="51" locator="51:43-51:67" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    </resultTypeSpecifier>
+                                    <operand path="period" scope="EncounterInpatient" xsi:type="Property"/>
+                                 </operand>
+                              </operand>
+                           </operand>
+                        </operand>
+                        <operand localId="55" locator="51:73-51:74" resultTypeName="t:Integer" valueType="t:Integer" value="65" xsi:type="Literal"/>
+                     </operand>
+                  </operand>
+                  <operand localId="62" locator="52:11-52:79" resultTypeName="t:Boolean" xsi:type="GreaterOrEqual">
+                     <operand localId="60" locator="52:13-52:71" resultTypeName="t:Integer" precision="Hour" xsi:type="DurationBetween">
+                        <operand xsi:type="Start">
+                           <operand localId="59" locator="52:34-52:71" name="hospitalization" libraryName="CQMCommon" xsi:type="FunctionRef">
+                              <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                              <operand localId="58" locator="52:34-52:51" resultTypeName="fhir:Encounter" name="EncounterInpatient" xsi:type="AliasRef"/>
+                           </operand>
+                        </operand>
+                        <operand xsi:type="End">
+                           <operand localId="59" locator="52:34-52:71" name="hospitalization" libraryName="CQMCommon" xsi:type="FunctionRef">
+                              <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                              <operand localId="58" locator="52:34-52:51" resultTypeName="fhir:Encounter" name="EncounterInpatient" xsi:type="AliasRef"/>
+                           </operand>
+                        </operand>
+                     </operand>
+                     <operand localId="61" locator="52:76-52:77" resultTypeName="t:Integer" valueType="t:Integer" value="24" xsi:type="Literal"/>
+                  </operand>
+               </operand>
+               <operand localId="67" locator="53:11-53:48" resultTypeName="t:Boolean" xsi:type="Equal">
+                  <operand localId="65" locator="53:11-53:35" resultTypeName="fhir:EncounterStatus" path="value" xsi:type="Property">
+                     <source path="status" scope="EncounterInpatient" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="66" locator="53:39-53:48" resultTypeName="t:String" valueType="t:String" value="finished" xsi:type="Literal"/>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="72" locator="55:1-56:59" name="Initial Population" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="72">
+               <a:s>define &quot;Initial Population&quot;:
+  </a:s>
+               <a:s r="71">
+                  <a:s>&quot;Global Malnutrition Encounter During Measurement Period&quot;</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="71" locator="56:3-56:59" name="Global Malnutrition Encounter During Measurement Period" xsi:type="ExpressionRef">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+         </expression>
+      </def>
+      <def localId="74" locator="58:1-59:22" name="Measure Population" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="74">
+               <a:s>define &quot;Measure Population&quot;:
+  </a:s>
+               <a:s r="73">
+                  <a:s>&quot;Initial Population&quot;</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="73" locator="59:3-59:22" name="Initial Population" xsi:type="ExpressionRef">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+         </expression>
+      </def>
+      <def localId="122" locator="61:1-73:38" name="Encounter with Malnutrition Risk Screening and Identified Result" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="122">
+               <a:s>define &quot;Encounter with Malnutrition Risk Screening and Identified Result&quot;:
+  </a:s>
+               <a:s r="121">
+                  <a:s>
+                     <a:s>from
+    </a:s>
+                     <a:s r="76">
+                        <a:s r="75">
+                           <a:s>
+                              <a:s>&quot;Global Malnutrition Encounter During Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> GlobalMalnutritionEncounter</a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="78">
+                        <a:s r="77">
+                           <a:s r="77">
+                              <a:s>[&quot;Observation&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Malnutrition Risk Screening&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> MalnutritionRiskScreening</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s>
+                     <a:s>let </a:s>
+                     <a:s r="81">
+                        <a:s>MalnutritionRiskScreeningMalnutritionRiskScreeningPeriod: </a:s>
+                        <a:s r="80">
+                           <a:s r="79">
+                              <a:s>GlobalMalnutritionEncounter</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="80">
+                              <a:s>hospitalizationWithObservation ( )</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="85">
+                        <a:s>MalnutritionRiskScreeningStart: </a:s>
+                        <a:s r="84">
+                           <a:s r="83">
+                              <a:s r="82">
+                                 <a:s>MalnutritionRiskScreening</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="83">
+                                 <a:s>effective</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="84">
+                              <a:s>earliest ( )</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="118">
+                     <a:s>where </a:s>
+                     <a:s r="118">
+                        <a:s r="104">
+                           <a:s r="97">
+                              <a:s r="89">
+                                 <a:s r="87">
+                                    <a:s r="86">
+                                       <a:s>MalnutritionRiskScreening</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="87">
+                                       <a:s>code</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> in </a:s>
+                                 <a:s r="88">
+                                    <a:s>&quot;Malnutrition Risk Screening&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      and </a:s>
+                              <a:s r="96">
+                                 <a:s r="91">
+                                    <a:s r="90">
+                                       <a:s>MalnutritionRiskScreening</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="91">
+                                       <a:s>status</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> in </a:s>
+                                 <a:s r="95">
+                                    <a:s>{ </a:s>
+                                    <a:s r="92">
+                                       <a:s>'final'</a:s>
+                                    </a:s>
+                                    <a:s>, </a:s>
+                                    <a:s r="93">
+                                       <a:s>'amended'</a:s>
+                                    </a:s>
+                                    <a:s>, </a:s>
+                                    <a:s r="94">
+                                       <a:s>'corrected'</a:s>
+                                    </a:s>
+                                    <a:s> }</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+      and </a:s>
+                           <a:s r="103">
+                              <a:s r="100">
+                                 <a:s r="99">
+                                    <a:s r="98">
+                                       <a:s>MalnutritionRiskScreening</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="99">
+                                       <a:s>effective</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="100">
+                                    <a:s>toInterval ( )</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s r="103"> during </a:s>
+                              <a:s r="102">
+                                 <a:s r="101">
+                                    <a:s>GlobalMalnutritionEncounter</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="102">
+                                    <a:s>hospitalizationWithObservation ( )</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      and </a:s>
+                        <a:s r="117">
+                           <a:s>( </a:s>
+                           <a:s r="117">
+                              <a:s r="110">
+                                 <a:s r="108">
+                                    <a:s r="106">
+                                       <a:s r="105">
+                                          <a:s>MalnutritionRiskScreening</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="106">
+                                          <a:s>value</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> as </a:s>
+                                    <a:s r="107">
+                                       <a:s>Concept</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> in </a:s>
+                                 <a:s r="109">
+                                    <a:s>&quot;Malnutrition Screening Not At Risk Result&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+          or </a:s>
+                              <a:s r="116">
+                                 <a:s r="114">
+                                    <a:s r="112">
+                                       <a:s r="111">
+                                          <a:s>MalnutritionRiskScreening</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="112">
+                                          <a:s>value</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> as </a:s>
+                                    <a:s r="113">
+                                       <a:s>Concept</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> in </a:s>
+                                 <a:s r="115">
+                                    <a:s>&quot;Malnutrition Screening At Risk Result&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+      )</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="120">
+                     <a:s>return </a:s>
+                     <a:s r="119">
+                        <a:s>GlobalMalnutritionEncounter</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="121" locator="62:3-73:38" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="76" locator="63:5-63:89" alias="GlobalMalnutritionEncounter">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="75" locator="63:5-63:61" name="Global Malnutrition Encounter During Measurement Period" xsi:type="ExpressionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </expression>
+            </source>
+            <source localId="78" locator="64:5-64:76" alias="MalnutritionRiskScreening">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="77" locator="64:5-64:50" dataType="fhir:Observation" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <codes locator="64:21-64:49" resultTypeName="t:ValueSet" name="Malnutrition Risk Screening" preserve="true" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <let localId="81" locator="65:9-65:128" identifier="MalnutritionRiskScreeningMalnutritionRiskScreeningPeriod">
+               <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                  <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="80" locator="65:67-65:128" name="hospitalizationWithObservation" libraryName="CQMCommon" xsi:type="FunctionRef">
+                  <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                     <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <operand localId="79" locator="65:67-65:93" resultTypeName="fhir:Encounter" name="GlobalMalnutritionEncounter" xsi:type="AliasRef"/>
+               </expression>
+            </let>
+            <let localId="85" locator="66:5-66:84" resultTypeName="t:DateTime" identifier="MalnutritionRiskScreeningStart">
+               <expression localId="84" locator="66:37-66:84" resultTypeName="t:DateTime" name="earliest" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                  <operand xsi:type="Case">
+                     <caseItem>
+                        <when isType="t:DateTime" xsi:type="Is">
+                           <operand localId="83" locator="66:37-66:71" name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                              <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                 <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                                 <choice name="fhir:Timing" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                              <operand path="effective" scope="MalnutritionRiskScreening" xsi:type="Property"/>
+                           </operand>
+                        </when>
+                        <then xsi:type="As">
+                           <operand asType="t:DateTime" xsi:type="As">
+                              <operand localId="83" locator="66:37-66:71" name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                    <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    <choice xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    </choice>
+                                    <choice name="fhir:Timing" xsi:type="NamedTypeSpecifier"/>
+                                    <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                                 <operand path="effective" scope="MalnutritionRiskScreening" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                           <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                              <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                              <choice xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              </choice>
+                              <choice xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                              </choice>
+                           </asTypeSpecifier>
+                        </then>
+                     </caseItem>
+                     <caseItem>
+                        <when xsi:type="Is">
+                           <operand localId="83" locator="66:37-66:71" name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                              <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                 <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                                 <choice name="fhir:Timing" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                              <operand path="effective" scope="MalnutritionRiskScreening" xsi:type="Property"/>
+                           </operand>
+                           <isTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                              <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                           </isTypeSpecifier>
+                        </when>
+                        <then xsi:type="As">
+                           <operand xsi:type="As">
+                              <operand localId="83" locator="66:37-66:71" name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                    <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    <choice xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    </choice>
+                                    <choice name="fhir:Timing" xsi:type="NamedTypeSpecifier"/>
+                                    <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                                 <operand path="effective" scope="MalnutritionRiskScreening" xsi:type="Property"/>
+                              </operand>
+                              <asTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              </asTypeSpecifier>
+                           </operand>
+                           <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                              <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                              <choice xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              </choice>
+                              <choice xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                              </choice>
+                           </asTypeSpecifier>
+                        </then>
+                     </caseItem>
+                     <caseItem>
+                        <when isType="t:DateTime" xsi:type="Is">
+                           <operand localId="83" locator="66:37-66:71" name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                              <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                 <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                                 <choice name="fhir:Timing" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                              <operand path="effective" scope="MalnutritionRiskScreening" xsi:type="Property"/>
+                           </operand>
+                        </when>
+                        <then xsi:type="As">
+                           <operand asType="t:DateTime" xsi:type="As">
+                              <operand localId="83" locator="66:37-66:71" name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                    <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    <choice xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    </choice>
+                                    <choice name="fhir:Timing" xsi:type="NamedTypeSpecifier"/>
+                                    <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                                 <operand path="effective" scope="MalnutritionRiskScreening" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                           <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                              <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                              <choice xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              </choice>
+                              <choice xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                              </choice>
+                           </asTypeSpecifier>
+                        </then>
+                     </caseItem>
+                     <else xsi:type="Null">
+                        <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                           <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                           <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                           <choice xsi:type="IntervalTypeSpecifier">
+                              <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                           </choice>
+                           <choice xsi:type="IntervalTypeSpecifier">
+                              <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                           </choice>
+                        </resultTypeSpecifier>
+                     </else>
+                  </operand>
+               </expression>
+            </let>
+            <where localId="118" locator="67:5-72:7" resultTypeName="t:Boolean" xsi:type="And">
+               <operand localId="104" locator="67:11-69:130" resultTypeName="t:Boolean" xsi:type="And">
+                  <operand localId="97" locator="67:11-68:81" resultTypeName="t:Boolean" xsi:type="And">
+                     <operand localId="89" locator="67:11-67:73" resultTypeName="t:Boolean" xsi:type="InValueSet">
+                        <code localId="87" locator="67:11-67:40" resultTypeName="t:Concept" name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                           <operand path="code" scope="MalnutritionRiskScreening" xsi:type="Property"/>
+                        </code>
+                        <valueset localId="88" locator="67:45-67:73" resultTypeName="t:ValueSet" name="Malnutrition Risk Screening" preserve="true"/>
+                     </operand>
+                     <operand localId="96" locator="68:11-68:81" resultTypeName="t:Boolean" xsi:type="In">
+                        <operand localId="91" locator="68:11-68:42" resultTypeName="fhir:ObservationStatus" path="value" xsi:type="Property">
+                           <source path="status" scope="MalnutritionRiskScreening" xsi:type="Property"/>
+                        </operand>
+                        <operand localId="95" locator="68:47-68:81" xsi:type="List">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="t:String" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <element localId="92" locator="68:49-68:55" resultTypeName="t:String" valueType="t:String" value="final" xsi:type="Literal"/>
+                           <element localId="93" locator="68:58-68:66" resultTypeName="t:String" valueType="t:String" value="amended" xsi:type="Literal"/>
+                           <element localId="94" locator="68:69-68:79" resultTypeName="t:String" valueType="t:String" value="corrected" xsi:type="Literal"/>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand localId="103" locator="69:11-69:130" resultTypeName="t:Boolean" xsi:type="IncludedIn">
+                     <operand localId="100" locator="69:11-69:60" name="toInterval" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                        <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                           <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <operand xsi:type="Case">
+                           <caseItem>
+                              <when isType="t:DateTime" xsi:type="Is">
+                                 <operand localId="99" locator="69:11-69:45" name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                       <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       <choice xsi:type="IntervalTypeSpecifier">
+                                          <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       </choice>
+                                       <choice name="fhir:Timing" xsi:type="NamedTypeSpecifier"/>
+                                       <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    </resultTypeSpecifier>
+                                    <operand path="effective" scope="MalnutritionRiskScreening" xsi:type="Property"/>
+                                 </operand>
+                              </when>
+                              <then xsi:type="As">
+                                 <operand asType="t:DateTime" xsi:type="As">
+                                    <operand localId="99" locator="69:11-69:45" name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                       <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                          <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                          <choice xsi:type="IntervalTypeSpecifier">
+                                             <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                          </choice>
+                                          <choice name="fhir:Timing" xsi:type="NamedTypeSpecifier"/>
+                                          <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       </resultTypeSpecifier>
+                                       <operand path="effective" scope="MalnutritionRiskScreening" xsi:type="Property"/>
+                                    </operand>
+                                 </operand>
+                                 <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                    <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                    <choice xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    </choice>
+                                    <choice xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                    </choice>
+                                 </asTypeSpecifier>
+                              </then>
+                           </caseItem>
+                           <caseItem>
+                              <when xsi:type="Is">
+                                 <operand localId="99" locator="69:11-69:45" name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                       <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       <choice xsi:type="IntervalTypeSpecifier">
+                                          <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       </choice>
+                                       <choice name="fhir:Timing" xsi:type="NamedTypeSpecifier"/>
+                                       <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    </resultTypeSpecifier>
+                                    <operand path="effective" scope="MalnutritionRiskScreening" xsi:type="Property"/>
+                                 </operand>
+                                 <isTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </isTypeSpecifier>
+                              </when>
+                              <then xsi:type="As">
+                                 <operand xsi:type="As">
+                                    <operand localId="99" locator="69:11-69:45" name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                       <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                          <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                          <choice xsi:type="IntervalTypeSpecifier">
+                                             <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                          </choice>
+                                          <choice name="fhir:Timing" xsi:type="NamedTypeSpecifier"/>
+                                          <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       </resultTypeSpecifier>
+                                       <operand path="effective" scope="MalnutritionRiskScreening" xsi:type="Property"/>
+                                    </operand>
+                                    <asTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    </asTypeSpecifier>
+                                 </operand>
+                                 <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                    <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                    <choice xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    </choice>
+                                    <choice xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                    </choice>
+                                 </asTypeSpecifier>
+                              </then>
+                           </caseItem>
+                           <caseItem>
+                              <when isType="t:DateTime" xsi:type="Is">
+                                 <operand localId="99" locator="69:11-69:45" name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                       <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       <choice xsi:type="IntervalTypeSpecifier">
+                                          <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       </choice>
+                                       <choice name="fhir:Timing" xsi:type="NamedTypeSpecifier"/>
+                                       <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    </resultTypeSpecifier>
+                                    <operand path="effective" scope="MalnutritionRiskScreening" xsi:type="Property"/>
+                                 </operand>
+                              </when>
+                              <then xsi:type="As">
+                                 <operand asType="t:DateTime" xsi:type="As">
+                                    <operand localId="99" locator="69:11-69:45" name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                       <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                          <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                          <choice xsi:type="IntervalTypeSpecifier">
+                                             <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                          </choice>
+                                          <choice name="fhir:Timing" xsi:type="NamedTypeSpecifier"/>
+                                          <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       </resultTypeSpecifier>
+                                       <operand path="effective" scope="MalnutritionRiskScreening" xsi:type="Property"/>
+                                    </operand>
+                                 </operand>
+                                 <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                    <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                    <choice xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    </choice>
+                                    <choice xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                    </choice>
+                                 </asTypeSpecifier>
+                              </then>
+                           </caseItem>
+                           <else xsi:type="Null">
+                              <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                 <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                              </resultTypeSpecifier>
+                           </else>
+                        </operand>
+                     </operand>
+                     <operand localId="102" locator="69:69-69:130" name="hospitalizationWithObservation" libraryName="CQMCommon" xsi:type="FunctionRef">
+                        <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                           <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <operand localId="101" locator="69:69-69:95" resultTypeName="fhir:Encounter" name="GlobalMalnutritionEncounter" xsi:type="AliasRef"/>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand localId="117" locator="70:11-72:7" resultTypeName="t:Boolean" xsi:type="Or">
+                  <operand localId="110" locator="70:13-70:101" resultTypeName="t:Boolean" xsi:type="InValueSet">
+                     <code localId="108" locator="70:13-70:54" resultTypeName="t:Concept" strict="false" xsi:type="As">
+                        <operand localId="106" locator="70:13-70:43" name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                           <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                              <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="t:String" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+                              <choice xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                              </choice>
+                              <choice name="t:Ratio" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="fhir:SampledData" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="t:Time" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              <choice xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              </choice>
+                           </resultTypeSpecifier>
+                           <operand path="value" scope="MalnutritionRiskScreening" xsi:type="Property"/>
+                        </operand>
+                        <asTypeSpecifier localId="107" locator="70:48-70:54" resultTypeName="t:Concept" name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                     </code>
+                     <valueset localId="109" locator="70:59-70:101" resultTypeName="t:ValueSet" name="Malnutrition Screening Not At Risk Result" preserve="true"/>
+                  </operand>
+                  <operand localId="116" locator="71:14-71:98" resultTypeName="t:Boolean" xsi:type="InValueSet">
+                     <code localId="114" locator="71:14-71:55" resultTypeName="t:Concept" strict="false" xsi:type="As">
+                        <operand localId="112" locator="71:14-71:44" name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                           <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                              <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="t:String" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+                              <choice xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                              </choice>
+                              <choice name="t:Ratio" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="fhir:SampledData" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="t:Time" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              <choice xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              </choice>
+                           </resultTypeSpecifier>
+                           <operand path="value" scope="MalnutritionRiskScreening" xsi:type="Property"/>
+                        </operand>
+                        <asTypeSpecifier localId="113" locator="71:49-71:55" resultTypeName="t:Concept" name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                     </code>
+                     <valueset localId="115" locator="71:60-71:98" resultTypeName="t:ValueSet" name="Malnutrition Screening At Risk Result" preserve="true"/>
+                  </operand>
+               </operand>
+            </where>
+            <return localId="120" locator="73:5-73:38">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="119" locator="73:12-73:38" resultTypeName="fhir:Encounter" name="GlobalMalnutritionEncounter" xsi:type="AliasRef"/>
+            </return>
+         </expression>
+      </def>
+      <def localId="144" locator="75:1-82:38" name="Encounter with Hospital Dietitian Referral" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="144">
+               <a:s>define &quot;Encounter with Hospital Dietitian Referral&quot;:
+  </a:s>
+               <a:s r="143">
+                  <a:s>
+                     <a:s>from
+    </a:s>
+                     <a:s r="124">
+                        <a:s r="123">
+                           <a:s>
+                              <a:s>&quot;Global Malnutrition Encounter During Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> GlobalMalnutritionEncounter</a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="126">
+                        <a:s r="125">
+                           <a:s r="125">
+                              <a:s>[&quot;Procedure&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Hospital Dietitian Referral&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> HospitalDietitianReferral</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s>
+                     <a:s>let </a:s>
+                     <a:s r="129">
+                        <a:s>HospitalDietitianReferral: </a:s>
+                        <a:s r="128">
+                           <a:s r="127">
+                              <a:s>GlobalMalnutritionEncounter</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="128">
+                              <a:s>hospitalizationWithObservation ( )</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="140">
+                     <a:s>where </a:s>
+                     <a:s r="140">
+                        <a:s r="133">
+                           <a:s r="131">
+                              <a:s r="130">
+                                 <a:s>HospitalDietitianReferral</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="131">
+                                 <a:s>code</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> in </a:s>
+                           <a:s r="132">
+                              <a:s>&quot;Hospital Dietitian Referral&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      and </a:s>
+                        <a:s r="139">
+                           <a:s r="135">
+                              <a:s r="134">
+                                 <a:s>HospitalDietitianReferral</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="135">
+                                 <a:s>status</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> in </a:s>
+                           <a:s r="138">
+                              <a:s>{ </a:s>
+                              <a:s r="136">
+                                 <a:s>'active'</a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="137">
+                                 <a:s>'completed'</a:s>
+                              </a:s>
+                              <a:s> }</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="142">
+                     <a:s>return </a:s>
+                     <a:s r="141">
+                        <a:s>GlobalMalnutritionEncounter</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="143" locator="76:3-82:38" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="124" locator="77:5-77:89" alias="GlobalMalnutritionEncounter">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="123" locator="77:5-77:61" name="Global Malnutrition Encounter During Measurement Period" xsi:type="ExpressionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </expression>
+            </source>
+            <source localId="126" locator="78:5-78:74" alias="HospitalDietitianReferral">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="125" locator="78:5-78:48" dataType="fhir:Procedure" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <codes locator="78:19-78:47" resultTypeName="t:ValueSet" name="Hospital Dietitian Referral" preserve="true" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <let localId="129" locator="79:9-79:97" identifier="HospitalDietitianReferral">
+               <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                  <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="128" locator="79:36-79:97" name="hospitalizationWithObservation" libraryName="CQMCommon" xsi:type="FunctionRef">
+                  <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                     <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <operand localId="127" locator="79:36-79:62" resultTypeName="fhir:Encounter" name="GlobalMalnutritionEncounter" xsi:type="AliasRef"/>
+               </expression>
+            </let>
+            <where localId="140" locator="80:5-81:71" resultTypeName="t:Boolean" xsi:type="And">
+               <operand localId="133" locator="80:11-80:73" resultTypeName="t:Boolean" xsi:type="InValueSet">
+                  <code localId="131" locator="80:11-80:40" resultTypeName="t:Concept" name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                     <operand path="code" scope="HospitalDietitianReferral" xsi:type="Property"/>
+                  </code>
+                  <valueset localId="132" locator="80:45-80:73" resultTypeName="t:ValueSet" name="Hospital Dietitian Referral" preserve="true"/>
+               </operand>
+               <operand localId="139" locator="81:11-81:71" resultTypeName="t:Boolean" xsi:type="In">
+                  <operand localId="135" locator="81:11-81:42" resultTypeName="t:String" path="value" xsi:type="Property">
+                     <source path="status" scope="HospitalDietitianReferral" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="138" locator="81:47-81:71" xsi:type="List">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="t:String" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <element localId="136" locator="81:49-81:56" resultTypeName="t:String" valueType="t:String" value="active" xsi:type="Literal"/>
+                     <element localId="137" locator="81:59-81:69" resultTypeName="t:String" valueType="t:String" value="completed" xsi:type="Literal"/>
+                  </operand>
+               </operand>
+            </where>
+            <return localId="142" locator="82:5-82:38">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="141" locator="82:12-82:38" resultTypeName="fhir:Encounter" name="GlobalMalnutritionEncounter" xsi:type="AliasRef"/>
+            </return>
+         </expression>
+      </def>
+      <def localId="177" locator="84:1-93:38" name="Encounter with Nutrition Assessment and Identified Status" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="177">
+               <a:s>define &quot;Encounter with Nutrition Assessment and Identified Status&quot;:
+  </a:s>
+               <a:s r="176">
+                  <a:s>
+                     <a:s>from
+    </a:s>
+                     <a:s r="146">
+                        <a:s r="145">
+                           <a:s>
+                              <a:s>&quot;Global Malnutrition Encounter During Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> GlobalMalnutritionEncounter</a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="148">
+                        <a:s r="147">
+                           <a:s r="147">
+                              <a:s>[&quot;Observation&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Nutrition Assessment&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> NutritionAssessment</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="173">
+                     <a:s>where </a:s>
+                     <a:s r="173">
+                        <a:s r="152">
+                           <a:s r="150">
+                              <a:s r="149">
+                                 <a:s>NutritionAssessment</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="150">
+                                 <a:s>code</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> in </a:s>
+                           <a:s r="151">
+                              <a:s>&quot;Nutrition Assessment&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      and </a:s>
+                        <a:s r="172">
+                           <a:s>( </a:s>
+                           <a:s r="172">
+                              <a:s r="165">
+                                 <a:s r="158">
+                                    <a:s r="156">
+                                       <a:s r="154">
+                                          <a:s r="153">
+                                             <a:s>NutritionAssessment</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="154">
+                                             <a:s>value</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> as </a:s>
+                                       <a:s r="155">
+                                          <a:s>Concept</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> in </a:s>
+                                    <a:s r="157">
+                                       <a:s>&quot;Nutrition Assessment Status Moderately Malnourished&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+          or </a:s>
+                                 <a:s r="164">
+                                    <a:s r="162">
+                                       <a:s r="160">
+                                          <a:s r="159">
+                                             <a:s>NutritionAssessment</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="160">
+                                             <a:s>value</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> as </a:s>
+                                       <a:s r="161">
+                                          <a:s>Concept</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> in </a:s>
+                                    <a:s r="163">
+                                       <a:s>&quot;Nutrition Assessment Status Not or Mildly Malnourished&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+          or </a:s>
+                              <a:s r="171">
+                                 <a:s r="169">
+                                    <a:s r="167">
+                                       <a:s r="166">
+                                          <a:s>NutritionAssessment</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="167">
+                                          <a:s>value</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> as </a:s>
+                                    <a:s r="168">
+                                       <a:s>Concept</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> in </a:s>
+                                 <a:s r="170">
+                                    <a:s>&quot;Nutrition Assessment Status Severely Malnourished&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+      )</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="175">
+                     <a:s>return </a:s>
+                     <a:s r="174">
+                        <a:s>GlobalMalnutritionEncounter</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="176" locator="85:3-93:38" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="146" locator="86:5-86:89" alias="GlobalMalnutritionEncounter">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="145" locator="86:5-86:61" name="Global Malnutrition Encounter During Measurement Period" xsi:type="ExpressionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </expression>
+            </source>
+            <source localId="148" locator="87:5-87:63" alias="NutritionAssessment">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="147" locator="87:5-87:43" dataType="fhir:Observation" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <codes locator="87:21-87:42" resultTypeName="t:ValueSet" name="Nutrition Assessment" preserve="true" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <where localId="173" locator="88:5-92:7" resultTypeName="t:Boolean" xsi:type="And">
+               <operand localId="152" locator="88:11-88:60" resultTypeName="t:Boolean" xsi:type="InValueSet">
+                  <code localId="150" locator="88:11-88:34" resultTypeName="t:Concept" name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                     <operand path="code" scope="NutritionAssessment" xsi:type="Property"/>
+                  </code>
+                  <valueset localId="151" locator="88:39-88:60" resultTypeName="t:ValueSet" name="Nutrition Assessment" preserve="true"/>
+               </operand>
+               <operand localId="172" locator="89:11-92:7" resultTypeName="t:Boolean" xsi:type="Or">
+                  <operand localId="165" locator="89:13-90:109" resultTypeName="t:Boolean" xsi:type="Or">
+                     <operand localId="158" locator="89:13-89:105" resultTypeName="t:Boolean" xsi:type="InValueSet">
+                        <code localId="156" locator="89:13-89:48" resultTypeName="t:Concept" strict="false" xsi:type="As">
+                           <operand localId="154" locator="89:13-89:37" name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                              <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                 <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="t:String" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                                 <choice name="t:Ratio" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="fhir:SampledData" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="t:Time" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                              </resultTypeSpecifier>
+                              <operand path="value" scope="NutritionAssessment" xsi:type="Property"/>
+                           </operand>
+                           <asTypeSpecifier localId="155" locator="89:42-89:48" resultTypeName="t:Concept" name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                        </code>
+                        <valueset localId="157" locator="89:53-89:105" resultTypeName="t:ValueSet" name="Nutrition Assessment Status Moderately Malnourished" preserve="true"/>
+                     </operand>
+                     <operand localId="164" locator="90:14-90:109" resultTypeName="t:Boolean" xsi:type="InValueSet">
+                        <code localId="162" locator="90:14-90:49" resultTypeName="t:Concept" strict="false" xsi:type="As">
+                           <operand localId="160" locator="90:14-90:38" name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                              <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                                 <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="t:String" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                                 <choice name="t:Ratio" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="fhir:SampledData" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="t:Time" xsi:type="NamedTypeSpecifier"/>
+                                 <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 <choice xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </choice>
+                              </resultTypeSpecifier>
+                              <operand path="value" scope="NutritionAssessment" xsi:type="Property"/>
+                           </operand>
+                           <asTypeSpecifier localId="161" locator="90:43-90:49" resultTypeName="t:Concept" name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                        </code>
+                        <valueset localId="163" locator="90:54-90:109" resultTypeName="t:ValueSet" name="Nutrition Assessment Status Not or Mildly Malnourished" preserve="true"/>
+                     </operand>
+                  </operand>
+                  <operand localId="171" locator="91:14-91:104" resultTypeName="t:Boolean" xsi:type="InValueSet">
+                     <code localId="169" locator="91:14-91:49" resultTypeName="t:Concept" strict="false" xsi:type="As">
+                        <operand localId="167" locator="91:14-91:38" name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                           <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                              <choice name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="t:String" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+                              <choice xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                              </choice>
+                              <choice name="t:Ratio" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="fhir:SampledData" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="t:Time" xsi:type="NamedTypeSpecifier"/>
+                              <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              <choice xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              </choice>
+                           </resultTypeSpecifier>
+                           <operand path="value" scope="NutritionAssessment" xsi:type="Property"/>
+                        </operand>
+                        <asTypeSpecifier localId="168" locator="91:43-91:49" resultTypeName="t:Concept" name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                     </code>
+                     <valueset localId="170" locator="91:54-91:104" resultTypeName="t:ValueSet" name="Nutrition Assessment Status Severely Malnourished" preserve="true"/>
+                  </operand>
+               </operand>
+            </where>
+            <return localId="175" locator="93:5-93:38">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="174" locator="93:12-93:38" resultTypeName="fhir:Encounter" name="GlobalMalnutritionEncounter" xsi:type="AliasRef"/>
+            </return>
+         </expression>
+      </def>
+      <def localId="196" locator="103:1-108:5" name="Encounter with Malnutrition Diagnosis" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="196">
+               <a:s>/*AU2023 Known Issue Pending to include Malnutrition Risk Screening and At Risk Result OR Hospital Dietitan Referral
+                and MalnutritionRiskScreening.code in &quot;Malnutrition Risk Screening&quot;
+                    and MalnutritionRiskScreeningResult.value in &quot;Malnutrition Screening At Risk Result&quot;
+                or ( HospitalDietitianReferral.code in &quot;Hospital Dietitian Referral&quot;
+                    ) */
+//In building complex clause that include 'at risk' and 'not at risk', the implementer/reporting facility may not have separate risk results findings. This is the choice between implementer burden reduction and potential access to performance improvement data.define &quot;Encounter with Malnutrition Diagnosis&quot;:
+  </a:s>
+               <a:s r="195">
+                  <a:s>
+                     <a:s r="179">
+                        <a:s r="178">
+                           <a:s>
+                              <a:s>&quot;Global Malnutrition Encounter During Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> GlobalMalnutritionEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="194">
+                     <a:s>where </a:s>
+                     <a:s r="194">
+                        <a:s>exists </a:s>
+                        <a:s r="193">
+                           <a:s>( </a:s>
+                           <a:s r="193">
+                              <a:s>
+                                 <a:s r="182">
+                                    <a:s r="181">
+                                       <a:s>( </a:s>
+                                       <a:s r="181">
+                                          <a:s r="180">
+                                             <a:s>GlobalMalnutritionEncounter</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="181">
+                                             <a:s>encounterDiagnosis ( )</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> )</a:s>
+                                    </a:s>
+                                    <a:s> EncounterDiagnosis</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+        </a:s>
+                              <a:s r="192">
+                                 <a:s>where </a:s>
+                                 <a:s r="192">
+                                    <a:s r="186">
+                                       <a:s>( </a:s>
+                                       <a:s r="186">
+                                          <a:s r="184">
+                                             <a:s r="183">
+                                                <a:s>EncounterDiagnosis</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="184">
+                                                <a:s>code</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s> in </a:s>
+                                          <a:s r="185">
+                                             <a:s>&quot;Malnutrition Diagnosis&quot;</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> )</a:s>
+                                    </a:s>
+                                    <a:s>
+          and </a:s>
+                                    <a:s r="191">
+                                       <a:s r="188">
+                                          <a:s r="187">
+                                             <a:s>EncounterDiagnosis</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="188">
+                                             <a:s>prevalenceInterval ( )</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s r="191"> overlaps </a:s>
+                                       <a:s r="190">
+                                          <a:s r="189">
+                                             <a:s>GlobalMalnutritionEncounter</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="190">
+                                             <a:s>hospitalizationWithObservation ( )</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+    )</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="195" locator="104:3-108:5" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="179" locator="104:3-104:87" alias="GlobalMalnutritionEncounter">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="178" locator="104:3-104:59" name="Global Malnutrition Encounter During Measurement Period" xsi:type="ExpressionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </expression>
+            </source>
+            <where localId="194" locator="105:5-108:5" resultTypeName="t:Boolean" xsi:type="Exists">
+               <operand localId="193" locator="105:18-108:5" xsi:type="Query">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <source localId="182" locator="105:20-105:92" alias="EncounterDiagnosis">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <expression localId="181" locator="105:20-105:73" name="encounterDiagnosis" libraryName="CQMCommon" xsi:type="FunctionRef">
+                        <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <operand localId="180" locator="105:22-105:48" resultTypeName="fhir:Encounter" name="GlobalMalnutritionEncounter" xsi:type="AliasRef"/>
+                     </expression>
+                  </source>
+                  <where localId="192" locator="106:9-107:127" resultTypeName="t:Boolean" xsi:type="And">
+                     <operand localId="186" locator="106:15-106:69" resultTypeName="t:Boolean" xsi:type="InValueSet">
+                        <code localId="184" locator="106:17-106:39" resultTypeName="t:Concept" name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                           <operand path="code" scope="EncounterDiagnosis" xsi:type="Property"/>
+                        </code>
+                        <valueset localId="185" locator="106:44-106:67" resultTypeName="t:ValueSet" name="Malnutrition Diagnosis" preserve="true"/>
+                     </operand>
+                     <operand localId="191" locator="107:15-107:127" resultTypeName="t:Boolean" xsi:type="Overlaps">
+                        <operand localId="188" locator="107:15-107:55" name="prevalenceInterval" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                           <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                              <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <operand localId="187" locator="107:15-107:32" resultTypeName="fhir:Condition" name="EncounterDiagnosis" xsi:type="AliasRef"/>
+                        </operand>
+                        <operand localId="190" locator="107:66-107:127" name="hospitalizationWithObservation" libraryName="CQMCommon" xsi:type="FunctionRef">
+                           <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                              <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <operand localId="189" locator="107:66-107:92" resultTypeName="fhir:Encounter" name="GlobalMalnutritionEncounter" xsi:type="AliasRef"/>
+                        </operand>
+                     </operand>
+                  </where>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="221" locator="118:1-126:38" name="Encounter with Nutrition Care Plan" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="221">
+               <a:s>//            and NutritionAssessment.code in &quot;Nutrition Assessment&quot;
+//            and ( NutritionAssessment.value as Concept in &quot;Nutrition Assessment Status Moderately Malnourished&quot;
+//                or NutritionAssessment.value as Concept in &quot;Nutrition Assessment Status Severely Malnourished&quot; )
+//In building complex clause that include 'not/mildly', 'moderately', and 'severely' malnourished, the implementer/reporting facility may not have separate status findings. This is the choice between implementer burden reduction and potential access to performance improvement data.
+define &quot;Encounter with Nutrition Care Plan&quot;:
+  </a:s>
+               <a:s r="220">
+                  <a:s>
+                     <a:s>from
+    </a:s>
+                     <a:s r="198">
+                        <a:s r="197">
+                           <a:s>
+                              <a:s>&quot;Global Malnutrition Encounter During Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> GlobalMalnutritionEncounter</a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="200">
+                        <a:s r="199">
+                           <a:s r="199">
+                              <a:s>[&quot;Procedure&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Nutrition Care Plan&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> NutritionCarePlan</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s>
+                     <a:s>let </a:s>
+                     <a:s r="203">
+                        <a:s>NutritionCarePlan: </a:s>
+                        <a:s r="202">
+                           <a:s r="201">
+                              <a:s>GlobalMalnutritionEncounter</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="202">
+                              <a:s>hospitalizationWithObservation ( )</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="207">
+                        <a:s>NutritionCarePlanStart: </a:s>
+                        <a:s r="206">
+                           <a:s r="205">
+                              <a:s r="204">
+                                 <a:s>NutritionCarePlan</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="205">
+                                 <a:s>performed</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="206">
+                              <a:s>earliest ( )</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="217">
+                     <a:s>where </a:s>
+                     <a:s r="217">
+                        <a:s r="211">
+                           <a:s r="209">
+                              <a:s r="208">
+                                 <a:s>NutritionCarePlan</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="209">
+                                 <a:s>code</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> in </a:s>
+                           <a:s r="210">
+                              <a:s>&quot;Nutrition Care Plan&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      and </a:s>
+                        <a:s r="216">
+                           <a:s r="213">
+                              <a:s r="212">
+                                 <a:s>NutritionCarePlan</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="213">
+                                 <a:s>status</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> in </a:s>
+                           <a:s r="215">
+                              <a:s>{ </a:s>
+                              <a:s r="214">
+                                 <a:s>'completed'</a:s>
+                              </a:s>
+                              <a:s> }</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="219">
+                     <a:s>return </a:s>
+                     <a:s r="218">
+                        <a:s>GlobalMalnutritionEncounter</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <expression localId="220" locator="119:3-126:38" xsi:type="Query">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <source localId="198" locator="120:5-120:89" alias="GlobalMalnutritionEncounter">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="197" locator="120:5-120:61" name="Global Malnutrition Encounter During Measurement Period" xsi:type="ExpressionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </expression>
+            </source>
+            <source localId="200" locator="121:5-121:58" alias="NutritionCarePlan">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="199" locator="121:5-121:40" dataType="fhir:Procedure" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <codes locator="121:19-121:39" resultTypeName="t:ValueSet" name="Nutrition Care Plan" preserve="true" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <let localId="203" locator="122:9-122:89" identifier="NutritionCarePlan">
+               <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                  <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="202" locator="122:28-122:89" name="hospitalizationWithObservation" libraryName="CQMCommon" xsi:type="FunctionRef">
+                  <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                     <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <operand localId="201" locator="122:28-122:54" resultTypeName="fhir:Encounter" name="GlobalMalnutritionEncounter" xsi:type="AliasRef"/>
+               </expression>
+            </let>
+            <let localId="207" locator="123:5-123:68" resultTypeName="t:DateTime" identifier="NutritionCarePlanStart">
+               <expression localId="206" locator="123:29-123:68" resultTypeName="t:DateTime" name="earliest" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                  <operand localId="205" locator="123:29-123:55" name="ToValue" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                     <resultTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                        <choice name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        <choice xsi:type="IntervalTypeSpecifier">
+                           <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        </choice>
+                     </resultTypeSpecifier>
+                     <operand path="performed" scope="NutritionCarePlan" xsi:type="Property"/>
+                  </operand>
+               </expression>
+            </let>
+            <where localId="217" locator="124:5-125:53" resultTypeName="t:Boolean" xsi:type="And">
+               <operand localId="211" locator="124:11-124:57" resultTypeName="t:Boolean" xsi:type="InValueSet">
+                  <code localId="209" locator="124:11-124:32" resultTypeName="t:Concept" name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                     <operand path="code" scope="NutritionCarePlan" xsi:type="Property"/>
+                  </code>
+                  <valueset localId="210" locator="124:37-124:57" resultTypeName="t:ValueSet" name="Nutrition Care Plan" preserve="true"/>
+               </operand>
+               <operand localId="216" locator="125:11-125:53" resultTypeName="t:Boolean" xsi:type="In">
+                  <operand localId="213" locator="125:11-125:34" resultTypeName="t:String" path="value" xsi:type="Property">
+                     <source path="status" scope="NutritionCarePlan" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="215" locator="125:39-125:53" xsi:type="List">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="t:String" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <element localId="214" locator="125:41-125:51" resultTypeName="t:String" valueType="t:String" value="completed" xsi:type="Literal"/>
+                  </operand>
+               </operand>
+            </where>
+            <return localId="219" locator="126:5-126:38">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <expression localId="218" locator="126:12-126:38" resultTypeName="fhir:Encounter" name="GlobalMalnutritionEncounter" xsi:type="AliasRef"/>
+            </return>
+         </expression>
+      </def>
+      <def localId="229" locator="134:1-136:10" resultTypeName="t:Integer" name="Measure Observation 1" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="229">
+               <a:s>//            and NutritionAssessment.code in &quot;Nutrition Assessment&quot;
+//            and ( NutritionAssessment.value as Concept in &quot;Nutrition Assessment Status Moderately Malnourished&quot;
+//                or NutritionAssessment.value as Concept in &quot;Nutrition Assessment Status Severely Malnourished&quot; )
+define function &quot;Measure Observation 1&quot;(MalnutritionRiskScreening </a:s>
+               <a:s r="222">
+                  <a:s>Encounter</a:s>
+               </a:s>
+               <a:s>):
+  </a:s>
+               <a:s r="228">
+                  <a:s r="228">
+                     <a:s>if </a:s>
+                     <a:s r="225">
+                        <a:s r="223">
+                           <a:s>MalnutritionRiskScreening</a:s>
+                        </a:s>
+                        <a:s> in </a:s>
+                        <a:s r="224">
+                           <a:s>&quot;Encounter with Malnutrition Risk Screening and Identified Result&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s r="226"> then 1 
+    else 0</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="228" locator="135:3-136:10" resultTypeName="t:Integer" xsi:type="If">
+            <condition localId="225" locator="135:6-135:100" resultTypeName="t:Boolean" xsi:type="In">
+               <operand localId="223" locator="135:6-135:30" resultTypeName="fhir:Encounter" name="MalnutritionRiskScreening" xsi:type="OperandRef"/>
+               <operand localId="224" locator="135:35-135:100" name="Encounter with Malnutrition Risk Screening and Identified Result" xsi:type="ExpressionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </operand>
+            </condition>
+            <then localId="226" locator="135:107" resultTypeName="t:Integer" valueType="t:Integer" value="1" xsi:type="Literal"/>
+            <else localId="227" locator="136:10" resultTypeName="t:Integer" valueType="t:Integer" value="0" xsi:type="Literal"/>
+         </expression>
+         <operand name="MalnutritionRiskScreening">
+            <operandTypeSpecifier localId="222" locator="134:67-134:75" resultTypeName="fhir:Encounter" name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+      </def>
+      <def localId="237" locator="140:1-142:10" resultTypeName="t:Integer" name="Measure Observation 2" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="237">
+               <a:s>//null 0
+define function &quot;Measure Observation 2&quot;(NutritionAssessment </a:s>
+               <a:s r="230">
+                  <a:s>Encounter</a:s>
+               </a:s>
+               <a:s>):
+  </a:s>
+               <a:s r="236">
+                  <a:s r="236">
+                     <a:s>if </a:s>
+                     <a:s r="233">
+                        <a:s r="231">
+                           <a:s>NutritionAssessment</a:s>
+                        </a:s>
+                        <a:s> in </a:s>
+                        <a:s r="232">
+                           <a:s>&quot;Encounter with Nutrition Assessment and Identified Status&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s r="234"> then 1 
+    else 0</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="236" locator="141:3-142:10" resultTypeName="t:Integer" xsi:type="If">
+            <condition localId="233" locator="141:6-141:87" resultTypeName="t:Boolean" xsi:type="In">
+               <operand localId="231" locator="141:6-141:24" resultTypeName="fhir:Encounter" name="NutritionAssessment" xsi:type="OperandRef"/>
+               <operand localId="232" locator="141:29-141:87" name="Encounter with Nutrition Assessment and Identified Status" xsi:type="ExpressionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </operand>
+            </condition>
+            <then localId="234" locator="141:94" resultTypeName="t:Integer" valueType="t:Integer" value="1" xsi:type="Literal"/>
+            <else localId="235" locator="142:10" resultTypeName="t:Integer" valueType="t:Integer" value="0" xsi:type="Literal"/>
+         </expression>
+         <operand name="NutritionAssessment">
+            <operandTypeSpecifier localId="230" locator="140:61-140:69" resultTypeName="fhir:Encounter" name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+      </def>
+      <def localId="245" locator="146:1-148:10" resultTypeName="t:Integer" name="Measure Observation 3" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="245">
+               <a:s>//null 0
+define function &quot;Measure Observation 3&quot;(MalnutritionDiagnosis </a:s>
+               <a:s r="238">
+                  <a:s>Encounter</a:s>
+               </a:s>
+               <a:s>):
+  </a:s>
+               <a:s r="244">
+                  <a:s r="244">
+                     <a:s>if </a:s>
+                     <a:s r="241">
+                        <a:s r="239">
+                           <a:s>MalnutritionDiagnosis</a:s>
+                        </a:s>
+                        <a:s> in </a:s>
+                        <a:s r="240">
+                           <a:s>&quot;Encounter with Malnutrition Diagnosis&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s r="242"> then 1 
+    else 0</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="244" locator="147:3-148:10" resultTypeName="t:Integer" xsi:type="If">
+            <condition localId="241" locator="147:6-147:69" resultTypeName="t:Boolean" xsi:type="In">
+               <operand localId="239" locator="147:6-147:26" resultTypeName="fhir:Encounter" name="MalnutritionDiagnosis" xsi:type="OperandRef"/>
+               <operand localId="240" locator="147:31-147:69" name="Encounter with Malnutrition Diagnosis" xsi:type="ExpressionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </operand>
+            </condition>
+            <then localId="242" locator="147:76" resultTypeName="t:Integer" valueType="t:Integer" value="1" xsi:type="Literal"/>
+            <else localId="243" locator="148:10" resultTypeName="t:Integer" valueType="t:Integer" value="0" xsi:type="Literal"/>
+         </expression>
+         <operand name="MalnutritionDiagnosis">
+            <operandTypeSpecifier localId="238" locator="146:63-146:71" resultTypeName="fhir:Encounter" name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+      </def>
+      <def localId="253" locator="152:1-154:10" resultTypeName="t:Integer" name="Measure Observation 4" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="253">
+               <a:s>//null 0
+define function &quot;Measure Observation 4&quot;(NutritionCarePlan </a:s>
+               <a:s r="246">
+                  <a:s>Encounter</a:s>
+               </a:s>
+               <a:s>):
+  </a:s>
+               <a:s r="252">
+                  <a:s r="252">
+                     <a:s>if </a:s>
+                     <a:s r="249">
+                        <a:s r="247">
+                           <a:s>NutritionCarePlan</a:s>
+                        </a:s>
+                        <a:s> in </a:s>
+                        <a:s r="248">
+                           <a:s>&quot;Encounter with Nutrition Care Plan&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s r="250"> then 1 
+    else 0</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="252" locator="153:3-154:10" resultTypeName="t:Integer" xsi:type="If">
+            <condition localId="249" locator="153:6-153:62" resultTypeName="t:Boolean" xsi:type="In">
+               <operand localId="247" locator="153:6-153:22" resultTypeName="fhir:Encounter" name="NutritionCarePlan" xsi:type="OperandRef"/>
+               <operand localId="248" locator="153:27-153:62" name="Encounter with Nutrition Care Plan" xsi:type="ExpressionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </operand>
+            </condition>
+            <then localId="250" locator="153:69" resultTypeName="t:Integer" valueType="t:Integer" value="1" xsi:type="Literal"/>
+            <else localId="251" locator="154:10" resultTypeName="t:Integer" valueType="t:Integer" value="0" xsi:type="Literal"/>
+         </expression>
+         <operand name="NutritionCarePlan">
+            <operandTypeSpecifier localId="246" locator="152:59-152:67" resultTypeName="fhir:Encounter" name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+      </def>
+      <def localId="265" locator="158:1-159:193" resultTypeName="t:Integer" name="Measure Observation TotalMalnutritionComponentsScore" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="265">
+               <a:s>//null 0
+define function &quot;Measure Observation TotalMalnutritionComponentsScore&quot;(QualifyingEncounter </a:s>
+               <a:s r="254">
+                  <a:s>Encounter</a:s>
+               </a:s>
+               <a:s>):
+  </a:s>
+               <a:s r="264">
+                  <a:s r="264">
+                     <a:s>Sum(</a:s>
+                     <a:s r="263">
+                        <a:s>{ </a:s>
+                        <a:s r="256">
+                           <a:s>&quot;Measure Observation 1&quot;(</a:s>
+                           <a:s r="255">
+                              <a:s>QualifyingEncounter</a:s>
+                           </a:s>
+                           <a:s>)</a:s>
+                        </a:s>
+                        <a:s>, </a:s>
+                        <a:s r="258">
+                           <a:s>&quot;Measure Observation 2&quot;(</a:s>
+                           <a:s r="257">
+                              <a:s>QualifyingEncounter</a:s>
+                           </a:s>
+                           <a:s>)</a:s>
+                        </a:s>
+                        <a:s>, </a:s>
+                        <a:s r="260">
+                           <a:s>&quot;Measure Observation 3&quot;(</a:s>
+                           <a:s r="259">
+                              <a:s>QualifyingEncounter</a:s>
+                           </a:s>
+                           <a:s>)</a:s>
+                        </a:s>
+                        <a:s>, </a:s>
+                        <a:s r="262">
+                           <a:s>&quot;Measure Observation 4&quot;(</a:s>
+                           <a:s r="261">
+                              <a:s>QualifyingEncounter</a:s>
+                           </a:s>
+                           <a:s>)</a:s>
+                        </a:s>
+                        <a:s> }</a:s>
+                     </a:s>
+                     <a:s>)</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="264" locator="159:3-159:193" resultTypeName="t:Integer" xsi:type="Sum">
+            <source localId="263" locator="159:7-159:192" xsi:type="List">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <element localId="256" locator="159:9-159:52" resultTypeName="t:Integer" name="Measure Observation 1" xsi:type="FunctionRef">
+                  <operand localId="255" locator="159:33-159:51" resultTypeName="fhir:Encounter" name="QualifyingEncounter" xsi:type="OperandRef"/>
+               </element>
+               <element localId="258" locator="159:55-159:98" resultTypeName="t:Integer" name="Measure Observation 2" xsi:type="FunctionRef">
+                  <operand localId="257" locator="159:79-159:97" resultTypeName="fhir:Encounter" name="QualifyingEncounter" xsi:type="OperandRef"/>
+               </element>
+               <element localId="260" locator="159:101-159:144" resultTypeName="t:Integer" name="Measure Observation 3" xsi:type="FunctionRef">
+                  <operand localId="259" locator="159:125-159:143" resultTypeName="fhir:Encounter" name="QualifyingEncounter" xsi:type="OperandRef"/>
+               </element>
+               <element localId="262" locator="159:147-159:190" resultTypeName="t:Integer" name="Measure Observation 4" xsi:type="FunctionRef">
+                  <operand localId="261" locator="159:171-159:189" resultTypeName="fhir:Encounter" name="QualifyingEncounter" xsi:type="OperandRef"/>
+               </element>
+            </source>
+         </expression>
+         <operand name="QualifyingEncounter">
+            <operandTypeSpecifier localId="254" locator="158:92-158:100" resultTypeName="fhir:Encounter" name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+      </def>
+      <def localId="288" locator="164:1-173:10" resultTypeName="t:Integer" name="TotalMalnutritionCompositeScore Eligible Denominators" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="288">
+               <a:s>define function &quot;TotalMalnutritionCompositeScore Eligible Denominators&quot;(QualifyingEncounter </a:s>
+               <a:s r="271">
+                  <a:s>Encounter</a:s>
+               </a:s>
+               <a:s>):
+  </a:s>
+               <a:s r="287">
+                  <a:s r="287">
+                     <a:s>if </a:s>
+                     <a:s r="279">
+                        <a:s>( </a:s>
+                        <a:s r="279">
+                           <a:s r="274">
+                              <a:s>( </a:s>
+                              <a:s r="274">
+                                 <a:s r="272">
+                                    <a:s>&quot;Encounter with Malnutrition Risk Screening and Identified Result&quot;</a:s>
+                                 </a:s>
+                                 <a:s> contains </a:s>
+                                 <a:s r="273">
+                                    <a:s>QualifyingEncounter</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+//        and &quot;Encounter with Malnutrition Screening Not At Risk Result&quot; contains QualifyingEncounter)  )
+    )</a:s>
+                           </a:s>
+                           <a:s>
+      and </a:s>
+                           <a:s r="278">
+                              <a:s>not </a:s>
+                              <a:s r="277">
+                                 <a:s>( </a:s>
+                                 <a:s r="277">
+                                    <a:s r="275">
+                                       <a:s>&quot;Encounter with Hospital Dietitian Referral&quot;</a:s>
+                                    </a:s>
+                                    <a:s> contains </a:s>
+                                    <a:s r="276">
+                                       <a:s>QualifyingEncounter</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+  )</a:s>
+                     </a:s>
+                     <a:s r="280"> then 1 
+    else </a:s>
+                     <a:s r="286">
+                        <a:s>if </a:s>
+                        <a:s r="283">
+                           <a:s>( </a:s>
+                           <a:s r="283">
+                              <a:s r="281">
+                                 <a:s>&quot;Encounter with Nutrition Assessment and Identified Status&quot;</a:s>
+                              </a:s>
+                              <a:s> contains </a:s>
+                              <a:s r="282">
+                                 <a:s>QualifyingEncounter</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+//      and &quot;Encounter with Nutrition Assessment Status Not or Mildly Malnourished&quot; contains QualifyingEncounter
+  )</a:s>
+                        </a:s>
+                        <a:s r="284"> then 2 
+    else 4</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="287" locator="165:3-173:10" resultTypeName="t:Integer" xsi:type="If">
+            <condition localId="279" locator="165:6-169:3" resultTypeName="t:Boolean" xsi:type="And">
+               <operand localId="274" locator="165:8-167:5" resultTypeName="t:Boolean" xsi:type="Contains">
+                  <operand localId="272" locator="165:10-165:75" name="Encounter with Malnutrition Risk Screening and Identified Result" xsi:type="ExpressionRef">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                  </operand>
+                  <operand localId="273" locator="165:86-165:104" resultTypeName="fhir:Encounter" name="QualifyingEncounter" xsi:type="OperandRef"/>
+               </operand>
+               <operand localId="278" locator="168:11-168:91" resultTypeName="t:Boolean" xsi:type="Not">
+                  <operand localId="277" locator="168:15-168:91" resultTypeName="t:Boolean" xsi:type="Contains">
+                     <operand localId="275" locator="168:17-168:60" name="Encounter with Hospital Dietitian Referral" xsi:type="ExpressionRef">
+                        <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                     </operand>
+                     <operand localId="276" locator="168:71-168:89" resultTypeName="fhir:Encounter" name="QualifyingEncounter" xsi:type="OperandRef"/>
+                  </operand>
+               </operand>
+            </condition>
+            <then localId="280" locator="169:10" resultTypeName="t:Integer" valueType="t:Integer" value="1" xsi:type="Literal"/>
+            <else localId="286" locator="170:10-173:10" resultTypeName="t:Integer" xsi:type="If">
+               <condition localId="283" locator="170:13-172:3" resultTypeName="t:Boolean" xsi:type="Contains">
+                  <operand localId="281" locator="170:15-170:73" name="Encounter with Nutrition Assessment and Identified Status" xsi:type="ExpressionRef">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                  </operand>
+                  <operand localId="282" locator="170:84-170:102" resultTypeName="fhir:Encounter" name="QualifyingEncounter" xsi:type="OperandRef"/>
+               </condition>
+               <then localId="284" locator="172:10" resultTypeName="t:Integer" valueType="t:Integer" value="2" xsi:type="Literal"/>
+               <else localId="285" locator="173:10" resultTypeName="t:Integer" valueType="t:Integer" value="4" xsi:type="Literal"/>
+            </else>
+         </expression>
+         <operand name="QualifyingEncounter">
+            <operandTypeSpecifier localId="271" locator="164:93-164:101" resultTypeName="fhir:Encounter" name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+      </def>
+      <def localId="292" locator="161:1-162:166" resultTypeName="t:Decimal" name="Measure Observation TotalMalnutritionCompositeScore as Percentage" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="292">
+               <a:s>define function &quot;Measure Observation TotalMalnutritionCompositeScore as Percentage&quot;(QualifyingEncounter </a:s>
+               <a:s r="266">
+                  <a:s>Encounter</a:s>
+               </a:s>
+               <a:s>):
+  </a:s>
+               <a:s r="291">
+                  <a:s r="291">
+                     <a:s r="267">100 * </a:s>
+                     <a:s r="290">
+                        <a:s>( </a:s>
+                        <a:s r="290">
+                           <a:s r="269">
+                              <a:s>&quot;Measure Observation TotalMalnutritionComponentsScore&quot;(</a:s>
+                              <a:s r="268">
+                                 <a:s>QualifyingEncounter</a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                           <a:s> / </a:s>
+                           <a:s r="289">
+                              <a:s>&quot;TotalMalnutritionCompositeScore Eligible Denominators&quot;(</a:s>
+                              <a:s r="270">
+                                 <a:s>QualifyingEncounter</a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> )</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="291" locator="162:3-162:166" resultTypeName="t:Decimal" xsi:type="Multiply">
+            <operand xsi:type="ToDecimal">
+               <operand localId="267" locator="162:3-162:5" resultTypeName="t:Integer" valueType="t:Integer" value="100" xsi:type="Literal"/>
+            </operand>
+            <operand localId="290" locator="162:9-162:166" resultTypeName="t:Decimal" xsi:type="Divide">
+               <operand xsi:type="ToDecimal">
+                  <operand localId="269" locator="162:11-162:85" resultTypeName="t:Integer" name="Measure Observation TotalMalnutritionComponentsScore" xsi:type="FunctionRef">
+                     <operand localId="268" locator="162:66-162:84" resultTypeName="fhir:Encounter" name="QualifyingEncounter" xsi:type="OperandRef"/>
+                  </operand>
+               </operand>
+               <operand xsi:type="ToDecimal">
+                  <operand localId="289" locator="162:89-162:164" resultTypeName="t:Integer" name="TotalMalnutritionCompositeScore Eligible Denominators" xsi:type="FunctionRef">
+                     <operand localId="270" locator="162:145-162:163" resultTypeName="fhir:Encounter" name="QualifyingEncounter" xsi:type="OperandRef"/>
+                  </operand>
+               </operand>
+            </operand>
+         </expression>
+         <operand name="QualifyingEncounter">
+            <operandTypeSpecifier localId="266" locator="161:105-161:113" resultTypeName="fhir:Encounter" name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+      </def>
+   </statements>
+</library>

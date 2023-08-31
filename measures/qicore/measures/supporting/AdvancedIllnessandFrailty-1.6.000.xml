@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
-   <annotation translatorOptions="EnableAnnotations,EnableLocators,EnableResultTypes" xsi:type="a:CqlToElmInfo"/>
-   <annotation libraryId="AdvancedIllnessandFrailty" libraryVersion="1.6.000" startLine="55" startChar="14" endLine="55" endChar="46" message="Could not resolve code path codeCodeableConcept for the type of the retrieve QICore.DeviceRequest." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation libraryId="AdvancedIllnessandFrailty" libraryVersion="1.6.000" startLine="55" startChar="14" endLine="55" endChar="46" message="Could not resolve membership operator for terminology target of the retrieve." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation translatorVersion="2.10.0" translatorOptions="EnableAnnotations,EnableLocators,EnableResultTypes" xsi:type="a:CqlToElmInfo"/>
    <annotation xsi:type="a:Annotation">
       <a:s r="261">
          <a:s>library AdvancedIllnessandFrailty version '1.6.000'</a:s>
@@ -623,11 +621,19 @@
                                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
                                     <elementType name="fhir:DeviceRequest" xsi:type="NamedTypeSpecifier"/>
                                  </resultTypeSpecifier>
-                                 <operand localId="35" locator="55:13-55:47" dataType="fhir:DeviceRequest" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-devicerequest" codeProperty="codeCodeableConcept" codeComparator="in" xsi:type="Retrieve">
+                                 <operand localId="35" locator="55:13-55:47" xsi:type="Union">
                                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
                                        <elementType name="fhir:DeviceRequest" xsi:type="NamedTypeSpecifier"/>
                                     </resultTypeSpecifier>
-                                    <codes locator="55:30-55:45" resultTypeName="t:ValueSet" name="Frailty Device" preserve="true" xsi:type="ValueSetRef"/>
+                                    <operand dataType="fhir:DeviceRequest" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-devicerequest" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                                       <codes locator="55:30-55:45" resultTypeName="t:ValueSet" name="Frailty Device" preserve="true" xsi:type="ValueSetRef"/>
+                                    </operand>
+                                    <operand locator="55:14-55:46" dataType="fhir:DeviceRequest" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-devicerequest" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                                       <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                          <elementType name="fhir:DeviceRequest" xsi:type="NamedTypeSpecifier"/>
+                                       </resultTypeSpecifier>
+                                       <codes locator="55:30-55:45" resultTypeName="t:ValueSet" name="Frailty Device" preserve="true" xsi:type="ValueSetRef"/>
+                                    </operand>
                                  </operand>
                               </expression>
                            </source>
@@ -1360,20 +1366,27 @@
             </source>
             <where localId="131" locator="87:7-89:36" resultTypeName="t:Boolean" xsi:type="And">
                <operand localId="119" locator="87:13-87:116" resultTypeName="t:Boolean" xsi:type="Exists">
-                  <operand xsi:type="ToList">
-                     <operand localId="118" locator="87:20-87:116" resultTypeName="fhir:Condition" xsi:type="Query">
-                        <source localId="113" locator="87:21-87:72" resultTypeName="fhir:Condition" alias="Diagnosis">
-                           <expression localId="112" locator="87:21-87:62" resultTypeName="fhir:Condition" name="encounterDiagnosis" libraryName="Global" xsi:type="FunctionRef">
-                              <operand localId="111" locator="87:22-87:40" resultTypeName="fhir:Encounter" name="OutpatientEncounter" xsi:type="AliasRef"/>
-                           </expression>
-                        </source>
-                        <where localId="117" locator="87:74-87:115" resultTypeName="t:Boolean" xsi:type="InValueSet">
-                           <code localId="115" locator="87:80-87:93" resultTypeName="t:Concept" name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                              <operand path="code" scope="Diagnosis" xsi:type="Property"/>
-                           </code>
-                           <valueset localId="116" locator="87:98-87:115" resultTypeName="t:ValueSet" name="Advanced Illness" preserve="true"/>
-                        </where>
-                     </operand>
+                  <operand localId="118" locator="87:20-87:116" xsi:type="Query">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <source localId="113" locator="87:21-87:72" alias="Diagnosis">
+                        <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <expression localId="112" locator="87:21-87:62" name="encounterDiagnosis" libraryName="Global" xsi:type="FunctionRef">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <operand localId="111" locator="87:22-87:40" resultTypeName="fhir:Encounter" name="OutpatientEncounter" xsi:type="AliasRef"/>
+                        </expression>
+                     </source>
+                     <where localId="117" locator="87:74-87:115" resultTypeName="t:Boolean" xsi:type="InValueSet">
+                        <code localId="115" locator="87:80-87:93" resultTypeName="t:Concept" name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                           <operand path="code" scope="Diagnosis" xsi:type="Property"/>
+                        </code>
+                        <valueset localId="116" locator="87:98-87:115" resultTypeName="t:ValueSet" name="Advanced Illness" preserve="true"/>
+                     </where>
                   </operand>
                </operand>
                <operand localId="130" locator="88:13-89:36" resultTypeName="t:Boolean" precision="Day" xsi:type="In">
@@ -1731,20 +1744,27 @@
                </source>
                <where localId="174" locator="93:7-95:38" resultTypeName="t:Boolean" xsi:type="And">
                   <operand localId="162" locator="93:13-93:115" resultTypeName="t:Boolean" xsi:type="Exists">
-                     <operand xsi:type="ToList">
-                        <operand localId="161" locator="93:20-93:115" resultTypeName="fhir:Condition" xsi:type="Query">
-                           <source localId="156" locator="93:21-93:71" resultTypeName="fhir:Condition" alias="Diagnosis">
-                              <expression localId="155" locator="93:21-93:61" resultTypeName="fhir:Condition" name="encounterDiagnosis" libraryName="Global" xsi:type="FunctionRef">
-                                 <operand localId="154" locator="93:22-93:39" resultTypeName="fhir:Encounter" name="InpatientEncounter" xsi:type="AliasRef"/>
-                              </expression>
-                           </source>
-                           <where localId="160" locator="93:73-93:114" resultTypeName="t:Boolean" xsi:type="InValueSet">
-                              <code localId="158" locator="93:79-93:92" resultTypeName="t:Concept" name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                                 <operand path="code" scope="Diagnosis" xsi:type="Property"/>
-                              </code>
-                              <valueset localId="159" locator="93:97-93:114" resultTypeName="t:ValueSet" name="Advanced Illness" preserve="true"/>
-                           </where>
-                        </operand>
+                     <operand localId="161" locator="93:20-93:115" xsi:type="Query">
+                        <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <source localId="156" locator="93:21-93:71" alias="Diagnosis">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <expression localId="155" locator="93:21-93:61" name="encounterDiagnosis" libraryName="Global" xsi:type="FunctionRef">
+                              <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                 <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                              <operand localId="154" locator="93:22-93:39" resultTypeName="fhir:Encounter" name="InpatientEncounter" xsi:type="AliasRef"/>
+                           </expression>
+                        </source>
+                        <where localId="160" locator="93:73-93:114" resultTypeName="t:Boolean" xsi:type="InValueSet">
+                           <code localId="158" locator="93:79-93:92" resultTypeName="t:Concept" name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                              <operand path="code" scope="Diagnosis" xsi:type="Property"/>
+                           </code>
+                           <valueset localId="159" locator="93:97-93:114" resultTypeName="t:ValueSet" name="Advanced Illness" preserve="true"/>
+                        </where>
                      </operand>
                   </operand>
                   <operand localId="173" locator="94:13-95:38" resultTypeName="t:Boolean" precision="Day" xsi:type="In">
@@ -1917,11 +1937,19 @@
                      <resultTypeSpecifier xsi:type="ListTypeSpecifier">
                         <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
                      </resultTypeSpecifier>
-                     <operand localId="180" locator="99:13-99:57" dataType="fhir:MedicationRequest" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest" codeProperty="medication" codeComparator="in" xsi:type="Retrieve">
+                     <operand localId="180" locator="99:13-99:57" xsi:type="Union">
                         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
                            <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
                         </resultTypeSpecifier>
-                        <codes locator="99:34-99:55" resultTypeName="t:ValueSet" name="Dementia Medications" preserve="true" xsi:type="ValueSetRef"/>
+                        <operand dataType="fhir:MedicationRequest" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest" codeProperty="medication" codeComparator="in" xsi:type="Retrieve">
+                           <codes locator="99:34-99:55" resultTypeName="t:ValueSet" name="Dementia Medications" preserve="true" xsi:type="ValueSetRef"/>
+                        </operand>
+                        <operand locator="99:14-99:56" dataType="fhir:MedicationRequest" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest" codeProperty="medication" codeComparator="in" xsi:type="Retrieve">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <codes locator="99:34-99:55" resultTypeName="t:ValueSet" name="Dementia Medications" preserve="true" xsi:type="ValueSetRef"/>
+                        </operand>
                      </operand>
                   </expression>
                </source>
@@ -2059,8 +2087,10 @@
             <operand localId="100" locator="35:4-36:41" resultTypeName="t:Boolean" xsi:type="And">
                <operand localId="34" locator="35:4-35:59" resultTypeName="t:Boolean" xsi:type="GreaterOrEqual">
                   <operand localId="32" locator="35:4-35:54" resultTypeName="t:Integer" precision="Year" xsi:type="CalculateAgeAt">
-                     <operand path="birthDate" xsi:type="Property">
-                        <source name="Patient" xsi:type="ExpressionRef"/>
+                     <operand path="value" xsi:type="Property">
+                        <source path="birthDate" xsi:type="Property">
+                           <source name="Patient" xsi:type="ExpressionRef"/>
+                        </source>
                      </operand>
                      <operand localId="31" locator="35:17-35:53" resultTypeName="t:Date" xsi:type="DateFrom">
                         <operand localId="30" locator="35:27-35:53" resultTypeName="t:DateTime" xsi:type="End">
@@ -2186,8 +2216,10 @@
                <operand localId="214" locator="43:5-44:43" resultTypeName="t:Boolean" xsi:type="And">
                   <operand localId="212" locator="43:5-43:74" resultTypeName="t:Boolean" xsi:type="In">
                      <operand localId="208" locator="43:5-43:55" resultTypeName="t:Integer" precision="Year" xsi:type="CalculateAgeAt">
-                        <operand path="birthDate" xsi:type="Property">
-                           <source name="Patient" xsi:type="ExpressionRef"/>
+                        <operand path="value" xsi:type="Property">
+                           <source path="birthDate" xsi:type="Property">
+                              <source name="Patient" xsi:type="ExpressionRef"/>
+                           </source>
                         </operand>
                         <operand localId="207" locator="43:18-43:54" resultTypeName="t:Date" xsi:type="DateFrom">
                            <operand localId="206" locator="43:28-43:54" resultTypeName="t:DateTime" xsi:type="End">
@@ -2220,8 +2252,10 @@
             <operand localId="228" locator="50:8-52:5" resultTypeName="t:Boolean" xsi:type="And">
                <operand localId="226" locator="50:10-50:65" resultTypeName="t:Boolean" xsi:type="GreaterOrEqual">
                   <operand localId="224" locator="50:10-50:60" resultTypeName="t:Integer" precision="Year" xsi:type="CalculateAgeAt">
-                     <operand path="birthDate" xsi:type="Property">
-                        <source name="Patient" xsi:type="ExpressionRef"/>
+                     <operand path="value" xsi:type="Property">
+                        <source path="birthDate" xsi:type="Property">
+                           <source name="Patient" xsi:type="ExpressionRef"/>
+                        </source>
                      </operand>
                      <operand localId="223" locator="50:23-50:59" resultTypeName="t:Date" xsi:type="DateFrom">
                         <operand localId="222" locator="50:33-50:59" resultTypeName="t:DateTime" xsi:type="End">
@@ -2394,8 +2428,10 @@
          <expression localId="260" locator="106:3-116:17" resultTypeName="t:Boolean" xsi:type="And">
             <operand localId="236" locator="106:3-108:8" resultTypeName="t:Boolean" xsi:type="GreaterOrEqual">
                <operand localId="234" locator="106:3-108:3" resultTypeName="t:Integer" precision="Year" xsi:type="CalculateAgeAt">
-                  <operand path="birthDate" xsi:type="Property">
-                     <source name="Patient" xsi:type="ExpressionRef"/>
+                  <operand path="value" xsi:type="Property">
+                     <source path="birthDate" xsi:type="Property">
+                        <source name="Patient" xsi:type="ExpressionRef"/>
+                     </source>
                   </operand>
                   <operand localId="233" locator="106:16-107:32" resultTypeName="t:Date" xsi:type="DateFrom">
                      <operand localId="232" locator="107:6-107:32" resultTypeName="t:DateTime" xsi:type="End">

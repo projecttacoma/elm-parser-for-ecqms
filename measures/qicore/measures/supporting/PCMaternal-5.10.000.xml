@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
-   <annotation translatorOptions="EnableAnnotations,EnableLocators,EnableResultTypes" xsi:type="a:CqlToElmInfo"/>
+   <annotation translatorVersion="2.10.0" translatorOptions="EnableAnnotations,EnableLocators,EnableResultTypes" xsi:type="a:CqlToElmInfo"/>
    <annotation xsi:type="a:Annotation">
       <a:s r="259">
          <a:s>library PCMaternal version '5.10.000'</a:s>
@@ -12,8 +12,7 @@
       <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
       <def localId="1" locator="5:1-5:28" localIdentifier="QICore" uri="http://hl7.org/fhir">
          <annotation xsi:type="a:Annotation">
-            <a:t name="update" value=""/>
-            <a:t name="update" value=""/>
+            <a:t name="update"/>
             <a:s r="1">
                <a:s>/*@update: @@Created from QDM v2.1 to FHIR, then updated 041922 after annual update to QDM v2.21.000 @@*/
 using </a:s>
@@ -285,8 +284,10 @@ using </a:s>
                   </operand>
                   <operand localId="32" locator="35:29-35:107" resultTypeName="t:Boolean" xsi:type="In">
                      <operand localId="28" locator="35:29-35:86" resultTypeName="t:Integer" precision="Year" xsi:type="CalculateAgeAt">
-                        <operand path="birthDate" xsi:type="Property">
-                           <source name="Patient" xsi:type="ExpressionRef"/>
+                        <operand path="value" xsi:type="Property">
+                           <source path="birthDate" xsi:type="Property">
+                              <source name="Patient" xsi:type="ExpressionRef"/>
+                           </source>
                         </operand>
                         <operand localId="27" locator="35:42-35:85" resultTypeName="t:Date" xsi:type="DateFrom">
                            <operand localId="26" locator="35:52-35:85" resultTypeName="t:DateTime" xsi:type="Start">

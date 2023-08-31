@@ -1,0 +1,1504 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorVersion="2.10.0" translatorOptions="EnableAnnotations,EnableLocators,EnableResultTypes" xsi:type="a:CqlToElmInfo"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="62">
+         <a:s>library HFACEIorARBorARNIforLVSDFHIR version '0.0.022'</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="HFACEIorARBorARNIforLVSDFHIR" version="0.0.022"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="3:1-3:28" localIdentifier="QICore" uri="http://hl7.org/fhir">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>using </a:s>
+               <a:s>
+                  <a:s>QICore</a:s>
+               </a:s>
+               <a:s> version '4.1.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="5:1-5:56" localIdentifier="FHIRHelpers" path="FHIRHelpers" version="4.3.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>FHIRHelpers</a:s>
+               </a:s>
+               <a:s> version '4.3.000' called FHIRHelpers</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="3" locator="6:1-6:61" localIdentifier="SDE" path="SupplementalDataElements" version="3.4.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>SupplementalDataElements</a:s>
+               </a:s>
+               <a:s> version '3.4.000' called SDE</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="4" locator="7:1-7:58" localIdentifier="QICoreCommon" path="QICoreCommon" version="1.5.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>QICoreCommon</a:s>
+               </a:s>
+               <a:s> version '1.5.000' called QICoreCommon</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="5" locator="8:1-8:47" localIdentifier="AHA" path="AHAOverall" version="2.5.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>AHAOverall</a:s>
+               </a:s>
+               <a:s> version '2.5.000' called AHA</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <parameters>
+      <def localId="26" locator="27:1-27:49" name="Measurement Period" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="26">
+               <a:s>parameter &quot;Measurement Period&quot; </a:s>
+               <a:s r="25">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="24">
+                     <a:s>DateTime</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+            <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </resultTypeSpecifier>
+         <parameterTypeSpecifier localId="25" locator="27:32-27:49" xsi:type="IntervalTypeSpecifier">
+            <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+               <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+            </resultTypeSpecifier>
+            <pointType localId="24" locator="27:41-27:48" resultTypeName="t:DateTime" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <codeSystems>
+      <def localId="6" locator="10:1-10:47" resultTypeName="t:CodeSystem" name="SNOMEDCT" id="http://snomed.info/sct" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>codesystem &quot;SNOMEDCT&quot;: 'http://snomed.info/sct'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </codeSystems>
+   <valueSets>
+      <def localId="7" locator="12:1-12:121" resultTypeName="t:ValueSet" name="ACE Inhibitor or ARB or ARNI Ingredient" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1489" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="7">
+               <a:s>valueset &quot;ACE Inhibitor or ARB or ARNI Ingredient&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1489'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="8" locator="13:1-13:110" resultTypeName="t:ValueSet" name="ACE Inhibitor or ARB or ARNI" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1139" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="8">
+               <a:s>valueset &quot;ACE Inhibitor or ARB or ARNI&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1139'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="9" locator="14:1-14:113" resultTypeName="t:ValueSet" name="Allergy to ACE Inhibitor or ARB" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1211" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="9">
+               <a:s>valueset &quot;Allergy to ACE Inhibitor or ARB&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1211'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="10" locator="15:1-15:117" resultTypeName="t:ValueSet" name="Intolerance to ACE Inhibitor or ARB" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1212" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="10">
+               <a:s>valueset &quot;Intolerance to ACE Inhibitor or ARB&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1212'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="11" locator="16:1-16:96" resultTypeName="t:ValueSet" name="Medical Reason" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="11">
+               <a:s>valueset &quot;Medical Reason&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="12" locator="17:1-17:96" resultTypeName="t:ValueSet" name="Patient Reason" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1008" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="12">
+               <a:s>valueset &quot;Patient Reason&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1008'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="13" locator="18:1-18:129" resultTypeName="t:ValueSet" name="Patient Reason for ACE Inhibitor or ARB Decline" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1140" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="13">
+               <a:s>valueset &quot;Patient Reason for ACE Inhibitor or ARB Decline&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1140'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="14" locator="19:1-19:90" resultTypeName="t:ValueSet" name="Pregnancy" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.378" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="14">
+               <a:s>valueset &quot;Pregnancy&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.378'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="15" locator="20:1-20:105" resultTypeName="t:ValueSet" name="Moderate or Severe LVSD" id="http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1090" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="15">
+               <a:s>valueset &quot;Moderate or Severe LVSD&quot;: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1090'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </valueSets>
+   <codes>
+      <def localId="17" locator="22:1-22:207" resultTypeName="t:Code" name="Acute renal failure caused by angiotensin-converting-enzyme inhibitor (disorder)" id="422593004" display="Acute renal failure caused by angiotensin-converting-enzyme inhibitor (disorder)" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="17">
+               <a:s>code &quot;Acute renal failure caused by angiotensin-converting-enzyme inhibitor (disorder)&quot;: '422593004' from </a:s>
+               <a:s r="16">
+                  <a:s>&quot;SNOMEDCT&quot;</a:s>
+               </a:s>
+               <a:s> display 'Acute renal failure caused by angiotensin-converting-enzyme inhibitor (disorder)'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="16" locator="22:107-22:116" resultTypeName="t:CodeSystem" name="SNOMEDCT"/>
+      </def>
+      <def localId="19" locator="23:1-23:209" resultTypeName="t:Code" name="Substance with angiotensin II receptor antagonist mechanism of action (substance)" id="372913009" display="Substance with angiotensin II receptor antagonist mechanism of action (substance)" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="19">
+               <a:s>code &quot;Substance with angiotensin II receptor antagonist mechanism of action (substance)&quot;: '372913009' from </a:s>
+               <a:s r="18">
+                  <a:s>&quot;SNOMEDCT&quot;</a:s>
+               </a:s>
+               <a:s> display 'Substance with angiotensin II receptor antagonist mechanism of action (substance)'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="18" locator="23:108-23:117" resultTypeName="t:CodeSystem" name="SNOMEDCT"/>
+      </def>
+      <def localId="21" locator="24:1-24:219" resultTypeName="t:Code" name="Substance with angiotensin-converting enzyme inhibitor mechanism of action (substance)" id="372733002" display="Substance with angiotensin-converting enzyme inhibitor mechanism of action (substance)" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="21">
+               <a:s>code &quot;Substance with angiotensin-converting enzyme inhibitor mechanism of action (substance)&quot;: '372733002' from </a:s>
+               <a:s r="20">
+                  <a:s>&quot;SNOMEDCT&quot;</a:s>
+               </a:s>
+               <a:s> display 'Substance with angiotensin-converting enzyme inhibitor mechanism of action (substance)'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="20" locator="24:113-24:122" resultTypeName="t:CodeSystem" name="SNOMEDCT"/>
+      </def>
+      <def localId="23" locator="25:1-25:181" resultTypeName="t:Code" name="Substance with neprilysin inhibitor mechanism of action (substance)" id="786886009" display="Substance with neprilysin inhibitor mechanism of action (substance)" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="23">
+               <a:s>code &quot;Substance with neprilysin inhibitor mechanism of action (substance)&quot;: '786886009' from </a:s>
+               <a:s r="22">
+                  <a:s>&quot;SNOMEDCT&quot;</a:s>
+               </a:s>
+               <a:s> display 'Substance with neprilysin inhibitor mechanism of action (substance)'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="22" locator="25:94-25:103" resultTypeName="t:CodeSystem" name="SNOMEDCT"/>
+      </def>
+   </codes>
+   <contexts>
+      <def locator="29:1-29:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="29:1-29:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="29:1-29:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="29" locator="31:1-32:117" resultTypeName="t:Boolean" name="Initial Population" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="29">
+               <a:s>define &quot;Initial Population&quot;:
+  </a:s>
+               <a:s r="28">
+                  <a:s r="27">
+                     <a:s>AHA</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="28">
+                     <a:s>&quot;Has Two Qualifying Outpatient Encounters and Heart Failure Outpatient Encounter During the Measurement Period&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="28" locator="32:3-32:117" resultTypeName="t:Boolean" name="Has Two Qualifying Outpatient Encounters and Heart Failure Outpatient Encounter During the Measurement Period" libraryName="AHA" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="35" locator="34:1-36:95" resultTypeName="t:Boolean" name="Denominator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="35">
+               <a:s>define &quot;Denominator&quot;:
+  </a:s>
+               <a:s r="34">
+                  <a:s r="30">
+                     <a:s>&quot;Initial Population&quot;</a:s>
+                  </a:s>
+                  <a:s>
+    and </a:s>
+                  <a:s r="33">
+                     <a:s>exists </a:s>
+                     <a:s r="32">
+                        <a:s r="31">
+                           <a:s>AHA</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="32">
+                           <a:s>&quot;Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="34" locator="35:3-36:95" resultTypeName="t:Boolean" xsi:type="And">
+            <operand localId="30" locator="35:3-35:22" resultTypeName="t:Boolean" name="Initial Population" xsi:type="ExpressionRef"/>
+            <operand localId="33" locator="36:9-36:95" resultTypeName="t:Boolean" xsi:type="Exists">
+               <operand localId="32" locator="36:16-36:95" name="Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD" libraryName="AHA" xsi:type="ExpressionRef">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+               </operand>
+            </operand>
+         </expression>
+      </def>
+      <def localId="47" locator="38:1-42:61" resultTypeName="t:Boolean" name="Denominator Exclusions" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="47">
+               <a:s>define &quot;Denominator Exclusions&quot;:
+  </a:s>
+               <a:s r="46">
+                  <a:s r="43">
+                     <a:s r="40">
+                        <a:s r="37">
+                           <a:s r="36">
+                              <a:s>AHA</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="37">
+                              <a:s>&quot;Has Heart Transplant&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+    or </a:s>
+                        <a:s r="39">
+                           <a:s r="38">
+                              <a:s>AHA</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="39">
+                              <a:s>&quot;Has Heart Transplant Complications&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    or </a:s>
+                     <a:s r="42">
+                        <a:s r="41">
+                           <a:s>AHA</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="42">
+                           <a:s>&quot;Has Left Ventricular Assist Device&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    or </a:s>
+                  <a:s r="45">
+                     <a:s r="44">
+                        <a:s>AHA</a:s>
+                     </a:s>
+                     <a:s>.</a:s>
+                     <a:s r="45">
+                        <a:s>&quot;Has Left Ventricular Assist Device Complications&quot;</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="46" locator="39:3-42:61" resultTypeName="t:Boolean" xsi:type="Or">
+            <operand localId="43" locator="39:3-41:47" resultTypeName="t:Boolean" xsi:type="Or">
+               <operand localId="40" locator="39:3-40:47" resultTypeName="t:Boolean" xsi:type="Or">
+                  <operand localId="37" locator="39:3-39:28" resultTypeName="t:Boolean" name="Has Heart Transplant" libraryName="AHA" xsi:type="ExpressionRef"/>
+                  <operand localId="39" locator="40:8-40:47" resultTypeName="t:Boolean" name="Has Heart Transplant Complications" libraryName="AHA" xsi:type="ExpressionRef"/>
+               </operand>
+               <operand localId="42" locator="41:8-41:47" resultTypeName="t:Boolean" name="Has Left Ventricular Assist Device" libraryName="AHA" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand localId="45" locator="42:8-42:61" resultTypeName="t:Boolean" name="Has Left Ventricular Assist Device Complications" libraryName="AHA" xsi:type="ExpressionRef"/>
+         </expression>
+      </def>
+      <def localId="54" locator="67:1-70:3" resultTypeName="t:Boolean" name="Has ACEI or ARB or ARNI Ordered" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="54">
+               <a:s>define &quot;Has ACEI or ARB or ARNI Ordered&quot;:
+  </a:s>
+               <a:s r="53">
+                  <a:s>exists </a:s>
+                  <a:s r="52">
+                     <a:s>( </a:s>
+                     <a:s r="52">
+                        <a:s>
+                           <a:s r="49">
+                              <a:s r="48">
+                                 <a:s r="48">
+                                    <a:s>[MedicationRequest: </a:s>
+                                    <a:s>
+                                       <a:s>medication</a:s>
+                                    </a:s>
+                                    <a:s> in </a:s>
+                                    <a:s>
+                                       <a:s>&quot;ACE Inhibitor or ARB or ARNI&quot;</a:s>
+                                    </a:s>
+                                    <a:s>]</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> ACEIOrARBOrARNIOrdered</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="51">
+                           <a:s>where </a:s>
+                           <a:s r="51">
+                              <a:s r="50">
+                                 <a:s>ACEIOrARBOrARNIOrdered</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="51">
+                                 <a:s>isOrderedDuringHeartFailureOutpatientEncounter ( )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="53" locator="68:3-70:3" resultTypeName="t:Boolean" xsi:type="Exists">
+            <operand localId="52" locator="68:10-70:3" xsi:type="Query">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <source localId="49" locator="68:12-68:99" alias="ACEIOrARBOrARNIOrdered">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <expression localId="48" locator="68:12-68:76" dataType="fhir:MedicationRequest" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest" codeProperty="medication" codeComparator="in" xsi:type="Retrieve">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <codes locator="68:46-68:75" resultTypeName="t:ValueSet" name="ACE Inhibitor or ARB or ARNI" preserve="true" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <where localId="51" locator="69:7-69:85" resultTypeName="t:Boolean" name="isOrderedDuringHeartFailureOutpatientEncounter" libraryName="AHA" xsi:type="FunctionRef">
+                  <operand localId="50" locator="69:13-69:34" resultTypeName="fhir:MedicationRequest" name="ACEIOrARBOrARNIOrdered" xsi:type="AliasRef"/>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def localId="62" locator="109:1-112:3" resultTypeName="t:Boolean" name="Is Currently Taking ACEI or ARB or ARNI" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="62">
+               <a:s>define &quot;Is Currently Taking ACEI or ARB or ARNI&quot;:
+  </a:s>
+               <a:s r="61">
+                  <a:s>exists </a:s>
+                  <a:s r="60">
+                     <a:s>( </a:s>
+                     <a:s r="60">
+                        <a:s>
+                           <a:s r="57">
+                              <a:s r="56">
+                                 <a:s r="56">
+                                    <a:s>[MedicationRequest: </a:s>
+                                    <a:s>
+                                       <a:s>medication</a:s>
+                                    </a:s>
+                                    <a:s> in </a:s>
+                                    <a:s>
+                                       <a:s>&quot;ACE Inhibitor or ARB or ARNI&quot;</a:s>
+                                    </a:s>
+                                    <a:s>]</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> ActiveACEIOrARBOrARNI</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="59">
+                           <a:s>where </a:s>
+                           <a:s r="59">
+                              <a:s r="58">
+                                 <a:s>ActiveACEIOrARBOrARNI</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="59">
+                                 <a:s>overlapsAfterHeartFailureOutpatientEncounter ( )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="61" locator="110:3-112:3" resultTypeName="t:Boolean" xsi:type="Exists">
+            <operand localId="60" locator="110:10-112:3" xsi:type="Query">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <source localId="57" locator="110:12-110:98" alias="ActiveACEIOrARBOrARNI">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <expression localId="56" locator="110:12-110:76" dataType="fhir:MedicationRequest" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest" codeProperty="medication" codeComparator="in" xsi:type="Retrieve">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <codes locator="110:46-110:75" resultTypeName="t:ValueSet" name="ACE Inhibitor or ARB or ARNI" preserve="true" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <where localId="59" locator="111:7-111:82" resultTypeName="t:Boolean" name="overlapsAfterHeartFailureOutpatientEncounter" libraryName="AHA" xsi:type="FunctionRef">
+                  <operand xsi:type="As">
+                     <operand localId="58" locator="111:13-111:33" resultTypeName="fhir:MedicationRequest" name="ActiveACEIOrARBOrARNI" xsi:type="AliasRef"/>
+                     <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                        <choice name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:AllergyIntolerance" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+                     </asTypeSpecifier>
+                  </operand>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def localId="65" locator="44:1-46:48" resultTypeName="t:Boolean" name="Numerator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="65">
+               <a:s>define &quot;Numerator&quot;:
+  </a:s>
+               <a:s r="64">
+                  <a:s r="55">
+                     <a:s>&quot;Has ACEI or ARB or ARNI Ordered&quot;</a:s>
+                  </a:s>
+                  <a:s>
+    or </a:s>
+                  <a:s r="63">
+                     <a:s>&quot;Is Currently Taking ACEI or ARB or ARNI&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="64" locator="45:3-46:48" resultTypeName="t:Boolean" xsi:type="Or">
+            <operand localId="55" locator="45:3-45:35" resultTypeName="t:Boolean" name="Has ACEI or ARB or ARNI Ordered" xsi:type="ExpressionRef"/>
+            <operand localId="63" locator="46:8-46:48" resultTypeName="t:Boolean" name="Is Currently Taking ACEI or ARB or ARNI" xsi:type="ExpressionRef"/>
+         </expression>
+      </def>
+      <def localId="107" locator="97:1-107:3" resultTypeName="t:Boolean" name="Has Medical or Patient Reason for Not Ordering ACEI or ARB or ARNI" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="107">
+               <a:s>define &quot;Has Medical or Patient Reason for Not Ordering ACEI or ARB or ARNI&quot;:
+  </a:s>
+               <a:s r="106">
+                  <a:s>exists </a:s>
+                  <a:s r="105">
+                     <a:s>( </a:s>
+                     <a:s r="105">
+                        <a:s>
+                           <a:s r="67">
+                              <a:s r="66">
+                                 <a:s r="66">
+                                    <a:s>[MedicationNotRequested: </a:s>
+                                    <a:s>
+                                       <a:s>medication</a:s>
+                                    </a:s>
+                                    <a:s> in </a:s>
+                                    <a:s>
+                                       <a:s>&quot;ACE Inhibitor or ARB or ARNI&quot;</a:s>
+                                    </a:s>
+                                    <a:s>]</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> NoACEIOrARBOrARNIOrdered</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="75">
+                           <a:s>with </a:s>
+                           <a:s r="69">
+                              <a:s r="68">
+                                 <a:s>
+                                    <a:s>AHA.&quot;Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> ModerateOrSevereLVSDHFOutpatientEncounter</a:s>
+                           </a:s>
+                           <a:s>
+        such that </a:s>
+                           <a:s r="74">
+                              <a:s r="71">
+                                 <a:s r="70">
+                                    <a:s>NoACEIOrARBOrARNIOrdered</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="71">
+                                    <a:s>authoredOn</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s r="74"> during day of </a:s>
+                              <a:s r="73">
+                                 <a:s r="72">
+                                    <a:s>ModerateOrSevereLVSDHFOutpatientEncounter</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="73">
+                                    <a:s>period</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="104">
+                           <a:s>where </a:s>
+                           <a:s r="104">
+                              <a:s r="89">
+                                 <a:s r="79">
+                                    <a:s r="77">
+                                       <a:s r="76">
+                                          <a:s>NoACEIOrARBOrARNIOrdered</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="77">
+                                          <a:s>status</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> = </a:s>
+                                    <a:s r="78">
+                                       <a:s>'completed'</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+        and </a:s>
+                                 <a:s r="88">
+                                    <a:s r="81">
+                                       <a:s r="80">
+                                          <a:s>NoACEIOrARBOrARNIOrdered</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="81">
+                                          <a:s>intent</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> in </a:s>
+                                    <a:s r="87">
+                                       <a:s>{ </a:s>
+                                       <a:s r="82">
+                                          <a:s>'order'</a:s>
+                                       </a:s>
+                                       <a:s>, </a:s>
+                                       <a:s r="83">
+                                          <a:s>'original-order'</a:s>
+                                       </a:s>
+                                       <a:s>, </a:s>
+                                       <a:s r="84">
+                                          <a:s>'reflex-order'</a:s>
+                                       </a:s>
+                                       <a:s>, </a:s>
+                                       <a:s r="85">
+                                          <a:s>'filler-order'</a:s>
+                                       </a:s>
+                                       <a:s>, </a:s>
+                                       <a:s r="86">
+                                          <a:s>'instance-order'</a:s>
+                                       </a:s>
+                                       <a:s> }</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+        and </a:s>
+                              <a:s r="103">
+                                 <a:s>( </a:s>
+                                 <a:s r="103">
+                                    <a:s r="98">
+                                       <a:s r="93">
+                                          <a:s r="91">
+                                             <a:s r="90">
+                                                <a:s>NoACEIOrARBOrARNIOrdered</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="91">
+                                                <a:s>reasonCode</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s> in </a:s>
+                                          <a:s r="92">
+                                             <a:s>&quot;Medical Reason&quot;</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>
+            or </a:s>
+                                       <a:s r="97">
+                                          <a:s r="95">
+                                             <a:s r="94">
+                                                <a:s>NoACEIOrARBOrARNIOrdered</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="95">
+                                                <a:s>reasonCode</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s> in </a:s>
+                                          <a:s r="96">
+                                             <a:s>&quot;Patient Reason&quot;</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+            or </a:s>
+                                    <a:s r="102">
+                                       <a:s r="100">
+                                          <a:s r="99">
+                                             <a:s>NoACEIOrARBOrARNIOrdered</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="100">
+                                             <a:s>reasonCode</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> in </a:s>
+                                       <a:s r="101">
+                                          <a:s>&quot;Patient Reason for ACE Inhibitor or ARB Decline&quot;</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+        )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="106" locator="98:3-107:3" resultTypeName="t:Boolean" xsi:type="Exists">
+            <operand localId="105" locator="98:10-107:3" xsi:type="Query">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <source localId="67" locator="98:12-98:106" alias="NoACEIOrARBOrARNIOrdered">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <expression localId="66" locator="98:12-98:81" dataType="fhir:MedicationRequest" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-mednotrequested" codeProperty="medication" codeComparator="in" xsi:type="Retrieve">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <codes locator="98:51-98:80" resultTypeName="t:ValueSet" name="ACE Inhibitor or ARB or ARNI" preserve="true" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <relationship localId="75" locator="99:7-100:116" alias="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="With">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <expression localId="68" locator="99:12-99:91" name="Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD" libraryName="AHA" xsi:type="ExpressionRef">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                  </expression>
+                  <suchThat localId="74" locator="100:19-100:116" resultTypeName="t:Boolean" precision="Day" xsi:type="In">
+                     <operand localId="71" locator="100:19-100:53" resultTypeName="t:DateTime" path="value" xsi:type="Property">
+                        <source path="authoredOn" scope="NoACEIOrARBOrARNIOrdered" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="73" locator="100:69-100:116" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                        <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                           <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <operand path="period" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                     </operand>
+                  </suchThat>
+               </relationship>
+               <where localId="104" locator="101:7-106:9" resultTypeName="t:Boolean" xsi:type="And">
+                  <operand localId="89" locator="101:13-102:126" resultTypeName="t:Boolean" xsi:type="And">
+                     <operand localId="79" locator="101:13-101:57" resultTypeName="t:Boolean" xsi:type="Equal">
+                        <operand localId="77" locator="101:13-101:43" resultTypeName="t:String" path="value" xsi:type="Property">
+                           <source path="status" scope="NoACEIOrARBOrARNIOrdered" xsi:type="Property"/>
+                        </operand>
+                        <operand localId="78" locator="101:47-101:57" resultTypeName="t:String" valueType="t:String" value="completed" xsi:type="Literal"/>
+                     </operand>
+                     <operand localId="88" locator="102:13-102:126" resultTypeName="t:Boolean" xsi:type="In">
+                        <operand localId="81" locator="102:13-102:43" resultTypeName="t:String" path="value" xsi:type="Property">
+                           <source path="intent" scope="NoACEIOrARBOrARNIOrdered" xsi:type="Property"/>
+                        </operand>
+                        <operand localId="87" locator="102:48-102:126" xsi:type="List">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="t:String" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <element localId="82" locator="102:50-102:56" resultTypeName="t:String" valueType="t:String" value="order" xsi:type="Literal"/>
+                           <element localId="83" locator="102:59-102:74" resultTypeName="t:String" valueType="t:String" value="original-order" xsi:type="Literal"/>
+                           <element localId="84" locator="102:77-102:90" resultTypeName="t:String" valueType="t:String" value="reflex-order" xsi:type="Literal"/>
+                           <element localId="85" locator="102:93-102:106" resultTypeName="t:String" valueType="t:String" value="filler-order" xsi:type="Literal"/>
+                           <element localId="86" locator="102:109-102:124" resultTypeName="t:String" valueType="t:String" value="instance-order" xsi:type="Literal"/>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand localId="103" locator="103:13-106:9" resultTypeName="t:Boolean" xsi:type="Or">
+                     <operand localId="98" locator="103:15-104:70" resultTypeName="t:Boolean" xsi:type="Or">
+                        <operand localId="93" locator="103:15-103:69" resultTypeName="t:Boolean" xsi:type="AnyInValueSet">
+                           <codes localId="91" locator="103:15-103:49" xsi:type="Query">
+                              <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                 <elementType name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                              <source alias="$this">
+                                 <expression path="reasonCode" scope="NoACEIOrARBOrARNIOrdered" xsi:type="Property"/>
+                              </source>
+                              <return distinct="false">
+                                 <expression name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <operand name="$this" xsi:type="AliasRef"/>
+                                 </expression>
+                              </return>
+                           </codes>
+                           <valueset localId="92" locator="103:54-103:69" resultTypeName="t:ValueSet" name="Medical Reason" preserve="true"/>
+                        </operand>
+                        <operand localId="97" locator="104:16-104:70" resultTypeName="t:Boolean" xsi:type="AnyInValueSet">
+                           <codes localId="95" locator="104:16-104:50" xsi:type="Query">
+                              <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                                 <elementType name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                              <source alias="$this">
+                                 <expression path="reasonCode" scope="NoACEIOrARBOrARNIOrdered" xsi:type="Property"/>
+                              </source>
+                              <return distinct="false">
+                                 <expression name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <operand name="$this" xsi:type="AliasRef"/>
+                                 </expression>
+                              </return>
+                           </codes>
+                           <valueset localId="96" locator="104:55-104:70" resultTypeName="t:ValueSet" name="Patient Reason" preserve="true"/>
+                        </operand>
+                     </operand>
+                     <operand localId="102" locator="105:16-105:103" resultTypeName="t:Boolean" xsi:type="AnyInValueSet">
+                        <codes localId="100" locator="105:16-105:50" xsi:type="Query">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <source alias="$this">
+                              <expression path="reasonCode" scope="NoACEIOrARBOrARNIOrdered" xsi:type="Property"/>
+                           </source>
+                           <return distinct="false">
+                              <expression name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <operand name="$this" xsi:type="AliasRef"/>
+                              </expression>
+                           </return>
+                        </codes>
+                        <valueset localId="101" locator="105:55-105:103" resultTypeName="t:ValueSet" name="Patient Reason for ACE Inhibitor or ARB Decline" preserve="true"/>
+                     </operand>
+                  </operand>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def localId="122" locator="72:1-78:3" resultTypeName="t:Boolean" name="Has Allergy or Intolerance to ACEI or ARB or ARNI Ingredient" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="122">
+               <a:s>define &quot;Has Allergy or Intolerance to ACEI or ARB or ARNI Ingredient&quot;:
+  </a:s>
+               <a:s r="121">
+                  <a:s>exists </a:s>
+                  <a:s r="120">
+                     <a:s>( </a:s>
+                     <a:s r="120">
+                        <a:s>
+                           <a:s r="117">
+                              <a:s r="116">
+                                 <a:s>( </a:s>
+                                 <a:s r="116">
+                                    <a:s r="113">
+                                       <a:s r="111">
+                                          <a:s r="109">
+                                             <a:s>[AllergyIntolerance: </a:s>
+                                             <a:s>
+                                                <a:s>&quot;ACE Inhibitor or ARB or ARNI Ingredient&quot;</a:s>
+                                             </a:s>
+                                             <a:s>]</a:s>
+                                          </a:s>
+                                          <a:s>
+      union </a:s>
+                                          <a:s r="110">
+                                             <a:s>[AllergyIntolerance: </a:s>
+                                             <a:s>
+                                                <a:s>&quot;Substance with angiotensin-converting enzyme inhibitor mechanism of action (substance)&quot;</a:s>
+                                             </a:s>
+                                             <a:s>]</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>
+      union </a:s>
+                                       <a:s r="112">
+                                          <a:s>[AllergyIntolerance: </a:s>
+                                          <a:s>
+                                             <a:s>&quot;Substance with angiotensin II receptor antagonist mechanism of action (substance)&quot;</a:s>
+                                          </a:s>
+                                          <a:s>]</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+      union </a:s>
+                                    <a:s r="114">
+                                       <a:s>[AllergyIntolerance: </a:s>
+                                       <a:s>
+                                          <a:s>&quot;Substance with neprilysin inhibitor mechanism of action (substance)&quot;</a:s>
+                                       </a:s>
+                                       <a:s>]</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                              <a:s> ACEIOrARBOrARNIAllergyIntolerance</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="119">
+                           <a:s>where </a:s>
+                           <a:s r="119">
+                              <a:s r="118">
+                                 <a:s>ACEIOrARBOrARNIAllergyIntolerance</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="119">
+                                 <a:s>overlapsAfterHeartFailureOutpatientEncounter ( )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="121" locator="73:3-78:3" resultTypeName="t:Boolean" xsi:type="Exists">
+            <operand localId="120" locator="73:10-78:3" xsi:type="Query">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:AllergyIntolerance" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <source localId="117" locator="73:12-76:139" alias="ACEIOrARBOrARNIAllergyIntolerance">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:AllergyIntolerance" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <expression localId="116" locator="73:12-76:105" xsi:type="Union">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:AllergyIntolerance" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <operand localId="111" locator="73:14-74:122" xsi:type="Union">
+                        <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:AllergyIntolerance" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <operand localId="109" locator="73:14-73:76" dataType="fhir:AllergyIntolerance" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-allergyintolerance" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:AllergyIntolerance" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <codes locator="73:35-73:75" resultTypeName="t:ValueSet" name="ACE Inhibitor or ARB or ARNI Ingredient" preserve="true" xsi:type="ValueSetRef"/>
+                        </operand>
+                        <operand localId="110" locator="74:13-74:122" dataType="fhir:AllergyIntolerance" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-allergyintolerance" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:AllergyIntolerance" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <codes xsi:type="ToList">
+                              <operand locator="74:34-74:121" resultTypeName="t:Code" name="Substance with angiotensin-converting enzyme inhibitor mechanism of action (substance)" xsi:type="CodeRef"/>
+                           </codes>
+                        </operand>
+                     </operand>
+                     <operand localId="115" xsi:type="Union">
+                        <operand localId="112" locator="75:13-75:117" dataType="fhir:AllergyIntolerance" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-allergyintolerance" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:AllergyIntolerance" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <codes xsi:type="ToList">
+                              <operand locator="75:34-75:116" resultTypeName="t:Code" name="Substance with angiotensin II receptor antagonist mechanism of action (substance)" xsi:type="CodeRef"/>
+                           </codes>
+                        </operand>
+                        <operand localId="114" locator="76:13-76:103" dataType="fhir:AllergyIntolerance" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-allergyintolerance" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                           <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:AllergyIntolerance" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <codes xsi:type="ToList">
+                              <operand locator="76:34-76:102" resultTypeName="t:Code" name="Substance with neprilysin inhibitor mechanism of action (substance)" xsi:type="CodeRef"/>
+                           </codes>
+                        </operand>
+                     </operand>
+                  </expression>
+               </source>
+               <where localId="119" locator="77:7-77:94" resultTypeName="t:Boolean" name="overlapsAfterHeartFailureOutpatientEncounter" libraryName="AHA" xsi:type="FunctionRef">
+                  <operand xsi:type="As">
+                     <operand localId="118" locator="77:13-77:45" resultTypeName="fhir:AllergyIntolerance" name="ACEIOrARBOrARNIAllergyIntolerance" xsi:type="AliasRef"/>
+                     <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                        <choice name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:AllergyIntolerance" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+                     </asTypeSpecifier>
+                  </operand>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def localId="133" locator="80:1-84:3" resultTypeName="t:Boolean" name="Has Diagnosis of Allergy or Intolerance to ACEI or ARB" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="133">
+               <a:s>define &quot;Has Diagnosis of Allergy or Intolerance to ACEI or ARB&quot;:
+  </a:s>
+               <a:s r="132">
+                  <a:s>exists </a:s>
+                  <a:s r="131">
+                     <a:s>( </a:s>
+                     <a:s r="131">
+                        <a:s>
+                           <a:s r="128">
+                              <a:s r="127">
+                                 <a:s>( </a:s>
+                                 <a:s r="127">
+                                    <a:s r="125">
+                                       <a:s>[&quot;Condition&quot;: </a:s>
+                                       <a:s>
+                                          <a:s>&quot;Allergy to ACE Inhibitor or ARB&quot;</a:s>
+                                       </a:s>
+                                       <a:s>]</a:s>
+                                    </a:s>
+                                    <a:s>
+      union </a:s>
+                                    <a:s r="126">
+                                       <a:s>[&quot;Condition&quot;: </a:s>
+                                       <a:s>
+                                          <a:s>&quot;Intolerance to ACE Inhibitor or ARB&quot;</a:s>
+                                       </a:s>
+                                       <a:s>]</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                              <a:s> ACEIOrARBAllergyOrIntoleranceDiagnosis</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="130">
+                           <a:s>where </a:s>
+                           <a:s r="130">
+                              <a:s r="129">
+                                 <a:s>ACEIOrARBAllergyOrIntoleranceDiagnosis</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="130">
+                                 <a:s>overlapsAfterHeartFailureOutpatientEncounter ( )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="132" locator="81:3-84:3" resultTypeName="t:Boolean" xsi:type="Exists">
+            <operand localId="131" locator="81:10-84:3" xsi:type="Query">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <source localId="128" locator="81:12-82:105" alias="ACEIOrARBAllergyOrIntoleranceDiagnosis">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <expression localId="127" locator="81:12-82:66" xsi:type="Union">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <operand localId="125" locator="81:14-81:61" dataType="fhir:Condition" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                        <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <codes locator="81:28-81:60" resultTypeName="t:ValueSet" name="Allergy to ACE Inhibitor or ARB" preserve="true" xsi:type="ValueSetRef"/>
+                     </operand>
+                     <operand localId="126" locator="82:13-82:64" dataType="fhir:Condition" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                        <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                        <codes locator="82:27-82:63" resultTypeName="t:ValueSet" name="Intolerance to ACE Inhibitor or ARB" preserve="true" xsi:type="ValueSetRef"/>
+                     </operand>
+                  </expression>
+               </source>
+               <where localId="130" locator="83:7-83:99" resultTypeName="t:Boolean" name="overlapsAfterHeartFailureOutpatientEncounter" libraryName="AHA" xsi:type="FunctionRef">
+                  <operand xsi:type="As">
+                     <operand localId="129" locator="83:13-83:50" resultTypeName="fhir:Condition" name="ACEIOrARBAllergyOrIntoleranceDiagnosis" xsi:type="AliasRef"/>
+                     <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                        <choice name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:AllergyIntolerance" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+                     </asTypeSpecifier>
+                  </operand>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def localId="150" locator="86:1-90:3" resultTypeName="t:Boolean" name="Has Diagnosis of Pregnancy" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="150">
+               <a:s>define &quot;Has Diagnosis of Pregnancy&quot;:
+  </a:s>
+               <a:s r="149">
+                  <a:s>exists </a:s>
+                  <a:s r="148">
+                     <a:s>( </a:s>
+                     <a:s r="148">
+                        <a:s>
+                           <a:s r="137">
+                              <a:s r="136">
+                                 <a:s r="136">
+                                    <a:s>[Condition: </a:s>
+                                    <a:s>
+                                       <a:s>&quot;Pregnancy&quot;</a:s>
+                                    </a:s>
+                                    <a:s>]</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> PregnancyDiagnosis</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="147">
+                           <a:s>with </a:s>
+                           <a:s r="139">
+                              <a:s r="138">
+                                 <a:s>
+                                    <a:s>AHA.&quot;Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> ModerateOrSevereLVSDHFOutpatientEncounter</a:s>
+                           </a:s>
+                           <a:s>
+        such that </a:s>
+                           <a:s r="146">
+                              <a:s r="141">
+                                 <a:s r="140">
+                                    <a:s>PregnancyDiagnosis</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="141">
+                                    <a:s>prevalenceInterval ( )</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> </a:s>
+                              <a:s r="146">
+                                 <a:s>starts </a:s>
+                                 <a:s r="145">
+                                    <a:s>9 months</a:s>
+                                 </a:s>
+                                 <a:s> or less before or on</a:s>
+                              </a:s>
+                              <a:s> </a:s>
+                              <a:s r="144">
+                                 <a:s>start of </a:s>
+                                 <a:s r="143">
+                                    <a:s r="142">
+                                       <a:s>ModerateOrSevereLVSDHFOutpatientEncounter</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="143">
+                                       <a:s>period</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="149" locator="87:3-90:3" resultTypeName="t:Boolean" xsi:type="Exists">
+            <operand localId="148" locator="87:10-90:3" xsi:type="Query">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <source localId="137" locator="87:12-87:54" alias="PregnancyDiagnosis">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <expression localId="136" locator="87:12-87:35" dataType="fhir:Condition" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <codes locator="87:24-87:34" resultTypeName="t:ValueSet" name="Pregnancy" preserve="true" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <relationship localId="147" locator="88:7-89:154" alias="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="With">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <expression localId="138" locator="88:12-88:91" name="Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD" libraryName="AHA" xsi:type="ExpressionRef">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                  </expression>
+                  <suchThat localId="146" locator="89:19-89:154" resultTypeName="t:Boolean" xsi:type="And">
+                     <operand locator="89:68-89:83" xsi:type="In">
+                        <operand locator="89:61-89:66" xsi:type="Start">
+                           <operand localId="141" locator="89:19-89:59" name="prevalenceInterval" libraryName="QICoreCommon" xsi:type="FunctionRef">
+                              <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                 <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              </resultTypeSpecifier>
+                              <operand localId="140" locator="89:19-89:36" resultTypeName="fhir:Condition" name="PregnancyDiagnosis" xsi:type="AliasRef"/>
+                           </operand>
+                        </operand>
+                        <operand locator="89:68-89:83" lowClosed="true" highClosed="true" xsi:type="Interval">
+                           <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                              <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                           </resultTypeSpecifier>
+                           <low locator="89:98-89:154" xsi:type="Subtract">
+                              <operand localId="144" locator="89:98-89:154" resultTypeName="t:DateTime" xsi:type="Start">
+                                 <operand localId="143" locator="89:107-89:154" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    </resultTypeSpecifier>
+                                    <operand path="period" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                                 </operand>
+                              </operand>
+                              <operand localId="145" locator="89:68-89:75" resultTypeName="t:Quantity" value="9" unit="months" xsi:type="Quantity"/>
+                           </low>
+                           <high localId="144" locator="89:98-89:154" resultTypeName="t:DateTime" xsi:type="Start">
+                              <operand localId="143" locator="89:107-89:154" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                                 <operand path="period" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                              </operand>
+                           </high>
+                        </operand>
+                     </operand>
+                     <operand locator="89:68-89:83" xsi:type="Not">
+                        <operand locator="89:68-89:83" xsi:type="IsNull">
+                           <operand localId="144" locator="89:98-89:154" resultTypeName="t:DateTime" xsi:type="Start">
+                              <operand localId="143" locator="89:107-89:154" name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                                 <operand path="period" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                        </operand>
+                     </operand>
+                  </suchThat>
+               </relationship>
+            </operand>
+         </expression>
+      </def>
+      <def localId="159" locator="92:1-95:3" resultTypeName="t:Boolean" name="Has Diagnosis of Renal Failure Due to ACEI" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="159">
+               <a:s>define &quot;Has Diagnosis of Renal Failure Due to ACEI&quot;:
+  </a:s>
+               <a:s r="158">
+                  <a:s>exists </a:s>
+                  <a:s r="157">
+                     <a:s>( </a:s>
+                     <a:s r="157">
+                        <a:s>
+                           <a:s r="154">
+                              <a:s r="153">
+                                 <a:s r="153">
+                                    <a:s>[Condition: </a:s>
+                                    <a:s>
+                                       <a:s>&quot;Acute renal failure caused by angiotensin-converting-enzyme inhibitor (disorder)&quot;</a:s>
+                                    </a:s>
+                                    <a:s>]</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> RenalFailureDueToACEI</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="156">
+                           <a:s>where </a:s>
+                           <a:s r="156">
+                              <a:s r="155">
+                                 <a:s>RenalFailureDueToACEI</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="156">
+                                 <a:s>overlapsAfterHeartFailureOutpatientEncounter ( )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="158" locator="93:3-95:3" resultTypeName="t:Boolean" xsi:type="Exists">
+            <operand localId="157" locator="93:10-95:3" xsi:type="Query">
+               <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+               </resultTypeSpecifier>
+               <source localId="154" locator="93:12-93:128" alias="RenalFailureDueToACEI">
+                  <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                  </resultTypeSpecifier>
+                  <expression localId="153" locator="93:12-93:106" dataType="fhir:Condition" templateId="http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                     <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                     </resultTypeSpecifier>
+                     <codes xsi:type="ToList">
+                        <operand locator="93:24-93:105" resultTypeName="t:Code" name="Acute renal failure caused by angiotensin-converting-enzyme inhibitor (disorder)" xsi:type="CodeRef"/>
+                     </codes>
+                  </expression>
+               </source>
+               <where localId="156" locator="94:7-94:82" resultTypeName="t:Boolean" name="overlapsAfterHeartFailureOutpatientEncounter" libraryName="AHA" xsi:type="FunctionRef">
+                  <operand xsi:type="As">
+                     <operand localId="155" locator="94:13-94:33" resultTypeName="fhir:Condition" name="RenalFailureDueToACEI" xsi:type="AliasRef"/>
+                     <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
+                        <choice name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:AllergyIntolerance" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+                        <choice name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+                     </asTypeSpecifier>
+                  </operand>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def localId="162" locator="48:1-53:51" resultTypeName="t:Boolean" name="Denominator Exceptions" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="162">
+               <a:s>define &quot;Denominator Exceptions&quot;:
+  </a:s>
+               <a:s r="161">
+                  <a:s r="152">
+                     <a:s r="135">
+                        <a:s r="124">
+                           <a:s r="108">
+                              <a:s>&quot;Has Medical or Patient Reason for Not Ordering ACEI or ARB or ARNI&quot;</a:s>
+                           </a:s>
+                           <a:s>
+    or </a:s>
+                           <a:s r="123">
+                              <a:s>&quot;Has Allergy or Intolerance to ACEI or ARB or ARNI Ingredient&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+    or </a:s>
+                        <a:s r="134">
+                           <a:s>&quot;Has Diagnosis of Allergy or Intolerance to ACEI or ARB&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    or </a:s>
+                     <a:s r="151">
+                        <a:s>&quot;Has Diagnosis of Pregnancy&quot;</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    or </a:s>
+                  <a:s r="160">
+                     <a:s>&quot;Has Diagnosis of Renal Failure Due to ACEI&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="161" locator="49:3-53:51" resultTypeName="t:Boolean" xsi:type="Or">
+            <operand localId="152" locator="49:3-52:35" resultTypeName="t:Boolean" xsi:type="Or">
+               <operand localId="135" locator="49:3-51:63" resultTypeName="t:Boolean" xsi:type="Or">
+                  <operand localId="124" locator="49:3-50:69" resultTypeName="t:Boolean" xsi:type="Or">
+                     <operand localId="108" locator="49:3-49:70" resultTypeName="t:Boolean" name="Has Medical or Patient Reason for Not Ordering ACEI or ARB or ARNI" xsi:type="ExpressionRef"/>
+                     <operand localId="123" locator="50:8-50:69" resultTypeName="t:Boolean" name="Has Allergy or Intolerance to ACEI or ARB or ARNI Ingredient" xsi:type="ExpressionRef"/>
+                  </operand>
+                  <operand localId="134" locator="51:8-51:63" resultTypeName="t:Boolean" name="Has Diagnosis of Allergy or Intolerance to ACEI or ARB" xsi:type="ExpressionRef"/>
+               </operand>
+               <operand localId="151" locator="52:8-52:35" resultTypeName="t:Boolean" name="Has Diagnosis of Pregnancy" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand localId="160" locator="53:8-53:51" resultTypeName="t:Boolean" name="Has Diagnosis of Renal Failure Due to ACEI" xsi:type="ExpressionRef"/>
+         </expression>
+      </def>
+      <def localId="165" locator="55:1-56:21" name="SDE Ethnicity" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="165">
+               <a:s>define &quot;SDE Ethnicity&quot;:
+  </a:s>
+               <a:s r="164">
+                  <a:s r="163">
+                     <a:s>SDE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="164">
+                     <a:s>&quot;SDE Ethnicity&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="TupleTypeSpecifier">
+            <element name="codes">
+               <elementType xsi:type="ListTypeSpecifier">
+                  <elementType name="t:Code" xsi:type="NamedTypeSpecifier"/>
+               </elementType>
+            </element>
+            <element name="display">
+               <elementType name="t:String" xsi:type="NamedTypeSpecifier"/>
+            </element>
+         </resultTypeSpecifier>
+         <expression localId="164" locator="56:3-56:21" name="SDE Ethnicity" libraryName="SDE" xsi:type="ExpressionRef">
+            <resultTypeSpecifier xsi:type="TupleTypeSpecifier">
+               <element name="codes">
+                  <elementType xsi:type="ListTypeSpecifier">
+                     <elementType name="t:Code" xsi:type="NamedTypeSpecifier"/>
+                  </elementType>
+               </element>
+               <element name="display">
+                  <elementType name="t:String" xsi:type="NamedTypeSpecifier"/>
+               </element>
+            </resultTypeSpecifier>
+         </expression>
+      </def>
+      <def localId="168" locator="58:1-59:17" name="SDE Payer" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="168">
+               <a:s>define &quot;SDE Payer&quot;:
+  </a:s>
+               <a:s r="167">
+                  <a:s r="166">
+                     <a:s>SDE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="167">
+                     <a:s>&quot;SDE Payer&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+            <elementType xsi:type="TupleTypeSpecifier">
+               <element name="code">
+                  <elementType name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+               </element>
+               <element name="period">
+                  <elementType xsi:type="IntervalTypeSpecifier">
+                     <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                  </elementType>
+               </element>
+            </elementType>
+         </resultTypeSpecifier>
+         <expression localId="167" locator="59:3-59:17" name="SDE Payer" libraryName="SDE" xsi:type="ExpressionRef">
+            <resultTypeSpecifier xsi:type="ListTypeSpecifier">
+               <elementType xsi:type="TupleTypeSpecifier">
+                  <element name="code">
+                     <elementType name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                  </element>
+                  <element name="period">
+                     <elementType xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     </elementType>
+                  </element>
+               </elementType>
+            </resultTypeSpecifier>
+         </expression>
+      </def>
+      <def localId="171" locator="61:1-62:16" name="SDE Race" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="171">
+               <a:s>define &quot;SDE Race&quot;:
+  </a:s>
+               <a:s r="170">
+                  <a:s r="169">
+                     <a:s>SDE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="170">
+                     <a:s>&quot;SDE Race&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <resultTypeSpecifier xsi:type="TupleTypeSpecifier">
+            <element name="codes">
+               <elementType xsi:type="ListTypeSpecifier">
+                  <elementType name="t:Code" xsi:type="NamedTypeSpecifier"/>
+               </elementType>
+            </element>
+            <element name="display">
+               <elementType name="t:String" xsi:type="NamedTypeSpecifier"/>
+            </element>
+         </resultTypeSpecifier>
+         <expression localId="170" locator="62:3-62:16" name="SDE Race" libraryName="SDE" xsi:type="ExpressionRef">
+            <resultTypeSpecifier xsi:type="TupleTypeSpecifier">
+               <element name="codes">
+                  <elementType xsi:type="ListTypeSpecifier">
+                     <elementType name="t:Code" xsi:type="NamedTypeSpecifier"/>
+                  </elementType>
+               </element>
+               <element name="display">
+                  <elementType name="t:String" xsi:type="NamedTypeSpecifier"/>
+               </element>
+            </resultTypeSpecifier>
+         </expression>
+      </def>
+      <def localId="174" locator="64:1-65:15" resultTypeName="t:Code" name="SDE Sex" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="174">
+               <a:s>define &quot;SDE Sex&quot;:
+  </a:s>
+               <a:s r="173">
+                  <a:s r="172">
+                     <a:s>SDE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="173">
+                     <a:s>&quot;SDE Sex&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="173" locator="65:3-65:15" resultTypeName="t:Code" name="SDE Sex" libraryName="SDE" xsi:type="ExpressionRef"/>
+      </def>
+   </statements>
+</library>
