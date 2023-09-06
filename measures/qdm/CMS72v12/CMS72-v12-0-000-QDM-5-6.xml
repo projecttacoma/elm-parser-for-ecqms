@@ -1,0 +1,1551 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion,DisableMethodInvocation" xsi:type="a:CqlToElmInfo"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="50">
+         <a:s>library AntithromboticTherapyByEndofHospitalDay2 version '12.0.000'</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="AntithromboticTherapyByEndofHospitalDay2" version="12.0.000"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="3:1-3:23" localIdentifier="QDM" uri="urn:healthit-gov:qdm:v5_6" version="5.6">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>using </a:s>
+               <a:s>
+                  <a:s>QDM</a:s>
+               </a:s>
+               <a:s> version '5.6'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="5:1-5:64" localIdentifier="Global" path="MATGlobalCommonFunctions" version="7.0.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>MATGlobalCommonFunctions</a:s>
+               </a:s>
+               <a:s> version '7.0.000' called Global</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="3" locator="6:1-6:47" localIdentifier="TJC" path="TJCOverall" version="7.1.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>TJCOverall</a:s>
+               </a:s>
+               <a:s> version '7.1.000' called TJC</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <valueSets>
+      <def localId="4" locator="8:1-8:94" name="Antithrombotic Therapy for Ischemic Stroke" id="urn:oid:2.16.840.1.113762.1.4.1110.62" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>valueset &quot;Antithrombotic Therapy for Ischemic Stroke&quot;: 'urn:oid:2.16.840.1.113762.1.4.1110.62'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="5" locator="9:1-9:58" name="Ethnicity" id="urn:oid:2.16.840.1.114222.4.11.837" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>valueset &quot;Ethnicity&quot;: 'urn:oid:2.16.840.1.114222.4.11.837'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="6" locator="10:1-10:59" name="INR" id="urn:oid:2.16.840.1.113883.3.117.1.7.1.213" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>valueset &quot;INR&quot;: 'urn:oid:2.16.840.1.113883.3.117.1.7.1.213'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="7" locator="11:1-11:123" name="Intravenous or Intra arterial Thrombolytic tPA Therapy Prior to Arrival" id="urn:oid:2.16.840.1.113762.1.4.1110.21" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="7">
+               <a:s>valueset &quot;Intravenous or Intra arterial Thrombolytic tPA Therapy Prior to Arrival&quot;: 'urn:oid:2.16.840.1.113762.1.4.1110.21'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="8" locator="12:1-12:105" name="Intravenous or Intraarterial Thrombolytic tPA Therapy" id="urn:oid:2.16.840.1.113762.1.4.1045.21" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="8">
+               <a:s>valueset &quot;Intravenous or Intraarterial Thrombolytic tPA Therapy&quot;: 'urn:oid:2.16.840.1.113762.1.4.1045.21'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="9" locator="13:1-13:98" name="Medical Reason For Not Providing Treatment" id="urn:oid:2.16.840.1.113883.3.117.1.7.1.473" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="9">
+               <a:s>valueset &quot;Medical Reason For Not Providing Treatment&quot;: 'urn:oid:2.16.840.1.113883.3.117.1.7.1.473'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="10" locator="14:1-14:68" name="ONC Administrative Sex" id="urn:oid:2.16.840.1.113762.1.4.1" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="10">
+               <a:s>valueset &quot;ONC Administrative Sex&quot;: 'urn:oid:2.16.840.1.113762.1.4.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="11" locator="15:1-15:70" name="Patient Refusal" id="urn:oid:2.16.840.1.113883.3.117.1.7.1.93" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="11">
+               <a:s>valueset &quot;Patient Refusal&quot;: 'urn:oid:2.16.840.1.113883.3.117.1.7.1.93'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="12" locator="16:1-16:55" name="Payer" id="urn:oid:2.16.840.1.114222.4.11.3591" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="12">
+               <a:s>valueset &quot;Payer&quot;: 'urn:oid:2.16.840.1.114222.4.11.3591'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="13" locator="17:1-17:112" name="Pharmacological Contraindications For Antithrombotic Therapy" id="urn:oid:2.16.840.1.113762.1.4.1110.52" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="13">
+               <a:s>valueset &quot;Pharmacological Contraindications For Antithrombotic Therapy&quot;: 'urn:oid:2.16.840.1.113762.1.4.1110.52'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="14" locator="18:1-18:53" name="Race" id="urn:oid:2.16.840.1.114222.4.11.836" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="14">
+               <a:s>valueset &quot;Race&quot;: 'urn:oid:2.16.840.1.114222.4.11.836'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="15" locator="19:1-19:80" name="Thrombolytic tPA Therapy" id="urn:oid:2.16.840.1.113883.3.117.1.7.1.226" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="15">
+               <a:s>valueset &quot;Thrombolytic tPA Therapy&quot;: 'urn:oid:2.16.840.1.113883.3.117.1.7.1.226'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </valueSets>
+   <contexts>
+      <def locator="21:1-21:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="21:1-21:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="21:1-21:15" xmlns:ns0="urn:healthit-gov:qdm:v5_6" dataType="ns0:Patient" templateId="Patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="18" locator="23:1-24:33" name="Denominator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="18">
+               <a:s>define &quot;Denominator&quot;:
+  </a:s>
+               <a:s r="17">
+                  <a:s r="16">
+                     <a:s>TJC</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="17">
+                     <a:s>&quot;Ischemic Stroke Encounter&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="17" locator="24:3-24:33" name="Ischemic Stroke Encounter" libraryName="TJC" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="33" locator="93:1-96:69" name="Reason for Not Ordering Antithrombotic" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="33">
+               <a:s>define &quot;Reason for Not Ordering Antithrombotic&quot;:
+  </a:s>
+               <a:s r="32">
+                  <a:s>
+                     <a:s r="22">
+                        <a:s r="21">
+                           <a:s r="21">
+                              <a:s>[&quot;Medication, Not Ordered&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Antithrombotic Therapy for Ischemic Stroke&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> NoAntithromboticOrder</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="31">
+                     <a:s>where </a:s>
+                     <a:s r="31">
+                        <a:s r="26">
+                           <a:s r="24">
+                              <a:s r="23">
+                                 <a:s>NoAntithromboticOrder</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="24">
+                                 <a:s>negationRationale</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> in </a:s>
+                           <a:s r="25">
+                              <a:s>&quot;Medical Reason For Not Providing Treatment&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      or </a:s>
+                        <a:s r="30">
+                           <a:s r="28">
+                              <a:s r="27">
+                                 <a:s>NoAntithromboticOrder</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="28">
+                                 <a:s>negationRationale</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> in </a:s>
+                           <a:s r="29">
+                              <a:s>&quot;Patient Refusal&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="32" locator="94:3-96:69" xsi:type="Query">
+            <source localId="22" locator="94:3-94:97" alias="NoAntithromboticOrder">
+               <expression localId="21" locator="94:3-94:75" xmlns:ns1="urn:healthit-gov:qdm:v5_6" dataType="ns1:NegativeMedicationOrder" templateId="NegativeMedicationOrder" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="94:31-94:74" name="Antithrombotic Therapy for Ischemic Stroke" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <where localId="31" locator="95:5-96:69" xsi:type="Or">
+               <operand localId="26" locator="95:11-95:97" xsi:type="InValueSet">
+                  <code localId="24" locator="95:11-95:49" path="negationRationale" scope="NoAntithromboticOrder" xsi:type="Property"/>
+                  <valueset localId="25" locator="95:54-95:97" name="Medical Reason For Not Providing Treatment" xsi:type="ValueSetRef"/>
+               </operand>
+               <operand localId="30" locator="96:10-96:69" xsi:type="InValueSet">
+                  <code localId="28" locator="96:10-96:48" path="negationRationale" scope="NoAntithromboticOrder" xsi:type="Property"/>
+                  <valueset localId="29" locator="96:53-96:69" name="Patient Refusal" xsi:type="ValueSetRef"/>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="47" locator="88:1-91:69" name="Reason for Not Administering Antithrombotic" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="47">
+               <a:s>define &quot;Reason for Not Administering Antithrombotic&quot;:
+  </a:s>
+               <a:s r="46">
+                  <a:s>
+                     <a:s r="36">
+                        <a:s r="35">
+                           <a:s r="35">
+                              <a:s>[&quot;Medication, Not Administered&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Antithrombotic Therapy for Ischemic Stroke&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> NoAntithromboticGiven</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="45">
+                     <a:s>where </a:s>
+                     <a:s r="45">
+                        <a:s r="40">
+                           <a:s r="38">
+                              <a:s r="37">
+                                 <a:s>NoAntithromboticGiven</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="38">
+                                 <a:s>negationRationale</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> in </a:s>
+                           <a:s r="39">
+                              <a:s>&quot;Medical Reason For Not Providing Treatment&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      or </a:s>
+                        <a:s r="44">
+                           <a:s r="42">
+                              <a:s r="41">
+                                 <a:s>NoAntithromboticGiven</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="42">
+                                 <a:s>negationRationale</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> in </a:s>
+                           <a:s r="43">
+                              <a:s>&quot;Patient Refusal&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="46" locator="89:3-91:69" xsi:type="Query">
+            <source localId="36" locator="89:3-89:102" alias="NoAntithromboticGiven">
+               <expression localId="35" locator="89:3-89:80" xmlns:ns2="urn:healthit-gov:qdm:v5_6" dataType="ns2:NegativeMedicationAdministered" templateId="NegativeMedicationAdministered" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="89:36-89:79" name="Antithrombotic Therapy for Ischemic Stroke" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <where localId="45" locator="90:5-91:69" xsi:type="Or">
+               <operand localId="40" locator="90:11-90:97" xsi:type="InValueSet">
+                  <code localId="38" locator="90:11-90:49" path="negationRationale" scope="NoAntithromboticGiven" xsi:type="Property"/>
+                  <valueset localId="39" locator="90:54-90:97" name="Medical Reason For Not Providing Treatment" xsi:type="ValueSetRef"/>
+               </operand>
+               <operand localId="44" locator="91:10-91:69" xsi:type="InValueSet">
+                  <code localId="42" locator="91:10-91:48" path="negationRationale" scope="NoAntithromboticGiven" xsi:type="Property"/>
+                  <valueset localId="43" locator="91:53-91:69" name="Patient Refusal" xsi:type="ValueSetRef"/>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="50" locator="119:1-121:55" name="Documented Reason for No Antithrombotic Ordered or Administered" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="50">
+               <a:s>define &quot;Documented Reason for No Antithrombotic Ordered or Administered&quot;:
+  </a:s>
+               <a:s r="49">
+                  <a:s r="34">
+                     <a:s>&quot;Reason for Not Ordering Antithrombotic&quot;</a:s>
+                  </a:s>
+                  <a:s>
+    union </a:s>
+                  <a:s r="48">
+                     <a:s>&quot;Reason for Not Administering Antithrombotic&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="49" locator="120:3-121:55" xsi:type="Union">
+            <operand xsi:type="As">
+               <operand localId="34" locator="120:3-120:42" name="Reason for Not Ordering Antithrombotic" xsi:type="ExpressionRef"/>
+               <asTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType xsi:type="ChoiceTypeSpecifier">
+                     <choice xmlns:ns3="urn:healthit-gov:qdm:v5_6" name="ns3:NegativeMedicationAdministered" xsi:type="NamedTypeSpecifier"/>
+                     <choice xmlns:ns4="urn:healthit-gov:qdm:v5_6" name="ns4:NegativeMedicationOrder" xsi:type="NamedTypeSpecifier"/>
+                  </elementType>
+               </asTypeSpecifier>
+            </operand>
+            <operand xsi:type="As">
+               <operand localId="48" locator="121:11-121:55" name="Reason for Not Administering Antithrombotic" xsi:type="ExpressionRef"/>
+               <asTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType xsi:type="ChoiceTypeSpecifier">
+                     <choice xmlns:ns5="urn:healthit-gov:qdm:v5_6" name="ns5:NegativeMedicationAdministered" xsi:type="NamedTypeSpecifier"/>
+                     <choice xmlns:ns6="urn:healthit-gov:qdm:v5_6" name="ns6:NegativeMedicationOrder" xsi:type="NamedTypeSpecifier"/>
+                  </elementType>
+               </asTypeSpecifier>
+            </operand>
+         </expression>
+      </def>
+      <def localId="64" locator="114:1-117:172" name="Encounter with Documented Reason for No Antithrombotic Ordered or Administered Day Of or Day After Hospital Arrival" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="64">
+               <a:s>define &quot;Encounter with Documented Reason for No Antithrombotic Ordered or Administered Day Of or Day After Hospital Arrival&quot;:
+  </a:s>
+               <a:s r="63">
+                  <a:s>
+                     <a:s r="20">
+                        <a:s r="19">
+                           <a:s>
+                              <a:s>TJC.&quot;Ischemic Stroke Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> IschemicStrokeEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="62">
+                     <a:s>with </a:s>
+                     <a:s r="52">
+                        <a:s r="51">
+                           <a:s>
+                              <a:s>&quot;Documented Reason for No Antithrombotic Ordered or Administered&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> NoAntithrombotic</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="61">
+                        <a:s r="54">
+                           <a:s r="53">
+                              <a:s>NoAntithrombotic</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="54">
+                              <a:s>authorDatetime</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="61"> during day of </a:s>
+                        <a:s r="60">
+                           <a:s r="55">
+                              <a:s>TJC</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="60">
+                              <a:s>&quot;CalendarDayOfOrDayAfter&quot; ( </a:s>
+                              <a:s r="59">
+                                 <a:s>start of </a:s>
+                                 <a:s r="58">
+                                    <a:s r="56">
+                                       <a:s>Global</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="58">
+                                       <a:s>&quot;HospitalizationWithObservation&quot; ( </a:s>
+                                       <a:s r="57">
+                                          <a:s>IschemicStrokeEncounter</a:s>
+                                       </a:s>
+                                       <a:s> )</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="63" locator="115:3-117:172" xsi:type="Query">
+            <source localId="20" locator="115:3-115:57" alias="IschemicStrokeEncounter">
+               <expression localId="19" locator="115:3-115:33" name="Ischemic Stroke Encounter" libraryName="TJC" xsi:type="ExpressionRef"/>
+            </source>
+            <relationship localId="62" locator="116:5-117:172" alias="NoAntithrombotic" xsi:type="With">
+               <expression localId="51" locator="116:10-116:74" name="Documented Reason for No Antithrombotic Ordered or Administered" xsi:type="ExpressionRef"/>
+               <suchThat localId="61" locator="117:17-117:172" precision="Day" xsi:type="In">
+                  <operand localId="54" locator="117:17-117:47" path="authorDatetime" scope="NoAntithrombotic" xsi:type="Property"/>
+                  <operand localId="60" locator="117:63-117:172" name="CalendarDayOfOrDayAfter" libraryName="TJC" xsi:type="FunctionRef">
+                     <operand localId="59" locator="117:95-117:170" xsi:type="Start">
+                        <operand localId="58" locator="117:104-117:170" name="HospitalizationWithObservation" libraryName="Global" xsi:type="FunctionRef">
+                           <operand localId="57" locator="117:146-117:168" name="IschemicStrokeEncounter" xsi:type="AliasRef"/>
+                        </operand>
+                     </operand>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="85" locator="56:1-59:277" name="Encounter with Pharmacological Contraindications for Antithrombotic Therapy Given Day Of or Day After Hospital Arrival" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="85">
+               <a:s>define &quot;Encounter with Pharmacological Contraindications for Antithrombotic Therapy Given Day Of or Day After Hospital Arrival&quot;:
+  </a:s>
+               <a:s r="84">
+                  <a:s>
+                     <a:s r="67">
+                        <a:s r="66">
+                           <a:s>
+                              <a:s>TJC.&quot;Ischemic Stroke Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> IschemicStrokeEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="83">
+                     <a:s>with </a:s>
+                     <a:s r="69">
+                        <a:s r="68">
+                           <a:s r="68">
+                              <a:s>[&quot;Medication, Administered&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Pharmacological Contraindications For Antithrombotic Therapy&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> PharmacologicalContraindications</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="82">
+                        <a:s r="75">
+                           <a:s r="70">
+                              <a:s>Global</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="75">
+                              <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                              <a:s r="72">
+                                 <a:s r="71">
+                                    <a:s>PharmacologicalContraindications</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="72">
+                                    <a:s>relevantDatetime</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="74">
+                                 <a:s r="73">
+                                    <a:s>PharmacologicalContraindications</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="74">
+                                    <a:s>relevantPeriod</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="82"> starts during day of </a:s>
+                        <a:s r="81">
+                           <a:s r="76">
+                              <a:s>TJC</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="81">
+                              <a:s>&quot;CalendarDayOfOrDayAfter&quot; ( </a:s>
+                              <a:s r="80">
+                                 <a:s>start of </a:s>
+                                 <a:s r="79">
+                                    <a:s r="77">
+                                       <a:s>Global</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="79">
+                                       <a:s>&quot;HospitalizationWithObservation&quot; ( </a:s>
+                                       <a:s r="78">
+                                          <a:s>IschemicStrokeEncounter</a:s>
+                                       </a:s>
+                                       <a:s> )</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="84" locator="57:3-59:277" xsi:type="Query">
+            <source localId="67" locator="57:3-57:57" alias="IschemicStrokeEncounter">
+               <expression localId="66" locator="57:3-57:33" name="Ischemic Stroke Encounter" libraryName="TJC" xsi:type="ExpressionRef"/>
+            </source>
+            <relationship localId="83" locator="58:5-59:277" alias="PharmacologicalContraindications" xsi:type="With">
+               <expression localId="68" locator="58:10-58:101" xmlns:ns7="urn:healthit-gov:qdm:v5_6" dataType="ns7:PositiveMedicationAdministered" templateId="PositiveMedicationAdministered" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="58:39-58:100" name="Pharmacological Contraindications For Antithrombotic Therapy" xsi:type="ValueSetRef"/>
+               </expression>
+               <suchThat localId="82" locator="59:17-59:277" precision="Day" xsi:type="In">
+                  <operand locator="59:147-59:152" xsi:type="Start">
+                     <operand localId="75" locator="59:17-59:145" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                        <operand localId="72" locator="59:46-59:94" path="relevantDatetime" scope="PharmacologicalContraindications" xsi:type="Property"/>
+                        <operand localId="74" locator="59:97-59:143" path="relevantPeriod" scope="PharmacologicalContraindications" xsi:type="Property"/>
+                     </operand>
+                  </operand>
+                  <operand localId="81" locator="59:168-59:277" name="CalendarDayOfOrDayAfter" libraryName="TJC" xsi:type="FunctionRef">
+                     <operand localId="80" locator="59:200-59:275" xsi:type="Start">
+                        <operand localId="79" locator="59:209-59:275" name="HospitalizationWithObservation" libraryName="Global" xsi:type="FunctionRef">
+                           <operand localId="78" locator="59:251-59:273" name="IschemicStrokeEncounter" xsi:type="AliasRef"/>
+                        </operand>
+                     </operand>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="108" locator="40:1-44:28" name="Encounter with An INR Greater Than 3.5" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="108">
+               <a:s>define &quot;Encounter with An INR Greater Than 3.5&quot;:
+  </a:s>
+               <a:s r="107">
+                  <a:s>
+                     <a:s r="89">
+                        <a:s r="88">
+                           <a:s>
+                              <a:s>TJC.&quot;Ischemic Stroke Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> IschemicStrokeEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="106">
+                     <a:s>with </a:s>
+                     <a:s r="91">
+                        <a:s r="90">
+                           <a:s r="90">
+                              <a:s>[&quot;Laboratory Test, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;INR&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> INR</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="105">
+                        <a:s r="100">
+                           <a:s r="93">
+                              <a:s r="92">
+                                 <a:s>INR</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="93">
+                                 <a:s>resultDatetime</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="100"> during day of </a:s>
+                           <a:s r="99">
+                              <a:s r="94">
+                                 <a:s>TJC</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="99">
+                                 <a:s>&quot;CalendarDayOfOrDayAfter&quot; ( </a:s>
+                                 <a:s r="98">
+                                    <a:s>start of </a:s>
+                                    <a:s r="97">
+                                       <a:s r="95">
+                                          <a:s>Global</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="97">
+                                          <a:s>&quot;HospitalizationWithObservation&quot; ( </a:s>
+                                          <a:s r="96">
+                                             <a:s>IschemicStrokeEncounter</a:s>
+                                          </a:s>
+                                          <a:s> )</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+        and </a:s>
+                        <a:s r="104">
+                           <a:s r="102">
+                              <a:s r="101">
+                                 <a:s>INR</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="102">
+                                 <a:s>result</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="103"> > 3.5</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="107" locator="41:3-44:28" xsi:type="Query">
+            <source localId="89" locator="41:3-41:57" alias="IschemicStrokeEncounter">
+               <expression localId="88" locator="41:3-41:33" name="Ischemic Stroke Encounter" libraryName="TJC" xsi:type="ExpressionRef"/>
+            </source>
+            <relationship localId="106" locator="42:5-44:28" alias="INR" xsi:type="With">
+               <expression localId="90" locator="42:10-42:46" xmlns:ns8="urn:healthit-gov:qdm:v5_6" dataType="ns8:PositiveLaboratoryTestPerformed" templateId="PositiveLaboratoryTestPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="42:41-42:45" name="INR" xsi:type="ValueSetRef"/>
+               </expression>
+               <suchThat localId="105" locator="43:17-44:28" xsi:type="And">
+                  <operand localId="100" locator="43:17-43:159" precision="Day" xsi:type="In">
+                     <operand localId="93" locator="43:17-43:34" path="resultDatetime" scope="INR" xsi:type="Property"/>
+                     <operand localId="99" locator="43:50-43:159" name="CalendarDayOfOrDayAfter" libraryName="TJC" xsi:type="FunctionRef">
+                        <operand localId="98" locator="43:82-43:157" xsi:type="Start">
+                           <operand localId="97" locator="43:91-43:157" name="HospitalizationWithObservation" libraryName="Global" xsi:type="FunctionRef">
+                              <operand localId="96" locator="43:133-43:155" name="IschemicStrokeEncounter" xsi:type="AliasRef"/>
+                           </operand>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand localId="104" locator="44:13-44:28" xsi:type="Greater">
+                     <operand asType="t:Decimal" xsi:type="As">
+                        <operand localId="102" locator="44:13-44:22" path="result" scope="INR" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="103" locator="44:26-44:28" valueType="t:Decimal" value="3.5" xsi:type="Literal"/>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="111" locator="26:1-29:50" name="Denominator Exceptions" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="111">
+               <a:s>define &quot;Denominator Exceptions&quot;:
+  </a:s>
+               <a:s r="110">
+                  <a:s r="87">
+                     <a:s r="65">
+                        <a:s>&quot;Encounter with Documented Reason for No Antithrombotic Ordered or Administered Day Of or Day After Hospital Arrival&quot;</a:s>
+                     </a:s>
+                     <a:s>
+    union </a:s>
+                     <a:s r="86">
+                        <a:s>&quot;Encounter with Pharmacological Contraindications for Antithrombotic Therapy Given Day Of or Day After Hospital Arrival&quot;</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    union </a:s>
+                  <a:s r="109">
+                     <a:s>&quot;Encounter with An INR Greater Than 3.5&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="110" locator="27:3-29:50" xsi:type="Union">
+            <operand localId="87" locator="27:3-28:130" xsi:type="Union">
+               <operand localId="65" locator="27:3-27:119" name="Encounter with Documented Reason for No Antithrombotic Ordered or Administered Day Of or Day After Hospital Arrival" xsi:type="ExpressionRef"/>
+               <operand localId="86" locator="28:11-28:130" name="Encounter with Pharmacological Contraindications for Antithrombotic Therapy Given Day Of or Day After Hospital Arrival" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand localId="109" locator="29:11-29:50" name="Encounter with An INR Greater Than 3.5" xsi:type="ExpressionRef"/>
+         </expression>
+      </def>
+      <def localId="120" locator="36:1-38:93" name="Encounter Less Than Two Days" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="120">
+               <a:s>define &quot;Encounter Less Than Two Days&quot;:
+  </a:s>
+               <a:s r="119">
+                  <a:s>
+                     <a:s r="113">
+                        <a:s r="112">
+                           <a:s>
+                              <a:s>TJC.&quot;Ischemic Stroke Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> IschemicStrokeEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="118">
+                     <a:s>where </a:s>
+                     <a:s r="118">
+                        <a:s r="116">
+                           <a:s r="114">
+                              <a:s>Global</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="116">
+                              <a:s>&quot;HospitalizationWithObservationLengthofStay&quot; ( </a:s>
+                              <a:s r="115">
+                                 <a:s>IschemicStrokeEncounter</a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="117"> &lt; 2</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="119" locator="37:3-38:93" xsi:type="Query">
+            <source localId="113" locator="37:3-37:57" alias="IschemicStrokeEncounter">
+               <expression localId="112" locator="37:3-37:33" name="Ischemic Stroke Encounter" libraryName="TJC" xsi:type="ExpressionRef"/>
+            </source>
+            <where localId="118" locator="38:5-38:93" xsi:type="Less">
+               <operand localId="116" locator="38:11-38:89" name="HospitalizationWithObservationLengthofStay" libraryName="Global" xsi:type="FunctionRef">
+                  <operand localId="115" locator="38:65-38:87" name="IschemicStrokeEncounter" xsi:type="AliasRef"/>
+               </operand>
+               <operand localId="117" locator="38:93" valueType="t:Integer" value="2" xsi:type="Literal"/>
+            </where>
+         </expression>
+      </def>
+      <def localId="145" locator="51:1-54:283" name="Encounter with Comfort Measures during Day of or Day After Arrival" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="145">
+               <a:s>define &quot;Encounter with Comfort Measures during Day of or Day After Arrival&quot;:
+  </a:s>
+               <a:s r="144">
+                  <a:s>
+                     <a:s r="123">
+                        <a:s r="122">
+                           <a:s>
+                              <a:s>TJC.&quot;Ischemic Stroke Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> IschemicStrokeEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="143">
+                     <a:s>with </a:s>
+                     <a:s r="125">
+                        <a:s r="124">
+                           <a:s>
+                              <a:s>TJC.&quot;Intervention Comfort Measures&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> ComfortMeasures</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="142">
+                        <a:s r="135">
+                           <a:s>Coalesce(</a:s>
+                           <a:s r="132">
+                              <a:s>start of </a:s>
+                              <a:s r="131">
+                                 <a:s r="126">
+                                    <a:s>Global</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="131">
+                                    <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                    <a:s r="128">
+                                       <a:s r="127">
+                                          <a:s>ComfortMeasures</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="128">
+                                          <a:s>relevantDatetime</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>, </a:s>
+                                    <a:s r="130">
+                                       <a:s r="129">
+                                          <a:s>ComfortMeasures</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="130">
+                                          <a:s>relevantPeriod</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>)</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>, </a:s>
+                           <a:s r="134">
+                              <a:s r="133">
+                                 <a:s>ComfortMeasures</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="134">
+                                 <a:s>authorDatetime</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>)</a:s>
+                        </a:s>
+                        <a:s r="142">during day of </a:s>
+                        <a:s r="141">
+                           <a:s r="136">
+                              <a:s>TJC</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="141">
+                              <a:s>&quot;CalendarDayOfOrDayAfter&quot; ( </a:s>
+                              <a:s r="140">
+                                 <a:s>start of </a:s>
+                                 <a:s r="139">
+                                    <a:s r="137">
+                                       <a:s>Global</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="139">
+                                       <a:s>&quot;HospitalizationWithObservation&quot; ( </a:s>
+                                       <a:s r="138">
+                                          <a:s>IschemicStrokeEncounter</a:s>
+                                       </a:s>
+                                       <a:s> )</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="144" locator="52:3-54:283" xsi:type="Query">
+            <source localId="123" locator="52:3-52:57" alias="IschemicStrokeEncounter">
+               <expression localId="122" locator="52:3-52:33" name="Ischemic Stroke Encounter" libraryName="TJC" xsi:type="ExpressionRef"/>
+            </source>
+            <relationship localId="143" locator="53:5-54:283" alias="ComfortMeasures" xsi:type="With">
+               <expression localId="124" locator="53:10-53:44" name="Intervention Comfort Measures" libraryName="TJC" xsi:type="ExpressionRef"/>
+               <suchThat localId="142" locator="54:17-54:283" precision="Day" xsi:type="In">
+                  <operand localId="135" locator="54:17-54:159" xsi:type="Coalesce">
+                     <operand localId="132" locator="54:26-54:126" xsi:type="Start">
+                        <operand localId="131" locator="54:35-54:126" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                           <operand localId="128" locator="54:62-54:93" path="relevantDatetime" scope="ComfortMeasures" xsi:type="Property"/>
+                           <operand localId="130" locator="54:96-54:125" path="relevantPeriod" scope="ComfortMeasures" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                     <operand localId="134" locator="54:129-54:158" path="authorDatetime" scope="ComfortMeasures" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="141" locator="54:174-54:283" name="CalendarDayOfOrDayAfter" libraryName="TJC" xsi:type="FunctionRef">
+                     <operand localId="140" locator="54:206-54:281" xsi:type="Start">
+                        <operand localId="139" locator="54:215-54:281" name="HospitalizationWithObservation" libraryName="Global" xsi:type="FunctionRef">
+                           <operand localId="138" locator="54:257-54:279" name="IschemicStrokeEncounter" xsi:type="AliasRef"/>
+                        </operand>
+                     </operand>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="153" locator="110:1-112:91" name="Thrombolytic Therapy Medication or Procedures" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="153">
+               <a:s>define &quot;Thrombolytic Therapy Medication or Procedures&quot;:
+  </a:s>
+               <a:s r="152">
+                  <a:s r="150">
+                     <a:s>[&quot;Medication, Administered&quot;: </a:s>
+                     <a:s>
+                        <a:s>&quot;Thrombolytic tPA Therapy&quot;</a:s>
+                     </a:s>
+                     <a:s>]</a:s>
+                  </a:s>
+                  <a:s>
+    union </a:s>
+                  <a:s r="151">
+                     <a:s>[&quot;Procedure, Performed&quot;: </a:s>
+                     <a:s>
+                        <a:s>&quot;Intravenous or Intraarterial Thrombolytic tPA Therapy&quot;</a:s>
+                     </a:s>
+                     <a:s>]</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="152" locator="111:3-112:91" xsi:type="Union">
+            <operand xsi:type="As">
+               <operand localId="150" locator="111:3-111:58" xmlns:ns9="urn:healthit-gov:qdm:v5_6" dataType="ns9:PositiveMedicationAdministered" templateId="PositiveMedicationAdministered" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="111:32-111:57" name="Thrombolytic tPA Therapy" xsi:type="ValueSetRef"/>
+               </operand>
+               <asTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType xsi:type="ChoiceTypeSpecifier">
+                     <choice xmlns:ns10="urn:healthit-gov:qdm:v5_6" name="ns10:PositiveProcedurePerformed" xsi:type="NamedTypeSpecifier"/>
+                     <choice xmlns:ns11="urn:healthit-gov:qdm:v5_6" name="ns11:PositiveMedicationAdministered" xsi:type="NamedTypeSpecifier"/>
+                  </elementType>
+               </asTypeSpecifier>
+            </operand>
+            <operand xsi:type="As">
+               <operand localId="151" locator="112:11-112:91" xmlns:ns12="urn:healthit-gov:qdm:v5_6" dataType="ns12:PositiveProcedurePerformed" templateId="PositiveProcedurePerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="112:36-112:90" name="Intravenous or Intraarterial Thrombolytic tPA Therapy" xsi:type="ValueSetRef"/>
+               </operand>
+               <asTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType xsi:type="ChoiceTypeSpecifier">
+                     <choice xmlns:ns13="urn:healthit-gov:qdm:v5_6" name="ns13:PositiveProcedurePerformed" xsi:type="NamedTypeSpecifier"/>
+                     <choice xmlns:ns14="urn:healthit-gov:qdm:v5_6" name="ns14:PositiveMedicationAdministered" xsi:type="NamedTypeSpecifier"/>
+                  </elementType>
+               </asTypeSpecifier>
+            </operand>
+         </expression>
+      </def>
+      <def localId="176" locator="71:1-75:82" name="Encounter with Thrombolytic Therapy Medication or Procedures" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="176">
+               <a:s>define &quot;Encounter with Thrombolytic Therapy Medication or Procedures&quot;:
+  </a:s>
+               <a:s r="175">
+                  <a:s>
+                     <a:s r="149">
+                        <a:s r="148">
+                           <a:s>
+                              <a:s>TJC.&quot;Ischemic Stroke Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> IschemicStrokeEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="174">
+                     <a:s>with </a:s>
+                     <a:s r="155">
+                        <a:s r="154">
+                           <a:s>
+                              <a:s>&quot;Thrombolytic Therapy Medication or Procedures&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> ThrombolyticTherapy</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="173">
+                        <a:s r="161">
+                           <a:s r="156">
+                              <a:s>Global</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="161">
+                              <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                              <a:s r="158">
+                                 <a:s r="157">
+                                    <a:s>ThrombolyticTherapy</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="158">
+                                    <a:s>relevantDatetime</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="160">
+                                 <a:s r="159">
+                                    <a:s>ThrombolyticTherapy</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="160">
+                                    <a:s>relevantPeriod</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="173"> starts during </a:s>
+                        <a:s r="172">
+                           <a:s>Interval[</a:s>
+                           <a:s r="167">
+                              <a:s r="165">
+                                 <a:s>start of </a:s>
+                                 <a:s r="164">
+                                    <a:s r="162">
+                                       <a:s>Global</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="164">
+                                       <a:s>&quot;HospitalizationWithObservation&quot; ( </a:s>
+                                       <a:s r="163">
+                                          <a:s>IschemicStrokeEncounter</a:s>
+                                       </a:s>
+                                       <a:s> )</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> - </a:s>
+                              <a:s r="166">
+                                 <a:s>24 hours</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>, 
+      </a:s>
+                           <a:s r="171">
+                              <a:s>end of </a:s>
+                              <a:s r="170">
+                                 <a:s r="168">
+                                    <a:s>Global</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="170">
+                                    <a:s>&quot;HospitalizationWithObservation&quot; ( </a:s>
+                                    <a:s r="169">
+                                       <a:s>IschemicStrokeEncounter</a:s>
+                                    </a:s>
+                                    <a:s> )</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> )</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="175" locator="72:3-75:82" xsi:type="Query">
+            <source localId="149" locator="72:3-72:57" alias="IschemicStrokeEncounter">
+               <expression localId="148" locator="72:3-72:33" name="Ischemic Stroke Encounter" libraryName="TJC" xsi:type="ExpressionRef"/>
+            </source>
+            <relationship localId="174" locator="73:5-75:82" alias="ThrombolyticTherapy" xsi:type="With">
+               <expression localId="154" locator="73:10-73:56" name="Thrombolytic Therapy Medication or Procedures" xsi:type="ExpressionRef"/>
+               <suchThat localId="173" locator="74:17-75:82" xsi:type="In">
+                  <operand locator="74:121-74:126" xsi:type="Start">
+                     <operand localId="161" locator="74:17-74:119" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                        <operand localId="158" locator="74:46-74:81" path="relevantDatetime" scope="ThrombolyticTherapy" xsi:type="Property"/>
+                        <operand localId="160" locator="74:84-74:117" path="relevantPeriod" scope="ThrombolyticTherapy" xsi:type="Property"/>
+                     </operand>
+                  </operand>
+                  <operand localId="172" locator="74:135-75:82" lowClosed="true" highClosed="false" xsi:type="Interval">
+                     <low localId="167" locator="74:144-74:230" xsi:type="Subtract">
+                        <operand localId="165" locator="74:144-74:219" xsi:type="Start">
+                           <operand localId="164" locator="74:153-74:219" name="HospitalizationWithObservation" libraryName="Global" xsi:type="FunctionRef">
+                              <operand localId="163" locator="74:195-74:217" name="IschemicStrokeEncounter" xsi:type="AliasRef"/>
+                           </operand>
+                        </operand>
+                        <operand localId="166" locator="74:223-74:230" value="24" unit="hours" xsi:type="Quantity"/>
+                     </low>
+                     <high localId="171" locator="75:7-75:80" xsi:type="End">
+                        <operand localId="170" locator="75:14-75:80" name="HospitalizationWithObservation" libraryName="Global" xsi:type="FunctionRef">
+                           <operand localId="169" locator="75:56-75:78" name="IschemicStrokeEncounter" xsi:type="AliasRef"/>
+                        </operand>
+                     </high>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="189" locator="77:1-80:103" name="Encounter with Thrombolytic Therapy Prior to Arrival" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="189">
+               <a:s>define &quot;Encounter with Thrombolytic Therapy Prior to Arrival&quot;:
+  </a:s>
+               <a:s r="188">
+                  <a:s>
+                     <a:s r="179">
+                        <a:s r="178">
+                           <a:s>
+                              <a:s>TJC.&quot;Ischemic Stroke Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> IschemicStrokeEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="187">
+                     <a:s>where </a:s>
+                     <a:s r="187">
+                        <a:s>exists </a:s>
+                        <a:s r="186">
+                           <a:s>
+                              <a:s r="181">
+                                 <a:s r="180">
+                                    <a:s>
+                                       <a:s>IschemicStrokeEncounter.diagnoses</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> Diagnosis</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+      </a:s>
+                           <a:s r="185">
+                              <a:s>where </a:s>
+                              <a:s r="185">
+                                 <a:s r="183">
+                                    <a:s r="182">
+                                       <a:s>Diagnosis</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="183">
+                                       <a:s>code</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> in </a:s>
+                                 <a:s r="184">
+                                    <a:s>&quot;Intravenous or Intra arterial Thrombolytic tPA Therapy Prior to Arrival&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="188" locator="78:3-80:103" xsi:type="Query">
+            <source localId="179" locator="78:3-78:57" alias="IschemicStrokeEncounter">
+               <expression localId="178" locator="78:3-78:33" name="Ischemic Stroke Encounter" libraryName="TJC" xsi:type="ExpressionRef"/>
+            </source>
+            <where localId="187" locator="79:5-80:103" xsi:type="Exists">
+               <operand localId="186" locator="79:18-80:103" xsi:type="Query">
+                  <source localId="181" locator="79:18-79:60" alias="Diagnosis">
+                     <expression localId="180" locator="79:18-79:50" path="diagnoses" scope="IschemicStrokeEncounter" xsi:type="Property"/>
+                  </source>
+                  <where localId="185" locator="80:7-80:103" xsi:type="InValueSet">
+                     <code localId="183" locator="80:13-80:26" path="code" scope="Diagnosis" xsi:type="Property"/>
+                     <valueset localId="184" locator="80:31-80:103" name="Intravenous or Intra arterial Thrombolytic tPA Therapy Prior to Arrival" xsi:type="ValueSetRef"/>
+                  </where>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="204" locator="61:1-64:114" name="Encounter with Thrombolytic Therapy Documented As Already Given" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="204">
+               <a:s>define &quot;Encounter with Thrombolytic Therapy Documented As Already Given&quot;:
+  </a:s>
+               <a:s r="203">
+                  <a:s>
+                     <a:s r="193">
+                        <a:s r="192">
+                           <a:s>
+                              <a:s>TJC.&quot;Ischemic Stroke Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> IschemicStrokeEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="202">
+                     <a:s>with </a:s>
+                     <a:s r="195">
+                        <a:s r="194">
+                           <a:s r="194">
+                              <a:s>[Diagnosis: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Intravenous or Intra arterial Thrombolytic tPA Therapy Prior to Arrival&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> PriorTPA</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="201">
+                        <a:s r="197">
+                           <a:s r="196">
+                              <a:s>PriorTPA</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="197">
+                              <a:s>authorDatetime</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="201"> during </a:s>
+                        <a:s r="200">
+                           <a:s r="198">
+                              <a:s>Global</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="200">
+                              <a:s>&quot;HospitalizationWithObservation&quot; ( </a:s>
+                              <a:s r="199">
+                                 <a:s>IschemicStrokeEncounter</a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="203" locator="62:3-64:114" xsi:type="Query">
+            <source localId="193" locator="62:3-62:57" alias="IschemicStrokeEncounter">
+               <expression localId="192" locator="62:3-62:33" name="Ischemic Stroke Encounter" libraryName="TJC" xsi:type="ExpressionRef"/>
+            </source>
+            <relationship localId="202" locator="63:5-64:114" alias="PriorTPA" xsi:type="With">
+               <expression localId="194" locator="63:10-63:95" xmlns:ns15="urn:healthit-gov:qdm:v5_6" dataType="ns15:Diagnosis" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="63:22-63:94" name="Intravenous or Intra arterial Thrombolytic tPA Therapy Prior to Arrival" xsi:type="ValueSetRef"/>
+               </expression>
+               <suchThat localId="201" locator="64:17-64:114" xsi:type="In">
+                  <operand localId="197" locator="64:17-64:39" path="authorDatetime" scope="PriorTPA" xsi:type="Property"/>
+                  <operand localId="200" locator="64:48-64:114" name="HospitalizationWithObservation" libraryName="Global" xsi:type="FunctionRef">
+                     <operand localId="199" locator="64:90-64:112" name="IschemicStrokeEncounter" xsi:type="AliasRef"/>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="207" locator="66:1-69:75" name="Encounter with Thrombolytic Therapy Given Prior To Arrival Or During Hospitalization" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="207">
+               <a:s>define &quot;Encounter with Thrombolytic Therapy Given Prior To Arrival Or During Hospitalization&quot;:
+  </a:s>
+               <a:s r="206">
+                  <a:s r="191">
+                     <a:s r="177">
+                        <a:s>&quot;Encounter with Thrombolytic Therapy Medication or Procedures&quot;</a:s>
+                     </a:s>
+                     <a:s>
+    union </a:s>
+                     <a:s r="190">
+                        <a:s>&quot;Encounter with Thrombolytic Therapy Prior to Arrival&quot;</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    union </a:s>
+                  <a:s r="205">
+                     <a:s>&quot;Encounter with Thrombolytic Therapy Documented As Already Given&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="206" locator="67:3-69:75" xsi:type="Union">
+            <operand localId="191" locator="67:3-68:64" xsi:type="Union">
+               <operand localId="177" locator="67:3-67:64" name="Encounter with Thrombolytic Therapy Medication or Procedures" xsi:type="ExpressionRef"/>
+               <operand localId="190" locator="68:11-68:64" name="Encounter with Thrombolytic Therapy Prior to Arrival" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand localId="205" locator="69:11-69:75" name="Encounter with Thrombolytic Therapy Documented As Already Given" xsi:type="ExpressionRef"/>
+         </expression>
+      </def>
+      <def localId="210" locator="31:1-34:96" name="Denominator Exclusions" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="210">
+               <a:s>define &quot;Denominator Exclusions&quot;:
+  </a:s>
+               <a:s r="209">
+                  <a:s r="147">
+                     <a:s r="121">
+                        <a:s>&quot;Encounter Less Than Two Days&quot;</a:s>
+                     </a:s>
+                     <a:s>
+    union </a:s>
+                     <a:s r="146">
+                        <a:s>&quot;Encounter with Comfort Measures during Day of or Day After Arrival&quot;</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    union </a:s>
+                  <a:s r="208">
+                     <a:s>&quot;Encounter with Thrombolytic Therapy Given Prior To Arrival Or During Hospitalization&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="209" locator="32:3-34:96" xsi:type="Union">
+            <operand localId="147" locator="32:3-33:78" xsi:type="Union">
+               <operand localId="121" locator="32:3-32:32" name="Encounter Less Than Two Days" xsi:type="ExpressionRef"/>
+               <operand localId="146" locator="33:11-33:78" name="Encounter with Comfort Measures during Day of or Day After Arrival" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand localId="208" locator="34:11-34:96" name="Encounter with Thrombolytic Therapy Given Prior To Arrival Or During Hospitalization" xsi:type="ExpressionRef"/>
+         </expression>
+      </def>
+      <def localId="230" locator="46:1-49:241" name="Encounter with Antithrombotic Therapy" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="230">
+               <a:s>define &quot;Encounter with Antithrombotic Therapy&quot;:
+  </a:s>
+               <a:s r="229">
+                  <a:s>
+                     <a:s r="212">
+                        <a:s r="211">
+                           <a:s>
+                              <a:s>TJC.&quot;Ischemic Stroke Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> IschemicStrokeEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="228">
+                     <a:s>with </a:s>
+                     <a:s r="214">
+                        <a:s r="213">
+                           <a:s r="213">
+                              <a:s>[&quot;Medication, Administered&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Antithrombotic Therapy for Ischemic Stroke&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> Antithrombotic</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="227">
+                        <a:s r="220">
+                           <a:s r="215">
+                              <a:s>Global</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="220">
+                              <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                              <a:s r="217">
+                                 <a:s r="216">
+                                    <a:s>Antithrombotic</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="217">
+                                    <a:s>relevantDatetime</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="219">
+                                 <a:s r="218">
+                                    <a:s>Antithrombotic</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="219">
+                                    <a:s>relevantPeriod</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="227"> starts during day of </a:s>
+                        <a:s r="226">
+                           <a:s r="221">
+                              <a:s>TJC</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="226">
+                              <a:s>&quot;CalendarDayOfOrDayAfter&quot; ( </a:s>
+                              <a:s r="225">
+                                 <a:s>start of </a:s>
+                                 <a:s r="224">
+                                    <a:s r="222">
+                                       <a:s>Global</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="224">
+                                       <a:s>&quot;HospitalizationWithObservation&quot; ( </a:s>
+                                       <a:s r="223">
+                                          <a:s>IschemicStrokeEncounter</a:s>
+                                       </a:s>
+                                       <a:s> )</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="229" locator="47:3-49:241" xsi:type="Query">
+            <source localId="212" locator="47:3-47:57" alias="IschemicStrokeEncounter">
+               <expression localId="211" locator="47:3-47:33" name="Ischemic Stroke Encounter" libraryName="TJC" xsi:type="ExpressionRef"/>
+            </source>
+            <relationship localId="228" locator="48:5-49:241" alias="Antithrombotic" xsi:type="With">
+               <expression localId="213" locator="48:10-48:83" xmlns:ns16="urn:healthit-gov:qdm:v5_6" dataType="ns16:PositiveMedicationAdministered" templateId="PositiveMedicationAdministered" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="48:39-48:82" name="Antithrombotic Therapy for Ischemic Stroke" xsi:type="ValueSetRef"/>
+               </expression>
+               <suchThat localId="227" locator="49:17-49:241" precision="Day" xsi:type="In">
+                  <operand locator="49:111-49:116" xsi:type="Start">
+                     <operand localId="220" locator="49:17-49:109" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                        <operand localId="217" locator="49:46-49:76" path="relevantDatetime" scope="Antithrombotic" xsi:type="Property"/>
+                        <operand localId="219" locator="49:79-49:107" path="relevantPeriod" scope="Antithrombotic" xsi:type="Property"/>
+                     </operand>
+                  </operand>
+                  <operand localId="226" locator="49:132-49:241" name="CalendarDayOfOrDayAfter" libraryName="TJC" xsi:type="FunctionRef">
+                     <operand localId="225" locator="49:164-49:239" xsi:type="Start">
+                        <operand localId="224" locator="49:173-49:239" name="HospitalizationWithObservation" libraryName="Global" xsi:type="FunctionRef">
+                           <operand localId="223" locator="49:215-49:237" name="IschemicStrokeEncounter" xsi:type="AliasRef"/>
+                        </operand>
+                     </operand>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="233" locator="82:1-83:50" name="Initial Population" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="233">
+               <a:s>define &quot;Initial Population&quot;:
+  </a:s>
+               <a:s r="232">
+                  <a:s r="231">
+                     <a:s>TJC</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="232">
+                     <a:s>&quot;Encounter with Principal Diagnosis and Age&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="232" locator="83:3-83:50" name="Encounter with Principal Diagnosis and Age" libraryName="TJC" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="235" locator="85:1-86:41" name="Numerator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="235">
+               <a:s>define &quot;Numerator&quot;:
+  </a:s>
+               <a:s r="234">
+                  <a:s>&quot;Encounter with Antithrombotic Therapy&quot;</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="234" locator="86:3-86:41" name="Encounter with Antithrombotic Therapy" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="237" locator="98:1-99:51" name="SDE Ethnicity" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="237">
+               <a:s>define &quot;SDE Ethnicity&quot;:
+  </a:s>
+               <a:s r="236">
+                  <a:s>[&quot;Patient Characteristic Ethnicity&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Ethnicity&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="236" locator="99:3-99:51" xmlns:ns17="urn:healthit-gov:qdm:v5_6" dataType="ns17:PatientCharacteristicEthnicity" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="99:40-99:50" name="Ethnicity" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="239" locator="101:1-102:43" name="SDE Payer" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="239">
+               <a:s>define &quot;SDE Payer&quot;:
+  </a:s>
+               <a:s r="238">
+                  <a:s>[&quot;Patient Characteristic Payer&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Payer&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="238" locator="102:3-102:43" xmlns:ns18="urn:healthit-gov:qdm:v5_6" dataType="ns18:PatientCharacteristicPayer" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="102:36-102:42" name="Payer" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="241" locator="104:1-105:41" name="SDE Race" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="241">
+               <a:s>define &quot;SDE Race&quot;:
+  </a:s>
+               <a:s r="240">
+                  <a:s>[&quot;Patient Characteristic Race&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Race&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="240" locator="105:3-105:41" xmlns:ns19="urn:healthit-gov:qdm:v5_6" dataType="ns19:PatientCharacteristicRace" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="105:35-105:40" name="Race" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="243" locator="107:1-108:58" name="SDE Sex" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="243">
+               <a:s>define &quot;SDE Sex&quot;:
+  </a:s>
+               <a:s r="242">
+                  <a:s>[&quot;Patient Characteristic Sex&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;ONC Administrative Sex&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="242" locator="108:3-108:58" xmlns:ns20="urn:healthit-gov:qdm:v5_6" dataType="ns20:PatientCharacteristicSex" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="108:34-108:57" name="ONC Administrative Sex" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+   </statements>
+</library>

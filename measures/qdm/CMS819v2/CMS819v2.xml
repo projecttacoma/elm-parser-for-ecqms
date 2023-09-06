@@ -1,0 +1,822 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<QualityMeasureDocument xmlns="urn:hl7-org:v3" xmlns:cql-ext="urn:hhs-cql:hqmf-n1-extensions:v1"
+                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+      <!--
+            **************************************************************
+            Measure Details Section
+            **************************************************************
+        -->
+
+      <typeId extension="POQM_HD000001UV02" root="2.16.840.1.113883.1.3"/>
+   <templateId>
+      <item extension="2021-02-01" root="2.16.840.1.113883.10.20.28.1.2"/>
+   </templateId>
+   <id root="2c928084-808a-9589-0180-8b94695c0128"/>
+   <code code="57024-2" codeSystem="2.16.840.1.113883.6.1">
+      <displayName value="Health Quality Measure Document"/>
+   </code>
+   <title value="Hospital Harm - Opioid-Related Adverse Events"/>
+   <text
+         value="This measure assesses the number of inpatient hospitalizations for patients age 18 and older who have been administered an opioid medication and are subsequently administered an opioid antagonist within 12 hours, an indication of an opioid-related adverse event"/>
+   <statusCode code="COMPLETED"/>
+   <setId root="cb58c1ef-e8a9-4a8d-af83-760d354077db"/>
+   <versionNumber value="2.0.000"/>
+   <author>
+      <responsibleParty classCode="ASSIGNED">
+         <representedResponsibleOrganization classCode="ORG" determinerCode="INSTANCE">
+            <id>
+               <item root="e9606bf4-a69f-11ea-bb37-0242ac130002"/>
+            </id>
+            <name>
+               <item>
+                  <part value="American Institutes for Research (AIR)"/>
+               </item>
+            </name>
+         </representedResponsibleOrganization>
+      </responsibleParty>
+   </author>
+   <custodian>
+      <responsibleParty classCode="ASSIGNED">
+         <representedResponsibleOrganization classCode="ORG" determinerCode="INSTANCE">
+            <id>
+               <item root="93"/>
+            </id>
+            <name>
+               <item>
+                  <part value="Centers for Medicare &amp; Medicaid Services (CMS)"/>
+               </item>
+            </name>
+         </representedResponsibleOrganization>
+      </responsibleParty>
+   </custodian>
+   <verifier>
+      <responsibleParty classCode="ASSIGNED">
+         <representedResponsibleOrganization classCode="ORG" determinerCode="INSTANCE">
+            <id>
+               <item root="2.16.840.1.113883.3.560"/>
+            </id>
+            <name>
+               <item>
+                  <part value="National Quality Forum"/>
+               </item>
+            </name>
+         </representedResponsibleOrganization>
+      </responsibleParty>
+   </verifier>
+   <!--Encounter Inpatient-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.666.5.307"/>
+         <title value="Encounter Inpatient"/>
+      </valueSet>
+   </definition>
+   <!--Payer-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.114222.4.11.3591"/>
+         <title value="Payer"/>
+      </valueSet>
+   </definition>
+   <!--ONC Administrative Sex-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113762.1.4.1"/>
+         <title value="ONC Administrative Sex"/>
+      </valueSet>
+   </definition>
+   <!--Ethnicity-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.114222.4.11.837"/>
+         <title value="Ethnicity"/>
+      </valueSet>
+   </definition>
+   <!--Opioids, All-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113762.1.4.1196.226"/>
+         <title value="Opioids, All"/>
+      </valueSet>
+   </definition>
+   <!--Observation Services-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113762.1.4.1111.143"/>
+         <title value="Observation Services"/>
+      </valueSet>
+   </definition>
+   <!--Race-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.114222.4.11.836"/>
+         <title value="Race"/>
+      </valueSet>
+   </definition>
+   <!--Emergency Department Visit-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113883.3.117.1.7.1.292"/>
+         <title value="Emergency Department Visit"/>
+      </valueSet>
+   </definition>
+   <!--Opioid Antagonist-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113762.1.4.1248.119"/>
+         <title value="Opioid Antagonist"/>
+      </valueSet>
+   </definition>
+   <!--Routes of Administration for Opioid Antagonists-->
+     	 <definition>
+      <valueSet classCode="OBS" moodCode="DEF">
+         <id root="2.16.840.1.113762.1.4.1248.187"/>
+         <title value="Routes of Administration for Opioid Antagonists"/>
+      </valueSet>
+   </definition>
+   <!--Operating Room/Suite-CODE:/CodeSystem/HSLOC/Version/2017/Code/1096-7/Info-->
+      <definition>
+      <cql-ext:code code="1096-7" codeSystem="2.16.840.1.113883.6.259" codeSystemName="HSLOC">
+         <displayName value="Operating Room/Suite"/>
+      </cql-ext:code>
+   </definition>
+   <relatedDocument typeCode="COMP">
+      <expressionDocument>
+         <id root="54FBC74F-B998-4B6B-8D3D-E252686CD0E4"/>
+         <text mediaType="text/cql">
+            <reference value="https://emeasuretool.cms.gov/libraries/cb58c1ef-e8a9-4a8d-af83-760d354077db/CMS819-v2-0-000-QDM-5-6.cql"/>
+            <translation mediaType="application/elm+xml">
+               <reference value="https://emeasuretool.cms.gov/libraries/cb58c1ef-e8a9-4a8d-af83-760d354077db/CMS819-v2-0-000-QDM-5-6.xml"/>
+            </translation>
+            <translation mediaType="application/elm+json">
+               <reference value="https://emeasuretool.cms.gov/libraries/cb58c1ef-e8a9-4a8d-af83-760d354077db/CMS819-v2-0-000-QDM-5-6.json"/>
+            </translation>
+         </text>
+         <setId extension="cb58c1ef-e8a9-4a8d-af83-760d354077db"
+                identifierName="HospitalHarmOpioidRelatedAdverseEvents"
+                root="https://emeasuretool.cms.gov/libraries"/>
+         <versionNumber value="2.0.000"/>
+      </expressionDocument>
+   </relatedDocument>
+   <relatedDocument typeCode="COMP">
+      <expressionDocument>
+         <id root="2c9280857b2aeb52017b5f8b96c31ff8"/>
+         <text mediaType="text/cql">
+            <reference value="https://emeasuretool.cms.gov/libraries/8bdc0a19-b210-4a58-8a07-f5d95a34eca9/MATGlobalCommonFunctions-v7-0-000-QDM-5-6.cql"/>
+            <translation mediaType="application/elm+xml">
+               <reference value="https://emeasuretool.cms.gov/libraries/8bdc0a19-b210-4a58-8a07-f5d95a34eca9/MATGlobalCommonFunctions-v7-0-000-QDM-5-6.xml"/>
+            </translation>
+            <translation mediaType="application/elm+json">
+               <reference value="https://emeasuretool.cms.gov/libraries/8bdc0a19-b210-4a58-8a07-f5d95a34eca9/MATGlobalCommonFunctions-v7-0-000-QDM-5-6.json"/>
+            </translation>
+         </text>
+         <setId extension="8bdc0a19-b210-4a58-8a07-f5d95a34eca9"
+                identifierName="MATGlobalCommonFunctions"
+                root="https://emeasuretool.cms.gov/libraries"/>
+         <versionNumber value="7.0.000"/>
+      </expressionDocument>
+   </relatedDocument>
+   <controlVariable>
+      <measurePeriod>
+         <id extension="measureperiod" root="f220bdbe-ee4e-41a5-8b7a-e1f50e73395c"/>
+         <code code="MSRTP" codeSystem="2.16.840.1.113883.5.4">
+            <originalText value="Measurement Period"/>
+         </code>
+         <value xsi:type="PIVL_TS">
+            <phase highClosed="true" lowClosed="true">
+               <low value="20230101"/>
+               <width unit="a" value="1" xsi:type="PQ"/>
+            </phase>
+            <period unit="a" value="1"/>
+         </value>
+      </measurePeriod>
+   </controlVariable>
+   <subjectOf>
+      <measureAttribute>
+         <code nullFlavor="OTH">
+            <originalText value="eCQM Identifier (Measure Authoring Tool)"/>
+         </code>
+         <value mediaType="text/plain" value="819" xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code nullFlavor="OTH">
+            <originalText value="NQF Number"/>
+         </code>
+         <value mediaType="text/plain" value="3501e" xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="COPY" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Copyright"/>
+         </code>
+         <value mediaType="text/plain"
+                value="Limited proprietary coding is contained in the Measure specifications for user convenience. Users of proprietary code sets should obtain all necessary licenses from the owners of the code sets. American Institutes for Research(R), formerly IMPAQ International, disclaims all liability for use or accuracy of any third party codes contained in the specifications.&#xA;&#xA;LOINC(R) copyright 2004-2022 Regenstrief Institute, Inc. This material contains SNOMED Clinical Terms(R) (SNOMED CT[R]) copyright 2004-2022 International Health Terminology Standards Development Organisation. ICD-10 copyright 2022 World Health Organization. All Rights Reserved."
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="DISC" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Disclaimer"/>
+         </code>
+         <value mediaType="text/plain"
+                value="This performance measure is not a clinical guideline, does not establish a standard of medical care and has not been tested for all potential applications.&#xA;&#xA;THE MEASURES AND SPECIFICATIONS ARE PROVIDED &quot;AS IS&quot; WITHOUT WARRANTY OF ANY KIND.&#xA;&#xA;Due to technical limitations, registered trademarks are indicated by (R) or [R] and unregistered trademarks are indicated by (TM) or [TM]."
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="MSRSCORE" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Measure Scoring"/>
+         </code>
+         <value code="PROPOR" codeSystem="2.16.840.1.113883.5.1063" xsi:type="CD">
+            <displayName value="Proportion"/>
+         </value>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="MSRTYPE" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Measure Type"/>
+         </code>
+         <value code="OUTCOME" codeSystem="2.16.840.1.113883.5.1063" xsi:type="CD">
+            <displayName value="OUTCOME"/>
+         </value>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="STRAT" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Stratification"/>
+         </code>
+         <value mediaType="text/plain" value="None" xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="MSRADJ" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Risk Adjustment"/>
+         </code>
+         <value mediaType="text/plain" value="None" xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="MSRAGG" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Rate Aggregation"/>
+         </code>
+         <value mediaType="text/plain" value="None" xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="RAT" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Rationale"/>
+         </code>
+         <value mediaType="text/plain"
+                value="Opioids are often the foundation for sedation and pain relief. Opioid-based analgesia continues to be the most commonly used treatment in postoperative pain management, with more than 95% of surgical patients receiving opioids during their hospitalization (Baker et al., 2020). However, use of opioids can also lead to serious adverse events, including constipation, over sedation, delirium, and respiratory depression (Urman, 2022). Opioid-related adverse events (ORADE) have both patient-level and financial implications. The presence of an ORADE was associated with a 55% longer postoperative length of stay, 29% lower odds of discharge home, and 2.9 times the odds of death (Urman, 2021). Patients who experience this event have been noted to have 55% longer lengths of stay (LOS), 47% higher costs, 36% higher risk of 30-day readmission, and 3.4 times higher payments than patients without these adverse events (Kessler et al., 2013). For surgical patients, occurrence of opioid-related adverse events was associated with an increase of 1.6 days in LOS and $8225 more in cost for the index hospitalization (Shafi et al., 2018). Numerous studies report the additive (risk-adjusted) hospitalization cost burden of surgical patients with ORADEs to be between $4350–$8225, representing a 27–47% increase in (risk-adjusted) admission costs (Khanna, 2021).&#xA;&#xA;Most opioid-related adverse events are preventable. Each year, adverse drug events (ADE) account for nearly 700,000 emergency department visits and 100,000 hospitalizations. Nearly 5% of hospitalized patients experience an ADE, making them one of the most common types of inpatient errors (https://psnet.ahrq.gov/primer/medication-errors-and-adverse-drug-events, 2019). Additionally, in a closed-claims analysis, 97% of adverse events were judged preventable with better monitoring and response (Lee et al., 2015). Naloxone administration is often used as an indicator of a severe opioid-related adverse event, and implementation of this measure can advance safe use of opioids in hospitals and prevent these serious and potentially lethal adverse drug events."
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="CRS" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Clinical Recommendation Statement"/>
+         </code>
+         <value mediaType="text/plain"
+                value="Naloxone is an opioid reversal agent typically used for severe opioid-related adverse events. Naloxone administration has been used in a number of studies as an indicator of opioid-related adverse events (Lynn et al., 2017, Nwulu et al., 2013).&#xA;&#xA;From Section 10 of the 2015 American Heart Association Guidelines Update for Cardiopulmonary Resuscitation and Emergency Cardiovascular Care (Lavonas et al., 2015), the following recommendation is listed for use of Naloxone:&#xA;&#xA;Naloxone is a potent opioid receptor antagonist in the brain, spinal cord, and gastrointestinal system. Naloxone has an excellent safety profile and can rapidly reverse central nervous system (CNS) and respiratory depression in a patient with an opioid-associated resuscitative emergency.&#xA;&#xA;In February 2022, FDA approved its abbreviated new drug application for Nalmefene hydrochloride injection, 2mg/2mL (1mg/1mL). Nalmefene is an opioid antagonist indicated for the complete or partial reversal of opioid drug effects, including respiratory depression, induced by either natural or synthetic opioids, and in the management of known or suspected opioid overdose (FDA, 2022). In contrast to Naloxone, the long half-life of Nalmefene is similar to or greater than that of many opioid receptor agonists (Britch et al., 2022), which could decrease the need for repeat drug administration. Data are lacking on use of Nalmefene for reversal of overdose due to fentanyl or its analogues. For emergent reversal of opioid overdose, Naloxone is a safer choice (Med Lett Drugs Ther, 2022). &#xA;&#xA;2020 American Heart Association guidelines update for cardiopulmonary resuscitation continue to recommend Naloxone for a patient with suspected opioid overdose who has a definite pulse but no normal breathing or only gasping (i.e., a respiratory arrest), in addition to providing standard Pediatric Basic Life Support (PBLS) or Pediatric Advanced Life Support (PALS), it is reasonable for responders to administer intramuscular or intranasal naloxone. These recommendations are&#xA;identical for adults (https://cpr.heart.org/-/media/cpr-files/cpr-guidelines-files/highlights/hghlghts_2020_ecc_guidelines_english.pdf)."
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="IDUR" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Improvement Notation"/>
+         </code>
+         <value mediaType="text/plain" value="A lower proportion indicates higher quality"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Reference"/>
+         </code>
+         <value mediaType="text/plain"
+                value="CITATIONAgency for Healthcare Research and Quality. (2019). Medication Errors and Adverse Drug Events. Rockville: US Department of Health &amp; Human Services. Retrieved from https://psnet.ahrq.gov/primer/medication-errors-and-adverse-drug-events"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Reference"/>
+         </code>
+         <value mediaType="text/plain"
+                value="CITATIONAmerican Heart Association. (2020). Highlights of the 2020 American Heart Association's Guidelines for CPR and ECC. https://cpr.heart.org/-/media/cpr-files/cpr-guidelines-files/highlights/hghlghts_2020_ecc_guidelines_english.pdf"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Reference"/>
+         </code>
+         <value mediaType="text/plain"
+                value="CITATIONAmerican Heart Association and American Society of Anesthesiologists (2021). Naloxone in CPR/AED Training and Public Access to Defibrillation. Retrieved from https://www.heart.org/-/media/Files/About-Us/Policy-Research/Policy-Positions/CPR-and-AED/Naloxone-Position-Statement.pdf"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Reference"/>
+         </code>
+         <value mediaType="text/plain"
+                value="CITATIONBaker, J., Brovman, E.Y., Rao, N., Beutler, S.S., Urman, R.D. (2020). Potential Opioid-Related Adverse Drug Events Are Associated With Decreased Revenue in Hip Replacement Surgery in the Older Population. Geriatric Orthopaedic Surgery &amp; Rehabilitation. January 2020. doi:10.1177/2151459320915328"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Reference"/>
+         </code>
+         <value mediaType="text/plain"
+                value="CITATIONBritch, S.C., Walsh, S.L. (2022). Treatment of opioid overdose: current approaches and recent advances. Psychopharmacology (Berl). 2022;239(7):2063-2081. doi:10.1007/s00213-022-06125-5"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Reference"/>
+         </code>
+         <value mediaType="text/plain"
+                value="CITATIONFood and Drug Administration. (2022). Nalmefene Hydrochloride Injection 2mg/2mL (1mg/1mL) [Full Prescribing Information]. Stamford, CT: Purdue Pharma L.P., 02/08/2022. https://www.accessdata.fda.gov/spl/data/d4bb0797-a4ed-4ed4-9904-604433eea4ff/d4bb0797-a4ed-4ed4-9904-604433eea4ff.xml"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Reference"/>
+         </code>
+         <value mediaType="text/plain"
+                value="CITATIONKessler, E. R., Shah, M., Gruschkus, S. K., &amp; Raju, A. (2013). Cost and quality implications of opioid-based postsurgical pain control using administrative claims data from a large health system: opioid-related adverse events and their impact on clinical and economic outcomes. Pharmacotherapy, 33(4), 383-391. doi: 10.1002/phar.1223"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Reference"/>
+         </code>
+         <value mediaType="text/plain"
+                value="CITATIONKhanna, A.K., Saager, L., Bergese, S.D., et al. (2021). Opioid-induced respiratory depression increases hospital costs and length of stay in patients recovering on the general care floor. BMC Anesthesiol. 2021;21(1):88. Published 2021 Mar 20. doi:10.1186/s12871-021-01307-8"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Reference"/>
+         </code>
+         <value mediaType="text/plain"
+                value="CITATIONLavonas, E. J., Drennan, I. R., Gabrielli, A., Heffner, A. C., Hoyte, C. O., Orkin, A. M., Donnino, M. W. (2015). Part 10: Special Circumstances of Resuscitation. 2015 American Heart Association Guidelines Update for Cardiopulmonary Resuscitation and Emergency Cardiovascular Care, 132(18 suppl 2), S501-S518. doi: 10.1161/cir.0000000000000264"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Reference"/>
+         </code>
+         <value mediaType="text/plain"
+                value="CITATIONLee, L. A., Caplan, R. A., Stephens, L. S., Posner, K. L., Terman, G. W., Voepel-Lewis, T., &amp; Domino, K. B. (2015). Postoperative opioid-induced respiratory depression: a closed claims analysis. Anesthesiology, 122(3), 659-665"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Reference"/>
+         </code>
+         <value mediaType="text/plain"
+                value="CITATIONLynn, R. R., Galinkin, J. (2017). Naloxone dosage for opioid reversal: Current evidence and clinical implications. Therapeutic Advances in Drug Safety, 9(1), 63-88. doi:10.1177/2042098617744161"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Reference"/>
+         </code>
+         <value mediaType="text/plain"
+                value="CITATIONMakary, M. A., Daniel, M. (2016). Medical error-the third leading cause of death in the US. BMJ, 353, i2139. doi: 10.1136/bmj.i2139"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Reference"/>
+         </code>
+         <value mediaType="text/plain"
+                value="CITATIONMed Lett Drugs Ther. (2022). Nalmefene Returns for Reversal of Opioid Overdose. Sep 5;64(1658):141-2"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Reference"/>
+         </code>
+         <value mediaType="text/plain"
+                value="CITATIONNwulu, U., Nirantharakumar, K., Odesanya, R., McDowell, S. E., Coleman, J. J. (2013). Improvement in the detection of adverse drug events by the use of electronic health and prescription records: an evaluation of two trigger tools. Eur J Clin Pharmacol, 69(2), 255-259. doi: 10.1007/s00228-012-1327-1"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Reference"/>
+         </code>
+         <value mediaType="text/plain"
+                value="CITATIONShafi, S., Collinsworth, A.W., Copeland, L.A., et al. (2018). Association of Opioid-Related Adverse Drug Events With Clinical and Cost Outcomes Among Surgical Patients in a Large Integrated Health Care Delivery System. JAMA Surg. 2018;153(8):757-763. doi:10.1001/jamasurg.2018.1039. PMID: 29799927; PMCID: PMC6142954"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Reference"/>
+         </code>
+         <value mediaType="text/plain"
+                value="CITATIONUrman, R.D., Khanna, A.K., Bergese, S.D., et al. (2021). Postoperative opioid administration characteristics associated with opioid-induced respiratory depression: Results from the PRODIGY trial. J Clin Anesth. 2021;70:110167. doi:10.1016/j.jclinane.110167"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="REF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Reference"/>
+         </code>
+         <value mediaType="text/plain"
+                value="CITATIONUrman, R.D., Seger, D.L., Fiskio, J.M., et al. (2021). The Burden of Opioid-Related Adverse Drug Events on Hospitalized Previously Opioid-Free Surgical Patients. J Patient Saf. 2021;17(2):e76-e83"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="DEF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Definition"/>
+         </code>
+         <value mediaType="text/plain"
+                value="This measure defines the indication of a harm for an opioid-related adverse event by assessing administration of an opioid antagonist.&#xA;&#xA;Inpatient hospitalizations: Includes time in the emergency department and observation when the transition between these encounters (if they exist) and the inpatient encounter are within an hour or less of each other."
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="GUIDE" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Guidance"/>
+         </code>
+         <value mediaType="text/plain"
+                value="To calculate the hospital-level measure result, divide the total numerator events by the total number of qualifying encounters (denominator).&#xA;&#xA;Qualifying encounters (denominator) include all patients 18 years of age or older with at least one opioid medication administered outside of the operating room.&#xA;&#xA;To create the numerator:&#xA; &#xA;1. First, start with those encounters meeting denominator criteria.&#xA;&#xA;2. Next, remove all events where an opioid or opioid antagonist was only administered in the operating room. &#xA;&#xA;Opioid antagonist administrations in the operating room are excluded because they could be part of the sedation plan as administered by an anesthesiologist. Encounters that include use of opioid antagonists for procedures and recovery outside of the operating room (e.g., bone marrow biopsy and PACU) are included in the numerator, as it would indicate the patient was over-sedated. Note that should a facility not utilize temporary patient locations, alternative times may be used to determine whether a patient is in the operating room during opioid antagonist administration. Since anesthesia end time could represent the time the anesthesiologist signed off, and thus may include the patient’s time in the PACU, this should be avoided.&#xA;&#xA;3. Next, remove all events where the opioid antagonist was administered via an enteral route. Only opioid antagonists given by a non-enteral (i.e., intravenous, intramuscular, subcutaneous, intranasal, inhalation) route are considered.&#xA;&#xA;4. Finally, remove all administrations of opioid antagonist that were given greater than 12 hours following hospital administration of an opioid medication.&#xA;&#xA;This eCQM is an episode-based measure. An episode is defined as each inpatient hospitalization or encounter that ends during the measurement period.&#xA;&#xA;This version of the eCQM uses QDM version 5.6. Please refer to the eCQI resource center https://ecqi.healthit.gov/qdm) for more information on the QDM."
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="TRANF" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Transmission Format"/>
+         </code>
+         <value mediaType="text/plain" value="TBD" xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="IPOP" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Initial Population"/>
+         </code>
+         <value mediaType="text/plain"
+                value="Inpatient hospitalizations for patients age 18 and older during which at least one opioid medication was administered outside of the operating room"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="DENOM" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Denominator"/>
+         </code>
+         <value mediaType="text/plain" value="Equals Initial Population" xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="DENEX" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Denominator Exclusions"/>
+         </code>
+         <value mediaType="text/plain" value="None" xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="NUMER" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Numerator"/>
+         </code>
+         <value mediaType="text/plain"
+                value="Inpatient hospitalizations where an opioid antagonist was administered outside of the operating room and within 12 hours following administration of an opioid medication. The route of administration of the opioid antagonist must be by intranasal spray, inhalation, intramuscular, subcutaneous, or intravenous injection. &#xA;&#xA;Only one numerator event is counted per encounter."
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="NUMEX" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Numerator Exclusions"/>
+         </code>
+         <value mediaType="text/plain" value="Not applicable" xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="DENEXCEP" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Denominator Exceptions"/>
+         </code>
+         <value mediaType="text/plain" value="None" xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <subjectOf>
+      <measureAttribute>
+         <code code="SDE" codeSystem="2.16.840.1.113883.5.4">
+            <displayName value="Supplemental Data Elements"/>
+         </code>
+         <value mediaType="text/plain"
+                value="For every patient evaluated by this measure also identify payer, race, ethnicity and sex"
+                xsi:type="ED"/>
+      </measureAttribute>
+   </subjectOf>
+   <componentOf>
+      <qualityMeasureSet classCode="ACT">
+         <id root="cb58c1ef-e8a9-4a8d-af83-760d354077db"/>
+         <title value=""/>
+      </qualityMeasureSet>
+   </componentOf>
+   <!--Data Criteria Section-->
+   <component>
+      <dataCriteriaSection>
+         <templateId>
+            <item extension="2021-02-01" root="2.16.840.1.113883.10.20.28.2.6"/>
+         </templateId>
+         <code code="57025-9" codeSystem="2.16.840.1.113883.6.1"/>
+         <title value="Data Criteria Section"/>
+         <text/>
+         <entry typeCode="DRIV">
+            <localVariableName value="EncounterInpatient_EncounterPerformed_vc5i5"/>
+            <encounterCriteria classCode="ENC" moodCode="EVN">
+               <templateId>
+                  <item extension="2021-02-01" root="2.16.840.1.113883.10.20.28.4.5"/>
+               </templateId>
+               <id extension="EncounterInpatient_EncounterPerformed"
+                   root="59113e5a-7ee3-422d-9401-39163fc1857c"/>
+               <code valueSet="2.16.840.1.113883.3.666.5.307"/>
+               <title value="Encounter, Performed"/>
+               <statusCode code="COMPLETED"/>
+            </encounterCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="Payer_PatientCharacteristicPayer_fFaW3"/>
+            <observationCriteria classCode="OBS" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-05-01" root="2.16.840.1.113883.10.20.28.4.58"/>
+               </templateId>
+               <id extension="Payer_PatientCharacteristicPayer"
+                   root="b2f1dfff-4e57-4b66-946e-ca3f8616b46e"/>
+               <code code="48768-6" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+                  <displayName value="Payer"/>
+               </code>
+               <title value="Patient Characteristic Payer"/>
+               <statusCode code="COMPLETED"/>
+               <value valueSet="2.16.840.1.114222.4.11.3591" xsi:type="CD"/>
+            </observationCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="ONCAdministrativeSex_PatientCharacteristicSex_yuPpr"/>
+            <observationCriteria classCode="OBS" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-05-01" root="2.16.840.1.113883.10.20.28.4.55"/>
+               </templateId>
+               <id extension="ONCAdministrativeSex_PatientCharacteristicSex"
+                   root="6a7ec8bd-9d9b-4588-8ed2-0a499d5512be"/>
+               <code code="263495000" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT">
+                  <displayName value="Gender"/>
+               </code>
+               <title value="Patient Characteristic Sex"/>
+               <statusCode code="COMPLETED"/>
+               <value valueSet="2.16.840.1.113762.1.4.1" xsi:type="CD"/>
+            </observationCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="Ethnicity_PatientCharacteristicEthnicity_D6ut9"/>
+            <observationCriteria classCode="OBS" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-05-01" root="2.16.840.1.113883.10.20.28.4.56"/>
+               </templateId>
+               <id extension="Ethnicity_PatientCharacteristicEthnicity"
+                   root="09110957-121c-418d-b31e-705cfb9c3e8e"/>
+               <code code="54133-4" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+                  <displayName value="Ethnicity"/>
+               </code>
+               <title value="Patient Characteristic Ethnicity"/>
+               <statusCode code="COMPLETED"/>
+               <value valueSet="2.16.840.1.114222.4.11.837" xsi:type="CD"/>
+            </observationCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="OpioidsAll_MedicationAdministered_yrq4G"/>
+            <substanceAdministrationCriteria classCode="SBADM" moodCode="EVN">
+               <templateId>
+                  <item extension="2021-02-01" root="2.16.840.1.113883.10.20.28.4.45"/>
+               </templateId>
+               <id extension="OpioidsAll_MedicationAdministered"
+                   root="0b30800d-a23e-437a-a2e3-1eb9197b01af"/>
+               <code code="416118004" codeSystem="2.16.840.1.113883.6.96"/>
+               <title value="Medication, Administered"/>
+               <statusCode code="COMPLETED"/>
+			            <participation typeCode="CSM">
+                  <role classCode="MANU">
+                     <playingManufacturedMaterial classCode="MMAT" determinerCode="KIND">
+                        <code valueSet="2.16.840.1.113762.1.4.1196.226"/>
+                     </playingManufacturedMaterial>
+                  </role>
+               </participation>
+		          </substanceAdministrationCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="ObservationServices_EncounterPerformed_dx9IH"/>
+            <encounterCriteria classCode="ENC" moodCode="EVN">
+               <templateId>
+                  <item extension="2021-02-01" root="2.16.840.1.113883.10.20.28.4.5"/>
+               </templateId>
+               <id extension="ObservationServices_EncounterPerformed"
+                   root="215b8958-753d-4e97-88e4-80e69c50bd14"/>
+               <code valueSet="2.16.840.1.113762.1.4.1111.143"/>
+               <title value="Encounter, Performed"/>
+               <statusCode code="COMPLETED"/>
+            </encounterCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="Race_PatientCharacteristicRace_cHoZ1"/>
+            <observationCriteria classCode="OBS" moodCode="EVN">
+               <templateId>
+                  <item extension="2017-05-01" root="2.16.840.1.113883.10.20.28.4.59"/>
+               </templateId>
+               <id extension="Race_PatientCharacteristicRace"
+                   root="338bf149-5aef-4dff-81a3-e4e592119362"/>
+               <code code="32624-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+                  <displayName value="Race"/>
+               </code>
+               <title value="Patient Characteristic Race"/>
+               <statusCode code="COMPLETED"/>
+               <value valueSet="2.16.840.1.114222.4.11.836" xsi:type="CD"/>
+            </observationCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="EmergencyDepartmentVisit_EncounterPerformed_fIHj6"/>
+            <encounterCriteria classCode="ENC" moodCode="EVN">
+               <templateId>
+                  <item extension="2021-02-01" root="2.16.840.1.113883.10.20.28.4.5"/>
+               </templateId>
+               <id extension="EmergencyDepartmentVisit_EncounterPerformed"
+                   root="943fd468-a486-47eb-bcef-69bbc31a73a0"/>
+               <code valueSet="2.16.840.1.113883.3.117.1.7.1.292"/>
+               <title value="Encounter, Performed"/>
+               <statusCode code="COMPLETED"/>
+            </encounterCriteria>
+         </entry>
+         <entry typeCode="DRIV">
+            <localVariableName value="OpioidAntagonist_MedicationAdministered_VpVET"/>
+            <substanceAdministrationCriteria classCode="SBADM" moodCode="EVN">
+               <templateId>
+                  <item extension="2021-02-01" root="2.16.840.1.113883.10.20.28.4.45"/>
+               </templateId>
+               <id extension="OpioidAntagonist_MedicationAdministered"
+                   root="0c811e30-e287-40d3-94c0-fe10e21fa2d3"/>
+               <code code="416118004" codeSystem="2.16.840.1.113883.6.96"/>
+               <title value="Medication, Administered"/>
+               <statusCode code="COMPLETED"/>
+			            <participation typeCode="CSM">
+                  <role classCode="MANU">
+                     <playingManufacturedMaterial classCode="MMAT" determinerCode="KIND">
+                        <code valueSet="2.16.840.1.113762.1.4.1248.119"/>
+                     </playingManufacturedMaterial>
+                  </role>
+               </participation>
+		          </substanceAdministrationCriteria>
+         </entry>
+      </dataCriteriaSection>
+   </component>
+   <component>
+      <populationCriteriaSection>
+         <templateId>
+            <item extension="2017-08-01" root="2.16.840.1.113883.10.20.28.2.7"/>
+         </templateId>
+         <id extension="PopulationCriteria1" root="3B1B7E64-2538-478C-91C7-D3AB7E9F1139"/>
+         <code code="57026-7" codeSystem="2.16.840.1.113883.6.1"/>
+         <title value="Population Criteria Section"/>
+         <text/>
+         <component typeCode="COMP">
+            <initialPopulationCriteria classCode="OBS" moodCode="EVN">
+               <id extension="initialPopulation" root="AEBCB165-5FF6-4F19-BDCB-C39D981E8D3C"/>
+               <code code="IPOP" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="HospitalHarmOpioidRelatedAdverseEvents.&quot;Initial Population&quot;"
+                         root="54FBC74F-B998-4B6B-8D3D-E252686CD0E4"/>
+                  </criteriaReference>
+               </precondition>
+            </initialPopulationCriteria>
+         </component>
+         <component typeCode="COMP">
+            <denominatorCriteria classCode="OBS" moodCode="EVN">
+               <id extension="denominator" root="ECC2706D-74FF-4FD8-B326-56B5042187F0"/>
+               <code code="DENOM" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="HospitalHarmOpioidRelatedAdverseEvents.&quot;Denominator&quot;"
+                         root="54FBC74F-B998-4B6B-8D3D-E252686CD0E4"/>
+                  </criteriaReference>
+               </precondition>
+            </denominatorCriteria>
+         </component>
+         <component typeCode="COMP">
+            <numeratorCriteria classCode="OBS" moodCode="EVN">
+               <id extension="numerator" root="28276063-FC68-49CD-832B-0F2717BF09BB"/>
+               <code code="NUMER" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="HospitalHarmOpioidRelatedAdverseEvents.&quot;Numerator&quot;"
+                         root="54FBC74F-B998-4B6B-8D3D-E252686CD0E4"/>
+                  </criteriaReference>
+               </precondition>
+            </numeratorCriteria>
+         </component>
+         <component typeCode="COMP">
+            <cql-ext:supplementalDataElement>
+               <id extension="Supplemental Data Elements"
+                   root="32A1159D-4E73-4ECB-B082-6CFE82679455"/>
+               <code code="SDE" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="HospitalHarmOpioidRelatedAdverseEvents.&quot;SDE Ethnicity&quot;"
+                         root="54FBC74F-B998-4B6B-8D3D-E252686CD0E4"/>
+                  </criteriaReference>
+               </precondition>
+            </cql-ext:supplementalDataElement>
+         </component>
+         <component typeCode="COMP">
+            <cql-ext:supplementalDataElement>
+               <id extension="Supplemental Data Elements"
+                   root="E67696A8-CCCF-4CF5-A66C-21EC069915F1"/>
+               <code code="SDE" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="HospitalHarmOpioidRelatedAdverseEvents.&quot;SDE Payer&quot;"
+                         root="54FBC74F-B998-4B6B-8D3D-E252686CD0E4"/>
+                  </criteriaReference>
+               </precondition>
+            </cql-ext:supplementalDataElement>
+         </component>
+         <component typeCode="COMP">
+            <cql-ext:supplementalDataElement>
+               <id extension="Supplemental Data Elements"
+                   root="60C210F1-4E22-429E-B067-B7C80F4B5350"/>
+               <code code="SDE" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="HospitalHarmOpioidRelatedAdverseEvents.&quot;SDE Race&quot;"
+                         root="54FBC74F-B998-4B6B-8D3D-E252686CD0E4"/>
+                  </criteriaReference>
+               </precondition>
+            </cql-ext:supplementalDataElement>
+         </component>
+         <component typeCode="COMP">
+            <cql-ext:supplementalDataElement>
+               <id extension="Supplemental Data Elements"
+                   root="0F86B85B-AE7B-4CE1-B7A7-9F8864E62714"/>
+               <code code="SDE" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code"/>
+               <precondition typeCode="PRCN">
+                  <criteriaReference classCode="OBS" moodCode="EVN">
+                     <id extension="HospitalHarmOpioidRelatedAdverseEvents.&quot;SDE Sex&quot;"
+                         root="54FBC74F-B998-4B6B-8D3D-E252686CD0E4"/>
+                  </criteriaReference>
+               </precondition>
+            </cql-ext:supplementalDataElement>
+         </component>
+      </populationCriteriaSection>
+   </component>
+</QualityMeasureDocument>

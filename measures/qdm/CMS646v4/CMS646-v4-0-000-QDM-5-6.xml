@@ -1,0 +1,2188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion,DisableMethodInvocation" xsi:type="a:CqlToElmInfo"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="179">
+         <a:s>library IntravesicalBacillusCalmetteGuerinForBladderCancer version '4.0.000'</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="IntravesicalBacillusCalmetteGuerinForBladderCancer" version="4.0.000"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="3:1-3:23" localIdentifier="QDM" uri="urn:healthit-gov:qdm:v5_6" version="5.6">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>using </a:s>
+               <a:s>
+                  <a:s>QDM</a:s>
+               </a:s>
+               <a:s> version '5.6'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="5:1-5:64" localIdentifier="Global" path="MATGlobalCommonFunctions" version="7.0.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>MATGlobalCommonFunctions</a:s>
+               </a:s>
+               <a:s> version '7.0.000' called Global</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <parameters>
+      <def localId="37" locator="35:1-35:49" name="Measurement Period" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="37">
+               <a:s>parameter &quot;Measurement Period&quot; </a:s>
+               <a:s r="36">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="35">
+                     <a:s>DateTime</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <parameterTypeSpecifier localId="36" locator="35:32-35:49" xsi:type="IntervalTypeSpecifier">
+            <pointType localId="35" locator="35:41-35:48" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <codeSystems>
+      <def localId="3" locator="7:1-7:54" name="ICD10CM" id="urn:oid:2.16.840.1.113883.6.90" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>codesystem &quot;ICD10CM&quot;: 'urn:oid:2.16.840.1.113883.6.90'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="4" locator="8:1-8:55" name="SNOMEDCT" id="urn:oid:2.16.840.1.113883.6.96" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>codesystem &quot;SNOMEDCT&quot;: 'urn:oid:2.16.840.1.113883.6.96'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="5" locator="9:1-9:53" name="ActCode" id="urn:oid:2.16.840.1.113883.5.4" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>codesystem &quot;ActCode&quot;: 'urn:oid:2.16.840.1.113883.5.4'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </codeSystems>
+   <valueSets>
+      <def localId="6" locator="11:1-11:88" name="Active Tuberculosis for Urology Care" id="urn:oid:2.16.840.1.113762.1.4.1151.56" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>valueset &quot;Active Tuberculosis for Urology Care&quot;: 'urn:oid:2.16.840.1.113762.1.4.1151.56'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="7" locator="12:1-12:97" name="BCG Bacillus Calmette Guerin for Urology Care" id="urn:oid:2.16.840.1.113762.1.4.1151.52" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="7">
+               <a:s>valueset &quot;BCG Bacillus Calmette Guerin for Urology Care&quot;: 'urn:oid:2.16.840.1.113762.1.4.1151.52'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="8" locator="13:1-13:83" name="Bladder Cancer for Urology Care" id="urn:oid:2.16.840.1.113762.1.4.1151.45" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="8">
+               <a:s>valueset &quot;Bladder Cancer for Urology Care&quot;: 'urn:oid:2.16.840.1.113762.1.4.1151.45'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="9" locator="14:1-14:91" name="Chemotherapy Agents for Advanced Cancer" id="urn:oid:2.16.840.1.113762.1.4.1151.60" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="9">
+               <a:s>valueset &quot;Chemotherapy Agents for Advanced Cancer&quot;: 'urn:oid:2.16.840.1.113762.1.4.1151.60'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="10" locator="15:1-15:79" name="Cystectomy for Urology Care" id="urn:oid:2.16.840.1.113762.1.4.1151.55" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="10">
+               <a:s>valueset &quot;Cystectomy for Urology Care&quot;: 'urn:oid:2.16.840.1.113762.1.4.1151.55'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="11" locator="16:1-16:58" name="Ethnicity" id="urn:oid:2.16.840.1.114222.4.11.837" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="11">
+               <a:s>valueset &quot;Ethnicity&quot;: 'urn:oid:2.16.840.1.114222.4.11.837'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="12" locator="17:1-17:66" name="HIV" id="urn:oid:2.16.840.1.113883.3.464.1003.120.12.1003" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="12">
+               <a:s>valueset &quot;HIV&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.120.12.1003'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="13" locator="18:1-18:81" name="Immunocompromised Conditions" id="urn:oid:2.16.840.1.113883.3.666.5.1940" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="13">
+               <a:s>valueset &quot;Immunocompromised Conditions&quot;: 'urn:oid:2.16.840.1.113883.3.666.5.1940'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="14" locator="19:1-19:92" name="Immunosuppressive Drugs for Urology Care" id="urn:oid:2.16.840.1.113762.1.4.1151.32" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="14">
+               <a:s>valueset &quot;Immunosuppressive Drugs for Urology Care&quot;: 'urn:oid:2.16.840.1.113762.1.4.1151.32'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="15" locator="20:1-20:110" name="Mixed histology urothelial cell carcinoma for Urology Care" id="urn:oid:2.16.840.1.113762.1.4.1151.39" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="15">
+               <a:s>valueset &quot;Mixed histology urothelial cell carcinoma for Urology Care&quot;: 'urn:oid:2.16.840.1.113762.1.4.1151.39'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="16" locator="21:1-21:75" name="Office Visit" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1001" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="16">
+               <a:s>valueset &quot;Office Visit&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1001'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="17" locator="22:1-22:68" name="ONC Administrative Sex" id="urn:oid:2.16.840.1.113762.1.4.1" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="17">
+               <a:s>valueset &quot;ONC Administrative Sex&quot;: 'urn:oid:2.16.840.1.113762.1.4.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="18" locator="23:1-23:55" name="Payer" id="urn:oid:2.16.840.1.114222.4.11.3591" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="18">
+               <a:s>valueset &quot;Payer&quot;: 'urn:oid:2.16.840.1.114222.4.11.3591'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="19" locator="24:1-24:53" name="Race" id="urn:oid:2.16.840.1.114222.4.11.836" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="19">
+               <a:s>valueset &quot;Race&quot;: 'urn:oid:2.16.840.1.114222.4.11.836'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="20" locator="25:1-25:111" name="Unavailability of Bacillus Calmette Guerin for urology care" id="urn:oid:2.16.840.1.113762.1.4.1151.44" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="20">
+               <a:s>valueset &quot;Unavailability of Bacillus Calmette Guerin for urology care&quot;: 'urn:oid:2.16.840.1.113762.1.4.1151.44'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </valueSets>
+   <codes>
+      <def localId="22" locator="27:1-27:98" name="Carcinoma in situ of bladder" id="D09.0" display="Carcinoma in situ of bladder" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="22">
+               <a:s>code &quot;Carcinoma in situ of bladder&quot;: 'D09.0' from </a:s>
+               <a:s r="21">
+                  <a:s>&quot;ICD10CM&quot;</a:s>
+               </a:s>
+               <a:s> display 'Carcinoma in situ of bladder'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="21" locator="27:51-27:59" name="ICD10CM"/>
+      </def>
+      <def localId="24" locator="28:1-28:113" name="Combined radiotherapy (procedure)" id="169331000" display="Combined radiotherapy (procedure)" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="24">
+               <a:s>code &quot;Combined radiotherapy (procedure)&quot;: '169331000' from </a:s>
+               <a:s r="23">
+                  <a:s>&quot;SNOMEDCT&quot;</a:s>
+               </a:s>
+               <a:s> display 'Combined radiotherapy (procedure)'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="23" locator="28:60-28:69" name="SNOMEDCT"/>
+      </def>
+      <def localId="26" locator="29:1-29:193" name="T1: Urinary tract tumor invades subepithelial connective tissue (finding)" id="369935001" display="T1: Urinary tract tumor invades subepithelial connective tissue (finding)" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="26">
+               <a:s>code &quot;T1: Urinary tract tumor invades subepithelial connective tissue (finding)&quot;: '369935001' from </a:s>
+               <a:s r="25">
+                  <a:s>&quot;SNOMEDCT&quot;</a:s>
+               </a:s>
+               <a:s> display 'T1: Urinary tract tumor invades subepithelial connective tissue (finding)'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="25" locator="29:100-29:109" name="SNOMEDCT"/>
+      </def>
+      <def localId="28" locator="30:1-30:169" name="Ta: Noninvasive papillary carcinoma (urinary tract) (finding)" id="369949005" display="Ta: Noninvasive papillary carcinoma (urinary tract) (finding)" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="28">
+               <a:s>code &quot;Ta: Noninvasive papillary carcinoma (urinary tract) (finding)&quot;: '369949005' from </a:s>
+               <a:s r="27">
+                  <a:s>&quot;SNOMEDCT&quot;</a:s>
+               </a:s>
+               <a:s> display 'Ta: Noninvasive papillary carcinoma (urinary tract) (finding)'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="27" locator="30:88-30:97" name="SNOMEDCT"/>
+      </def>
+      <def localId="30" locator="31:1-31:175" name="Tis: Carcinoma in situ (flat tumor of urinary bladder) (finding)" id="369934002" display="Tis: Carcinoma in situ (flat tumor of urinary bladder) (finding)" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="30">
+               <a:s>code &quot;Tis: Carcinoma in situ (flat tumor of urinary bladder) (finding)&quot;: '369934002' from </a:s>
+               <a:s r="29">
+                  <a:s>&quot;SNOMEDCT&quot;</a:s>
+               </a:s>
+               <a:s> display 'Tis: Carcinoma in situ (flat tumor of urinary bladder) (finding)'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="29" locator="31:91-31:100" name="SNOMEDCT"/>
+      </def>
+      <def localId="32" locator="32:1-32:105" name="Tumor staging (tumor staging)" id="254292007" display="Tumor staging (tumor staging)" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="32">
+               <a:s>code &quot;Tumor staging (tumor staging)&quot;: '254292007' from </a:s>
+               <a:s r="31">
+                  <a:s>&quot;SNOMEDCT&quot;</a:s>
+               </a:s>
+               <a:s> display 'Tumor staging (tumor staging)'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="31" locator="32:56-32:65" name="SNOMEDCT"/>
+      </def>
+      <def localId="34" locator="33:1-33:53" name="virtual" id="VR" display="virtual" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="34">
+               <a:s>code &quot;virtual&quot;: 'VR' from </a:s>
+               <a:s r="33">
+                  <a:s>&quot;ActCode&quot;</a:s>
+               </a:s>
+               <a:s> display 'virtual'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="33" locator="33:27-33:35" name="ActCode"/>
+      </def>
+   </codes>
+   <contexts>
+      <def locator="37:1-37:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="37:1-37:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="37:1-37:15" xmlns:ns0="urn:healthit-gov:qdm:v5_6" dataType="ns0:Patient" templateId="Patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="48" locator="140:1-143:31" name="Bladder Cancer Diagnosis" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="48">
+               <a:s>define &quot;Bladder Cancer Diagnosis&quot;:
+  </a:s>
+               <a:s r="47">
+                  <a:s>
+                     <a:s r="41">
+                        <a:s r="40">
+                           <a:s r="40">
+                              <a:s>[&quot;Diagnosis&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Bladder Cancer for Urology Care&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> BladderCancer</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="46">
+                     <a:s>where </a:s>
+                     <a:s r="46">
+                        <a:s r="43">
+                           <a:s r="42">
+                              <a:s>BladderCancer</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="43">
+                              <a:s>prevalencePeriod</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="46"> starts before 
+    </a:s>
+                        <a:s r="45">
+                           <a:s>end of </a:s>
+                           <a:s r="44">
+                              <a:s>&quot;Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="47" locator="141:3-143:31" xsi:type="Query">
+            <source localId="41" locator="141:3-141:64" alias="BladderCancer">
+               <expression localId="40" locator="141:3-141:50" xmlns:ns1="urn:healthit-gov:qdm:v5_6" dataType="ns1:Diagnosis" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="141:17-141:49" name="Bladder Cancer for Urology Care" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <where localId="46" locator="142:5-143:31" xsi:type="Before">
+               <operand locator="142:42-142:47" xsi:type="Start">
+                  <operand localId="43" locator="142:11-142:40" path="prevalencePeriod" scope="BladderCancer" xsi:type="Property"/>
+               </operand>
+               <operand localId="45" locator="143:5-143:31" xsi:type="End">
+                  <operand localId="44" locator="143:12-143:31" name="Measurement Period" xsi:type="ParameterRef"/>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="70" locator="112:1-117:3" name="First Bladder Cancer Staging Procedure" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="70">
+               <a:s>define &quot;First Bladder Cancer Staging Procedure&quot;:
+  </a:s>
+               <a:s r="69">
+                  <a:s>First(</a:s>
+                  <a:s r="68">
+                     <a:s>
+                        <a:s r="39">
+                           <a:s r="38">
+                              <a:s r="38">
+                                 <a:s>[&quot;Procedure, Performed&quot;: </a:s>
+                                 <a:s>
+                                    <a:s>&quot;Tumor staging (tumor staging)&quot;</a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> BladderCancerStaging</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+      </a:s>
+                     <a:s r="60">
+                        <a:s>with </a:s>
+                        <a:s r="50">
+                           <a:s r="49">
+                              <a:s>
+                                 <a:s>&quot;Bladder Cancer Diagnosis&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> BladderCancer</a:s>
+                        </a:s>
+                        <a:s>
+        such that </a:s>
+                        <a:s r="59">
+                           <a:s r="56">
+                              <a:s r="51">
+                                 <a:s>Global</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="56">
+                                 <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                 <a:s r="53">
+                                    <a:s r="52">
+                                       <a:s>BladderCancerStaging</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="53">
+                                       <a:s>relevantDatetime</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>, </a:s>
+                                 <a:s r="55">
+                                    <a:s r="54">
+                                       <a:s>BladderCancerStaging</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="55">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>)</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="59">starts on or before day of start </a:s>
+                           <a:s r="58">
+                              <a:s r="57">
+                                 <a:s>BladderCancer</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="58">
+                                 <a:s>prevalencePeriod</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+      </a:s>
+                     <a:s r="67">
+                        <a:s>sort by </a:s>
+                        <a:s r="66">
+                           <a:s r="65">
+                              <a:s>start of </a:s>
+                              <a:s r="64">
+                                 <a:s r="61">
+                                    <a:s>Global</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="64">
+                                    <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                    <a:s r="62">
+                                       <a:s>relevantDatetime</a:s>
+                                    </a:s>
+                                    <a:s>, </a:s>
+                                    <a:s r="63">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                    <a:s>)</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+  )</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="69" locator="113:3-117:3" xsi:type="First">
+            <source localId="68" locator="113:9-116:83" xsi:type="Query">
+               <source localId="39" locator="113:9-113:86" alias="BladderCancerStaging">
+                  <expression localId="38" locator="113:9-113:65" xmlns:ns2="urn:healthit-gov:qdm:v5_6" dataType="ns2:PositiveProcedurePerformed" templateId="PositiveProcedurePerformed" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                     <codes xsi:type="ToList">
+                        <operand locator="113:34-113:64" name="Tumor staging (tumor staging)" xsi:type="CodeRef"/>
+                     </codes>
+                  </expression>
+               </source>
+               <relationship localId="60" locator="114:7-115:183" alias="BladderCancer" xsi:type="With">
+                  <expression localId="49" locator="114:12-114:37" name="Bladder Cancer Diagnosis" xsi:type="ExpressionRef"/>
+                  <suchThat localId="59" locator="115:19-115:183" precision="Day" xsi:type="SameOrBefore">
+                     <operand locator="115:121-115:126" xsi:type="Start">
+                        <operand localId="56" locator="115:19-115:120" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                           <operand localId="53" locator="115:46-115:82" path="relevantDatetime" scope="BladderCancerStaging" xsi:type="Property"/>
+                           <operand localId="55" locator="115:85-115:119" path="relevantPeriod" scope="BladderCancerStaging" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                     <operand locator="115:148-115:152" xsi:type="Start">
+                        <operand localId="58" locator="115:154-115:183" path="prevalencePeriod" scope="BladderCancer" xsi:type="Property"/>
+                     </operand>
+                  </suchThat>
+               </relationship>
+               <sort localId="67" locator="116:7-116:83">
+                  <by localId="66" locator="116:15-116:83" direction="asc" xsi:type="ByExpression">
+                     <expression localId="65" locator="116:15-116:83" xsi:type="Start">
+                        <operand localId="64" locator="116:24-116:83" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                           <operand localId="62" locator="116:51-116:66" name="relevantDatetime" xsi:type="IdentifierRef"/>
+                           <operand localId="63" locator="116:69-116:82" name="relevantPeriod" xsi:type="IdentifierRef"/>
+                        </operand>
+                     </expression>
+                  </by>
+               </sort>
+            </source>
+         </expression>
+      </def>
+      <def localId="92" locator="60:1-61:78" name="July 1 of Year Prior to the Measurement Period" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="92">
+               <a:s>define &quot;July 1 of Year Prior to the Measurement Period&quot;:
+  </a:s>
+               <a:s r="91">
+                  <a:s>DateTime(</a:s>
+                  <a:s r="83">
+                     <a:s>(</a:s>
+                     <a:s r="83">
+                        <a:s r="81">
+                           <a:s>year from </a:s>
+                           <a:s r="80">
+                              <a:s>start of </a:s>
+                              <a:s r="79">
+                                 <a:s>&quot;Measurement Period&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="82"> - 1</a:s>
+                     </a:s>
+                     <a:s>)</a:s>
+                  </a:s>
+                  <a:s r="84">, 7, 1, 0, 0, 0, 0, 0)</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="91" locator="61:3-61:78" xsi:type="DateTime">
+            <year localId="83" locator="61:12-61:56" xsi:type="Subtract">
+               <operand localId="81" locator="61:13-61:51" precision="Year" xsi:type="DateTimeComponentFrom">
+                  <operand localId="80" locator="61:23-61:51" xsi:type="Start">
+                     <operand localId="79" locator="61:32-61:51" name="Measurement Period" xsi:type="ParameterRef"/>
+                  </operand>
+               </operand>
+               <operand localId="82" locator="61:55" valueType="t:Integer" value="1" xsi:type="Literal"/>
+            </year>
+            <month localId="84" locator="61:59" valueType="t:Integer" value="7" xsi:type="Literal"/>
+            <day localId="85" locator="61:62" valueType="t:Integer" value="1" xsi:type="Literal"/>
+            <hour localId="86" locator="61:65" valueType="t:Integer" value="0" xsi:type="Literal"/>
+            <minute localId="87" locator="61:68" valueType="t:Integer" value="0" xsi:type="Literal"/>
+            <second localId="88" locator="61:71" valueType="t:Integer" value="0" xsi:type="Literal"/>
+            <millisecond localId="89" locator="61:74" valueType="t:Integer" value="0" xsi:type="Literal"/>
+            <timezoneOffset xsi:type="ToDecimal">
+               <operand localId="90" locator="61:77" valueType="t:Integer" value="0" xsi:type="Literal"/>
+            </timezoneOffset>
+         </expression>
+      </def>
+      <def localId="105" locator="63:1-64:78" name="June 30 of the Measurement Period" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="105">
+               <a:s>define &quot;June 30 of the Measurement Period&quot;:
+  </a:s>
+               <a:s r="104">
+                  <a:s>DateTime(</a:s>
+                  <a:s r="96">
+                     <a:s>(</a:s>
+                     <a:s r="96">
+                        <a:s>year from </a:s>
+                        <a:s r="95">
+                           <a:s>start of </a:s>
+                           <a:s r="94">
+                              <a:s>&quot;Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>)</a:s>
+                  </a:s>
+                  <a:s r="97">, 6, 30, 23, 59, 59, 0, 0)</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="104" locator="64:3-64:78" xsi:type="DateTime">
+            <year localId="96" locator="64:12-64:52" precision="Year" xsi:type="DateTimeComponentFrom">
+               <operand localId="95" locator="64:23-64:51" xsi:type="Start">
+                  <operand localId="94" locator="64:32-64:51" name="Measurement Period" xsi:type="ParameterRef"/>
+               </operand>
+            </year>
+            <month localId="97" locator="64:55" valueType="t:Integer" value="6" xsi:type="Literal"/>
+            <day localId="98" locator="64:58-64:59" valueType="t:Integer" value="30" xsi:type="Literal"/>
+            <hour localId="99" locator="64:62-64:63" valueType="t:Integer" value="23" xsi:type="Literal"/>
+            <minute localId="100" locator="64:66-64:67" valueType="t:Integer" value="59" xsi:type="Literal"/>
+            <second localId="101" locator="64:70-64:71" valueType="t:Integer" value="59" xsi:type="Literal"/>
+            <millisecond localId="102" locator="64:74" valueType="t:Integer" value="0" xsi:type="Literal"/>
+            <timezoneOffset xsi:type="ToDecimal">
+               <operand localId="103" locator="64:77" valueType="t:Integer" value="0" xsi:type="Literal"/>
+            </timezoneOffset>
+         </expression>
+      </def>
+      <def localId="110" locator="136:1-138:235" name="First Qualifying Bladder Cancer Staging Procedure" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="110">
+               <a:s>define &quot;First Qualifying Bladder Cancer Staging Procedure&quot;:
+  </a:s>
+               <a:s r="109">
+                  <a:s>
+                     <a:s r="72">
+                        <a:s r="71">
+                           <a:s>
+                              <a:s>&quot;First Bladder Cancer Staging Procedure&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> FirstBladderCancerStaging</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="108">
+                     <a:s>where </a:s>
+                     <a:s r="108">
+                        <a:s r="78">
+                           <a:s r="73">
+                              <a:s>Global</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="78">
+                              <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                              <a:s r="75">
+                                 <a:s r="74">
+                                    <a:s>FirstBladderCancerStaging</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="75">
+                                    <a:s>relevantDatetime</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="77">
+                                 <a:s r="76">
+                                    <a:s>FirstBladderCancerStaging</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="77">
+                                    <a:s>relevantPeriod</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="108"> during day of </a:s>
+                        <a:s r="107">
+                           <a:s>Interval[</a:s>
+                           <a:s r="93">
+                              <a:s>&quot;July 1 of Year Prior to the Measurement Period&quot;</a:s>
+                           </a:s>
+                           <a:s>, </a:s>
+                           <a:s r="106">
+                              <a:s>&quot;June 30 of the Measurement Period&quot;</a:s>
+                           </a:s>
+                           <a:s>]</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="109" locator="137:3-138:235" xsi:type="Query">
+            <source localId="72" locator="137:3-137:68" alias="FirstBladderCancerStaging">
+               <expression localId="71" locator="137:3-137:42" name="First Bladder Cancer Staging Procedure" xsi:type="ExpressionRef"/>
+            </source>
+            <where localId="108" locator="138:5-138:235" precision="Day" xsi:type="IncludedIn">
+               <operand localId="78" locator="138:11-138:125" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                  <operand localId="75" locator="138:40-138:81" path="relevantDatetime" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+                  <operand localId="77" locator="138:84-138:123" path="relevantPeriod" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+               </operand>
+               <operand localId="107" locator="138:141-138:235" lowClosed="true" highClosed="true" xsi:type="Interval">
+                  <low localId="93" locator="138:150-138:197" name="July 1 of Year Prior to the Measurement Period" xsi:type="ExpressionRef"/>
+                  <high localId="106" locator="138:200-138:234" name="June 30 of the Measurement Period" xsi:type="ExpressionRef"/>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="136" locator="67:1-73:15" name="Has Most Recent Bladder Cancer Tumor Staging is Ta HG, Tis, T1" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="136">
+               <a:s>/*Ta High Grade only to be included.  Ta low grade is to be excluded from this measure.*/define &quot;Has Most Recent Bladder Cancer Tumor Staging is Ta HG, Tis, T1&quot;:
+  </a:s>
+               <a:s r="135">
+                  <a:s r="134">
+                     <a:s>( </a:s>
+                     <a:s r="134">
+                        <a:s>
+                           <a:s r="114">
+                              <a:s r="113">
+                                 <a:s>
+                                    <a:s>&quot;First Qualifying Bladder Cancer Staging Procedure&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> FirstBladderCancerStagingMP</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="133">
+                           <a:s>where </a:s>
+                           <a:s r="133">
+                              <a:s r="128">
+                                 <a:s r="123">
+                                    <a:s r="118">
+                                       <a:s r="116">
+                                          <a:s r="115">
+                                             <a:s>FirstBladderCancerStagingMP</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="116">
+                                             <a:s>result</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> ~ </a:s>
+                                       <a:s r="117">
+                                          <a:s>&quot;T1: Urinary tract tumor invades subepithelial connective tissue (finding)&quot;</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+        or </a:s>
+                                    <a:s r="122">
+                                       <a:s r="120">
+                                          <a:s r="119">
+                                             <a:s>FirstBladderCancerStagingMP</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="120">
+                                             <a:s>result</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> ~ </a:s>
+                                       <a:s r="121">
+                                          <a:s>&quot;Ta: Noninvasive papillary carcinoma (urinary tract) (finding)&quot;</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+        or </a:s>
+                                 <a:s r="127">
+                                    <a:s r="125">
+                                       <a:s r="124">
+                                          <a:s>FirstBladderCancerStagingMP</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="125">
+                                          <a:s>result</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> ~ </a:s>
+                                    <a:s r="126">
+                                       <a:s>&quot;Tis: Carcinoma in situ (flat tumor of urinary bladder) (finding)&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+        or </a:s>
+                              <a:s r="132">
+                                 <a:s r="130">
+                                    <a:s r="129">
+                                       <a:s>FirstBladderCancerStagingMP</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="130">
+                                       <a:s>result</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> ~ </a:s>
+                                 <a:s r="131">
+                                    <a:s>&quot;Carcinoma in situ of bladder&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+                  <a:s> is not null</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="135" locator="68:3-73:15" xsi:type="Not">
+            <operand locator="68:3-73:15" xsi:type="IsNull">
+               <operand localId="134" locator="68:3-73:3" xsi:type="Query">
+                  <source localId="114" locator="68:5-68:83" alias="FirstBladderCancerStagingMP">
+                     <expression localId="113" locator="68:5-68:55" name="First Qualifying Bladder Cancer Staging Procedure" xsi:type="ExpressionRef"/>
+                  </source>
+                  <where localId="133" locator="69:7-72:78" xsi:type="Or">
+                     <operand localId="128" locator="69:13-71:114" xsi:type="Or">
+                        <operand localId="123" locator="69:13-70:111" xsi:type="Or">
+                           <operand localId="118" locator="69:13-69:124" xsi:type="Equivalent">
+                              <operand asType="t:Code" xsi:type="As">
+                                 <operand localId="116" locator="69:13-69:46" path="result" scope="FirstBladderCancerStagingMP" xsi:type="Property"/>
+                              </operand>
+                              <operand localId="117" locator="69:50-69:124" name="T1: Urinary tract tumor invades subepithelial connective tissue (finding)" xsi:type="CodeRef"/>
+                           </operand>
+                           <operand localId="122" locator="70:12-70:111" xsi:type="Equivalent">
+                              <operand asType="t:Code" xsi:type="As">
+                                 <operand localId="120" locator="70:12-70:45" path="result" scope="FirstBladderCancerStagingMP" xsi:type="Property"/>
+                              </operand>
+                              <operand localId="121" locator="70:49-70:111" name="Ta: Noninvasive papillary carcinoma (urinary tract) (finding)" xsi:type="CodeRef"/>
+                           </operand>
+                        </operand>
+                        <operand localId="127" locator="71:12-71:114" xsi:type="Equivalent">
+                           <operand asType="t:Code" xsi:type="As">
+                              <operand localId="125" locator="71:12-71:45" path="result" scope="FirstBladderCancerStagingMP" xsi:type="Property"/>
+                           </operand>
+                           <operand localId="126" locator="71:49-71:114" name="Tis: Carcinoma in situ (flat tumor of urinary bladder) (finding)" xsi:type="CodeRef"/>
+                        </operand>
+                     </operand>
+                     <operand localId="132" locator="72:12-72:78" xsi:type="Equivalent">
+                        <operand asType="t:Code" xsi:type="As">
+                           <operand localId="130" locator="72:12-72:45" path="result" scope="FirstBladderCancerStagingMP" xsi:type="Property"/>
+                        </operand>
+                        <operand localId="131" locator="72:49-72:78" name="Carcinoma in situ of bladder" xsi:type="CodeRef"/>
+                     </operand>
+                  </where>
+               </operand>
+            </operand>
+         </expression>
+      </def>
+      <def localId="152" locator="124:1-127:43" name="Has Qualifying Encounter" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="152">
+               <a:s>define &quot;Has Qualifying Encounter&quot;:
+  </a:s>
+               <a:s r="151">
+                  <a:s>exists </a:s>
+                  <a:s r="150">
+                     <a:s>
+                        <a:s r="140">
+                           <a:s r="139">
+                              <a:s r="139">
+                                 <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                 <a:s>
+                                    <a:s>&quot;Office Visit&quot;</a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> ValidEncounter</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    </a:s>
+                     <a:s r="149">
+                        <a:s>where </a:s>
+                        <a:s r="149">
+                           <a:s r="144">
+                              <a:s r="142">
+                                 <a:s r="141">
+                                    <a:s>ValidEncounter</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="142">
+                                    <a:s>relevantPeriod</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s r="144"> during day of </a:s>
+                              <a:s r="143">
+                                 <a:s>&quot;Measurement Period&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+      and </a:s>
+                           <a:s r="148">
+                              <a:s r="146">
+                                 <a:s r="145">
+                                    <a:s>ValidEncounter</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="146">
+                                    <a:s>class</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> !~ </a:s>
+                              <a:s r="147">
+                                 <a:s>&quot;virtual&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="151" locator="125:3-127:43" xsi:type="Exists">
+            <operand localId="150" locator="125:10-127:43" xsi:type="Query">
+               <source localId="140" locator="125:10-125:64" alias="ValidEncounter">
+                  <expression localId="139" locator="125:10-125:49" xmlns:ns3="urn:healthit-gov:qdm:v5_6" dataType="ns3:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes locator="125:35-125:48" name="Office Visit" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <where localId="149" locator="126:5-127:43" xsi:type="And">
+                  <operand localId="144" locator="126:11-126:74" precision="Day" xsi:type="IncludedIn">
+                     <operand localId="142" locator="126:11-126:39" path="relevantPeriod" scope="ValidEncounter" xsi:type="Property"/>
+                     <operand localId="143" locator="126:55-126:74" name="Measurement Period" xsi:type="ParameterRef"/>
+                  </operand>
+                  <operand localId="148" locator="127:11-127:43" xsi:type="Not">
+                     <operand locator="127:11-127:43" xsi:type="Equivalent">
+                        <operand localId="146" locator="127:11-127:30" path="class" scope="ValidEncounter" xsi:type="Property"/>
+                        <operand localId="147" locator="127:35-127:43" name="virtual" xsi:type="CodeRef"/>
+                     </operand>
+                  </operand>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def localId="155" locator="75:1-78:34" name="Initial Population" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="155">
+               <a:s>define &quot;Initial Population&quot;:
+  </a:s>
+               <a:s r="154">
+                  <a:s r="138">
+                     <a:s r="112">
+                        <a:s r="111">
+                           <a:s>&quot;First Qualifying Bladder Cancer Staging Procedure&quot;</a:s>
+                        </a:s>
+                        <a:s> is not null</a:s>
+                     </a:s>
+                     <a:s>
+    and </a:s>
+                     <a:s r="137">
+                        <a:s>&quot;Has Most Recent Bladder Cancer Tumor Staging is Ta HG, Tis, T1&quot;</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    and </a:s>
+                  <a:s r="153">
+                     <a:s>&quot;Has Qualifying Encounter&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="154" locator="76:3-78:34" xsi:type="And">
+            <operand localId="138" locator="76:3-77:72" xsi:type="And">
+               <operand localId="112" locator="76:3-76:65" xsi:type="Not">
+                  <operand locator="76:3-76:65" xsi:type="IsNull">
+                     <operand localId="111" locator="76:3-76:53" name="First Qualifying Bladder Cancer Staging Procedure" xsi:type="ExpressionRef"/>
+                  </operand>
+               </operand>
+               <operand localId="137" locator="77:9-77:72" name="Has Most Recent Bladder Cancer Tumor Staging is Ta HG, Tis, T1" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand localId="153" locator="78:9-78:34" name="Has Qualifying Encounter" xsi:type="ExpressionRef"/>
+         </expression>
+      </def>
+      <def localId="157" locator="39:1-40:22" name="Denominator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="157">
+               <a:s>define &quot;Denominator&quot;:
+  </a:s>
+               <a:s r="156">
+                  <a:s>&quot;Initial Population&quot;</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="156" locator="40:3-40:22" name="Initial Population" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="179" locator="145:1-150:3" name="BCG Not Available Within 6 Months After Bladder Cancer Staging" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="179">
+               <a:s>define &quot;BCG Not Available Within 6 Months After Bladder Cancer Staging&quot;:
+  </a:s>
+               <a:s r="178">
+                  <a:s>( </a:s>
+                  <a:s r="178">
+                     <a:s>
+                        <a:s r="159">
+                           <a:s r="158">
+                              <a:s r="158">
+                                 <a:s>[&quot;Medication, Not Administered&quot;: </a:s>
+                                 <a:s>
+                                    <a:s>&quot;BCG Bacillus Calmette Guerin for Urology Care&quot;</a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> BCGnotGiven</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+      </a:s>
+                     <a:s r="173">
+                        <a:s>with </a:s>
+                        <a:s r="161">
+                           <a:s r="160">
+                              <a:s>
+                                 <a:s>&quot;First Bladder Cancer Staging Procedure&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> FirstBladderCancerStaging</a:s>
+                        </a:s>
+                        <a:s>
+        such that </a:s>
+                        <a:s r="172">
+                           <a:s r="163">
+                              <a:s r="162">
+                                 <a:s>BCGnotGiven</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="163">
+                                 <a:s>authorDatetime</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> </a:s>
+                           <a:s r="172">
+                              <a:s r="171">
+                                 <a:s>6 months</a:s>
+                              </a:s>
+                              <a:s> or less after</a:s>
+                           </a:s>
+                           <a:s> </a:s>
+                           <a:s r="170">
+                              <a:s>start of </a:s>
+                              <a:s r="169">
+                                 <a:s r="164">
+                                    <a:s>Global</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="169">
+                                    <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                    <a:s r="166">
+                                       <a:s r="165">
+                                          <a:s>FirstBladderCancerStaging</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="166">
+                                          <a:s>relevantDatetime</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>, </a:s>
+                                    <a:s r="168">
+                                       <a:s r="167">
+                                          <a:s>FirstBladderCancerStaging</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="168">
+                                          <a:s>relevantPeriod</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> )</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+      </a:s>
+                     <a:s r="177">
+                        <a:s>where </a:s>
+                        <a:s r="177">
+                           <a:s r="175">
+                              <a:s r="174">
+                                 <a:s>BCGnotGiven</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="175">
+                                 <a:s>negationRationale</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> in </a:s>
+                           <a:s r="176">
+                              <a:s>&quot;Unavailability of Bacillus Calmette Guerin for urology care&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+  )</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="178" locator="146:3-150:3" xsi:type="Query">
+            <source localId="159" locator="146:5-146:97" alias="BCGnotGiven">
+               <expression localId="158" locator="146:5-146:85" xmlns:ns4="urn:healthit-gov:qdm:v5_6" dataType="ns4:NegativeMedicationAdministered" templateId="NegativeMedicationAdministered" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="146:38-146:84" name="BCG Bacillus Calmette Guerin for Urology Care" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <relationship localId="173" locator="147:7-148:192" alias="FirstBladderCancerStaging" xsi:type="With">
+               <expression localId="160" locator="147:12-147:51" name="First Bladder Cancer Staging Procedure" xsi:type="ExpressionRef"/>
+               <suchThat localId="172" locator="148:19-148:192" xsi:type="And">
+                  <operand locator="148:46-148:61" xsi:type="In">
+                     <operand localId="163" locator="148:19-148:44" path="authorDatetime" scope="BCGnotGiven" xsi:type="Property"/>
+                     <operand locator="148:46-148:61" lowClosed="false" highClosed="true" xsi:type="Interval">
+                        <low localId="170" locator="148:69-148:192" xsi:type="Start">
+                           <operand localId="169" locator="148:78-148:192" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                              <operand localId="166" locator="148:107-148:148" path="relevantDatetime" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+                              <operand localId="168" locator="148:151-148:190" path="relevantPeriod" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+                           </operand>
+                        </low>
+                        <high locator="148:69-148:192" xsi:type="Add">
+                           <operand localId="170" locator="148:69-148:192" xsi:type="Start">
+                              <operand localId="169" locator="148:78-148:192" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                 <operand localId="166" locator="148:107-148:148" path="relevantDatetime" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+                                 <operand localId="168" locator="148:151-148:190" path="relevantPeriod" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                           <operand localId="171" locator="148:46-148:53" value="6" unit="months" xsi:type="Quantity"/>
+                        </high>
+                     </operand>
+                  </operand>
+                  <operand locator="148:46-148:61" xsi:type="Not">
+                     <operand locator="148:46-148:61" xsi:type="IsNull">
+                        <operand localId="170" locator="148:69-148:192" xsi:type="Start">
+                           <operand localId="169" locator="148:78-148:192" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                              <operand localId="166" locator="148:107-148:148" path="relevantDatetime" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+                              <operand localId="168" locator="148:151-148:190" path="relevantPeriod" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+                           </operand>
+                        </operand>
+                     </operand>
+                  </operand>
+               </suchThat>
+            </relationship>
+            <where localId="177" locator="149:7-149:106" xsi:type="InValueSet">
+               <code localId="175" locator="149:13-149:41" path="negationRationale" scope="BCGnotGiven" xsi:type="Property"/>
+               <valueset localId="176" locator="149:46-149:106" name="Unavailability of Bacillus Calmette Guerin for urology care" xsi:type="ValueSetRef"/>
+            </where>
+         </expression>
+      </def>
+      <def localId="182" locator="42:1-43:73" name="Denominator Exception" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="182">
+               <a:s>define &quot;Denominator Exception&quot;:
+  </a:s>
+               <a:s r="181">
+                  <a:s>exists </a:s>
+                  <a:s r="180">
+                     <a:s>&quot;BCG Not Available Within 6 Months After Bladder Cancer Staging&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="181" locator="43:3-43:73" xsi:type="Exists">
+            <operand localId="180" locator="43:10-43:73" name="BCG Not Available Within 6 Months After Bladder Cancer Staging" xsi:type="ExpressionRef"/>
+         </expression>
+      </def>
+      <def localId="212" locator="129:1-134:3" name="First BCG Administered" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="212">
+               <a:s>define &quot;First BCG Administered&quot;:
+  </a:s>
+               <a:s r="211">
+                  <a:s>First(</a:s>
+                  <a:s r="210">
+                     <a:s>
+                        <a:s r="184">
+                           <a:s r="183">
+                              <a:s r="183">
+                                 <a:s>[&quot;Medication, Administered&quot;: </a:s>
+                                 <a:s>
+                                    <a:s>&quot;BCG Bacillus Calmette Guerin for Urology Care&quot;</a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> BCG</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+      </a:s>
+                     <a:s r="202">
+                        <a:s>with </a:s>
+                        <a:s r="186">
+                           <a:s r="185">
+                              <a:s>
+                                 <a:s>&quot;First Bladder Cancer Staging Procedure&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> FirstBladderCancerStaging</a:s>
+                        </a:s>
+                        <a:s>
+        such that </a:s>
+                        <a:s r="201">
+                           <a:s r="192">
+                              <a:s r="187">
+                                 <a:s>Global</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="192">
+                                 <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                 <a:s r="189">
+                                    <a:s r="188">
+                                       <a:s>BCG</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="189">
+                                       <a:s>relevantDatetime</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>, </a:s>
+                                 <a:s r="191">
+                                    <a:s r="190">
+                                       <a:s>BCG</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="191">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>)</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="201">
+                              <a:s>starts </a:s>
+                              <a:s r="200">
+                                 <a:s>6 months</a:s>
+                              </a:s>
+                              <a:s> or less after</a:s>
+                           </a:s>
+                           <a:s> </a:s>
+                           <a:s r="199">
+                              <a:s>start of </a:s>
+                              <a:s r="198">
+                                 <a:s r="193">
+                                    <a:s>Global</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="198">
+                                    <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                    <a:s r="195">
+                                       <a:s r="194">
+                                          <a:s>FirstBladderCancerStaging</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="195">
+                                          <a:s>relevantDatetime</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>, </a:s>
+                                    <a:s r="197">
+                                       <a:s r="196">
+                                          <a:s>FirstBladderCancerStaging</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="197">
+                                          <a:s>relevantPeriod</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>)</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+      </a:s>
+                     <a:s r="209">
+                        <a:s>sort by </a:s>
+                        <a:s r="208">
+                           <a:s r="207">
+                              <a:s>start of </a:s>
+                              <a:s r="206">
+                                 <a:s r="203">
+                                    <a:s>Global</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="206">
+                                    <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                    <a:s r="204">
+                                       <a:s>relevantDatetime</a:s>
+                                    </a:s>
+                                    <a:s>, </a:s>
+                                    <a:s r="205">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                    <a:s>)</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+  )</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="211" locator="130:3-134:3" xsi:type="First">
+            <source localId="210" locator="130:9-133:83" xsi:type="Query">
+               <source localId="184" locator="130:9-130:89" alias="BCG">
+                  <expression localId="183" locator="130:9-130:85" xmlns:ns5="urn:healthit-gov:qdm:v5_6" dataType="ns5:PositiveMedicationAdministered" templateId="PositiveMedicationAdministered" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes locator="130:38-130:84" name="BCG Bacillus Calmette Guerin for Urology Care" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <relationship localId="202" locator="131:7-132:237" alias="FirstBladderCancerStaging" xsi:type="With">
+                  <expression localId="185" locator="131:12-131:51" name="First Bladder Cancer Staging Procedure" xsi:type="ExpressionRef"/>
+                  <suchThat localId="201" locator="132:19-132:237" xsi:type="And">
+                     <operand locator="132:94-132:109" xsi:type="In">
+                        <operand locator="132:87-132:92" xsi:type="Start">
+                           <operand localId="192" locator="132:19-132:86" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                              <operand localId="189" locator="132:46-132:65" path="relevantDatetime" scope="BCG" xsi:type="Property"/>
+                              <operand localId="191" locator="132:68-132:85" path="relevantPeriod" scope="BCG" xsi:type="Property"/>
+                           </operand>
+                        </operand>
+                        <operand locator="132:94-132:109" lowClosed="false" highClosed="true" xsi:type="Interval">
+                           <low localId="199" locator="132:117-132:237" xsi:type="Start">
+                              <operand localId="198" locator="132:126-132:237" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                 <operand localId="195" locator="132:153-132:194" path="relevantDatetime" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+                                 <operand localId="197" locator="132:197-132:236" path="relevantPeriod" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+                              </operand>
+                           </low>
+                           <high locator="132:117-132:237" xsi:type="Add">
+                              <operand localId="199" locator="132:117-132:237" xsi:type="Start">
+                                 <operand localId="198" locator="132:126-132:237" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                    <operand localId="195" locator="132:153-132:194" path="relevantDatetime" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+                                    <operand localId="197" locator="132:197-132:236" path="relevantPeriod" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+                                 </operand>
+                              </operand>
+                              <operand localId="200" locator="132:94-132:101" value="6" unit="months" xsi:type="Quantity"/>
+                           </high>
+                        </operand>
+                     </operand>
+                     <operand locator="132:94-132:109" xsi:type="Not">
+                        <operand locator="132:94-132:109" xsi:type="IsNull">
+                           <operand localId="199" locator="132:117-132:237" xsi:type="Start">
+                              <operand localId="198" locator="132:126-132:237" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                 <operand localId="195" locator="132:153-132:194" path="relevantDatetime" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+                                 <operand localId="197" locator="132:197-132:236" path="relevantPeriod" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                        </operand>
+                     </operand>
+                  </suchThat>
+               </relationship>
+               <sort localId="209" locator="133:7-133:83">
+                  <by localId="208" locator="133:15-133:83" direction="asc" xsi:type="ByExpression">
+                     <expression localId="207" locator="133:15-133:83" xsi:type="Start">
+                        <operand localId="206" locator="133:24-133:83" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                           <operand localId="204" locator="133:51-133:66" name="relevantDatetime" xsi:type="IdentifierRef"/>
+                           <operand localId="205" locator="133:69-133:82" name="relevantPeriod" xsi:type="IdentifierRef"/>
+                        </operand>
+                     </expression>
+                  </by>
+               </sort>
+            </source>
+         </expression>
+      </def>
+      <def localId="215" locator="45:1-46:38" name="Numerator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="215">
+               <a:s>define &quot;Numerator&quot;:
+  </a:s>
+               <a:s r="214">
+                  <a:s r="213">
+                     <a:s>&quot;First BCG Administered&quot;</a:s>
+                  </a:s>
+                  <a:s> is not null</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="214" locator="46:3-46:38" xsi:type="Not">
+            <operand locator="46:3-46:38" xsi:type="IsNull">
+               <operand localId="213" locator="46:3-46:26" name="First BCG Administered" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
+      </def>
+      <def localId="217" locator="48:1-49:51" name="SDE Ethnicity" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="217">
+               <a:s>define &quot;SDE Ethnicity&quot;:
+  </a:s>
+               <a:s r="216">
+                  <a:s>[&quot;Patient Characteristic Ethnicity&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Ethnicity&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="216" locator="49:3-49:51" xmlns:ns6="urn:healthit-gov:qdm:v5_6" dataType="ns6:PatientCharacteristicEthnicity" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="49:40-49:50" name="Ethnicity" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="219" locator="51:1-52:43" name="SDE Payer" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="219">
+               <a:s>define &quot;SDE Payer&quot;:
+  </a:s>
+               <a:s r="218">
+                  <a:s>[&quot;Patient Characteristic Payer&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Payer&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="218" locator="52:3-52:43" xmlns:ns7="urn:healthit-gov:qdm:v5_6" dataType="ns7:PatientCharacteristicPayer" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="52:36-52:42" name="Payer" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="221" locator="54:1-55:41" name="SDE Race" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="221">
+               <a:s>define &quot;SDE Race&quot;:
+  </a:s>
+               <a:s r="220">
+                  <a:s>[&quot;Patient Characteristic Race&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Race&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="220" locator="55:3-55:41" xmlns:ns8="urn:healthit-gov:qdm:v5_6" dataType="ns8:PatientCharacteristicRace" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="55:35-55:40" name="Race" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="223" locator="57:1-58:58" name="SDE Sex" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="223">
+               <a:s>define &quot;SDE Sex&quot;:
+  </a:s>
+               <a:s r="222">
+                  <a:s>[&quot;Patient Characteristic Sex&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;ONC Administrative Sex&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="222" locator="58:3-58:58" xmlns:ns9="urn:healthit-gov:qdm:v5_6" dataType="ns9:PatientCharacteristicSex" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="58:34-58:57" name="ONC Administrative Sex" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="239" locator="87:1-90:182" name="Acute Tuberculosis Diagnosis" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="239">
+               <a:s>define &quot;Acute Tuberculosis Diagnosis&quot;:
+  </a:s>
+               <a:s r="238">
+                  <a:s>
+                     <a:s r="225">
+                        <a:s r="224">
+                           <a:s r="224">
+                              <a:s>[&quot;Diagnosis&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Active Tuberculosis for Urology Care&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> ActiveTuberculosis</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="237">
+                     <a:s>with </a:s>
+                     <a:s r="227">
+                        <a:s r="226">
+                           <a:s>
+                              <a:s>&quot;First Bladder Cancer Staging Procedure&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> FirstBladderCancerStaging</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="236">
+                        <a:s r="229">
+                           <a:s r="228">
+                              <a:s>ActiveTuberculosis</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="229">
+                              <a:s>prevalencePeriod</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="236"> overlaps after </a:s>
+                        <a:s r="235">
+                           <a:s r="230">
+                              <a:s>Global</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="235">
+                              <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                              <a:s r="232">
+                                 <a:s r="231">
+                                    <a:s>FirstBladderCancerStaging</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="232">
+                                    <a:s>relevantDatetime</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="234">
+                                 <a:s r="233">
+                                    <a:s>FirstBladderCancerStaging</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="234">
+                                    <a:s>relevantPeriod</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="238" locator="88:3-90:182" xsi:type="Query">
+            <source localId="225" locator="88:3-88:74" alias="ActiveTuberculosis">
+               <expression localId="224" locator="88:3-88:55" xmlns:ns10="urn:healthit-gov:qdm:v5_6" dataType="ns10:Diagnosis" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="88:17-88:54" name="Active Tuberculosis for Urology Care" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <relationship localId="237" locator="89:5-90:182" alias="FirstBladderCancerStaging" xsi:type="With">
+               <expression localId="226" locator="89:10-89:49" name="First Bladder Cancer Staging Procedure" xsi:type="ExpressionRef"/>
+               <suchThat localId="236" locator="90:17-90:182" xsi:type="OverlapsAfter">
+                  <operand localId="229" locator="90:17-90:51" path="prevalencePeriod" scope="ActiveTuberculosis" xsi:type="Property"/>
+                  <operand localId="235" locator="90:68-90:182" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                     <operand localId="232" locator="90:97-90:138" path="relevantDatetime" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+                     <operand localId="234" locator="90:141-90:180" path="relevantPeriod" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="262" locator="119:1-122:270" name="Immunosuppressive Drugs" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="262">
+               <a:s>define &quot;Immunosuppressive Drugs&quot;:
+  </a:s>
+               <a:s r="261">
+                  <a:s>
+                     <a:s r="243">
+                        <a:s r="242">
+                           <a:s r="242">
+                              <a:s>[&quot;Medication, Active&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Immunosuppressive Drugs for Urology Care&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> ImmunosuppressiveDrugs</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="260">
+                     <a:s>with </a:s>
+                     <a:s r="245">
+                        <a:s r="244">
+                           <a:s>
+                              <a:s>&quot;First Bladder Cancer Staging Procedure&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> FirstBladderCancerStaging</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="259">
+                        <a:s r="251">
+                           <a:s r="246">
+                              <a:s>Global</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="251">
+                              <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                              <a:s r="248">
+                                 <a:s r="247">
+                                    <a:s>ImmunosuppressiveDrugs</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="248">
+                                    <a:s>relevantDatetime</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="250">
+                                 <a:s r="249">
+                                    <a:s>ImmunosuppressiveDrugs</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="250">
+                                    <a:s>relevantPeriod</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="259"> starts on or before </a:s>
+                        <a:s r="258">
+                           <a:s>start of </a:s>
+                           <a:s r="257">
+                              <a:s r="252">
+                                 <a:s>Global</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="257">
+                                 <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                 <a:s r="254">
+                                    <a:s r="253">
+                                       <a:s>FirstBladderCancerStaging</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="254">
+                                       <a:s>relevantDatetime</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>, </a:s>
+                                 <a:s r="256">
+                                    <a:s r="255">
+                                       <a:s>FirstBladderCancerStaging</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="256">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="261" locator="120:3-122:270" xsi:type="Query">
+            <source localId="243" locator="120:3-120:91" alias="ImmunosuppressiveDrugs">
+               <expression localId="242" locator="120:3-120:68" xmlns:ns11="urn:healthit-gov:qdm:v5_6" dataType="ns11:MedicationActive" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="120:26-120:67" name="Immunosuppressive Drugs for Urology Care" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <relationship localId="260" locator="121:5-122:270" alias="FirstBladderCancerStaging" xsi:type="With">
+               <expression localId="244" locator="121:10-121:49" name="First Bladder Cancer Staging Procedure" xsi:type="ExpressionRef"/>
+               <suchThat localId="259" locator="122:17-122:270" xsi:type="SameOrBefore">
+                  <operand locator="122:127-122:132" xsi:type="Start">
+                     <operand localId="251" locator="122:17-122:125" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                        <operand localId="248" locator="122:46-122:84" path="relevantDatetime" scope="ImmunosuppressiveDrugs" xsi:type="Property"/>
+                        <operand localId="250" locator="122:87-122:123" path="relevantPeriod" scope="ImmunosuppressiveDrugs" xsi:type="Property"/>
+                     </operand>
+                  </operand>
+                  <operand localId="258" locator="122:147-122:270" xsi:type="Start">
+                     <operand localId="257" locator="122:156-122:270" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                        <operand localId="254" locator="122:185-122:226" path="relevantDatetime" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+                        <operand localId="256" locator="122:229-122:268" path="relevantPeriod" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+                     </operand>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="287" locator="92:1-95:241" name="Cystectomy Done" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="287">
+               <a:s>define &quot;Cystectomy Done&quot;:
+  </a:s>
+               <a:s r="286">
+                  <a:s>
+                     <a:s r="267">
+                        <a:s r="266">
+                           <a:s r="266">
+                              <a:s>[&quot;Procedure, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Cystectomy for Urology Care&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> Cystectomy</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="285">
+                     <a:s>with </a:s>
+                     <a:s r="269">
+                        <a:s r="268">
+                           <a:s>
+                              <a:s>&quot;First Bladder Cancer Staging Procedure&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> FirstBladderCancerStaging</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="284">
+                        <a:s r="275">
+                           <a:s r="270">
+                              <a:s>Global</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="275">
+                              <a:s>EarliestOf ( </a:s>
+                              <a:s r="272">
+                                 <a:s r="271">
+                                    <a:s>Cystectomy</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="272">
+                                    <a:s>relevantDatetime</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="274">
+                                 <a:s r="273">
+                                    <a:s>Cystectomy</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="274">
+                                    <a:s>relevantPeriod</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> </a:s>
+                        <a:s r="284">
+                           <a:s r="283">
+                              <a:s>6 months</a:s>
+                           </a:s>
+                           <a:s> or less before</a:s>
+                        </a:s>
+                        <a:s> </a:s>
+                        <a:s r="282">
+                           <a:s>start of </a:s>
+                           <a:s r="281">
+                              <a:s r="276">
+                                 <a:s>Global</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="281">
+                                 <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                 <a:s r="278">
+                                    <a:s r="277">
+                                       <a:s>FirstBladderCancerStaging</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="278">
+                                       <a:s>relevantDatetime</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>, </a:s>
+                                 <a:s r="280">
+                                    <a:s r="279">
+                                       <a:s>FirstBladderCancerStaging</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="280">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="286" locator="93:3-95:241" xsi:type="Query">
+            <source localId="267" locator="93:3-93:68" alias="Cystectomy">
+               <expression localId="266" locator="93:3-93:57" xmlns:ns12="urn:healthit-gov:qdm:v5_6" dataType="ns12:PositiveProcedurePerformed" templateId="PositiveProcedurePerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="93:28-93:56" name="Cystectomy for Urology Care" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <relationship localId="285" locator="94:5-95:241" alias="FirstBladderCancerStaging" xsi:type="With">
+               <expression localId="268" locator="94:10-94:49" name="First Bladder Cancer Staging Procedure" xsi:type="ExpressionRef"/>
+               <suchThat localId="284" locator="95:17-95:241" xsi:type="And">
+                  <operand locator="95:94-95:109" xsi:type="In">
+                     <operand localId="275" locator="95:17-95:92" name="EarliestOf" libraryName="Global" xsi:type="FunctionRef">
+                        <operand localId="272" locator="95:37-95:63" path="relevantDatetime" scope="Cystectomy" xsi:type="Property"/>
+                        <operand localId="274" locator="95:66-95:90" path="relevantPeriod" scope="Cystectomy" xsi:type="Property"/>
+                     </operand>
+                     <operand locator="95:94-95:109" lowClosed="true" highClosed="false" xsi:type="Interval">
+                        <low locator="95:118-95:241" xsi:type="Subtract">
+                           <operand localId="282" locator="95:118-95:241" xsi:type="Start">
+                              <operand localId="281" locator="95:127-95:241" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                 <operand localId="278" locator="95:156-95:197" path="relevantDatetime" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+                                 <operand localId="280" locator="95:200-95:239" path="relevantPeriod" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                           <operand localId="283" locator="95:94-95:101" value="6" unit="months" xsi:type="Quantity"/>
+                        </low>
+                        <high localId="282" locator="95:118-95:241" xsi:type="Start">
+                           <operand localId="281" locator="95:127-95:241" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                              <operand localId="278" locator="95:156-95:197" path="relevantDatetime" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+                              <operand localId="280" locator="95:200-95:239" path="relevantPeriod" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+                           </operand>
+                        </high>
+                     </operand>
+                  </operand>
+                  <operand locator="95:94-95:109" xsi:type="Not">
+                     <operand locator="95:94-95:109" xsi:type="IsNull">
+                        <operand localId="282" locator="95:118-95:241" xsi:type="Start">
+                           <operand localId="281" locator="95:127-95:241" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                              <operand localId="278" locator="95:156-95:197" path="relevantDatetime" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+                              <operand localId="280" locator="95:200-95:239" path="relevantPeriod" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+                           </operand>
+                        </operand>
+                     </operand>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="312" locator="97:1-103:3" name="Has Excluding  HIV, Immunocompromised Conditions or Mixed Histology Before Staging" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="312">
+               <a:s>define &quot;Has Excluding  HIV, Immunocompromised Conditions or Mixed Histology Before Staging&quot;:
+  </a:s>
+               <a:s r="311">
+                  <a:s>exists </a:s>
+                  <a:s r="310">
+                     <a:s>( </a:s>
+                     <a:s r="310">
+                        <a:s>
+                           <a:s r="296">
+                              <a:s r="295">
+                                 <a:s>( </a:s>
+                                 <a:s r="295">
+                                    <a:s r="293">
+                                       <a:s r="291">
+                                          <a:s>[&quot;Diagnosis&quot;: </a:s>
+                                          <a:s>
+                                             <a:s>&quot;HIV&quot;</a:s>
+                                          </a:s>
+                                          <a:s>]</a:s>
+                                       </a:s>
+                                       <a:s>
+      union </a:s>
+                                       <a:s r="292">
+                                          <a:s>[&quot;Diagnosis&quot;: </a:s>
+                                          <a:s>
+                                             <a:s>&quot;Immunocompromised Conditions&quot;</a:s>
+                                          </a:s>
+                                          <a:s>]</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+      union </a:s>
+                                    <a:s r="294">
+                                       <a:s>[&quot;Diagnosis&quot;: </a:s>
+                                       <a:s>
+                                          <a:s>&quot;Mixed histology urothelial cell carcinoma for Urology Care&quot;</a:s>
+                                       </a:s>
+                                       <a:s>]</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                              <a:s> ExclusionDiagnosis</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="309">
+                           <a:s>with </a:s>
+                           <a:s r="298">
+                              <a:s r="297">
+                                 <a:s>
+                                    <a:s>&quot;First Bladder Cancer Staging Procedure&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> FirstBladderCancerStaging</a:s>
+                           </a:s>
+                           <a:s>
+        such that </a:s>
+                           <a:s r="308">
+                              <a:s r="300">
+                                 <a:s r="299">
+                                    <a:s>ExclusionDiagnosis</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="300">
+                                    <a:s>prevalencePeriod</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s r="308"> starts on or before </a:s>
+                              <a:s r="307">
+                                 <a:s>start of </a:s>
+                                 <a:s r="306">
+                                    <a:s r="301">
+                                       <a:s>Global</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="306">
+                                       <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                       <a:s r="303">
+                                          <a:s r="302">
+                                             <a:s>FirstBladderCancerStaging</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="303">
+                                             <a:s>relevantDatetime</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>, </a:s>
+                                       <a:s r="305">
+                                          <a:s r="304">
+                                             <a:s>FirstBladderCancerStaging</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="305">
+                                             <a:s>relevantPeriod</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> )</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="311" locator="98:3-103:3" xsi:type="Exists">
+            <operand localId="310" locator="98:10-103:3" xsi:type="Query">
+               <source localId="296" locator="98:12-100:108" alias="ExclusionDiagnosis">
+                  <expression localId="295" locator="98:12-100:89" xsi:type="Union">
+                     <operand localId="293" locator="98:14-99:57" xsi:type="Union">
+                        <operand localId="291" locator="98:14-98:33" xmlns:ns13="urn:healthit-gov:qdm:v5_6" dataType="ns13:Diagnosis" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                           <codes locator="98:28-98:32" name="HIV" xsi:type="ValueSetRef"/>
+                        </operand>
+                        <operand localId="292" locator="99:13-99:57" xmlns:ns14="urn:healthit-gov:qdm:v5_6" dataType="ns14:Diagnosis" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                           <codes locator="99:27-99:56" name="Immunocompromised Conditions" xsi:type="ValueSetRef"/>
+                        </operand>
+                     </operand>
+                     <operand localId="294" locator="100:13-100:87" xmlns:ns15="urn:healthit-gov:qdm:v5_6" dataType="ns15:Diagnosis" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                        <codes locator="100:27-100:86" name="Mixed histology urothelial cell carcinoma for Urology Care" xsi:type="ValueSetRef"/>
+                     </operand>
+                  </expression>
+               </source>
+               <relationship localId="309" locator="101:7-102:198" alias="FirstBladderCancerStaging" xsi:type="With">
+                  <expression localId="297" locator="101:12-101:51" name="First Bladder Cancer Staging Procedure" xsi:type="ExpressionRef"/>
+                  <suchThat localId="308" locator="102:19-102:198" xsi:type="SameOrBefore">
+                     <operand locator="102:55-102:60" xsi:type="Start">
+                        <operand localId="300" locator="102:19-102:53" path="prevalencePeriod" scope="ExclusionDiagnosis" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="307" locator="102:75-102:198" xsi:type="Start">
+                        <operand localId="306" locator="102:84-102:198" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                           <operand localId="303" locator="102:113-102:154" path="relevantDatetime" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+                           <operand localId="305" locator="102:157-102:196" path="relevantPeriod" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                  </suchThat>
+               </relationship>
+            </operand>
+         </expression>
+      </def>
+      <def localId="334" locator="105:1-110:3" name="Has Excluding Chemotherapy or Radiotherapy Procedure Before Staging" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="334">
+               <a:s>define &quot;Has Excluding Chemotherapy or Radiotherapy Procedure Before Staging&quot;:
+  </a:s>
+               <a:s r="333">
+                  <a:s>exists </a:s>
+                  <a:s r="332">
+                     <a:s>( </a:s>
+                     <a:s r="332">
+                        <a:s>
+                           <a:s r="318">
+                              <a:s r="317">
+                                 <a:s>( </a:s>
+                                 <a:s r="317">
+                                    <a:s r="315">
+                                       <a:s>[&quot;Medication, Active&quot;: </a:s>
+                                       <a:s>
+                                          <a:s>&quot;Chemotherapy Agents for Advanced Cancer&quot;</a:s>
+                                       </a:s>
+                                       <a:s>]</a:s>
+                                    </a:s>
+                                    <a:s>
+      union </a:s>
+                                    <a:s r="316">
+                                       <a:s>[&quot;Procedure, Performed&quot;: </a:s>
+                                       <a:s>
+                                          <a:s>&quot;Combined radiotherapy (procedure)&quot;</a:s>
+                                       </a:s>
+                                       <a:s>]</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                              <a:s> ExclusionMedsProcedures</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="331">
+                           <a:s>with </a:s>
+                           <a:s r="320">
+                              <a:s r="319">
+                                 <a:s>
+                                    <a:s>&quot;First Bladder Cancer Staging Procedure&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> FirstBladderCancerStaging</a:s>
+                           </a:s>
+                           <a:s>
+        such that </a:s>
+                           <a:s r="330">
+                              <a:s r="322">
+                                 <a:s r="321">
+                                    <a:s>ExclusionMedsProcedures</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="322">
+                                    <a:s>relevantPeriod</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> </a:s>
+                              <a:s r="330">
+                                 <a:s>starts </a:s>
+                                 <a:s r="329">
+                                    <a:s>6 months</a:s>
+                                 </a:s>
+                                 <a:s> or less before</a:s>
+                              </a:s>
+                              <a:s> </a:s>
+                              <a:s r="328">
+                                 <a:s r="323">
+                                    <a:s>Global</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="328">
+                                    <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                    <a:s r="325">
+                                       <a:s r="324">
+                                          <a:s>FirstBladderCancerStaging</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="325">
+                                          <a:s>relevantDatetime</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>, </a:s>
+                                    <a:s r="327">
+                                       <a:s r="326">
+                                          <a:s>FirstBladderCancerStaging</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="327">
+                                          <a:s>relevantPeriod</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> )</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="333" locator="106:3-110:3" xsi:type="Exists">
+            <operand localId="332" locator="106:10-110:3" xsi:type="Query">
+               <source localId="318" locator="106:12-107:99" alias="ExclusionMedsProcedures">
+                  <expression localId="317" locator="106:12-107:75" xsi:type="Union">
+                     <operand xsi:type="As">
+                        <operand localId="315" locator="106:14-106:78" xmlns:ns16="urn:healthit-gov:qdm:v5_6" dataType="ns16:MedicationActive" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                           <codes locator="106:37-106:77" name="Chemotherapy Agents for Advanced Cancer" xsi:type="ValueSetRef"/>
+                        </operand>
+                        <asTypeSpecifier xsi:type="ListTypeSpecifier">
+                           <elementType xsi:type="ChoiceTypeSpecifier">
+                              <choice xmlns:ns17="urn:healthit-gov:qdm:v5_6" name="ns17:PositiveProcedurePerformed" xsi:type="NamedTypeSpecifier"/>
+                              <choice xmlns:ns18="urn:healthit-gov:qdm:v5_6" name="ns18:MedicationActive" xsi:type="NamedTypeSpecifier"/>
+                           </elementType>
+                        </asTypeSpecifier>
+                     </operand>
+                     <operand xsi:type="As">
+                        <operand localId="316" locator="107:13-107:73" xmlns:ns19="urn:healthit-gov:qdm:v5_6" dataType="ns19:PositiveProcedurePerformed" templateId="PositiveProcedurePerformed" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                           <codes xsi:type="ToList">
+                              <operand locator="107:38-107:72" name="Combined radiotherapy (procedure)" xsi:type="CodeRef"/>
+                           </codes>
+                        </operand>
+                        <asTypeSpecifier xsi:type="ListTypeSpecifier">
+                           <elementType xsi:type="ChoiceTypeSpecifier">
+                              <choice xmlns:ns20="urn:healthit-gov:qdm:v5_6" name="ns20:PositiveProcedurePerformed" xsi:type="NamedTypeSpecifier"/>
+                              <choice xmlns:ns21="urn:healthit-gov:qdm:v5_6" name="ns21:MedicationActive" xsi:type="NamedTypeSpecifier"/>
+                           </elementType>
+                        </asTypeSpecifier>
+                     </operand>
+                  </expression>
+               </source>
+               <relationship localId="331" locator="108:7-109:203" alias="FirstBladderCancerStaging" xsi:type="With">
+                  <expression localId="319" locator="108:12-108:51" name="First Bladder Cancer Staging Procedure" xsi:type="ExpressionRef"/>
+                  <suchThat localId="330" locator="109:19-109:203" xsi:type="And">
+                     <operand locator="109:65-109:80" xsi:type="In">
+                        <operand locator="109:58-109:63" xsi:type="Start">
+                           <operand localId="322" locator="109:19-109:56" path="relevantPeriod" scope="ExclusionMedsProcedures" xsi:type="Property"/>
+                        </operand>
+                        <operand locator="109:65-109:80" lowClosed="true" highClosed="false" xsi:type="Interval">
+                           <low locator="109:96-109:203" xsi:type="Subtract">
+                              <operand locator="109:96-109:203" xsi:type="Start">
+                                 <operand localId="328" locator="109:89-109:203" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                    <operand localId="325" locator="109:118-109:159" path="relevantDatetime" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+                                    <operand localId="327" locator="109:162-109:201" path="relevantPeriod" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+                                 </operand>
+                              </operand>
+                              <operand localId="329" locator="109:65-109:72" value="6" unit="months" xsi:type="Quantity"/>
+                           </low>
+                           <high locator="109:96-109:203" xsi:type="Start">
+                              <operand localId="328" locator="109:89-109:203" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                 <operand localId="325" locator="109:118-109:159" path="relevantDatetime" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+                                 <operand localId="327" locator="109:162-109:201" path="relevantPeriod" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+                              </operand>
+                           </high>
+                        </operand>
+                     </operand>
+                     <operand locator="109:65-109:80" xsi:type="Not">
+                        <operand locator="109:65-109:80" xsi:type="IsNull">
+                           <operand locator="109:96-109:203" xsi:type="Start">
+                              <operand localId="328" locator="109:89-109:203" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                 <operand localId="325" locator="109:118-109:159" path="relevantDatetime" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+                                 <operand localId="327" locator="109:162-109:201" path="relevantPeriod" scope="FirstBladderCancerStaging" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                        </operand>
+                     </operand>
+                  </suchThat>
+               </relationship>
+            </operand>
+         </expression>
+      </def>
+      <def localId="337" locator="80:1-85:76" name="Denominator Exclusion" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="337">
+               <a:s>define &quot;Denominator Exclusion&quot;:
+  </a:s>
+               <a:s r="336">
+                  <a:s r="314">
+                     <a:s r="290">
+                        <a:s r="265">
+                           <a:s r="241">
+                              <a:s>exists </a:s>
+                              <a:s r="240">
+                                 <a:s>&quot;Acute Tuberculosis Diagnosis&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+    or </a:s>
+                           <a:s r="264">
+                              <a:s>exists </a:s>
+                              <a:s r="263">
+                                 <a:s>&quot;Immunosuppressive Drugs&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+    or </a:s>
+                        <a:s r="289">
+                           <a:s>exists </a:s>
+                           <a:s r="288">
+                              <a:s>&quot;Cystectomy Done&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    or </a:s>
+                     <a:s r="313">
+                        <a:s>&quot;Has Excluding  HIV, Immunocompromised Conditions or Mixed Histology Before Staging&quot;</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    or </a:s>
+                  <a:s r="335">
+                     <a:s>&quot;Has Excluding Chemotherapy or Radiotherapy Procedure Before Staging&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="336" locator="81:3-85:76" xsi:type="Or">
+            <operand localId="314" locator="81:3-84:91" xsi:type="Or">
+               <operand localId="290" locator="81:3-83:31" xsi:type="Or">
+                  <operand localId="265" locator="81:3-82:39" xsi:type="Or">
+                     <operand localId="241" locator="81:3-81:39" xsi:type="Exists">
+                        <operand localId="240" locator="81:10-81:39" name="Acute Tuberculosis Diagnosis" xsi:type="ExpressionRef"/>
+                     </operand>
+                     <operand localId="264" locator="82:8-82:39" xsi:type="Exists">
+                        <operand localId="263" locator="82:15-82:39" name="Immunosuppressive Drugs" xsi:type="ExpressionRef"/>
+                     </operand>
+                  </operand>
+                  <operand localId="289" locator="83:8-83:31" xsi:type="Exists">
+                     <operand localId="288" locator="83:15-83:31" name="Cystectomy Done" xsi:type="ExpressionRef"/>
+                  </operand>
+               </operand>
+               <operand localId="313" locator="84:8-84:91" name="Has Excluding  HIV, Immunocompromised Conditions or Mixed Histology Before Staging" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand localId="335" locator="85:8-85:76" name="Has Excluding Chemotherapy or Radiotherapy Procedure Before Staging" xsi:type="ExpressionRef"/>
+         </expression>
+      </def>
+   </statements>
+</library>

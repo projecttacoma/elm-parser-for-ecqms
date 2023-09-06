@@ -1,0 +1,3533 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion,DisableMethodInvocation" xsi:type="a:CqlToElmInfo"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="552">
+         <a:s>library HospitalHarmHyperglycemiainHospitalizedPatients version '3.0.000'</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="HospitalHarmHyperglycemiainHospitalizedPatients" version="3.0.000"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="3:1-3:23" localIdentifier="QDM" uri="urn:healthit-gov:qdm:v5_6" version="5.6">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>using </a:s>
+               <a:s>
+                  <a:s>QDM</a:s>
+               </a:s>
+               <a:s> version '5.6'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="5:1-5:64" localIdentifier="Global" path="MATGlobalCommonFunctions" version="7.0.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>MATGlobalCommonFunctions</a:s>
+               </a:s>
+               <a:s> version '7.0.000' called Global</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <parameters>
+      <def localId="13" locator="16:1-16:49" name="Measurement Period" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="13">
+               <a:s>parameter &quot;Measurement Period&quot; </a:s>
+               <a:s r="12">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="11">
+                     <a:s>DateTime</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <parameterTypeSpecifier localId="12" locator="16:32-16:49" xsi:type="IntervalTypeSpecifier">
+            <pointType localId="11" locator="16:41-16:48" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <valueSets>
+      <def localId="3" locator="7:1-7:71" name="Diabetes" id="urn:oid:2.16.840.1.113883.3.464.1003.103.12.1001" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>valueset &quot;Diabetes&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.103.12.1001'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="4" locator="8:1-8:71" name="Encounter Inpatient" id="urn:oid:2.16.840.1.113883.3.666.5.307" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>valueset &quot;Encounter Inpatient&quot;: 'urn:oid:2.16.840.1.113883.3.666.5.307'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="5" locator="9:1-9:58" name="Ethnicity" id="urn:oid:2.16.840.1.114222.4.11.837" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>valueset &quot;Ethnicity&quot;: 'urn:oid:2.16.840.1.114222.4.11.837'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="6" locator="10:1-10:84" name="Glucose Lab Test Mass Per Volume" id="urn:oid:2.16.840.1.113762.1.4.1248.34" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>valueset &quot;Glucose Lab Test Mass Per Volume&quot;: 'urn:oid:2.16.840.1.113762.1.4.1248.34'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="7" locator="11:1-11:88" name="Hypoglycemics Treatment Medications" id="urn:oid:2.16.840.1.113762.1.4.1196.394" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="7">
+               <a:s>valueset &quot;Hypoglycemics Treatment Medications&quot;: 'urn:oid:2.16.840.1.113762.1.4.1196.394'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="8" locator="12:1-12:68" name="ONC Administrative Sex" id="urn:oid:2.16.840.1.113762.1.4.1" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="8">
+               <a:s>valueset &quot;ONC Administrative Sex&quot;: 'urn:oid:2.16.840.1.113762.1.4.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="9" locator="13:1-13:55" name="Payer" id="urn:oid:2.16.840.1.114222.4.11.3591" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="9">
+               <a:s>valueset &quot;Payer&quot;: 'urn:oid:2.16.840.1.114222.4.11.3591'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="10" locator="14:1-14:53" name="Race" id="urn:oid:2.16.840.1.114222.4.11.836" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="10">
+               <a:s>valueset &quot;Race&quot;: 'urn:oid:2.16.840.1.114222.4.11.836'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </valueSets>
+   <contexts>
+      <def locator="18:1-18:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="18:1-18:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="18:1-18:15" xmlns:ns0="urn:healthit-gov:qdm:v5_6" dataType="ns0:Patient" templateId="Patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="29" locator="130:1-133:81" name="Qualifying Encounter" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="29">
+               <a:s>define &quot;Qualifying Encounter&quot;:
+  </a:s>
+               <a:s r="28">
+                  <a:s>
+                     <a:s r="15">
+                        <a:s r="14">
+                           <a:s r="14">
+                              <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Encounter Inpatient&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> InpatientEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="27">
+                     <a:s>where </a:s>
+                     <a:s r="27">
+                        <a:s r="19">
+                           <a:s r="17">
+                              <a:s r="16">
+                                 <a:s>InpatientEncounter</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="17">
+                                 <a:s>relevantPeriod</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="19"> ends during day of </a:s>
+                           <a:s r="18">
+                              <a:s>&quot;Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      and </a:s>
+                        <a:s r="26">
+                           <a:s r="24">
+                              <a:s>AgeInYearsAt(</a:s>
+                              <a:s r="23">
+                                 <a:s>date from </a:s>
+                                 <a:s r="22">
+                                    <a:s>start of </a:s>
+                                    <a:s r="21">
+                                       <a:s r="20">
+                                          <a:s>InpatientEncounter</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="21">
+                                          <a:s>relevantPeriod</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                           <a:s r="25">>= 18</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="28" locator="131:3-133:81" xsi:type="Query">
+            <source localId="15" locator="131:3-131:68" alias="InpatientEncounter">
+               <expression localId="14" locator="131:3-131:49" xmlns:ns1="urn:healthit-gov:qdm:v5_6" dataType="ns1:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="131:28-131:48" name="Encounter Inpatient" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <where localId="27" locator="132:5-133:81" xsi:type="And">
+               <operand localId="19" locator="132:11-132:83" precision="Day" xsi:type="In">
+                  <operand locator="132:45-132:48" xsi:type="End">
+                     <operand localId="17" locator="132:11-132:43" path="relevantPeriod" scope="InpatientEncounter" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="18" locator="132:64-132:83" name="Measurement Period" xsi:type="ParameterRef"/>
+               </operand>
+               <operand localId="26" locator="133:11-133:81" xsi:type="GreaterOrEqual">
+                  <operand localId="24" locator="133:11-133:76" precision="Year" xsi:type="CalculateAgeAt">
+                     <operand xsi:type="ToDate">
+                        <operand path="birthDatetime" xsi:type="Property">
+                           <source name="Patient" xsi:type="ExpressionRef"/>
+                        </operand>
+                     </operand>
+                     <operand localId="23" locator="133:24-133:75" xsi:type="DateFrom">
+                        <operand localId="22" locator="133:34-133:75" xsi:type="Start">
+                           <operand localId="21" locator="133:43-133:75" path="relevantPeriod" scope="InpatientEncounter" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand localId="25" locator="133:80-133:81" valueType="t:Integer" value="18" xsi:type="Literal"/>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="39" locator="95:1-100:5" name="Encounter with Hospitalization Period" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="39">
+               <a:s>define &quot;Encounter with Hospitalization Period&quot;:
+  </a:s>
+               <a:s r="38">
+                  <a:s>
+                     <a:s r="31">
+                        <a:s r="30">
+                           <a:s>
+                              <a:s>&quot;Qualifying Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> QualifyingHospitalization</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="37">
+                     <a:s>return </a:s>
+                     <a:s r="36">
+                        <a:s>Tuple {
+      </a:s>
+                        <a:s>
+                           <a:s>encounter: </a:s>
+                           <a:s r="32">
+                              <a:s>QualifyingHospitalization</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>,
+      </a:s>
+                        <a:s>
+                           <a:s>hospitalizationPeriod: </a:s>
+                           <a:s r="35">
+                              <a:s r="33">
+                                 <a:s>Global</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="35">
+                                 <a:s>&quot;HospitalizationWithObservation&quot; ( </a:s>
+                                 <a:s r="34">
+                                    <a:s>QualifyingHospitalization</a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+    }</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="38" locator="96:3-100:5" xsi:type="Query">
+            <source localId="31" locator="96:3-96:50" alias="QualifyingHospitalization">
+               <expression localId="30" locator="96:3-96:24" name="Qualifying Encounter" xsi:type="ExpressionRef"/>
+            </source>
+            <return localId="37" locator="97:5-100:5">
+               <expression localId="36" locator="97:12-100:5" xsi:type="Tuple">
+                  <element name="encounter">
+                     <value localId="32" locator="98:18-98:42" name="QualifyingHospitalization" xsi:type="AliasRef"/>
+                  </element>
+                  <element name="hospitalizationPeriod">
+                     <value localId="35" locator="99:30-99:98" name="HospitalizationWithObservation" libraryName="Global" xsi:type="FunctionRef">
+                        <operand localId="34" locator="99:72-99:96" name="QualifyingHospitalization" xsi:type="AliasRef"/>
+                     </value>
+                  </element>
+               </expression>
+            </return>
+         </expression>
+      </def>
+      <def localId="55" locator="88:1-93:36" name="Encounter with Existing Diabetes Diagnosis" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="55">
+               <a:s>define &quot;Encounter with Existing Diabetes Diagnosis&quot;:
+  </a:s>
+               <a:s r="54">
+                  <a:s>
+                     <a:s r="41">
+                        <a:s r="40">
+                           <a:s>
+                              <a:s>&quot;Encounter with Hospitalization Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> Hospitalization</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="50">
+                     <a:s>with </a:s>
+                     <a:s r="43">
+                        <a:s r="42">
+                           <a:s r="42">
+                              <a:s>[&quot;Diagnosis&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Diabetes&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> DiabetesCondition</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="49">
+                        <a:s r="45">
+                           <a:s r="44">
+                              <a:s>DiabetesCondition</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="45">
+                              <a:s>prevalencePeriod</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="49"> starts before 
+      </a:s>
+                        <a:s r="48">
+                           <a:s>end of </a:s>
+                           <a:s r="47">
+                              <a:s r="46">
+                                 <a:s>Hospitalization</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="47">
+                                 <a:s>hospitalizationPeriod</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="53">
+                     <a:s>return </a:s>
+                     <a:s r="52">
+                        <a:s r="51">
+                           <a:s>Hospitalization</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="52">
+                           <a:s>encounter</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="54" locator="89:3-93:36" xsi:type="Query">
+            <source localId="41" locator="89:3-89:57" alias="Hospitalization">
+               <expression localId="40" locator="89:3-89:41" name="Encounter with Hospitalization Period" xsi:type="ExpressionRef"/>
+            </source>
+            <relationship localId="50" locator="90:5-92:50" alias="DiabetesCondition" xsi:type="With">
+               <expression localId="42" locator="90:10-90:34" xmlns:ns2="urn:healthit-gov:qdm:v5_6" dataType="ns2:Diagnosis" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="90:24-90:33" name="Diabetes" xsi:type="ValueSetRef"/>
+               </expression>
+               <suchThat localId="49" locator="91:17-92:50" xsi:type="Before">
+                  <operand locator="91:52-91:57" xsi:type="Start">
+                     <operand localId="45" locator="91:17-91:50" path="prevalencePeriod" scope="DiabetesCondition" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="48" locator="92:7-92:50" xsi:type="End">
+                     <operand localId="47" locator="92:14-92:50" path="hospitalizationPeriod" scope="Hospitalization" xsi:type="Property"/>
+                  </operand>
+               </suchThat>
+            </relationship>
+            <return localId="53" locator="93:5-93:36">
+               <expression localId="52" locator="93:12-93:36" path="encounter" scope="Hospitalization" xsi:type="Property"/>
+            </return>
+         </expression>
+      </def>
+      <def localId="75" locator="109:1-113:36" name="Encounter with Hypoglycemic Medication" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="75">
+               <a:s>define &quot;Encounter with Hypoglycemic Medication&quot;:
+  </a:s>
+               <a:s r="74">
+                  <a:s>
+                     <a:s r="58">
+                        <a:s r="57">
+                           <a:s>
+                              <a:s>&quot;Encounter with Hospitalization Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> Hospitalization</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="70">
+                     <a:s>with </a:s>
+                     <a:s r="60">
+                        <a:s r="59">
+                           <a:s r="59">
+                              <a:s>[&quot;Medication, Administered&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Hypoglycemics Treatment Medications&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> HypoglycemicMedication</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="69">
+                        <a:s r="66">
+                           <a:s r="61">
+                              <a:s>Global</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="66">
+                              <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                              <a:s r="63">
+                                 <a:s r="62">
+                                    <a:s>HypoglycemicMedication</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="63">
+                                    <a:s>relevantDatetime</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="65">
+                                 <a:s r="64">
+                                    <a:s>HypoglycemicMedication</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="65">
+                                    <a:s>relevantPeriod</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="69"> starts during </a:s>
+                        <a:s r="68">
+                           <a:s r="67">
+                              <a:s>Hospitalization</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="68">
+                              <a:s>hospitalizationPeriod</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="73">
+                     <a:s>return </a:s>
+                     <a:s r="72">
+                        <a:s r="71">
+                           <a:s>Hospitalization</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="72">
+                           <a:s>encounter</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="74" locator="110:3-113:36" xsi:type="Query">
+            <source localId="58" locator="110:3-110:57" alias="Hospitalization">
+               <expression localId="57" locator="110:3-110:41" name="Encounter with Hospitalization Period" xsi:type="ExpressionRef"/>
+            </source>
+            <relationship localId="70" locator="111:5-112:177" alias="HypoglycemicMedication" xsi:type="With">
+               <expression localId="59" locator="111:10-111:76" xmlns:ns3="urn:healthit-gov:qdm:v5_6" dataType="ns3:PositiveMedicationAdministered" templateId="PositiveMedicationAdministered" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="111:39-111:75" name="Hypoglycemics Treatment Medications" xsi:type="ValueSetRef"/>
+               </expression>
+               <suchThat localId="69" locator="112:17-112:177" xsi:type="In">
+                  <operand locator="112:127-112:132" xsi:type="Start">
+                     <operand localId="66" locator="112:17-112:125" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                        <operand localId="63" locator="112:46-112:84" path="relevantDatetime" scope="HypoglycemicMedication" xsi:type="Property"/>
+                        <operand localId="65" locator="112:87-112:123" path="relevantPeriod" scope="HypoglycemicMedication" xsi:type="Property"/>
+                     </operand>
+                  </operand>
+                  <operand localId="68" locator="112:141-112:177" path="hospitalizationPeriod" scope="Hospitalization" xsi:type="Property"/>
+               </suchThat>
+            </relationship>
+            <return localId="73" locator="113:5-113:36">
+               <expression localId="72" locator="113:12-113:36" path="encounter" scope="Hospitalization" xsi:type="Property"/>
+            </return>
+         </expression>
+      </def>
+      <def localId="101" locator="81:1-86:36" name="Encounter with Elevated Glucose Greater Than or Equal to 200" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="101">
+               <a:s>define &quot;Encounter with Elevated Glucose Greater Than or Equal to 200&quot;:
+  </a:s>
+               <a:s r="100">
+                  <a:s>
+                     <a:s r="79">
+                        <a:s r="78">
+                           <a:s>
+                              <a:s>&quot;Encounter with Hospitalization Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> Hospitalization</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="96">
+                     <a:s>with </a:s>
+                     <a:s r="81">
+                        <a:s r="80">
+                           <a:s r="80">
+                              <a:s>[&quot;Laboratory Test, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Glucose Lab Test Mass Per Volume&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> GlucoseTest</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="95">
+                        <a:s r="90">
+                           <a:s r="87">
+                              <a:s r="82">
+                                 <a:s>Global</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="87">
+                                 <a:s>&quot;EarliestOf&quot; ( </a:s>
+                                 <a:s r="84">
+                                    <a:s r="83">
+                                       <a:s>GlucoseTest</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="84">
+                                       <a:s>relevantDatetime</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>, </a:s>
+                                 <a:s r="86">
+                                    <a:s r="85">
+                                       <a:s>GlucoseTest</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="86">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="90"> during </a:s>
+                           <a:s r="89">
+                              <a:s r="88">
+                                 <a:s>Hospitalization</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="89">
+                                 <a:s>hospitalizationPeriod</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+        and </a:s>
+                        <a:s r="94">
+                           <a:s r="92">
+                              <a:s r="91">
+                                 <a:s>GlucoseTest</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="92">
+                                 <a:s>result</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> >= </a:s>
+                           <a:s r="93">
+                              <a:s>200 'mg/dL'</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="99">
+                     <a:s>return </a:s>
+                     <a:s r="98">
+                        <a:s r="97">
+                           <a:s>Hospitalization</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="98">
+                           <a:s>encounter</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="100" locator="82:3-86:36" xsi:type="Query">
+            <source localId="79" locator="82:3-82:57" alias="Hospitalization">
+               <expression localId="78" locator="82:3-82:41" name="Encounter with Hospitalization Period" xsi:type="ExpressionRef"/>
+            </source>
+            <relationship localId="96" locator="83:5-85:45" alias="GlucoseTest" xsi:type="With">
+               <expression localId="80" locator="83:10-83:75" xmlns:ns4="urn:healthit-gov:qdm:v5_6" dataType="ns4:PositiveLaboratoryTestPerformed" templateId="PositiveLaboratoryTestPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="83:41-83:74" name="Glucose Lab Test Mass Per Volume" xsi:type="ValueSetRef"/>
+               </expression>
+               <suchThat localId="95" locator="84:17-85:45" xsi:type="And">
+                  <operand localId="90" locator="84:17-84:141" xsi:type="In">
+                     <operand localId="87" locator="84:17-84:96" name="EarliestOf" libraryName="Global" xsi:type="FunctionRef">
+                        <operand localId="84" locator="84:39-84:66" path="relevantDatetime" scope="GlucoseTest" xsi:type="Property"/>
+                        <operand localId="86" locator="84:69-84:94" path="relevantPeriod" scope="GlucoseTest" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="89" locator="84:105-84:141" path="hospitalizationPeriod" scope="Hospitalization" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="94" locator="85:13-85:45" xsi:type="GreaterOrEqual">
+                     <operand asType="t:Quantity" xsi:type="As">
+                        <operand localId="92" locator="85:13-85:30" path="result" scope="GlucoseTest" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="93" locator="85:35-85:45" value="200" unit="mg/dL" xsi:type="Quantity"/>
+                  </operand>
+               </suchThat>
+            </relationship>
+            <return localId="99" locator="86:5-86:36">
+               <expression localId="98" locator="86:12-86:36" path="encounter" scope="Hospitalization" xsi:type="Property"/>
+            </return>
+         </expression>
+      </def>
+      <def localId="104" locator="119:1-122:72" name="Initial Population" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="104">
+               <a:s>define &quot;Initial Population&quot;:
+  </a:s>
+               <a:s r="103">
+                  <a:s r="77">
+                     <a:s r="56">
+                        <a:s>&quot;Encounter with Existing Diabetes Diagnosis&quot;</a:s>
+                     </a:s>
+                     <a:s>
+    union </a:s>
+                     <a:s r="76">
+                        <a:s>&quot;Encounter with Hypoglycemic Medication&quot;</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    union </a:s>
+                  <a:s r="102">
+                     <a:s>&quot;Encounter with Elevated Glucose Greater Than or Equal to 200&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="103" locator="120:3-122:72" xsi:type="Union">
+            <operand localId="77" locator="120:3-121:50" xsi:type="Union">
+               <operand localId="56" locator="120:3-120:46" name="Encounter with Existing Diabetes Diagnosis" xsi:type="ExpressionRef"/>
+               <operand localId="76" locator="121:11-121:50" name="Encounter with Hypoglycemic Medication" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand localId="102" locator="122:11-122:72" name="Encounter with Elevated Glucose Greater Than or Equal to 200" xsi:type="ExpressionRef"/>
+         </expression>
+      </def>
+      <def localId="106" locator="75:1-76:22" name="Denominator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="106">
+               <a:s>define &quot;Denominator&quot;:
+  </a:s>
+               <a:s r="105">
+                  <a:s>&quot;Initial Population&quot;</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="105" locator="76:3-76:22" name="Initial Population" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="108" locator="124:1-125:15" name="Measurement Population" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="108">
+               <a:s>define &quot;Measurement Population&quot;:
+  </a:s>
+               <a:s r="107">
+                  <a:s>&quot;Denominator&quot;</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="107" locator="125:3-125:15" name="Denominator" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="129" locator="186:1-189:4" name="Hospital Days Max 10" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="129">
+               <a:s>define function &quot;Hospital Days Max 10&quot;(Period </a:s>
+               <a:s r="117">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="116">
+                     <a:s>DateTime</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+               <a:s> ):
+  </a:s>
+               <a:s r="128">
+                  <a:s r="128">
+                     <a:s>Interval[</a:s>
+                     <a:s r="119">
+                        <a:s>start of </a:s>
+                        <a:s r="118">
+                           <a:s>Period</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>, </a:s>
+                     <a:s r="127">
+                        <a:s>Min(</a:s>
+                        <a:s r="126">
+                           <a:s>{ 
+    </a:s>
+                           <a:s r="121">
+                              <a:s>end of </a:s>
+                              <a:s r="120">
+                                 <a:s>Period</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>, </a:s>
+                           <a:s r="125">
+                              <a:s r="123">
+                                 <a:s>start of </a:s>
+                                 <a:s r="122">
+                                    <a:s>Period</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> + </a:s>
+                              <a:s r="124">
+                                 <a:s>10 days</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> }</a:s>
+                        </a:s>
+                        <a:s>
+  )</a:s>
+                     </a:s>
+                     <a:s>]</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="128" locator="187:3-189:4" lowClosed="true" highClosed="true" xsi:type="Interval">
+            <low localId="119" locator="187:12-187:26" xsi:type="Start">
+               <operand localId="118" locator="187:21-187:26" name="Period" xsi:type="OperandRef"/>
+            </low>
+            <high localId="127" locator="187:29-189:3" xsi:type="Min">
+               <source localId="126" locator="187:33-188:46" xsi:type="List">
+                  <element localId="121" locator="188:5-188:17" xsi:type="End">
+                     <operand localId="120" locator="188:12-188:17" name="Period" xsi:type="OperandRef"/>
+                  </element>
+                  <element localId="125" locator="188:20-188:44" xsi:type="Add">
+                     <operand localId="123" locator="188:20-188:34" xsi:type="Start">
+                        <operand localId="122" locator="188:29-188:34" name="Period" xsi:type="OperandRef"/>
+                     </operand>
+                     <operand localId="124" locator="188:38-188:44" value="10" unit="days" xsi:type="Quantity"/>
+                  </element>
+               </source>
+            </high>
+         </expression>
+         <operand name="Period">
+            <operandTypeSpecifier localId="117" locator="186:47-186:64" xsi:type="IntervalTypeSpecifier">
+               <pointType localId="116" locator="186:56-186:63" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+            </operandTypeSpecifier>
+         </operand>
+      </def>
+      <def localId="155" locator="180:1-184:20" name="Interval To Day Numbers" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="155">
+               <a:s>define function &quot;Interval To Day Numbers&quot;(Period </a:s>
+               <a:s r="140">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="139">
+                     <a:s>DateTime</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+               <a:s> ):
+  </a:s>
+               <a:s r="154">
+                  <a:s r="154">
+                     <a:s>
+                        <a:s r="150">
+                           <a:s r="149">
+                              <a:s>( </a:s>
+                              <a:s r="149">
+                                 <a:s>expand </a:s>
+                                 <a:s r="148">
+                                    <a:s>{ </a:s>
+                                    <a:s r="147">
+                                       <a:s r="141">Interval[1, </a:s>
+                                       <a:s r="146">
+                                          <a:s>days between </a:s>
+                                          <a:s r="143">
+                                             <a:s>start of </a:s>
+                                             <a:s r="142">
+                                                <a:s>Period</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s> and 
+  </a:s>
+                                          <a:s r="145">
+                                             <a:s>end of </a:s>
+                                             <a:s r="144">
+                                                <a:s>Period</a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>]</a:s>
+                                    </a:s>
+                                    <a:s>}</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                           <a:s> DayExpand</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    </a:s>
+                     <a:s r="153">
+                        <a:s>return 
+    </a:s>
+                        <a:s r="152">
+                           <a:s>end of </a:s>
+                           <a:s r="151">
+                              <a:s>DayExpand</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="154" locator="181:3-184:20" xsi:type="Query">
+            <source localId="150" locator="181:3-182:29" alias="DayExpand">
+               <expression localId="149" locator="181:3-182:19" xsi:type="Expand">
+                  <operand localId="148" locator="181:12-182:17" xsi:type="List">
+                     <element localId="147" locator="181:14-182:16" lowClosed="true" highClosed="true" xsi:type="Interval">
+                        <low localId="141" locator="181:23" valueType="t:Integer" value="1" xsi:type="Literal"/>
+                        <high localId="146" locator="181:26-182:15" precision="Day" xsi:type="DurationBetween">
+                           <operand localId="143" locator="181:39-181:53" xsi:type="Start">
+                              <operand localId="142" locator="181:48-181:53" name="Period" xsi:type="OperandRef"/>
+                           </operand>
+                           <operand localId="145" locator="182:3-182:15" xsi:type="End">
+                              <operand localId="144" locator="182:10-182:15" name="Period" xsi:type="OperandRef"/>
+                           </operand>
+                        </high>
+                     </element>
+                  </operand>
+                  <operand resultTypeName="t:Quantity" xsi:type="Null"/>
+               </expression>
+            </source>
+            <return localId="153" locator="183:5-184:20">
+               <expression localId="152" locator="184:5-184:20" xsi:type="End">
+                  <operand localId="151" locator="184:12-184:20" name="DayExpand" xsi:type="AliasRef"/>
+               </expression>
+            </return>
+         </expression>
+         <operand name="Period">
+            <operandTypeSpecifier localId="140" locator="180:50-180:67" xsi:type="IntervalTypeSpecifier">
+               <pointType localId="139" locator="180:59-180:66" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+            </operandTypeSpecifier>
+         </operand>
+      </def>
+      <def localId="189" locator="191:1-201:5" name="Days In Period" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="189">
+               <a:s>define function &quot;Days In Period&quot;(Period </a:s>
+               <a:s r="137">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="136">
+                     <a:s>DateTime</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+               <a:s> ):
+  </a:s>
+               <a:s r="188">
+                  <a:s r="188">
+                     <a:s>
+                        <a:s r="157">
+                           <a:s r="156">
+                              <a:s>( </a:s>
+                              <a:s r="156">
+                                 <a:s>&quot;Interval To Day Numbers&quot;(</a:s>
+                                 <a:s r="138">
+                                    <a:s>Period</a:s>
+                                 </a:s>
+                                 <a:s>)</a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                           <a:s> DayNumber</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    </a:s>
+                     <a:s>
+                        <a:s>let </a:s>
+                        <a:s r="166">
+                           <a:s>startPeriod: </a:s>
+                           <a:s r="165">
+                              <a:s r="159">
+                                 <a:s>start of </a:s>
+                                 <a:s r="158">
+                                    <a:s>Period</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> + </a:s>
+                              <a:s r="164">
+                                 <a:s>( </a:s>
+                                 <a:s r="164">
+                                    <a:s r="160">
+                                       <a:s>24 hours</a:s>
+                                    </a:s>
+                                    <a:s> * </a:s>
+                                    <a:s r="163">
+                                       <a:s>( </a:s>
+                                       <a:s r="163">
+                                          <a:s r="161">
+                                             <a:s>DayNumber</a:s>
+                                          </a:s>
+                                          <a:s r="162"> - 1</a:s>
+                                       </a:s>
+                                       <a:s> )</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>,
+    </a:s>
+                        <a:s r="181">
+                           <a:s>endPeriod: </a:s>
+                           <a:s r="180">
+                              <a:s>if </a:s>
+                              <a:s r="172">
+                                 <a:s>( </a:s>
+                                 <a:s r="172">
+                                    <a:s r="170">
+                                       <a:s>hours between </a:s>
+                                       <a:s r="167">
+                                          <a:s>startPeriod</a:s>
+                                       </a:s>
+                                       <a:s> and 
+      </a:s>
+                                       <a:s r="169">
+                                          <a:s>end of </a:s>
+                                          <a:s r="168">
+                                             <a:s>Period</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s r="171"> &lt; 24</a:s>
+                                 </a:s>
+                                 <a:s>
+    )</a:s>
+                              </a:s>
+                              <a:s> then </a:s>
+                              <a:s r="173">
+                                 <a:s>startPeriod</a:s>
+                              </a:s>
+                              <a:s> 
+      else </a:s>
+                              <a:s r="179">
+                                 <a:s r="175">
+                                    <a:s>start of </a:s>
+                                    <a:s r="174">
+                                       <a:s>Period</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> + </a:s>
+                                 <a:s r="178">
+                                    <a:s>( </a:s>
+                                    <a:s r="178">
+                                       <a:s r="176">
+                                          <a:s>24 hours</a:s>
+                                       </a:s>
+                                       <a:s> * </a:s>
+                                       <a:s r="177">
+                                          <a:s>DayNumber</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> )</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    </a:s>
+                     <a:s r="187">
+                        <a:s>return </a:s>
+                        <a:s r="186">
+                           <a:s>Tuple {
+      </a:s>
+                           <a:s>
+                              <a:s>dayNumber: </a:s>
+                              <a:s r="182">
+                                 <a:s>DayNumber</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>,
+      </a:s>
+                           <a:s>
+                              <a:s>dayPeriod: </a:s>
+                              <a:s r="185">
+                                 <a:s>Interval[</a:s>
+                                 <a:s r="183">
+                                    <a:s>startPeriod</a:s>
+                                 </a:s>
+                                 <a:s>, </a:s>
+                                 <a:s r="184">
+                                    <a:s>endPeriod</a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+    }</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="188" locator="192:3-201:5" xsi:type="Query">
+            <source localId="157" locator="192:3-192:48" alias="DayNumber">
+               <expression localId="156" locator="192:3-192:38" name="Interval To Day Numbers" xsi:type="FunctionRef">
+                  <operand localId="138" locator="192:31-192:36" name="Period" xsi:type="OperandRef"/>
+               </expression>
+            </source>
+            <let localId="166" locator="193:9-193:71" identifier="startPeriod">
+               <expression localId="165" locator="193:22-193:71" xsi:type="Add">
+                  <operand localId="159" locator="193:22-193:36" xsi:type="Start">
+                     <operand localId="158" locator="193:31-193:36" name="Period" xsi:type="OperandRef"/>
+                  </operand>
+                  <operand localId="164" locator="193:40-193:71" xsi:type="Multiply">
+                     <operand localId="160" locator="193:42-193:49" value="24" unit="hours" xsi:type="Quantity"/>
+                     <operand xsi:type="ToQuantity">
+                        <operand localId="163" locator="193:53-193:69" xsi:type="Subtract">
+                           <operand localId="161" locator="193:55-193:63" name="DayNumber" xsi:type="AliasRef"/>
+                           <operand localId="162" locator="193:67" valueType="t:Integer" value="1" xsi:type="Literal"/>
+                        </operand>
+                     </operand>
+                  </operand>
+               </expression>
+            </let>
+            <let localId="181" locator="194:5-197:53" identifier="endPeriod">
+               <expression localId="180" locator="194:16-197:53" xsi:type="If">
+                  <condition localId="172" locator="194:19-196:5" xsi:type="Less">
+                     <operand localId="170" locator="194:21-195:19" precision="Hour" xsi:type="DurationBetween">
+                        <operand localId="167" locator="194:35-194:45" name="startPeriod" xsi:type="QueryLetRef"/>
+                        <operand localId="169" locator="195:7-195:19" xsi:type="End">
+                           <operand localId="168" locator="195:14-195:19" name="Period" xsi:type="OperandRef"/>
+                        </operand>
+                     </operand>
+                     <operand localId="171" locator="195:23-195:24" valueType="t:Integer" value="24" xsi:type="Literal"/>
+                  </condition>
+                  <then localId="173" locator="196:12-196:22" name="startPeriod" xsi:type="QueryLetRef"/>
+                  <else localId="179" locator="197:12-197:53" xsi:type="Add">
+                     <operand localId="175" locator="197:12-197:26" xsi:type="Start">
+                        <operand localId="174" locator="197:21-197:26" name="Period" xsi:type="OperandRef"/>
+                     </operand>
+                     <operand localId="178" locator="197:30-197:53" xsi:type="Multiply">
+                        <operand localId="176" locator="197:32-197:39" value="24" unit="hours" xsi:type="Quantity"/>
+                        <operand xsi:type="ToQuantity">
+                           <operand localId="177" locator="197:43-197:51" name="DayNumber" xsi:type="AliasRef"/>
+                        </operand>
+                     </operand>
+                  </else>
+               </expression>
+            </let>
+            <return localId="187" locator="198:5-201:5">
+               <expression localId="186" locator="198:12-201:5" xsi:type="Tuple">
+                  <element name="dayNumber">
+                     <value localId="182" locator="199:18-199:26" name="DayNumber" xsi:type="AliasRef"/>
+                  </element>
+                  <element name="dayPeriod">
+                     <value localId="185" locator="200:18-200:50" lowClosed="true" highClosed="false" xsi:type="Interval">
+                        <low localId="183" locator="200:27-200:37" name="startPeriod" xsi:type="QueryLetRef"/>
+                        <high localId="184" locator="200:40-200:48" name="endPeriod" xsi:type="QueryLetRef"/>
+                     </value>
+                  </element>
+               </expression>
+            </return>
+         </expression>
+         <operand name="Period">
+            <operandTypeSpecifier localId="137" locator="191:41-191:58" xsi:type="IntervalTypeSpecifier">
+               <pointType localId="136" locator="191:50-191:57" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+            </operandTypeSpecifier>
+         </operand>
+      </def>
+      <def localId="194" locator="20:1-29:5" name="Days in Hospitalization" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="194">
+               <a:s>define &quot;Days in Hospitalization&quot;:
+  </a:s>
+               <a:s r="193">
+                  <a:s>
+                     <a:s r="110">
+                        <a:s r="109">
+                           <a:s>
+                              <a:s>&quot;Measurement Population&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> EligibleInpatientHospitalization</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s>
+                     <a:s>let </a:s>
+                     <a:s r="114">
+                        <a:s>period: </a:s>
+                        <a:s r="113">
+                           <a:s r="111">
+                              <a:s>Global</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="113">
+                              <a:s>&quot;HospitalizationWithObservation&quot; ( </a:s>
+                              <a:s r="112">
+                                 <a:s>EligibleInpatientHospitalization</a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="131">
+                        <a:s>relevantPeriod: </a:s>
+                        <a:s r="130">
+                           <a:s>&quot;Hospital Days Max 10&quot;(</a:s>
+                           <a:s r="115">
+                              <a:s>period</a:s>
+                           </a:s>
+                           <a:s>)</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="192">
+                     <a:s>return </a:s>
+                     <a:s r="191">
+                        <a:s>Tuple {
+      </a:s>
+                        <a:s>
+                           <a:s>encounter: </a:s>
+                           <a:s r="132">
+                              <a:s>EligibleInpatientHospitalization</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>,
+      </a:s>
+                        <a:s>
+                           <a:s>hospitalizationPeriod: </a:s>
+                           <a:s r="133">
+                              <a:s>period</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>,
+      </a:s>
+                        <a:s>
+                           <a:s>relevantPeriod: </a:s>
+                           <a:s r="134">
+                              <a:s>relevantPeriod</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>,
+      </a:s>
+                        <a:s>
+                           <a:s>relevantDays: </a:s>
+                           <a:s r="190">
+                              <a:s>&quot;Days In Period&quot;(</a:s>
+                              <a:s r="135">
+                                 <a:s>relevantPeriod</a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+    }</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="193" locator="21:3-29:5" xsi:type="Query">
+            <source localId="110" locator="21:3-21:59" alias="EligibleInpatientHospitalization">
+               <expression localId="109" locator="21:3-21:26" name="Measurement Population" xsi:type="ExpressionRef"/>
+            </source>
+            <let localId="114" locator="22:9-22:92" identifier="period">
+               <expression localId="113" locator="22:17-22:92" name="HospitalizationWithObservation" libraryName="Global" xsi:type="FunctionRef">
+                  <operand localId="112" locator="22:59-22:90" name="EligibleInpatientHospitalization" xsi:type="AliasRef"/>
+               </expression>
+            </let>
+            <let localId="131" locator="23:5-23:50" identifier="relevantPeriod">
+               <expression localId="130" locator="23:21-23:50" name="Hospital Days Max 10" xsi:type="FunctionRef">
+                  <operand localId="115" locator="23:44-23:49" name="period" xsi:type="QueryLetRef"/>
+               </expression>
+            </let>
+            <return localId="192" locator="24:5-29:5">
+               <expression localId="191" locator="24:12-29:5" xsi:type="Tuple">
+                  <element name="encounter">
+                     <value localId="132" locator="25:18-25:49" name="EligibleInpatientHospitalization" xsi:type="AliasRef"/>
+                  </element>
+                  <element name="hospitalizationPeriod">
+                     <value localId="133" locator="26:30-26:35" name="period" xsi:type="QueryLetRef"/>
+                  </element>
+                  <element name="relevantPeriod">
+                     <value localId="134" locator="27:23-27:36" name="relevantPeriod" xsi:type="QueryLetRef"/>
+                  </element>
+                  <element name="relevantDays">
+                     <value localId="190" locator="28:21-28:52" name="Days In Period" xsi:type="FunctionRef">
+                        <operand localId="135" locator="28:38-28:51" name="relevantPeriod" xsi:type="QueryLetRef"/>
+                     </value>
+                  </element>
+               </expression>
+            </return>
+         </expression>
+      </def>
+      <def localId="263" locator="31:1-53:5" name="Days with Glucose Results" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="263">
+               <a:s>define &quot;Days with Glucose Results&quot;:
+  </a:s>
+               <a:s r="262">
+                  <a:s>
+                     <a:s r="196">
+                        <a:s r="195">
+                           <a:s>
+                              <a:s>&quot;Days in Hospitalization&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> InpatientHospitalDays</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="261">
+                     <a:s>return </a:s>
+                     <a:s r="260">
+                        <a:s>Tuple {
+      </a:s>
+                        <a:s>
+                           <a:s>encounter: </a:s>
+                           <a:s r="198">
+                              <a:s r="197">
+                                 <a:s>InpatientHospitalDays</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="198">
+                                 <a:s>encounter</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>,
+      </a:s>
+                        <a:s>
+                           <a:s>relevantPeriod: </a:s>
+                           <a:s r="200">
+                              <a:s r="199">
+                                 <a:s>InpatientHospitalDays</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="200">
+                                 <a:s>relevantPeriod</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>,
+      </a:s>
+                        <a:s>
+                           <a:s>relevantDays: </a:s>
+                           <a:s r="259">
+                              <a:s>( </a:s>
+                              <a:s r="259">
+                                 <a:s>
+                                    <a:s r="202">
+                                       <a:s r="201">
+                                          <a:s>
+                                             <a:s>InpatientHospitalDays.relevantDays</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> EncounterDay</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+          </a:s>
+                                 <a:s r="258">
+                                    <a:s>return </a:s>
+                                    <a:s r="257">
+                                       <a:s>Tuple {
+            </a:s>
+                                       <a:s>
+                                          <a:s>dayNumber: </a:s>
+                                          <a:s r="204">
+                                             <a:s r="203">
+                                                <a:s>EncounterDay</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="204">
+                                                <a:s>dayNumber</a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>,
+            </a:s>
+                                       <a:s>
+                                          <a:s>dayPeriod: </a:s>
+                                          <a:s r="206">
+                                             <a:s r="205">
+                                                <a:s>EncounterDay</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="206">
+                                                <a:s>dayPeriod</a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>,
+            </a:s>
+                                       <a:s>
+                                          <a:s>hasSevereResult: </a:s>
+                                          <a:s r="224">
+                                             <a:s>exists </a:s>
+                                             <a:s r="223">
+                                                <a:s>( </a:s>
+                                                <a:s r="223">
+                                                   <a:s>
+                                                      <a:s r="208">
+                                                         <a:s r="207">
+                                                            <a:s r="207">
+                                                               <a:s>[&quot;Laboratory Test, Performed&quot;: </a:s>
+                                                               <a:s>
+                                                                  <a:s>&quot;Glucose Lab Test Mass Per Volume&quot;</a:s>
+                                                               </a:s>
+                                                               <a:s>]</a:s>
+                                                            </a:s>
+                                                         </a:s>
+                                                         <a:s> GlucoseTest</a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                   <a:s>
+                </a:s>
+                                                   <a:s r="222">
+                                                      <a:s>where </a:s>
+                                                      <a:s r="222">
+                                                         <a:s r="212">
+                                                            <a:s r="210">
+                                                               <a:s r="209">
+                                                                  <a:s>GlucoseTest</a:s>
+                                                               </a:s>
+                                                               <a:s>.</a:s>
+                                                               <a:s r="210">
+                                                                  <a:s>result</a:s>
+                                                               </a:s>
+                                                            </a:s>
+                                                            <a:s> > </a:s>
+                                                            <a:s r="211">
+                                                               <a:s>300 'mg/dL'</a:s>
+                                                            </a:s>
+                                                         </a:s>
+                                                         <a:s>
+                  and </a:s>
+                                                         <a:s r="221">
+                                                            <a:s r="218">
+                                                               <a:s r="213">
+                                                                  <a:s>Global</a:s>
+                                                               </a:s>
+                                                               <a:s>.</a:s>
+                                                               <a:s r="218">
+                                                                  <a:s>&quot;EarliestOf&quot; ( </a:s>
+                                                                  <a:s r="215">
+                                                                     <a:s r="214">
+                                                                        <a:s>GlucoseTest</a:s>
+                                                                     </a:s>
+                                                                     <a:s>.</a:s>
+                                                                     <a:s r="215">
+                                                                        <a:s>relevantDatetime</a:s>
+                                                                     </a:s>
+                                                                  </a:s>
+                                                                  <a:s>, </a:s>
+                                                                  <a:s r="217">
+                                                                     <a:s r="216">
+                                                                        <a:s>GlucoseTest</a:s>
+                                                                     </a:s>
+                                                                     <a:s>.</a:s>
+                                                                     <a:s r="217">
+                                                                        <a:s>relevantPeriod</a:s>
+                                                                     </a:s>
+                                                                  </a:s>
+                                                                  <a:s> )</a:s>
+                                                               </a:s>
+                                                            </a:s>
+                                                            <a:s r="221"> during </a:s>
+                                                            <a:s r="220">
+                                                               <a:s r="219">
+                                                                  <a:s>EncounterDay</a:s>
+                                                               </a:s>
+                                                               <a:s>.</a:s>
+                                                               <a:s r="220">
+                                                                  <a:s>dayPeriod</a:s>
+                                                               </a:s>
+                                                            </a:s>
+                                                         </a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s>
+            )</a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>,
+            </a:s>
+                                       <a:s>
+                                          <a:s>hasElevatedResult: </a:s>
+                                          <a:s r="242">
+                                             <a:s>exists </a:s>
+                                             <a:s r="241">
+                                                <a:s>( </a:s>
+                                                <a:s r="241">
+                                                   <a:s>
+                                                      <a:s r="226">
+                                                         <a:s r="225">
+                                                            <a:s r="225">
+                                                               <a:s>[&quot;Laboratory Test, Performed&quot;: </a:s>
+                                                               <a:s>
+                                                                  <a:s>&quot;Glucose Lab Test Mass Per Volume&quot;</a:s>
+                                                               </a:s>
+                                                               <a:s>]</a:s>
+                                                            </a:s>
+                                                         </a:s>
+                                                         <a:s> GlucoseTest</a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                   <a:s>
+                </a:s>
+                                                   <a:s r="240">
+                                                      <a:s>where </a:s>
+                                                      <a:s r="240">
+                                                         <a:s r="230">
+                                                            <a:s r="228">
+                                                               <a:s r="227">
+                                                                  <a:s>GlucoseTest</a:s>
+                                                               </a:s>
+                                                               <a:s>.</a:s>
+                                                               <a:s r="228">
+                                                                  <a:s>result</a:s>
+                                                               </a:s>
+                                                            </a:s>
+                                                            <a:s> >= </a:s>
+                                                            <a:s r="229">
+                                                               <a:s>200 'mg/dL'</a:s>
+                                                            </a:s>
+                                                         </a:s>
+                                                         <a:s>
+                  and </a:s>
+                                                         <a:s r="239">
+                                                            <a:s r="236">
+                                                               <a:s r="231">
+                                                                  <a:s>Global</a:s>
+                                                               </a:s>
+                                                               <a:s>.</a:s>
+                                                               <a:s r="236">
+                                                                  <a:s>&quot;EarliestOf&quot; ( </a:s>
+                                                                  <a:s r="233">
+                                                                     <a:s r="232">
+                                                                        <a:s>GlucoseTest</a:s>
+                                                                     </a:s>
+                                                                     <a:s>.</a:s>
+                                                                     <a:s r="233">
+                                                                        <a:s>relevantDatetime</a:s>
+                                                                     </a:s>
+                                                                  </a:s>
+                                                                  <a:s>, </a:s>
+                                                                  <a:s r="235">
+                                                                     <a:s r="234">
+                                                                        <a:s>GlucoseTest</a:s>
+                                                                     </a:s>
+                                                                     <a:s>.</a:s>
+                                                                     <a:s r="235">
+                                                                        <a:s>relevantPeriod</a:s>
+                                                                     </a:s>
+                                                                  </a:s>
+                                                                  <a:s> )</a:s>
+                                                               </a:s>
+                                                            </a:s>
+                                                            <a:s r="239"> during </a:s>
+                                                            <a:s r="238">
+                                                               <a:s r="237">
+                                                                  <a:s>EncounterDay</a:s>
+                                                               </a:s>
+                                                               <a:s>.</a:s>
+                                                               <a:s r="238">
+                                                                  <a:s>dayPeriod</a:s>
+                                                               </a:s>
+                                                            </a:s>
+                                                         </a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s>
+            )</a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>,
+            </a:s>
+                                       <a:s>
+                                          <a:s>hasNoGlucoseTest: </a:s>
+                                          <a:s r="256">
+                                             <a:s>not </a:s>
+                                             <a:s r="255">
+                                                <a:s>exists </a:s>
+                                                <a:s r="254">
+                                                   <a:s>( </a:s>
+                                                   <a:s r="254">
+                                                      <a:s>
+                                                         <a:s r="244">
+                                                            <a:s r="243">
+                                                               <a:s r="243">
+                                                                  <a:s>[&quot;Laboratory Test, Performed&quot;: </a:s>
+                                                                  <a:s>
+                                                                     <a:s>&quot;Glucose Lab Test Mass Per Volume&quot;</a:s>
+                                                                  </a:s>
+                                                                  <a:s>]</a:s>
+                                                               </a:s>
+                                                            </a:s>
+                                                            <a:s> GlucoseTest</a:s>
+                                                         </a:s>
+                                                      </a:s>
+                                                      <a:s>
+                </a:s>
+                                                      <a:s r="253">
+                                                         <a:s>where </a:s>
+                                                         <a:s r="253">
+                                                            <a:s r="250">
+                                                               <a:s r="245">
+                                                                  <a:s>Global</a:s>
+                                                               </a:s>
+                                                               <a:s>.</a:s>
+                                                               <a:s r="250">
+                                                                  <a:s>&quot;EarliestOf&quot; ( </a:s>
+                                                                  <a:s r="247">
+                                                                     <a:s r="246">
+                                                                        <a:s>GlucoseTest</a:s>
+                                                                     </a:s>
+                                                                     <a:s>.</a:s>
+                                                                     <a:s r="247">
+                                                                        <a:s>relevantDatetime</a:s>
+                                                                     </a:s>
+                                                                  </a:s>
+                                                                  <a:s>, </a:s>
+                                                                  <a:s r="249">
+                                                                     <a:s r="248">
+                                                                        <a:s>GlucoseTest</a:s>
+                                                                     </a:s>
+                                                                     <a:s>.</a:s>
+                                                                     <a:s r="249">
+                                                                        <a:s>relevantPeriod</a:s>
+                                                                     </a:s>
+                                                                  </a:s>
+                                                                  <a:s> )</a:s>
+                                                               </a:s>
+                                                            </a:s>
+                                                            <a:s r="253"> during </a:s>
+                                                            <a:s r="252">
+                                                               <a:s r="251">
+                                                                  <a:s>EncounterDay</a:s>
+                                                               </a:s>
+                                                               <a:s>.</a:s>
+                                                               <a:s r="252">
+                                                                  <a:s>dayPeriod</a:s>
+                                                               </a:s>
+                                                            </a:s>
+                                                         </a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                   <a:s>
+            )</a:s>
+                                                </a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>
+          }</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+    }</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="262" locator="32:3-53:5" xsi:type="Query">
+            <source localId="196" locator="32:3-32:49" alias="InpatientHospitalDays">
+               <expression localId="195" locator="32:3-32:27" name="Days in Hospitalization" xsi:type="ExpressionRef"/>
+            </source>
+            <return localId="261" locator="33:5-53:5">
+               <expression localId="260" locator="33:12-53:5" xsi:type="Tuple">
+                  <element name="encounter">
+                     <value localId="198" locator="34:18-34:48" path="encounter" scope="InpatientHospitalDays" xsi:type="Property"/>
+                  </element>
+                  <element name="relevantPeriod">
+                     <value localId="200" locator="35:23-35:58" path="relevantPeriod" scope="InpatientHospitalDays" xsi:type="Property"/>
+                  </element>
+                  <element name="relevantDays">
+                     <value localId="259" locator="36:21-52:7" xsi:type="Query">
+                        <source localId="202" locator="36:23-36:69" alias="EncounterDay">
+                           <expression localId="201" locator="36:23-36:56" path="relevantDays" scope="InpatientHospitalDays" xsi:type="Property"/>
+                        </source>
+                        <return localId="258" locator="37:11-51:11">
+                           <expression localId="257" locator="37:18-51:11" xsi:type="Tuple">
+                              <element name="dayNumber">
+                                 <value localId="204" locator="38:24-38:45" path="dayNumber" scope="EncounterDay" xsi:type="Property"/>
+                              </element>
+                              <element name="dayPeriod">
+                                 <value localId="206" locator="39:24-39:45" path="dayPeriod" scope="EncounterDay" xsi:type="Property"/>
+                              </element>
+                              <element name="hasSevereResult">
+                                 <value localId="224" locator="40:30-43:13" xsi:type="Exists">
+                                    <operand localId="223" locator="40:37-43:13" xsi:type="Query">
+                                       <source localId="208" locator="40:39-40:116" alias="GlucoseTest">
+                                          <expression localId="207" locator="40:39-40:104" xmlns:ns5="urn:healthit-gov:qdm:v5_6" dataType="ns5:PositiveLaboratoryTestPerformed" templateId="PositiveLaboratoryTestPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                                             <codes locator="40:70-40:103" name="Glucose Lab Test Mass Per Volume" xsi:type="ValueSetRef"/>
+                                          </expression>
+                                       </source>
+                                       <where localId="222" locator="41:17-42:132" xsi:type="And">
+                                          <operand localId="212" locator="41:23-41:54" xsi:type="Greater">
+                                             <operand asType="t:Quantity" xsi:type="As">
+                                                <operand localId="210" locator="41:23-41:40" path="result" scope="GlucoseTest" xsi:type="Property"/>
+                                             </operand>
+                                             <operand localId="211" locator="41:44-41:54" value="300" unit="mg/dL" xsi:type="Quantity"/>
+                                          </operand>
+                                          <operand localId="221" locator="42:23-42:132" xsi:type="In">
+                                             <operand localId="218" locator="42:23-42:102" name="EarliestOf" libraryName="Global" xsi:type="FunctionRef">
+                                                <operand localId="215" locator="42:45-42:72" path="relevantDatetime" scope="GlucoseTest" xsi:type="Property"/>
+                                                <operand localId="217" locator="42:75-42:100" path="relevantPeriod" scope="GlucoseTest" xsi:type="Property"/>
+                                             </operand>
+                                             <operand localId="220" locator="42:111-42:132" path="dayPeriod" scope="EncounterDay" xsi:type="Property"/>
+                                          </operand>
+                                       </where>
+                                    </operand>
+                                 </value>
+                              </element>
+                              <element name="hasElevatedResult">
+                                 <value localId="242" locator="44:32-47:13" xsi:type="Exists">
+                                    <operand localId="241" locator="44:39-47:13" xsi:type="Query">
+                                       <source localId="226" locator="44:41-44:118" alias="GlucoseTest">
+                                          <expression localId="225" locator="44:41-44:106" xmlns:ns6="urn:healthit-gov:qdm:v5_6" dataType="ns6:PositiveLaboratoryTestPerformed" templateId="PositiveLaboratoryTestPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                                             <codes locator="44:72-44:105" name="Glucose Lab Test Mass Per Volume" xsi:type="ValueSetRef"/>
+                                          </expression>
+                                       </source>
+                                       <where localId="240" locator="45:17-46:132" xsi:type="And">
+                                          <operand localId="230" locator="45:23-45:55" xsi:type="GreaterOrEqual">
+                                             <operand asType="t:Quantity" xsi:type="As">
+                                                <operand localId="228" locator="45:23-45:40" path="result" scope="GlucoseTest" xsi:type="Property"/>
+                                             </operand>
+                                             <operand localId="229" locator="45:45-45:55" value="200" unit="mg/dL" xsi:type="Quantity"/>
+                                          </operand>
+                                          <operand localId="239" locator="46:23-46:132" xsi:type="In">
+                                             <operand localId="236" locator="46:23-46:102" name="EarliestOf" libraryName="Global" xsi:type="FunctionRef">
+                                                <operand localId="233" locator="46:45-46:72" path="relevantDatetime" scope="GlucoseTest" xsi:type="Property"/>
+                                                <operand localId="235" locator="46:75-46:100" path="relevantPeriod" scope="GlucoseTest" xsi:type="Property"/>
+                                             </operand>
+                                             <operand localId="238" locator="46:111-46:132" path="dayPeriod" scope="EncounterDay" xsi:type="Property"/>
+                                          </operand>
+                                       </where>
+                                    </operand>
+                                 </value>
+                              </element>
+                              <element name="hasNoGlucoseTest">
+                                 <value localId="256" locator="48:31-50:13" xsi:type="Not">
+                                    <operand localId="255" locator="48:35-50:13" xsi:type="Exists">
+                                       <operand localId="254" locator="48:42-50:13" xsi:type="Query">
+                                          <source localId="244" locator="48:44-48:121" alias="GlucoseTest">
+                                             <expression localId="243" locator="48:44-48:109" xmlns:ns7="urn:healthit-gov:qdm:v5_6" dataType="ns7:PositiveLaboratoryTestPerformed" templateId="PositiveLaboratoryTestPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                                                <codes locator="48:75-48:108" name="Glucose Lab Test Mass Per Volume" xsi:type="ValueSetRef"/>
+                                             </expression>
+                                          </source>
+                                          <where localId="253" locator="49:17-49:132" xsi:type="In">
+                                             <operand localId="250" locator="49:23-49:102" name="EarliestOf" libraryName="Global" xsi:type="FunctionRef">
+                                                <operand localId="247" locator="49:45-49:72" path="relevantDatetime" scope="GlucoseTest" xsi:type="Property"/>
+                                                <operand localId="249" locator="49:75-49:100" path="relevantPeriod" scope="GlucoseTest" xsi:type="Property"/>
+                                             </operand>
+                                             <operand localId="252" locator="49:111-49:132" path="dayPeriod" scope="EncounterDay" xsi:type="Property"/>
+                                          </where>
+                                       </operand>
+                                    </operand>
+                                 </value>
+                              </element>
+                           </expression>
+                        </return>
+                     </value>
+                  </element>
+               </expression>
+            </return>
+         </expression>
+      </def>
+      <def localId="311" locator="55:1-73:5" name="Days with Hyperglycemic Events" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="311">
+               <a:s>define &quot;Days with Hyperglycemic Events&quot;:
+  </a:s>
+               <a:s r="310">
+                  <a:s>
+                     <a:s r="265">
+                        <a:s r="264">
+                           <a:s>
+                              <a:s>&quot;Days with Glucose Results&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> EncounterWithResultDays</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s>
+                     <a:s>let </a:s>
+                     <a:s r="302">
+                        <a:s>eligibleEventDays: </a:s>
+                        <a:s r="301">
+                           <a:s>
+                              <a:s r="267">
+                                 <a:s r="266">
+                                    <a:s>
+                                       <a:s>EncounterWithResultDays.relevantDays</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> EncounterDay</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+      </a:s>
+                           <a:s r="271">
+                              <a:s>where </a:s>
+                              <a:s r="271">
+                                 <a:s r="269">
+                                    <a:s r="268">
+                                       <a:s>EncounterDay</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="269">
+                                       <a:s>dayNumber</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s r="270"> > 1</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+      </a:s>
+                           <a:s r="300">
+                              <a:s>return </a:s>
+                              <a:s r="299">
+                                 <a:s>Tuple {
+        </a:s>
+                                 <a:s>
+                                    <a:s>dayNumber: </a:s>
+                                    <a:s r="273">
+                                       <a:s r="272">
+                                          <a:s>EncounterDay</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="273">
+                                          <a:s>dayNumber</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>,
+        </a:s>
+                                 <a:s>
+                                    <a:s>dayPeriod: </a:s>
+                                    <a:s r="275">
+                                       <a:s r="274">
+                                          <a:s>EncounterDay</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="275">
+                                          <a:s>dayPeriod</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>,
+        </a:s>
+                                 <a:s>
+                                    <a:s>hasHyperglycemicEvent: </a:s>
+                                    <a:s r="298">
+                                       <a:s>( </a:s>
+                                       <a:s r="298">
+                                          <a:s r="277">
+                                             <a:s r="276">
+                                                <a:s>EncounterDay</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="277">
+                                                <a:s>hasSevereResult</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s>
+            or </a:s>
+                                          <a:s r="297">
+                                             <a:s>( </a:s>
+                                             <a:s r="297">
+                                                <a:s r="288">
+                                                   <a:s r="279">
+                                                      <a:s r="278">
+                                                         <a:s>EncounterDay</a:s>
+                                                      </a:s>
+                                                      <a:s>.</a:s>
+                                                      <a:s r="279">
+                                                         <a:s>hasNoGlucoseTest</a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                   <a:s>
+                and </a:s>
+                                                   <a:s r="287">
+                                                      <a:s r="286">
+                                                         <a:s r="281">
+                                                            <a:s r="280">
+                                                               <a:s>EncounterWithResultDays</a:s>
+                                                            </a:s>
+                                                            <a:s>.</a:s>
+                                                            <a:s r="281">
+                                                               <a:s>relevantDays</a:s>
+                                                            </a:s>
+                                                         </a:s>
+                                                         <a:s>[</a:s>
+                                                         <a:s r="285">
+                                                            <a:s r="283">
+                                                               <a:s r="282">
+                                                                  <a:s>EncounterDay</a:s>
+                                                               </a:s>
+                                                               <a:s>.</a:s>
+                                                               <a:s r="283">
+                                                                  <a:s>dayNumber</a:s>
+                                                               </a:s>
+                                                            </a:s>
+                                                            <a:s r="284"> - 2</a:s>
+                                                         </a:s>
+                                                         <a:s>]</a:s>
+                                                      </a:s>
+                                                      <a:s>.</a:s>
+                                                      <a:s r="287">
+                                                         <a:s>hasElevatedResult</a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s>
+                and </a:s>
+                                                <a:s r="296">
+                                                   <a:s r="295">
+                                                      <a:s r="290">
+                                                         <a:s r="289">
+                                                            <a:s>EncounterWithResultDays</a:s>
+                                                         </a:s>
+                                                         <a:s>.</a:s>
+                                                         <a:s r="290">
+                                                            <a:s>relevantDays</a:s>
+                                                         </a:s>
+                                                      </a:s>
+                                                      <a:s>[</a:s>
+                                                      <a:s r="294">
+                                                         <a:s r="292">
+                                                            <a:s r="291">
+                                                               <a:s>EncounterDay</a:s>
+                                                            </a:s>
+                                                            <a:s>.</a:s>
+                                                            <a:s r="292">
+                                                               <a:s>dayNumber</a:s>
+                                                            </a:s>
+                                                         </a:s>
+                                                         <a:s r="293"> - 3</a:s>
+                                                      </a:s>
+                                                      <a:s>]</a:s>
+                                                   </a:s>
+                                                   <a:s>.</a:s>
+                                                   <a:s r="296">
+                                                      <a:s>hasElevatedResult</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>
+            )</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>
+        )</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+      }</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="309">
+                     <a:s>return </a:s>
+                     <a:s r="308">
+                        <a:s>Tuple {
+      </a:s>
+                        <a:s>
+                           <a:s>encounter: </a:s>
+                           <a:s r="304">
+                              <a:s r="303">
+                                 <a:s>EncounterWithResultDays</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="304">
+                                 <a:s>encounter</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>,
+      </a:s>
+                        <a:s>
+                           <a:s>relevantPeriod: </a:s>
+                           <a:s r="306">
+                              <a:s r="305">
+                                 <a:s>EncounterWithResultDays</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="306">
+                                 <a:s>relevantPeriod</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>,
+      </a:s>
+                        <a:s>
+                           <a:s>eligibleEventDays: </a:s>
+                           <a:s r="307">
+                              <a:s>eligibleEventDays</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+    }</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="310" locator="56:3-73:5" xsi:type="Query">
+            <source localId="265" locator="56:3-56:53" alias="EncounterWithResultDays">
+               <expression localId="264" locator="56:3-56:29" name="Days with Glucose Results" xsi:type="ExpressionRef"/>
+            </source>
+            <let localId="302" locator="57:9-68:7" identifier="eligibleEventDays">
+               <expression localId="301" locator="57:28-68:7" xsi:type="Query">
+                  <source localId="267" locator="57:28-57:76" alias="EncounterDay">
+                     <expression localId="266" locator="57:28-57:63" path="relevantDays" scope="EncounterWithResultDays" xsi:type="Property"/>
+                  </source>
+                  <where localId="271" locator="58:7-58:38" xsi:type="Greater">
+                     <operand localId="269" locator="58:13-58:34" path="dayNumber" scope="EncounterDay" xsi:type="Property"/>
+                     <operand localId="270" locator="58:38" valueType="t:Integer" value="1" xsi:type="Literal"/>
+                  </where>
+                  <return localId="300" locator="59:7-68:7">
+                     <expression localId="299" locator="59:14-68:7" xsi:type="Tuple">
+                        <element name="dayNumber">
+                           <value localId="273" locator="60:20-60:41" path="dayNumber" scope="EncounterDay" xsi:type="Property"/>
+                        </element>
+                        <element name="dayPeriod">
+                           <value localId="275" locator="61:20-61:41" path="dayPeriod" scope="EncounterDay" xsi:type="Property"/>
+                        </element>
+                        <element name="hasHyperglycemicEvent">
+                           <value localId="298" locator="62:32-67:9" xsi:type="Or">
+                              <operand localId="277" locator="62:34-62:61" path="hasSevereResult" scope="EncounterDay" xsi:type="Property"/>
+                              <operand localId="297" locator="63:16-66:13" xsi:type="And">
+                                 <operand localId="288" locator="63:18-64:102" xsi:type="And">
+                                    <operand localId="279" locator="63:18-63:46" path="hasNoGlucoseTest" scope="EncounterDay" xsi:type="Property"/>
+                                    <operand localId="287" locator="64:21-64:102" path="hasElevatedResult" xsi:type="Property">
+                                       <source localId="286" locator="64:21-64:84" xsi:type="Indexer">
+                                          <operand localId="281" locator="64:21-64:56" path="relevantDays" scope="EncounterWithResultDays" xsi:type="Property"/>
+                                          <operand localId="285" locator="64:58-64:83" xsi:type="Subtract">
+                                             <operand localId="283" locator="64:58-64:79" path="dayNumber" scope="EncounterDay" xsi:type="Property"/>
+                                             <operand localId="284" locator="64:83" valueType="t:Integer" value="2" xsi:type="Literal"/>
+                                          </operand>
+                                       </source>
+                                    </operand>
+                                 </operand>
+                                 <operand localId="296" locator="65:21-65:102" path="hasElevatedResult" xsi:type="Property">
+                                    <source localId="295" locator="65:21-65:84" xsi:type="Indexer">
+                                       <operand localId="290" locator="65:21-65:56" path="relevantDays" scope="EncounterWithResultDays" xsi:type="Property"/>
+                                       <operand localId="294" locator="65:58-65:83" xsi:type="Subtract">
+                                          <operand localId="292" locator="65:58-65:79" path="dayNumber" scope="EncounterDay" xsi:type="Property"/>
+                                          <operand localId="293" locator="65:83" valueType="t:Integer" value="3" xsi:type="Literal"/>
+                                       </operand>
+                                    </source>
+                                 </operand>
+                              </operand>
+                           </value>
+                        </element>
+                     </expression>
+                  </return>
+               </expression>
+            </let>
+            <return localId="309" locator="69:5-73:5">
+               <expression localId="308" locator="69:12-73:5" xsi:type="Tuple">
+                  <element name="encounter">
+                     <value localId="304" locator="70:18-70:50" path="encounter" scope="EncounterWithResultDays" xsi:type="Property"/>
+                  </element>
+                  <element name="relevantPeriod">
+                     <value localId="306" locator="71:23-71:60" path="relevantPeriod" scope="EncounterWithResultDays" xsi:type="Property"/>
+                  </element>
+                  <element name="eligibleEventDays">
+                     <value localId="307" locator="72:26-72:42" name="eligibleEventDays" xsi:type="QueryLetRef"/>
+                  </element>
+               </expression>
+            </return>
+         </expression>
+      </def>
+      <def localId="352" locator="147:1-156:22" name="Glucose Greater Than or Equal to 1000 within 1 Hour Prior To and 6 Hours After Encounter Start" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="352">
+               <a:s>define &quot;Glucose Greater Than or Equal to 1000 within 1 Hour Prior To and 6 Hours After Encounter Start&quot;:
+  </a:s>
+               <a:s r="351">
+                  <a:s>
+                     <a:s>from
+    </a:s>
+                     <a:s r="315">
+                        <a:s r="314">
+                           <a:s>
+                              <a:s>&quot;Initial Population&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> InpatientHospitalization</a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="317">
+                        <a:s r="316">
+                           <a:s r="316">
+                              <a:s>[&quot;Laboratory Test, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Glucose Lab Test Mass Per Volume&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> GlucoseTest</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s>
+                     <a:s>let </a:s>
+                     <a:s r="321">
+                        <a:s>HospitalizationInterval: </a:s>
+                        <a:s r="320">
+                           <a:s r="318">
+                              <a:s>Global</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="320">
+                              <a:s>&quot;HospitalizationWithObservation&quot; ( </a:s>
+                              <a:s r="319">
+                                 <a:s>InpatientHospitalization</a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="328">
+                        <a:s>GlucoseTestTime: </a:s>
+                        <a:s r="327">
+                           <a:s r="322">
+                              <a:s>Global</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="327">
+                              <a:s>&quot;EarliestOf&quot; ( </a:s>
+                              <a:s r="324">
+                                 <a:s r="323">
+                                    <a:s>GlucoseTest</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="324">
+                                    <a:s>relevantDatetime</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="326">
+                                 <a:s r="325">
+                                    <a:s>GlucoseTest</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="326">
+                                    <a:s>relevantPeriod</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="348">
+                     <a:s>where </a:s>
+                     <a:s r="348">
+                        <a:s r="336">
+                           <a:s r="332">
+                              <a:s r="330">
+                                 <a:s r="329">
+                                    <a:s>GlucoseTest</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="330">
+                                    <a:s>result</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> >= </a:s>
+                              <a:s r="331">
+                                 <a:s>1000 'mg/dL'</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+      and </a:s>
+                           <a:s r="335">
+                              <a:s r="334">
+                                 <a:s r="333">
+                                    <a:s>GlucoseTest</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="334">
+                                    <a:s>result</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> is not null</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      and </a:s>
+                        <a:s r="347">
+                           <a:s r="337">
+                              <a:s>GlucoseTestTime</a:s>
+                           </a:s>
+                           <a:s r="347"> during </a:s>
+                           <a:s r="346">
+                              <a:s>Interval[</a:s>
+                              <a:s r="341">
+                                 <a:s>( </a:s>
+                                 <a:s r="341">
+                                    <a:s r="339">
+                                       <a:s>start of </a:s>
+                                       <a:s r="338">
+                                          <a:s>HospitalizationInterval</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> - </a:s>
+                                    <a:s r="340">
+                                       <a:s>1 hour</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="345">
+                                 <a:s>( </a:s>
+                                 <a:s r="345">
+                                    <a:s r="343">
+                                       <a:s>start of </a:s>
+                                       <a:s r="342">
+                                          <a:s>HospitalizationInterval</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> + </a:s>
+                                    <a:s r="344">
+                                       <a:s>6 hours</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="350">
+                     <a:s>return </a:s>
+                     <a:s r="349">
+                        <a:s>GlucoseTest</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="351" locator="148:3-156:22" xsi:type="Query">
+            <source localId="315" locator="149:5-149:49" alias="InpatientHospitalization">
+               <expression localId="314" locator="149:5-149:24" name="Initial Population" xsi:type="ExpressionRef"/>
+            </source>
+            <source localId="317" locator="150:5-150:82" alias="GlucoseTest">
+               <expression localId="316" locator="150:5-150:70" xmlns:ns8="urn:healthit-gov:qdm:v5_6" dataType="ns8:PositiveLaboratoryTestPerformed" templateId="PositiveLaboratoryTestPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="150:36-150:69" name="Glucose Lab Test Mass Per Volume" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <let localId="321" locator="151:9-151:101" identifier="HospitalizationInterval">
+               <expression localId="320" locator="151:34-151:101" name="HospitalizationWithObservation" libraryName="Global" xsi:type="FunctionRef">
+                  <operand localId="319" locator="151:76-151:99" name="InpatientHospitalization" xsi:type="AliasRef"/>
+               </expression>
+            </let>
+            <let localId="328" locator="152:5-152:101" identifier="GlucoseTestTime">
+               <expression localId="327" locator="152:22-152:101" name="EarliestOf" libraryName="Global" xsi:type="FunctionRef">
+                  <operand localId="324" locator="152:44-152:71" path="relevantDatetime" scope="GlucoseTest" xsi:type="Property"/>
+                  <operand localId="326" locator="152:74-152:99" path="relevantPeriod" scope="GlucoseTest" xsi:type="Property"/>
+               </expression>
+            </let>
+            <where localId="348" locator="153:5-155:136" xsi:type="And">
+               <operand localId="336" locator="153:11-154:40" xsi:type="And">
+                  <operand localId="332" locator="153:11-153:44" xsi:type="GreaterOrEqual">
+                     <operand asType="t:Quantity" xsi:type="As">
+                        <operand localId="330" locator="153:11-153:28" path="result" scope="GlucoseTest" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="331" locator="153:33-153:44" value="1000" unit="mg/dL" xsi:type="Quantity"/>
+                  </operand>
+                  <operand localId="335" locator="154:11-154:40" xsi:type="Not">
+                     <operand locator="154:11-154:40" xsi:type="IsNull">
+                        <operand localId="334" locator="154:11-154:28" path="result" scope="GlucoseTest" xsi:type="Property"/>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand localId="347" locator="155:11-155:136" xsi:type="In">
+                  <operand localId="337" locator="155:11-155:25" name="GlucoseTestTime" xsi:type="QueryLetRef"/>
+                  <operand localId="346" locator="155:34-155:136" lowClosed="true" highClosed="true" xsi:type="Interval">
+                     <low localId="341" locator="155:43-155:87" xsi:type="Subtract">
+                        <operand localId="339" locator="155:45-155:76" xsi:type="Start">
+                           <operand localId="338" locator="155:54-155:76" name="HospitalizationInterval" xsi:type="QueryLetRef"/>
+                        </operand>
+                        <operand localId="340" locator="155:80-155:85" value="1" unit="hour" xsi:type="Quantity"/>
+                     </low>
+                     <high localId="345" locator="155:90-155:135" xsi:type="Add">
+                        <operand localId="343" locator="155:92-155:123" xsi:type="Start">
+                           <operand localId="342" locator="155:101-155:123" name="HospitalizationInterval" xsi:type="QueryLetRef"/>
+                        </operand>
+                        <operand localId="344" locator="155:127-155:133" value="6" unit="hours" xsi:type="Quantity"/>
+                     </high>
+                  </operand>
+               </operand>
+            </where>
+            <return localId="350" locator="156:5-156:22">
+               <expression localId="349" locator="156:12-156:22" name="GlucoseTest" xsi:type="AliasRef"/>
+            </return>
+         </expression>
+      </def>
+      <def localId="413" locator="166:1-178:28" name="Glucose Tests Earlier Than Glucose Greater Than or Equal to 1000 within 1 Hour Prior To and 6 Hours After Encounter Start" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="413">
+               <a:s>define &quot;Glucose Tests Earlier Than Glucose Greater Than or Equal to 1000 within 1 Hour Prior To and 6 Hours After Encounter Start&quot;:
+  </a:s>
+               <a:s r="412">
+                  <a:s>
+                     <a:s>from
+    </a:s>
+                     <a:s r="358">
+                        <a:s r="357">
+                           <a:s>
+                              <a:s>&quot;Initial Population&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> InpatientHospitalization</a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="360">
+                        <a:s r="359">
+                           <a:s>
+                              <a:s>&quot;Glucose Greater Than or Equal to 1000 within 1 Hour Prior To and 6 Hours After Encounter Start&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> GlucoseResult1000</a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="362">
+                        <a:s r="361">
+                           <a:s r="361">
+                              <a:s>[&quot;Laboratory Test, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Glucose Lab Test Mass Per Volume&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> EarlierGlucoseTest</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s>
+                     <a:s>let </a:s>
+                     <a:s r="366">
+                        <a:s>HospitalizationInterval: </a:s>
+                        <a:s r="365">
+                           <a:s r="363">
+                              <a:s>Global</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="365">
+                              <a:s>&quot;HospitalizationWithObservation&quot; ( </a:s>
+                              <a:s r="364">
+                                 <a:s>InpatientHospitalization</a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="373">
+                        <a:s>GlucoseTest1000Time: </a:s>
+                        <a:s r="372">
+                           <a:s r="367">
+                              <a:s>Global</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="372">
+                              <a:s>&quot;EarliestOf&quot; ( </a:s>
+                              <a:s r="369">
+                                 <a:s r="368">
+                                    <a:s>GlucoseResult1000</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="369">
+                                    <a:s>relevantDatetime</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="371">
+                                 <a:s r="370">
+                                    <a:s>GlucoseResult1000</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="371">
+                                    <a:s>relevantPeriod</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="380">
+                        <a:s>EarlierGlucoseTestTime: </a:s>
+                        <a:s r="379">
+                           <a:s r="374">
+                              <a:s>Global</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="379">
+                              <a:s>&quot;EarliestOf&quot; ( </a:s>
+                              <a:s r="376">
+                                 <a:s r="375">
+                                    <a:s>EarlierGlucoseTest</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="376">
+                                    <a:s>relevantDatetime</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="378">
+                                 <a:s r="377">
+                                    <a:s>EarlierGlucoseTest</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="378">
+                                    <a:s>relevantPeriod</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="409">
+                     <a:s>where </a:s>
+                     <a:s r="409">
+                        <a:s r="403">
+                           <a:s r="400">
+                              <a:s r="391">
+                                 <a:s r="381">
+                                    <a:s>GlucoseTest1000Time</a:s>
+                                 </a:s>
+                                 <a:s r="391"> during </a:s>
+                                 <a:s r="390">
+                                    <a:s>Interval[</a:s>
+                                    <a:s r="385">
+                                       <a:s>( </a:s>
+                                       <a:s r="385">
+                                          <a:s r="383">
+                                             <a:s>start of </a:s>
+                                             <a:s r="382">
+                                                <a:s>HospitalizationInterval</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s> - </a:s>
+                                          <a:s r="384">
+                                             <a:s>1 hour</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> )</a:s>
+                                    </a:s>
+                                    <a:s>, </a:s>
+                                    <a:s r="389">
+                                       <a:s>( </a:s>
+                                       <a:s r="389">
+                                          <a:s r="387">
+                                             <a:s>start of </a:s>
+                                             <a:s r="386">
+                                                <a:s>HospitalizationInterval</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s> + </a:s>
+                                          <a:s r="388">
+                                             <a:s>6 hour</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> )</a:s>
+                                    </a:s>
+                                    <a:s>]</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      and </a:s>
+                              <a:s r="399">
+                                 <a:s r="392">
+                                    <a:s>EarlierGlucoseTestTime</a:s>
+                                 </a:s>
+                                 <a:s r="399"> during </a:s>
+                                 <a:s r="398">
+                                    <a:s>Interval[</a:s>
+                                    <a:s r="396">
+                                       <a:s>( </a:s>
+                                       <a:s r="396">
+                                          <a:s r="394">
+                                             <a:s>start of </a:s>
+                                             <a:s r="393">
+                                                <a:s>HospitalizationInterval</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s> - </a:s>
+                                          <a:s r="395">
+                                             <a:s>1 hour</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> )</a:s>
+                                    </a:s>
+                                    <a:s>, </a:s>
+                                    <a:s r="397">
+                                       <a:s>GlucoseTest1000Time</a:s>
+                                    </a:s>
+                                    <a:s> )</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+      and </a:s>
+                           <a:s r="402">
+                              <a:s r="401">
+                                 <a:s>EarlierGlucoseTest</a:s>
+                              </a:s>
+                              <a:s> is not null</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      and </a:s>
+                        <a:s r="408">
+                           <a:s r="405">
+                              <a:s r="404">
+                                 <a:s>EarlierGlucoseTest</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="405">
+                                 <a:s>id</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> !~ </a:s>
+                           <a:s r="407">
+                              <a:s r="406">
+                                 <a:s>GlucoseResult1000</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="407">
+                                 <a:s>id</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="411">
+                     <a:s>return </a:s>
+                     <a:s r="410">
+                        <a:s>GlucoseResult1000</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="412" locator="167:3-178:28" xsi:type="Query">
+            <source localId="358" locator="168:5-168:49" alias="InpatientHospitalization">
+               <expression localId="357" locator="168:5-168:24" name="Initial Population" xsi:type="ExpressionRef"/>
+            </source>
+            <source localId="360" locator="169:5-169:118" alias="GlucoseResult1000">
+               <expression localId="359" locator="169:5-169:100" name="Glucose Greater Than or Equal to 1000 within 1 Hour Prior To and 6 Hours After Encounter Start" xsi:type="ExpressionRef"/>
+            </source>
+            <source localId="362" locator="170:5-170:89" alias="EarlierGlucoseTest">
+               <expression localId="361" locator="170:5-170:70" xmlns:ns9="urn:healthit-gov:qdm:v5_6" dataType="ns9:PositiveLaboratoryTestPerformed" templateId="PositiveLaboratoryTestPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="170:36-170:69" name="Glucose Lab Test Mass Per Volume" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <let localId="366" locator="171:9-171:101" identifier="HospitalizationInterval">
+               <expression localId="365" locator="171:34-171:101" name="HospitalizationWithObservation" libraryName="Global" xsi:type="FunctionRef">
+                  <operand localId="364" locator="171:76-171:99" name="InpatientHospitalization" xsi:type="AliasRef"/>
+               </expression>
+            </let>
+            <let localId="373" locator="172:5-172:117" identifier="GlucoseTest1000Time">
+               <expression localId="372" locator="172:26-172:117" name="EarliestOf" libraryName="Global" xsi:type="FunctionRef">
+                  <operand localId="369" locator="172:48-172:81" path="relevantDatetime" scope="GlucoseResult1000" xsi:type="Property"/>
+                  <operand localId="371" locator="172:84-172:115" path="relevantPeriod" scope="GlucoseResult1000" xsi:type="Property"/>
+               </expression>
+            </let>
+            <let localId="380" locator="173:5-173:122" identifier="EarlierGlucoseTestTime">
+               <expression localId="379" locator="173:29-173:122" name="EarliestOf" libraryName="Global" xsi:type="FunctionRef">
+                  <operand localId="376" locator="173:51-173:85" path="relevantDatetime" scope="EarlierGlucoseTest" xsi:type="Property"/>
+                  <operand localId="378" locator="173:88-173:120" path="relevantPeriod" scope="EarlierGlucoseTest" xsi:type="Property"/>
+               </expression>
+            </let>
+            <where localId="409" locator="174:5-177:55" xsi:type="And">
+               <operand localId="403" locator="174:11-176:40" xsi:type="And">
+                  <operand localId="400" locator="174:11-175:117" xsi:type="And">
+                     <operand localId="391" locator="174:11-174:139" xsi:type="In">
+                        <operand localId="381" locator="174:11-174:29" name="GlucoseTest1000Time" xsi:type="QueryLetRef"/>
+                        <operand localId="390" locator="174:38-174:139" lowClosed="true" highClosed="true" xsi:type="Interval">
+                           <low localId="385" locator="174:47-174:91" xsi:type="Subtract">
+                              <operand localId="383" locator="174:49-174:80" xsi:type="Start">
+                                 <operand localId="382" locator="174:58-174:80" name="HospitalizationInterval" xsi:type="QueryLetRef"/>
+                              </operand>
+                              <operand localId="384" locator="174:84-174:89" value="1" unit="hour" xsi:type="Quantity"/>
+                           </low>
+                           <high localId="389" locator="174:94-174:138" xsi:type="Add">
+                              <operand localId="387" locator="174:96-174:127" xsi:type="Start">
+                                 <operand localId="386" locator="174:105-174:127" name="HospitalizationInterval" xsi:type="QueryLetRef"/>
+                              </operand>
+                              <operand localId="388" locator="174:131-174:136" value="6" unit="hour" xsi:type="Quantity"/>
+                           </high>
+                        </operand>
+                     </operand>
+                     <operand localId="399" locator="175:11-175:117" xsi:type="In">
+                        <operand localId="392" locator="175:11-175:32" name="EarlierGlucoseTestTime" xsi:type="QueryLetRef"/>
+                        <operand localId="398" locator="175:41-175:117" lowClosed="true" highClosed="false" xsi:type="Interval">
+                           <low localId="396" locator="175:50-175:94" xsi:type="Subtract">
+                              <operand localId="394" locator="175:52-175:83" xsi:type="Start">
+                                 <operand localId="393" locator="175:61-175:83" name="HospitalizationInterval" xsi:type="QueryLetRef"/>
+                              </operand>
+                              <operand localId="395" locator="175:87-175:92" value="1" unit="hour" xsi:type="Quantity"/>
+                           </low>
+                           <high localId="397" locator="175:97-175:115" name="GlucoseTest1000Time" xsi:type="QueryLetRef"/>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand localId="402" locator="176:11-176:40" xsi:type="Not">
+                     <operand locator="176:11-176:40" xsi:type="IsNull">
+                        <operand localId="401" locator="176:11-176:28" name="EarlierGlucoseTest" xsi:type="AliasRef"/>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand localId="408" locator="177:11-177:55" xsi:type="Not">
+                  <operand locator="177:11-177:55" xsi:type="Equivalent">
+                     <operand localId="405" locator="177:11-177:31" path="id" scope="EarlierGlucoseTest" xsi:type="Property"/>
+                     <operand localId="407" locator="177:36-177:55" path="id" scope="GlucoseResult1000" xsi:type="Property"/>
+                  </operand>
+               </operand>
+            </where>
+            <return localId="411" locator="178:5-178:28">
+               <expression localId="410" locator="178:12-178:28" name="GlucoseResult1000" xsi:type="AliasRef"/>
+            </return>
+         </expression>
+      </def>
+      <def localId="419" locator="115:1-117:168" name="Initial Glucose Greater Than or Equal to 1000 within 1 Hour Prior To and 6 Hours After Encounter Start" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="419">
+               <a:s>define &quot;Initial Glucose Greater Than or Equal to 1000 within 1 Hour Prior To and 6 Hours After Encounter Start&quot;:
+  </a:s>
+               <a:s r="418">
+                  <a:s>
+                     <a:s r="354">
+                        <a:s r="353">
+                           <a:s>
+                              <a:s>&quot;Glucose Greater Than or Equal to 1000 within 1 Hour Prior To and 6 Hours After Encounter Start&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> GlucoseResult1000</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="417">
+                     <a:s>where </a:s>
+                     <a:s r="417">
+                        <a:s>not </a:s>
+                        <a:s r="416">
+                           <a:s>( </a:s>
+                           <a:s r="416">
+                              <a:s r="356">
+                                 <a:s r="355">
+                                    <a:s>GlucoseResult1000</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="356">
+                                    <a:s>id</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> in </a:s>
+                              <a:s r="415">
+                                 <a:s r="414">
+                                    <a:s>&quot;Glucose Tests Earlier Than Glucose Greater Than or Equal to 1000 within 1 Hour Prior To and 6 Hours After Encounter Start&quot;</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="415">
+                                    <a:s>id</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> )</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="418" locator="116:3-117:168" xsi:type="Query">
+            <source localId="354" locator="116:3-116:116" alias="GlucoseResult1000">
+               <expression localId="353" locator="116:3-116:98" name="Glucose Greater Than or Equal to 1000 within 1 Hour Prior To and 6 Hours After Encounter Start" xsi:type="ExpressionRef"/>
+            </source>
+            <where localId="417" locator="117:5-117:168" xsi:type="Not">
+               <operand localId="416" locator="117:15-117:168" xsi:type="In">
+                  <operand localId="356" locator="117:17-117:36" path="id" scope="GlucoseResult1000" xsi:type="Property"/>
+                  <operand localId="415" locator="117:41-117:166" xsi:type="Query">
+                     <source alias="$this">
+                        <expression localId="414" locator="117:41-117:163" name="Glucose Tests Earlier Than Glucose Greater Than or Equal to 1000 within 1 Hour Prior To and 6 Hours After Encounter Start" xsi:type="ExpressionRef"/>
+                     </source>
+                     <where xsi:type="Not">
+                        <operand xsi:type="IsNull">
+                           <operand path="id" xsi:type="Property">
+                              <source name="$this" xsi:type="AliasRef"/>
+                           </operand>
+                        </operand>
+                     </where>
+                     <return distinct="false">
+                        <expression path="id" xsi:type="Property">
+                           <source name="$this" xsi:type="AliasRef"/>
+                        </expression>
+                     </return>
+                  </operand>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="455" locator="158:1-164:35" name="Encounter with First Glucose Greater Than or Equal to 1000" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="455">
+               <a:s>define &quot;Encounter with First Glucose Greater Than or Equal to 1000&quot;:
+  </a:s>
+               <a:s r="454">
+                  <a:s>
+                     <a:s r="313">
+                        <a:s r="312">
+                           <a:s>
+                              <a:s>&quot;Initial Population&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> InpatientHospitalization</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="451">
+                     <a:s>with </a:s>
+                     <a:s r="421">
+                        <a:s r="420">
+                           <a:s>
+                              <a:s>&quot;Initial Glucose Greater Than or Equal to 1000 within 1 Hour Prior To and 6 Hours After Encounter Start&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> FirstGlucoseResult</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="450">
+                        <a:s r="429">
+                           <a:s r="424">
+                              <a:s r="423">
+                                 <a:s r="422">
+                                    <a:s>FirstGlucoseResult</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="423">
+                                    <a:s>result</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> is not null</a:s>
+                           </a:s>
+                           <a:s>
+        and </a:s>
+                           <a:s r="428">
+                              <a:s r="426">
+                                 <a:s r="425">
+                                    <a:s>FirstGlucoseResult</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="426">
+                                    <a:s>result</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> >= </a:s>
+                              <a:s r="427">
+                                 <a:s>1000 'mg/dL'</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+        and </a:s>
+                        <a:s r="449">
+                           <a:s r="435">
+                              <a:s r="430">
+                                 <a:s>Global</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="435">
+                                 <a:s>&quot;EarliestOf&quot; ( </a:s>
+                                 <a:s r="432">
+                                    <a:s r="431">
+                                       <a:s>FirstGlucoseResult</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="432">
+                                       <a:s>relevantDatetime</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>, </a:s>
+                                 <a:s r="434">
+                                    <a:s r="433">
+                                       <a:s>FirstGlucoseResult</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="434">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="449"> during </a:s>
+                           <a:s r="448">
+                              <a:s>Interval[</a:s>
+                              <a:s r="441">
+                                 <a:s>( </a:s>
+                                 <a:s r="441">
+                                    <a:s r="439">
+                                       <a:s>start of </a:s>
+                                       <a:s r="438">
+                                          <a:s r="436">
+                                             <a:s>Global</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="438">
+                                             <a:s>&quot;HospitalizationWithObservation&quot; ( </a:s>
+                                             <a:s r="437">
+                                                <a:s>InpatientHospitalization</a:s>
+                                             </a:s>
+                                             <a:s> )</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> - </a:s>
+                                    <a:s r="440">
+                                       <a:s>1 hour</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="447">
+                                 <a:s>( </a:s>
+                                 <a:s r="447">
+                                    <a:s r="445">
+                                       <a:s>start of </a:s>
+                                       <a:s r="444">
+                                          <a:s r="442">
+                                             <a:s>Global</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="444">
+                                             <a:s>&quot;HospitalizationWithObservation&quot; ( </a:s>
+                                             <a:s r="443">
+                                                <a:s>InpatientHospitalization</a:s>
+                                             </a:s>
+                                             <a:s> )</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> + </a:s>
+                                    <a:s r="446">
+                                       <a:s>6 hours</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="453">
+                     <a:s>return </a:s>
+                     <a:s r="452">
+                        <a:s>InpatientHospitalization</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="454" locator="159:3-164:35" xsi:type="Query">
+            <source localId="313" locator="159:3-159:47" alias="InpatientHospitalization">
+               <expression localId="312" locator="159:3-159:22" name="Initial Population" xsi:type="ExpressionRef"/>
+            </source>
+            <relationship localId="451" locator="160:5-163:307" alias="FirstGlucoseResult" xsi:type="With">
+               <expression localId="420" locator="160:10-160:113" name="Initial Glucose Greater Than or Equal to 1000 within 1 Hour Prior To and 6 Hours After Encounter Start" xsi:type="ExpressionRef"/>
+               <suchThat localId="450" locator="161:17-163:307" xsi:type="And">
+                  <operand localId="429" locator="161:17-162:53" xsi:type="And">
+                     <operand localId="424" locator="161:17-161:53" xsi:type="Not">
+                        <operand locator="161:17-161:53" xsi:type="IsNull">
+                           <operand localId="423" locator="161:17-161:41" path="result" scope="FirstGlucoseResult" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                     <operand localId="428" locator="162:13-162:53" xsi:type="GreaterOrEqual">
+                        <operand asType="t:Quantity" xsi:type="As">
+                           <operand localId="426" locator="162:13-162:37" path="result" scope="FirstGlucoseResult" xsi:type="Property"/>
+                        </operand>
+                        <operand localId="427" locator="162:42-162:53" value="1000" unit="mg/dL" xsi:type="Quantity"/>
+                     </operand>
+                  </operand>
+                  <operand localId="449" locator="163:13-163:307" xsi:type="In">
+                     <operand localId="435" locator="163:13-163:106" name="EarliestOf" libraryName="Global" xsi:type="FunctionRef">
+                        <operand localId="432" locator="163:35-163:69" path="relevantDatetime" scope="FirstGlucoseResult" xsi:type="Property"/>
+                        <operand localId="434" locator="163:72-163:104" path="relevantPeriod" scope="FirstGlucoseResult" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="448" locator="163:115-163:307" lowClosed="true" highClosed="true" xsi:type="Interval">
+                        <low localId="441" locator="163:124-163:213" xsi:type="Subtract">
+                           <operand localId="439" locator="163:126-163:202" xsi:type="Start">
+                              <operand localId="438" locator="163:135-163:202" name="HospitalizationWithObservation" libraryName="Global" xsi:type="FunctionRef">
+                                 <operand localId="437" locator="163:177-163:200" name="InpatientHospitalization" xsi:type="AliasRef"/>
+                              </operand>
+                           </operand>
+                           <operand localId="440" locator="163:206-163:211" value="1" unit="hour" xsi:type="Quantity"/>
+                        </low>
+                        <high localId="447" locator="163:216-163:306" xsi:type="Add">
+                           <operand localId="445" locator="163:218-163:294" xsi:type="Start">
+                              <operand localId="444" locator="163:227-163:294" name="HospitalizationWithObservation" libraryName="Global" xsi:type="FunctionRef">
+                                 <operand localId="443" locator="163:269-163:292" name="InpatientHospitalization" xsi:type="AliasRef"/>
+                              </operand>
+                           </operand>
+                           <operand localId="446" locator="163:298-163:304" value="6" unit="hours" xsi:type="Quantity"/>
+                        </high>
+                     </operand>
+                  </operand>
+               </suchThat>
+            </relationship>
+            <return localId="453" locator="164:5-164:35">
+               <expression localId="452" locator="164:12-164:35" name="InpatientHospitalization" xsi:type="AliasRef"/>
+            </return>
+         </expression>
+      </def>
+      <def localId="457" locator="78:1-79:62" name="Denominator Exclusions" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="457">
+               <a:s>define &quot;Denominator Exclusions&quot;:
+  </a:s>
+               <a:s r="456">
+                  <a:s>&quot;Encounter with First Glucose Greater Than or Equal to 1000&quot;</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="456" locator="79:3-79:62" name="Encounter with First Glucose Greater Than or Equal to 1000" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="470" locator="102:1-107:43" name="Encounter with Hyperglycemic Events" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="470">
+               <a:s>define &quot;Encounter with Hyperglycemic Events&quot;:
+  </a:s>
+               <a:s r="469">
+                  <a:s>
+                     <a:s r="459">
+                        <a:s r="458">
+                           <a:s>
+                              <a:s>&quot;Days with Hyperglycemic Events&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> HyperglycemicEventDays</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="465">
+                     <a:s>where </a:s>
+                     <a:s r="465">
+                        <a:s>exists </a:s>
+                        <a:s r="464">
+                           <a:s>( </a:s>
+                           <a:s r="464">
+                              <a:s>
+                                 <a:s r="461">
+                                    <a:s r="460">
+                                       <a:s>
+                                          <a:s>HyperglycemicEventDays.eligibleEventDays</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> EligibleEventDay</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+        </a:s>
+                              <a:s r="463">
+                                 <a:s>where </a:s>
+                                 <a:s r="463">
+                                    <a:s r="462">
+                                       <a:s>EligibleEventDay</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="463">
+                                       <a:s>hasHyperglycemicEvent</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+    )</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="468">
+                     <a:s>return </a:s>
+                     <a:s r="467">
+                        <a:s r="466">
+                           <a:s>HyperglycemicEventDays</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="467">
+                           <a:s>encounter</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="469" locator="103:3-107:43" xsi:type="Query">
+            <source localId="459" locator="103:3-103:57" alias="HyperglycemicEventDays">
+               <expression localId="458" locator="103:3-103:34" name="Days with Hyperglycemic Events" xsi:type="ExpressionRef"/>
+            </source>
+            <where localId="465" locator="104:5-106:5" xsi:type="Exists">
+               <operand localId="464" locator="104:18-106:5" xsi:type="Query">
+                  <source localId="461" locator="104:20-104:76" alias="EligibleEventDay">
+                     <expression localId="460" locator="104:20-104:59" path="eligibleEventDays" scope="HyperglycemicEventDays" xsi:type="Property"/>
+                  </source>
+                  <where localId="463" locator="105:9-105:52" path="hasHyperglycemicEvent" scope="EligibleEventDay" xsi:type="Property"/>
+               </operand>
+            </where>
+            <return localId="468" locator="107:5-107:43">
+               <expression localId="467" locator="107:12-107:43" path="encounter" scope="HyperglycemicEventDays" xsi:type="Property"/>
+            </return>
+         </expression>
+      </def>
+      <def localId="472" locator="127:1-128:39" name="Numerator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="472">
+               <a:s>define &quot;Numerator&quot;:
+  </a:s>
+               <a:s r="471">
+                  <a:s>&quot;Encounter with Hyperglycemic Events&quot;</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="471" locator="128:3-128:39" name="Encounter with Hyperglycemic Events" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="474" locator="135:1-136:51" name="SDE Ethnicity" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="474">
+               <a:s>define &quot;SDE Ethnicity&quot;:
+  </a:s>
+               <a:s r="473">
+                  <a:s>[&quot;Patient Characteristic Ethnicity&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Ethnicity&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="473" locator="136:3-136:51" xmlns:ns10="urn:healthit-gov:qdm:v5_6" dataType="ns10:PatientCharacteristicEthnicity" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="136:40-136:50" name="Ethnicity" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="476" locator="138:1-139:43" name="SDE Payer" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="476">
+               <a:s>define &quot;SDE Payer&quot;:
+  </a:s>
+               <a:s r="475">
+                  <a:s>[&quot;Patient Characteristic Payer&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Payer&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="475" locator="139:3-139:43" xmlns:ns11="urn:healthit-gov:qdm:v5_6" dataType="ns11:PatientCharacteristicPayer" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="139:36-139:42" name="Payer" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="478" locator="141:1-142:41" name="SDE Race" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="478">
+               <a:s>define &quot;SDE Race&quot;:
+  </a:s>
+               <a:s r="477">
+                  <a:s>[&quot;Patient Characteristic Race&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Race&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="477" locator="142:3-142:41" xmlns:ns12="urn:healthit-gov:qdm:v5_6" dataType="ns12:PatientCharacteristicRace" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="142:35-142:40" name="Race" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="480" locator="144:1-145:58" name="SDE Sex" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="480">
+               <a:s>define &quot;SDE Sex&quot;:
+  </a:s>
+               <a:s r="479">
+                  <a:s>[&quot;Patient Characteristic Sex&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;ONC Administrative Sex&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="479" locator="145:3-145:58" xmlns:ns13="urn:healthit-gov:qdm:v5_6" dataType="ns13:PatientCharacteristicSex" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="145:34-145:57" name="ONC Administrative Sex" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="519" locator="203:1-211:3" name="Denominator Observations" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="519">
+               <a:s>define function &quot;Denominator Observations&quot;(QualifyingEncounter </a:s>
+               <a:s r="490">
+                  <a:s>&quot;Encounter, Performed&quot;</a:s>
+               </a:s>
+               <a:s> ):
+  </a:s>
+               <a:s r="518">
+                  <a:s r="518">
+                     <a:s>if </a:s>
+                     <a:s r="495">
+                        <a:s r="492">
+                           <a:s r="491">
+                              <a:s>QualifyingEncounter</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="492">
+                              <a:s>id</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> in </a:s>
+                        <a:s r="494">
+                           <a:s r="493">
+                              <a:s>&quot;Denominator Exclusions&quot;</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="494">
+                              <a:s>id</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s> then </a:s>
+                     <a:s r="505">
+                        <a:s>singleton from </a:s>
+                        <a:s r="504">
+                           <a:s>( </a:s>
+                           <a:s r="504">
+                              <a:s>
+                                 <a:s r="497">
+                                    <a:s r="496">
+                                       <a:s>
+                                          <a:s>&quot;Days with Hyperglycemic Events&quot;</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> EncounterWithEventDays</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      </a:s>
+                              <a:s r="501">
+                                 <a:s>where </a:s>
+                                 <a:s r="501">
+                                    <a:s r="499">
+                                       <a:s r="498">
+                                          <a:s>EncounterWithEventDays</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="499">
+                                          <a:s>encounter</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> = </a:s>
+                                    <a:s r="500">
+                                       <a:s>QualifyingEncounter</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      </a:s>
+                              <a:s r="503">
+                                 <a:s r="502">return 0</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+  )</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s> 
+    else </a:s>
+                     <a:s r="517">
+                        <a:s>singleton from </a:s>
+                        <a:s r="516">
+                           <a:s>( </a:s>
+                           <a:s r="516">
+                              <a:s>
+                                 <a:s r="507">
+                                    <a:s r="506">
+                                       <a:s>
+                                          <a:s>&quot;Days with Hyperglycemic Events&quot;</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> EncounterWithEventDays</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      </a:s>
+                              <a:s r="511">
+                                 <a:s>where </a:s>
+                                 <a:s r="511">
+                                    <a:s r="509">
+                                       <a:s r="508">
+                                          <a:s>EncounterWithEventDays</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="509">
+                                          <a:s>encounter</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> = </a:s>
+                                    <a:s r="510">
+                                       <a:s>QualifyingEncounter</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      </a:s>
+                              <a:s r="515">
+                                 <a:s>return </a:s>
+                                 <a:s r="514">
+                                    <a:s>Count(</a:s>
+                                    <a:s r="513">
+                                       <a:s r="512">
+                                          <a:s>EncounterWithEventDays</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="513">
+                                          <a:s>eligibleEventDays</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>)</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+  )</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="518" locator="204:3-211:3" xsi:type="If">
+            <condition localId="495" locator="204:6-204:58" xsi:type="In">
+               <operand localId="492" locator="204:6-204:27" path="id" xsi:type="Property">
+                  <source localId="491" locator="204:6-204:24" name="QualifyingEncounter" xsi:type="OperandRef"/>
+               </operand>
+               <operand localId="494" locator="204:32-204:58" xsi:type="Query">
+                  <source alias="$this">
+                     <expression localId="493" locator="204:32-204:55" name="Denominator Exclusions" xsi:type="ExpressionRef"/>
+                  </source>
+                  <where xsi:type="Not">
+                     <operand xsi:type="IsNull">
+                        <operand path="id" xsi:type="Property">
+                           <source name="$this" xsi:type="AliasRef"/>
+                        </operand>
+                     </operand>
+                  </where>
+                  <return distinct="false">
+                     <expression path="id" xsi:type="Property">
+                        <source name="$this" xsi:type="AliasRef"/>
+                     </expression>
+                  </return>
+               </operand>
+            </condition>
+            <then localId="505" locator="204:65-207:3" xsi:type="SingletonFrom">
+               <operand localId="504" locator="204:80-207:3" xsi:type="Query">
+                  <source localId="497" locator="204:82-204:136" alias="EncounterWithEventDays">
+                     <expression localId="496" locator="204:82-204:113" name="Days with Hyperglycemic Events" xsi:type="ExpressionRef"/>
+                  </source>
+                  <where localId="501" locator="205:7-205:66" xsi:type="Equal">
+                     <operand localId="499" locator="205:13-205:44" path="encounter" scope="EncounterWithEventDays" xsi:type="Property"/>
+                     <operand localId="500" locator="205:48-205:66" name="QualifyingEncounter" xsi:type="OperandRef"/>
+                  </where>
+                  <return localId="503" locator="206:7-206:14">
+                     <expression localId="502" locator="206:14" valueType="t:Integer" value="0" xsi:type="Literal"/>
+                  </return>
+               </operand>
+            </then>
+            <else localId="517" locator="208:10-211:3" xsi:type="SingletonFrom">
+               <operand localId="516" locator="208:25-211:3" xsi:type="Query">
+                  <source localId="507" locator="208:27-208:81" alias="EncounterWithEventDays">
+                     <expression localId="506" locator="208:27-208:58" name="Days with Hyperglycemic Events" xsi:type="ExpressionRef"/>
+                  </source>
+                  <where localId="511" locator="209:7-209:66" xsi:type="Equal">
+                     <operand localId="509" locator="209:13-209:44" path="encounter" scope="EncounterWithEventDays" xsi:type="Property"/>
+                     <operand localId="510" locator="209:48-209:66" name="QualifyingEncounter" xsi:type="OperandRef"/>
+                  </where>
+                  <return localId="515" locator="210:7-210:60">
+                     <expression localId="514" locator="210:14-210:60" xsi:type="Count">
+                        <source localId="513" locator="210:20-210:59" path="eligibleEventDays" scope="EncounterWithEventDays" xsi:type="Property"/>
+                     </expression>
+                  </return>
+               </operand>
+            </else>
+         </expression>
+         <operand name="QualifyingEncounter">
+            <operandTypeSpecifier localId="490" locator="203:64-203:85" xmlns:ns14="urn:healthit-gov:qdm:v5_6" name="ns14:PositiveEncounterPerformed" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+      </def>
+      <def localId="552" locator="213:1-223:3" name="Numerator Observations" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="552">
+               <a:s>define function &quot;Numerator Observations&quot;(QualifyingEncounter </a:s>
+               <a:s r="520">
+                  <a:s>&quot;Encounter, Performed&quot;</a:s>
+               </a:s>
+               <a:s> ):
+  </a:s>
+               <a:s r="551">
+                  <a:s r="551">
+                     <a:s>if </a:s>
+                     <a:s r="525">
+                        <a:s r="522">
+                           <a:s r="521">
+                              <a:s>QualifyingEncounter</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="522">
+                              <a:s>id</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> in </a:s>
+                        <a:s r="524">
+                           <a:s r="523">
+                              <a:s>&quot;Denominator Exclusions&quot;</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="524">
+                              <a:s>id</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s> then </a:s>
+                     <a:s r="535">
+                        <a:s>singleton from </a:s>
+                        <a:s r="534">
+                           <a:s>( </a:s>
+                           <a:s r="534">
+                              <a:s>
+                                 <a:s r="527">
+                                    <a:s r="526">
+                                       <a:s>
+                                          <a:s>&quot;Days with Hyperglycemic Events&quot;</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> EncounterWithEventDays</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      </a:s>
+                              <a:s r="531">
+                                 <a:s>where </a:s>
+                                 <a:s r="531">
+                                    <a:s r="529">
+                                       <a:s r="528">
+                                          <a:s>EncounterWithEventDays</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="529">
+                                          <a:s>encounter</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> = </a:s>
+                                    <a:s r="530">
+                                       <a:s>QualifyingEncounter</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      </a:s>
+                              <a:s r="533">
+                                 <a:s r="532">return 0</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+  )</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s> 
+    else </a:s>
+                     <a:s r="550">
+                        <a:s>singleton from </a:s>
+                        <a:s r="549">
+                           <a:s>( </a:s>
+                           <a:s r="549">
+                              <a:s>
+                                 <a:s r="537">
+                                    <a:s r="536">
+                                       <a:s>
+                                          <a:s>&quot;Days with Hyperglycemic Events&quot;</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> EncounterWithEventDays</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      </a:s>
+                              <a:s r="541">
+                                 <a:s>where </a:s>
+                                 <a:s r="541">
+                                    <a:s r="539">
+                                       <a:s r="538">
+                                          <a:s>EncounterWithEventDays</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="539">
+                                          <a:s>encounter</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> = </a:s>
+                                    <a:s r="540">
+                                       <a:s>QualifyingEncounter</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      </a:s>
+                              <a:s r="548">
+                                 <a:s>return </a:s>
+                                 <a:s r="547">
+                                    <a:s>Count(</a:s>
+                                    <a:s r="546">
+                                       <a:s>
+                                          <a:s r="543">
+                                             <a:s r="542">
+                                                <a:s>
+                                                   <a:s>EncounterWithEventDays.eligibleEventDays</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s> EligibleEventDay</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>
+          </a:s>
+                                       <a:s r="545">
+                                          <a:s>where </a:s>
+                                          <a:s r="545">
+                                             <a:s r="544">
+                                                <a:s>EligibleEventDay</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="545">
+                                                <a:s>hasHyperglycemicEvent</a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+      )</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+  )</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="551" locator="214:3-223:3" xsi:type="If">
+            <condition localId="525" locator="214:6-214:58" xsi:type="In">
+               <operand localId="522" locator="214:6-214:27" path="id" xsi:type="Property">
+                  <source localId="521" locator="214:6-214:24" name="QualifyingEncounter" xsi:type="OperandRef"/>
+               </operand>
+               <operand localId="524" locator="214:32-214:58" xsi:type="Query">
+                  <source alias="$this">
+                     <expression localId="523" locator="214:32-214:55" name="Denominator Exclusions" xsi:type="ExpressionRef"/>
+                  </source>
+                  <where xsi:type="Not">
+                     <operand xsi:type="IsNull">
+                        <operand path="id" xsi:type="Property">
+                           <source name="$this" xsi:type="AliasRef"/>
+                        </operand>
+                     </operand>
+                  </where>
+                  <return distinct="false">
+                     <expression path="id" xsi:type="Property">
+                        <source name="$this" xsi:type="AliasRef"/>
+                     </expression>
+                  </return>
+               </operand>
+            </condition>
+            <then localId="535" locator="214:65-217:3" xsi:type="SingletonFrom">
+               <operand localId="534" locator="214:80-217:3" xsi:type="Query">
+                  <source localId="527" locator="214:82-214:136" alias="EncounterWithEventDays">
+                     <expression localId="526" locator="214:82-214:113" name="Days with Hyperglycemic Events" xsi:type="ExpressionRef"/>
+                  </source>
+                  <where localId="531" locator="215:7-215:66" xsi:type="Equal">
+                     <operand localId="529" locator="215:13-215:44" path="encounter" scope="EncounterWithEventDays" xsi:type="Property"/>
+                     <operand localId="530" locator="215:48-215:66" name="QualifyingEncounter" xsi:type="OperandRef"/>
+                  </where>
+                  <return localId="533" locator="216:7-216:14">
+                     <expression localId="532" locator="216:14" valueType="t:Integer" value="0" xsi:type="Literal"/>
+                  </return>
+               </operand>
+            </then>
+            <else localId="550" locator="218:10-223:3" xsi:type="SingletonFrom">
+               <operand localId="549" locator="218:25-223:3" xsi:type="Query">
+                  <source localId="537" locator="218:27-218:81" alias="EncounterWithEventDays">
+                     <expression localId="536" locator="218:27-218:58" name="Days with Hyperglycemic Events" xsi:type="ExpressionRef"/>
+                  </source>
+                  <where localId="541" locator="219:7-219:66" xsi:type="Equal">
+                     <operand localId="539" locator="219:13-219:44" path="encounter" scope="EncounterWithEventDays" xsi:type="Property"/>
+                     <operand localId="540" locator="219:48-219:66" name="QualifyingEncounter" xsi:type="OperandRef"/>
+                  </where>
+                  <return localId="548" locator="220:7-222:7">
+                     <expression localId="547" locator="220:14-222:7" xsi:type="Count">
+                        <source localId="546" locator="220:20-221:54" xsi:type="Query">
+                           <source localId="543" locator="220:20-220:76" alias="EligibleEventDay">
+                              <expression localId="542" locator="220:20-220:59" path="eligibleEventDays" scope="EncounterWithEventDays" xsi:type="Property"/>
+                           </source>
+                           <where localId="545" locator="221:11-221:54" path="hasHyperglycemicEvent" scope="EligibleEventDay" xsi:type="Property"/>
+                        </source>
+                     </expression>
+                  </return>
+               </operand>
+            </else>
+         </expression>
+         <operand name="QualifyingEncounter">
+            <operandTypeSpecifier localId="520" locator="213:62-213:83" xmlns:ns15="urn:healthit-gov:qdm:v5_6" name="ns15:PositiveEncounterPerformed" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+      </def>
+   </statements>
+</library>

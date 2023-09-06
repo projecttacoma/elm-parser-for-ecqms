@@ -1,0 +1,2015 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion,DisableMethodInvocation" xsi:type="a:CqlToElmInfo"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="300">
+         <a:s>library HFBetaBlockerTherapyforLVSD version '12.0.000'</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="HFBetaBlockerTherapyforLVSD" version="12.0.000"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="3:1-3:23" localIdentifier="QDM" uri="urn:healthit-gov:qdm:v5_6" version="5.6">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>using </a:s>
+               <a:s>
+                  <a:s>QDM</a:s>
+               </a:s>
+               <a:s> version '5.6'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="5:1-5:64" localIdentifier="Global" path="MATGlobalCommonFunctions" version="7.0.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>MATGlobalCommonFunctions</a:s>
+               </a:s>
+               <a:s> version '7.0.000' called Global</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="3" locator="6:1-6:65" localIdentifier="HeartFailure" path="HFCommonDefinitions" version="2.0.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HFCommonDefinitions</a:s>
+               </a:s>
+               <a:s> version '2.0.000' called HeartFailure</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <codeSystems>
+      <def localId="4" locator="8:1-8:55" name="SNOMEDCT" id="urn:oid:2.16.840.1.113883.6.96" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>codesystem &quot;SNOMEDCT&quot;: 'urn:oid:2.16.840.1.113883.6.96'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </codeSystems>
+   <valueSets>
+      <def localId="5" locator="10:1-10:84" name="Allergy to Beta Blocker Therapy" id="urn:oid:2.16.840.1.113883.3.526.3.1177" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>valueset &quot;Allergy to Beta Blocker Therapy&quot;: 'urn:oid:2.16.840.1.113883.3.526.3.1177'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="6" locator="11:1-11:62" name="Arrhythmia" id="urn:oid:2.16.840.1.113883.3.526.3.366" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>valueset &quot;Arrhythmia&quot;: 'urn:oid:2.16.840.1.113883.3.526.3.366'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="7" locator="12:1-12:58" name="Asthma" id="urn:oid:2.16.840.1.113883.3.526.3.362" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="7">
+               <a:s>valueset &quot;Asthma&quot;: 'urn:oid:2.16.840.1.113883.3.526.3.362'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="8" locator="13:1-13:74" name="Atrioventricular Block" id="urn:oid:2.16.840.1.113883.3.526.3.367" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="8">
+               <a:s>valueset &quot;Atrioventricular Block&quot;: 'urn:oid:2.16.840.1.113883.3.526.3.367'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="9" locator="14:1-14:82" name="Beta Blocker Therapy for LVSD" id="urn:oid:2.16.840.1.113883.3.526.3.1184" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="9">
+               <a:s>valueset &quot;Beta Blocker Therapy for LVSD&quot;: 'urn:oid:2.16.840.1.113883.3.526.3.1184'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="10" locator="15:1-15:84" name="Beta Blocker Therapy Ingredient" id="urn:oid:2.16.840.1.113883.3.526.3.1493" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="10">
+               <a:s>valueset &quot;Beta Blocker Therapy Ingredient&quot;: 'urn:oid:2.16.840.1.113883.3.526.3.1493'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="11" locator="16:1-16:63" name="Bradycardia" id="urn:oid:2.16.840.1.113883.3.526.3.412" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="11">
+               <a:s>valueset &quot;Bradycardia&quot;: 'urn:oid:2.16.840.1.113883.3.526.3.412'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="12" locator="17:1-17:65" name="Cardiac Pacer" id="urn:oid:2.16.840.1.113762.1.4.1178.53" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="12">
+               <a:s>valueset &quot;Cardiac Pacer&quot;: 'urn:oid:2.16.840.1.113762.1.4.1178.53'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="13" locator="18:1-18:73" name="Cardiac Pacer in Situ" id="urn:oid:2.16.840.1.113883.3.526.3.368" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="13">
+               <a:s>valueset &quot;Cardiac Pacer in Situ&quot;: 'urn:oid:2.16.840.1.113883.3.526.3.368'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="14" locator="19:1-19:58" name="Ethnicity" id="urn:oid:2.16.840.1.114222.4.11.837" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="14">
+               <a:s>valueset &quot;Ethnicity&quot;: 'urn:oid:2.16.840.1.114222.4.11.837'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="15" locator="20:1-20:63" name="Heart Rate" id="urn:oid:2.16.840.1.113883.3.526.3.1176" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="15">
+               <a:s>valueset &quot;Heart Rate&quot;: 'urn:oid:2.16.840.1.113883.3.526.3.1176'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="16" locator="21:1-21:63" name="Hypotension" id="urn:oid:2.16.840.1.113883.3.526.3.370" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="16">
+               <a:s>valueset &quot;Hypotension&quot;: 'urn:oid:2.16.840.1.113883.3.526.3.370'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="17" locator="22:1-22:88" name="Intolerance to Beta Blocker Therapy" id="urn:oid:2.16.840.1.113883.3.526.3.1178" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="17">
+               <a:s>valueset &quot;Intolerance to Beta Blocker Therapy&quot;: 'urn:oid:2.16.840.1.113883.3.526.3.1178'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="18" locator="23:1-23:67" name="Medical Reason" id="urn:oid:2.16.840.1.113883.3.526.3.1007" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="18">
+               <a:s>valueset &quot;Medical Reason&quot;: 'urn:oid:2.16.840.1.113883.3.526.3.1007'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="19" locator="24:1-24:68" name="ONC Administrative Sex" id="urn:oid:2.16.840.1.113762.1.4.1" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="19">
+               <a:s>valueset &quot;ONC Administrative Sex&quot;: 'urn:oid:2.16.840.1.113762.1.4.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="20" locator="25:1-25:67" name="Patient Reason" id="urn:oid:2.16.840.1.113883.3.526.3.1008" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="20">
+               <a:s>valueset &quot;Patient Reason&quot;: 'urn:oid:2.16.840.1.113883.3.526.3.1008'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="21" locator="26:1-26:55" name="Payer" id="urn:oid:2.16.840.1.114222.4.11.3591" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="21">
+               <a:s>valueset &quot;Payer&quot;: 'urn:oid:2.16.840.1.114222.4.11.3591'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="22" locator="27:1-27:53" name="Race" id="urn:oid:2.16.840.1.114222.4.11.836" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="22">
+               <a:s>valueset &quot;Race&quot;: 'urn:oid:2.16.840.1.114222.4.11.836'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </valueSets>
+   <codes>
+      <def localId="24" locator="29:1-29:211" name="Substance with beta adrenergic receptor antagonist mechanism of action (substance)" id="373254001" display="Substance with beta adrenergic receptor antagonist mechanism of action (substance)" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="24">
+               <a:s>code &quot;Substance with beta adrenergic receptor antagonist mechanism of action (substance)&quot;: '373254001' from </a:s>
+               <a:s r="23">
+                  <a:s>&quot;SNOMEDCT&quot;</a:s>
+               </a:s>
+               <a:s> display 'Substance with beta adrenergic receptor antagonist mechanism of action (substance)'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="23" locator="29:109-29:118" name="SNOMEDCT"/>
+      </def>
+   </codes>
+   <contexts>
+      <def locator="31:1-31:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="31:1-31:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="31:1-31:15" xmlns:ns0="urn:healthit-gov:qdm:v5_6" dataType="ns0:Patient" templateId="Patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="37" locator="126:1-129:127" name="Has Atrioventricular Block Diagnosis" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="37">
+               <a:s>define &quot;Has Atrioventricular Block Diagnosis&quot;:
+  </a:s>
+               <a:s r="36">
+                  <a:s>exists </a:s>
+                  <a:s r="35">
+                     <a:s>
+                        <a:s r="26">
+                           <a:s r="25">
+                              <a:s r="25">
+                                 <a:s>[&quot;Diagnosis&quot;: </a:s>
+                                 <a:s>
+                                    <a:s>&quot;Atrioventricular Block&quot;</a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> AtrioventricularBlock</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    </a:s>
+                     <a:s r="34">
+                        <a:s>with </a:s>
+                        <a:s r="28">
+                           <a:s r="27">
+                              <a:s>
+                                 <a:s>HeartFailure.&quot;Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> ModerateOrSevereLVSDHFOutpatientEncounter</a:s>
+                        </a:s>
+                        <a:s>
+      such that </a:s>
+                        <a:s r="33">
+                           <a:s r="30">
+                              <a:s r="29">
+                                 <a:s>AtrioventricularBlock</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="30">
+                                 <a:s>prevalencePeriod</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="33"> overlaps day of </a:s>
+                           <a:s r="32">
+                              <a:s r="31">
+                                 <a:s>ModerateOrSevereLVSDHFOutpatientEncounter</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="32">
+                                 <a:s>relevantPeriod</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="36" locator="127:3-129:127" xsi:type="Exists">
+            <operand localId="35" locator="127:10-129:127" xsi:type="Query">
+               <source localId="26" locator="127:10-127:70" alias="AtrioventricularBlock">
+                  <expression localId="25" locator="127:10-127:48" xmlns:ns1="urn:healthit-gov:qdm:v5_6" dataType="ns1:Diagnosis" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes locator="127:24-127:47" name="Atrioventricular Block" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <relationship localId="34" locator="128:5-129:127" alias="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="With">
+                  <expression localId="27" locator="128:10-128:98" name="Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD" libraryName="HeartFailure" xsi:type="ExpressionRef"/>
+                  <suchThat localId="33" locator="129:17-129:127" precision="Day" xsi:type="Overlaps">
+                     <operand localId="30" locator="129:17-129:54" path="prevalencePeriod" scope="AtrioventricularBlock" xsi:type="Property"/>
+                     <operand localId="32" locator="129:72-129:127" path="relevantPeriod" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                  </suchThat>
+               </relationship>
+            </operand>
+         </expression>
+      </def>
+      <def localId="51" locator="81:1-84:133" name="Has Diagnosis of Cardiac Pacer in Situ" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="51">
+               <a:s>define &quot;Has Diagnosis of Cardiac Pacer in Situ&quot;:
+  </a:s>
+               <a:s r="50">
+                  <a:s>exists </a:s>
+                  <a:s r="49">
+                     <a:s>
+                        <a:s r="40">
+                           <a:s r="39">
+                              <a:s r="39">
+                                 <a:s>[&quot;Diagnosis&quot;: </a:s>
+                                 <a:s>
+                                    <a:s>&quot;Cardiac Pacer in Situ&quot;</a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> CardiacPacerDiagnosis</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    </a:s>
+                     <a:s r="48">
+                        <a:s>with </a:s>
+                        <a:s r="42">
+                           <a:s r="41">
+                              <a:s>
+                                 <a:s>HeartFailure.&quot;Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> ModerateOrSevereLVSDHFOutpatientEncounter</a:s>
+                        </a:s>
+                        <a:s>
+      such that </a:s>
+                        <a:s r="47">
+                           <a:s r="44">
+                              <a:s r="43">
+                                 <a:s>CardiacPacerDiagnosis</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="44">
+                                 <a:s>prevalencePeriod</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="47"> overlaps after day of </a:s>
+                           <a:s r="46">
+                              <a:s r="45">
+                                 <a:s>ModerateOrSevereLVSDHFOutpatientEncounter</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="46">
+                                 <a:s>relevantPeriod</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="50" locator="82:3-84:133" xsi:type="Exists">
+            <operand localId="49" locator="82:10-84:133" xsi:type="Query">
+               <source localId="40" locator="82:10-82:69" alias="CardiacPacerDiagnosis">
+                  <expression localId="39" locator="82:10-82:47" xmlns:ns2="urn:healthit-gov:qdm:v5_6" dataType="ns2:Diagnosis" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes locator="82:24-82:46" name="Cardiac Pacer in Situ" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <relationship localId="48" locator="83:5-84:133" alias="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="With">
+                  <expression localId="41" locator="83:10-83:98" name="Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD" libraryName="HeartFailure" xsi:type="ExpressionRef"/>
+                  <suchThat localId="47" locator="84:17-84:133" precision="Day" xsi:type="OverlapsAfter">
+                     <operand localId="44" locator="84:17-84:54" path="prevalencePeriod" scope="CardiacPacerDiagnosis" xsi:type="Property"/>
+                     <operand localId="46" locator="84:78-84:133" path="relevantPeriod" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                  </suchThat>
+               </relationship>
+            </operand>
+         </expression>
+      </def>
+      <def localId="72" locator="65:1-69:69" name="Has Cardiac Pacer Device Implanted" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="72">
+               <a:s>define &quot;Has Cardiac Pacer Device Implanted&quot;:
+  </a:s>
+               <a:s r="71">
+                  <a:s>exists </a:s>
+                  <a:s r="70">
+                     <a:s>
+                        <a:s r="56">
+                           <a:s r="55">
+                              <a:s r="55">
+                                 <a:s>[&quot;Procedure, Performed&quot;: </a:s>
+                                 <a:s>
+                                    <a:s>&quot;Cardiac Pacer&quot;</a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> ImplantedCardiacPacer</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    </a:s>
+                     <a:s r="69">
+                        <a:s>with </a:s>
+                        <a:s r="58">
+                           <a:s r="57">
+                              <a:s>
+                                 <a:s>HeartFailure.&quot;Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> ModerateOrSevereLVSDHFOutpatientEncounter</a:s>
+                        </a:s>
+                        <a:s>
+      such that </a:s>
+                        <a:s r="68">
+                           <a:s r="64">
+                              <a:s>( </a:s>
+                              <a:s r="64">
+                                 <a:s r="59">
+                                    <a:s>Global</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="64">
+                                    <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                    <a:s r="61">
+                                       <a:s r="60">
+                                          <a:s>ImplantedCardiacPacer</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="61">
+                                          <a:s>relevantDatetime</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>, </a:s>
+                                    <a:s r="63">
+                                       <a:s r="62">
+                                          <a:s>ImplantedCardiacPacer</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="63">
+                                          <a:s>relevantPeriod</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> )</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                           <a:s r="68"> starts before 
+      </a:s>
+                           <a:s r="67">
+                              <a:s>end of </a:s>
+                              <a:s r="66">
+                                 <a:s r="65">
+                                    <a:s>ModerateOrSevereLVSDHFOutpatientEncounter</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="66">
+                                    <a:s>relevantPeriod</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="71" locator="66:3-69:69" xsi:type="Exists">
+            <operand localId="70" locator="66:10-69:69" xsi:type="Query">
+               <source localId="56" locator="66:10-66:72" alias="ImplantedCardiacPacer">
+                  <expression localId="55" locator="66:10-66:50" xmlns:ns3="urn:healthit-gov:qdm:v5_6" dataType="ns3:PositiveProcedurePerformed" templateId="PositiveProcedurePerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes locator="66:35-66:49" name="Cardiac Pacer" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <relationship localId="69" locator="67:5-69:69" alias="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="With">
+                  <expression localId="57" locator="67:10-67:98" name="Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD" libraryName="HeartFailure" xsi:type="ExpressionRef"/>
+                  <suchThat localId="68" locator="68:17-69:69" xsi:type="Before">
+                     <operand locator="68:129-68:134" xsi:type="Start">
+                        <operand localId="64" locator="68:17-68:127" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                           <operand localId="61" locator="68:48-68:85" path="relevantDatetime" scope="ImplantedCardiacPacer" xsi:type="Property"/>
+                           <operand localId="63" locator="68:88-68:123" path="relevantPeriod" scope="ImplantedCardiacPacer" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                     <operand localId="67" locator="69:7-69:69" xsi:type="End">
+                        <operand localId="66" locator="69:14-69:69" path="relevantPeriod" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                     </operand>
+                  </suchThat>
+               </relationship>
+            </operand>
+         </expression>
+      </def>
+      <def localId="76" locator="33:1-36:48" name="Atrioventricular Block without Cardiac Pacer" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="76">
+               <a:s>define &quot;Atrioventricular Block without Cardiac Pacer&quot;:
+  </a:s>
+               <a:s r="75">
+                  <a:s r="54">
+                     <a:s r="38">
+                        <a:s>&quot;Has Atrioventricular Block Diagnosis&quot;</a:s>
+                     </a:s>
+                     <a:s>
+    and </a:s>
+                     <a:s r="53">
+                        <a:s>not </a:s>
+                        <a:s r="52">
+                           <a:s>&quot;Has Diagnosis of Cardiac Pacer in Situ&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    and </a:s>
+                  <a:s r="74">
+                     <a:s>not </a:s>
+                     <a:s r="73">
+                        <a:s>&quot;Has Cardiac Pacer Device Implanted&quot;</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="75" locator="34:3-36:48" xsi:type="And">
+            <operand localId="54" locator="34:3-35:52" xsi:type="And">
+               <operand localId="38" locator="34:3-34:40" name="Has Atrioventricular Block Diagnosis" xsi:type="ExpressionRef"/>
+               <operand localId="53" locator="35:9-35:52" xsi:type="Not">
+                  <operand localId="52" locator="35:13-35:52" name="Has Diagnosis of Cardiac Pacer in Situ" xsi:type="ExpressionRef"/>
+               </operand>
+            </operand>
+            <operand localId="74" locator="36:9-36:48" xsi:type="Not">
+               <operand localId="73" locator="36:13-36:48" name="Has Cardiac Pacer Device Implanted" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
+      </def>
+      <def localId="137" locator="97:1-108:50" name="Has Consecutive Heart Rates Less than 50" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="137">
+               <a:s>define &quot;Has Consecutive Heart Rates Less than 50&quot;:
+  </a:s>
+               <a:s r="136">
+                  <a:s>exists </a:s>
+                  <a:s r="135">
+                     <a:s>
+                        <a:s>from
+    </a:s>
+                        <a:s r="78">
+                           <a:s r="77">
+                              <a:s r="77">
+                                 <a:s>[&quot;Physical Exam, Performed&quot;: </a:s>
+                                 <a:s>
+                                    <a:s>&quot;Heart Rate&quot;</a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> HeartRate</a:s>
+                        </a:s>
+                        <a:s>,
+    </a:s>
+                        <a:s r="80">
+                           <a:s r="79">
+                              <a:s>
+                                 <a:s>HeartFailure.&quot;Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> ModerateOrSevereLVSDHFOutpatientEncounter</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    </a:s>
+                     <a:s>
+                        <a:s>let </a:s>
+                        <a:s r="115">
+                           <a:s>PriorHeartRate: </a:s>
+                           <a:s r="114">
+                              <a:s>Last(</a:s>
+                              <a:s r="113">
+                                 <a:s>
+                                    <a:s r="82">
+                                       <a:s r="81">
+                                          <a:s r="81">
+                                             <a:s>[&quot;Physical Exam, Performed&quot;: </a:s>
+                                             <a:s>
+                                                <a:s>&quot;Heart Rate&quot;</a:s>
+                                             </a:s>
+                                             <a:s>]</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> MostRecentPriorHeartRate</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+        </a:s>
+                                 <a:s r="105">
+                                    <a:s>where</a:s>
+                                    <a:s r="105">
+                                       <a:s r="91">
+                                          <a:s r="88">
+                                             <a:s>(</a:s>
+                                             <a:s r="88">
+                                                <a:s r="83">
+                                                   <a:s>Global</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="88">
+                                                   <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                                   <a:s r="85">
+                                                      <a:s r="84">
+                                                         <a:s>MostRecentPriorHeartRate</a:s>
+                                                      </a:s>
+                                                      <a:s>.</a:s>
+                                                      <a:s r="85">
+                                                         <a:s>relevantDatetime</a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                   <a:s>, </a:s>
+                                                   <a:s r="87">
+                                                      <a:s r="86">
+                                                         <a:s>MostRecentPriorHeartRate</a:s>
+                                                      </a:s>
+                                                      <a:s>.</a:s>
+                                                      <a:s r="87">
+                                                         <a:s>relevantPeriod</a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                   <a:s>)</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>)</a:s>
+                                          </a:s>
+                                          <a:s r="91">during </a:s>
+                                          <a:s r="90">
+                                             <a:s r="89">
+                                                <a:s>ModerateOrSevereLVSDHFOutpatientEncounter</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="90">
+                                                <a:s>relevantPeriod</a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>
+          and</a:s>
+                                       <a:s r="104">
+                                          <a:s r="97">
+                                             <a:s>(</a:s>
+                                             <a:s r="97">
+                                                <a:s r="92">
+                                                   <a:s>Global</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="97">
+                                                   <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                                   <a:s r="94">
+                                                      <a:s r="93">
+                                                         <a:s>MostRecentPriorHeartRate</a:s>
+                                                      </a:s>
+                                                      <a:s>.</a:s>
+                                                      <a:s r="94">
+                                                         <a:s>relevantDatetime</a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                   <a:s>, </a:s>
+                                                   <a:s r="96">
+                                                      <a:s r="95">
+                                                         <a:s>MostRecentPriorHeartRate</a:s>
+                                                      </a:s>
+                                                      <a:s>.</a:s>
+                                                      <a:s r="96">
+                                                         <a:s>relevantPeriod</a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                   <a:s>)</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>)</a:s>
+                                          </a:s>
+                                          <a:s r="104">before </a:s>
+                                          <a:s r="103">
+                                             <a:s r="98">
+                                                <a:s>Global</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="103">
+                                                <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                                <a:s r="100">
+                                                   <a:s r="99">
+                                                      <a:s>HeartRate</a:s>
+                                                   </a:s>
+                                                   <a:s>.</a:s>
+                                                   <a:s r="100">
+                                                      <a:s>relevantDatetime</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s>, </a:s>
+                                                <a:s r="102">
+                                                   <a:s r="101">
+                                                      <a:s>HeartRate</a:s>
+                                                   </a:s>
+                                                   <a:s>.</a:s>
+                                                   <a:s r="102">
+                                                      <a:s>relevantPeriod</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s>)</a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+        </a:s>
+                                 <a:s r="112">
+                                    <a:s>sort by </a:s>
+                                    <a:s r="111">
+                                       <a:s r="110">
+                                          <a:s>start of </a:s>
+                                          <a:s r="109">
+                                             <a:s r="106">
+                                                <a:s>Global</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="109">
+                                                <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                                <a:s r="107">
+                                                   <a:s>relevantDatetime</a:s>
+                                                </a:s>
+                                                <a:s>, </a:s>
+                                                <a:s r="108">
+                                                   <a:s>relevantPeriod</a:s>
+                                                </a:s>
+                                                <a:s>)</a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+    )</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    </a:s>
+                     <a:s r="134">
+                        <a:s>where </a:s>
+                        <a:s r="134">
+                           <a:s r="129">
+                              <a:s r="124">
+                                 <a:s r="121">
+                                    <a:s r="116">
+                                       <a:s>Global</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="121">
+                                       <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                       <a:s r="118">
+                                          <a:s r="117">
+                                             <a:s>HeartRate</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="118">
+                                             <a:s>relevantDatetime</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>, </a:s>
+                                       <a:s r="120">
+                                          <a:s r="119">
+                                             <a:s>HeartRate</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="120">
+                                             <a:s>relevantPeriod</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> )</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s r="124"> during </a:s>
+                                 <a:s r="123">
+                                    <a:s r="122">
+                                       <a:s>ModerateOrSevereLVSDHFOutpatientEncounter</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="123">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      and </a:s>
+                              <a:s r="128">
+                                 <a:s r="126">
+                                    <a:s r="125">
+                                       <a:s>HeartRate</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="126">
+                                       <a:s>result</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> &lt; </a:s>
+                                 <a:s r="127">
+                                    <a:s>50 '{beats}/min'</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+      and </a:s>
+                           <a:s r="133">
+                              <a:s r="131">
+                                 <a:s r="130">
+                                    <a:s>PriorHeartRate</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="131">
+                                    <a:s>result</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> &lt; </a:s>
+                              <a:s r="132">
+                                 <a:s>50 '{beats}/min'</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="136" locator="98:3-108:50" xsi:type="Exists">
+            <operand localId="135" locator="98:10-108:50" xsi:type="Query">
+               <source localId="78" locator="99:5-99:56" alias="HeartRate">
+                  <expression localId="77" locator="99:5-99:46" xmlns:ns4="urn:healthit-gov:qdm:v5_6" dataType="ns4:PositivePhysicalExamPerformed" templateId="PositivePhysicalExamPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes locator="99:34-99:45" name="Heart Rate" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <source localId="80" locator="100:5-100:135" alias="ModerateOrSevereLVSDHFOutpatientEncounter">
+                  <expression localId="79" locator="100:5-100:93" name="Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD" libraryName="HeartFailure" xsi:type="ExpressionRef"/>
+               </source>
+               <let localId="115" locator="101:9-105:5" identifier="PriorHeartRate">
+                  <expression localId="114" locator="101:25-105:5" xsi:type="Last">
+                     <source localId="113" locator="101:30-104:85" xsi:type="Query">
+                        <source localId="82" locator="101:30-101:96" alias="MostRecentPriorHeartRate">
+                           <expression localId="81" locator="101:30-101:71" xmlns:ns5="urn:healthit-gov:qdm:v5_6" dataType="ns5:PositivePhysicalExamPerformed" templateId="PositivePhysicalExamPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                              <codes locator="101:59-101:70" name="Heart Rate" xsi:type="ValueSetRef"/>
+                           </expression>
+                        </source>
+                        <where localId="105" locator="102:9-103:212" xsi:type="And">
+                           <operand localId="91" locator="102:14-102:188" xsi:type="IncludedIn">
+                              <operand localId="88" locator="102:14-102:125" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                 <operand localId="85" locator="102:42-102:82" path="relevantDatetime" scope="MostRecentPriorHeartRate" xsi:type="Property"/>
+                                 <operand localId="87" locator="102:85-102:123" path="relevantPeriod" scope="MostRecentPriorHeartRate" xsi:type="Property"/>
+                              </operand>
+                              <operand localId="90" locator="102:133-102:188" path="relevantPeriod" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                           </operand>
+                           <operand localId="104" locator="103:14-103:212" xsi:type="Before">
+                              <operand localId="97" locator="103:14-103:125" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                 <operand localId="94" locator="103:42-103:82" path="relevantDatetime" scope="MostRecentPriorHeartRate" xsi:type="Property"/>
+                                 <operand localId="96" locator="103:85-103:123" path="relevantPeriod" scope="MostRecentPriorHeartRate" xsi:type="Property"/>
+                              </operand>
+                              <operand localId="103" locator="103:133-103:212" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                 <operand localId="100" locator="103:160-103:185" path="relevantDatetime" scope="HeartRate" xsi:type="Property"/>
+                                 <operand localId="102" locator="103:188-103:211" path="relevantPeriod" scope="HeartRate" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                        </where>
+                        <sort localId="112" locator="104:9-104:85">
+                           <by localId="111" locator="104:17-104:85" direction="asc" xsi:type="ByExpression">
+                              <expression localId="110" locator="104:17-104:85" xsi:type="Start">
+                                 <operand localId="109" locator="104:26-104:85" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                    <operand localId="107" locator="104:53-104:68" name="relevantDatetime" xsi:type="IdentifierRef"/>
+                                    <operand localId="108" locator="104:71-104:84" name="relevantPeriod" xsi:type="IdentifierRef"/>
+                                 </operand>
+                              </expression>
+                           </by>
+                        </sort>
+                     </source>
+                  </expression>
+               </let>
+               <where localId="134" locator="106:5-108:50" xsi:type="And">
+                  <operand localId="129" locator="106:11-107:45" xsi:type="And">
+                     <operand localId="124" locator="106:11-106:157" xsi:type="IncludedIn">
+                        <operand localId="121" locator="106:11-106:93" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                           <operand localId="118" locator="106:40-106:65" path="relevantDatetime" scope="HeartRate" xsi:type="Property"/>
+                           <operand localId="120" locator="106:68-106:91" path="relevantPeriod" scope="HeartRate" xsi:type="Property"/>
+                        </operand>
+                        <operand localId="123" locator="106:102-106:157" path="relevantPeriod" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="128" locator="107:11-107:45" xsi:type="Less">
+                        <operand asType="t:Quantity" xsi:type="As">
+                           <operand localId="126" locator="107:11-107:26" path="result" scope="HeartRate" xsi:type="Property"/>
+                        </operand>
+                        <operand localId="127" locator="107:30-107:45" value="50" unit="{beats}/min" xsi:type="Quantity"/>
+                     </operand>
+                  </operand>
+                  <operand localId="133" locator="108:11-108:50" xsi:type="Less">
+                     <operand asType="t:Quantity" xsi:type="As">
+                        <operand localId="131" locator="108:11-108:31" path="result" xsi:type="Property">
+                           <source localId="130" locator="108:11-108:24" name="PriorHeartRate" xsi:type="QueryLetRef"/>
+                        </operand>
+                     </operand>
+                     <operand localId="132" locator="108:35-108:50" value="50" unit="{beats}/min" xsi:type="Quantity"/>
+                  </operand>
+               </where>
+               <return distinct="true">
+                  <expression xsi:type="Tuple">
+                     <element name="HeartRate">
+                        <value name="HeartRate" xsi:type="AliasRef"/>
+                     </element>
+                     <element name="ModerateOrSevereLVSDHFOutpatientEncounter">
+                        <value name="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="AliasRef"/>
+                     </element>
+                  </expression>
+               </return>
+            </operand>
+         </expression>
+      </def>
+      <def localId="160" locator="146:1-152:5" name="Has Medical or Patient Reason for Not Ordering Beta Blocker for LVSD" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="160">
+               <a:s>define &quot;Has Medical or Patient Reason for Not Ordering Beta Blocker for LVSD&quot;:
+  </a:s>
+               <a:s r="159">
+                  <a:s>exists </a:s>
+                  <a:s r="158">
+                     <a:s>
+                        <a:s r="140">
+                           <a:s r="139">
+                              <a:s r="139">
+                                 <a:s>[&quot;Medication, Not Ordered&quot;: </a:s>
+                                 <a:s>
+                                    <a:s>&quot;Beta Blocker Therapy for LVSD&quot;</a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> NoBetaBlockerOrdered</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    </a:s>
+                     <a:s r="148">
+                        <a:s>with </a:s>
+                        <a:s r="142">
+                           <a:s r="141">
+                              <a:s>
+                                 <a:s>HeartFailure.&quot;Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> ModerateOrSevereLVSDHFOutpatientEncounter</a:s>
+                        </a:s>
+                        <a:s>
+      such that </a:s>
+                        <a:s r="147">
+                           <a:s r="144">
+                              <a:s r="143">
+                                 <a:s>NoBetaBlockerOrdered</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="144">
+                                 <a:s>authorDatetime</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="147"> during day of </a:s>
+                           <a:s r="146">
+                              <a:s r="145">
+                                 <a:s>ModerateOrSevereLVSDHFOutpatientEncounter</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="146">
+                                 <a:s>relevantPeriod</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    </a:s>
+                     <a:s r="157">
+                        <a:s>where </a:s>
+                        <a:s r="157">
+                           <a:s>( </a:s>
+                           <a:s r="157">
+                              <a:s r="152">
+                                 <a:s r="150">
+                                    <a:s r="149">
+                                       <a:s>NoBetaBlockerOrdered</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="150">
+                                       <a:s>negationRationale</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> in </a:s>
+                                 <a:s r="151">
+                                    <a:s>&quot;Medical Reason&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+        or </a:s>
+                              <a:s r="156">
+                                 <a:s r="154">
+                                    <a:s r="153">
+                                       <a:s>NoBetaBlockerOrdered</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="154">
+                                       <a:s>negationRationale</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> in </a:s>
+                                 <a:s r="155">
+                                    <a:s>&quot;Patient Reason&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+    )</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="159" locator="147:3-152:5" xsi:type="Exists">
+            <operand localId="158" locator="147:10-152:5" xsi:type="Query">
+               <source localId="140" locator="147:10-147:90" alias="NoBetaBlockerOrdered">
+                  <expression localId="139" locator="147:10-147:69" xmlns:ns6="urn:healthit-gov:qdm:v5_6" dataType="ns6:NegativeMedicationOrder" templateId="NegativeMedicationOrder" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes locator="147:38-147:68" name="Beta Blocker Therapy for LVSD" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <relationship localId="148" locator="148:5-149:122" alias="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="With">
+                  <expression localId="141" locator="148:10-148:98" name="Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD" libraryName="HeartFailure" xsi:type="ExpressionRef"/>
+                  <suchThat localId="147" locator="149:17-149:122" precision="Day" xsi:type="In">
+                     <operand localId="144" locator="149:17-149:51" path="authorDatetime" scope="NoBetaBlockerOrdered" xsi:type="Property"/>
+                     <operand localId="146" locator="149:67-149:122" path="relevantPeriod" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                  </suchThat>
+               </relationship>
+               <where localId="157" locator="150:5-152:5" xsi:type="Or">
+                  <operand localId="152" locator="150:13-150:70" xsi:type="InValueSet">
+                     <code localId="150" locator="150:13-150:50" path="negationRationale" scope="NoBetaBlockerOrdered" xsi:type="Property"/>
+                     <valueset localId="151" locator="150:55-150:70" name="Medical Reason" xsi:type="ValueSetRef"/>
+                  </operand>
+                  <operand localId="156" locator="151:12-151:69" xsi:type="InValueSet">
+                     <code localId="154" locator="151:12-151:49" path="negationRationale" scope="NoBetaBlockerOrdered" xsi:type="Property"/>
+                     <valueset localId="155" locator="151:54-151:69" name="Patient Reason" xsi:type="ValueSetRef"/>
+                  </operand>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def localId="175" locator="116:1-119:116" name="Has Arrhythmia Diagnosis" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="175">
+               <a:s>define &quot;Has Arrhythmia Diagnosis&quot;:
+  </a:s>
+               <a:s r="174">
+                  <a:s>exists </a:s>
+                  <a:s r="173">
+                     <a:s>
+                        <a:s r="164">
+                           <a:s r="163">
+                              <a:s r="163">
+                                 <a:s>[&quot;Diagnosis&quot;: </a:s>
+                                 <a:s>
+                                    <a:s>&quot;Arrhythmia&quot;</a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> Arrhythmia</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    </a:s>
+                     <a:s r="172">
+                        <a:s>with </a:s>
+                        <a:s r="166">
+                           <a:s r="165">
+                              <a:s>
+                                 <a:s>HeartFailure.&quot;Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> ModerateOrSevereLVSDHFOutpatientEncounter</a:s>
+                        </a:s>
+                        <a:s>
+      such that </a:s>
+                        <a:s r="171">
+                           <a:s r="168">
+                              <a:s r="167">
+                                 <a:s>Arrhythmia</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="168">
+                                 <a:s>prevalencePeriod</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="171"> overlaps day of </a:s>
+                           <a:s r="170">
+                              <a:s r="169">
+                                 <a:s>ModerateOrSevereLVSDHFOutpatientEncounter</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="170">
+                                 <a:s>relevantPeriod</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="174" locator="117:3-119:116" xsi:type="Exists">
+            <operand localId="173" locator="117:10-119:116" xsi:type="Query">
+               <source localId="164" locator="117:10-117:47" alias="Arrhythmia">
+                  <expression localId="163" locator="117:10-117:36" xmlns:ns7="urn:healthit-gov:qdm:v5_6" dataType="ns7:Diagnosis" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes locator="117:24-117:35" name="Arrhythmia" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <relationship localId="172" locator="118:5-119:116" alias="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="With">
+                  <expression localId="165" locator="118:10-118:98" name="Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD" libraryName="HeartFailure" xsi:type="ExpressionRef"/>
+                  <suchThat localId="171" locator="119:17-119:116" precision="Day" xsi:type="Overlaps">
+                     <operand localId="168" locator="119:17-119:43" path="prevalencePeriod" scope="Arrhythmia" xsi:type="Property"/>
+                     <operand localId="170" locator="119:61-119:116" path="relevantPeriod" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                  </suchThat>
+               </relationship>
+            </operand>
+         </expression>
+      </def>
+      <def localId="190" locator="76:1-79:117" name="Has Hypotension Diagnosis" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="190">
+               <a:s>define &quot;Has Hypotension Diagnosis&quot;:
+  </a:s>
+               <a:s r="189">
+                  <a:s>exists </a:s>
+                  <a:s r="188">
+                     <a:s>
+                        <a:s r="179">
+                           <a:s r="178">
+                              <a:s r="178">
+                                 <a:s>[&quot;Diagnosis&quot;: </a:s>
+                                 <a:s>
+                                    <a:s>&quot;Hypotension&quot;</a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> Hypotension</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    </a:s>
+                     <a:s r="187">
+                        <a:s>with </a:s>
+                        <a:s r="181">
+                           <a:s r="180">
+                              <a:s>
+                                 <a:s>HeartFailure.&quot;Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> ModerateOrSevereLVSDHFOutpatientEncounter</a:s>
+                        </a:s>
+                        <a:s>
+      such that </a:s>
+                        <a:s r="186">
+                           <a:s r="183">
+                              <a:s r="182">
+                                 <a:s>Hypotension</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="183">
+                                 <a:s>prevalencePeriod</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="186"> overlaps day of </a:s>
+                           <a:s r="185">
+                              <a:s r="184">
+                                 <a:s>ModerateOrSevereLVSDHFOutpatientEncounter</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="185">
+                                 <a:s>relevantPeriod</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="189" locator="77:3-79:117" xsi:type="Exists">
+            <operand localId="188" locator="77:10-79:117" xsi:type="Query">
+               <source localId="179" locator="77:10-77:49" alias="Hypotension">
+                  <expression localId="178" locator="77:10-77:37" xmlns:ns8="urn:healthit-gov:qdm:v5_6" dataType="ns8:Diagnosis" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes locator="77:24-77:36" name="Hypotension" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <relationship localId="187" locator="78:5-79:117" alias="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="With">
+                  <expression localId="180" locator="78:10-78:98" name="Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD" libraryName="HeartFailure" xsi:type="ExpressionRef"/>
+                  <suchThat localId="186" locator="79:17-79:117" precision="Day" xsi:type="Overlaps">
+                     <operand localId="183" locator="79:17-79:44" path="prevalencePeriod" scope="Hypotension" xsi:type="Property"/>
+                     <operand localId="185" locator="79:62-79:117" path="relevantPeriod" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                  </suchThat>
+               </relationship>
+            </operand>
+         </expression>
+      </def>
+      <def localId="205" locator="121:1-124:112" name="Has Asthma Diagnosis" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="205">
+               <a:s>define &quot;Has Asthma Diagnosis&quot;:
+  </a:s>
+               <a:s r="204">
+                  <a:s>exists </a:s>
+                  <a:s r="203">
+                     <a:s>
+                        <a:s r="194">
+                           <a:s r="193">
+                              <a:s r="193">
+                                 <a:s>[&quot;Diagnosis&quot;: </a:s>
+                                 <a:s>
+                                    <a:s>&quot;Asthma&quot;</a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> Asthma</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    </a:s>
+                     <a:s r="202">
+                        <a:s>with </a:s>
+                        <a:s r="196">
+                           <a:s r="195">
+                              <a:s>
+                                 <a:s>HeartFailure.&quot;Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> ModerateOrSevereLVSDHFOutpatientEncounter</a:s>
+                        </a:s>
+                        <a:s>
+      such that </a:s>
+                        <a:s r="201">
+                           <a:s r="198">
+                              <a:s r="197">
+                                 <a:s>Asthma</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="198">
+                                 <a:s>prevalencePeriod</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="201"> overlaps day of </a:s>
+                           <a:s r="200">
+                              <a:s r="199">
+                                 <a:s>ModerateOrSevereLVSDHFOutpatientEncounter</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="200">
+                                 <a:s>relevantPeriod</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="204" locator="122:3-124:112" xsi:type="Exists">
+            <operand localId="203" locator="122:10-124:112" xsi:type="Query">
+               <source localId="194" locator="122:10-122:39" alias="Asthma">
+                  <expression localId="193" locator="122:10-122:32" xmlns:ns9="urn:healthit-gov:qdm:v5_6" dataType="ns9:Diagnosis" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes locator="122:24-122:31" name="Asthma" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <relationship localId="202" locator="123:5-124:112" alias="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="With">
+                  <expression localId="195" locator="123:10-123:98" name="Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD" libraryName="HeartFailure" xsi:type="ExpressionRef"/>
+                  <suchThat localId="201" locator="124:17-124:112" precision="Day" xsi:type="Overlaps">
+                     <operand localId="198" locator="124:17-124:39" path="prevalencePeriod" scope="Asthma" xsi:type="Property"/>
+                     <operand localId="200" locator="124:57-124:112" path="relevantPeriod" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                  </suchThat>
+               </relationship>
+            </operand>
+         </expression>
+      </def>
+      <def localId="222" locator="86:1-90:152" name="Has Diagnosis of Allergy or Intolerance to Beta Blocker Therapy" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="222">
+               <a:s>define &quot;Has Diagnosis of Allergy or Intolerance to Beta Blocker Therapy&quot;:
+  </a:s>
+               <a:s r="221">
+                  <a:s>exists </a:s>
+                  <a:s r="220">
+                     <a:s>
+                        <a:s r="211">
+                           <a:s r="210">
+                              <a:s>( </a:s>
+                              <a:s r="210">
+                                 <a:s r="208">
+                                    <a:s>[&quot;Diagnosis&quot;: </a:s>
+                                    <a:s>
+                                       <a:s>&quot;Allergy to Beta Blocker Therapy&quot;</a:s>
+                                    </a:s>
+                                    <a:s>]</a:s>
+                                 </a:s>
+                                 <a:s>
+    union </a:s>
+                                 <a:s r="209">
+                                    <a:s>[&quot;Diagnosis&quot;: </a:s>
+                                    <a:s>
+                                       <a:s>&quot;Intolerance to Beta Blocker Therapy&quot;</a:s>
+                                    </a:s>
+                                    <a:s>]</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                           <a:s> BetaBlockerAllergyOrIntoleranceDiagnosis</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    </a:s>
+                     <a:s r="219">
+                        <a:s>with </a:s>
+                        <a:s r="213">
+                           <a:s r="212">
+                              <a:s>
+                                 <a:s>HeartFailure.&quot;Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> ModerateOrSevereLVSDHFOutpatientEncounter</a:s>
+                        </a:s>
+                        <a:s>
+      such that </a:s>
+                        <a:s r="218">
+                           <a:s r="215">
+                              <a:s r="214">
+                                 <a:s>BetaBlockerAllergyOrIntoleranceDiagnosis</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="215">
+                                 <a:s>prevalencePeriod</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="218"> overlaps after day of </a:s>
+                           <a:s r="217">
+                              <a:s r="216">
+                                 <a:s>ModerateOrSevereLVSDHFOutpatientEncounter</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="217">
+                                 <a:s>relevantPeriod</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="221" locator="87:3-90:152" xsi:type="Exists">
+            <operand localId="220" locator="87:10-90:152" xsi:type="Query">
+               <source localId="211" locator="87:10-88:105" alias="BetaBlockerAllergyOrIntoleranceDiagnosis">
+                  <expression localId="210" locator="87:10-88:64" xsi:type="Union">
+                     <operand localId="208" locator="87:12-87:59" xmlns:ns10="urn:healthit-gov:qdm:v5_6" dataType="ns10:Diagnosis" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                        <codes locator="87:26-87:58" name="Allergy to Beta Blocker Therapy" xsi:type="ValueSetRef"/>
+                     </operand>
+                     <operand localId="209" locator="88:11-88:62" xmlns:ns11="urn:healthit-gov:qdm:v5_6" dataType="ns11:Diagnosis" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                        <codes locator="88:25-88:61" name="Intolerance to Beta Blocker Therapy" xsi:type="ValueSetRef"/>
+                     </operand>
+                  </expression>
+               </source>
+               <relationship localId="219" locator="89:5-90:152" alias="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="With">
+                  <expression localId="212" locator="89:10-89:98" name="Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD" libraryName="HeartFailure" xsi:type="ExpressionRef"/>
+                  <suchThat localId="218" locator="90:17-90:152" precision="Day" xsi:type="OverlapsAfter">
+                     <operand localId="215" locator="90:17-90:73" path="prevalencePeriod" scope="BetaBlockerAllergyOrIntoleranceDiagnosis" xsi:type="Property"/>
+                     <operand localId="217" locator="90:97-90:152" path="relevantPeriod" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                  </suchThat>
+               </relationship>
+            </operand>
+         </expression>
+      </def>
+      <def localId="237" locator="92:1-95:117" name="Has Bradycardia Diagnosis" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="237">
+               <a:s>define &quot;Has Bradycardia Diagnosis&quot;:
+  </a:s>
+               <a:s r="236">
+                  <a:s>exists </a:s>
+                  <a:s r="235">
+                     <a:s>
+                        <a:s r="226">
+                           <a:s r="225">
+                              <a:s r="225">
+                                 <a:s>[&quot;Diagnosis&quot;: </a:s>
+                                 <a:s>
+                                    <a:s>&quot;Bradycardia&quot;</a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> Bradycardia</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    </a:s>
+                     <a:s r="234">
+                        <a:s>with </a:s>
+                        <a:s r="228">
+                           <a:s r="227">
+                              <a:s>
+                                 <a:s>HeartFailure.&quot;Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> ModerateOrSevereLVSDHFOutpatientEncounter</a:s>
+                        </a:s>
+                        <a:s>
+      such that </a:s>
+                        <a:s r="233">
+                           <a:s r="230">
+                              <a:s r="229">
+                                 <a:s>Bradycardia</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="230">
+                                 <a:s>prevalencePeriod</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="233"> overlaps day of </a:s>
+                           <a:s r="232">
+                              <a:s r="231">
+                                 <a:s>ModerateOrSevereLVSDHFOutpatientEncounter</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="232">
+                                 <a:s>relevantPeriod</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="236" locator="93:3-95:117" xsi:type="Exists">
+            <operand localId="235" locator="93:10-95:117" xsi:type="Query">
+               <source localId="226" locator="93:10-93:49" alias="Bradycardia">
+                  <expression localId="225" locator="93:10-93:37" xmlns:ns12="urn:healthit-gov:qdm:v5_6" dataType="ns12:Diagnosis" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes locator="93:24-93:36" name="Bradycardia" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <relationship localId="234" locator="94:5-95:117" alias="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="With">
+                  <expression localId="227" locator="94:10-94:98" name="Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD" libraryName="HeartFailure" xsi:type="ExpressionRef"/>
+                  <suchThat localId="233" locator="95:17-95:117" precision="Day" xsi:type="Overlaps">
+                     <operand localId="230" locator="95:17-95:44" path="prevalencePeriod" scope="Bradycardia" xsi:type="Property"/>
+                     <operand localId="232" locator="95:62-95:117" path="relevantPeriod" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                  </suchThat>
+               </relationship>
+            </operand>
+         </expression>
+      </def>
+      <def localId="254" locator="110:1-114:141" name="Has Allergy or Intolerance to Beta Blocker Therapy Ingredient" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="254">
+               <a:s>define &quot;Has Allergy or Intolerance to Beta Blocker Therapy Ingredient&quot;:
+  </a:s>
+               <a:s r="253">
+                  <a:s>exists </a:s>
+                  <a:s r="252">
+                     <a:s>
+                        <a:s r="243">
+                           <a:s r="242">
+                              <a:s>( </a:s>
+                              <a:s r="242">
+                                 <a:s r="240">
+                                    <a:s>[&quot;Allergy/Intolerance&quot;: </a:s>
+                                    <a:s>
+                                       <a:s>&quot;Beta Blocker Therapy Ingredient&quot;</a:s>
+                                    </a:s>
+                                    <a:s>]</a:s>
+                                 </a:s>
+                                 <a:s>
+    union </a:s>
+                                 <a:s r="241">
+                                    <a:s>[&quot;Allergy/Intolerance&quot;: </a:s>
+                                    <a:s>
+                                       <a:s>&quot;Substance with beta adrenergic receptor antagonist mechanism of action (substance)&quot;</a:s>
+                                    </a:s>
+                                    <a:s>]</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                           <a:s> BetaBlockerAllergyIntolerance</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    </a:s>
+                     <a:s r="251">
+                        <a:s>with </a:s>
+                        <a:s r="245">
+                           <a:s r="244">
+                              <a:s>
+                                 <a:s>HeartFailure.&quot;Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> ModerateOrSevereLVSDHFOutpatientEncounter</a:s>
+                        </a:s>
+                        <a:s>
+      such that </a:s>
+                        <a:s r="250">
+                           <a:s r="247">
+                              <a:s r="246">
+                                 <a:s>BetaBlockerAllergyIntolerance</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="247">
+                                 <a:s>prevalencePeriod</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="250"> overlaps after day of </a:s>
+                           <a:s r="249">
+                              <a:s r="248">
+                                 <a:s>ModerateOrSevereLVSDHFOutpatientEncounter</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="249">
+                                 <a:s>relevantPeriod</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="253" locator="111:3-114:141" xsi:type="Exists">
+            <operand localId="252" locator="111:10-114:141" xsi:type="Query">
+               <source localId="243" locator="111:10-112:151" alias="BetaBlockerAllergyIntolerance">
+                  <expression localId="242" locator="111:10-112:121" xsi:type="Union">
+                     <operand localId="240" locator="111:12-111:69" xmlns:ns13="urn:healthit-gov:qdm:v5_6" dataType="ns13:AllergyIntolerance" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                        <codes locator="111:36-111:68" name="Beta Blocker Therapy Ingredient" xsi:type="ValueSetRef"/>
+                     </operand>
+                     <operand localId="241" locator="112:11-112:119" xmlns:ns14="urn:healthit-gov:qdm:v5_6" dataType="ns14:AllergyIntolerance" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                        <codes xsi:type="ToList">
+                           <operand locator="112:35-112:118" name="Substance with beta adrenergic receptor antagonist mechanism of action (substance)" xsi:type="CodeRef"/>
+                        </codes>
+                     </operand>
+                  </expression>
+               </source>
+               <relationship localId="251" locator="113:5-114:141" alias="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="With">
+                  <expression localId="244" locator="113:10-113:98" name="Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD" libraryName="HeartFailure" xsi:type="ExpressionRef"/>
+                  <suchThat localId="250" locator="114:17-114:141" precision="Day" xsi:type="OverlapsAfter">
+                     <operand localId="247" locator="114:17-114:62" path="prevalencePeriod" scope="BetaBlockerAllergyIntolerance" xsi:type="Property"/>
+                     <operand localId="249" locator="114:86-114:141" path="relevantPeriod" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                  </suchThat>
+               </relationship>
+            </operand>
+         </expression>
+      </def>
+      <def localId="259" locator="38:1-47:53" name="Denominator Exceptions" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="259">
+               <a:s>define &quot;Denominator Exceptions&quot;:
+  </a:s>
+               <a:s r="258">
+                  <a:s r="256">
+                     <a:s r="239">
+                        <a:s r="224">
+                           <a:s r="207">
+                              <a:s r="192">
+                                 <a:s r="177">
+                                    <a:s r="162">
+                                       <a:s r="138">
+                                          <a:s>&quot;Has Consecutive Heart Rates Less than 50&quot;</a:s>
+                                       </a:s>
+                                       <a:s>
+    or </a:s>
+                                       <a:s r="161">
+                                          <a:s>&quot;Has Medical or Patient Reason for Not Ordering Beta Blocker for LVSD&quot;</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+    or </a:s>
+                                    <a:s r="176">
+                                       <a:s>&quot;Has Arrhythmia Diagnosis&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+    or </a:s>
+                                 <a:s r="191">
+                                    <a:s>&quot;Has Hypotension Diagnosis&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+    or </a:s>
+                              <a:s r="206">
+                                 <a:s>&quot;Has Asthma Diagnosis&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+    or </a:s>
+                           <a:s r="223">
+                              <a:s>&quot;Has Diagnosis of Allergy or Intolerance to Beta Blocker Therapy&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+    or </a:s>
+                        <a:s r="238">
+                           <a:s>&quot;Has Bradycardia Diagnosis&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    or </a:s>
+                     <a:s r="255">
+                        <a:s>&quot;Has Allergy or Intolerance to Beta Blocker Therapy Ingredient&quot;</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    or </a:s>
+                  <a:s r="257">
+                     <a:s>&quot;Atrioventricular Block without Cardiac Pacer&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="258" locator="39:3-47:53" xsi:type="Or">
+            <operand localId="256" locator="39:3-46:70" xsi:type="Or">
+               <operand localId="239" locator="39:3-45:34" xsi:type="Or">
+                  <operand localId="224" locator="39:3-44:72" xsi:type="Or">
+                     <operand localId="207" locator="39:3-43:29" xsi:type="Or">
+                        <operand localId="192" locator="39:3-42:34" xsi:type="Or">
+                           <operand localId="177" locator="39:3-41:33" xsi:type="Or">
+                              <operand localId="162" locator="39:3-40:77" xsi:type="Or">
+                                 <operand localId="138" locator="39:3-39:44" name="Has Consecutive Heart Rates Less than 50" xsi:type="ExpressionRef"/>
+                                 <operand localId="161" locator="40:8-40:77" name="Has Medical or Patient Reason for Not Ordering Beta Blocker for LVSD" xsi:type="ExpressionRef"/>
+                              </operand>
+                              <operand localId="176" locator="41:8-41:33" name="Has Arrhythmia Diagnosis" xsi:type="ExpressionRef"/>
+                           </operand>
+                           <operand localId="191" locator="42:8-42:34" name="Has Hypotension Diagnosis" xsi:type="ExpressionRef"/>
+                        </operand>
+                        <operand localId="206" locator="43:8-43:29" name="Has Asthma Diagnosis" xsi:type="ExpressionRef"/>
+                     </operand>
+                     <operand localId="223" locator="44:8-44:72" name="Has Diagnosis of Allergy or Intolerance to Beta Blocker Therapy" xsi:type="ExpressionRef"/>
+                  </operand>
+                  <operand localId="238" locator="45:8-45:34" name="Has Bradycardia Diagnosis" xsi:type="ExpressionRef"/>
+               </operand>
+               <operand localId="255" locator="46:8-46:70" name="Has Allergy or Intolerance to Beta Blocker Therapy Ingredient" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand localId="257" locator="47:8-47:53" name="Atrioventricular Block without Cardiac Pacer" xsi:type="ExpressionRef"/>
+         </expression>
+      </def>
+      <def localId="272" locator="131:1-134:120" name="Has Beta Blocker Therapy for LVSD Ordered" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="272">
+               <a:s>define &quot;Has Beta Blocker Therapy for LVSD Ordered&quot;:
+  </a:s>
+               <a:s r="271">
+                  <a:s>exists </a:s>
+                  <a:s r="270">
+                     <a:s>
+                        <a:s r="261">
+                           <a:s r="260">
+                              <a:s r="260">
+                                 <a:s>[&quot;Medication, Order&quot;: </a:s>
+                                 <a:s>
+                                    <a:s>&quot;Beta Blocker Therapy for LVSD&quot;</a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> BetaBlockerOrdered</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    </a:s>
+                     <a:s r="269">
+                        <a:s>with </a:s>
+                        <a:s r="263">
+                           <a:s r="262">
+                              <a:s>
+                                 <a:s>HeartFailure.&quot;Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> ModerateOrSevereLVSDHFOutpatientEncounter</a:s>
+                        </a:s>
+                        <a:s>
+      such that </a:s>
+                        <a:s r="268">
+                           <a:s r="265">
+                              <a:s r="264">
+                                 <a:s>BetaBlockerOrdered</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="265">
+                                 <a:s>authorDatetime</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="268"> during day of </a:s>
+                           <a:s r="267">
+                              <a:s r="266">
+                                 <a:s>ModerateOrSevereLVSDHFOutpatientEncounter</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="267">
+                                 <a:s>relevantPeriod</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="271" locator="132:3-134:120" xsi:type="Exists">
+            <operand localId="270" locator="132:10-134:120" xsi:type="Query">
+               <source localId="261" locator="132:10-132:82" alias="BetaBlockerOrdered">
+                  <expression localId="260" locator="132:10-132:63" xmlns:ns15="urn:healthit-gov:qdm:v5_6" dataType="ns15:PositiveMedicationOrder" templateId="PositiveMedicationOrder" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes locator="132:32-132:62" name="Beta Blocker Therapy for LVSD" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <relationship localId="269" locator="133:5-134:120" alias="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="With">
+                  <expression localId="262" locator="133:10-133:98" name="Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD" libraryName="HeartFailure" xsi:type="ExpressionRef"/>
+                  <suchThat localId="268" locator="134:17-134:120" precision="Day" xsi:type="In">
+                     <operand localId="265" locator="134:17-134:49" path="authorDatetime" scope="BetaBlockerOrdered" xsi:type="Property"/>
+                     <operand localId="267" locator="134:65-134:120" path="relevantPeriod" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                  </suchThat>
+               </relationship>
+            </operand>
+         </expression>
+      </def>
+      <def localId="286" locator="71:1-74:127" name="Is Currently Taking Beta Blocker Therapy for LVSD" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="286">
+               <a:s>define &quot;Is Currently Taking Beta Blocker Therapy for LVSD&quot;:
+  </a:s>
+               <a:s r="285">
+                  <a:s>exists </a:s>
+                  <a:s r="284">
+                     <a:s>
+                        <a:s r="275">
+                           <a:s r="274">
+                              <a:s r="274">
+                                 <a:s>[&quot;Medication, Active&quot;: </a:s>
+                                 <a:s>
+                                    <a:s>&quot;Beta Blocker Therapy for LVSD&quot;</a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> ActiveBetaBlocker</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    </a:s>
+                     <a:s r="283">
+                        <a:s>with </a:s>
+                        <a:s r="277">
+                           <a:s r="276">
+                              <a:s>
+                                 <a:s>HeartFailure.&quot;Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> ModerateOrSevereLVSDHFOutpatientEncounter</a:s>
+                        </a:s>
+                        <a:s>
+      such that </a:s>
+                        <a:s r="282">
+                           <a:s r="279">
+                              <a:s r="278">
+                                 <a:s>ActiveBetaBlocker</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="279">
+                                 <a:s>relevantPeriod</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="282"> overlaps after day of </a:s>
+                           <a:s r="281">
+                              <a:s r="280">
+                                 <a:s>ModerateOrSevereLVSDHFOutpatientEncounter</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="281">
+                                 <a:s>relevantPeriod</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="285" locator="72:3-74:127" xsi:type="Exists">
+            <operand localId="284" locator="72:10-74:127" xsi:type="Query">
+               <source localId="275" locator="72:10-72:82" alias="ActiveBetaBlocker">
+                  <expression localId="274" locator="72:10-72:64" xmlns:ns16="urn:healthit-gov:qdm:v5_6" dataType="ns16:MedicationActive" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes locator="72:33-72:63" name="Beta Blocker Therapy for LVSD" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <relationship localId="283" locator="73:5-74:127" alias="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="With">
+                  <expression localId="276" locator="73:10-73:98" name="Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD" libraryName="HeartFailure" xsi:type="ExpressionRef"/>
+                  <suchThat localId="282" locator="74:17-74:127" precision="Day" xsi:type="OverlapsAfter">
+                     <operand localId="279" locator="74:17-74:48" path="relevantPeriod" scope="ActiveBetaBlocker" xsi:type="Property"/>
+                     <operand localId="281" locator="74:72-74:127" path="relevantPeriod" scope="ModerateOrSevereLVSDHFOutpatientEncounter" xsi:type="Property"/>
+                  </suchThat>
+               </relationship>
+            </operand>
+         </expression>
+      </def>
+      <def localId="289" locator="49:1-51:58" name="Numerator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="289">
+               <a:s>define &quot;Numerator&quot;:
+  </a:s>
+               <a:s r="288">
+                  <a:s r="273">
+                     <a:s>&quot;Has Beta Blocker Therapy for LVSD Ordered&quot;</a:s>
+                  </a:s>
+                  <a:s>
+    or </a:s>
+                  <a:s r="287">
+                     <a:s>&quot;Is Currently Taking Beta Blocker Therapy for LVSD&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="288" locator="50:3-51:58" xsi:type="Or">
+            <operand localId="273" locator="50:3-50:45" name="Has Beta Blocker Therapy for LVSD Ordered" xsi:type="ExpressionRef"/>
+            <operand localId="287" locator="51:8-51:58" name="Is Currently Taking Beta Blocker Therapy for LVSD" xsi:type="ExpressionRef"/>
+         </expression>
+      </def>
+      <def localId="291" locator="53:1-54:51" name="SDE Ethnicity" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="291">
+               <a:s>define &quot;SDE Ethnicity&quot;:
+  </a:s>
+               <a:s r="290">
+                  <a:s>[&quot;Patient Characteristic Ethnicity&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Ethnicity&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="290" locator="54:3-54:51" xmlns:ns17="urn:healthit-gov:qdm:v5_6" dataType="ns17:PatientCharacteristicEthnicity" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="54:40-54:50" name="Ethnicity" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="293" locator="56:1-57:43" name="SDE Payer" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="293">
+               <a:s>define &quot;SDE Payer&quot;:
+  </a:s>
+               <a:s r="292">
+                  <a:s>[&quot;Patient Characteristic Payer&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Payer&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="292" locator="57:3-57:43" xmlns:ns18="urn:healthit-gov:qdm:v5_6" dataType="ns18:PatientCharacteristicPayer" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="57:36-57:42" name="Payer" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="295" locator="59:1-60:41" name="SDE Race" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="295">
+               <a:s>define &quot;SDE Race&quot;:
+  </a:s>
+               <a:s r="294">
+                  <a:s>[&quot;Patient Characteristic Race&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Race&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="294" locator="60:3-60:41" xmlns:ns19="urn:healthit-gov:qdm:v5_6" dataType="ns19:PatientCharacteristicRace" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="60:35-60:40" name="Race" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="297" locator="62:1-63:58" name="SDE Sex" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="297">
+               <a:s>define &quot;SDE Sex&quot;:
+  </a:s>
+               <a:s r="296">
+                  <a:s>[&quot;Patient Characteristic Sex&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;ONC Administrative Sex&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="296" locator="63:3-63:58" xmlns:ns20="urn:healthit-gov:qdm:v5_6" dataType="ns20:PatientCharacteristicSex" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="63:34-63:57" name="ONC Administrative Sex" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="300" locator="154:1-155:126" name="Initial Population" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="300">
+               <a:s>define &quot;Initial Population&quot;:
+  </a:s>
+               <a:s r="299">
+                  <a:s r="298">
+                     <a:s>HeartFailure</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="299">
+                     <a:s>&quot;Has Two Qualifying Outpatient Encounters and Heart Failure Outpatient Encounter During the Measurement Period&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="299" locator="155:3-155:126" name="Has Two Qualifying Outpatient Encounters and Heart Failure Outpatient Encounter During the Measurement Period" libraryName="HeartFailure" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="306" locator="136:1-138:104" name="Denominator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="306">
+               <a:s>define &quot;Denominator&quot;:
+  </a:s>
+               <a:s r="305">
+                  <a:s r="301">
+                     <a:s>&quot;Initial Population&quot;</a:s>
+                  </a:s>
+                  <a:s>
+    and </a:s>
+                  <a:s r="304">
+                     <a:s>exists </a:s>
+                     <a:s r="303">
+                        <a:s r="302">
+                           <a:s>HeartFailure</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="303">
+                           <a:s>&quot;Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="305" locator="137:3-138:104" xsi:type="And">
+            <operand localId="301" locator="137:3-137:22" name="Initial Population" xsi:type="ExpressionRef"/>
+            <operand localId="304" locator="138:9-138:104" xsi:type="Exists">
+               <operand localId="303" locator="138:16-138:104" name="Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD" libraryName="HeartFailure" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
+      </def>
+      <def localId="318" locator="140:1-144:70" name="Denominator Exclusions" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="318">
+               <a:s>define &quot;Denominator Exclusions&quot;:
+  </a:s>
+               <a:s r="317">
+                  <a:s r="314">
+                     <a:s r="311">
+                        <a:s r="308">
+                           <a:s r="307">
+                              <a:s>HeartFailure</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="308">
+                              <a:s>&quot;Has Heart Transplant&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+    or </a:s>
+                        <a:s r="310">
+                           <a:s r="309">
+                              <a:s>HeartFailure</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="310">
+                              <a:s>&quot;Has Heart Transplant Complications&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    or </a:s>
+                     <a:s r="313">
+                        <a:s r="312">
+                           <a:s>HeartFailure</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="313">
+                           <a:s>&quot;Has Left Ventricular Assist Device&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    or </a:s>
+                  <a:s r="316">
+                     <a:s r="315">
+                        <a:s>HeartFailure</a:s>
+                     </a:s>
+                     <a:s>.</a:s>
+                     <a:s r="316">
+                        <a:s>&quot;Has Left Ventricular Assist Device Complications&quot;</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="317" locator="141:3-144:70" xsi:type="Or">
+            <operand localId="314" locator="141:3-143:56" xsi:type="Or">
+               <operand localId="311" locator="141:3-142:56" xsi:type="Or">
+                  <operand localId="308" locator="141:3-141:37" name="Has Heart Transplant" libraryName="HeartFailure" xsi:type="ExpressionRef"/>
+                  <operand localId="310" locator="142:8-142:56" name="Has Heart Transplant Complications" libraryName="HeartFailure" xsi:type="ExpressionRef"/>
+               </operand>
+               <operand localId="313" locator="143:8-143:56" name="Has Left Ventricular Assist Device" libraryName="HeartFailure" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand localId="316" locator="144:8-144:70" name="Has Left Ventricular Assist Device Complications" libraryName="HeartFailure" xsi:type="ExpressionRef"/>
+         </expression>
+      </def>
+   </statements>
+</library>

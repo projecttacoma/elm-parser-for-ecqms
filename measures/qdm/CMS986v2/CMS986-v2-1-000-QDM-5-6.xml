@@ -1,0 +1,2532 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion,DisableMethodInvocation" xsi:type="a:CqlToElmInfo"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="423">
+         <a:s>library GlobalMalnutritionComposite version '2.1.000'</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="GlobalMalnutritionComposite" version="2.1.000"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="3:1-3:23" localIdentifier="QDM" uri="urn:healthit-gov:qdm:v5_6" version="5.6">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>using </a:s>
+               <a:s>
+                  <a:s>QDM</a:s>
+               </a:s>
+               <a:s> version '5.6'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="5:1-5:64" localIdentifier="Global" path="MATGlobalCommonFunctions" version="7.0.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>MATGlobalCommonFunctions</a:s>
+               </a:s>
+               <a:s> version '7.0.000' called Global</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <parameters>
+      <def localId="20" locator="23:1-23:49" name="Measurement Period" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="20">
+               <a:s>parameter &quot;Measurement Period&quot; </a:s>
+               <a:s r="19">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="18">
+                     <a:s>DateTime</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <parameterTypeSpecifier localId="19" locator="23:32-23:49" xsi:type="IntervalTypeSpecifier">
+            <pointType localId="18" locator="23:41-23:48" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <valueSets>
+      <def localId="3" locator="7:1-7:71" name="Encounter Inpatient" id="urn:oid:2.16.840.1.113883.3.666.5.307" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>valueset &quot;Encounter Inpatient&quot;: 'urn:oid:2.16.840.1.113883.3.666.5.307'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="4" locator="8:1-8:58" name="Ethnicity" id="urn:oid:2.16.840.1.114222.4.11.837" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>valueset &quot;Ethnicity&quot;: 'urn:oid:2.16.840.1.114222.4.11.837'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="5" locator="9:1-9:79" name="Hospital Dietitian Referral" id="urn:oid:2.16.840.1.113762.1.4.1095.91" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>valueset &quot;Hospital Dietitian Referral&quot;: 'urn:oid:2.16.840.1.113762.1.4.1095.91'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="6" locator="10:1-10:74" name="Malnutrition Diagnosis" id="urn:oid:2.16.840.1.113762.1.4.1095.55" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>valueset &quot;Malnutrition Diagnosis&quot;: 'urn:oid:2.16.840.1.113762.1.4.1095.55'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="7" locator="11:1-11:79" name="Malnutrition Risk Screening" id="urn:oid:2.16.840.1.113762.1.4.1095.92" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="7">
+               <a:s>valueset &quot;Malnutrition Risk Screening&quot;: 'urn:oid:2.16.840.1.113762.1.4.1095.92'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="8" locator="12:1-12:89" name="Malnutrition Screening At Risk Result" id="urn:oid:2.16.840.1.113762.1.4.1095.38" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="8">
+               <a:s>valueset &quot;Malnutrition Screening At Risk Result&quot;: 'urn:oid:2.16.840.1.113762.1.4.1095.38'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="9" locator="13:1-13:93" name="Malnutrition Screening Not At Risk Result" id="urn:oid:2.16.840.1.113762.1.4.1095.34" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="9">
+               <a:s>valueset &quot;Malnutrition Screening Not At Risk Result&quot;: 'urn:oid:2.16.840.1.113762.1.4.1095.34'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="10" locator="14:1-14:72" name="Nutrition Assessment" id="urn:oid:2.16.840.1.113762.1.4.1095.21" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="10">
+               <a:s>valueset &quot;Nutrition Assessment&quot;: 'urn:oid:2.16.840.1.113762.1.4.1095.21'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="11" locator="15:1-15:103" name="Nutrition Assessment Status Moderately Malnourished" id="urn:oid:2.16.840.1.113762.1.4.1095.44" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="11">
+               <a:s>valueset &quot;Nutrition Assessment Status Moderately Malnourished&quot;: 'urn:oid:2.16.840.1.113762.1.4.1095.44'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="12" locator="16:1-16:106" name="Nutrition Assessment Status Not or Mildly Malnourished" id="urn:oid:2.16.840.1.113762.1.4.1095.48" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="12">
+               <a:s>valueset &quot;Nutrition Assessment Status Not or Mildly Malnourished&quot;: 'urn:oid:2.16.840.1.113762.1.4.1095.48'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="13" locator="17:1-17:101" name="Nutrition Assessment Status Severely Malnourished" id="urn:oid:2.16.840.1.113762.1.4.1095.42" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="13">
+               <a:s>valueset &quot;Nutrition Assessment Status Severely Malnourished&quot;: 'urn:oid:2.16.840.1.113762.1.4.1095.42'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="14" locator="18:1-18:71" name="Nutrition Care Plan" id="urn:oid:2.16.840.1.113762.1.4.1095.93" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="14">
+               <a:s>valueset &quot;Nutrition Care Plan&quot;: 'urn:oid:2.16.840.1.113762.1.4.1095.93'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="15" locator="19:1-19:68" name="ONC Administrative Sex" id="urn:oid:2.16.840.1.113762.1.4.1" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="15">
+               <a:s>valueset &quot;ONC Administrative Sex&quot;: 'urn:oid:2.16.840.1.113762.1.4.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="16" locator="20:1-20:55" name="Payer" id="urn:oid:2.16.840.1.114222.4.11.3591" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="16">
+               <a:s>valueset &quot;Payer&quot;: 'urn:oid:2.16.840.1.114222.4.11.3591'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="17" locator="21:1-21:53" name="Race" id="urn:oid:2.16.840.1.114222.4.11.836" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="17">
+               <a:s>valueset &quot;Race&quot;: 'urn:oid:2.16.840.1.114222.4.11.836'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </valueSets>
+   <contexts>
+      <def locator="25:1-25:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="25:1-25:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="25:1-25:15" xmlns:ns0="urn:healthit-gov:qdm:v5_6" dataType="ns0:Patient" templateId="Patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="22" locator="27:1-28:51" name="SDE Ethnicity" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="22">
+               <a:s>define &quot;SDE Ethnicity&quot;:
+  </a:s>
+               <a:s r="21">
+                  <a:s>[&quot;Patient Characteristic Ethnicity&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Ethnicity&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="21" locator="28:3-28:51" xmlns:ns1="urn:healthit-gov:qdm:v5_6" dataType="ns1:PatientCharacteristicEthnicity" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="28:40-28:50" name="Ethnicity" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="24" locator="30:1-31:43" name="SDE Payer" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="24">
+               <a:s>define &quot;SDE Payer&quot;:
+  </a:s>
+               <a:s r="23">
+                  <a:s>[&quot;Patient Characteristic Payer&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Payer&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="23" locator="31:3-31:43" xmlns:ns2="urn:healthit-gov:qdm:v5_6" dataType="ns2:PatientCharacteristicPayer" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="31:36-31:42" name="Payer" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="26" locator="33:1-34:41" name="SDE Race" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="26">
+               <a:s>define &quot;SDE Race&quot;:
+  </a:s>
+               <a:s r="25">
+                  <a:s>[&quot;Patient Characteristic Race&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Race&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="25" locator="34:3-34:41" xmlns:ns3="urn:healthit-gov:qdm:v5_6" dataType="ns3:PatientCharacteristicRace" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="34:35-34:40" name="Race" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="28" locator="36:1-37:58" name="SDE Sex" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="28">
+               <a:s>define &quot;SDE Sex&quot;:
+  </a:s>
+               <a:s r="27">
+                  <a:s>[&quot;Patient Characteristic Sex&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;ONC Administrative Sex&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="27" locator="37:3-37:58" xmlns:ns4="urn:healthit-gov:qdm:v5_6" dataType="ns4:PatientCharacteristicSex" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="37:34-37:57" name="ONC Administrative Sex" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="50" locator="39:1-43:78" name="Global Malnutrition Encounter" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="50">
+               <a:s>define &quot;Global Malnutrition Encounter&quot;:
+  </a:s>
+               <a:s r="49">
+                  <a:s>
+                     <a:s r="30">
+                        <a:s r="29">
+                           <a:s r="29">
+                              <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Encounter Inpatient&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> EncounterInpatient</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="48">
+                     <a:s>where </a:s>
+                     <a:s r="48">
+                        <a:s r="43">
+                           <a:s r="37">
+                              <a:s r="35">
+                                 <a:s>AgeInYearsAt(</a:s>
+                                 <a:s r="34">
+                                    <a:s>date from </a:s>
+                                    <a:s r="33">
+                                       <a:s>start of </a:s>
+                                       <a:s r="32">
+                                          <a:s r="31">
+                                             <a:s>EncounterInpatient</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="32">
+                                             <a:s>relevantPeriod</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>)</a:s>
+                              </a:s>
+                              <a:s r="36">>= 65</a:s>
+                           </a:s>
+                           <a:s>
+      and </a:s>
+                           <a:s r="42">
+                              <a:s r="40">
+                                 <a:s>duration in hours of </a:s>
+                                 <a:s r="39">
+                                    <a:s r="38">
+                                       <a:s>EncounterInpatient</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="39">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s r="41"> >= 24</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      and </a:s>
+                        <a:s r="47">
+                           <a:s r="45">
+                              <a:s r="44">
+                                 <a:s>EncounterInpatient</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="45">
+                                 <a:s>relevantPeriod</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="47"> during day of </a:s>
+                           <a:s r="46">
+                              <a:s>&quot;Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="49" locator="40:3-43:78" xsi:type="Query">
+            <source localId="30" locator="40:3-40:68" alias="EncounterInpatient">
+               <expression localId="29" locator="40:3-40:49" xmlns:ns5="urn:healthit-gov:qdm:v5_6" dataType="ns5:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="40:28-40:48" name="Encounter Inpatient" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <where localId="48" locator="41:5-43:78" xsi:type="And">
+               <operand localId="43" locator="41:11-42:70" xsi:type="And">
+                  <operand localId="37" locator="41:11-41:81" xsi:type="GreaterOrEqual">
+                     <operand localId="35" locator="41:11-41:76" precision="Year" xsi:type="CalculateAgeAt">
+                        <operand xsi:type="ToDate">
+                           <operand path="birthDatetime" xsi:type="Property">
+                              <source name="Patient" xsi:type="ExpressionRef"/>
+                           </operand>
+                        </operand>
+                        <operand localId="34" locator="41:24-41:75" xsi:type="DateFrom">
+                           <operand localId="33" locator="41:34-41:75" xsi:type="Start">
+                              <operand localId="32" locator="41:43-41:75" path="relevantPeriod" scope="EncounterInpatient" xsi:type="Property"/>
+                           </operand>
+                        </operand>
+                     </operand>
+                     <operand localId="36" locator="41:80-41:81" valueType="t:Integer" value="65" xsi:type="Literal"/>
+                  </operand>
+                  <operand localId="42" locator="42:11-42:70" xsi:type="GreaterOrEqual">
+                     <operand localId="40" locator="42:11-42:64" precision="Hour" xsi:type="DurationBetween">
+                        <operand xsi:type="Start">
+                           <operand localId="39" locator="42:32-42:64" path="relevantPeriod" scope="EncounterInpatient" xsi:type="Property"/>
+                        </operand>
+                        <operand xsi:type="End">
+                           <operand localId="39" locator="42:32-42:64" path="relevantPeriod" scope="EncounterInpatient" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                     <operand localId="41" locator="42:69-42:70" valueType="t:Integer" value="24" xsi:type="Literal"/>
+                  </operand>
+               </operand>
+               <operand localId="47" locator="43:11-43:78" precision="Day" xsi:type="IncludedIn">
+                  <operand localId="45" locator="43:11-43:43" path="relevantPeriod" scope="EncounterInpatient" xsi:type="Property"/>
+                  <operand localId="46" locator="43:59-43:78" name="Measurement Period" xsi:type="ParameterRef"/>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="52" locator="45:1-46:33" name="Initial Population" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="52">
+               <a:s>define &quot;Initial Population&quot;:
+  </a:s>
+               <a:s r="51">
+                  <a:s>&quot;Global Malnutrition Encounter&quot;</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="51" locator="46:3-46:33" name="Global Malnutrition Encounter" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="54" locator="48:1-49:22" name="Measure Population" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="54">
+               <a:s>define &quot;Measure Population&quot;:
+  </a:s>
+               <a:s r="53">
+                  <a:s>&quot;Initial Population&quot;</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="53" locator="49:3-49:22" name="Initial Population" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="85" locator="51:1-57:9" name="Encounter with Malnutrition Risk Screening and Identified Result" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="85">
+               <a:s>define &quot;Encounter with Malnutrition Risk Screening and Identified Result&quot;:
+  </a:s>
+               <a:s r="84">
+                  <a:s>
+                     <a:s r="56">
+                        <a:s r="55">
+                           <a:s>
+                              <a:s>&quot;Global Malnutrition Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> GlobalMalnutritionEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="83">
+                     <a:s>with </a:s>
+                     <a:s r="58">
+                        <a:s r="57">
+                           <a:s r="57">
+                              <a:s>[&quot;Assessment, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Malnutrition Risk Screening&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> MalnutritionRiskScreening</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="82">
+                        <a:s r="72">
+                           <a:s r="68">
+                              <a:s>Coalesce(</a:s>
+                              <a:s r="65">
+                                 <a:s>start of </a:s>
+                                 <a:s r="64">
+                                    <a:s r="59">
+                                       <a:s>Global</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="64">
+                                       <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                       <a:s r="61">
+                                          <a:s r="60">
+                                             <a:s>MalnutritionRiskScreening</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="61">
+                                             <a:s>relevantDatetime</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>, </a:s>
+                                       <a:s r="63">
+                                          <a:s r="62">
+                                             <a:s>MalnutritionRiskScreening</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="63">
+                                             <a:s>relevantPeriod</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>)</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="67">
+                                 <a:s r="66">
+                                    <a:s>MalnutritionRiskScreening</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="67">
+                                    <a:s>authorDatetime</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                           <a:s r="72">during </a:s>
+                           <a:s r="71">
+                              <a:s r="69">
+                                 <a:s>Global</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="71">
+                                 <a:s>&quot;HospitalizationWithObservation&quot; ( </a:s>
+                                 <a:s r="70">
+                                    <a:s>GlobalMalnutritionEncounter</a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+        and </a:s>
+                        <a:s r="81">
+                           <a:s>( </a:s>
+                           <a:s r="81">
+                              <a:s r="76">
+                                 <a:s r="74">
+                                    <a:s r="73">
+                                       <a:s>MalnutritionRiskScreening</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="74">
+                                       <a:s>result</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> in </a:s>
+                                 <a:s r="75">
+                                    <a:s>&quot;Malnutrition Screening Not At Risk Result&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+            or </a:s>
+                              <a:s r="80">
+                                 <a:s r="78">
+                                    <a:s r="77">
+                                       <a:s>MalnutritionRiskScreening</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="78">
+                                       <a:s>result</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> in </a:s>
+                                 <a:s r="79">
+                                    <a:s>&quot;Malnutrition Screening At Risk Result&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+        )</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="84" locator="52:3-57:9" xsi:type="Query">
+            <source localId="56" locator="52:3-52:61" alias="GlobalMalnutritionEncounter">
+               <expression localId="55" locator="52:3-52:33" name="Global Malnutrition Encounter" xsi:type="ExpressionRef"/>
+            </source>
+            <relationship localId="83" locator="53:5-57:9" alias="MalnutritionRiskScreening" xsi:type="With">
+               <expression localId="57" locator="53:10-53:65" xmlns:ns6="urn:healthit-gov:qdm:v5_6" dataType="ns6:PositiveAssessmentPerformed" templateId="PositiveAssessmentPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="53:36-53:64" name="Malnutrition Risk Screening" xsi:type="ValueSetRef"/>
+               </expression>
+               <suchThat localId="82" locator="54:17-57:9" xsi:type="And">
+                  <operand localId="72" locator="54:17-54:267" xsi:type="In">
+                     <operand localId="68" locator="54:17-54:189" xsi:type="Coalesce">
+                        <operand localId="65" locator="54:26-54:146" xsi:type="Start">
+                           <operand localId="64" locator="54:35-54:146" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                              <operand localId="61" locator="54:62-54:103" path="relevantDatetime" scope="MalnutritionRiskScreening" xsi:type="Property"/>
+                              <operand localId="63" locator="54:106-54:145" path="relevantPeriod" scope="MalnutritionRiskScreening" xsi:type="Property"/>
+                           </operand>
+                        </operand>
+                        <operand localId="67" locator="54:149-54:188" path="authorDatetime" scope="MalnutritionRiskScreening" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="71" locator="54:197-54:267" name="HospitalizationWithObservation" libraryName="Global" xsi:type="FunctionRef">
+                        <operand localId="70" locator="54:239-54:265" name="GlobalMalnutritionEncounter" xsi:type="AliasRef"/>
+                     </operand>
+                  </operand>
+                  <operand localId="81" locator="55:13-57:9" xsi:type="Or">
+                     <operand localId="76" locator="55:15-55:93" xsi:type="InValueSet">
+                        <code asType="t:Code" xsi:type="As">
+                           <operand localId="74" locator="55:15-55:46" path="result" scope="MalnutritionRiskScreening" xsi:type="Property"/>
+                        </code>
+                        <valueset localId="75" locator="55:51-55:93" name="Malnutrition Screening Not At Risk Result" xsi:type="ValueSetRef"/>
+                     </operand>
+                     <operand localId="80" locator="56:16-56:90" xsi:type="InValueSet">
+                        <code asType="t:Code" xsi:type="As">
+                           <operand localId="78" locator="56:16-56:47" path="result" scope="MalnutritionRiskScreening" xsi:type="Property"/>
+                        </code>
+                        <valueset localId="79" locator="56:52-56:90" name="Malnutrition Screening At Risk Result" xsi:type="ValueSetRef"/>
+                     </operand>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="111" locator="59:1-63:91" name="Encounter with Malnutrition Screening Not At Risk Result" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="111">
+               <a:s>define &quot;Encounter with Malnutrition Screening Not At Risk Result&quot;:
+  </a:s>
+               <a:s r="110">
+                  <a:s>
+                     <a:s r="87">
+                        <a:s r="86">
+                           <a:s>
+                              <a:s>&quot;Global Malnutrition Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> GlobalMalnutritionEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="109">
+                     <a:s>with </a:s>
+                     <a:s r="89">
+                        <a:s r="88">
+                           <a:s r="88">
+                              <a:s>[&quot;Assessment, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Malnutrition Risk Screening&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> MalnutritionRiskScreening</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="108">
+                        <a:s r="103">
+                           <a:s r="99">
+                              <a:s>Coalesce(</a:s>
+                              <a:s r="96">
+                                 <a:s>start of </a:s>
+                                 <a:s r="95">
+                                    <a:s r="90">
+                                       <a:s>Global</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="95">
+                                       <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                       <a:s r="92">
+                                          <a:s r="91">
+                                             <a:s>MalnutritionRiskScreening</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="92">
+                                             <a:s>relevantDatetime</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>, </a:s>
+                                       <a:s r="94">
+                                          <a:s r="93">
+                                             <a:s>MalnutritionRiskScreening</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="94">
+                                             <a:s>relevantPeriod</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>)</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="98">
+                                 <a:s r="97">
+                                    <a:s>MalnutritionRiskScreening</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="98">
+                                    <a:s>authorDatetime</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                           <a:s r="103">during </a:s>
+                           <a:s r="102">
+                              <a:s r="100">
+                                 <a:s>Global</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="102">
+                                 <a:s>&quot;HospitalizationWithObservation&quot; ( </a:s>
+                                 <a:s r="101">
+                                    <a:s>GlobalMalnutritionEncounter</a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+        and </a:s>
+                        <a:s r="107">
+                           <a:s r="105">
+                              <a:s r="104">
+                                 <a:s>MalnutritionRiskScreening</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="105">
+                                 <a:s>result</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> in </a:s>
+                           <a:s r="106">
+                              <a:s>&quot;Malnutrition Screening Not At Risk Result&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="110" locator="60:3-63:91" xsi:type="Query">
+            <source localId="87" locator="60:3-60:61" alias="GlobalMalnutritionEncounter">
+               <expression localId="86" locator="60:3-60:33" name="Global Malnutrition Encounter" xsi:type="ExpressionRef"/>
+            </source>
+            <relationship localId="109" locator="61:5-63:91" alias="MalnutritionRiskScreening" xsi:type="With">
+               <expression localId="88" locator="61:10-61:65" xmlns:ns7="urn:healthit-gov:qdm:v5_6" dataType="ns7:PositiveAssessmentPerformed" templateId="PositiveAssessmentPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="61:36-61:64" name="Malnutrition Risk Screening" xsi:type="ValueSetRef"/>
+               </expression>
+               <suchThat localId="108" locator="62:17-63:91" xsi:type="And">
+                  <operand localId="103" locator="62:17-62:267" xsi:type="In">
+                     <operand localId="99" locator="62:17-62:189" xsi:type="Coalesce">
+                        <operand localId="96" locator="62:26-62:146" xsi:type="Start">
+                           <operand localId="95" locator="62:35-62:146" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                              <operand localId="92" locator="62:62-62:103" path="relevantDatetime" scope="MalnutritionRiskScreening" xsi:type="Property"/>
+                              <operand localId="94" locator="62:106-62:145" path="relevantPeriod" scope="MalnutritionRiskScreening" xsi:type="Property"/>
+                           </operand>
+                        </operand>
+                        <operand localId="98" locator="62:149-62:188" path="authorDatetime" scope="MalnutritionRiskScreening" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="102" locator="62:197-62:267" name="HospitalizationWithObservation" libraryName="Global" xsi:type="FunctionRef">
+                        <operand localId="101" locator="62:239-62:265" name="GlobalMalnutritionEncounter" xsi:type="AliasRef"/>
+                     </operand>
+                  </operand>
+                  <operand localId="107" locator="63:13-63:91" xsi:type="InValueSet">
+                     <code asType="t:Code" xsi:type="As">
+                        <operand localId="105" locator="63:13-63:44" path="result" scope="MalnutritionRiskScreening" xsi:type="Property"/>
+                     </code>
+                     <valueset localId="106" locator="63:49-63:91" name="Malnutrition Screening Not At Risk Result" xsi:type="ValueSetRef"/>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="137" locator="65:1-69:87" name="Encounter with Malnutrition Screening At Risk Result" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="137">
+               <a:s>define &quot;Encounter with Malnutrition Screening At Risk Result&quot;:
+  </a:s>
+               <a:s r="136">
+                  <a:s>
+                     <a:s r="113">
+                        <a:s r="112">
+                           <a:s>
+                              <a:s>&quot;Global Malnutrition Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> GlobalMalnutritionEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="135">
+                     <a:s>with </a:s>
+                     <a:s r="115">
+                        <a:s r="114">
+                           <a:s r="114">
+                              <a:s>[&quot;Assessment, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Malnutrition Risk Screening&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> MalnutritionRiskScreening</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="134">
+                        <a:s r="129">
+                           <a:s r="125">
+                              <a:s>Coalesce(</a:s>
+                              <a:s r="122">
+                                 <a:s>start of </a:s>
+                                 <a:s r="121">
+                                    <a:s r="116">
+                                       <a:s>Global</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="121">
+                                       <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                       <a:s r="118">
+                                          <a:s r="117">
+                                             <a:s>MalnutritionRiskScreening</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="118">
+                                             <a:s>relevantDatetime</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>, </a:s>
+                                       <a:s r="120">
+                                          <a:s r="119">
+                                             <a:s>MalnutritionRiskScreening</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="120">
+                                             <a:s>relevantPeriod</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>)</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="124">
+                                 <a:s r="123">
+                                    <a:s>MalnutritionRiskScreening</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="124">
+                                    <a:s>authorDatetime</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                           <a:s r="129">during </a:s>
+                           <a:s r="128">
+                              <a:s r="126">
+                                 <a:s>Global</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="128">
+                                 <a:s>&quot;HospitalizationWithObservation&quot; ( </a:s>
+                                 <a:s r="127">
+                                    <a:s>GlobalMalnutritionEncounter</a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+        and </a:s>
+                        <a:s r="133">
+                           <a:s r="131">
+                              <a:s r="130">
+                                 <a:s>MalnutritionRiskScreening</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="131">
+                                 <a:s>result</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> in </a:s>
+                           <a:s r="132">
+                              <a:s>&quot;Malnutrition Screening At Risk Result&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="136" locator="66:3-69:87" xsi:type="Query">
+            <source localId="113" locator="66:3-66:61" alias="GlobalMalnutritionEncounter">
+               <expression localId="112" locator="66:3-66:33" name="Global Malnutrition Encounter" xsi:type="ExpressionRef"/>
+            </source>
+            <relationship localId="135" locator="67:5-69:87" alias="MalnutritionRiskScreening" xsi:type="With">
+               <expression localId="114" locator="67:10-67:65" xmlns:ns8="urn:healthit-gov:qdm:v5_6" dataType="ns8:PositiveAssessmentPerformed" templateId="PositiveAssessmentPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="67:36-67:64" name="Malnutrition Risk Screening" xsi:type="ValueSetRef"/>
+               </expression>
+               <suchThat localId="134" locator="68:17-69:87" xsi:type="And">
+                  <operand localId="129" locator="68:17-68:267" xsi:type="In">
+                     <operand localId="125" locator="68:17-68:189" xsi:type="Coalesce">
+                        <operand localId="122" locator="68:26-68:146" xsi:type="Start">
+                           <operand localId="121" locator="68:35-68:146" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                              <operand localId="118" locator="68:62-68:103" path="relevantDatetime" scope="MalnutritionRiskScreening" xsi:type="Property"/>
+                              <operand localId="120" locator="68:106-68:145" path="relevantPeriod" scope="MalnutritionRiskScreening" xsi:type="Property"/>
+                           </operand>
+                        </operand>
+                        <operand localId="124" locator="68:149-68:188" path="authorDatetime" scope="MalnutritionRiskScreening" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="128" locator="68:197-68:267" name="HospitalizationWithObservation" libraryName="Global" xsi:type="FunctionRef">
+                        <operand localId="127" locator="68:239-68:265" name="GlobalMalnutritionEncounter" xsi:type="AliasRef"/>
+                     </operand>
+                  </operand>
+                  <operand localId="133" locator="69:13-69:87" xsi:type="InValueSet">
+                     <code asType="t:Code" xsi:type="As">
+                        <operand localId="131" locator="69:13-69:44" path="result" scope="MalnutritionRiskScreening" xsi:type="Property"/>
+                     </code>
+                     <valueset localId="132" locator="69:49-69:87" name="Malnutrition Screening At Risk Result" xsi:type="ValueSetRef"/>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="150" locator="71:1-74:135" name="Encounter with Hospital Dietitian Referral" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="150">
+               <a:s>define &quot;Encounter with Hospital Dietitian Referral&quot;:
+  </a:s>
+               <a:s r="149">
+                  <a:s>
+                     <a:s r="139">
+                        <a:s r="138">
+                           <a:s>
+                              <a:s>&quot;Global Malnutrition Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> GlobalMalnutritionEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="148">
+                     <a:s>with </a:s>
+                     <a:s r="141">
+                        <a:s r="140">
+                           <a:s r="140">
+                              <a:s>[&quot;Intervention, Order&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Hospital Dietitian Referral&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> HospitalDietitianReferral</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="147">
+                        <a:s r="143">
+                           <a:s r="142">
+                              <a:s>HospitalDietitianReferral</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="143">
+                              <a:s>authorDatetime</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="147"> during </a:s>
+                        <a:s r="146">
+                           <a:s r="144">
+                              <a:s>Global</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="146">
+                              <a:s>&quot;HospitalizationWithObservation&quot; ( </a:s>
+                              <a:s r="145">
+                                 <a:s>GlobalMalnutritionEncounter</a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="149" locator="72:3-74:135" xsi:type="Query">
+            <source localId="139" locator="72:3-72:61" alias="GlobalMalnutritionEncounter">
+               <expression localId="138" locator="72:3-72:33" name="Global Malnutrition Encounter" xsi:type="ExpressionRef"/>
+            </source>
+            <relationship localId="148" locator="73:5-74:135" alias="HospitalDietitianReferral" xsi:type="With">
+               <expression localId="140" locator="73:10-73:63" xmlns:ns9="urn:healthit-gov:qdm:v5_6" dataType="ns9:PositiveInterventionOrder" templateId="PositiveInterventionOrder" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="73:34-73:62" name="Hospital Dietitian Referral" xsi:type="ValueSetRef"/>
+               </expression>
+               <suchThat localId="147" locator="74:17-74:135" xsi:type="In">
+                  <operand localId="143" locator="74:17-74:56" path="authorDatetime" scope="HospitalDietitianReferral" xsi:type="Property"/>
+                  <operand localId="146" locator="74:65-74:135" name="HospitalizationWithObservation" libraryName="Global" xsi:type="FunctionRef">
+                     <operand localId="145" locator="74:107-74:133" name="GlobalMalnutritionEncounter" xsi:type="AliasRef"/>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="186" locator="76:1-83:9" name="Encounter with Nutrition Assessment and Identified Status" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="186">
+               <a:s>define &quot;Encounter with Nutrition Assessment and Identified Status&quot;:
+  </a:s>
+               <a:s r="185">
+                  <a:s>
+                     <a:s r="152">
+                        <a:s r="151">
+                           <a:s>
+                              <a:s>&quot;Global Malnutrition Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> GlobalMalnutritionEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="184">
+                     <a:s>with </a:s>
+                     <a:s r="154">
+                        <a:s r="153">
+                           <a:s r="153">
+                              <a:s>[&quot;Assessment, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Nutrition Assessment&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> NutritionAssessment</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="183">
+                        <a:s r="168">
+                           <a:s r="164">
+                              <a:s>Coalesce(</a:s>
+                              <a:s r="161">
+                                 <a:s>start of </a:s>
+                                 <a:s r="160">
+                                    <a:s r="155">
+                                       <a:s>Global</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="160">
+                                       <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                       <a:s r="157">
+                                          <a:s r="156">
+                                             <a:s>NutritionAssessment</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="157">
+                                             <a:s>relevantDatetime</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>, </a:s>
+                                       <a:s r="159">
+                                          <a:s r="158">
+                                             <a:s>NutritionAssessment</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="159">
+                                             <a:s>relevantPeriod</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>)</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="163">
+                                 <a:s r="162">
+                                    <a:s>NutritionAssessment</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="163">
+                                    <a:s>authorDatetime</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                           <a:s r="168">during </a:s>
+                           <a:s r="167">
+                              <a:s r="165">
+                                 <a:s>Global</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="167">
+                                 <a:s>&quot;HospitalizationWithObservation&quot; ( </a:s>
+                                 <a:s r="166">
+                                    <a:s>GlobalMalnutritionEncounter</a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+        and </a:s>
+                        <a:s r="182">
+                           <a:s>( </a:s>
+                           <a:s r="182">
+                              <a:s r="177">
+                                 <a:s r="172">
+                                    <a:s r="170">
+                                       <a:s r="169">
+                                          <a:s>NutritionAssessment</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="170">
+                                          <a:s>result</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> in </a:s>
+                                    <a:s r="171">
+                                       <a:s>&quot;Nutrition Assessment Status Not or Mildly Malnourished&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+            or </a:s>
+                                 <a:s r="176">
+                                    <a:s r="174">
+                                       <a:s r="173">
+                                          <a:s>NutritionAssessment</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="174">
+                                          <a:s>result</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> in </a:s>
+                                    <a:s r="175">
+                                       <a:s>&quot;Nutrition Assessment Status Moderately Malnourished&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+            or </a:s>
+                              <a:s r="181">
+                                 <a:s r="179">
+                                    <a:s r="178">
+                                       <a:s>NutritionAssessment</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="179">
+                                       <a:s>result</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> in </a:s>
+                                 <a:s r="180">
+                                    <a:s>&quot;Nutrition Assessment Status Severely Malnourished&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+        )</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="185" locator="77:3-83:9" xsi:type="Query">
+            <source localId="152" locator="77:3-77:61" alias="GlobalMalnutritionEncounter">
+               <expression localId="151" locator="77:3-77:33" name="Global Malnutrition Encounter" xsi:type="ExpressionRef"/>
+            </source>
+            <relationship localId="184" locator="78:5-83:9" alias="NutritionAssessment" xsi:type="With">
+               <expression localId="153" locator="78:10-78:58" xmlns:ns10="urn:healthit-gov:qdm:v5_6" dataType="ns10:PositiveAssessmentPerformed" templateId="PositiveAssessmentPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="78:36-78:57" name="Nutrition Assessment" xsi:type="ValueSetRef"/>
+               </expression>
+               <suchThat localId="183" locator="79:17-83:9" xsi:type="And">
+                  <operand localId="168" locator="79:17-79:249" xsi:type="In">
+                     <operand localId="164" locator="79:17-79:171" xsi:type="Coalesce">
+                        <operand localId="161" locator="79:26-79:134" xsi:type="Start">
+                           <operand localId="160" locator="79:35-79:134" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                              <operand localId="157" locator="79:62-79:97" path="relevantDatetime" scope="NutritionAssessment" xsi:type="Property"/>
+                              <operand localId="159" locator="79:100-79:133" path="relevantPeriod" scope="NutritionAssessment" xsi:type="Property"/>
+                           </operand>
+                        </operand>
+                        <operand localId="163" locator="79:137-79:170" path="authorDatetime" scope="NutritionAssessment" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="167" locator="79:179-79:249" name="HospitalizationWithObservation" libraryName="Global" xsi:type="FunctionRef">
+                        <operand localId="166" locator="79:221-79:247" name="GlobalMalnutritionEncounter" xsi:type="AliasRef"/>
+                     </operand>
+                  </operand>
+                  <operand localId="182" locator="80:13-83:9" xsi:type="Or">
+                     <operand localId="177" locator="80:15-81:98" xsi:type="Or">
+                        <operand localId="172" locator="80:15-80:100" xsi:type="InValueSet">
+                           <code asType="t:Code" xsi:type="As">
+                              <operand localId="170" locator="80:15-80:40" path="result" scope="NutritionAssessment" xsi:type="Property"/>
+                           </code>
+                           <valueset localId="171" locator="80:45-80:100" name="Nutrition Assessment Status Not or Mildly Malnourished" xsi:type="ValueSetRef"/>
+                        </operand>
+                        <operand localId="176" locator="81:16-81:98" xsi:type="InValueSet">
+                           <code asType="t:Code" xsi:type="As">
+                              <operand localId="174" locator="81:16-81:41" path="result" scope="NutritionAssessment" xsi:type="Property"/>
+                           </code>
+                           <valueset localId="175" locator="81:46-81:98" name="Nutrition Assessment Status Moderately Malnourished" xsi:type="ValueSetRef"/>
+                        </operand>
+                     </operand>
+                     <operand localId="181" locator="82:16-82:96" xsi:type="InValueSet">
+                        <code asType="t:Code" xsi:type="As">
+                           <operand localId="179" locator="82:16-82:41" path="result" scope="NutritionAssessment" xsi:type="Property"/>
+                        </code>
+                        <valueset localId="180" locator="82:46-82:96" name="Nutrition Assessment Status Severely Malnourished" xsi:type="ValueSetRef"/>
+                     </operand>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="212" locator="85:1-89:98" name="Encounter with Nutrition Assessment Status Not or Mildly Malnourished" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="212">
+               <a:s>define &quot;Encounter with Nutrition Assessment Status Not or Mildly Malnourished&quot;:
+  </a:s>
+               <a:s r="211">
+                  <a:s>
+                     <a:s r="188">
+                        <a:s r="187">
+                           <a:s>
+                              <a:s>&quot;Global Malnutrition Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> GlobalMalnutritionEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="210">
+                     <a:s>with </a:s>
+                     <a:s r="190">
+                        <a:s r="189">
+                           <a:s r="189">
+                              <a:s>[&quot;Assessment, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Nutrition Assessment&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> NutritionAssessment</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="209">
+                        <a:s r="204">
+                           <a:s r="200">
+                              <a:s>Coalesce(</a:s>
+                              <a:s r="197">
+                                 <a:s>start of </a:s>
+                                 <a:s r="196">
+                                    <a:s r="191">
+                                       <a:s>Global</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="196">
+                                       <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                       <a:s r="193">
+                                          <a:s r="192">
+                                             <a:s>NutritionAssessment</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="193">
+                                             <a:s>relevantDatetime</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>, </a:s>
+                                       <a:s r="195">
+                                          <a:s r="194">
+                                             <a:s>NutritionAssessment</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="195">
+                                             <a:s>relevantPeriod</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>)</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="199">
+                                 <a:s r="198">
+                                    <a:s>NutritionAssessment</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="199">
+                                    <a:s>authorDatetime</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                           <a:s r="204">during </a:s>
+                           <a:s r="203">
+                              <a:s r="201">
+                                 <a:s>Global</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="203">
+                                 <a:s>&quot;HospitalizationWithObservation&quot; ( </a:s>
+                                 <a:s r="202">
+                                    <a:s>GlobalMalnutritionEncounter</a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+        and </a:s>
+                        <a:s r="208">
+                           <a:s r="206">
+                              <a:s r="205">
+                                 <a:s>NutritionAssessment</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="206">
+                                 <a:s>result</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> in </a:s>
+                           <a:s r="207">
+                              <a:s>&quot;Nutrition Assessment Status Not or Mildly Malnourished&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="211" locator="86:3-89:98" xsi:type="Query">
+            <source localId="188" locator="86:3-86:61" alias="GlobalMalnutritionEncounter">
+               <expression localId="187" locator="86:3-86:33" name="Global Malnutrition Encounter" xsi:type="ExpressionRef"/>
+            </source>
+            <relationship localId="210" locator="87:5-89:98" alias="NutritionAssessment" xsi:type="With">
+               <expression localId="189" locator="87:10-87:58" xmlns:ns11="urn:healthit-gov:qdm:v5_6" dataType="ns11:PositiveAssessmentPerformed" templateId="PositiveAssessmentPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="87:36-87:57" name="Nutrition Assessment" xsi:type="ValueSetRef"/>
+               </expression>
+               <suchThat localId="209" locator="88:17-89:98" xsi:type="And">
+                  <operand localId="204" locator="88:17-88:249" xsi:type="In">
+                     <operand localId="200" locator="88:17-88:171" xsi:type="Coalesce">
+                        <operand localId="197" locator="88:26-88:134" xsi:type="Start">
+                           <operand localId="196" locator="88:35-88:134" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                              <operand localId="193" locator="88:62-88:97" path="relevantDatetime" scope="NutritionAssessment" xsi:type="Property"/>
+                              <operand localId="195" locator="88:100-88:133" path="relevantPeriod" scope="NutritionAssessment" xsi:type="Property"/>
+                           </operand>
+                        </operand>
+                        <operand localId="199" locator="88:137-88:170" path="authorDatetime" scope="NutritionAssessment" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="203" locator="88:179-88:249" name="HospitalizationWithObservation" libraryName="Global" xsi:type="FunctionRef">
+                        <operand localId="202" locator="88:221-88:247" name="GlobalMalnutritionEncounter" xsi:type="AliasRef"/>
+                     </operand>
+                  </operand>
+                  <operand localId="208" locator="89:13-89:98" xsi:type="InValueSet">
+                     <code asType="t:Code" xsi:type="As">
+                        <operand localId="206" locator="89:13-89:38" path="result" scope="NutritionAssessment" xsi:type="Property"/>
+                     </code>
+                     <valueset localId="207" locator="89:43-89:98" name="Nutrition Assessment Status Not or Mildly Malnourished" xsi:type="ValueSetRef"/>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="238" locator="91:1-95:95" name="Encounter with Nutrition Assessment Status Moderately Malnourished" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="238">
+               <a:s>define &quot;Encounter with Nutrition Assessment Status Moderately Malnourished&quot;:
+  </a:s>
+               <a:s r="237">
+                  <a:s>
+                     <a:s r="214">
+                        <a:s r="213">
+                           <a:s>
+                              <a:s>&quot;Global Malnutrition Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> GlobalMalnutritionEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="236">
+                     <a:s>with </a:s>
+                     <a:s r="216">
+                        <a:s r="215">
+                           <a:s r="215">
+                              <a:s>[&quot;Assessment, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Nutrition Assessment&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> NutritionAssessment</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="235">
+                        <a:s r="230">
+                           <a:s r="226">
+                              <a:s>Coalesce(</a:s>
+                              <a:s r="223">
+                                 <a:s>start of </a:s>
+                                 <a:s r="222">
+                                    <a:s r="217">
+                                       <a:s>Global</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="222">
+                                       <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                       <a:s r="219">
+                                          <a:s r="218">
+                                             <a:s>NutritionAssessment</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="219">
+                                             <a:s>relevantDatetime</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>, </a:s>
+                                       <a:s r="221">
+                                          <a:s r="220">
+                                             <a:s>NutritionAssessment</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="221">
+                                             <a:s>relevantPeriod</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>)</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="225">
+                                 <a:s r="224">
+                                    <a:s>NutritionAssessment</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="225">
+                                    <a:s>authorDatetime</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                           <a:s r="230">during </a:s>
+                           <a:s r="229">
+                              <a:s r="227">
+                                 <a:s>Global</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="229">
+                                 <a:s>&quot;HospitalizationWithObservation&quot; ( </a:s>
+                                 <a:s r="228">
+                                    <a:s>GlobalMalnutritionEncounter</a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+        and </a:s>
+                        <a:s r="234">
+                           <a:s r="232">
+                              <a:s r="231">
+                                 <a:s>NutritionAssessment</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="232">
+                                 <a:s>result</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> in </a:s>
+                           <a:s r="233">
+                              <a:s>&quot;Nutrition Assessment Status Moderately Malnourished&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="237" locator="92:3-95:95" xsi:type="Query">
+            <source localId="214" locator="92:3-92:61" alias="GlobalMalnutritionEncounter">
+               <expression localId="213" locator="92:3-92:33" name="Global Malnutrition Encounter" xsi:type="ExpressionRef"/>
+            </source>
+            <relationship localId="236" locator="93:5-95:95" alias="NutritionAssessment" xsi:type="With">
+               <expression localId="215" locator="93:10-93:58" xmlns:ns12="urn:healthit-gov:qdm:v5_6" dataType="ns12:PositiveAssessmentPerformed" templateId="PositiveAssessmentPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="93:36-93:57" name="Nutrition Assessment" xsi:type="ValueSetRef"/>
+               </expression>
+               <suchThat localId="235" locator="94:17-95:95" xsi:type="And">
+                  <operand localId="230" locator="94:17-94:249" xsi:type="In">
+                     <operand localId="226" locator="94:17-94:171" xsi:type="Coalesce">
+                        <operand localId="223" locator="94:26-94:134" xsi:type="Start">
+                           <operand localId="222" locator="94:35-94:134" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                              <operand localId="219" locator="94:62-94:97" path="relevantDatetime" scope="NutritionAssessment" xsi:type="Property"/>
+                              <operand localId="221" locator="94:100-94:133" path="relevantPeriod" scope="NutritionAssessment" xsi:type="Property"/>
+                           </operand>
+                        </operand>
+                        <operand localId="225" locator="94:137-94:170" path="authorDatetime" scope="NutritionAssessment" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="229" locator="94:179-94:249" name="HospitalizationWithObservation" libraryName="Global" xsi:type="FunctionRef">
+                        <operand localId="228" locator="94:221-94:247" name="GlobalMalnutritionEncounter" xsi:type="AliasRef"/>
+                     </operand>
+                  </operand>
+                  <operand localId="234" locator="95:13-95:95" xsi:type="InValueSet">
+                     <code asType="t:Code" xsi:type="As">
+                        <operand localId="232" locator="95:13-95:38" path="result" scope="NutritionAssessment" xsi:type="Property"/>
+                     </code>
+                     <valueset localId="233" locator="95:43-95:95" name="Nutrition Assessment Status Moderately Malnourished" xsi:type="ValueSetRef"/>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="264" locator="97:1-101:93" name="Encounter with Nutrition Assessment Status Severely Malnourished" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="264">
+               <a:s>define &quot;Encounter with Nutrition Assessment Status Severely Malnourished&quot;:
+  </a:s>
+               <a:s r="263">
+                  <a:s>
+                     <a:s r="240">
+                        <a:s r="239">
+                           <a:s>
+                              <a:s>&quot;Global Malnutrition Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> GlobalMalnutritionEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="262">
+                     <a:s>with </a:s>
+                     <a:s r="242">
+                        <a:s r="241">
+                           <a:s r="241">
+                              <a:s>[&quot;Assessment, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Nutrition Assessment&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> NutritionAssessment</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="261">
+                        <a:s r="256">
+                           <a:s r="252">
+                              <a:s>Coalesce(</a:s>
+                              <a:s r="249">
+                                 <a:s>start of </a:s>
+                                 <a:s r="248">
+                                    <a:s r="243">
+                                       <a:s>Global</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="248">
+                                       <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                       <a:s r="245">
+                                          <a:s r="244">
+                                             <a:s>NutritionAssessment</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="245">
+                                             <a:s>relevantDatetime</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>, </a:s>
+                                       <a:s r="247">
+                                          <a:s r="246">
+                                             <a:s>NutritionAssessment</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="247">
+                                             <a:s>relevantPeriod</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>)</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="251">
+                                 <a:s r="250">
+                                    <a:s>NutritionAssessment</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="251">
+                                    <a:s>authorDatetime</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                           <a:s r="256">during </a:s>
+                           <a:s r="255">
+                              <a:s r="253">
+                                 <a:s>Global</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="255">
+                                 <a:s>&quot;HospitalizationWithObservation&quot; ( </a:s>
+                                 <a:s r="254">
+                                    <a:s>GlobalMalnutritionEncounter</a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+        and </a:s>
+                        <a:s r="260">
+                           <a:s r="258">
+                              <a:s r="257">
+                                 <a:s>NutritionAssessment</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="258">
+                                 <a:s>result</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> in </a:s>
+                           <a:s r="259">
+                              <a:s>&quot;Nutrition Assessment Status Severely Malnourished&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="263" locator="98:3-101:93" xsi:type="Query">
+            <source localId="240" locator="98:3-98:61" alias="GlobalMalnutritionEncounter">
+               <expression localId="239" locator="98:3-98:33" name="Global Malnutrition Encounter" xsi:type="ExpressionRef"/>
+            </source>
+            <relationship localId="262" locator="99:5-101:93" alias="NutritionAssessment" xsi:type="With">
+               <expression localId="241" locator="99:10-99:58" xmlns:ns13="urn:healthit-gov:qdm:v5_6" dataType="ns13:PositiveAssessmentPerformed" templateId="PositiveAssessmentPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="99:36-99:57" name="Nutrition Assessment" xsi:type="ValueSetRef"/>
+               </expression>
+               <suchThat localId="261" locator="100:17-101:93" xsi:type="And">
+                  <operand localId="256" locator="100:17-100:249" xsi:type="In">
+                     <operand localId="252" locator="100:17-100:171" xsi:type="Coalesce">
+                        <operand localId="249" locator="100:26-100:134" xsi:type="Start">
+                           <operand localId="248" locator="100:35-100:134" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                              <operand localId="245" locator="100:62-100:97" path="relevantDatetime" scope="NutritionAssessment" xsi:type="Property"/>
+                              <operand localId="247" locator="100:100-100:133" path="relevantPeriod" scope="NutritionAssessment" xsi:type="Property"/>
+                           </operand>
+                        </operand>
+                        <operand localId="251" locator="100:137-100:170" path="authorDatetime" scope="NutritionAssessment" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="255" locator="100:179-100:249" name="HospitalizationWithObservation" libraryName="Global" xsi:type="FunctionRef">
+                        <operand localId="254" locator="100:221-100:247" name="GlobalMalnutritionEncounter" xsi:type="AliasRef"/>
+                     </operand>
+                  </operand>
+                  <operand localId="260" locator="101:13-101:93" xsi:type="InValueSet">
+                     <code asType="t:Code" xsi:type="As">
+                        <operand localId="258" locator="101:13-101:38" path="result" scope="NutritionAssessment" xsi:type="Property"/>
+                     </code>
+                     <valueset localId="259" locator="101:43-101:93" name="Nutrition Assessment Status Severely Malnourished" xsi:type="ValueSetRef"/>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="277" locator="103:1-106:140" name="Encounter with Malnutrition Diagnosis" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="277">
+               <a:s>define &quot;Encounter with Malnutrition Diagnosis&quot;:
+  </a:s>
+               <a:s r="276">
+                  <a:s>
+                     <a:s r="266">
+                        <a:s r="265">
+                           <a:s>
+                              <a:s>&quot;Global Malnutrition Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> GlobalMalnutritionEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="275">
+                     <a:s>with </a:s>
+                     <a:s r="268">
+                        <a:s r="267">
+                           <a:s r="267">
+                              <a:s>[&quot;Diagnosis&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Malnutrition Diagnosis&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> MalnutritionDiagnosis</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="274">
+                        <a:s r="270">
+                           <a:s r="269">
+                              <a:s>MalnutritionDiagnosis</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="270">
+                              <a:s>prevalencePeriod</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="274"> starts during </a:s>
+                        <a:s r="273">
+                           <a:s r="271">
+                              <a:s>Global</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="273">
+                              <a:s>&quot;HospitalizationWithObservation&quot; ( </a:s>
+                              <a:s r="272">
+                                 <a:s>GlobalMalnutritionEncounter</a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="276" locator="104:3-106:140" xsi:type="Query">
+            <source localId="266" locator="104:3-104:61" alias="GlobalMalnutritionEncounter">
+               <expression localId="265" locator="104:3-104:33" name="Global Malnutrition Encounter" xsi:type="ExpressionRef"/>
+            </source>
+            <relationship localId="275" locator="105:5-106:140" alias="MalnutritionDiagnosis" xsi:type="With">
+               <expression localId="267" locator="105:10-105:48" xmlns:ns14="urn:healthit-gov:qdm:v5_6" dataType="ns14:Diagnosis" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="105:24-105:47" name="Malnutrition Diagnosis" xsi:type="ValueSetRef"/>
+               </expression>
+               <suchThat localId="274" locator="106:17-106:140" xsi:type="In">
+                  <operand locator="106:56-106:61" xsi:type="Start">
+                     <operand localId="270" locator="106:17-106:54" path="prevalencePeriod" scope="MalnutritionDiagnosis" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="273" locator="106:70-106:140" name="HospitalizationWithObservation" libraryName="Global" xsi:type="FunctionRef">
+                     <operand localId="272" locator="106:112-106:138" name="GlobalMalnutritionEncounter" xsi:type="AliasRef"/>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="298" locator="108:1-111:243" name="Encounter with Nutrition Care Plan" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="298">
+               <a:s>define &quot;Encounter with Nutrition Care Plan&quot;:
+  </a:s>
+               <a:s r="297">
+                  <a:s>
+                     <a:s r="279">
+                        <a:s r="278">
+                           <a:s>
+                              <a:s>&quot;Global Malnutrition Encounter&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> GlobalMalnutritionEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="296">
+                     <a:s>with </a:s>
+                     <a:s r="281">
+                        <a:s r="280">
+                           <a:s r="280">
+                              <a:s>[&quot;Intervention, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Nutrition Care Plan&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> NutritionCarePlan</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="295">
+                        <a:s r="291">
+                           <a:s>Coalesce(</a:s>
+                           <a:s r="288">
+                              <a:s>start of </a:s>
+                              <a:s r="287">
+                                 <a:s r="282">
+                                    <a:s>Global</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="287">
+                                    <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                    <a:s r="284">
+                                       <a:s r="283">
+                                          <a:s>NutritionCarePlan</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="284">
+                                          <a:s>relevantDatetime</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>, </a:s>
+                                    <a:s r="286">
+                                       <a:s r="285">
+                                          <a:s>NutritionCarePlan</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="286">
+                                          <a:s>relevantPeriod</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>)</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>, </a:s>
+                           <a:s r="290">
+                              <a:s r="289">
+                                 <a:s>NutritionCarePlan</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="290">
+                                 <a:s>authorDatetime</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>)</a:s>
+                        </a:s>
+                        <a:s r="295">during </a:s>
+                        <a:s r="294">
+                           <a:s r="292">
+                              <a:s>Global</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="294">
+                              <a:s>&quot;HospitalizationWithObservation&quot; ( </a:s>
+                              <a:s r="293">
+                                 <a:s>GlobalMalnutritionEncounter</a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="297" locator="109:3-111:243" xsi:type="Query">
+            <source localId="279" locator="109:3-109:61" alias="GlobalMalnutritionEncounter">
+               <expression localId="278" locator="109:3-109:33" name="Global Malnutrition Encounter" xsi:type="ExpressionRef"/>
+            </source>
+            <relationship localId="296" locator="110:5-111:243" alias="NutritionCarePlan" xsi:type="With">
+               <expression localId="280" locator="110:10-110:59" xmlns:ns15="urn:healthit-gov:qdm:v5_6" dataType="ns15:PositiveInterventionPerformed" templateId="PositiveInterventionPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="110:38-110:58" name="Nutrition Care Plan" xsi:type="ValueSetRef"/>
+               </expression>
+               <suchThat localId="295" locator="111:17-111:243" xsi:type="In">
+                  <operand localId="291" locator="111:17-111:165" xsi:type="Coalesce">
+                     <operand localId="288" locator="111:26-111:130" xsi:type="Start">
+                        <operand localId="287" locator="111:35-111:130" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                           <operand localId="284" locator="111:62-111:95" path="relevantDatetime" scope="NutritionCarePlan" xsi:type="Property"/>
+                           <operand localId="286" locator="111:98-111:129" path="relevantPeriod" scope="NutritionCarePlan" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                     <operand localId="290" locator="111:133-111:164" path="authorDatetime" scope="NutritionCarePlan" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="294" locator="111:173-111:243" name="HospitalizationWithObservation" libraryName="Global" xsi:type="FunctionRef">
+                     <operand localId="293" locator="111:215-111:241" name="GlobalMalnutritionEncounter" xsi:type="AliasRef"/>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="314" locator="114:1-120:10" name="Measure Observation 1" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="314">
+               <a:s>/*&quot;Measure Observation 1&quot; identifies hospital encounters where a “Malnutrition Risk Screening” was performed with a current identified “Malnutrition Screening Not At Risk Result” or current identified “Malnutrition Screening At Risk Result”. &quot;Global Malnutrition Encounters&quot; are hospital encounters for patients aged 65 years and greater with a length of stay of 24 hours or greater. &quot;Measure Observation 1&quot; equals 1 for performed &quot;Encounters with Malnutrition Risk Screening and Identified Result&quot; and 0 for not performed*/define function &quot;Measure Observation 1&quot;(Encounter </a:s>
+               <a:s r="299">
+                  <a:s>&quot;Encounter, Performed&quot;</a:s>
+               </a:s>
+               <a:s> ):
+  </a:s>
+               <a:s r="313">
+                  <a:s r="313">
+                     <a:s>if </a:s>
+                     <a:s r="310">
+                        <a:s>( </a:s>
+                        <a:s r="310">
+                           <a:s r="302">
+                              <a:s r="300">
+                                 <a:s>&quot;Encounter with Malnutrition Risk Screening and Identified Result&quot;</a:s>
+                              </a:s>
+                              <a:s> contains </a:s>
+                              <a:s r="301">
+                                 <a:s>Encounter</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+      and </a:s>
+                           <a:s r="309">
+                              <a:s>( </a:s>
+                              <a:s r="309">
+                                 <a:s r="305">
+                                    <a:s r="303">
+                                       <a:s>&quot;Encounter with Malnutrition Screening Not At Risk Result&quot;</a:s>
+                                    </a:s>
+                                    <a:s> contains </a:s>
+                                    <a:s r="304">
+                                       <a:s>Encounter</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+          or </a:s>
+                                 <a:s r="308">
+                                    <a:s r="306">
+                                       <a:s>&quot;Encounter with Malnutrition Screening At Risk Result&quot;</a:s>
+                                    </a:s>
+                                    <a:s> contains </a:s>
+                                    <a:s r="307">
+                                       <a:s>Encounter</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+  )</a:s>
+                     </a:s>
+                     <a:s r="311"> then 1 
+    else 0</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="313" locator="115:3-120:10" xsi:type="If">
+            <condition localId="310" locator="115:6-119:3" xsi:type="And">
+               <operand localId="302" locator="115:8-115:92" xsi:type="Contains">
+                  <operand localId="300" locator="115:8-115:73" name="Encounter with Malnutrition Risk Screening and Identified Result" xsi:type="ExpressionRef"/>
+                  <operand localId="301" locator="115:84-115:92" name="Encounter" xsi:type="OperandRef"/>
+               </operand>
+               <operand localId="309" locator="116:11-118:7" xsi:type="Or">
+                  <operand localId="305" locator="116:13-116:89" xsi:type="Contains">
+                     <operand localId="303" locator="116:13-116:70" name="Encounter with Malnutrition Screening Not At Risk Result" xsi:type="ExpressionRef"/>
+                     <operand localId="304" locator="116:81-116:89" name="Encounter" xsi:type="OperandRef"/>
+                  </operand>
+                  <operand localId="308" locator="117:14-117:86" xsi:type="Contains">
+                     <operand localId="306" locator="117:14-117:67" name="Encounter with Malnutrition Screening At Risk Result" xsi:type="ExpressionRef"/>
+                     <operand localId="307" locator="117:78-117:86" name="Encounter" xsi:type="OperandRef"/>
+                  </operand>
+               </operand>
+            </condition>
+            <then localId="311" locator="119:10" valueType="t:Integer" value="1" xsi:type="Literal"/>
+            <else localId="312" locator="120:10" valueType="t:Integer" value="0" xsi:type="Literal"/>
+         </expression>
+         <operand name="Encounter">
+            <operandTypeSpecifier localId="299" locator="114:51-114:72" xmlns:ns16="urn:healthit-gov:qdm:v5_6" name="ns16:PositiveEncounterPerformed" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+      </def>
+      <def localId="334" locator="123:1-130:10" name="Measure Observation 2" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="334">
+               <a:s>/*&quot;Measure Observation 2&quot; identifies hospital encounters where a “Nutrition Assessment” was performed with a current identified status of “Nutrition Assessment Status Not or Mildly Malnourished&quot;, “Nutrition Assessment Status Moderately Malnourished&quot;, or “Nutrition Assessment Status Severely Malnourished&quot;. &quot;Measure Observation 2&quot; should be performed in &quot;Global Malnutrition Encounters&quot; with a current &quot;Malnutrition Screening At Risk Result&quot; or current &quot;Hospital Dietitian Referral&quot;. &quot;Measure Observation 2&quot; equals 1 for performed &quot;Encounters with Nutrition Assessment with Identified Status&quot; and 0 for not performed*/define function &quot;Measure Observation 2&quot;(Encounter </a:s>
+               <a:s r="315">
+                  <a:s>&quot;Encounter, Performed&quot;</a:s>
+               </a:s>
+               <a:s> ):
+  </a:s>
+               <a:s r="333">
+                  <a:s r="333">
+                     <a:s>if </a:s>
+                     <a:s r="330">
+                        <a:s>( </a:s>
+                        <a:s r="330">
+                           <a:s r="318">
+                              <a:s r="316">
+                                 <a:s>&quot;Encounter with Nutrition Assessment and Identified Status&quot;</a:s>
+                              </a:s>
+                              <a:s> contains </a:s>
+                              <a:s r="317">
+                                 <a:s>Encounter</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+      and </a:s>
+                           <a:s r="329">
+                              <a:s>( </a:s>
+                              <a:s r="329">
+                                 <a:s r="325">
+                                    <a:s r="321">
+                                       <a:s r="319">
+                                          <a:s>&quot;Encounter with Nutrition Assessment Status Not or Mildly Malnourished&quot;</a:s>
+                                       </a:s>
+                                       <a:s> contains </a:s>
+                                       <a:s r="320">
+                                          <a:s>Encounter</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+          or </a:s>
+                                    <a:s r="324">
+                                       <a:s r="322">
+                                          <a:s>&quot;Encounter with Nutrition Assessment Status Moderately Malnourished&quot;</a:s>
+                                       </a:s>
+                                       <a:s> contains </a:s>
+                                       <a:s r="323">
+                                          <a:s>Encounter</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+          or </a:s>
+                                 <a:s r="328">
+                                    <a:s r="326">
+                                       <a:s>&quot;Encounter with Nutrition Assessment Status Severely Malnourished&quot;</a:s>
+                                    </a:s>
+                                    <a:s> contains </a:s>
+                                    <a:s r="327">
+                                       <a:s>Encounter</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+  )</a:s>
+                     </a:s>
+                     <a:s r="331"> then 1 
+    else 0</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="333" locator="124:3-130:10" xsi:type="If">
+            <condition localId="330" locator="124:6-129:3" xsi:type="And">
+               <operand localId="318" locator="124:8-124:85" xsi:type="Contains">
+                  <operand localId="316" locator="124:8-124:66" name="Encounter with Nutrition Assessment and Identified Status" xsi:type="ExpressionRef"/>
+                  <operand localId="317" locator="124:77-124:85" name="Encounter" xsi:type="OperandRef"/>
+               </operand>
+               <operand localId="329" locator="125:11-128:7" xsi:type="Or">
+                  <operand localId="325" locator="125:13-126:100" xsi:type="Or">
+                     <operand localId="321" locator="125:13-125:102" xsi:type="Contains">
+                        <operand localId="319" locator="125:13-125:83" name="Encounter with Nutrition Assessment Status Not or Mildly Malnourished" xsi:type="ExpressionRef"/>
+                        <operand localId="320" locator="125:94-125:102" name="Encounter" xsi:type="OperandRef"/>
+                     </operand>
+                     <operand localId="324" locator="126:14-126:100" xsi:type="Contains">
+                        <operand localId="322" locator="126:14-126:81" name="Encounter with Nutrition Assessment Status Moderately Malnourished" xsi:type="ExpressionRef"/>
+                        <operand localId="323" locator="126:92-126:100" name="Encounter" xsi:type="OperandRef"/>
+                     </operand>
+                  </operand>
+                  <operand localId="328" locator="127:14-127:98" xsi:type="Contains">
+                     <operand localId="326" locator="127:14-127:79" name="Encounter with Nutrition Assessment Status Severely Malnourished" xsi:type="ExpressionRef"/>
+                     <operand localId="327" locator="127:90-127:98" name="Encounter" xsi:type="OperandRef"/>
+                  </operand>
+               </operand>
+            </condition>
+            <then localId="331" locator="129:10" valueType="t:Integer" value="1" xsi:type="Literal"/>
+            <else localId="332" locator="130:10" valueType="t:Integer" value="0" xsi:type="Literal"/>
+         </expression>
+         <operand name="Encounter">
+            <operandTypeSpecifier localId="315" locator="123:51-123:72" xmlns:ns17="urn:healthit-gov:qdm:v5_6" name="ns17:PositiveEncounterPerformed" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+      </def>
+      <def localId="354" locator="133:1-140:10" name="Measure Observation 3" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="354">
+               <a:s>/*&quot;Measure Observation 3&quot; identifies hospital encounters where a current “Malnutrition Diagnosis” was documented. &quot;Measure Observation 3&quot; should be performed in &quot;Global Malnutrition Encounters&quot; with a current identified status of “Nutrition Assessment Status Moderately Malnourished&quot; or “Nutrition Assessment Status Severely Malnourished&quot;. &quot;Measure Observation 3&quot; equals 1 for performed &quot;Encounters with Malnutrition Diagnosis&quot; and 0 for not performed*/define function &quot;Measure Observation 3&quot;(Encounter </a:s>
+               <a:s r="335">
+                  <a:s>&quot;Encounter, Performed&quot;</a:s>
+               </a:s>
+               <a:s> ):
+  </a:s>
+               <a:s r="353">
+                  <a:s r="353">
+                     <a:s>if </a:s>
+                     <a:s r="350">
+                        <a:s>( </a:s>
+                        <a:s r="350">
+                           <a:s r="342">
+                              <a:s r="338">
+                                 <a:s r="336">
+                                    <a:s>&quot;Encounter with Malnutrition Diagnosis&quot;</a:s>
+                                 </a:s>
+                                 <a:s> contains </a:s>
+                                 <a:s r="337">
+                                    <a:s>Encounter</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      and </a:s>
+                              <a:s r="341">
+                                 <a:s r="339">
+                                    <a:s>&quot;Encounter with Nutrition Assessment and Identified Status&quot;</a:s>
+                                 </a:s>
+                                 <a:s> contains </a:s>
+                                 <a:s r="340">
+                                    <a:s>Encounter</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+      and </a:s>
+                           <a:s r="349">
+                              <a:s>( </a:s>
+                              <a:s r="349">
+                                 <a:s r="345">
+                                    <a:s r="343">
+                                       <a:s>&quot;Encounter with Nutrition Assessment Status Moderately Malnourished&quot;</a:s>
+                                    </a:s>
+                                    <a:s> contains </a:s>
+                                    <a:s r="344">
+                                       <a:s>Encounter</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+          or </a:s>
+                                 <a:s r="348">
+                                    <a:s r="346">
+                                       <a:s>&quot;Encounter with Nutrition Assessment Status Severely Malnourished&quot;</a:s>
+                                    </a:s>
+                                    <a:s> contains </a:s>
+                                    <a:s r="347">
+                                       <a:s>Encounter</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+  )</a:s>
+                     </a:s>
+                     <a:s r="351"> then 1 
+    else 0</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="353" locator="134:3-140:10" xsi:type="If">
+            <condition localId="350" locator="134:6-139:3" xsi:type="And">
+               <operand localId="342" locator="134:8-135:88" xsi:type="And">
+                  <operand localId="338" locator="134:8-134:65" xsi:type="Contains">
+                     <operand localId="336" locator="134:8-134:46" name="Encounter with Malnutrition Diagnosis" xsi:type="ExpressionRef"/>
+                     <operand localId="337" locator="134:57-134:65" name="Encounter" xsi:type="OperandRef"/>
+                  </operand>
+                  <operand localId="341" locator="135:11-135:88" xsi:type="Contains">
+                     <operand localId="339" locator="135:11-135:69" name="Encounter with Nutrition Assessment and Identified Status" xsi:type="ExpressionRef"/>
+                     <operand localId="340" locator="135:80-135:88" name="Encounter" xsi:type="OperandRef"/>
+                  </operand>
+               </operand>
+               <operand localId="349" locator="136:11-138:7" xsi:type="Or">
+                  <operand localId="345" locator="136:13-136:99" xsi:type="Contains">
+                     <operand localId="343" locator="136:13-136:80" name="Encounter with Nutrition Assessment Status Moderately Malnourished" xsi:type="ExpressionRef"/>
+                     <operand localId="344" locator="136:91-136:99" name="Encounter" xsi:type="OperandRef"/>
+                  </operand>
+                  <operand localId="348" locator="137:14-137:98" xsi:type="Contains">
+                     <operand localId="346" locator="137:14-137:79" name="Encounter with Nutrition Assessment Status Severely Malnourished" xsi:type="ExpressionRef"/>
+                     <operand localId="347" locator="137:90-137:98" name="Encounter" xsi:type="OperandRef"/>
+                  </operand>
+               </operand>
+            </condition>
+            <then localId="351" locator="139:10" valueType="t:Integer" value="1" xsi:type="Literal"/>
+            <else localId="352" locator="140:10" valueType="t:Integer" value="0" xsi:type="Literal"/>
+         </expression>
+         <operand name="Encounter">
+            <operandTypeSpecifier localId="335" locator="133:51-133:72" xmlns:ns18="urn:healthit-gov:qdm:v5_6" name="ns18:PositiveEncounterPerformed" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+      </def>
+      <def localId="374" locator="143:1-150:10" name="Measure Observation 4" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="374">
+               <a:s>/*&quot;Measure Observation 4&quot; identifies hospital encounters where a current “Nutrition Care Plan” was performed. &quot;Measure Observation 4&quot; should be performed &quot;Global Malnutrition Encounters&quot; with a current identified status of “Nutrition Assessment Status Moderately Malnourished&quot; or “Nutrition Assessment Status Severely Malnourished&quot;. &quot;Measure Observation 4&quot; equals 1 for performed &quot;Encounters with Nutrition Care Plan&quot; and 0 for not performed*/define function &quot;Measure Observation 4&quot;(Encounter </a:s>
+               <a:s r="355">
+                  <a:s>&quot;Encounter, Performed&quot;</a:s>
+               </a:s>
+               <a:s> ):
+  </a:s>
+               <a:s r="373">
+                  <a:s r="373">
+                     <a:s>if </a:s>
+                     <a:s r="370">
+                        <a:s>( </a:s>
+                        <a:s r="370">
+                           <a:s r="362">
+                              <a:s r="358">
+                                 <a:s r="356">
+                                    <a:s>&quot;Encounter with Nutrition Care Plan&quot;</a:s>
+                                 </a:s>
+                                 <a:s> contains </a:s>
+                                 <a:s r="357">
+                                    <a:s>Encounter</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      and </a:s>
+                              <a:s r="361">
+                                 <a:s r="359">
+                                    <a:s>&quot;Encounter with Nutrition Assessment and Identified Status&quot;</a:s>
+                                 </a:s>
+                                 <a:s> contains </a:s>
+                                 <a:s r="360">
+                                    <a:s>Encounter</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+      and </a:s>
+                           <a:s r="369">
+                              <a:s>( </a:s>
+                              <a:s r="369">
+                                 <a:s r="365">
+                                    <a:s r="363">
+                                       <a:s>&quot;Encounter with Nutrition Assessment Status Moderately Malnourished&quot;</a:s>
+                                    </a:s>
+                                    <a:s> contains </a:s>
+                                    <a:s r="364">
+                                       <a:s>Encounter</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+          or </a:s>
+                                 <a:s r="368">
+                                    <a:s r="366">
+                                       <a:s>&quot;Encounter with Nutrition Assessment Status Severely Malnourished&quot;</a:s>
+                                    </a:s>
+                                    <a:s> contains </a:s>
+                                    <a:s r="367">
+                                       <a:s>Encounter</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+  )</a:s>
+                     </a:s>
+                     <a:s r="371"> then 1 
+    else 0</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="373" locator="144:3-150:10" xsi:type="If">
+            <condition localId="370" locator="144:6-149:3" xsi:type="And">
+               <operand localId="362" locator="144:8-145:88" xsi:type="And">
+                  <operand localId="358" locator="144:8-144:62" xsi:type="Contains">
+                     <operand localId="356" locator="144:8-144:43" name="Encounter with Nutrition Care Plan" xsi:type="ExpressionRef"/>
+                     <operand localId="357" locator="144:54-144:62" name="Encounter" xsi:type="OperandRef"/>
+                  </operand>
+                  <operand localId="361" locator="145:11-145:88" xsi:type="Contains">
+                     <operand localId="359" locator="145:11-145:69" name="Encounter with Nutrition Assessment and Identified Status" xsi:type="ExpressionRef"/>
+                     <operand localId="360" locator="145:80-145:88" name="Encounter" xsi:type="OperandRef"/>
+                  </operand>
+               </operand>
+               <operand localId="369" locator="146:11-148:7" xsi:type="Or">
+                  <operand localId="365" locator="146:13-146:99" xsi:type="Contains">
+                     <operand localId="363" locator="146:13-146:80" name="Encounter with Nutrition Assessment Status Moderately Malnourished" xsi:type="ExpressionRef"/>
+                     <operand localId="364" locator="146:91-146:99" name="Encounter" xsi:type="OperandRef"/>
+                  </operand>
+                  <operand localId="368" locator="147:14-147:98" xsi:type="Contains">
+                     <operand localId="366" locator="147:14-147:79" name="Encounter with Nutrition Assessment Status Severely Malnourished" xsi:type="ExpressionRef"/>
+                     <operand localId="367" locator="147:90-147:98" name="Encounter" xsi:type="OperandRef"/>
+                  </operand>
+               </operand>
+            </condition>
+            <then localId="371" locator="149:10" valueType="t:Integer" value="1" xsi:type="Literal"/>
+            <else localId="372" locator="150:10" valueType="t:Integer" value="0" xsi:type="Literal"/>
+         </expression>
+         <operand name="Encounter">
+            <operandTypeSpecifier localId="355" locator="143:51-143:72" xmlns:ns19="urn:healthit-gov:qdm:v5_6" name="ns19:PositiveEncounterPerformed" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+      </def>
+      <def localId="386" locator="156:1-157:152" name="Measure Observation TotalMalnutritionComponentsScore" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="386">
+               <a:s>/*Measure Observation ”TotalMalnutritionComponentsScore” = (&quot;Measure Observation 1&quot; + &quot;Measure Observation 2&quot; + &quot;Measure Observation 3&quot; + &quot;Measure Observation 4&quot;). 
+
+Measure Observation “TotalMalnutritionComponentsScore” Calculations:
+-For each hospitalization, Population Criteria 5 represents the subtotal of Measure Observations performed for Population Criteria 1, 2, 3, and 4. -For the reporting facility, the Population Criteria 5 Aggregate Operator “Count” counts the number of hospitalizations during the measurement period.*/define function &quot;Measure Observation TotalMalnutritionComponentsScore&quot;(Encounter </a:s>
+               <a:s r="375">
+                  <a:s>&quot;Encounter, Performed&quot;</a:s>
+               </a:s>
+               <a:s> ):
+  </a:s>
+               <a:s r="385">
+                  <a:s r="385">
+                     <a:s>Sum(</a:s>
+                     <a:s r="384">
+                        <a:s>{ </a:s>
+                        <a:s r="377">
+                           <a:s>&quot;Measure Observation 1&quot;(</a:s>
+                           <a:s r="376">
+                              <a:s>Encounter</a:s>
+                           </a:s>
+                           <a:s>)</a:s>
+                        </a:s>
+                        <a:s>, </a:s>
+                        <a:s r="379">
+                           <a:s>&quot;Measure Observation 2&quot;(</a:s>
+                           <a:s r="378">
+                              <a:s>Encounter</a:s>
+                           </a:s>
+                           <a:s>)</a:s>
+                        </a:s>
+                        <a:s>, </a:s>
+                        <a:s r="381">
+                           <a:s>&quot;Measure Observation 3&quot;(</a:s>
+                           <a:s r="380">
+                              <a:s>Encounter</a:s>
+                           </a:s>
+                           <a:s>)</a:s>
+                        </a:s>
+                        <a:s>, </a:s>
+                        <a:s r="383">
+                           <a:s>&quot;Measure Observation 4&quot;(</a:s>
+                           <a:s r="382">
+                              <a:s>Encounter</a:s>
+                           </a:s>
+                           <a:s>)</a:s>
+                        </a:s>
+                        <a:s>}</a:s>
+                     </a:s>
+                     <a:s>)</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="385" locator="157:3-157:152" xsi:type="Sum">
+            <source localId="384" locator="157:7-157:151" xsi:type="List">
+               <element localId="377" locator="157:9-157:42" name="Measure Observation 1" xsi:type="FunctionRef">
+                  <operand localId="376" locator="157:33-157:41" name="Encounter" xsi:type="OperandRef"/>
+               </element>
+               <element localId="379" locator="157:45-157:78" name="Measure Observation 2" xsi:type="FunctionRef">
+                  <operand localId="378" locator="157:69-157:77" name="Encounter" xsi:type="OperandRef"/>
+               </element>
+               <element localId="381" locator="157:81-157:114" name="Measure Observation 3" xsi:type="FunctionRef">
+                  <operand localId="380" locator="157:105-157:113" name="Encounter" xsi:type="OperandRef"/>
+               </element>
+               <element localId="383" locator="157:117-157:150" name="Measure Observation 4" xsi:type="FunctionRef">
+                  <operand localId="382" locator="157:141-157:149" name="Encounter" xsi:type="OperandRef"/>
+               </element>
+            </source>
+         </expression>
+         <operand name="Encounter">
+            <operandTypeSpecifier localId="375" locator="156:82-156:103" xmlns:ns20="urn:healthit-gov:qdm:v5_6" name="ns20:PositiveEncounterPerformed" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+      </def>
+      <def localId="417" locator="175:1-184:10" name="TotalMalnutritionCompositeScore Eligible Denominators" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="417">
+               <a:s>/*&quot;TotalMalnutritionCompositeScore Eligible Denominators&quot; defines the clinically eligible denominators for each &quot;Global Malnutrition Encounter.
+The “TotalMalnutritionCompositeScore Eligible Denominators” equals 4:
+-If a “Malnutrition Risk Screening” was performed AND a &quot;Malnutrition Screening At Risk Result&quot; was identified AND a “Nutrition Assessment” was not performed. 
+-If a “Malnutrition Risk Screening” was not performed AND a “Nutrition Assessment” was not performed. 
+-If a “Hospital Dietitian Referral” was ordered AND a “Nutrition Assessment” was not performed.
+-If a “Nutrition Assessment Status Moderately Malnourished” OR “Nutrition Assessment Status Severely Malnourished” was identified.
+
+ “TotalMalnutritionCompositeScore Eligible Denominators” is always 4 except in the following two instances: 
+-If a “Malnutrition Risk Screening” was performed and a “Malnutrition Screening Not At Risk Result” was identified and “Hospital Dietitian Referral” was not ordered, then the “TotalMalnutritionCompositeScore Eligible Denominators” is 1.
+-If a “Nutrition Assessment” was performed and a “Nutrition Assessment Status Not or Mildly Malnourished” was identified, then the “TotalMalnutritionCompositeScore Eligible Denominators” are 2.*/define function &quot;TotalMalnutritionCompositeScore Eligible Denominators&quot;(Encounter </a:s>
+               <a:s r="392">
+                  <a:s>&quot;Encounter, Performed&quot;</a:s>
+               </a:s>
+               <a:s> ):
+  </a:s>
+               <a:s r="416">
+                  <a:s r="416">
+                     <a:s>if </a:s>
+                     <a:s r="404">
+                        <a:s>( </a:s>
+                        <a:s r="404">
+                           <a:s r="399">
+                              <a:s>( </a:s>
+                              <a:s r="399">
+                                 <a:s r="395">
+                                    <a:s r="393">
+                                       <a:s>&quot;Encounter with Malnutrition Risk Screening and Identified Result&quot;</a:s>
+                                    </a:s>
+                                    <a:s> contains </a:s>
+                                    <a:s r="394">
+                                       <a:s>Encounter</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+        and </a:s>
+                                 <a:s r="398">
+                                    <a:s r="396">
+                                       <a:s>&quot;Encounter with Malnutrition Screening Not At Risk Result&quot;</a:s>
+                                    </a:s>
+                                    <a:s> contains </a:s>
+                                    <a:s r="397">
+                                       <a:s>Encounter</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+    )</a:s>
+                           </a:s>
+                           <a:s>
+      and </a:s>
+                           <a:s r="403">
+                              <a:s>not </a:s>
+                              <a:s r="402">
+                                 <a:s>( </a:s>
+                                 <a:s r="402">
+                                    <a:s r="400">
+                                       <a:s>&quot;Encounter with Hospital Dietitian Referral&quot;</a:s>
+                                    </a:s>
+                                    <a:s> contains </a:s>
+                                    <a:s r="401">
+                                       <a:s>Encounter</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+  )</a:s>
+                     </a:s>
+                     <a:s r="405"> then 1 
+    else </a:s>
+                     <a:s r="415">
+                        <a:s>if </a:s>
+                        <a:s r="412">
+                           <a:s>( </a:s>
+                           <a:s r="412">
+                              <a:s r="408">
+                                 <a:s r="406">
+                                    <a:s>&quot;Encounter with Nutrition Assessment and Identified Status&quot;</a:s>
+                                 </a:s>
+                                 <a:s> contains </a:s>
+                                 <a:s r="407">
+                                    <a:s>Encounter</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      and </a:s>
+                              <a:s r="411">
+                                 <a:s r="409">
+                                    <a:s>&quot;Encounter with Nutrition Assessment Status Not or Mildly Malnourished&quot;</a:s>
+                                 </a:s>
+                                 <a:s> contains </a:s>
+                                 <a:s r="410">
+                                    <a:s>Encounter</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+  )</a:s>
+                        </a:s>
+                        <a:s r="413"> then 2 
+    else 4</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="416" locator="176:3-184:10" xsi:type="If">
+            <condition localId="404" locator="176:6-180:3" xsi:type="And">
+               <operand localId="399" locator="176:8-178:5" xsi:type="And">
+                  <operand localId="395" locator="176:10-176:94" xsi:type="Contains">
+                     <operand localId="393" locator="176:10-176:75" name="Encounter with Malnutrition Risk Screening and Identified Result" xsi:type="ExpressionRef"/>
+                     <operand localId="394" locator="176:86-176:94" name="Encounter" xsi:type="OperandRef"/>
+                  </operand>
+                  <operand localId="398" locator="177:13-177:89" xsi:type="Contains">
+                     <operand localId="396" locator="177:13-177:70" name="Encounter with Malnutrition Screening Not At Risk Result" xsi:type="ExpressionRef"/>
+                     <operand localId="397" locator="177:81-177:89" name="Encounter" xsi:type="OperandRef"/>
+                  </operand>
+               </operand>
+               <operand localId="403" locator="179:11-179:81" xsi:type="Not">
+                  <operand localId="402" locator="179:15-179:81" xsi:type="Contains">
+                     <operand localId="400" locator="179:17-179:60" name="Encounter with Hospital Dietitian Referral" xsi:type="ExpressionRef"/>
+                     <operand localId="401" locator="179:71-179:79" name="Encounter" xsi:type="OperandRef"/>
+                  </operand>
+               </operand>
+            </condition>
+            <then localId="405" locator="180:10" valueType="t:Integer" value="1" xsi:type="Literal"/>
+            <else localId="415" locator="181:10-184:10" xsi:type="If">
+               <condition localId="412" locator="181:13-183:3" xsi:type="And">
+                  <operand localId="408" locator="181:15-181:92" xsi:type="Contains">
+                     <operand localId="406" locator="181:15-181:73" name="Encounter with Nutrition Assessment and Identified Status" xsi:type="ExpressionRef"/>
+                     <operand localId="407" locator="181:84-181:92" name="Encounter" xsi:type="OperandRef"/>
+                  </operand>
+                  <operand localId="411" locator="182:11-182:100" xsi:type="Contains">
+                     <operand localId="409" locator="182:11-182:81" name="Encounter with Nutrition Assessment Status Not or Mildly Malnourished" xsi:type="ExpressionRef"/>
+                     <operand localId="410" locator="182:92-182:100" name="Encounter" xsi:type="OperandRef"/>
+                  </operand>
+               </condition>
+               <then localId="413" locator="183:10" valueType="t:Integer" value="2" xsi:type="Literal"/>
+               <else localId="414" locator="184:10" valueType="t:Integer" value="4" xsi:type="Literal"/>
+            </else>
+         </expression>
+         <operand name="Encounter">
+            <operandTypeSpecifier localId="392" locator="175:83-175:104" xmlns:ns21="urn:healthit-gov:qdm:v5_6" name="ns21:PositiveEncounterPerformed" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+      </def>
+      <def localId="421" locator="162:1-163:144" name="Measure Observation TotalMalnutritionCompositeScore as Percentage" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="421">
+               <a:s>/*Population 6 Measure Observation “TotalMalnutritionCompositeScore as Percentage” Calculations:
+-For each hospitalization, Population Criteria 6 represents the sum of performed Measure Observations 1, 2, 3, and 4 divided by the number of clinically eligible denominators. 
+-For the reporting facility, the Population Criteria 6 Aggregate Operator “Average” averages the performance of each “TotalMalnutritionCompositeScore as Percentage” across all hospitalizations during the measurement period.*/define function &quot;Measure Observation TotalMalnutritionCompositeScore as Percentage&quot;(Encounter </a:s>
+               <a:s r="387">
+                  <a:s>&quot;Encounter, Performed&quot;</a:s>
+               </a:s>
+               <a:s> ):
+  </a:s>
+               <a:s r="420">
+                  <a:s r="420">
+                     <a:s r="388">100 * </a:s>
+                     <a:s r="419">
+                        <a:s>( </a:s>
+                        <a:s r="419">
+                           <a:s r="390">
+                              <a:s>&quot;Measure Observation TotalMalnutritionComponentsScore&quot;(</a:s>
+                              <a:s r="389">
+                                 <a:s>Encounter</a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                           <a:s>/ </a:s>
+                           <a:s r="418">
+                              <a:s>&quot;TotalMalnutritionCompositeScore Eligible Denominators&quot;(</a:s>
+                              <a:s r="391">
+                                 <a:s>Encounter</a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>)</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="420" locator="163:3-163:144" xsi:type="Multiply">
+            <operand xsi:type="ToDecimal">
+               <operand localId="388" locator="163:3-163:5" valueType="t:Integer" value="100" xsi:type="Literal"/>
+            </operand>
+            <operand localId="419" locator="163:9-163:144" xsi:type="Divide">
+               <operand xsi:type="ToDecimal">
+                  <operand localId="390" locator="163:11-163:75" name="Measure Observation TotalMalnutritionComponentsScore" xsi:type="FunctionRef">
+                     <operand localId="389" locator="163:66-163:74" name="Encounter" xsi:type="OperandRef"/>
+                  </operand>
+               </operand>
+               <operand xsi:type="ToDecimal">
+                  <operand localId="418" locator="163:78-163:143" name="TotalMalnutritionCompositeScore Eligible Denominators" xsi:type="FunctionRef">
+                     <operand localId="391" locator="163:134-163:142" name="Encounter" xsi:type="OperandRef"/>
+                  </operand>
+               </operand>
+            </operand>
+         </expression>
+         <operand name="Encounter">
+            <operandTypeSpecifier localId="387" locator="162:95-162:116" xmlns:ns22="urn:healthit-gov:qdm:v5_6" name="ns22:PositiveEncounterPerformed" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+      </def>
+   </statements>
+</library>

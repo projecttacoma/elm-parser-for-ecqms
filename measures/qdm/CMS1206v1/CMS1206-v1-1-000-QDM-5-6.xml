@@ -1,0 +1,1515 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion,DisableMethodInvocation" xsi:type="a:CqlToElmInfo"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="273">
+         <a:s>library AlaraCTOQR version '1.1.000'</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="AlaraCTOQR" version="1.1.000"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="3:1-3:23" localIdentifier="QDM" uri="urn:healthit-gov:qdm:v5_6" version="5.6">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>using </a:s>
+               <a:s>
+                  <a:s>QDM</a:s>
+               </a:s>
+               <a:s> version '5.6'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="5:1-5:64" localIdentifier="Global" path="MATGlobalCommonFunctions" version="7.0.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>MATGlobalCommonFunctions</a:s>
+               </a:s>
+               <a:s> version '7.0.000' called Global</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <parameters>
+      <def localId="17" locator="19:1-19:49" name="Measurement Period" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="17">
+               <a:s>parameter &quot;Measurement Period&quot; </a:s>
+               <a:s r="16">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="15">
+                     <a:s>DateTime</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <parameterTypeSpecifier localId="16" locator="19:32-19:49" xsi:type="IntervalTypeSpecifier">
+            <pointType localId="15" locator="19:41-19:48" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <codeSystems>
+      <def localId="3" locator="7:1-7:51" name="LOINC" id="urn:oid:2.16.840.1.113883.6.1" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>codesystem &quot;LOINC&quot;: 'urn:oid:2.16.840.1.113883.6.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </codeSystems>
+   <valueSets>
+      <def localId="4" locator="9:1-9:71" name="Encounter Inpatient" id="urn:oid:2.16.840.1.113883.3.666.5.307" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>valueset &quot;Encounter Inpatient&quot;: 'urn:oid:2.16.840.1.113883.3.666.5.307'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="5" locator="10:1-10:58" name="Ethnicity" id="urn:oid:2.16.840.1.114222.4.11.837" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>valueset &quot;Ethnicity&quot;: 'urn:oid:2.16.840.1.114222.4.11.837'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="6" locator="11:1-11:68" name="ONC Administrative Sex" id="urn:oid:2.16.840.1.113762.1.4.1" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>valueset &quot;ONC Administrative Sex&quot;: 'urn:oid:2.16.840.1.113762.1.4.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="7" locator="12:1-12:55" name="Payer" id="urn:oid:2.16.840.1.114222.4.11.3591" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="7">
+               <a:s>valueset &quot;Payer&quot;: 'urn:oid:2.16.840.1.114222.4.11.3591'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="8" locator="13:1-13:53" name="Race" id="urn:oid:2.16.840.1.114222.4.11.836" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="8">
+               <a:s>valueset &quot;Race&quot;: 'urn:oid:2.16.840.1.114222.4.11.836'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </valueSets>
+   <codes>
+      <def localId="10" locator="15:1-15:94" name="Calculated CT global noise" id="96912-1" display="Calculated CT global noise" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="10">
+               <a:s>code &quot;Calculated CT global noise&quot;: '96912-1' from </a:s>
+               <a:s r="9">
+                  <a:s>&quot;LOINC&quot;</a:s>
+               </a:s>
+               <a:s> display 'Calculated CT global noise'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="9" locator="15:51-15:57" name="LOINC"/>
+      </def>
+      <def localId="12" locator="16:1-16:106" name="Calculated CT size-adjusted dose" id="96913-9" display="Calculated CT size-adjusted dose" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="12">
+               <a:s>code &quot;Calculated CT size-adjusted dose&quot;: '96913-9' from </a:s>
+               <a:s r="11">
+                  <a:s>&quot;LOINC&quot;</a:s>
+               </a:s>
+               <a:s> display 'Calculated CT size-adjusted dose'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="11" locator="16:57-16:63" name="LOINC"/>
+      </def>
+      <def localId="14" locator="17:1-17:110" name="CT dose and image quality category" id="96914-7" display="CT dose and image quality category" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="14">
+               <a:s>code &quot;CT dose and image quality category&quot;: '96914-7' from </a:s>
+               <a:s r="13">
+                  <a:s>&quot;LOINC&quot;</a:s>
+               </a:s>
+               <a:s> display 'CT dose and image quality category'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="13" locator="17:59-17:65" name="LOINC"/>
+      </def>
+   </codes>
+   <contexts>
+      <def locator="21:1-21:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="21:1-21:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="21:1-21:15" xmlns:ns0="urn:healthit-gov:qdm:v5_6" dataType="ns0:Patient" templateId="Patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="35" locator="49:1-52:58" name="Qualified Scan" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="35">
+               <a:s>define &quot;Qualified Scan&quot;:
+  </a:s>
+               <a:s r="34">
+                  <a:s>
+                     <a:s r="19">
+                        <a:s r="18">
+                           <a:s r="18">
+                              <a:s>[&quot;Diagnostic Study, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;CT dose and image quality category&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> CTScan</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="33">
+                     <a:s>where </a:s>
+                     <a:s r="33">
+                        <a:s r="27">
+                           <a:s r="25">
+                              <a:s r="20">
+                                 <a:s>Global</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="25">
+                                 <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                 <a:s r="22">
+                                    <a:s r="21">
+                                       <a:s>CTScan</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="22">
+                                       <a:s>relevantDatetime</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>, </a:s>
+                                 <a:s r="24">
+                                    <a:s r="23">
+                                       <a:s>CTScan</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="24">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="27"> occurs during </a:s>
+                           <a:s r="26">
+                              <a:s>&quot;Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      and </a:s>
+                        <a:s r="32">
+                           <a:s r="30">
+                              <a:s>AgeInYearsAt(</a:s>
+                              <a:s r="29">
+                                 <a:s>start of </a:s>
+                                 <a:s r="28">
+                                    <a:s>&quot;Measurement Period&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                           <a:s r="31">>= 18</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="34" locator="50:3-52:58" xsi:type="Query">
+            <source localId="19" locator="50:3-50:78" alias="CTScan">
+               <expression localId="18" locator="50:3-50:71" xmlns:ns1="urn:healthit-gov:qdm:v5_6" dataType="ns1:PositiveDiagnosticStudyPerformed" templateId="PositiveDiagnosticStudyPerformed" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                  <codes xsi:type="ToList">
+                     <operand locator="50:35-50:70" name="CT dose and image quality category" xsi:type="CodeRef"/>
+                  </codes>
+               </expression>
+            </source>
+            <where localId="33" locator="51:5-52:58" xsi:type="And">
+               <operand localId="27" locator="51:11-51:122" xsi:type="IncludedIn">
+                  <operand localId="25" locator="51:11-51:87" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                     <operand localId="22" locator="51:40-51:62" path="relevantDatetime" scope="CTScan" xsi:type="Property"/>
+                     <operand localId="24" locator="51:65-51:85" path="relevantPeriod" scope="CTScan" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="26" locator="51:103-51:122" name="Measurement Period" xsi:type="ParameterRef"/>
+               </operand>
+               <operand localId="32" locator="52:11-52:58" xsi:type="GreaterOrEqual">
+                  <operand localId="30" locator="52:11-52:53" precision="Year" xsi:type="CalculateAgeAt">
+                     <operand path="birthDatetime" xsi:type="Property">
+                        <source name="Patient" xsi:type="ExpressionRef"/>
+                     </operand>
+                     <operand localId="29" locator="52:24-52:52" xsi:type="Start">
+                        <operand localId="28" locator="52:33-52:52" name="Measurement Period" xsi:type="ParameterRef"/>
+                     </operand>
+                  </operand>
+                  <operand localId="31" locator="52:57-52:58" valueType="t:Integer" value="18" xsi:type="Literal"/>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="51" locator="54:1-57:150" name="Initial Population" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="51">
+               <a:s>define &quot;Initial Population&quot;:
+  </a:s>
+               <a:s r="50">
+                  <a:s>
+                     <a:s r="37">
+                        <a:s r="36">
+                           <a:s>
+                              <a:s>&quot;Qualified Scan&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> QualifiedCTScan</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="49">
+                     <a:s>without </a:s>
+                     <a:s r="39">
+                        <a:s r="38">
+                           <a:s r="38">
+                              <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Encounter Inpatient&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> Encounter</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="48">
+                        <a:s r="45">
+                           <a:s r="40">
+                              <a:s>Global</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="45">
+                              <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                              <a:s r="42">
+                                 <a:s r="41">
+                                    <a:s>QualifiedCTScan</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="42">
+                                    <a:s>relevantDatetime</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="44">
+                                 <a:s r="43">
+                                    <a:s>QualifiedCTScan</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="44">
+                                    <a:s>relevantPeriod</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="48"> starts during </a:s>
+                        <a:s r="47">
+                           <a:s r="46">
+                              <a:s>Encounter</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="47">
+                              <a:s>relevantPeriod</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="50" locator="55:3-57:150" xsi:type="Query">
+            <source localId="37" locator="55:3-55:34" alias="QualifiedCTScan">
+               <expression localId="36" locator="55:3-55:18" name="Qualified Scan" xsi:type="ExpressionRef"/>
+            </source>
+            <relationship localId="49" locator="56:5-57:150" alias="Encounter" xsi:type="Without">
+               <expression localId="38" locator="56:13-56:59" xmlns:ns2="urn:healthit-gov:qdm:v5_6" dataType="ns2:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="56:38-56:58" name="Encounter Inpatient" xsi:type="ValueSetRef"/>
+               </expression>
+               <suchThat localId="48" locator="57:17-57:150" xsi:type="In">
+                  <operand locator="57:113-57:118" xsi:type="Start">
+                     <operand localId="45" locator="57:17-57:111" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                        <operand localId="42" locator="57:46-57:77" path="relevantDatetime" scope="QualifiedCTScan" xsi:type="Property"/>
+                        <operand localId="44" locator="57:80-57:109" path="relevantPeriod" scope="QualifiedCTScan" xsi:type="Property"/>
+                     </operand>
+                  </operand>
+                  <operand localId="47" locator="57:127-57:150" path="relevantPeriod" scope="Encounter" xsi:type="Property"/>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="76" locator="85:1-90:3" name="Global Noise Value" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="76">
+               <a:s>define function &quot;Global Noise Value&quot;(Study </a:s>
+               <a:s r="55">
+                  <a:s>&quot;Diagnostic Study, Performed&quot;</a:s>
+               </a:s>
+               <a:s> ):
+  </a:s>
+               <a:s r="75">
+                  <a:s r="75">
+                     <a:s>singleton from </a:s>
+                     <a:s r="74">
+                        <a:s>( </a:s>
+                        <a:s r="74">
+                           <a:s>
+                              <a:s r="57">
+                                 <a:s r="56">
+                                    <a:s>
+                                       <a:s>Study.components</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> C</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+      </a:s>
+                           <a:s r="67">
+                              <a:s>where </a:s>
+                              <a:s r="67">
+                                 <a:s r="61">
+                                    <a:s r="59">
+                                       <a:s r="58">
+                                          <a:s>C</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="59">
+                                          <a:s>code</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> ~ </a:s>
+                                    <a:s r="60">
+                                       <a:s>&quot;Calculated CT global noise&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+        and </a:s>
+                                 <a:s r="66">
+                                    <a:s r="64">
+                                       <a:s r="63">
+                                          <a:s r="62">
+                                             <a:s>C</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="63">
+                                             <a:s>result</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="64">
+                                          <a:s>unit</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> = </a:s>
+                                    <a:s r="65">
+                                       <a:s>'[hnsf\'U]'</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+      </a:s>
+                           <a:s r="73">
+                              <a:s>return </a:s>
+                              <a:s r="72">
+                                 <a:s r="70">
+                                    <a:s r="69">
+                                       <a:s r="68">
+                                          <a:s>C</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="69">
+                                          <a:s>result</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="70">
+                                       <a:s>value</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> as </a:s>
+                                 <a:s r="71">
+                                    <a:s>Decimal</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+  )</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="75" locator="86:3-90:3" xsi:type="SingletonFrom">
+            <operand localId="74" locator="86:18-90:3" xsi:type="Query">
+               <source localId="57" locator="86:20-86:37" alias="C">
+                  <expression localId="56" locator="86:20-86:35" path="components" xsi:type="Property">
+                     <source name="Study" xsi:type="OperandRef"/>
+                  </expression>
+               </source>
+               <where localId="67" locator="87:7-88:39" xsi:type="And">
+                  <operand localId="61" locator="87:13-87:49" xsi:type="Equivalent">
+                     <operand localId="59" locator="87:13-87:18" path="code" scope="C" xsi:type="Property"/>
+                     <operand localId="60" locator="87:22-87:49" name="Calculated CT global noise" xsi:type="CodeRef"/>
+                  </operand>
+                  <operand localId="66" locator="88:13-88:39" xsi:type="Equal">
+                     <operand localId="64" locator="88:13-88:25" path="unit" xsi:type="Property">
+                        <source localId="63" locator="88:13-88:20" path="result" scope="C" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="65" locator="88:29-88:39" valueType="t:String" value="[hnsf'U]" xsi:type="Literal"/>
+                  </operand>
+               </where>
+               <return localId="73" locator="89:7-89:38">
+                  <expression localId="72" locator="89:14-89:38" strict="false" xsi:type="As">
+                     <operand localId="70" locator="89:14-89:27" path="value" xsi:type="Property">
+                        <source localId="69" locator="89:14-89:21" path="result" scope="C" xsi:type="Property"/>
+                     </operand>
+                     <asTypeSpecifier localId="71" locator="89:32-89:38" name="t:Decimal" xsi:type="NamedTypeSpecifier"/>
+                  </expression>
+               </return>
+            </operand>
+         </expression>
+         <operand name="Study">
+            <operandTypeSpecifier localId="55" locator="85:44-85:72" xmlns:ns3="urn:healthit-gov:qdm:v5_6" name="ns3:PositiveDiagnosticStudyPerformed" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+      </def>
+      <def localId="101" locator="92:1-97:3" name="Size Adjusted Value" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="101">
+               <a:s>define function &quot;Size Adjusted Value&quot;(Study </a:s>
+               <a:s r="80">
+                  <a:s>&quot;Diagnostic Study, Performed&quot;</a:s>
+               </a:s>
+               <a:s> ):
+  </a:s>
+               <a:s r="100">
+                  <a:s r="100">
+                     <a:s>singleton from </a:s>
+                     <a:s r="99">
+                        <a:s>( </a:s>
+                        <a:s r="99">
+                           <a:s>
+                              <a:s r="82">
+                                 <a:s r="81">
+                                    <a:s>
+                                       <a:s>Study.components</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> C</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+      </a:s>
+                           <a:s r="92">
+                              <a:s>where </a:s>
+                              <a:s r="92">
+                                 <a:s r="86">
+                                    <a:s r="84">
+                                       <a:s r="83">
+                                          <a:s>C</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="84">
+                                          <a:s>code</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> ~ </a:s>
+                                    <a:s r="85">
+                                       <a:s>&quot;Calculated CT size-adjusted dose&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+        and </a:s>
+                                 <a:s r="91">
+                                    <a:s r="89">
+                                       <a:s r="88">
+                                          <a:s r="87">
+                                             <a:s>C</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="88">
+                                             <a:s>result</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="89">
+                                          <a:s>unit</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> = </a:s>
+                                    <a:s r="90">
+                                       <a:s>'mGy.cm'</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+      </a:s>
+                           <a:s r="98">
+                              <a:s>return </a:s>
+                              <a:s r="97">
+                                 <a:s r="95">
+                                    <a:s r="94">
+                                       <a:s r="93">
+                                          <a:s>C</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="94">
+                                          <a:s>result</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="95">
+                                       <a:s>value</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> as </a:s>
+                                 <a:s r="96">
+                                    <a:s>Decimal</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+  )</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="100" locator="93:3-97:3" xsi:type="SingletonFrom">
+            <operand localId="99" locator="93:18-97:3" xsi:type="Query">
+               <source localId="82" locator="93:20-93:37" alias="C">
+                  <expression localId="81" locator="93:20-93:35" path="components" xsi:type="Property">
+                     <source name="Study" xsi:type="OperandRef"/>
+                  </expression>
+               </source>
+               <where localId="92" locator="94:7-95:36" xsi:type="And">
+                  <operand localId="86" locator="94:13-94:55" xsi:type="Equivalent">
+                     <operand localId="84" locator="94:13-94:18" path="code" scope="C" xsi:type="Property"/>
+                     <operand localId="85" locator="94:22-94:55" name="Calculated CT size-adjusted dose" xsi:type="CodeRef"/>
+                  </operand>
+                  <operand localId="91" locator="95:13-95:36" xsi:type="Equal">
+                     <operand localId="89" locator="95:13-95:25" path="unit" xsi:type="Property">
+                        <source localId="88" locator="95:13-95:20" path="result" scope="C" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="90" locator="95:29-95:36" valueType="t:String" value="mGy.cm" xsi:type="Literal"/>
+                  </operand>
+               </where>
+               <return localId="98" locator="96:7-96:38">
+                  <expression localId="97" locator="96:14-96:38" strict="false" xsi:type="As">
+                     <operand localId="95" locator="96:14-96:27" path="value" xsi:type="Property">
+                        <source localId="94" locator="96:14-96:21" path="result" scope="C" xsi:type="Property"/>
+                     </operand>
+                     <asTypeSpecifier localId="96" locator="96:32-96:38" name="t:Decimal" xsi:type="NamedTypeSpecifier"/>
+                  </expression>
+               </return>
+            </operand>
+         </expression>
+         <operand name="Study">
+            <operandTypeSpecifier localId="80" locator="92:45-92:73" xmlns:ns4="urn:healthit-gov:qdm:v5_6" name="ns4:PositiveDiagnosticStudyPerformed" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+      </def>
+      <def localId="110" locator="23:1-27:31" name="Denominator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="110">
+               <a:s>define &quot;Denominator&quot;:
+  </a:s>
+               <a:s r="109">
+                  <a:s>
+                     <a:s r="53">
+                        <a:s r="52">
+                           <a:s>
+                              <a:s>&quot;Initial Population&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> IP</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="108">
+                     <a:s>where </a:s>
+                     <a:s r="108">
+                        <a:s r="104">
+                           <a:s r="78">
+                              <a:s r="77">
+                                 <a:s>&quot;Global Noise Value&quot;(</a:s>
+                                 <a:s r="54">
+                                    <a:s>IP</a:s>
+                                 </a:s>
+                                 <a:s>)</a:s>
+                              </a:s>
+                              <a:s>is not null</a:s>
+                           </a:s>
+                           <a:s>
+      and </a:s>
+                           <a:s r="103">
+                              <a:s r="102">
+                                 <a:s>&quot;Size Adjusted Value&quot;(</a:s>
+                                 <a:s r="79">
+                                    <a:s>IP</a:s>
+                                 </a:s>
+                                 <a:s>)</a:s>
+                              </a:s>
+                              <a:s>is not null</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      and </a:s>
+                        <a:s r="107">
+                           <a:s r="106">
+                              <a:s r="105">
+                                 <a:s>IP</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="106">
+                                 <a:s>result</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> is not null</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="109" locator="24:3-27:31" xsi:type="Query">
+            <source localId="53" locator="24:3-24:25" alias="IP">
+               <expression localId="52" locator="24:3-24:22" name="Initial Population" xsi:type="ExpressionRef"/>
+            </source>
+            <where localId="108" locator="25:5-27:31" xsi:type="And">
+               <operand localId="104" locator="25:11-26:46" xsi:type="And">
+                  <operand localId="78" locator="25:11-25:45" xsi:type="Not">
+                     <operand locator="25:11-25:45" xsi:type="IsNull">
+                        <operand localId="77" locator="25:11-25:34" name="Global Noise Value" xsi:type="FunctionRef">
+                           <operand localId="54" locator="25:32-25:33" name="IP" xsi:type="AliasRef"/>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand localId="103" locator="26:11-26:46" xsi:type="Not">
+                     <operand locator="26:11-26:46" xsi:type="IsNull">
+                        <operand localId="102" locator="26:11-26:35" name="Size Adjusted Value" xsi:type="FunctionRef">
+                           <operand localId="79" locator="26:33-26:34" name="IP" xsi:type="AliasRef"/>
+                        </operand>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand localId="107" locator="27:11-27:31" xsi:type="Not">
+                  <operand locator="27:11-27:31" xsi:type="IsNull">
+                     <operand localId="106" locator="27:11-27:19" path="result" scope="IP" xsi:type="Property"/>
+                  </operand>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="119" locator="29:1-31:40" name="Denominator Exclusion" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="119">
+               <a:s>define &quot;Denominator Exclusion&quot;:
+  </a:s>
+               <a:s r="118">
+                  <a:s>
+                     <a:s r="112">
+                        <a:s r="111">
+                           <a:s>
+                              <a:s>&quot;Denominator&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> Denom</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="117">
+                     <a:s>where </a:s>
+                     <a:s r="117">
+                        <a:s r="115">
+                           <a:s r="114">
+                              <a:s r="113">
+                                 <a:s>Denom</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="114">
+                                 <a:s>result</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="115">
+                              <a:s>code</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> ~ </a:s>
+                        <a:s r="116">
+                           <a:s>'FULLBODY'</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="118" locator="30:3-31:40" xsi:type="Query">
+            <source localId="112" locator="30:3-30:21" alias="Denom">
+               <expression localId="111" locator="30:3-30:15" name="Denominator" xsi:type="ExpressionRef"/>
+            </source>
+            <where localId="117" locator="31:5-31:40" xsi:type="Equivalent">
+               <operand localId="115" locator="31:11-31:27" path="code" xsi:type="Property">
+                  <source localId="114" locator="31:11-31:22" path="result" scope="Denom" xsi:type="Property"/>
+               </operand>
+               <operand localId="116" locator="31:31-31:40" valueType="t:String" value="FULLBODY" xsi:type="Literal"/>
+            </where>
+         </expression>
+      </def>
+      <def localId="147" locator="59:1-63:5" name="Qualifies" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="147">
+               <a:s>define function &quot;Qualifies&quot;(Study </a:s>
+               <a:s r="128">
+                  <a:s>&quot;Diagnostic Study, Performed&quot;</a:s>
+               </a:s>
+               <a:s>, code </a:s>
+               <a:s r="129">
+                  <a:s>String</a:s>
+               </a:s>
+               <a:s>, noiseThreshold </a:s>
+               <a:s r="130">
+                  <a:s>Decimal</a:s>
+               </a:s>
+               <a:s>, sizeDoseThreshold </a:s>
+               <a:s r="131">
+                  <a:s>Decimal</a:s>
+               </a:s>
+               <a:s> ):
+  </a:s>
+               <a:s r="146">
+                  <a:s r="146">
+                     <a:s r="136">
+                        <a:s r="134">
+                           <a:s r="133">
+                              <a:s r="132">
+                                 <a:s>Study</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="133">
+                                 <a:s>result</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="134">
+                              <a:s>code</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> ~ </a:s>
+                        <a:s r="135">
+                           <a:s>code</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    and </a:s>
+                     <a:s r="145">
+                        <a:s>( </a:s>
+                        <a:s r="145">
+                           <a:s r="140">
+                              <a:s r="138">
+                                 <a:s>&quot;Global Noise Value&quot;(</a:s>
+                                 <a:s r="137">
+                                    <a:s>Study</a:s>
+                                 </a:s>
+                                 <a:s>)</a:s>
+                              </a:s>
+                              <a:s>>= </a:s>
+                              <a:s r="139">
+                                 <a:s>noiseThreshold</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+        or </a:s>
+                           <a:s r="144">
+                              <a:s r="142">
+                                 <a:s>&quot;Size Adjusted Value&quot;(</a:s>
+                                 <a:s r="141">
+                                    <a:s>Study</a:s>
+                                 </a:s>
+                                 <a:s>)</a:s>
+                              </a:s>
+                              <a:s>>= </a:s>
+                              <a:s r="143">
+                                 <a:s>sizeDoseThreshold</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+    )</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="146" locator="60:3-63:5" xsi:type="And">
+            <operand localId="136" locator="60:3-60:26" xsi:type="Equivalent">
+               <operand localId="134" locator="60:3-60:19" path="code" xsi:type="Property">
+                  <source localId="133" locator="60:3-60:14" path="result" xsi:type="Property">
+                     <source localId="132" locator="60:3-60:7" name="Study" xsi:type="OperandRef"/>
+                  </source>
+               </operand>
+               <operand localId="135" locator="60:23-60:26" name="code" xsi:type="OperandRef"/>
+            </operand>
+            <operand localId="145" locator="61:9-63:5" xsi:type="Or">
+               <operand localId="140" locator="61:11-61:54" xsi:type="GreaterOrEqual">
+                  <operand localId="138" locator="61:11-61:37" name="Global Noise Value" xsi:type="FunctionRef">
+                     <operand localId="137" locator="61:32-61:36" name="Study" xsi:type="OperandRef"/>
+                  </operand>
+                  <operand localId="139" locator="61:41-61:54" name="noiseThreshold" xsi:type="OperandRef"/>
+               </operand>
+               <operand localId="144" locator="62:12-62:59" xsi:type="GreaterOrEqual">
+                  <operand localId="142" locator="62:12-62:39" name="Size Adjusted Value" xsi:type="FunctionRef">
+                     <operand localId="141" locator="62:34-62:38" name="Study" xsi:type="OperandRef"/>
+                  </operand>
+                  <operand localId="143" locator="62:43-62:59" name="sizeDoseThreshold" xsi:type="OperandRef"/>
+               </operand>
+            </operand>
+         </expression>
+         <operand name="Study">
+            <operandTypeSpecifier localId="128" locator="59:35-59:63" xmlns:ns5="urn:healthit-gov:qdm:v5_6" name="ns5:PositiveDiagnosticStudyPerformed" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+         <operand name="code">
+            <operandTypeSpecifier localId="129" locator="59:71-59:76" name="t:String" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+         <operand name="noiseThreshold">
+            <operandTypeSpecifier localId="130" locator="59:94-59:100" name="t:Decimal" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+         <operand name="sizeDoseThreshold">
+            <operandTypeSpecifier localId="131" locator="59:121-59:127" name="t:Decimal" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+      </def>
+      <def localId="251" locator="65:1-83:47" name="CT Scan Qualifies" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="251">
+               <a:s>define function &quot;CT Scan Qualifies&quot;(IP </a:s>
+               <a:s r="123">
+                  <a:s>&quot;Diagnostic Study, Performed&quot;</a:s>
+               </a:s>
+               <a:s> ):
+  </a:s>
+               <a:s r="250">
+                  <a:s r="250">
+                     <a:s r="244">
+                        <a:s r="238">
+                           <a:s r="232">
+                              <a:s r="226">
+                                 <a:s r="220">
+                                    <a:s r="214">
+                                       <a:s r="208">
+                                          <a:s r="202">
+                                             <a:s r="196">
+                                                <a:s r="190">
+                                                   <a:s r="184">
+                                                      <a:s r="178">
+                                                         <a:s r="172">
+                                                            <a:s r="166">
+                                                               <a:s r="160">
+                                                                  <a:s r="154">
+                                                                     <a:s r="148">
+                                                                        <a:s>&quot;Qualifies&quot;(</a:s>
+                                                                        <a:s r="124">
+                                                                           <a:s>IP</a:s>
+                                                                        </a:s>
+                                                                        <a:s>, </a:s>
+                                                                        <a:s r="125">
+                                                                           <a:s>'ABDOPEL LD'</a:s>
+                                                                        </a:s>
+                                                                        <a:s r="126">, 64, 598)</a:s>
+                                                                     </a:s>
+                                                                     <a:s>
+    or </a:s>
+                                                                     <a:s r="153">
+                                                                        <a:s>&quot;Qualifies&quot;(</a:s>
+                                                                        <a:s r="149">
+                                                                           <a:s>IP</a:s>
+                                                                        </a:s>
+                                                                        <a:s>, </a:s>
+                                                                        <a:s r="150">
+                                                                           <a:s>'ABDOPEL RT'</a:s>
+                                                                        </a:s>
+                                                                        <a:s r="151">, 29, 644)</a:s>
+                                                                     </a:s>
+                                                                  </a:s>
+                                                                  <a:s>
+    or </a:s>
+                                                                  <a:s r="159">
+                                                                     <a:s>&quot;Qualifies&quot;(</a:s>
+                                                                     <a:s r="155">
+                                                                        <a:s>IP</a:s>
+                                                                     </a:s>
+                                                                     <a:s>, </a:s>
+                                                                     <a:s r="156">
+                                                                        <a:s>'ABDOPEL HD'</a:s>
+                                                                     </a:s>
+                                                                     <a:s r="157">, 29, 1260)</a:s>
+                                                                  </a:s>
+                                                               </a:s>
+                                                               <a:s>
+    or </a:s>
+                                                               <a:s r="165">
+                                                                  <a:s>&quot;Qualifies&quot;(</a:s>
+                                                                  <a:s r="161">
+                                                                     <a:s>IP</a:s>
+                                                                  </a:s>
+                                                                  <a:s>, </a:s>
+                                                                  <a:s r="162">
+                                                                     <a:s>'CARDIAC LD'</a:s>
+                                                                  </a:s>
+                                                                  <a:s r="163">, 55, 93)</a:s>
+                                                               </a:s>
+                                                            </a:s>
+                                                            <a:s>
+    or </a:s>
+                                                            <a:s r="171">
+                                                               <a:s>&quot;Qualifies&quot;(</a:s>
+                                                               <a:s r="167">
+                                                                  <a:s>IP</a:s>
+                                                               </a:s>
+                                                               <a:s>, </a:s>
+                                                               <a:s r="168">
+                                                                  <a:s>'CARDIAC RT'</a:s>
+                                                               </a:s>
+                                                               <a:s r="169">, 32, 576)</a:s>
+                                                            </a:s>
+                                                         </a:s>
+                                                         <a:s>
+    or </a:s>
+                                                         <a:s r="177">
+                                                            <a:s>&quot;Qualifies&quot;(</a:s>
+                                                            <a:s r="173">
+                                                               <a:s>IP</a:s>
+                                                            </a:s>
+                                                            <a:s>, </a:s>
+                                                            <a:s r="174">
+                                                               <a:s>'CHEST LD'</a:s>
+                                                            </a:s>
+                                                            <a:s r="175">, 55, 377)</a:s>
+                                                         </a:s>
+                                                      </a:s>
+                                                      <a:s>
+    or </a:s>
+                                                      <a:s r="183">
+                                                         <a:s>&quot;Qualifies&quot;(</a:s>
+                                                         <a:s r="179">
+                                                            <a:s>IP</a:s>
+                                                         </a:s>
+                                                         <a:s>, </a:s>
+                                                         <a:s r="180">
+                                                            <a:s>'CHEST RT'</a:s>
+                                                         </a:s>
+                                                         <a:s r="181">, 49, 377)</a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                   <a:s>
+    or </a:s>
+                                                   <a:s r="189">
+                                                      <a:s>&quot;Qualifies&quot;(</a:s>
+                                                      <a:s r="185">
+                                                         <a:s>IP</a:s>
+                                                      </a:s>
+                                                      <a:s>, </a:s>
+                                                      <a:s r="186">
+                                                         <a:s>'CHEST-CARDIAC HD'</a:s>
+                                                      </a:s>
+                                                      <a:s r="187">, 49, 1282)</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s>
+    or </a:s>
+                                                <a:s r="195">
+                                                   <a:s>&quot;Qualifies&quot;(</a:s>
+                                                   <a:s r="191">
+                                                      <a:s>IP</a:s>
+                                                   </a:s>
+                                                   <a:s>, </a:s>
+                                                   <a:s r="192">
+                                                      <a:s>'HEAD LD'</a:s>
+                                                   </a:s>
+                                                   <a:s r="193">, 115, 582)</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>
+    or </a:s>
+                                             <a:s r="201">
+                                                <a:s>&quot;Qualifies&quot;(</a:s>
+                                                <a:s r="197">
+                                                   <a:s>IP</a:s>
+                                                </a:s>
+                                                <a:s>, </a:s>
+                                                <a:s r="198">
+                                                   <a:s>'HEAD RT'</a:s>
+                                                </a:s>
+                                                <a:s r="199">, 115, 1025)</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s>
+    or </a:s>
+                                          <a:s r="207">
+                                             <a:s>&quot;Qualifies&quot;(</a:s>
+                                             <a:s r="203">
+                                                <a:s>IP</a:s>
+                                             </a:s>
+                                             <a:s>, </a:s>
+                                             <a:s r="204">
+                                                <a:s>'HEAD HD'</a:s>
+                                             </a:s>
+                                             <a:s r="205">, 115, 1832)</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>
+    or </a:s>
+                                       <a:s r="213">
+                                          <a:s>&quot;Qualifies&quot;(</a:s>
+                                          <a:s r="209">
+                                             <a:s>IP</a:s>
+                                          </a:s>
+                                          <a:s>, </a:s>
+                                          <a:s r="210">
+                                             <a:s>'EXTREMITIES'</a:s>
+                                          </a:s>
+                                          <a:s r="211">, 73, 320)</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+    or </a:s>
+                                    <a:s r="219">
+                                       <a:s>&quot;Qualifies&quot;(</a:s>
+                                       <a:s r="215">
+                                          <a:s>IP</a:s>
+                                       </a:s>
+                                       <a:s>, </a:s>
+                                       <a:s r="216">
+                                          <a:s>'NECK-CSPINE'</a:s>
+                                       </a:s>
+                                       <a:s r="217">, 25, 1260)</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+    or </a:s>
+                                 <a:s r="225">
+                                    <a:s>&quot;Qualifies&quot;(</a:s>
+                                    <a:s r="221">
+                                       <a:s>IP</a:s>
+                                    </a:s>
+                                    <a:s>, </a:s>
+                                    <a:s r="222">
+                                       <a:s>'TSPINE-LSPINE'</a:s>
+                                    </a:s>
+                                    <a:s r="223">, 25, 1260)</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+    or </a:s>
+                              <a:s r="231">
+                                 <a:s>&quot;Qualifies&quot;(</a:s>
+                                 <a:s r="227">
+                                    <a:s>IP</a:s>
+                                 </a:s>
+                                 <a:s>, </a:s>
+                                 <a:s r="228">
+                                    <a:s>'CAP'</a:s>
+                                 </a:s>
+                                 <a:s r="229">, 29, 1637)</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+    or </a:s>
+                           <a:s r="237">
+                              <a:s>&quot;Qualifies&quot;(</a:s>
+                              <a:s r="233">
+                                 <a:s>IP</a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="234">
+                                 <a:s>'TLSPINE'</a:s>
+                              </a:s>
+                              <a:s r="235">, 25, 2520)</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+    or </a:s>
+                        <a:s r="243">
+                           <a:s>&quot;Qualifies&quot;(</a:s>
+                           <a:s r="239">
+                              <a:s>IP</a:s>
+                           </a:s>
+                           <a:s>, </a:s>
+                           <a:s r="240">
+                              <a:s>'HEADNECK RT'</a:s>
+                           </a:s>
+                           <a:s r="241">, 25, 2285)</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    or </a:s>
+                     <a:s r="249">
+                        <a:s>&quot;Qualifies&quot;(</a:s>
+                        <a:s r="245">
+                           <a:s>IP</a:s>
+                        </a:s>
+                        <a:s>, </a:s>
+                        <a:s r="246">
+                           <a:s>'HEADNECK HD'</a:s>
+                        </a:s>
+                        <a:s r="247">, 25, 3092)</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="250" locator="66:3-83:47" xsi:type="Or">
+            <operand localId="244" locator="66:3-82:47" xsi:type="Or">
+               <operand localId="238" locator="66:3-81:43" xsi:type="Or">
+                  <operand localId="232" locator="66:3-80:39" xsi:type="Or">
+                     <operand localId="226" locator="66:3-79:49" xsi:type="Or">
+                        <operand localId="220" locator="66:3-78:47" xsi:type="Or">
+                           <operand localId="214" locator="66:3-77:46" xsi:type="Or">
+                              <operand localId="208" locator="66:3-76:44" xsi:type="Or">
+                                 <operand localId="202" locator="66:3-75:44" xsi:type="Or">
+                                    <operand localId="196" locator="66:3-74:43" xsi:type="Or">
+                                       <operand localId="190" locator="66:3-73:52" xsi:type="Or">
+                                          <operand localId="184" locator="66:3-72:43" xsi:type="Or">
+                                             <operand localId="178" locator="66:3-71:43" xsi:type="Or">
+                                                <operand localId="172" locator="66:3-70:45" xsi:type="Or">
+                                                   <operand localId="166" locator="66:3-69:44" xsi:type="Or">
+                                                      <operand localId="160" locator="66:3-68:46" xsi:type="Or">
+                                                         <operand localId="154" locator="66:3-67:45" xsi:type="Or">
+                                                            <operand localId="148" locator="66:3-66:40" name="Qualifies" xsi:type="FunctionRef">
+                                                               <operand localId="124" locator="66:15-66:16" name="IP" xsi:type="OperandRef"/>
+                                                               <operand localId="125" locator="66:19-66:30" valueType="t:String" value="ABDOPEL LD" xsi:type="Literal"/>
+                                                               <operand xsi:type="ToDecimal">
+                                                                  <operand localId="126" locator="66:33-66:34" valueType="t:Integer" value="64" xsi:type="Literal"/>
+                                                               </operand>
+                                                               <operand xsi:type="ToDecimal">
+                                                                  <operand localId="127" locator="66:37-66:39" valueType="t:Integer" value="598" xsi:type="Literal"/>
+                                                               </operand>
+                                                            </operand>
+                                                            <operand localId="153" locator="67:8-67:45" name="Qualifies" xsi:type="FunctionRef">
+                                                               <operand localId="149" locator="67:20-67:21" name="IP" xsi:type="OperandRef"/>
+                                                               <operand localId="150" locator="67:24-67:35" valueType="t:String" value="ABDOPEL RT" xsi:type="Literal"/>
+                                                               <operand xsi:type="ToDecimal">
+                                                                  <operand localId="151" locator="67:38-67:39" valueType="t:Integer" value="29" xsi:type="Literal"/>
+                                                               </operand>
+                                                               <operand xsi:type="ToDecimal">
+                                                                  <operand localId="152" locator="67:42-67:44" valueType="t:Integer" value="644" xsi:type="Literal"/>
+                                                               </operand>
+                                                            </operand>
+                                                         </operand>
+                                                         <operand localId="159" locator="68:8-68:46" name="Qualifies" xsi:type="FunctionRef">
+                                                            <operand localId="155" locator="68:20-68:21" name="IP" xsi:type="OperandRef"/>
+                                                            <operand localId="156" locator="68:24-68:35" valueType="t:String" value="ABDOPEL HD" xsi:type="Literal"/>
+                                                            <operand xsi:type="ToDecimal">
+                                                               <operand localId="157" locator="68:38-68:39" valueType="t:Integer" value="29" xsi:type="Literal"/>
+                                                            </operand>
+                                                            <operand xsi:type="ToDecimal">
+                                                               <operand localId="158" locator="68:42-68:45" valueType="t:Integer" value="1260" xsi:type="Literal"/>
+                                                            </operand>
+                                                         </operand>
+                                                      </operand>
+                                                      <operand localId="165" locator="69:8-69:44" name="Qualifies" xsi:type="FunctionRef">
+                                                         <operand localId="161" locator="69:20-69:21" name="IP" xsi:type="OperandRef"/>
+                                                         <operand localId="162" locator="69:24-69:35" valueType="t:String" value="CARDIAC LD" xsi:type="Literal"/>
+                                                         <operand xsi:type="ToDecimal">
+                                                            <operand localId="163" locator="69:38-69:39" valueType="t:Integer" value="55" xsi:type="Literal"/>
+                                                         </operand>
+                                                         <operand xsi:type="ToDecimal">
+                                                            <operand localId="164" locator="69:42-69:43" valueType="t:Integer" value="93" xsi:type="Literal"/>
+                                                         </operand>
+                                                      </operand>
+                                                   </operand>
+                                                   <operand localId="171" locator="70:8-70:45" name="Qualifies" xsi:type="FunctionRef">
+                                                      <operand localId="167" locator="70:20-70:21" name="IP" xsi:type="OperandRef"/>
+                                                      <operand localId="168" locator="70:24-70:35" valueType="t:String" value="CARDIAC RT" xsi:type="Literal"/>
+                                                      <operand xsi:type="ToDecimal">
+                                                         <operand localId="169" locator="70:38-70:39" valueType="t:Integer" value="32" xsi:type="Literal"/>
+                                                      </operand>
+                                                      <operand xsi:type="ToDecimal">
+                                                         <operand localId="170" locator="70:42-70:44" valueType="t:Integer" value="576" xsi:type="Literal"/>
+                                                      </operand>
+                                                   </operand>
+                                                </operand>
+                                                <operand localId="177" locator="71:8-71:43" name="Qualifies" xsi:type="FunctionRef">
+                                                   <operand localId="173" locator="71:20-71:21" name="IP" xsi:type="OperandRef"/>
+                                                   <operand localId="174" locator="71:24-71:33" valueType="t:String" value="CHEST LD" xsi:type="Literal"/>
+                                                   <operand xsi:type="ToDecimal">
+                                                      <operand localId="175" locator="71:36-71:37" valueType="t:Integer" value="55" xsi:type="Literal"/>
+                                                   </operand>
+                                                   <operand xsi:type="ToDecimal">
+                                                      <operand localId="176" locator="71:40-71:42" valueType="t:Integer" value="377" xsi:type="Literal"/>
+                                                   </operand>
+                                                </operand>
+                                             </operand>
+                                             <operand localId="183" locator="72:8-72:43" name="Qualifies" xsi:type="FunctionRef">
+                                                <operand localId="179" locator="72:20-72:21" name="IP" xsi:type="OperandRef"/>
+                                                <operand localId="180" locator="72:24-72:33" valueType="t:String" value="CHEST RT" xsi:type="Literal"/>
+                                                <operand xsi:type="ToDecimal">
+                                                   <operand localId="181" locator="72:36-72:37" valueType="t:Integer" value="49" xsi:type="Literal"/>
+                                                </operand>
+                                                <operand xsi:type="ToDecimal">
+                                                   <operand localId="182" locator="72:40-72:42" valueType="t:Integer" value="377" xsi:type="Literal"/>
+                                                </operand>
+                                             </operand>
+                                          </operand>
+                                          <operand localId="189" locator="73:8-73:52" name="Qualifies" xsi:type="FunctionRef">
+                                             <operand localId="185" locator="73:20-73:21" name="IP" xsi:type="OperandRef"/>
+                                             <operand localId="186" locator="73:24-73:41" valueType="t:String" value="CHEST-CARDIAC HD" xsi:type="Literal"/>
+                                             <operand xsi:type="ToDecimal">
+                                                <operand localId="187" locator="73:44-73:45" valueType="t:Integer" value="49" xsi:type="Literal"/>
+                                             </operand>
+                                             <operand xsi:type="ToDecimal">
+                                                <operand localId="188" locator="73:48-73:51" valueType="t:Integer" value="1282" xsi:type="Literal"/>
+                                             </operand>
+                                          </operand>
+                                       </operand>
+                                       <operand localId="195" locator="74:8-74:43" name="Qualifies" xsi:type="FunctionRef">
+                                          <operand localId="191" locator="74:20-74:21" name="IP" xsi:type="OperandRef"/>
+                                          <operand localId="192" locator="74:24-74:32" valueType="t:String" value="HEAD LD" xsi:type="Literal"/>
+                                          <operand xsi:type="ToDecimal">
+                                             <operand localId="193" locator="74:35-74:37" valueType="t:Integer" value="115" xsi:type="Literal"/>
+                                          </operand>
+                                          <operand xsi:type="ToDecimal">
+                                             <operand localId="194" locator="74:40-74:42" valueType="t:Integer" value="582" xsi:type="Literal"/>
+                                          </operand>
+                                       </operand>
+                                    </operand>
+                                    <operand localId="201" locator="75:8-75:44" name="Qualifies" xsi:type="FunctionRef">
+                                       <operand localId="197" locator="75:20-75:21" name="IP" xsi:type="OperandRef"/>
+                                       <operand localId="198" locator="75:24-75:32" valueType="t:String" value="HEAD RT" xsi:type="Literal"/>
+                                       <operand xsi:type="ToDecimal">
+                                          <operand localId="199" locator="75:35-75:37" valueType="t:Integer" value="115" xsi:type="Literal"/>
+                                       </operand>
+                                       <operand xsi:type="ToDecimal">
+                                          <operand localId="200" locator="75:40-75:43" valueType="t:Integer" value="1025" xsi:type="Literal"/>
+                                       </operand>
+                                    </operand>
+                                 </operand>
+                                 <operand localId="207" locator="76:8-76:44" name="Qualifies" xsi:type="FunctionRef">
+                                    <operand localId="203" locator="76:20-76:21" name="IP" xsi:type="OperandRef"/>
+                                    <operand localId="204" locator="76:24-76:32" valueType="t:String" value="HEAD HD" xsi:type="Literal"/>
+                                    <operand xsi:type="ToDecimal">
+                                       <operand localId="205" locator="76:35-76:37" valueType="t:Integer" value="115" xsi:type="Literal"/>
+                                    </operand>
+                                    <operand xsi:type="ToDecimal">
+                                       <operand localId="206" locator="76:40-76:43" valueType="t:Integer" value="1832" xsi:type="Literal"/>
+                                    </operand>
+                                 </operand>
+                              </operand>
+                              <operand localId="213" locator="77:8-77:46" name="Qualifies" xsi:type="FunctionRef">
+                                 <operand localId="209" locator="77:20-77:21" name="IP" xsi:type="OperandRef"/>
+                                 <operand localId="210" locator="77:24-77:36" valueType="t:String" value="EXTREMITIES" xsi:type="Literal"/>
+                                 <operand xsi:type="ToDecimal">
+                                    <operand localId="211" locator="77:39-77:40" valueType="t:Integer" value="73" xsi:type="Literal"/>
+                                 </operand>
+                                 <operand xsi:type="ToDecimal">
+                                    <operand localId="212" locator="77:43-77:45" valueType="t:Integer" value="320" xsi:type="Literal"/>
+                                 </operand>
+                              </operand>
+                           </operand>
+                           <operand localId="219" locator="78:8-78:47" name="Qualifies" xsi:type="FunctionRef">
+                              <operand localId="215" locator="78:20-78:21" name="IP" xsi:type="OperandRef"/>
+                              <operand localId="216" locator="78:24-78:36" valueType="t:String" value="NECK-CSPINE" xsi:type="Literal"/>
+                              <operand xsi:type="ToDecimal">
+                                 <operand localId="217" locator="78:39-78:40" valueType="t:Integer" value="25" xsi:type="Literal"/>
+                              </operand>
+                              <operand xsi:type="ToDecimal">
+                                 <operand localId="218" locator="78:43-78:46" valueType="t:Integer" value="1260" xsi:type="Literal"/>
+                              </operand>
+                           </operand>
+                        </operand>
+                        <operand localId="225" locator="79:8-79:49" name="Qualifies" xsi:type="FunctionRef">
+                           <operand localId="221" locator="79:20-79:21" name="IP" xsi:type="OperandRef"/>
+                           <operand localId="222" locator="79:24-79:38" valueType="t:String" value="TSPINE-LSPINE" xsi:type="Literal"/>
+                           <operand xsi:type="ToDecimal">
+                              <operand localId="223" locator="79:41-79:42" valueType="t:Integer" value="25" xsi:type="Literal"/>
+                           </operand>
+                           <operand xsi:type="ToDecimal">
+                              <operand localId="224" locator="79:45-79:48" valueType="t:Integer" value="1260" xsi:type="Literal"/>
+                           </operand>
+                        </operand>
+                     </operand>
+                     <operand localId="231" locator="80:8-80:39" name="Qualifies" xsi:type="FunctionRef">
+                        <operand localId="227" locator="80:20-80:21" name="IP" xsi:type="OperandRef"/>
+                        <operand localId="228" locator="80:24-80:28" valueType="t:String" value="CAP" xsi:type="Literal"/>
+                        <operand xsi:type="ToDecimal">
+                           <operand localId="229" locator="80:31-80:32" valueType="t:Integer" value="29" xsi:type="Literal"/>
+                        </operand>
+                        <operand xsi:type="ToDecimal">
+                           <operand localId="230" locator="80:35-80:38" valueType="t:Integer" value="1637" xsi:type="Literal"/>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand localId="237" locator="81:8-81:43" name="Qualifies" xsi:type="FunctionRef">
+                     <operand localId="233" locator="81:20-81:21" name="IP" xsi:type="OperandRef"/>
+                     <operand localId="234" locator="81:24-81:32" valueType="t:String" value="TLSPINE" xsi:type="Literal"/>
+                     <operand xsi:type="ToDecimal">
+                        <operand localId="235" locator="81:35-81:36" valueType="t:Integer" value="25" xsi:type="Literal"/>
+                     </operand>
+                     <operand xsi:type="ToDecimal">
+                        <operand localId="236" locator="81:39-81:42" valueType="t:Integer" value="2520" xsi:type="Literal"/>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand localId="243" locator="82:8-82:47" name="Qualifies" xsi:type="FunctionRef">
+                  <operand localId="239" locator="82:20-82:21" name="IP" xsi:type="OperandRef"/>
+                  <operand localId="240" locator="82:24-82:36" valueType="t:String" value="HEADNECK RT" xsi:type="Literal"/>
+                  <operand xsi:type="ToDecimal">
+                     <operand localId="241" locator="82:39-82:40" valueType="t:Integer" value="25" xsi:type="Literal"/>
+                  </operand>
+                  <operand xsi:type="ToDecimal">
+                     <operand localId="242" locator="82:43-82:46" valueType="t:Integer" value="2285" xsi:type="Literal"/>
+                  </operand>
+               </operand>
+            </operand>
+            <operand localId="249" locator="83:8-83:47" name="Qualifies" xsi:type="FunctionRef">
+               <operand localId="245" locator="83:20-83:21" name="IP" xsi:type="OperandRef"/>
+               <operand localId="246" locator="83:24-83:36" valueType="t:String" value="HEADNECK HD" xsi:type="Literal"/>
+               <operand xsi:type="ToDecimal">
+                  <operand localId="247" locator="83:39-83:40" valueType="t:Integer" value="25" xsi:type="Literal"/>
+               </operand>
+               <operand xsi:type="ToDecimal">
+                  <operand localId="248" locator="83:43-83:46" valueType="t:Integer" value="3092" xsi:type="Literal"/>
+               </operand>
+            </operand>
+         </expression>
+         <operand name="IP">
+            <operandTypeSpecifier localId="123" locator="65:40-65:68" xmlns:ns6="urn:healthit-gov:qdm:v5_6" name="ns6:PositiveDiagnosticStudyPerformed" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+      </def>
+      <def localId="254" locator="33:1-35:36" name="Numerator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="254">
+               <a:s>define &quot;Numerator&quot;:
+  </a:s>
+               <a:s r="253">
+                  <a:s>
+                     <a:s r="121">
+                        <a:s r="120">
+                           <a:s>
+                              <a:s>&quot;Denominator&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> Denom</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="252">
+                     <a:s>where </a:s>
+                     <a:s r="252">
+                        <a:s>&quot;CT Scan Qualifies&quot;(</a:s>
+                        <a:s r="122">
+                           <a:s>Denom</a:s>
+                        </a:s>
+                        <a:s>)</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="253" locator="34:3-35:36" xsi:type="Query">
+            <source localId="121" locator="34:3-34:21" alias="Denom">
+               <expression localId="120" locator="34:3-34:15" name="Denominator" xsi:type="ExpressionRef"/>
+            </source>
+            <where localId="252" locator="35:5-35:36" name="CT Scan Qualifies" xsi:type="FunctionRef">
+               <operand localId="122" locator="35:31-35:35" name="Denom" xsi:type="AliasRef"/>
+            </where>
+         </expression>
+      </def>
+      <def localId="256" locator="37:1-38:51" name="SDE Ethnicity" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="256">
+               <a:s>define &quot;SDE Ethnicity&quot;:
+  </a:s>
+               <a:s r="255">
+                  <a:s>[&quot;Patient Characteristic Ethnicity&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Ethnicity&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="255" locator="38:3-38:51" xmlns:ns7="urn:healthit-gov:qdm:v5_6" dataType="ns7:PatientCharacteristicEthnicity" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="38:40-38:50" name="Ethnicity" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="258" locator="40:1-41:43" name="SDE Payer" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="258">
+               <a:s>define &quot;SDE Payer&quot;:
+  </a:s>
+               <a:s r="257">
+                  <a:s>[&quot;Patient Characteristic Payer&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Payer&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="257" locator="41:3-41:43" xmlns:ns8="urn:healthit-gov:qdm:v5_6" dataType="ns8:PatientCharacteristicPayer" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="41:36-41:42" name="Payer" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="260" locator="43:1-44:41" name="SDE Race" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="260">
+               <a:s>define &quot;SDE Race&quot;:
+  </a:s>
+               <a:s r="259">
+                  <a:s>[&quot;Patient Characteristic Race&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Race&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="259" locator="44:3-44:41" xmlns:ns9="urn:healthit-gov:qdm:v5_6" dataType="ns9:PatientCharacteristicRace" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="44:35-44:40" name="Race" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="262" locator="46:1-47:58" name="SDE Sex" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="262">
+               <a:s>define &quot;SDE Sex&quot;:
+  </a:s>
+               <a:s r="261">
+                  <a:s>[&quot;Patient Characteristic Sex&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;ONC Administrative Sex&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="261" locator="47:3-47:58" xmlns:ns10="urn:healthit-gov:qdm:v5_6" dataType="ns10:PatientCharacteristicSex" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="47:34-47:57" name="ONC Administrative Sex" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+   </statements>
+</library>

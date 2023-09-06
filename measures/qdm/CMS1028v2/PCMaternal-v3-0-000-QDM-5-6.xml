@@ -1,0 +1,1464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion,DisableMethodInvocation" xsi:type="a:CqlToElmInfo"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="228">
+         <a:s>library PCMaternal version '3.0.000'</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="PCMaternal" version="3.0.000"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="3:1-3:23" localIdentifier="QDM" uri="urn:healthit-gov:qdm:v5_6" version="5.6">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>using </a:s>
+               <a:s>
+                  <a:s>QDM</a:s>
+               </a:s>
+               <a:s> version '5.6'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="5:1-5:64" localIdentifier="Global" path="MATGlobalCommonFunctions" version="7.0.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>MATGlobalCommonFunctions</a:s>
+               </a:s>
+               <a:s> version '7.0.000' called Global</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <parameters>
+      <def localId="15" locator="18:1-18:49" name="Measurement Period" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="15">
+               <a:s>parameter &quot;Measurement Period&quot; </a:s>
+               <a:s r="14">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="13">
+                     <a:s>DateTime</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <parameterTypeSpecifier localId="14" locator="18:32-18:49" xsi:type="IntervalTypeSpecifier">
+            <pointType localId="13" locator="18:41-18:48" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <codeSystems>
+      <def localId="3" locator="7:1-7:51" name="LOINC" id="urn:oid:2.16.840.1.113883.6.1" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>codesystem &quot;LOINC&quot;: 'urn:oid:2.16.840.1.113883.6.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </codeSystems>
+   <valueSets>
+      <def localId="4" locator="9:1-9:71" name="Delivery Procedures" id="urn:oid:2.16.840.1.113762.1.4.1045.59" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>valueset &quot;Delivery Procedures&quot;: 'urn:oid:2.16.840.1.113762.1.4.1045.59'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="5" locator="10:1-10:75" name="ED Visit and OB Triage" id="urn:oid:2.16.840.1.113762.1.4.1029.369" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>valueset &quot;ED Visit and OB Triage&quot;: 'urn:oid:2.16.840.1.113762.1.4.1029.369'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="6" locator="11:1-11:71" name="Encounter Inpatient" id="urn:oid:2.16.840.1.113883.3.666.5.307" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>valueset &quot;Encounter Inpatient&quot;: 'urn:oid:2.16.840.1.113883.3.666.5.307'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="7" locator="12:1-12:89" name="Estimated Gestational Age at Delivery" id="urn:oid:2.16.840.1.113762.1.4.1045.26" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="7">
+               <a:s>valueset &quot;Estimated Gestational Age at Delivery&quot;: 'urn:oid:2.16.840.1.113762.1.4.1045.26'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="8" locator="13:1-13:73" name="Observation Services" id="urn:oid:2.16.840.1.113762.1.4.1111.143" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="8">
+               <a:s>valueset &quot;Observation Services&quot;: 'urn:oid:2.16.840.1.113762.1.4.1111.143'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </valueSets>
+   <codes>
+      <def localId="10" locator="15:1-15:112" name="Date and time of obstetric delivery" id="93857-1" display="Date and time of obstetric delivery" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="10">
+               <a:s>code &quot;Date and time of obstetric delivery&quot;: '93857-1' from </a:s>
+               <a:s r="9">
+                  <a:s>&quot;LOINC&quot;</a:s>
+               </a:s>
+               <a:s> display 'Date and time of obstetric delivery'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="9" locator="15:60-15:66" name="LOINC"/>
+      </def>
+      <def localId="12" locator="16:1-16:88" name="Delivery date Estimated" id="11778-8" display="Delivery date Estimated" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="12">
+               <a:s>code &quot;Delivery date Estimated&quot;: '11778-8' from </a:s>
+               <a:s r="11">
+                  <a:s>&quot;LOINC&quot;</a:s>
+               </a:s>
+               <a:s> display 'Delivery date Estimated'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="11" locator="16:48-16:54" name="LOINC"/>
+      </def>
+   </codes>
+   <contexts>
+      <def locator="20:1-20:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="20:1-20:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="20:1-20:15" xmlns:ns0="urn:healthit-gov:qdm:v5_6" dataType="ns0:Patient" templateId="Patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="39" locator="27:1-31:83" name="Encounter with Age Range" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="39">
+               <a:s>define &quot;Encounter with Age Range&quot;:
+  </a:s>
+               <a:s r="38">
+                  <a:s>
+                     <a:s r="17">
+                        <a:s r="16">
+                           <a:s r="16">
+                              <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Encounter Inpatient&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> EncounterInpatient</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="37">
+                     <a:s>where </a:s>
+                     <a:s r="37">
+                        <a:s r="32">
+                           <a:s r="24">
+                              <a:s r="22">
+                                 <a:s>AgeInYearsAt(</a:s>
+                                 <a:s r="21">
+                                    <a:s>date from </a:s>
+                                    <a:s r="20">
+                                       <a:s>start of </a:s>
+                                       <a:s r="19">
+                                          <a:s r="18">
+                                             <a:s>EncounterInpatient</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="19">
+                                             <a:s>relevantPeriod</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>)</a:s>
+                              </a:s>
+                              <a:s r="23">>= 8</a:s>
+                           </a:s>
+                           <a:s>
+      and </a:s>
+                           <a:s r="31">
+                              <a:s r="29">
+                                 <a:s>AgeInYearsAt(</a:s>
+                                 <a:s r="28">
+                                    <a:s>date from </a:s>
+                                    <a:s r="27">
+                                       <a:s>start of </a:s>
+                                       <a:s r="26">
+                                          <a:s r="25">
+                                             <a:s>EncounterInpatient</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="26">
+                                             <a:s>relevantPeriod</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>)</a:s>
+                              </a:s>
+                              <a:s r="30">&lt; 65</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      and </a:s>
+                        <a:s r="36">
+                           <a:s r="34">
+                              <a:s r="33">
+                                 <a:s>EncounterInpatient</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="34">
+                                 <a:s>relevantPeriod</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="36"> ends during day of </a:s>
+                           <a:s r="35">
+                              <a:s>&quot;Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="38" locator="28:3-31:83" xsi:type="Query">
+            <source localId="17" locator="28:3-28:68" alias="EncounterInpatient">
+               <expression localId="16" locator="28:3-28:49" xmlns:ns1="urn:healthit-gov:qdm:v5_6" dataType="ns1:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="28:28-28:48" name="Encounter Inpatient" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <where localId="37" locator="29:5-31:83" xsi:type="And">
+               <operand localId="32" locator="29:11-30:80" xsi:type="And">
+                  <operand localId="24" locator="29:11-29:80" xsi:type="GreaterOrEqual">
+                     <operand localId="22" locator="29:11-29:76" precision="Year" xsi:type="CalculateAgeAt">
+                        <operand xsi:type="ToDate">
+                           <operand path="birthDatetime" xsi:type="Property">
+                              <source name="Patient" xsi:type="ExpressionRef"/>
+                           </operand>
+                        </operand>
+                        <operand localId="21" locator="29:24-29:75" xsi:type="DateFrom">
+                           <operand localId="20" locator="29:34-29:75" xsi:type="Start">
+                              <operand localId="19" locator="29:43-29:75" path="relevantPeriod" scope="EncounterInpatient" xsi:type="Property"/>
+                           </operand>
+                        </operand>
+                     </operand>
+                     <operand localId="23" locator="29:80" valueType="t:Integer" value="8" xsi:type="Literal"/>
+                  </operand>
+                  <operand localId="31" locator="30:11-30:80" xsi:type="Less">
+                     <operand localId="29" locator="30:11-30:76" precision="Year" xsi:type="CalculateAgeAt">
+                        <operand xsi:type="ToDate">
+                           <operand path="birthDatetime" xsi:type="Property">
+                              <source name="Patient" xsi:type="ExpressionRef"/>
+                           </operand>
+                        </operand>
+                        <operand localId="28" locator="30:24-30:75" xsi:type="DateFrom">
+                           <operand localId="27" locator="30:34-30:75" xsi:type="Start">
+                              <operand localId="26" locator="30:43-30:75" path="relevantPeriod" scope="EncounterInpatient" xsi:type="Property"/>
+                           </operand>
+                        </operand>
+                     </operand>
+                     <operand localId="30" locator="30:79-30:80" valueType="t:Integer" value="65" xsi:type="Literal"/>
+                  </operand>
+               </operand>
+               <operand localId="36" locator="31:11-31:83" precision="Day" xsi:type="In">
+                  <operand locator="31:45-31:48" xsi:type="End">
+                     <operand localId="34" locator="31:11-31:43" path="relevantPeriod" scope="EncounterInpatient" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="35" locator="31:64-31:83" name="Measurement Period" xsi:type="ParameterRef"/>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="103" locator="53:1-68:32" name="HospitalizationWithEDOBTriageObservation" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="103">
+               <a:s>define function &quot;HospitalizationWithEDOBTriageObservation&quot;(Encounter </a:s>
+               <a:s r="51">
+                  <a:s>&quot;Encounter, Performed&quot;</a:s>
+               </a:s>
+               <a:s> ):
+  //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+  </a:s>
+               <a:s r="102">
+                  <a:s r="102">
+                     <a:s>
+                        <a:s r="53">
+                           <a:s r="52">
+                              <a:s>
+                                 <a:s>Encounter</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> Visit</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    </a:s>
+                     <a:s>
+                        <a:s>let </a:s>
+                        <a:s r="69">
+                           <a:s>ObsVisit: </a:s>
+                           <a:s r="68">
+                              <a:s>Last(</a:s>
+                              <a:s r="67">
+                                 <a:s>
+                                    <a:s r="55">
+                                       <a:s r="54">
+                                          <a:s r="54">
+                                             <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                             <a:s>
+                                                <a:s>&quot;Observation Services&quot;</a:s>
+                                             </a:s>
+                                             <a:s>]</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> LastObs</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+        </a:s>
+                                 <a:s r="62">
+                                    <a:s>where </a:s>
+                                    <a:s r="62">
+                                       <a:s r="57">
+                                          <a:s r="56">
+                                             <a:s>LastObs</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="57">
+                                             <a:s>relevantPeriod</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> </a:s>
+                                       <a:s r="62">
+                                          <a:s>ends </a:s>
+                                          <a:s r="61">
+                                             <a:s>1 hour</a:s>
+                                          </a:s>
+                                          <a:s> or less on or before</a:s>
+                                       </a:s>
+                                       <a:s> </a:s>
+                                       <a:s r="60">
+                                          <a:s>start of </a:s>
+                                          <a:s r="59">
+                                             <a:s r="58">
+                                                <a:s>Visit</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="59">
+                                                <a:s>relevantPeriod</a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+        </a:s>
+                                 <a:s r="66">
+                                    <a:s>sort by 
+        </a:s>
+                                    <a:s r="65">
+                                       <a:s r="64">
+                                          <a:s>end of </a:s>
+                                          <a:s r="63">
+                                             <a:s>relevantPeriod</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+    )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>,
+    </a:s>
+                        <a:s r="77">
+                           <a:s>VisitStart: </a:s>
+                           <a:s r="76">
+                              <a:s>Coalesce(</a:s>
+                              <a:s r="72">
+                                 <a:s>start of </a:s>
+                                 <a:s r="71">
+                                    <a:s r="70">
+                                       <a:s>ObsVisit</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="71">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="75">
+                                 <a:s>start of </a:s>
+                                 <a:s r="74">
+                                    <a:s r="73">
+                                       <a:s>Visit</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="74">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>,
+    </a:s>
+                        <a:s r="91">
+                           <a:s>EDOBTriageVisit: </a:s>
+                           <a:s r="90">
+                              <a:s>Last(</a:s>
+                              <a:s r="89">
+                                 <a:s>
+                                    <a:s r="79">
+                                       <a:s r="78">
+                                          <a:s r="78">
+                                             <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                             <a:s>
+                                                <a:s>&quot;ED Visit and OB Triage&quot;</a:s>
+                                             </a:s>
+                                             <a:s>]</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> LastEDOBTriage</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+        </a:s>
+                                 <a:s r="84">
+                                    <a:s>where </a:s>
+                                    <a:s r="84">
+                                       <a:s r="81">
+                                          <a:s r="80">
+                                             <a:s>LastEDOBTriage</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="81">
+                                             <a:s>relevantPeriod</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> </a:s>
+                                       <a:s r="84">
+                                          <a:s>ends </a:s>
+                                          <a:s r="83">
+                                             <a:s>1 hour</a:s>
+                                          </a:s>
+                                          <a:s> or less on or before</a:s>
+                                       </a:s>
+                                       <a:s> </a:s>
+                                       <a:s r="82">
+                                          <a:s>VisitStart</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+        </a:s>
+                                 <a:s r="88">
+                                    <a:s>sort by 
+        </a:s>
+                                    <a:s r="87">
+                                       <a:s r="86">
+                                          <a:s>end of </a:s>
+                                          <a:s r="85">
+                                             <a:s>relevantPeriod</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+    )</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    </a:s>
+                     <a:s r="101">
+                        <a:s>return </a:s>
+                        <a:s r="100">
+                           <a:s>Interval[</a:s>
+                           <a:s r="96">
+                              <a:s>Coalesce(</a:s>
+                              <a:s r="94">
+                                 <a:s>start of </a:s>
+                                 <a:s r="93">
+                                    <a:s r="92">
+                                       <a:s>EDOBTriageVisit</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="93">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="95">
+                                 <a:s>VisitStart</a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                           <a:s>, 
+    </a:s>
+                           <a:s r="99">
+                              <a:s>end of </a:s>
+                              <a:s r="98">
+                                 <a:s r="97">
+                                    <a:s>Visit</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="98">
+                                    <a:s>relevantPeriod</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>]</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="102" locator="55:3-68:32" xsi:type="Query">
+            <source localId="53" locator="55:3-55:17" alias="Visit">
+               <expression localId="52" locator="55:3-55:11" name="Encounter" xsi:type="OperandRef"/>
+            </source>
+            <let localId="69" locator="56:9-60:5" identifier="ObsVisit">
+               <expression localId="68" locator="56:19-60:5" xsi:type="Last">
+                  <source localId="67" locator="56:24-59:29" xsi:type="Query">
+                     <source localId="55" locator="56:24-56:79" alias="LastObs">
+                        <expression localId="54" locator="56:24-56:71" xmlns:ns2="urn:healthit-gov:qdm:v5_6" dataType="ns2:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                           <codes locator="56:49-56:70" name="Observation Services" xsi:type="ValueSetRef"/>
+                        </expression>
+                     </source>
+                     <where localId="62" locator="57:9-57:99" xsi:type="And">
+                        <operand locator="57:43-57:56" xsi:type="In">
+                           <operand locator="57:38-57:41" xsi:type="End">
+                              <operand localId="57" locator="57:15-57:36" path="relevantPeriod" scope="LastObs" xsi:type="Property"/>
+                           </operand>
+                           <operand locator="57:43-57:56" lowClosed="true" highClosed="true" xsi:type="Interval">
+                              <low locator="57:71-57:99" xsi:type="Subtract">
+                                 <operand localId="60" locator="57:71-57:99" xsi:type="Start">
+                                    <operand localId="59" locator="57:80-57:99" path="relevantPeriod" scope="Visit" xsi:type="Property"/>
+                                 </operand>
+                                 <operand localId="61" locator="57:43-57:48" value="1" unit="hour" xsi:type="Quantity"/>
+                              </low>
+                              <high localId="60" locator="57:71-57:99" xsi:type="Start">
+                                 <operand localId="59" locator="57:80-57:99" path="relevantPeriod" scope="Visit" xsi:type="Property"/>
+                              </high>
+                           </operand>
+                        </operand>
+                        <operand locator="57:43-57:56" xsi:type="Not">
+                           <operand locator="57:43-57:56" xsi:type="IsNull">
+                              <operand localId="60" locator="57:71-57:99" xsi:type="Start">
+                                 <operand localId="59" locator="57:80-57:99" path="relevantPeriod" scope="Visit" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                        </operand>
+                     </where>
+                     <sort localId="66" locator="58:9-59:29">
+                        <by localId="65" locator="59:9-59:29" direction="asc" xsi:type="ByExpression">
+                           <expression localId="64" locator="59:9-59:29" xsi:type="End">
+                              <operand localId="63" locator="59:16-59:29" name="relevantPeriod" xsi:type="IdentifierRef"/>
+                           </expression>
+                        </by>
+                     </sort>
+                  </source>
+               </expression>
+            </let>
+            <let localId="77" locator="61:5-61:89" identifier="VisitStart">
+               <expression localId="76" locator="61:17-61:89" xsi:type="Coalesce">
+                  <operand localId="72" locator="61:26-61:57" xsi:type="Start">
+                     <operand localId="71" locator="61:35-61:57" path="relevantPeriod" xsi:type="Property">
+                        <source localId="70" locator="61:35-61:42" name="ObsVisit" xsi:type="QueryLetRef"/>
+                     </operand>
+                  </operand>
+                  <operand localId="75" locator="61:60-61:88" xsi:type="Start">
+                     <operand localId="74" locator="61:69-61:88" path="relevantPeriod" scope="Visit" xsi:type="Property"/>
+                  </operand>
+               </expression>
+            </let>
+            <let localId="91" locator="62:5-66:5" identifier="EDOBTriageVisit">
+               <expression localId="90" locator="62:22-66:5" xsi:type="Last">
+                  <source localId="89" locator="62:27-65:29" xsi:type="Query">
+                     <source localId="79" locator="62:27-62:91" alias="LastEDOBTriage">
+                        <expression localId="78" locator="62:27-62:76" xmlns:ns3="urn:healthit-gov:qdm:v5_6" dataType="ns3:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                           <codes locator="62:52-62:75" name="ED Visit and OB Triage" xsi:type="ValueSetRef"/>
+                        </expression>
+                     </source>
+                     <where localId="84" locator="63:9-63:87" xsi:type="And">
+                        <operand locator="63:50-63:63" xsi:type="In">
+                           <operand locator="63:45-63:48" xsi:type="End">
+                              <operand localId="81" locator="63:15-63:43" path="relevantPeriod" scope="LastEDOBTriage" xsi:type="Property"/>
+                           </operand>
+                           <operand locator="63:50-63:63" lowClosed="true" highClosed="true" xsi:type="Interval">
+                              <low locator="63:78-63:87" xsi:type="Subtract">
+                                 <operand localId="82" locator="63:78-63:87" name="VisitStart" xsi:type="QueryLetRef"/>
+                                 <operand localId="83" locator="63:50-63:55" value="1" unit="hour" xsi:type="Quantity"/>
+                              </low>
+                              <high localId="82" locator="63:78-63:87" name="VisitStart" xsi:type="QueryLetRef"/>
+                           </operand>
+                        </operand>
+                        <operand locator="63:50-63:63" xsi:type="Not">
+                           <operand locator="63:50-63:63" xsi:type="IsNull">
+                              <operand localId="82" locator="63:78-63:87" name="VisitStart" xsi:type="QueryLetRef"/>
+                           </operand>
+                        </operand>
+                     </where>
+                     <sort localId="88" locator="64:9-65:29">
+                        <by localId="87" locator="65:9-65:29" direction="asc" xsi:type="ByExpression">
+                           <expression localId="86" locator="65:9-65:29" xsi:type="End">
+                              <operand localId="85" locator="65:16-65:29" name="relevantPeriod" xsi:type="IdentifierRef"/>
+                           </expression>
+                        </by>
+                     </sort>
+                  </source>
+               </expression>
+            </let>
+            <return localId="101" locator="67:5-68:32">
+               <expression localId="100" locator="67:12-68:32" lowClosed="true" highClosed="true" xsi:type="Interval">
+                  <low localId="96" locator="67:21-67:81" xsi:type="Coalesce">
+                     <operand localId="94" locator="67:30-67:68" xsi:type="Start">
+                        <operand localId="93" locator="67:39-67:68" path="relevantPeriod" xsi:type="Property">
+                           <source localId="92" locator="67:39-67:53" name="EDOBTriageVisit" xsi:type="QueryLetRef"/>
+                        </operand>
+                     </operand>
+                     <operand localId="95" locator="67:71-67:80" name="VisitStart" xsi:type="QueryLetRef"/>
+                  </low>
+                  <high localId="99" locator="68:5-68:31" xsi:type="End">
+                     <operand localId="98" locator="68:12-68:31" path="relevantPeriod" scope="Visit" xsi:type="Property"/>
+                  </high>
+               </expression>
+            </return>
+         </expression>
+         <operand name="Encounter">
+            <operandTypeSpecifier localId="51" locator="53:70-53:91" xmlns:ns4="urn:healthit-gov:qdm:v5_6" name="ns4:PositiveEncounterPerformed" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+      </def>
+      <def localId="108" locator="22:1-25:197" name="Delivery Encounter with Age Range" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="108">
+               <a:s>define &quot;Delivery Encounter with Age Range&quot;:
+  </a:s>
+               <a:s r="107">
+                  <a:s>
+                     <a:s r="41">
+                        <a:s r="40">
+                           <a:s>
+                              <a:s>&quot;Encounter with Age Range&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> EncounterWithAge</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="106">
+                     <a:s>with </a:s>
+                     <a:s r="43">
+                        <a:s r="42">
+                           <a:s r="42">
+                              <a:s>[&quot;Procedure, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Delivery Procedures&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> DeliveryProcedure</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="105">
+                        <a:s r="49">
+                           <a:s r="44">
+                              <a:s>Global</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="49">
+                              <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                              <a:s r="46">
+                                 <a:s r="45">
+                                    <a:s>DeliveryProcedure</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="46">
+                                    <a:s>relevantDatetime</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="48">
+                                 <a:s r="47">
+                                    <a:s>DeliveryProcedure</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="48">
+                                    <a:s>relevantPeriod</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="105"> starts during day of </a:s>
+                        <a:s r="104">
+                           <a:s>&quot;HospitalizationWithEDOBTriageObservation&quot;(</a:s>
+                           <a:s r="50">
+                              <a:s>EncounterWithAge</a:s>
+                           </a:s>
+                           <a:s>)</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="107" locator="23:3-25:197" xsi:type="Query">
+            <source localId="41" locator="23:3-23:45" alias="EncounterWithAge">
+               <expression localId="40" locator="23:3-23:28" name="Encounter with Age Range" xsi:type="ExpressionRef"/>
+            </source>
+            <relationship localId="106" locator="24:5-25:197" alias="DeliveryProcedure" xsi:type="With">
+               <expression localId="42" locator="24:10-24:56" xmlns:ns5="urn:healthit-gov:qdm:v5_6" dataType="ns5:PositiveProcedurePerformed" templateId="PositiveProcedurePerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="24:35-24:55" name="Delivery Procedures" xsi:type="ValueSetRef"/>
+               </expression>
+               <suchThat localId="105" locator="25:17-25:197" precision="Day" xsi:type="In">
+                  <operand locator="25:117-25:122" xsi:type="Start">
+                     <operand localId="49" locator="25:17-25:115" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                        <operand localId="46" locator="25:46-25:79" path="relevantDatetime" scope="DeliveryProcedure" xsi:type="Property"/>
+                        <operand localId="48" locator="25:82-25:113" path="relevantPeriod" scope="DeliveryProcedure" xsi:type="Property"/>
+                     </operand>
+                  </operand>
+                  <operand localId="104" locator="25:138-25:197" name="HospitalizationWithEDOBTriageObservation" xsi:type="FunctionRef">
+                     <operand localId="50" locator="25:181-25:196" name="EncounterWithAge" xsi:type="AliasRef"/>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="146" locator="39:1-44:22" name="LastTimeOfDelivery" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="146">
+               <a:s>define function &quot;LastTimeOfDelivery&quot;(Encounter </a:s>
+               <a:s r="115">
+                  <a:s>&quot;Encounter, Performed&quot;</a:s>
+               </a:s>
+               <a:s> ):
+  </a:s>
+               <a:s r="145">
+                  <a:s r="145">
+                     <a:s r="143">
+                        <a:s r="142">
+                           <a:s>Last(</a:s>
+                           <a:s r="141">
+                              <a:s>
+                                 <a:s r="117">
+                                    <a:s r="116">
+                                       <a:s r="116">
+                                          <a:s>[&quot;Assessment, Performed&quot;: </a:s>
+                                          <a:s>
+                                             <a:s>&quot;Date and time of obstetric delivery&quot;</a:s>
+                                          </a:s>
+                                          <a:s>]</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> TimeOfDelivery</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      </a:s>
+                              <a:s r="134">
+                                 <a:s>where </a:s>
+                                 <a:s r="134">
+                                    <a:s r="126">
+                                       <a:s r="123">
+                                          <a:s r="118">
+                                             <a:s>Global</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="123">
+                                             <a:s>&quot;EarliestOf&quot;(</a:s>
+                                             <a:s r="120">
+                                                <a:s r="119">
+                                                   <a:s>TimeOfDelivery</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="120">
+                                                   <a:s>relevantDatetime</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>, </a:s>
+                                             <a:s r="122">
+                                                <a:s r="121">
+                                                   <a:s>TimeOfDelivery</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="122">
+                                                   <a:s>relevantPeriod</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>)</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s r="126">during </a:s>
+                                       <a:s r="125">
+                                          <a:s>&quot;HospitalizationWithEDOBTriageObservation&quot;(</a:s>
+                                          <a:s r="124">
+                                             <a:s>Encounter</a:s>
+                                          </a:s>
+                                          <a:s>)</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+        and </a:s>
+                                    <a:s r="133">
+                                       <a:s r="130">
+                                          <a:s r="128">
+                                             <a:s r="127">
+                                                <a:s>TimeOfDelivery</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="128">
+                                                <a:s>result</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s> as </a:s>
+                                          <a:s r="129">
+                                             <a:s>DateTime</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s r="133"> during </a:s>
+                                       <a:s r="132">
+                                          <a:s>&quot;HospitalizationWithEDOBTriageObservation&quot;(</a:s>
+                                          <a:s r="131">
+                                             <a:s>Encounter</a:s>
+                                          </a:s>
+                                          <a:s>)</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      </a:s>
+                              <a:s r="140">
+                                 <a:s>sort by </a:s>
+                                 <a:s r="139">
+                                    <a:s r="138">
+                                       <a:s r="135">
+                                          <a:s>Global</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="138">
+                                          <a:s>&quot;EarliestOf&quot;(</a:s>
+                                          <a:s r="136">
+                                             <a:s>relevantDatetime</a:s>
+                                          </a:s>
+                                          <a:s>, </a:s>
+                                          <a:s r="137">
+                                             <a:s>relevantPeriod</a:s>
+                                          </a:s>
+                                          <a:s>)</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+  )</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="143">
+                           <a:s>result</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s> as </a:s>
+                     <a:s r="144">
+                        <a:s>DateTime</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="145" locator="40:3-44:22" strict="false" xsi:type="As">
+            <operand localId="143" locator="40:3-44:10" path="result" xsi:type="Property">
+               <source localId="142" locator="40:3-44:3" xsi:type="Last">
+                  <source localId="141" locator="40:8-43:67" xsi:type="Query">
+                     <source localId="117" locator="40:8-40:86" alias="TimeOfDelivery">
+                        <expression localId="116" locator="40:8-40:71" xmlns:ns6="urn:healthit-gov:qdm:v5_6" dataType="ns6:PositiveAssessmentPerformed" templateId="PositiveAssessmentPerformed" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                           <codes xsi:type="ToList">
+                              <operand locator="40:34-40:70" name="Date and time of obstetric delivery" xsi:type="CodeRef"/>
+                           </codes>
+                        </expression>
+                     </source>
+                     <where localId="134" locator="41:7-42:106" xsi:type="And">
+                        <operand localId="126" locator="41:13-41:155" xsi:type="In">
+                           <operand localId="123" locator="41:13-41:95" name="EarliestOf" libraryName="Global" xsi:type="FunctionRef">
+                              <operand localId="120" locator="41:33-41:63" path="relevantDatetime" scope="TimeOfDelivery" xsi:type="Property"/>
+                              <operand localId="122" locator="41:66-41:94" path="relevantPeriod" scope="TimeOfDelivery" xsi:type="Property"/>
+                           </operand>
+                           <operand localId="125" locator="41:103-41:155" name="HospitalizationWithEDOBTriageObservation" xsi:type="FunctionRef">
+                              <operand localId="124" locator="41:146-41:154" name="Encounter" xsi:type="OperandRef"/>
+                           </operand>
+                        </operand>
+                        <operand localId="133" locator="42:13-42:106" xsi:type="In">
+                           <operand localId="130" locator="42:13-42:45" strict="false" xsi:type="As">
+                              <operand localId="128" locator="42:13-42:33" path="result" scope="TimeOfDelivery" xsi:type="Property"/>
+                              <asTypeSpecifier localId="129" locator="42:38-42:45" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                           </operand>
+                           <operand localId="132" locator="42:54-42:106" name="HospitalizationWithEDOBTriageObservation" xsi:type="FunctionRef">
+                              <operand localId="131" locator="42:97-42:105" name="Encounter" xsi:type="OperandRef"/>
+                           </operand>
+                        </operand>
+                     </where>
+                     <sort localId="140" locator="43:7-43:67">
+                        <by localId="139" locator="43:15-43:67" direction="asc" xsi:type="ByExpression">
+                           <expression localId="138" locator="43:15-43:67" name="EarliestOf" libraryName="Global" xsi:type="FunctionRef">
+                              <operand localId="136" locator="43:35-43:50" name="relevantDatetime" xsi:type="IdentifierRef"/>
+                              <operand localId="137" locator="43:53-43:66" name="relevantPeriod" xsi:type="IdentifierRef"/>
+                           </expression>
+                        </by>
+                     </sort>
+                  </source>
+               </source>
+            </operand>
+            <asTypeSpecifier localId="144" locator="44:15-44:22" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </expression>
+         <operand name="Encounter">
+            <operandTypeSpecifier localId="115" locator="39:48-39:69" xmlns:ns7="urn:healthit-gov:qdm:v5_6" name="ns7:PositiveEncounterPerformed" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+      </def>
+      <def localId="177" locator="74:1-80:22" name="LastEstimatedDeliveryDate" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="177">
+               <a:s>define function &quot;LastEstimatedDeliveryDate&quot;(Encounter </a:s>
+               <a:s r="149">
+                  <a:s>&quot;Encounter, Performed&quot;</a:s>
+               </a:s>
+               <a:s> ):
+  //This function identifies the last time the Estimated Delivery Date was assessed 42 weeks or less prior to or on delivery and stores the result of that assessment.  
+  </a:s>
+               <a:s r="176">
+                  <a:s r="176">
+                     <a:s r="174">
+                        <a:s r="173">
+                           <a:s>Last(</a:s>
+                           <a:s r="172">
+                              <a:s>
+                                 <a:s r="151">
+                                    <a:s r="150">
+                                       <a:s r="150">
+                                          <a:s>[&quot;Assessment, Performed&quot;: </a:s>
+                                          <a:s>
+                                             <a:s>&quot;Delivery date Estimated&quot;</a:s>
+                                          </a:s>
+                                          <a:s>]</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> EstimatedDateOfDelivery</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      </a:s>
+                              <a:s r="165">
+                                 <a:s>where </a:s>
+                                 <a:s r="165">
+                                    <a:s r="161">
+                                       <a:s r="157">
+                                          <a:s r="152">
+                                             <a:s>Global</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="157">
+                                             <a:s>&quot;EarliestOf&quot;(</a:s>
+                                             <a:s r="154">
+                                                <a:s r="153">
+                                                   <a:s>EstimatedDateOfDelivery</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="154">
+                                                   <a:s>relevantDatetime</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>, </a:s>
+                                             <a:s r="156">
+                                                <a:s r="155">
+                                                   <a:s>EstimatedDateOfDelivery</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="156">
+                                                   <a:s>relevantPeriod</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>)</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s r="161">
+                                          <a:s r="160">
+                                             <a:s>42 weeks</a:s>
+                                          </a:s>
+                                          <a:s> or less before or on</a:s>
+                                       </a:s>
+                                       <a:s> </a:s>
+                                       <a:s r="159">
+                                          <a:s>&quot;LastTimeOfDelivery&quot;(</a:s>
+                                          <a:s r="158">
+                                             <a:s>Encounter</a:s>
+                                          </a:s>
+                                          <a:s>)</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+        and </a:s>
+                                    <a:s r="164">
+                                       <a:s r="163">
+                                          <a:s r="162">
+                                             <a:s>EstimatedDateOfDelivery</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="163">
+                                             <a:s>result</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> is not null</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      </a:s>
+                              <a:s r="171">
+                                 <a:s>sort by </a:s>
+                                 <a:s r="170">
+                                    <a:s r="169">
+                                       <a:s r="166">
+                                          <a:s>Global</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="169">
+                                          <a:s>&quot;EarliestOf&quot;(</a:s>
+                                          <a:s r="167">
+                                             <a:s>relevantDatetime</a:s>
+                                          </a:s>
+                                          <a:s>, </a:s>
+                                          <a:s r="168">
+                                             <a:s>relevantPeriod</a:s>
+                                          </a:s>
+                                          <a:s>)</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+  )</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="174">
+                           <a:s>result</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s> as </a:s>
+                     <a:s r="175">
+                        <a:s>DateTime</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="176" locator="76:3-80:22" strict="false" xsi:type="As">
+            <operand localId="174" locator="76:3-80:10" path="result" xsi:type="Property">
+               <source localId="173" locator="76:3-80:3" xsi:type="Last">
+                  <source localId="172" locator="76:8-79:67" xsi:type="Query">
+                     <source localId="151" locator="76:8-76:83" alias="EstimatedDateOfDelivery">
+                        <expression localId="150" locator="76:8-76:59" xmlns:ns8="urn:healthit-gov:qdm:v5_6" dataType="ns8:PositiveAssessmentPerformed" templateId="PositiveAssessmentPerformed" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                           <codes xsi:type="ToList">
+                              <operand locator="76:34-76:58" name="Delivery date Estimated" xsi:type="CodeRef"/>
+                           </codes>
+                        </expression>
+                     </source>
+                     <where localId="165" locator="77:7-78:54" xsi:type="And">
+                        <operand localId="161" locator="77:13-77:174" xsi:type="And">
+                           <operand locator="77:114-77:129" xsi:type="In">
+                              <operand localId="157" locator="77:13-77:113" name="EarliestOf" libraryName="Global" xsi:type="FunctionRef">
+                                 <operand localId="154" locator="77:33-77:72" path="relevantDatetime" scope="EstimatedDateOfDelivery" xsi:type="Property"/>
+                                 <operand localId="156" locator="77:75-77:112" path="relevantPeriod" scope="EstimatedDateOfDelivery" xsi:type="Property"/>
+                              </operand>
+                              <operand locator="77:114-77:129" lowClosed="true" highClosed="true" xsi:type="Interval">
+                                 <low locator="77:144-77:174" xsi:type="Subtract">
+                                    <operand localId="159" locator="77:144-77:174" name="LastTimeOfDelivery" xsi:type="FunctionRef">
+                                       <operand localId="158" locator="77:165-77:173" name="Encounter" xsi:type="OperandRef"/>
+                                    </operand>
+                                    <operand localId="160" locator="77:114-77:121" value="42" unit="weeks" xsi:type="Quantity"/>
+                                 </low>
+                                 <high localId="159" locator="77:144-77:174" name="LastTimeOfDelivery" xsi:type="FunctionRef">
+                                    <operand localId="158" locator="77:165-77:173" name="Encounter" xsi:type="OperandRef"/>
+                                 </high>
+                              </operand>
+                           </operand>
+                           <operand locator="77:114-77:129" xsi:type="Not">
+                              <operand locator="77:114-77:129" xsi:type="IsNull">
+                                 <operand localId="159" locator="77:144-77:174" name="LastTimeOfDelivery" xsi:type="FunctionRef">
+                                    <operand localId="158" locator="77:165-77:173" name="Encounter" xsi:type="OperandRef"/>
+                                 </operand>
+                              </operand>
+                           </operand>
+                        </operand>
+                        <operand localId="164" locator="78:13-78:54" xsi:type="Not">
+                           <operand locator="78:13-78:54" xsi:type="IsNull">
+                              <operand localId="163" locator="78:13-78:42" path="result" scope="EstimatedDateOfDelivery" xsi:type="Property"/>
+                           </operand>
+                        </operand>
+                     </where>
+                     <sort localId="171" locator="79:7-79:67">
+                        <by localId="170" locator="79:15-79:67" direction="asc" xsi:type="ByExpression">
+                           <expression localId="169" locator="79:15-79:67" name="EarliestOf" libraryName="Global" xsi:type="FunctionRef">
+                              <operand localId="167" locator="79:35-79:50" name="relevantDatetime" xsi:type="IdentifierRef"/>
+                              <operand localId="168" locator="79:53-79:66" name="relevantPeriod" xsi:type="IdentifierRef"/>
+                           </expression>
+                        </by>
+                     </sort>
+                  </source>
+               </source>
+            </operand>
+            <asTypeSpecifier localId="175" locator="80:15-80:22" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </expression>
+         <operand name="Encounter">
+            <operandTypeSpecifier localId="149" locator="74:55-74:76" xmlns:ns9="urn:healthit-gov:qdm:v5_6" name="ns9:PositiveEncounterPerformed" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+      </def>
+      <def localId="183" locator="70:1-72:121" name="CalculatedGestationalAge" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="183">
+               <a:s>define function &quot;CalculatedGestationalAge&quot;(Encounter </a:s>
+               <a:s r="112">
+                  <a:s>&quot;Encounter, Performed&quot;</a:s>
+               </a:s>
+               <a:s> ):
+  // Age = (280-(Estimated Delivery Date minus Reference Date/Delivery Date))/7
+  </a:s>
+               <a:s r="182">
+                  <a:s r="182">
+                     <a:s r="180">
+                        <a:s>( </a:s>
+                        <a:s r="180">
+                           <a:s r="113">280 - </a:s>
+                           <a:s r="179">
+                              <a:s>( </a:s>
+                              <a:s r="179">
+                                 <a:s>difference in days between </a:s>
+                                 <a:s r="147">
+                                    <a:s>&quot;LastTimeOfDelivery&quot;(</a:s>
+                                    <a:s r="114">
+                                       <a:s>Encounter</a:s>
+                                    </a:s>
+                                    <a:s>)</a:s>
+                                 </a:s>
+                                 <a:s>and </a:s>
+                                 <a:s r="178">
+                                    <a:s>&quot;LastEstimatedDeliveryDate&quot;(</a:s>
+                                    <a:s r="148">
+                                       <a:s>Encounter</a:s>
+                                    </a:s>
+                                    <a:s>)</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> )</a:s>
+                     </a:s>
+                     <a:s r="181"> div 7</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="182" locator="72:3-72:121" xsi:type="TruncatedDivide">
+            <operand localId="180" locator="72:3-72:115" xsi:type="Subtract">
+               <operand localId="113" locator="72:5-72:7" valueType="t:Integer" value="280" xsi:type="Literal"/>
+               <operand localId="179" locator="72:11-72:113" precision="Day" xsi:type="DifferenceBetween">
+                  <operand localId="147" locator="72:40-72:70" name="LastTimeOfDelivery" xsi:type="FunctionRef">
+                     <operand localId="114" locator="72:61-72:69" name="Encounter" xsi:type="OperandRef"/>
+                  </operand>
+                  <operand localId="178" locator="72:75-72:112" name="LastEstimatedDeliveryDate" xsi:type="FunctionRef">
+                     <operand localId="148" locator="72:103-72:111" name="Encounter" xsi:type="OperandRef"/>
+                  </operand>
+               </operand>
+            </operand>
+            <operand localId="181" locator="72:121" valueType="t:Integer" value="7" xsi:type="Literal"/>
+         </expression>
+         <operand name="Encounter">
+            <operandTypeSpecifier localId="112" locator="70:54-70:75" xmlns:ns10="urn:healthit-gov:qdm:v5_6" name="ns10:PositiveEncounterPerformed" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+      </def>
+      <def localId="191" locator="33:1-37:39" name="Variable Calculated Gestational Age" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="191">
+               <a:s>define &quot;Variable Calculated Gestational Age&quot;:
+  //This definition establishes a variable of CGA (Calculated Gestational Age).  CGA is a supplemental data element to store the calculated gestational age result from the &quot;CalculatedGestationalAge&quot; function.  The data element enables the capturing and saving of the CGA for data analysis post data receipt. Hospitals do not need to submit any additional data to comply with this definition.  
+  </a:s>
+               <a:s r="190">
+                  <a:s>
+                     <a:s r="110">
+                        <a:s r="109">
+                           <a:s>
+                              <a:s>&quot;Delivery Encounter with Age Range&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> QualifyingEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s>
+                     <a:s>let </a:s>
+                     <a:s r="185">
+                        <a:s>CGA: </a:s>
+                        <a:s r="184">
+                           <a:s>&quot;CalculatedGestationalAge&quot;(</a:s>
+                           <a:s r="111">
+                              <a:s>QualifyingEncounter</a:s>
+                           </a:s>
+                           <a:s>)</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="189">
+                     <a:s>return </a:s>
+                     <a:s r="188">
+                        <a:s>{ </a:s>
+                        <a:s r="186">
+                           <a:s>QualifyingEncounter</a:s>
+                        </a:s>
+                        <a:s>, </a:s>
+                        <a:s r="187">
+                           <a:s>CGA</a:s>
+                        </a:s>
+                        <a:s> }</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="190" locator="35:3-37:39" xsi:type="Query">
+            <source localId="110" locator="35:3-35:57" alias="QualifyingEncounter">
+               <expression localId="109" locator="35:3-35:37" name="Delivery Encounter with Age Range" xsi:type="ExpressionRef"/>
+            </source>
+            <let localId="185" locator="36:9-36:60" identifier="CGA">
+               <expression localId="184" locator="36:14-36:60" name="CalculatedGestationalAge" xsi:type="FunctionRef">
+                  <operand localId="111" locator="36:41-36:59" name="QualifyingEncounter" xsi:type="AliasRef"/>
+               </expression>
+            </let>
+            <return localId="189" locator="37:5-37:39">
+               <expression localId="188" locator="37:12-37:39" xsi:type="List">
+                  <element localId="186" locator="37:14-37:32" name="QualifyingEncounter" xsi:type="AliasRef"/>
+                  <element localId="187" locator="37:35-37:37" name="CGA" xsi:type="QueryLetRef"/>
+               </expression>
+            </return>
+         </expression>
+      </def>
+      <def localId="222" locator="46:1-51:22" name="LastEstimatedGestationalAge" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="222">
+               <a:s>define function &quot;LastEstimatedGestationalAge&quot;(Encounter </a:s>
+               <a:s r="194">
+                  <a:s>&quot;Encounter, Performed&quot;</a:s>
+               </a:s>
+               <a:s> ):
+  </a:s>
+               <a:s r="221">
+                  <a:s r="221">
+                     <a:s r="219">
+                        <a:s r="218">
+                           <a:s>Last(</a:s>
+                           <a:s r="217">
+                              <a:s>
+                                 <a:s r="196">
+                                    <a:s r="195">
+                                       <a:s r="195">
+                                          <a:s>[&quot;Assessment, Performed&quot;: </a:s>
+                                          <a:s>
+                                             <a:s>&quot;Estimated Gestational Age at Delivery&quot;</a:s>
+                                          </a:s>
+                                          <a:s>]</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> EstimatedGestationalAge</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      </a:s>
+                              <a:s r="210">
+                                 <a:s>where </a:s>
+                                 <a:s r="210">
+                                    <a:s r="206">
+                                       <a:s r="202">
+                                          <a:s r="197">
+                                             <a:s>Global</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="202">
+                                             <a:s>&quot;EarliestOf&quot;(</a:s>
+                                             <a:s r="199">
+                                                <a:s r="198">
+                                                   <a:s>EstimatedGestationalAge</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="199">
+                                                   <a:s>relevantDatetime</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>, </a:s>
+                                             <a:s r="201">
+                                                <a:s r="200">
+                                                   <a:s>EstimatedGestationalAge</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="201">
+                                                   <a:s>relevantPeriod</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>)</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s r="206">
+                                          <a:s r="205">
+                                             <a:s>24 hours</a:s>
+                                          </a:s>
+                                          <a:s> or less before or on</a:s>
+                                       </a:s>
+                                       <a:s> </a:s>
+                                       <a:s r="204">
+                                          <a:s>&quot;LastTimeOfDelivery&quot;(</a:s>
+                                          <a:s r="203">
+                                             <a:s>Encounter</a:s>
+                                          </a:s>
+                                          <a:s>)</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+        and </a:s>
+                                    <a:s r="209">
+                                       <a:s r="208">
+                                          <a:s r="207">
+                                             <a:s>EstimatedGestationalAge</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="208">
+                                             <a:s>result</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> is not null</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      </a:s>
+                              <a:s r="216">
+                                 <a:s>sort by </a:s>
+                                 <a:s r="215">
+                                    <a:s r="214">
+                                       <a:s r="211">
+                                          <a:s>Global</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="214">
+                                          <a:s>&quot;EarliestOf&quot;(</a:s>
+                                          <a:s r="212">
+                                             <a:s>relevantDatetime</a:s>
+                                          </a:s>
+                                          <a:s>, </a:s>
+                                          <a:s r="213">
+                                             <a:s>relevantPeriod</a:s>
+                                          </a:s>
+                                          <a:s>)</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+  )</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="219">
+                           <a:s>result</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s> as </a:s>
+                     <a:s r="220">
+                        <a:s>Quantity</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="221" locator="47:3-51:22" strict="false" xsi:type="As">
+            <operand localId="219" locator="47:3-51:10" path="result" xsi:type="Property">
+               <source localId="218" locator="47:3-51:3" xsi:type="Last">
+                  <source localId="217" locator="47:8-50:67" xsi:type="Query">
+                     <source localId="196" locator="47:8-47:97" alias="EstimatedGestationalAge">
+                        <expression localId="195" locator="47:8-47:73" xmlns:ns11="urn:healthit-gov:qdm:v5_6" dataType="ns11:PositiveAssessmentPerformed" templateId="PositiveAssessmentPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                           <codes locator="47:34-47:72" name="Estimated Gestational Age at Delivery" xsi:type="ValueSetRef"/>
+                        </expression>
+                     </source>
+                     <where localId="210" locator="48:7-49:54" xsi:type="And">
+                        <operand localId="206" locator="48:13-48:174" xsi:type="And">
+                           <operand locator="48:114-48:129" xsi:type="In">
+                              <operand localId="202" locator="48:13-48:113" name="EarliestOf" libraryName="Global" xsi:type="FunctionRef">
+                                 <operand localId="199" locator="48:33-48:72" path="relevantDatetime" scope="EstimatedGestationalAge" xsi:type="Property"/>
+                                 <operand localId="201" locator="48:75-48:112" path="relevantPeriod" scope="EstimatedGestationalAge" xsi:type="Property"/>
+                              </operand>
+                              <operand locator="48:114-48:129" lowClosed="true" highClosed="true" xsi:type="Interval">
+                                 <low locator="48:144-48:174" xsi:type="Subtract">
+                                    <operand localId="204" locator="48:144-48:174" name="LastTimeOfDelivery" xsi:type="FunctionRef">
+                                       <operand localId="203" locator="48:165-48:173" name="Encounter" xsi:type="OperandRef"/>
+                                    </operand>
+                                    <operand localId="205" locator="48:114-48:121" value="24" unit="hours" xsi:type="Quantity"/>
+                                 </low>
+                                 <high localId="204" locator="48:144-48:174" name="LastTimeOfDelivery" xsi:type="FunctionRef">
+                                    <operand localId="203" locator="48:165-48:173" name="Encounter" xsi:type="OperandRef"/>
+                                 </high>
+                              </operand>
+                           </operand>
+                           <operand locator="48:114-48:129" xsi:type="Not">
+                              <operand locator="48:114-48:129" xsi:type="IsNull">
+                                 <operand localId="204" locator="48:144-48:174" name="LastTimeOfDelivery" xsi:type="FunctionRef">
+                                    <operand localId="203" locator="48:165-48:173" name="Encounter" xsi:type="OperandRef"/>
+                                 </operand>
+                              </operand>
+                           </operand>
+                        </operand>
+                        <operand localId="209" locator="49:13-49:54" xsi:type="Not">
+                           <operand locator="49:13-49:54" xsi:type="IsNull">
+                              <operand localId="208" locator="49:13-49:42" path="result" scope="EstimatedGestationalAge" xsi:type="Property"/>
+                           </operand>
+                        </operand>
+                     </where>
+                     <sort localId="216" locator="50:7-50:67">
+                        <by localId="215" locator="50:15-50:67" direction="asc" xsi:type="ByExpression">
+                           <expression localId="214" locator="50:15-50:67" name="EarliestOf" libraryName="Global" xsi:type="FunctionRef">
+                              <operand localId="212" locator="50:35-50:50" name="relevantDatetime" xsi:type="IdentifierRef"/>
+                              <operand localId="213" locator="50:53-50:66" name="relevantPeriod" xsi:type="IdentifierRef"/>
+                           </expression>
+                        </by>
+                     </sort>
+                  </source>
+               </source>
+            </operand>
+            <asTypeSpecifier localId="220" locator="51:15-51:22" name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+         </expression>
+         <operand name="Encounter">
+            <operandTypeSpecifier localId="194" locator="46:57-46:78" xmlns:ns12="urn:healthit-gov:qdm:v5_6" name="ns12:PositiveEncounterPerformed" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+      </def>
+   </statements>
+</library>

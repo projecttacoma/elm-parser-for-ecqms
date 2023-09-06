@@ -1,0 +1,1727 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion,DisableMethodInvocation" xsi:type="a:CqlToElmInfo"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="143">
+         <a:s>library ProstateCaAvoidanceBoneScanOveruse version '13.0.000'</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="ProstateCaAvoidanceBoneScanOveruse" version="13.0.000"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="3:1-3:23" localIdentifier="QDM" uri="urn:healthit-gov:qdm:v5_6" version="5.6">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>using </a:s>
+               <a:s>
+                  <a:s>QDM</a:s>
+               </a:s>
+               <a:s> version '5.6'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="5:1-5:64" localIdentifier="Global" path="MATGlobalCommonFunctions" version="7.0.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>MATGlobalCommonFunctions</a:s>
+               </a:s>
+               <a:s> version '7.0.000' called Global</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <parameters>
+      <def localId="31" locator="29:1-29:49" name="Measurement Period" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="31">
+               <a:s>parameter &quot;Measurement Period&quot; </a:s>
+               <a:s r="30">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="29">
+                     <a:s>DateTime</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <parameterTypeSpecifier localId="30" locator="29:32-29:49" xsi:type="IntervalTypeSpecifier">
+            <pointType localId="29" locator="29:41-29:48" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <codeSystems>
+      <def localId="3" locator="7:1-7:51" name="LOINC" id="urn:oid:2.16.840.1.113883.6.1" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>codesystem &quot;LOINC&quot;: 'urn:oid:2.16.840.1.113883.6.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="4" locator="8:1-8:55" name="SNOMEDCT" id="urn:oid:2.16.840.1.113883.6.96" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>codesystem &quot;SNOMEDCT&quot;: 'urn:oid:2.16.840.1.113883.6.96'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </codeSystems>
+   <valueSets>
+      <def localId="5" locator="10:1-10:61" name="Bone Scan" id="urn:oid:2.16.840.1.113883.3.526.3.320" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>valueset &quot;Bone Scan&quot;: 'urn:oid:2.16.840.1.113883.3.526.3.320'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="6" locator="11:1-11:58" name="Ethnicity" id="urn:oid:2.16.840.1.114222.4.11.837" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>valueset &quot;Ethnicity&quot;: 'urn:oid:2.16.840.1.114222.4.11.837'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="7" locator="12:1-12:68" name="ONC Administrative Sex" id="urn:oid:2.16.840.1.113762.1.4.1" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="7">
+               <a:s>valueset &quot;ONC Administrative Sex&quot;: 'urn:oid:2.16.840.1.113762.1.4.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="8" locator="13:1-13:109" name="Pain Warranting Further Investigation for Prostate Cancer" id="urn:oid:2.16.840.1.113883.3.526.3.451" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="8">
+               <a:s>valueset &quot;Pain Warranting Further Investigation for Prostate Cancer&quot;: 'urn:oid:2.16.840.1.113883.3.526.3.451'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="9" locator="14:1-14:55" name="Payer" id="urn:oid:2.16.840.1.114222.4.11.3591" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="9">
+               <a:s>valueset &quot;Payer&quot;: 'urn:oid:2.16.840.1.114222.4.11.3591'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="10" locator="15:1-15:67" name="Prostate Cancer" id="urn:oid:2.16.840.1.113883.3.526.3.319" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="10">
+               <a:s>valueset &quot;Prostate Cancer&quot;: 'urn:oid:2.16.840.1.113883.3.526.3.319'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="11" locator="16:1-16:77" name="Prostate Cancer Treatment" id="urn:oid:2.16.840.1.113883.3.526.3.398" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="11">
+               <a:s>valueset &quot;Prostate Cancer Treatment&quot;: 'urn:oid:2.16.840.1.113883.3.526.3.398'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="12" locator="17:1-17:82" name="Prostate Specific Antigen Test" id="urn:oid:2.16.840.1.113883.3.526.3.401" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="12">
+               <a:s>valueset &quot;Prostate Specific Antigen Test&quot;: 'urn:oid:2.16.840.1.113883.3.526.3.401'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="13" locator="18:1-18:53" name="Race" id="urn:oid:2.16.840.1.114222.4.11.836" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="13">
+               <a:s>valueset &quot;Race&quot;: 'urn:oid:2.16.840.1.114222.4.11.836'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="14" locator="19:1-19:67" name="Salvage Therapy" id="urn:oid:2.16.840.1.113883.3.526.3.399" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="14">
+               <a:s>valueset &quot;Salvage Therapy&quot;: 'urn:oid:2.16.840.1.113883.3.526.3.399'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </valueSets>
+   <codes>
+      <def localId="16" locator="21:1-21:116" name="Gleason score in Specimen Qualitative" id="35266-6" display="Gleason score in Specimen Qualitative" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="16">
+               <a:s>code &quot;Gleason score in Specimen Qualitative&quot;: '35266-6' from </a:s>
+               <a:s r="15">
+                  <a:s>&quot;LOINC&quot;</a:s>
+               </a:s>
+               <a:s> display 'Gleason score in Specimen Qualitative'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="15" locator="21:62-21:68" name="LOINC"/>
+      </def>
+      <def localId="18" locator="22:1-22:253" name="Neoplasm of prostate primary tumor staging category T1c: Tumor identified by needle biopsy (finding)" id="433351000124101" display="Neoplasm of prostate primary tumor staging category T1c: Tumor identified by needle biopsy (finding)" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="18">
+               <a:s>code &quot;Neoplasm of prostate primary tumor staging category T1c: Tumor identified by needle biopsy (finding)&quot;: '433351000124101' from </a:s>
+               <a:s r="17">
+                  <a:s>&quot;SNOMEDCT&quot;</a:s>
+               </a:s>
+               <a:s> display 'Neoplasm of prostate primary tumor staging category T1c: Tumor identified by needle biopsy (finding)'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="17" locator="22:133-22:142" name="SNOMEDCT"/>
+      </def>
+      <def localId="20" locator="23:1-23:261" name="Neoplasm of prostate primary tumor staging category T2a: Involves one-half of one lobe or less (finding)" id="433361000124104" display="Neoplasm of prostate primary tumor staging category T2a: Involves one-half of one lobe or less (finding)" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="20">
+               <a:s>code &quot;Neoplasm of prostate primary tumor staging category T2a: Involves one-half of one lobe or less (finding)&quot;: '433361000124104' from </a:s>
+               <a:s r="19">
+                  <a:s>&quot;SNOMEDCT&quot;</a:s>
+               </a:s>
+               <a:s> display 'Neoplasm of prostate primary tumor staging category T2a: Involves one-half of one lobe or less (finding)'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="19" locator="23:137-23:146" name="SNOMEDCT"/>
+      </def>
+      <def localId="22" locator="24:1-24:135" name="Procedure reason record (record artifact)" id="433611000124109" display="Procedure reason record (record artifact)" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="22">
+               <a:s>code &quot;Procedure reason record (record artifact)&quot;: '433611000124109' from </a:s>
+               <a:s r="21">
+                  <a:s>&quot;SNOMEDCT&quot;</a:s>
+               </a:s>
+               <a:s> display 'Procedure reason record (record artifact)'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="21" locator="24:74-24:83" name="SNOMEDCT"/>
+      </def>
+      <def localId="24" locator="25:1-25:245" name="T1a: Prostate tumor incidental histologic finding in 5 percent or less of tissue resected (finding)" id="369833007" display="T1a: Prostate tumor incidental histologic finding in 5 percent or less of tissue resected (finding)" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="24">
+               <a:s>code &quot;T1a: Prostate tumor incidental histologic finding in 5 percent or less of tissue resected (finding)&quot;: '369833007' from </a:s>
+               <a:s r="23">
+                  <a:s>&quot;SNOMEDCT&quot;</a:s>
+               </a:s>
+               <a:s> display 'T1a: Prostate tumor incidental histologic finding in 5 percent or less of tissue resected (finding)'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="23" locator="25:126-25:135" name="SNOMEDCT"/>
+      </def>
+      <def localId="26" locator="26:1-26:255" name="T1b: Prostate tumor incidental histologic finding in greater than 5 percent of tissue resected (finding)" id="369834001" display="T1b: Prostate tumor incidental histologic finding in greater than 5 percent of tissue resected (finding)" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="26">
+               <a:s>code &quot;T1b: Prostate tumor incidental histologic finding in greater than 5 percent of tissue resected (finding)&quot;: '369834001' from </a:s>
+               <a:s r="25">
+                  <a:s>&quot;SNOMEDCT&quot;</a:s>
+               </a:s>
+               <a:s> display 'T1b: Prostate tumor incidental histologic finding in greater than 5 percent of tissue resected (finding)'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="25" locator="26:131-26:140" name="SNOMEDCT"/>
+      </def>
+      <def localId="28" locator="27:1-27:105" name="Tumor staging (tumor staging)" id="254292007" display="Tumor staging (tumor staging)" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="28">
+               <a:s>code &quot;Tumor staging (tumor staging)&quot;: '254292007' from </a:s>
+               <a:s r="27">
+                  <a:s>&quot;SNOMEDCT&quot;</a:s>
+               </a:s>
+               <a:s> display 'Tumor staging (tumor staging)'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="27" locator="27:56-27:65" name="SNOMEDCT"/>
+      </def>
+   </codes>
+   <contexts>
+      <def locator="31:1-31:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="31:1-31:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="31:1-31:15" xmlns:ns0="urn:healthit-gov:qdm:v5_6" dataType="ns0:Patient" templateId="Patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="33" locator="33:1-34:51" name="SDE Ethnicity" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="33">
+               <a:s>define &quot;SDE Ethnicity&quot;:
+  </a:s>
+               <a:s r="32">
+                  <a:s>[&quot;Patient Characteristic Ethnicity&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Ethnicity&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="32" locator="34:3-34:51" xmlns:ns1="urn:healthit-gov:qdm:v5_6" dataType="ns1:PatientCharacteristicEthnicity" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="34:40-34:50" name="Ethnicity" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="35" locator="36:1-37:43" name="SDE Payer" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="35">
+               <a:s>define &quot;SDE Payer&quot;:
+  </a:s>
+               <a:s r="34">
+                  <a:s>[&quot;Patient Characteristic Payer&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Payer&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="34" locator="37:3-37:43" xmlns:ns2="urn:healthit-gov:qdm:v5_6" dataType="ns2:PatientCharacteristicPayer" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="37:36-37:42" name="Payer" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="37" locator="39:1-40:41" name="SDE Race" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="37">
+               <a:s>define &quot;SDE Race&quot;:
+  </a:s>
+               <a:s r="36">
+                  <a:s>[&quot;Patient Characteristic Race&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Race&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="36" locator="40:3-40:41" xmlns:ns3="urn:healthit-gov:qdm:v5_6" dataType="ns3:PatientCharacteristicRace" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="40:35-40:40" name="Race" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="39" locator="42:1-43:58" name="SDE Sex" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="39">
+               <a:s>define &quot;SDE Sex&quot;:
+  </a:s>
+               <a:s r="38">
+                  <a:s>[&quot;Patient Characteristic Sex&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;ONC Administrative Sex&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="38" locator="43:3-43:58" xmlns:ns4="urn:healthit-gov:qdm:v5_6" dataType="ns4:PatientCharacteristicSex" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="43:34-43:57" name="ONC Administrative Sex" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="49" locator="104:1-106:78" name="Prostate Cancer Diagnosis" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="49">
+               <a:s>define &quot;Prostate Cancer Diagnosis&quot;:
+  </a:s>
+               <a:s r="48">
+                  <a:s>
+                     <a:s r="43">
+                        <a:s r="42">
+                           <a:s r="42">
+                              <a:s>[&quot;Diagnosis&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Prostate Cancer&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> ProstateCancer</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="47">
+                     <a:s>where </a:s>
+                     <a:s r="47">
+                        <a:s r="45">
+                           <a:s r="44">
+                              <a:s>ProstateCancer</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="45">
+                              <a:s>prevalencePeriod</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="47"> overlaps day of </a:s>
+                        <a:s r="46">
+                           <a:s>&quot;Measurement Period&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="48" locator="105:3-106:78" xsi:type="Query">
+            <source localId="43" locator="105:3-105:49" alias="ProstateCancer">
+               <expression localId="42" locator="105:3-105:34" xmlns:ns5="urn:healthit-gov:qdm:v5_6" dataType="ns5:Diagnosis" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="105:17-105:33" name="Prostate Cancer" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <where localId="47" locator="106:5-106:78" precision="Day" xsi:type="Overlaps">
+               <operand localId="45" locator="106:11-106:41" path="prevalencePeriod" scope="ProstateCancer" xsi:type="Property"/>
+               <operand localId="46" locator="106:59-106:78" name="Measurement Period" xsi:type="ParameterRef"/>
+            </where>
+         </expression>
+      </def>
+      <def localId="64" locator="45:1-48:157" name="Bone Scan Study Performed" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="64">
+               <a:s>define &quot;Bone Scan Study Performed&quot;:
+  </a:s>
+               <a:s r="63">
+                  <a:s>
+                     <a:s r="41">
+                        <a:s r="40">
+                           <a:s r="40">
+                              <a:s>[&quot;Diagnostic Study, Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Bone Scan&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> BoneScan</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="62">
+                     <a:s>with </a:s>
+                     <a:s r="51">
+                        <a:s r="50">
+                           <a:s>
+                              <a:s>&quot;Prostate Cancer Diagnosis&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> ActiveProstateCancer</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="61">
+                        <a:s r="57">
+                           <a:s r="52">
+                              <a:s>Global</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="57">
+                              <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                              <a:s r="54">
+                                 <a:s r="53">
+                                    <a:s>BoneScan</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="54">
+                                    <a:s>relevantDatetime</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="56">
+                                 <a:s r="55">
+                                    <a:s>BoneScan</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="56">
+                                    <a:s>relevantPeriod</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="61"> starts after </a:s>
+                        <a:s r="60">
+                           <a:s>start of </a:s>
+                           <a:s r="59">
+                              <a:s r="58">
+                                 <a:s>ActiveProstateCancer</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="59">
+                                 <a:s>prevalencePeriod</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="63" locator="46:3-48:157" xsi:type="Query">
+            <source localId="41" locator="46:3-46:55" alias="BoneScan">
+               <expression localId="40" locator="46:3-46:46" xmlns:ns6="urn:healthit-gov:qdm:v5_6" dataType="ns6:PositiveDiagnosticStudyPerformed" templateId="PositiveDiagnosticStudyPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="46:35-46:45" name="Bone Scan" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <relationship localId="62" locator="47:5-48:157" alias="ActiveProstateCancer" xsi:type="With">
+               <expression localId="50" locator="47:10-47:36" name="Prostate Cancer Diagnosis" xsi:type="ExpressionRef"/>
+               <suchThat localId="61" locator="48:17-48:157" xsi:type="After">
+                  <operand locator="48:99-48:104" xsi:type="Start">
+                     <operand localId="57" locator="48:17-48:97" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                        <operand localId="54" locator="48:46-48:70" path="relevantDatetime" scope="BoneScan" xsi:type="Property"/>
+                        <operand localId="56" locator="48:73-48:95" path="relevantPeriod" scope="BoneScan" xsi:type="Property"/>
+                     </operand>
+                  </operand>
+                  <operand localId="60" locator="48:112-48:157" xsi:type="Start">
+                     <operand localId="59" locator="48:121-48:157" path="prevalencePeriod" scope="ActiveProstateCancer" xsi:type="Property"/>
+                  </operand>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="68" locator="50:1-51:40" name="Numerator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="68">
+               <a:s>define &quot;Numerator&quot;:
+  </a:s>
+               <a:s r="67">
+                  <a:s>not </a:s>
+                  <a:s r="66">
+                     <a:s>exists </a:s>
+                     <a:s r="65">
+                        <a:s>&quot;Bone Scan Study Performed&quot;</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="67" locator="51:3-51:40" xsi:type="Not">
+            <operand localId="66" locator="51:7-51:40" xsi:type="Exists">
+               <operand localId="65" locator="51:14-51:40" name="Bone Scan Study Performed" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
+      </def>
+      <def localId="71" locator="53:1-54:36" name="Initial Population" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="71">
+               <a:s>define &quot;Initial Population&quot;:
+  </a:s>
+               <a:s r="70">
+                  <a:s>exists </a:s>
+                  <a:s r="69">
+                     <a:s>&quot;Prostate Cancer Diagnosis&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="70" locator="54:3-54:36" xsi:type="Exists">
+            <operand localId="69" locator="54:10-54:36" name="Prostate Cancer Diagnosis" xsi:type="ExpressionRef"/>
+         </expression>
+      </def>
+      <def localId="95" locator="83:1-87:3" name="First Prostate Cancer Treatment during day of Measurement Period" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="95">
+               <a:s>define &quot;First Prostate Cancer Treatment during day of Measurement Period&quot;:
+  </a:s>
+               <a:s r="94">
+                  <a:s>First(</a:s>
+                  <a:s r="93">
+                     <a:s>
+                        <a:s r="77">
+                           <a:s r="76">
+                              <a:s r="76">
+                                 <a:s>[&quot;Procedure, Performed&quot;: </a:s>
+                                 <a:s>
+                                    <a:s>&quot;Prostate Cancer Treatment&quot;</a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> ProstateCancerTreatment</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+      </a:s>
+                     <a:s r="85">
+                        <a:s>where </a:s>
+                        <a:s r="85">
+                           <a:s r="83">
+                              <a:s r="78">
+                                 <a:s>Global</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="83">
+                                 <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                 <a:s r="80">
+                                    <a:s r="79">
+                                       <a:s>ProstateCancerTreatment</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="80">
+                                       <a:s>relevantDatetime</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>, </a:s>
+                                 <a:s r="82">
+                                    <a:s r="81">
+                                       <a:s>ProstateCancerTreatment</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="82">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>)</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="85">ends during day of </a:s>
+                           <a:s r="84">
+                              <a:s>&quot;Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+      </a:s>
+                     <a:s r="92">
+                        <a:s>sort by </a:s>
+                        <a:s r="91">
+                           <a:s r="90">
+                              <a:s>start of </a:s>
+                              <a:s r="89">
+                                 <a:s r="86">
+                                    <a:s>Global</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="89">
+                                    <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                    <a:s r="87">
+                                       <a:s>relevantDatetime</a:s>
+                                    </a:s>
+                                    <a:s>, </a:s>
+                                    <a:s r="88">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                    <a:s>)</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+  )</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="94" locator="84:3-87:3" xsi:type="First">
+            <source localId="93" locator="84:9-86:83" xsi:type="Query">
+               <source localId="77" locator="84:9-84:85" alias="ProstateCancerTreatment">
+                  <expression localId="76" locator="84:9-84:61" xmlns:ns7="urn:healthit-gov:qdm:v5_6" dataType="ns7:PositiveProcedurePerformed" templateId="PositiveProcedurePerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes locator="84:34-84:60" name="Prostate Cancer Treatment" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <where localId="85" locator="85:7-85:159" precision="Day" xsi:type="In">
+                  <operand locator="85:121-85:124" xsi:type="End">
+                     <operand localId="83" locator="85:13-85:120" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                        <operand localId="80" locator="85:40-85:79" path="relevantDatetime" scope="ProstateCancerTreatment" xsi:type="Property"/>
+                        <operand localId="82" locator="85:82-85:119" path="relevantPeriod" scope="ProstateCancerTreatment" xsi:type="Property"/>
+                     </operand>
+                  </operand>
+                  <operand localId="84" locator="85:140-85:159" name="Measurement Period" xsi:type="ParameterRef"/>
+               </where>
+               <sort localId="92" locator="86:7-86:83">
+                  <by localId="91" locator="86:15-86:83" direction="asc" xsi:type="ByExpression">
+                     <expression localId="90" locator="86:15-86:83" xsi:type="Start">
+                        <operand localId="89" locator="86:24-86:83" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                           <operand localId="87" locator="86:51-86:66" name="relevantDatetime" xsi:type="IdentifierRef"/>
+                           <operand localId="88" locator="86:69-86:82" name="relevantPeriod" xsi:type="IdentifierRef"/>
+                        </operand>
+                     </expression>
+                  </by>
+               </sort>
+            </source>
+         </expression>
+      </def>
+      <def localId="143" locator="108:1-118:5" name="Most Recent Prostate Cancer Staging Tumor Size T1a to T2a" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="143">
+               <a:s>define &quot;Most Recent Prostate Cancer Staging Tumor Size T1a to T2a&quot;:
+  </a:s>
+               <a:s r="142">
+                  <a:s>
+                     <a:s r="122">
+                        <a:s r="121">
+                           <a:s>( </a:s>
+                           <a:s r="121">
+                              <a:s>Last(</a:s>
+                              <a:s r="120">
+                                 <a:s>
+                                    <a:s r="75">
+                                       <a:s r="74">
+                                          <a:s r="74">
+                                             <a:s>[&quot;Procedure, Performed&quot;: </a:s>
+                                             <a:s>
+                                                <a:s>&quot;Tumor staging (tumor staging)&quot;</a:s>
+                                             </a:s>
+                                             <a:s>]</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> ProstateCancerStaging</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+      </a:s>
+                                 <a:s r="112">
+                                    <a:s>with </a:s>
+                                    <a:s r="97">
+                                       <a:s r="96">
+                                          <a:s>
+                                             <a:s>&quot;First Prostate Cancer Treatment during day of Measurement Period&quot;</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> FirstProstateCancerTreatment</a:s>
+                                    </a:s>
+                                    <a:s>
+        such that </a:s>
+                                    <a:s r="111">
+                                       <a:s r="103">
+                                          <a:s r="98">
+                                             <a:s>Global</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="103">
+                                             <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                             <a:s r="100">
+                                                <a:s r="99">
+                                                   <a:s>ProstateCancerStaging</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="100">
+                                                   <a:s>relevantDatetime</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>, </a:s>
+                                             <a:s r="102">
+                                                <a:s r="101">
+                                                   <a:s>ProstateCancerStaging</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="102">
+                                                   <a:s>relevantPeriod</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>)</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s r="111">starts before </a:s>
+                                       <a:s r="110">
+                                          <a:s>start of </a:s>
+                                          <a:s r="109">
+                                             <a:s r="104">
+                                                <a:s>Global</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="109">
+                                                <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                                <a:s r="106">
+                                                   <a:s r="105">
+                                                      <a:s>FirstProstateCancerTreatment</a:s>
+                                                   </a:s>
+                                                   <a:s>.</a:s>
+                                                   <a:s r="106">
+                                                      <a:s>relevantDatetime</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s>, </a:s>
+                                                <a:s r="108">
+                                                   <a:s r="107">
+                                                      <a:s>FirstProstateCancerTreatment</a:s>
+                                                   </a:s>
+                                                   <a:s>.</a:s>
+                                                   <a:s r="108">
+                                                      <a:s>relevantPeriod</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s>)</a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+      </a:s>
+                                 <a:s r="119">
+                                    <a:s>sort by </a:s>
+                                    <a:s r="118">
+                                       <a:s r="117">
+                                          <a:s>start of </a:s>
+                                          <a:s r="116">
+                                             <a:s r="113">
+                                                <a:s>Global</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="116">
+                                                <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                                <a:s r="114">
+                                                   <a:s>relevantDatetime</a:s>
+                                                </a:s>
+                                                <a:s>, </a:s>
+                                                <a:s r="115">
+                                                   <a:s>relevantPeriod</a:s>
+                                                </a:s>
+                                                <a:s>)</a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+  )</a:s>
+                           </a:s>
+                           <a:s>)</a:s>
+                        </a:s>
+                        <a:s> LastProstateCancerStaging</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="141">
+                     <a:s>where </a:s>
+                     <a:s r="141">
+                        <a:s>( </a:s>
+                        <a:s r="141">
+                           <a:s r="136">
+                              <a:s r="131">
+                                 <a:s r="126">
+                                    <a:s r="124">
+                                       <a:s r="123">
+                                          <a:s>LastProstateCancerStaging</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="124">
+                                          <a:s>result</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> ~ </a:s>
+                                    <a:s r="125">
+                                       <a:s>&quot;T1a: Prostate tumor incidental histologic finding in 5 percent or less of tissue resected (finding)&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+        or </a:s>
+                                 <a:s r="130">
+                                    <a:s r="128">
+                                       <a:s r="127">
+                                          <a:s>LastProstateCancerStaging</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="128">
+                                          <a:s>result</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> ~ </a:s>
+                                    <a:s r="129">
+                                       <a:s>&quot;T1b: Prostate tumor incidental histologic finding in greater than 5 percent of tissue resected (finding)&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+        or </a:s>
+                              <a:s r="135">
+                                 <a:s r="133">
+                                    <a:s r="132">
+                                       <a:s>LastProstateCancerStaging</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="133">
+                                       <a:s>result</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> ~ </a:s>
+                                 <a:s r="134">
+                                    <a:s>&quot;Neoplasm of prostate primary tumor staging category T1c: Tumor identified by needle biopsy (finding)&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+        or </a:s>
+                           <a:s r="140">
+                              <a:s r="138">
+                                 <a:s r="137">
+                                    <a:s>LastProstateCancerStaging</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="138">
+                                    <a:s>result</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> ~ </a:s>
+                              <a:s r="139">
+                                 <a:s>&quot;Neoplasm of prostate primary tumor staging category T2a: Involves one-half of one lobe or less (finding)&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+    )</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="142" locator="109:3-118:5" xsi:type="Query">
+            <source localId="122" locator="109:3-113:30" alias="LastProstateCancerStaging">
+               <expression localId="121" locator="109:3-113:4" xsi:type="Last">
+                  <source localId="120" locator="109:10-112:83" xsi:type="Query">
+                     <source localId="75" locator="109:10-109:88" alias="ProstateCancerStaging">
+                        <expression localId="74" locator="109:10-109:66" xmlns:ns8="urn:healthit-gov:qdm:v5_6" dataType="ns8:PositiveProcedurePerformed" templateId="PositiveProcedurePerformed" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                           <codes xsi:type="ToList">
+                              <operand locator="109:35-109:65" name="Tumor staging (tumor staging)" xsi:type="CodeRef"/>
+                           </codes>
+                        </expression>
+                     </source>
+                     <relationship localId="112" locator="110:7-111:263" alias="FirstProstateCancerTreatment" xsi:type="With">
+                        <expression localId="96" locator="110:12-110:77" name="First Prostate Cancer Treatment during day of Measurement Period" xsi:type="ExpressionRef"/>
+                        <suchThat localId="111" locator="111:19-111:263" xsi:type="Before">
+                           <operand locator="111:123-111:128" xsi:type="Start">
+                              <operand localId="103" locator="111:19-111:122" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                 <operand localId="100" locator="111:46-111:83" path="relevantDatetime" scope="ProstateCancerStaging" xsi:type="Property"/>
+                                 <operand localId="102" locator="111:86-111:121" path="relevantPeriod" scope="ProstateCancerStaging" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                           <operand localId="110" locator="111:137-111:263" xsi:type="Start">
+                              <operand localId="109" locator="111:146-111:263" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                 <operand localId="106" locator="111:173-111:217" path="relevantDatetime" scope="FirstProstateCancerTreatment" xsi:type="Property"/>
+                                 <operand localId="108" locator="111:220-111:262" path="relevantPeriod" scope="FirstProstateCancerTreatment" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                        </suchThat>
+                     </relationship>
+                     <sort localId="119" locator="112:7-112:83">
+                        <by localId="118" locator="112:15-112:83" direction="asc" xsi:type="ByExpression">
+                           <expression localId="117" locator="112:15-112:83" xsi:type="Start">
+                              <operand localId="116" locator="112:24-112:83" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                 <operand localId="114" locator="112:51-112:66" name="relevantDatetime" xsi:type="IdentifierRef"/>
+                                 <operand localId="115" locator="112:69-112:82" name="relevantPeriod" xsi:type="IdentifierRef"/>
+                              </operand>
+                           </expression>
+                        </by>
+                     </sort>
+                  </source>
+               </expression>
+            </source>
+            <where localId="141" locator="114:5-118:5" xsi:type="Or">
+               <operand localId="136" locator="114:13-116:148" xsi:type="Or">
+                  <operand localId="131" locator="114:13-115:152" xsi:type="Or">
+                     <operand localId="126" locator="114:13-114:148" xsi:type="Equivalent">
+                        <operand asType="t:Code" xsi:type="As">
+                           <operand localId="124" locator="114:13-114:44" path="result" scope="LastProstateCancerStaging" xsi:type="Property"/>
+                        </operand>
+                        <operand localId="125" locator="114:48-114:148" name="T1a: Prostate tumor incidental histologic finding in 5 percent or less of tissue resected (finding)" xsi:type="CodeRef"/>
+                     </operand>
+                     <operand localId="130" locator="115:12-115:152" xsi:type="Equivalent">
+                        <operand asType="t:Code" xsi:type="As">
+                           <operand localId="128" locator="115:12-115:43" path="result" scope="LastProstateCancerStaging" xsi:type="Property"/>
+                        </operand>
+                        <operand localId="129" locator="115:47-115:152" name="T1b: Prostate tumor incidental histologic finding in greater than 5 percent of tissue resected (finding)" xsi:type="CodeRef"/>
+                     </operand>
+                  </operand>
+                  <operand localId="135" locator="116:12-116:148" xsi:type="Equivalent">
+                     <operand asType="t:Code" xsi:type="As">
+                        <operand localId="133" locator="116:12-116:43" path="result" scope="LastProstateCancerStaging" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="134" locator="116:47-116:148" name="Neoplasm of prostate primary tumor staging category T1c: Tumor identified by needle biopsy (finding)" xsi:type="CodeRef"/>
+                  </operand>
+               </operand>
+               <operand localId="140" locator="117:12-117:152" xsi:type="Equivalent">
+                  <operand asType="t:Code" xsi:type="As">
+                     <operand localId="138" locator="117:12-117:43" path="result" scope="LastProstateCancerStaging" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="139" locator="117:47-117:152" name="Neoplasm of prostate primary tumor staging category T2a: Involves one-half of one lobe or less (finding)" xsi:type="CodeRef"/>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="176" locator="56:1-62:42" name="Most Recent PSA Test Result is Low" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="176">
+               <a:s>define &quot;Most Recent PSA Test Result is Low&quot;:
+  </a:s>
+               <a:s r="175">
+                  <a:s>
+                     <a:s r="169">
+                        <a:s r="168">
+                           <a:s>( </a:s>
+                           <a:s r="168">
+                              <a:s>Last(</a:s>
+                              <a:s r="167">
+                                 <a:s>
+                                    <a:s r="73">
+                                       <a:s r="72">
+                                          <a:s r="72">
+                                             <a:s>[&quot;Laboratory Test, Performed&quot;: </a:s>
+                                             <a:s>
+                                                <a:s>&quot;Prostate Specific Antigen Test&quot;</a:s>
+                                             </a:s>
+                                             <a:s>]</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> PSATest</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+      </a:s>
+                                 <a:s r="159">
+                                    <a:s>with </a:s>
+                                    <a:s r="145">
+                                       <a:s r="144">
+                                          <a:s>
+                                             <a:s>&quot;Most Recent Prostate Cancer Staging Tumor Size T1a to T2a&quot;</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> MostRecentProstateCancerStaging</a:s>
+                                    </a:s>
+                                    <a:s>
+        such that </a:s>
+                                    <a:s r="158">
+                                       <a:s r="151">
+                                          <a:s r="146">
+                                             <a:s>Global</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="151">
+                                             <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                             <a:s r="148">
+                                                <a:s r="147">
+                                                   <a:s>PSATest</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="148">
+                                                   <a:s>relevantDatetime</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>, </a:s>
+                                             <a:s r="150">
+                                                <a:s r="149">
+                                                   <a:s>PSATest</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="150">
+                                                   <a:s>relevantPeriod</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>)</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s r="158">starts before </a:s>
+                                       <a:s r="157">
+                                          <a:s r="152">
+                                             <a:s>Global</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="157">
+                                             <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                             <a:s r="154">
+                                                <a:s r="153">
+                                                   <a:s>MostRecentProstateCancerStaging</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="154">
+                                                   <a:s>relevantDatetime</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>, </a:s>
+                                             <a:s r="156">
+                                                <a:s r="155">
+                                                   <a:s>MostRecentProstateCancerStaging</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="156">
+                                                   <a:s>relevantPeriod</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>)</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+      </a:s>
+                                 <a:s r="166">
+                                    <a:s>sort by </a:s>
+                                    <a:s r="165">
+                                       <a:s r="164">
+                                          <a:s>start of </a:s>
+                                          <a:s r="163">
+                                             <a:s r="160">
+                                                <a:s>Global</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="163">
+                                                <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                                <a:s r="161">
+                                                   <a:s>relevantDatetime</a:s>
+                                                </a:s>
+                                                <a:s>, </a:s>
+                                                <a:s r="162">
+                                                   <a:s>relevantPeriod</a:s>
+                                                </a:s>
+                                                <a:s>)</a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+  )</a:s>
+                           </a:s>
+                           <a:s>)</a:s>
+                        </a:s>
+                        <a:s> LastPSATest</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="174">
+                     <a:s>return </a:s>
+                     <a:s r="173">
+                        <a:s r="171">
+                           <a:s r="170">
+                              <a:s>LastPSATest</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="171">
+                              <a:s>result</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> &lt; </a:s>
+                        <a:s r="172">
+                           <a:s>10 'ng/mL'</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="175" locator="57:3-62:42" xsi:type="Query">
+            <source localId="169" locator="57:3-61:16" alias="LastPSATest">
+               <expression localId="168" locator="57:3-61:4" xsi:type="Last">
+                  <source localId="167" locator="57:10-60:83" xsi:type="Query">
+                     <source localId="73" locator="57:10-57:81" alias="PSATest">
+                        <expression localId="72" locator="57:10-57:73" xmlns:ns9="urn:healthit-gov:qdm:v5_6" dataType="ns9:PositiveLaboratoryTestPerformed" templateId="PositiveLaboratoryTestPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                           <codes locator="57:41-57:72" name="Prostate Specific Antigen Test" xsi:type="ValueSetRef"/>
+                        </expression>
+                     </source>
+                     <relationship localId="159" locator="58:7-59:232" alias="MostRecentProstateCancerStaging" xsi:type="With">
+                        <expression localId="144" locator="58:12-58:70" name="Most Recent Prostate Cancer Staging Tumor Size T1a to T2a" xsi:type="ExpressionRef"/>
+                        <suchThat localId="158" locator="59:19-59:232" xsi:type="Before">
+                           <operand xsi:type="If">
+                              <condition xsi:type="IsNull">
+                                 <operand locator="59:95-59:100" xsi:type="Start">
+                                    <operand localId="151" locator="59:19-59:94" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                       <operand localId="148" locator="59:46-59:69" path="relevantDatetime" scope="PSATest" xsi:type="Property"/>
+                                       <operand localId="150" locator="59:72-59:93" path="relevantPeriod" scope="PSATest" xsi:type="Property"/>
+                                    </operand>
+                                 </operand>
+                              </condition>
+                              <then xsi:type="Null">
+                                 <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </resultTypeSpecifier>
+                              </then>
+                              <else lowClosed="true" highClosed="true" xsi:type="Interval">
+                                 <low locator="59:95-59:100" xsi:type="Start">
+                                    <operand localId="151" locator="59:19-59:94" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                       <operand localId="148" locator="59:46-59:69" path="relevantDatetime" scope="PSATest" xsi:type="Property"/>
+                                       <operand localId="150" locator="59:72-59:93" path="relevantPeriod" scope="PSATest" xsi:type="Property"/>
+                                    </operand>
+                                 </low>
+                                 <high locator="59:95-59:100" xsi:type="Start">
+                                    <operand localId="151" locator="59:19-59:94" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                       <operand localId="148" locator="59:46-59:69" path="relevantDatetime" scope="PSATest" xsi:type="Property"/>
+                                       <operand localId="150" locator="59:72-59:93" path="relevantPeriod" scope="PSATest" xsi:type="Property"/>
+                                    </operand>
+                                 </high>
+                              </else>
+                           </operand>
+                           <operand localId="157" locator="59:109-59:232" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                              <operand localId="154" locator="59:136-59:183" path="relevantDatetime" scope="MostRecentProstateCancerStaging" xsi:type="Property"/>
+                              <operand localId="156" locator="59:186-59:231" path="relevantPeriod" scope="MostRecentProstateCancerStaging" xsi:type="Property"/>
+                           </operand>
+                        </suchThat>
+                     </relationship>
+                     <sort localId="166" locator="60:7-60:83">
+                        <by localId="165" locator="60:15-60:83" direction="asc" xsi:type="ByExpression">
+                           <expression localId="164" locator="60:15-60:83" xsi:type="Start">
+                              <operand localId="163" locator="60:24-60:83" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                 <operand localId="161" locator="60:51-60:66" name="relevantDatetime" xsi:type="IdentifierRef"/>
+                                 <operand localId="162" locator="60:69-60:82" name="relevantPeriod" xsi:type="IdentifierRef"/>
+                              </operand>
+                           </expression>
+                        </by>
+                     </sort>
+                  </source>
+               </expression>
+            </source>
+            <return localId="174" locator="62:5-62:42">
+               <expression localId="173" locator="62:12-62:42" xsi:type="Less">
+                  <operand asType="t:Quantity" xsi:type="As">
+                     <operand localId="171" locator="62:12-62:29" path="result" scope="LastPSATest" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="172" locator="62:33-62:42" value="10" unit="ng/mL" xsi:type="Quantity"/>
+               </expression>
+            </return>
+         </expression>
+      </def>
+      <def localId="190" locator="64:1-67:111" name="Has Diagnosis of Pain Related to Prostate Cancer" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="190">
+               <a:s>define &quot;Has Diagnosis of Pain Related to Prostate Cancer&quot;:
+  </a:s>
+               <a:s r="189">
+                  <a:s>exists </a:s>
+                  <a:s r="188">
+                     <a:s>
+                        <a:s r="178">
+                           <a:s r="177">
+                              <a:s r="177">
+                                 <a:s>[&quot;Diagnosis&quot;: </a:s>
+                                 <a:s>
+                                    <a:s>&quot;Pain Warranting Further Investigation for Prostate Cancer&quot;</a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> ProstateCancerPain</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    </a:s>
+                     <a:s r="187">
+                        <a:s>with </a:s>
+                        <a:s r="180">
+                           <a:s r="179">
+                              <a:s>
+                                 <a:s>&quot;Prostate Cancer Diagnosis&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> ActiveProstateCancer</a:s>
+                        </a:s>
+                        <a:s>
+      such that </a:s>
+                        <a:s r="186">
+                           <a:s r="182">
+                              <a:s r="181">
+                                 <a:s>ProstateCancerPain</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="182">
+                                 <a:s>prevalencePeriod</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="186"> starts after </a:s>
+                           <a:s r="185">
+                              <a:s>start of </a:s>
+                              <a:s r="184">
+                                 <a:s r="183">
+                                    <a:s>ActiveProstateCancer</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="184">
+                                    <a:s>prevalencePeriod</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="189" locator="65:3-67:111" xsi:type="Exists">
+            <operand localId="188" locator="65:10-67:111" xsi:type="Query">
+               <source localId="178" locator="65:10-65:102" alias="ProstateCancerPain">
+                  <expression localId="177" locator="65:10-65:83" xmlns:ns10="urn:healthit-gov:qdm:v5_6" dataType="ns10:Diagnosis" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes locator="65:24-65:82" name="Pain Warranting Further Investigation for Prostate Cancer" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <relationship localId="187" locator="66:5-67:111" alias="ActiveProstateCancer" xsi:type="With">
+                  <expression localId="179" locator="66:10-66:36" name="Prostate Cancer Diagnosis" xsi:type="ExpressionRef"/>
+                  <suchThat localId="186" locator="67:17-67:111" xsi:type="After">
+                     <operand locator="67:53-67:58" xsi:type="Start">
+                        <operand localId="182" locator="67:17-67:51" path="prevalencePeriod" scope="ProstateCancerPain" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="185" locator="67:66-67:111" xsi:type="Start">
+                        <operand localId="184" locator="67:75-67:111" path="prevalencePeriod" scope="ActiveProstateCancer" xsi:type="Property"/>
+                     </operand>
+                  </suchThat>
+               </relationship>
+            </operand>
+         </expression>
+      </def>
+      <def localId="208" locator="69:1-72:169" name="Has Salvage Therapy Performed After Prostate Cancer Diagnosis" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="208">
+               <a:s>define &quot;Has Salvage Therapy Performed After Prostate Cancer Diagnosis&quot;:
+  </a:s>
+               <a:s r="207">
+                  <a:s>exists </a:s>
+                  <a:s r="206">
+                     <a:s>
+                        <a:s r="192">
+                           <a:s r="191">
+                              <a:s r="191">
+                                 <a:s>[&quot;Procedure, Performed&quot;: </a:s>
+                                 <a:s>
+                                    <a:s>&quot;Salvage Therapy&quot;</a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> SalvageTherapy</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    </a:s>
+                     <a:s r="205">
+                        <a:s>with </a:s>
+                        <a:s r="194">
+                           <a:s r="193">
+                              <a:s>
+                                 <a:s>&quot;Prostate Cancer Diagnosis&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> ActiveProstateCancer</a:s>
+                        </a:s>
+                        <a:s>
+      such that </a:s>
+                        <a:s r="204">
+                           <a:s r="200">
+                              <a:s r="195">
+                                 <a:s>Global</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="200">
+                                 <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                 <a:s r="197">
+                                    <a:s r="196">
+                                       <a:s>SalvageTherapy</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="197">
+                                       <a:s>relevantDatetime</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>, </a:s>
+                                 <a:s r="199">
+                                    <a:s r="198">
+                                       <a:s>SalvageTherapy</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="199">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> )</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="204"> starts after </a:s>
+                           <a:s r="203">
+                              <a:s>start of </a:s>
+                              <a:s r="202">
+                                 <a:s r="201">
+                                    <a:s>ActiveProstateCancer</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="202">
+                                    <a:s>prevalencePeriod</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="207" locator="70:3-72:169" xsi:type="Exists">
+            <operand localId="206" locator="70:10-72:169" xsi:type="Query">
+               <source localId="192" locator="70:10-70:67" alias="SalvageTherapy">
+                  <expression localId="191" locator="70:10-70:52" xmlns:ns11="urn:healthit-gov:qdm:v5_6" dataType="ns11:PositiveProcedurePerformed" templateId="PositiveProcedurePerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes locator="70:35-70:51" name="Salvage Therapy" xsi:type="ValueSetRef"/>
+                  </expression>
+               </source>
+               <relationship localId="205" locator="71:5-72:169" alias="ActiveProstateCancer" xsi:type="With">
+                  <expression localId="193" locator="71:10-71:36" name="Prostate Cancer Diagnosis" xsi:type="ExpressionRef"/>
+                  <suchThat localId="204" locator="72:17-72:169" xsi:type="After">
+                     <operand locator="72:111-72:116" xsi:type="Start">
+                        <operand localId="200" locator="72:17-72:109" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                           <operand localId="197" locator="72:46-72:76" path="relevantDatetime" scope="SalvageTherapy" xsi:type="Property"/>
+                           <operand localId="199" locator="72:79-72:107" path="relevantPeriod" scope="SalvageTherapy" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                     <operand localId="203" locator="72:124-72:169" xsi:type="Start">
+                        <operand localId="202" locator="72:133-72:169" path="prevalencePeriod" scope="ActiveProstateCancer" xsi:type="Property"/>
+                     </operand>
+                  </suchThat>
+               </relationship>
+            </operand>
+         </expression>
+      </def>
+      <def localId="217" locator="74:1-76:85" name="Has Bone Scan Study Performed with Documented Reason" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="217">
+               <a:s>define &quot;Has Bone Scan Study Performed with Documented Reason&quot;:
+  </a:s>
+               <a:s r="216">
+                  <a:s>exists </a:s>
+                  <a:s r="215">
+                     <a:s>
+                        <a:s r="210">
+                           <a:s r="209">
+                              <a:s>
+                                 <a:s>&quot;Bone Scan Study Performed&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> BoneScanAfterDiagnosis</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    </a:s>
+                     <a:s r="214">
+                        <a:s>where </a:s>
+                        <a:s r="214">
+                           <a:s r="212">
+                              <a:s r="211">
+                                 <a:s>BoneScanAfterDiagnosis</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="212">
+                                 <a:s>reason</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> ~ </a:s>
+                           <a:s r="213">
+                              <a:s>&quot;Procedure reason record (record artifact)&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="216" locator="75:3-76:85" xsi:type="Exists">
+            <operand localId="215" locator="75:10-76:85" xsi:type="Query">
+               <source localId="210" locator="75:10-75:59" alias="BoneScanAfterDiagnosis">
+                  <expression localId="209" locator="75:10-75:36" name="Bone Scan Study Performed" xsi:type="ExpressionRef"/>
+               </source>
+               <where localId="214" locator="76:5-76:85" xsi:type="Equivalent">
+                  <operand localId="212" locator="76:11-76:39" path="reason" scope="BoneScanAfterDiagnosis" xsi:type="Property"/>
+                  <operand localId="213" locator="76:43-76:85" name="Procedure reason record (record artifact)" xsi:type="CodeRef"/>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def localId="223" locator="78:1-81:61" name="Denominator Exceptions" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="223">
+               <a:s>define &quot;Denominator Exceptions&quot;:
+  </a:s>
+               <a:s r="222">
+                  <a:s r="220">
+                     <a:s r="218">
+                        <a:s>&quot;Has Diagnosis of Pain Related to Prostate Cancer&quot;</a:s>
+                     </a:s>
+                     <a:s>
+    or </a:s>
+                     <a:s r="219">
+                        <a:s>&quot;Has Salvage Therapy Performed After Prostate Cancer Diagnosis&quot;</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    or </a:s>
+                  <a:s r="221">
+                     <a:s>&quot;Has Bone Scan Study Performed with Documented Reason&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="222" locator="79:3-81:61" xsi:type="Or">
+            <operand localId="220" locator="79:3-80:70" xsi:type="Or">
+               <operand localId="218" locator="79:3-79:52" name="Has Diagnosis of Pain Related to Prostate Cancer" xsi:type="ExpressionRef"/>
+               <operand localId="219" locator="80:8-80:70" name="Has Salvage Therapy Performed After Prostate Cancer Diagnosis" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand localId="221" locator="81:8-81:61" name="Has Bone Scan Study Performed with Documented Reason" xsi:type="ExpressionRef"/>
+         </expression>
+      </def>
+      <def localId="268" locator="96:1-102:39" name="Most Recent Gleason Score is Low" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="268">
+               <a:s>define &quot;Most Recent Gleason Score is Low&quot;:
+  </a:s>
+               <a:s r="267">
+                  <a:s>
+                     <a:s r="261">
+                        <a:s r="260">
+                           <a:s>( </a:s>
+                           <a:s r="260">
+                              <a:s>Last(</a:s>
+                              <a:s r="259">
+                                 <a:s>
+                                    <a:s r="234">
+                                       <a:s r="233">
+                                          <a:s r="233">
+                                             <a:s>[&quot;Laboratory Test, Performed&quot;: </a:s>
+                                             <a:s>
+                                                <a:s>&quot;Gleason score in Specimen Qualitative&quot;</a:s>
+                                             </a:s>
+                                             <a:s>]</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> GleasonScore</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+      </a:s>
+                                 <a:s r="251">
+                                    <a:s>with </a:s>
+                                    <a:s r="236">
+                                       <a:s r="235">
+                                          <a:s>
+                                             <a:s>&quot;First Prostate Cancer Treatment during day of Measurement Period&quot;</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> FirstProstateCancerTreatment</a:s>
+                                    </a:s>
+                                    <a:s>
+        such that </a:s>
+                                    <a:s r="250">
+                                       <a:s r="242">
+                                          <a:s r="237">
+                                             <a:s>Global</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="242">
+                                             <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                             <a:s r="239">
+                                                <a:s r="238">
+                                                   <a:s>GleasonScore</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="239">
+                                                   <a:s>relevantDatetime</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>, </a:s>
+                                             <a:s r="241">
+                                                <a:s r="240">
+                                                   <a:s>GleasonScore</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="241">
+                                                   <a:s>relevantPeriod</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>)</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s r="250">starts before </a:s>
+                                       <a:s r="249">
+                                          <a:s>start of </a:s>
+                                          <a:s r="248">
+                                             <a:s r="243">
+                                                <a:s>Global</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="248">
+                                                <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                                <a:s r="245">
+                                                   <a:s r="244">
+                                                      <a:s>FirstProstateCancerTreatment</a:s>
+                                                   </a:s>
+                                                   <a:s>.</a:s>
+                                                   <a:s r="245">
+                                                      <a:s>relevantDatetime</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s>, </a:s>
+                                                <a:s r="247">
+                                                   <a:s r="246">
+                                                      <a:s>FirstProstateCancerTreatment</a:s>
+                                                   </a:s>
+                                                   <a:s>.</a:s>
+                                                   <a:s r="247">
+                                                      <a:s>relevantPeriod</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s>)</a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+      </a:s>
+                                 <a:s r="258">
+                                    <a:s>sort by </a:s>
+                                    <a:s r="257">
+                                       <a:s r="256">
+                                          <a:s>start of </a:s>
+                                          <a:s r="255">
+                                             <a:s r="252">
+                                                <a:s>Global</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="255">
+                                                <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                                <a:s r="253">
+                                                   <a:s>relevantDatetime</a:s>
+                                                </a:s>
+                                                <a:s>, </a:s>
+                                                <a:s r="254">
+                                                   <a:s>relevantPeriod</a:s>
+                                                </a:s>
+                                                <a:s>)</a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+  )</a:s>
+                           </a:s>
+                           <a:s>)</a:s>
+                        </a:s>
+                        <a:s> LastGleasonScore</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="266">
+                     <a:s>return </a:s>
+                     <a:s r="265">
+                        <a:s r="263">
+                           <a:s r="262">
+                              <a:s>LastGleasonScore</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="263">
+                              <a:s>result</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="264"> &lt;= 6</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="267" locator="97:3-102:39" xsi:type="Query">
+            <source localId="261" locator="97:3-101:21" alias="LastGleasonScore">
+               <expression localId="260" locator="97:3-101:4" xsi:type="Last">
+                  <source localId="259" locator="97:10-100:83" xsi:type="Query">
+                     <source localId="234" locator="97:10-97:93" alias="GleasonScore">
+                        <expression localId="233" locator="97:10-97:80" xmlns:ns12="urn:healthit-gov:qdm:v5_6" dataType="ns12:PositiveLaboratoryTestPerformed" templateId="PositiveLaboratoryTestPerformed" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                           <codes xsi:type="ToList">
+                              <operand locator="97:41-97:79" name="Gleason score in Specimen Qualitative" xsi:type="CodeRef"/>
+                           </codes>
+                        </expression>
+                     </source>
+                     <relationship localId="251" locator="98:7-99:245" alias="FirstProstateCancerTreatment" xsi:type="With">
+                        <expression localId="235" locator="98:12-98:77" name="First Prostate Cancer Treatment during day of Measurement Period" xsi:type="ExpressionRef"/>
+                        <suchThat localId="250" locator="99:19-99:245" xsi:type="Before">
+                           <operand locator="99:105-99:110" xsi:type="Start">
+                              <operand localId="242" locator="99:19-99:104" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                 <operand localId="239" locator="99:46-99:74" path="relevantDatetime" scope="GleasonScore" xsi:type="Property"/>
+                                 <operand localId="241" locator="99:77-99:103" path="relevantPeriod" scope="GleasonScore" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                           <operand localId="249" locator="99:119-99:245" xsi:type="Start">
+                              <operand localId="248" locator="99:128-99:245" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                 <operand localId="245" locator="99:155-99:199" path="relevantDatetime" scope="FirstProstateCancerTreatment" xsi:type="Property"/>
+                                 <operand localId="247" locator="99:202-99:244" path="relevantPeriod" scope="FirstProstateCancerTreatment" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                        </suchThat>
+                     </relationship>
+                     <sort localId="258" locator="100:7-100:83">
+                        <by localId="257" locator="100:15-100:83" direction="asc" xsi:type="ByExpression">
+                           <expression localId="256" locator="100:15-100:83" xsi:type="Start">
+                              <operand localId="255" locator="100:24-100:83" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                 <operand localId="253" locator="100:51-100:66" name="relevantDatetime" xsi:type="IdentifierRef"/>
+                                 <operand localId="254" locator="100:69-100:82" name="relevantPeriod" xsi:type="IdentifierRef"/>
+                              </operand>
+                           </expression>
+                        </by>
+                     </sort>
+                  </source>
+               </expression>
+            </source>
+            <return localId="266" locator="102:5-102:39">
+               <expression localId="265" locator="102:12-102:39" xsi:type="LessOrEqual">
+                  <operand asType="t:Integer" xsi:type="As">
+                     <operand localId="263" locator="102:12-102:34" path="result" scope="LastGleasonScore" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="264" locator="102:39" valueType="t:Integer" value="6" xsi:type="Literal"/>
+               </expression>
+            </return>
+         </expression>
+      </def>
+      <def localId="271" locator="89:1-94:42" name="Denominator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="271">
+               <a:s>define &quot;Denominator&quot;:
+  </a:s>
+               <a:s r="270">
+                  <a:s r="232">
+                     <a:s r="230">
+                        <a:s r="227">
+                           <a:s r="224">
+                              <a:s>&quot;Initial Population&quot;</a:s>
+                           </a:s>
+                           <a:s>
+    and </a:s>
+                           <a:s r="226">
+                              <a:s r="225">
+                                 <a:s>&quot;First Prostate Cancer Treatment during day of Measurement Period&quot;</a:s>
+                              </a:s>
+                              <a:s> is not null</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+    and </a:s>
+                        <a:s r="229">
+                           <a:s r="228">
+                              <a:s>&quot;Most Recent Prostate Cancer Staging Tumor Size T1a to T2a&quot;</a:s>
+                           </a:s>
+                           <a:s> is not null</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    and </a:s>
+                     <a:s r="231">
+                        <a:s>&quot;Most Recent PSA Test Result is Low&quot;</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    and </a:s>
+                  <a:s r="269">
+                     <a:s>&quot;Most Recent Gleason Score is Low&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="270" locator="90:3-94:42" xsi:type="And">
+            <operand localId="232" locator="90:3-93:44" xsi:type="And">
+               <operand localId="230" locator="90:3-92:79" xsi:type="And">
+                  <operand localId="227" locator="90:3-91:86" xsi:type="And">
+                     <operand localId="224" locator="90:3-90:22" name="Initial Population" xsi:type="ExpressionRef"/>
+                     <operand localId="226" locator="91:9-91:86" xsi:type="Not">
+                        <operand locator="91:9-91:86" xsi:type="IsNull">
+                           <operand localId="225" locator="91:9-91:74" name="First Prostate Cancer Treatment during day of Measurement Period" xsi:type="ExpressionRef"/>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand localId="229" locator="92:9-92:79" xsi:type="Not">
+                     <operand locator="92:9-92:79" xsi:type="IsNull">
+                        <operand localId="228" locator="92:9-92:67" name="Most Recent Prostate Cancer Staging Tumor Size T1a to T2a" xsi:type="ExpressionRef"/>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand localId="231" locator="93:9-93:44" name="Most Recent PSA Test Result is Low" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand localId="269" locator="94:9-94:42" name="Most Recent Gleason Score is Low" xsi:type="ExpressionRef"/>
+         </expression>
+      </def>
+   </statements>
+</library>

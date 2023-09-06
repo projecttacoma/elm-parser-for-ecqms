@@ -1,0 +1,2978 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion,DisableMethodInvocation" xsi:type="a:CqlToElmInfo"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="419">
+         <a:s>library PCSDepressionScreenAndFollowUp version '13.1.000'</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="PCSDepressionScreenAndFollowUp" version="13.1.000"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="3:1-3:23" localIdentifier="QDM" uri="urn:healthit-gov:qdm:v5_6" version="5.6">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>using </a:s>
+               <a:s>
+                  <a:s>QDM</a:s>
+               </a:s>
+               <a:s> version '5.6'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="5:1-5:64" localIdentifier="Global" path="MATGlobalCommonFunctions" version="7.0.000">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>MATGlobalCommonFunctions</a:s>
+               </a:s>
+               <a:s> version '7.0.000' called Global</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <parameters>
+      <def localId="32" locator="32:1-32:49" name="Measurement Period" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="32">
+               <a:s>parameter &quot;Measurement Period&quot; </a:s>
+               <a:s r="31">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="30">
+                     <a:s>DateTime</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <parameterTypeSpecifier localId="31" locator="32:32-32:49" xsi:type="IntervalTypeSpecifier">
+            <pointType localId="30" locator="32:41-32:48" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <codeSystems>
+      <def localId="3" locator="7:1-7:51" name="LOINC" id="urn:oid:2.16.840.1.113883.6.1" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>codesystem &quot;LOINC&quot;: 'urn:oid:2.16.840.1.113883.6.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="4" locator="8:1-8:55" name="SNOMEDCT" id="urn:oid:2.16.840.1.113883.6.96" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>codesystem &quot;SNOMEDCT&quot;: 'urn:oid:2.16.840.1.113883.6.96'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </codeSystems>
+   <valueSets>
+      <def localId="5" locator="10:1-10:86" name="Adolescent Depression Medications" id="urn:oid:2.16.840.1.113883.3.526.3.1567" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>valueset &quot;Adolescent Depression Medications&quot;: 'urn:oid:2.16.840.1.113883.3.526.3.1567'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="6" locator="11:1-11:81" name="Adult Depression Medications" id="urn:oid:2.16.840.1.113883.3.526.3.1566" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>valueset &quot;Adult Depression Medications&quot;: 'urn:oid:2.16.840.1.113883.3.526.3.1566'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="7" locator="12:1-12:73" name="Bipolar Disorder" id="urn:oid:2.16.840.1.113883.3.67.1.101.1.128" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="7">
+               <a:s>valueset &quot;Bipolar Disorder&quot;: 'urn:oid:2.16.840.1.113883.3.67.1.101.1.128'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="8" locator="13:1-13:85" name="Encounter to Screen for Depression" id="urn:oid:2.16.840.1.113883.3.600.1916" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="8">
+               <a:s>valueset &quot;Encounter to Screen for Depression&quot;: 'urn:oid:2.16.840.1.113883.3.600.1916'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="9" locator="14:1-14:58" name="Ethnicity" id="urn:oid:2.16.840.1.114222.4.11.837" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="9">
+               <a:s>valueset &quot;Ethnicity&quot;: 'urn:oid:2.16.840.1.114222.4.11.837'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="10" locator="15:1-15:88" name="Follow Up for Adolescent Depression" id="urn:oid:2.16.840.1.113883.3.526.3.1569" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="10">
+               <a:s>valueset &quot;Follow Up for Adolescent Depression&quot;: 'urn:oid:2.16.840.1.113883.3.526.3.1569'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="11" locator="16:1-16:83" name="Follow Up for Adult Depression" id="urn:oid:2.16.840.1.113883.3.526.3.1568" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="11">
+               <a:s>valueset &quot;Follow Up for Adult Depression&quot;: 'urn:oid:2.16.840.1.113883.3.526.3.1568'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="12" locator="17:1-17:67" name="Medical Reason" id="urn:oid:2.16.840.1.113883.3.526.3.1007" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="12">
+               <a:s>valueset &quot;Medical Reason&quot;: 'urn:oid:2.16.840.1.113883.3.526.3.1007'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="13" locator="18:1-18:68" name="ONC Administrative Sex" id="urn:oid:2.16.840.1.113762.1.4.1" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="13">
+               <a:s>valueset &quot;ONC Administrative Sex&quot;: 'urn:oid:2.16.840.1.113762.1.4.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="14" locator="19:1-19:55" name="Payer" id="urn:oid:2.16.840.1.114222.4.11.3591" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="14">
+               <a:s>valueset &quot;Payer&quot;: 'urn:oid:2.16.840.1.114222.4.11.3591'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="15" locator="20:1-20:80" name="Physical Therapy Evaluation" id="urn:oid:2.16.840.1.113883.3.526.3.1022" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="15">
+               <a:s>valueset &quot;Physical Therapy Evaluation&quot;: 'urn:oid:2.16.840.1.113883.3.526.3.1022'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="16" locator="21:1-21:53" name="Race" id="urn:oid:2.16.840.1.114222.4.11.836" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="16">
+               <a:s>valueset &quot;Race&quot;: 'urn:oid:2.16.840.1.114222.4.11.836'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="17" locator="22:1-22:87" name="Referral for Adolescent Depression" id="urn:oid:2.16.840.1.113883.3.526.3.1570" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="17">
+               <a:s>valueset &quot;Referral for Adolescent Depression&quot;: 'urn:oid:2.16.840.1.113883.3.526.3.1570'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="18" locator="23:1-23:82" name="Referral for Adult Depression" id="urn:oid:2.16.840.1.113883.3.526.3.1571" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="18">
+               <a:s>valueset &quot;Referral for Adult Depression&quot;: 'urn:oid:2.16.840.1.113883.3.526.3.1571'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="19" locator="24:1-24:79" name="Telephone Visits" id="urn:oid:2.16.840.1.113883.3.464.1003.101.12.1080" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="19">
+               <a:s>valueset &quot;Telephone Visits&quot;: 'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1080'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </valueSets>
+   <codes>
+      <def localId="21" locator="26:1-26:126" name="Adolescent depression screening assessment" id="73831-0" display="Adolescent depression screening assessment" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="21">
+               <a:s>code &quot;Adolescent depression screening assessment&quot;: '73831-0' from </a:s>
+               <a:s r="20">
+                  <a:s>&quot;LOINC&quot;</a:s>
+               </a:s>
+               <a:s> display 'Adolescent depression screening assessment'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="20" locator="26:67-26:73" name="LOINC"/>
+      </def>
+      <def localId="23" locator="27:1-27:116" name="Adult depression screening assessment" id="73832-8" display="Adult depression screening assessment" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="23">
+               <a:s>code &quot;Adult depression screening assessment&quot;: '73832-8' from </a:s>
+               <a:s r="22">
+                  <a:s>&quot;LOINC&quot;</a:s>
+               </a:s>
+               <a:s> display 'Adult depression screening assessment'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="22" locator="27:62-27:68" name="LOINC"/>
+      </def>
+      <def localId="25" locator="28:1-28:129" name="Depression screening declined (situation)" id="720834000" display="Depression screening declined (situation)" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="25">
+               <a:s>code &quot;Depression screening declined (situation)&quot;: '720834000' from </a:s>
+               <a:s r="24">
+                  <a:s>&quot;SNOMEDCT&quot;</a:s>
+               </a:s>
+               <a:s> display 'Depression screening declined (situation)'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="24" locator="28:68-28:77" name="SNOMEDCT"/>
+      </def>
+      <def localId="27" locator="29:1-29:131" name="Depression screening negative (finding)" id="428171000124102" display="Depression screening negative (finding)" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="27">
+               <a:s>code &quot;Depression screening negative (finding)&quot;: '428171000124102' from </a:s>
+               <a:s r="26">
+                  <a:s>&quot;SNOMEDCT&quot;</a:s>
+               </a:s>
+               <a:s> display 'Depression screening negative (finding)'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="26" locator="29:72-29:81" name="SNOMEDCT"/>
+      </def>
+      <def localId="29" locator="30:1-30:131" name="Depression screening positive (finding)" id="428181000124104" display="Depression screening positive (finding)" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="29">
+               <a:s>code &quot;Depression screening positive (finding)&quot;: '428181000124104' from </a:s>
+               <a:s r="28">
+                  <a:s>&quot;SNOMEDCT&quot;</a:s>
+               </a:s>
+               <a:s> display 'Depression screening positive (finding)'</a:s>
+            </a:s>
+         </annotation>
+         <codeSystem localId="28" locator="30:72-30:81" name="SNOMEDCT"/>
+      </def>
+   </codes>
+   <contexts>
+      <def locator="34:1-34:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="34:1-34:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="34:1-34:15" xmlns:ns0="urn:healthit-gov:qdm:v5_6" dataType="ns0:Patient" templateId="Patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="39" locator="66:1-67:60" name="Patient Age 12 Years or Older at Start of Measurement Period" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="39">
+               <a:s>define &quot;Patient Age 12 Years or Older at Start of Measurement Period&quot;:
+  </a:s>
+               <a:s r="38">
+                  <a:s r="36">
+                     <a:s>AgeInYearsAt(</a:s>
+                     <a:s r="35">
+                        <a:s>date from </a:s>
+                        <a:s r="34">
+                           <a:s>start of </a:s>
+                           <a:s r="33">
+                              <a:s>&quot;Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>)</a:s>
+                  </a:s>
+                  <a:s r="37">>= 12</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="38" locator="67:3-67:60" xsi:type="GreaterOrEqual">
+            <operand localId="36" locator="67:3-67:55" precision="Year" xsi:type="CalculateAgeAt">
+               <operand xsi:type="ToDate">
+                  <operand path="birthDatetime" xsi:type="Property">
+                     <source name="Patient" xsi:type="ExpressionRef"/>
+                  </operand>
+               </operand>
+               <operand localId="35" locator="67:16-67:54" xsi:type="DateFrom">
+                  <operand localId="34" locator="67:26-67:54" xsi:type="Start">
+                     <operand localId="33" locator="67:35-67:54" name="Measurement Period" xsi:type="ParameterRef"/>
+                  </operand>
+               </operand>
+            </operand>
+            <operand localId="37" locator="67:59-67:60" valueType="t:Integer" value="12" xsi:type="Literal"/>
+         </expression>
+      </def>
+      <def localId="52" locator="112:1-116:72" name="Qualifying Encounter During Measurement Period" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="52">
+               <a:s>define &quot;Qualifying Encounter During Measurement Period&quot;:
+  </a:s>
+               <a:s r="51">
+                  <a:s>
+                     <a:s r="46">
+                        <a:s r="45">
+                           <a:s>( </a:s>
+                           <a:s r="45">
+                              <a:s r="43">
+                                 <a:s r="41">
+                                    <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                    <a:s>
+                                       <a:s>&quot;Encounter to Screen for Depression&quot;</a:s>
+                                    </a:s>
+                                    <a:s>]</a:s>
+                                 </a:s>
+                                 <a:s>
+    union </a:s>
+                                 <a:s r="42">
+                                    <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                    <a:s>
+                                       <a:s>&quot;Physical Therapy Evaluation&quot;</a:s>
+                                    </a:s>
+                                    <a:s>]</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+    union </a:s>
+                              <a:s r="44">
+                                 <a:s>[&quot;Encounter, Performed&quot;: </a:s>
+                                 <a:s>
+                                    <a:s>&quot;Telephone Visits&quot;</a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> )</a:s>
+                        </a:s>
+                        <a:s> QualifyingEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="50">
+                     <a:s>where </a:s>
+                     <a:s r="50">
+                        <a:s r="48">
+                           <a:s r="47">
+                              <a:s>QualifyingEncounter</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="48">
+                              <a:s>relevantPeriod</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="50"> during </a:s>
+                        <a:s r="49">
+                           <a:s>&quot;Measurement Period&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="51" locator="113:3-116:72" xsi:type="Query">
+            <source localId="46" locator="113:3-115:76" alias="QualifyingEncounter">
+               <expression localId="45" locator="113:3-115:56" xsi:type="Union">
+                  <operand localId="43" locator="113:5-114:65" xsi:type="Union">
+                     <operand localId="41" locator="113:5-113:66" xmlns:ns1="urn:healthit-gov:qdm:v5_6" dataType="ns1:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                        <codes locator="113:30-113:65" name="Encounter to Screen for Depression" xsi:type="ValueSetRef"/>
+                     </operand>
+                     <operand localId="42" locator="114:11-114:65" xmlns:ns2="urn:healthit-gov:qdm:v5_6" dataType="ns2:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                        <codes locator="114:36-114:64" name="Physical Therapy Evaluation" xsi:type="ValueSetRef"/>
+                     </operand>
+                  </operand>
+                  <operand localId="44" locator="115:11-115:54" xmlns:ns3="urn:healthit-gov:qdm:v5_6" dataType="ns3:PositiveEncounterPerformed" templateId="PositiveEncounterPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                     <codes locator="115:36-115:53" name="Telephone Visits" xsi:type="ValueSetRef"/>
+                  </operand>
+               </expression>
+            </source>
+            <where localId="50" locator="116:5-116:72" xsi:type="IncludedIn">
+               <operand localId="48" locator="116:11-116:44" path="relevantPeriod" scope="QualifyingEncounter" xsi:type="Property"/>
+               <operand localId="49" locator="116:53-116:72" name="Measurement Period" xsi:type="ParameterRef"/>
+            </where>
+         </expression>
+      </def>
+      <def localId="56" locator="170:1-172:67" name="Initial Population" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="56">
+               <a:s>define &quot;Initial Population&quot;:
+  </a:s>
+               <a:s r="55">
+                  <a:s r="40">
+                     <a:s>&quot;Patient Age 12 Years or Older at Start of Measurement Period&quot;</a:s>
+                  </a:s>
+                  <a:s>
+    and </a:s>
+                  <a:s r="54">
+                     <a:s>exists </a:s>
+                     <a:s r="53">
+                        <a:s>( </a:s>
+                        <a:s r="53">
+                           <a:s>&quot;Qualifying Encounter During Measurement Period&quot;</a:s>
+                        </a:s>
+                        <a:s> )</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="55" locator="171:3-172:67" xsi:type="And">
+            <operand localId="40" locator="171:3-171:64" name="Patient Age 12 Years or Older at Start of Measurement Period" xsi:type="ExpressionRef"/>
+            <operand localId="54" locator="172:9-172:67" xsi:type="Exists">
+               <operand localId="53" locator="172:16-172:67" name="Qualifying Encounter During Measurement Period" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
+      </def>
+      <def localId="58" locator="36:1-37:22" name="Denominator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="58">
+               <a:s>define &quot;Denominator&quot;:
+  </a:s>
+               <a:s r="57">
+                  <a:s>&quot;Initial Population&quot;</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="57" locator="37:3-37:22" name="Initial Population" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="79" locator="47:1-53:5" name="Medical or Patient Reason for Not Screening Adolescent for Depression" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="79">
+               <a:s>define &quot;Medical or Patient Reason for Not Screening Adolescent for Depression&quot;:
+  </a:s>
+               <a:s r="78">
+                  <a:s>
+                     <a:s r="60">
+                        <a:s r="59">
+                           <a:s r="59">
+                              <a:s>[&quot;Assessment, Not Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Adolescent depression screening assessment&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> NoAdolescentScreen</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="68">
+                     <a:s>with </a:s>
+                     <a:s r="62">
+                        <a:s r="61">
+                           <a:s>
+                              <a:s>&quot;Qualifying Encounter During Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> QualifyingEncounter</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="67">
+                        <a:s r="64">
+                           <a:s r="63">
+                              <a:s>NoAdolescentScreen</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="64">
+                              <a:s>authorDatetime</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="67"> during </a:s>
+                        <a:s r="66">
+                           <a:s r="65">
+                              <a:s>QualifyingEncounter</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="66">
+                              <a:s>relevantPeriod</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="77">
+                     <a:s>where </a:s>
+                     <a:s r="77">
+                        <a:s>( </a:s>
+                        <a:s r="77">
+                           <a:s r="72">
+                              <a:s r="70">
+                                 <a:s r="69">
+                                    <a:s>NoAdolescentScreen</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="70">
+                                    <a:s>negationRationale</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> ~ </a:s>
+                              <a:s r="71">
+                                 <a:s>&quot;Depression screening declined (situation)&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+        or </a:s>
+                           <a:s r="76">
+                              <a:s r="74">
+                                 <a:s r="73">
+                                    <a:s>NoAdolescentScreen</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="74">
+                                    <a:s>negationRationale</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> in </a:s>
+                              <a:s r="75">
+                                 <a:s>&quot;Medical Reason&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+    )</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="78" locator="48:3-53:5" xsi:type="Query">
+            <source localId="60" locator="48:3-48:96" alias="NoAdolescentScreen">
+               <expression localId="59" locator="48:3-48:77" xmlns:ns4="urn:healthit-gov:qdm:v5_6" dataType="ns4:NegativeAssessmentPerformed" templateId="NegativeAssessmentPerformed" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                  <codes xsi:type="ToList">
+                     <operand locator="48:33-48:76" name="Adolescent depression screening assessment" xsi:type="CodeRef"/>
+                  </codes>
+               </expression>
+            </source>
+            <relationship localId="68" locator="49:5-50:91" alias="QualifyingEncounter" xsi:type="With">
+               <expression localId="61" locator="49:10-49:57" name="Qualifying Encounter During Measurement Period" xsi:type="ExpressionRef"/>
+               <suchThat localId="67" locator="50:17-50:91" xsi:type="In">
+                  <operand localId="64" locator="50:17-50:49" path="authorDatetime" scope="NoAdolescentScreen" xsi:type="Property"/>
+                  <operand localId="66" locator="50:58-50:91" path="relevantPeriod" scope="QualifyingEncounter" xsi:type="Property"/>
+               </suchThat>
+            </relationship>
+            <where localId="77" locator="51:5-53:5" xsi:type="Or">
+               <operand localId="72" locator="51:13-51:94" xsi:type="Equivalent">
+                  <operand localId="70" locator="51:13-51:48" path="negationRationale" scope="NoAdolescentScreen" xsi:type="Property"/>
+                  <operand localId="71" locator="51:52-51:94" name="Depression screening declined (situation)" xsi:type="CodeRef"/>
+               </operand>
+               <operand localId="76" locator="52:12-52:67" xsi:type="InValueSet">
+                  <code localId="74" locator="52:12-52:47" path="negationRationale" scope="NoAdolescentScreen" xsi:type="Property"/>
+                  <valueset localId="75" locator="52:52-52:67" name="Medical Reason" xsi:type="ValueSetRef"/>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="104" locator="121:1-126:3" name="Has Adolescent Depression Screening" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="104">
+               <a:s>define &quot;Has Adolescent Depression Screening&quot;:
+  </a:s>
+               <a:s r="103">
+                  <a:s>exists </a:s>
+                  <a:s r="102">
+                     <a:s>( </a:s>
+                     <a:s r="102">
+                        <a:s>
+                           <a:s r="83">
+                              <a:s r="82">
+                                 <a:s r="82">
+                                    <a:s>[&quot;Assessment, Performed&quot;: </a:s>
+                                    <a:s>
+                                       <a:s>&quot;Adolescent depression screening assessment&quot;</a:s>
+                                    </a:s>
+                                    <a:s>]</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> AdolescentScreening</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="101">
+                           <a:s>with </a:s>
+                           <a:s r="85">
+                              <a:s r="84">
+                                 <a:s>
+                                    <a:s>&quot;Qualifying Encounter During Measurement Period&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> QualifyingEncounter</a:s>
+                           </a:s>
+                           <a:s>
+        such that </a:s>
+                           <a:s r="100">
+                              <a:s r="96">
+                                 <a:s r="91">
+                                    <a:s r="86">
+                                       <a:s>Global</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="91">
+                                       <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                       <a:s r="88">
+                                          <a:s r="87">
+                                             <a:s>AdolescentScreening</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="88">
+                                             <a:s>relevantDatetime</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>, </a:s>
+                                       <a:s r="90">
+                                          <a:s r="89">
+                                             <a:s>AdolescentScreening</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="90">
+                                             <a:s>relevantPeriod</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> )</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> </a:s>
+                                 <a:s r="96">
+                                    <a:s r="95">
+                                       <a:s>14 days</a:s>
+                                    </a:s>
+                                    <a:s> or less on or before day of</a:s>
+                                 </a:s>
+                                 <a:s> </a:s>
+                                 <a:s r="94">
+                                    <a:s>start of </a:s>
+                                    <a:s r="93">
+                                       <a:s r="92">
+                                          <a:s>QualifyingEncounter</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="93">
+                                          <a:s>relevantPeriod</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+          and </a:s>
+                              <a:s r="99">
+                                 <a:s r="98">
+                                    <a:s r="97">
+                                       <a:s>AdolescentScreening</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="98">
+                                       <a:s>result</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> is not null</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="103" locator="122:3-126:3" xsi:type="Exists">
+            <operand localId="102" locator="122:10-126:3" xsi:type="Query">
+               <source localId="83" locator="122:12-122:102" alias="AdolescentScreening">
+                  <expression localId="82" locator="122:12-122:82" xmlns:ns5="urn:healthit-gov:qdm:v5_6" dataType="ns5:PositiveAssessmentPerformed" templateId="PositiveAssessmentPerformed" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                     <codes xsi:type="ToList">
+                        <operand locator="122:38-122:81" name="Adolescent depression screening assessment" xsi:type="CodeRef"/>
+                     </codes>
+                  </expression>
+               </source>
+               <relationship localId="101" locator="123:7-125:52" alias="QualifyingEncounter" xsi:type="With">
+                  <expression localId="84" locator="123:12-123:59" name="Qualifying Encounter During Measurement Period" xsi:type="ExpressionRef"/>
+                  <suchThat localId="100" locator="124:19-125:52" xsi:type="And">
+                     <operand localId="96" locator="124:19-124:201" xsi:type="And">
+                        <operand locator="124:123-124:137" precision="Day" xsi:type="In">
+                           <operand locator="124:26-124:121" xsi:type="End">
+                              <operand localId="91" locator="124:19-124:121" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                 <operand localId="88" locator="124:48-124:83" path="relevantDatetime" scope="AdolescentScreening" xsi:type="Property"/>
+                                 <operand localId="90" locator="124:86-124:119" path="relevantPeriod" scope="AdolescentScreening" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                           <operand locator="124:123-124:137" lowClosed="true" highClosed="true" xsi:type="Interval">
+                              <low locator="124:159-124:201" xsi:type="Subtract">
+                                 <operand localId="94" locator="124:159-124:201" xsi:type="Start">
+                                    <operand localId="93" locator="124:168-124:201" path="relevantPeriod" scope="QualifyingEncounter" xsi:type="Property"/>
+                                 </operand>
+                                 <operand localId="95" locator="124:123-124:129" value="14" unit="days" xsi:type="Quantity"/>
+                              </low>
+                              <high localId="94" locator="124:159-124:201" xsi:type="Start">
+                                 <operand localId="93" locator="124:168-124:201" path="relevantPeriod" scope="QualifyingEncounter" xsi:type="Property"/>
+                              </high>
+                           </operand>
+                        </operand>
+                        <operand locator="124:123-124:137" xsi:type="Not">
+                           <operand locator="124:123-124:137" xsi:type="IsNull">
+                              <operand localId="94" locator="124:159-124:201" xsi:type="Start">
+                                 <operand localId="93" locator="124:168-124:201" path="relevantPeriod" scope="QualifyingEncounter" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                        </operand>
+                     </operand>
+                     <operand localId="99" locator="125:15-125:52" xsi:type="Not">
+                        <operand locator="125:15-125:52" xsi:type="IsNull">
+                           <operand localId="98" locator="125:15-125:40" path="result" scope="AdolescentScreening" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                  </suchThat>
+               </relationship>
+            </operand>
+         </expression>
+      </def>
+      <def localId="128" locator="55:1-61:5" name="Medical or Patient Reason for Not Screening Adult for Depression" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="128">
+               <a:s>define &quot;Medical or Patient Reason for Not Screening Adult for Depression&quot;:
+  </a:s>
+               <a:s r="127">
+                  <a:s>
+                     <a:s r="109">
+                        <a:s r="108">
+                           <a:s r="108">
+                              <a:s>[&quot;Assessment, Not Performed&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Adult depression screening assessment&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> NoAdultScreen</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="117">
+                     <a:s>with </a:s>
+                     <a:s r="111">
+                        <a:s r="110">
+                           <a:s>
+                              <a:s>&quot;Qualifying Encounter During Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> QualifyingEncounter</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="116">
+                        <a:s r="113">
+                           <a:s r="112">
+                              <a:s>NoAdultScreen</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="113">
+                              <a:s>authorDatetime</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="116"> during </a:s>
+                        <a:s r="115">
+                           <a:s r="114">
+                              <a:s>QualifyingEncounter</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="115">
+                              <a:s>relevantPeriod</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="126">
+                     <a:s>where </a:s>
+                     <a:s r="126">
+                        <a:s>( </a:s>
+                        <a:s r="126">
+                           <a:s r="121">
+                              <a:s r="119">
+                                 <a:s r="118">
+                                    <a:s>NoAdultScreen</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="119">
+                                    <a:s>negationRationale</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> ~ </a:s>
+                              <a:s r="120">
+                                 <a:s>&quot;Depression screening declined (situation)&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+        or </a:s>
+                           <a:s r="125">
+                              <a:s r="123">
+                                 <a:s r="122">
+                                    <a:s>NoAdultScreen</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="123">
+                                    <a:s>negationRationale</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> in </a:s>
+                              <a:s r="124">
+                                 <a:s>&quot;Medical Reason&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+    )</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="127" locator="56:3-61:5" xsi:type="Query">
+            <source localId="109" locator="56:3-56:86" alias="NoAdultScreen">
+               <expression localId="108" locator="56:3-56:72" xmlns:ns6="urn:healthit-gov:qdm:v5_6" dataType="ns6:NegativeAssessmentPerformed" templateId="NegativeAssessmentPerformed" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                  <codes xsi:type="ToList">
+                     <operand locator="56:33-56:71" name="Adult depression screening assessment" xsi:type="CodeRef"/>
+                  </codes>
+               </expression>
+            </source>
+            <relationship localId="117" locator="57:5-58:86" alias="QualifyingEncounter" xsi:type="With">
+               <expression localId="110" locator="57:10-57:57" name="Qualifying Encounter During Measurement Period" xsi:type="ExpressionRef"/>
+               <suchThat localId="116" locator="58:17-58:86" xsi:type="In">
+                  <operand localId="113" locator="58:17-58:44" path="authorDatetime" scope="NoAdultScreen" xsi:type="Property"/>
+                  <operand localId="115" locator="58:53-58:86" path="relevantPeriod" scope="QualifyingEncounter" xsi:type="Property"/>
+               </suchThat>
+            </relationship>
+            <where localId="126" locator="59:5-61:5" xsi:type="Or">
+               <operand localId="121" locator="59:13-59:89" xsi:type="Equivalent">
+                  <operand localId="119" locator="59:13-59:43" path="negationRationale" scope="NoAdultScreen" xsi:type="Property"/>
+                  <operand localId="120" locator="59:47-59:89" name="Depression screening declined (situation)" xsi:type="CodeRef"/>
+               </operand>
+               <operand localId="125" locator="60:12-60:62" xsi:type="InValueSet">
+                  <code localId="123" locator="60:12-60:42" path="negationRationale" scope="NoAdultScreen" xsi:type="Property"/>
+                  <valueset localId="124" locator="60:47-60:62" name="Medical Reason" xsi:type="ValueSetRef"/>
+               </operand>
+            </where>
+         </expression>
+      </def>
+      <def localId="153" locator="128:1-133:3" name="Has Adult Depression Screening" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="153">
+               <a:s>define &quot;Has Adult Depression Screening&quot;:
+  </a:s>
+               <a:s r="152">
+                  <a:s>exists </a:s>
+                  <a:s r="151">
+                     <a:s>( </a:s>
+                     <a:s r="151">
+                        <a:s>
+                           <a:s r="132">
+                              <a:s r="131">
+                                 <a:s r="131">
+                                    <a:s>[&quot;Assessment, Performed&quot;: </a:s>
+                                    <a:s>
+                                       <a:s>&quot;Adult depression screening assessment&quot;</a:s>
+                                    </a:s>
+                                    <a:s>]</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> AdultScreening</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="150">
+                           <a:s>with </a:s>
+                           <a:s r="134">
+                              <a:s r="133">
+                                 <a:s>
+                                    <a:s>&quot;Qualifying Encounter During Measurement Period&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> QualifyingEncounter</a:s>
+                           </a:s>
+                           <a:s>
+        such that </a:s>
+                           <a:s r="149">
+                              <a:s r="145">
+                                 <a:s r="140">
+                                    <a:s r="135">
+                                       <a:s>Global</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="140">
+                                       <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                       <a:s r="137">
+                                          <a:s r="136">
+                                             <a:s>AdultScreening</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="137">
+                                             <a:s>relevantDatetime</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>, </a:s>
+                                       <a:s r="139">
+                                          <a:s r="138">
+                                             <a:s>AdultScreening</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="139">
+                                             <a:s>relevantPeriod</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> )</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> </a:s>
+                                 <a:s r="145">
+                                    <a:s r="144">
+                                       <a:s>14 days</a:s>
+                                    </a:s>
+                                    <a:s> or less on or before day of</a:s>
+                                 </a:s>
+                                 <a:s> </a:s>
+                                 <a:s r="143">
+                                    <a:s>start of </a:s>
+                                    <a:s r="142">
+                                       <a:s r="141">
+                                          <a:s>QualifyingEncounter</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="142">
+                                          <a:s>relevantPeriod</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+          and </a:s>
+                              <a:s r="148">
+                                 <a:s r="147">
+                                    <a:s r="146">
+                                       <a:s>AdultScreening</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="147">
+                                       <a:s>result</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> is not null</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="152" locator="129:3-133:3" xsi:type="Exists">
+            <operand localId="151" locator="129:10-133:3" xsi:type="Query">
+               <source localId="132" locator="129:12-129:92" alias="AdultScreening">
+                  <expression localId="131" locator="129:12-129:77" xmlns:ns7="urn:healthit-gov:qdm:v5_6" dataType="ns7:PositiveAssessmentPerformed" templateId="PositiveAssessmentPerformed" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                     <codes xsi:type="ToList">
+                        <operand locator="129:38-129:76" name="Adult depression screening assessment" xsi:type="CodeRef"/>
+                     </codes>
+                  </expression>
+               </source>
+               <relationship localId="150" locator="130:7-132:47" alias="QualifyingEncounter" xsi:type="With">
+                  <expression localId="133" locator="130:12-130:59" name="Qualifying Encounter During Measurement Period" xsi:type="ExpressionRef"/>
+                  <suchThat localId="149" locator="131:19-132:47" xsi:type="And">
+                     <operand localId="145" locator="131:19-131:191" xsi:type="And">
+                        <operand locator="131:113-131:127" precision="Day" xsi:type="In">
+                           <operand locator="131:26-131:111" xsi:type="End">
+                              <operand localId="140" locator="131:19-131:111" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                 <operand localId="137" locator="131:48-131:78" path="relevantDatetime" scope="AdultScreening" xsi:type="Property"/>
+                                 <operand localId="139" locator="131:81-131:109" path="relevantPeriod" scope="AdultScreening" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                           <operand locator="131:113-131:127" lowClosed="true" highClosed="true" xsi:type="Interval">
+                              <low locator="131:149-131:191" xsi:type="Subtract">
+                                 <operand localId="143" locator="131:149-131:191" xsi:type="Start">
+                                    <operand localId="142" locator="131:158-131:191" path="relevantPeriod" scope="QualifyingEncounter" xsi:type="Property"/>
+                                 </operand>
+                                 <operand localId="144" locator="131:113-131:119" value="14" unit="days" xsi:type="Quantity"/>
+                              </low>
+                              <high localId="143" locator="131:149-131:191" xsi:type="Start">
+                                 <operand localId="142" locator="131:158-131:191" path="relevantPeriod" scope="QualifyingEncounter" xsi:type="Property"/>
+                              </high>
+                           </operand>
+                        </operand>
+                        <operand locator="131:113-131:127" xsi:type="Not">
+                           <operand locator="131:113-131:127" xsi:type="IsNull">
+                              <operand localId="143" locator="131:149-131:191" xsi:type="Start">
+                                 <operand localId="142" locator="131:158-131:191" path="relevantPeriod" scope="QualifyingEncounter" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                        </operand>
+                     </operand>
+                     <operand localId="148" locator="132:15-132:47" xsi:type="Not">
+                        <operand locator="132:15-132:47" xsi:type="IsNull">
+                           <operand localId="147" locator="132:15-132:35" path="result" scope="AdultScreening" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                  </suchThat>
+               </relationship>
+            </operand>
+         </expression>
+      </def>
+      <def localId="158" locator="39:1-45:5" name="Denominator Exceptions" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="158">
+               <a:s>define &quot;Denominator Exceptions&quot;:
+  </a:s>
+               <a:s r="157">
+                  <a:s r="107">
+                     <a:s>( </a:s>
+                     <a:s r="107">
+                        <a:s r="81">
+                           <a:s>exists </a:s>
+                           <a:s r="80">
+                              <a:s>&quot;Medical or Patient Reason for Not Screening Adolescent for Depression&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      and </a:s>
+                        <a:s r="106">
+                           <a:s>not </a:s>
+                           <a:s r="105">
+                              <a:s>&quot;Has Adolescent Depression Screening&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+                  <a:s>
+    or </a:s>
+                  <a:s r="156">
+                     <a:s>( </a:s>
+                     <a:s r="156">
+                        <a:s r="130">
+                           <a:s>exists </a:s>
+                           <a:s r="129">
+                              <a:s>&quot;Medical or Patient Reason for Not Screening Adult for Depression&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+        and </a:s>
+                        <a:s r="155">
+                           <a:s>not </a:s>
+                           <a:s r="154">
+                              <a:s>&quot;Has Adult Depression Screening&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    )</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="157" locator="40:3-45:5" xsi:type="Or">
+            <operand localId="107" locator="40:3-42:3" xsi:type="And">
+               <operand localId="81" locator="40:5-40:82" xsi:type="Exists">
+                  <operand localId="80" locator="40:12-40:82" name="Medical or Patient Reason for Not Screening Adolescent for Depression" xsi:type="ExpressionRef"/>
+               </operand>
+               <operand localId="106" locator="41:11-41:51" xsi:type="Not">
+                  <operand localId="105" locator="41:15-41:51" name="Has Adolescent Depression Screening" xsi:type="ExpressionRef"/>
+               </operand>
+            </operand>
+            <operand localId="156" locator="43:8-45:5" xsi:type="And">
+               <operand localId="130" locator="43:10-43:82" xsi:type="Exists">
+                  <operand localId="129" locator="43:17-43:82" name="Medical or Patient Reason for Not Screening Adult for Depression" xsi:type="ExpressionRef"/>
+               </operand>
+               <operand localId="155" locator="44:13-44:48" xsi:type="Not">
+                  <operand localId="154" locator="44:17-44:48" name="Has Adult Depression Screening" xsi:type="ExpressionRef"/>
+               </operand>
+            </operand>
+         </expression>
+      </def>
+      <def localId="167" locator="63:1-64:74" name="Patient Age 12 to 16 Years at Start of Measurement Period" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="167">
+               <a:s>define &quot;Patient Age 12 to 16 Years at Start of Measurement Period&quot;:
+  </a:s>
+               <a:s r="166">
+                  <a:s r="162">
+                     <a:s>AgeInYearsAt(</a:s>
+                     <a:s r="161">
+                        <a:s>date from </a:s>
+                        <a:s r="160">
+                           <a:s>start of </a:s>
+                           <a:s r="159">
+                              <a:s>&quot;Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>)</a:s>
+                  </a:s>
+                  <a:s>in </a:s>
+                  <a:s r="165">
+                     <a:s r="163">Interval[12, 16]</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="166" locator="64:3-64:74" xsi:type="In">
+            <operand localId="162" locator="64:3-64:55" precision="Year" xsi:type="CalculateAgeAt">
+               <operand xsi:type="ToDate">
+                  <operand path="birthDatetime" xsi:type="Property">
+                     <source name="Patient" xsi:type="ExpressionRef"/>
+                  </operand>
+               </operand>
+               <operand localId="161" locator="64:16-64:54" xsi:type="DateFrom">
+                  <operand localId="160" locator="64:26-64:54" xsi:type="Start">
+                     <operand localId="159" locator="64:35-64:54" name="Measurement Period" xsi:type="ParameterRef"/>
+                  </operand>
+               </operand>
+            </operand>
+            <operand localId="165" locator="64:59-64:74" lowClosed="true" highClosed="true" xsi:type="Interval">
+               <low localId="163" locator="64:68-64:69" valueType="t:Integer" value="12" xsi:type="Literal"/>
+               <high localId="164" locator="64:72-64:73" valueType="t:Integer" value="16" xsi:type="Literal"/>
+            </operand>
+         </expression>
+      </def>
+      <def localId="174" locator="69:1-70:59" name="Patient Age 17 Years at Start of Measurement Period" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="174">
+               <a:s>define &quot;Patient Age 17 Years at Start of Measurement Period&quot;:
+  </a:s>
+               <a:s r="173">
+                  <a:s r="171">
+                     <a:s>AgeInYearsAt(</a:s>
+                     <a:s r="170">
+                        <a:s>date from </a:s>
+                        <a:s r="169">
+                           <a:s>start of </a:s>
+                           <a:s r="168">
+                              <a:s>&quot;Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>)</a:s>
+                  </a:s>
+                  <a:s r="172">= 17</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="173" locator="70:3-70:59" xsi:type="Equal">
+            <operand localId="171" locator="70:3-70:55" precision="Year" xsi:type="CalculateAgeAt">
+               <operand xsi:type="ToDate">
+                  <operand path="birthDatetime" xsi:type="Property">
+                     <source name="Patient" xsi:type="ExpressionRef"/>
+                  </operand>
+               </operand>
+               <operand localId="170" locator="70:16-70:54" xsi:type="DateFrom">
+                  <operand localId="169" locator="70:26-70:54" xsi:type="Start">
+                     <operand localId="168" locator="70:35-70:54" name="Measurement Period" xsi:type="ParameterRef"/>
+                  </operand>
+               </operand>
+            </operand>
+            <operand localId="172" locator="70:58-70:59" valueType="t:Integer" value="17" xsi:type="Literal"/>
+         </expression>
+      </def>
+      <def localId="181" locator="72:1-73:60" name="Patient Age 18 Years or Older at Start of Measurement Period" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="181">
+               <a:s>define &quot;Patient Age 18 Years or Older at Start of Measurement Period&quot;:
+  </a:s>
+               <a:s r="180">
+                  <a:s r="178">
+                     <a:s>AgeInYearsAt(</a:s>
+                     <a:s r="177">
+                        <a:s>date from </a:s>
+                        <a:s r="176">
+                           <a:s>start of </a:s>
+                           <a:s r="175">
+                              <a:s>&quot;Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>)</a:s>
+                  </a:s>
+                  <a:s r="179">>= 18</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="180" locator="73:3-73:60" xsi:type="GreaterOrEqual">
+            <operand localId="178" locator="73:3-73:55" precision="Year" xsi:type="CalculateAgeAt">
+               <operand xsi:type="ToDate">
+                  <operand path="birthDatetime" xsi:type="Property">
+                     <source name="Patient" xsi:type="ExpressionRef"/>
+                  </operand>
+               </operand>
+               <operand localId="177" locator="73:16-73:54" xsi:type="DateFrom">
+                  <operand localId="176" locator="73:26-73:54" xsi:type="Start">
+                     <operand localId="175" locator="73:35-73:54" name="Measurement Period" xsi:type="ParameterRef"/>
+                  </operand>
+               </operand>
+            </operand>
+            <operand localId="179" locator="73:59-73:60" valueType="t:Integer" value="18" xsi:type="Literal"/>
+         </expression>
+      </def>
+      <def localId="183" locator="75:1-76:51" name="SDE Ethnicity" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="183">
+               <a:s>define &quot;SDE Ethnicity&quot;:
+  </a:s>
+               <a:s r="182">
+                  <a:s>[&quot;Patient Characteristic Ethnicity&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Ethnicity&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="182" locator="76:3-76:51" xmlns:ns8="urn:healthit-gov:qdm:v5_6" dataType="ns8:PatientCharacteristicEthnicity" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="76:40-76:50" name="Ethnicity" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="185" locator="78:1-79:43" name="SDE Payer" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="185">
+               <a:s>define &quot;SDE Payer&quot;:
+  </a:s>
+               <a:s r="184">
+                  <a:s>[&quot;Patient Characteristic Payer&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Payer&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="184" locator="79:3-79:43" xmlns:ns9="urn:healthit-gov:qdm:v5_6" dataType="ns9:PatientCharacteristicPayer" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="79:36-79:42" name="Payer" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="187" locator="81:1-82:41" name="SDE Race" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="187">
+               <a:s>define &quot;SDE Race&quot;:
+  </a:s>
+               <a:s r="186">
+                  <a:s>[&quot;Patient Characteristic Race&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;Race&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="186" locator="82:3-82:41" xmlns:ns10="urn:healthit-gov:qdm:v5_6" dataType="ns10:PatientCharacteristicRace" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="82:35-82:40" name="Race" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="189" locator="84:1-85:58" name="SDE Sex" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="189">
+               <a:s>define &quot;SDE Sex&quot;:
+  </a:s>
+               <a:s r="188">
+                  <a:s>[&quot;Patient Characteristic Sex&quot;: </a:s>
+                  <a:s>
+                     <a:s>&quot;ONC Administrative Sex&quot;</a:s>
+                  </a:s>
+                  <a:s>]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="188" locator="85:3-85:58" xmlns:ns11="urn:healthit-gov:qdm:v5_6" dataType="ns11:PatientCharacteristicSex" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+            <codes locator="85:34-85:57" name="ONC Administrative Sex" xsi:type="ValueSetRef"/>
+         </expression>
+      </def>
+      <def localId="201" locator="87:1-90:98" name="History of Bipolar Diagnosis Before Qualifying Encounter" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="201">
+               <a:s>define &quot;History of Bipolar Diagnosis Before Qualifying Encounter&quot;:
+  </a:s>
+               <a:s r="200">
+                  <a:s>
+                     <a:s r="191">
+                        <a:s r="190">
+                           <a:s r="190">
+                              <a:s>[&quot;Diagnosis&quot;: </a:s>
+                              <a:s>
+                                 <a:s>&quot;Bipolar Disorder&quot;</a:s>
+                              </a:s>
+                              <a:s>]</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> BipolarDiagnosis</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="199">
+                     <a:s>with </a:s>
+                     <a:s r="193">
+                        <a:s r="192">
+                           <a:s>
+                              <a:s>&quot;Qualifying Encounter During Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> QualifyingEncounter</a:s>
+                     </a:s>
+                     <a:s>
+      such that </a:s>
+                     <a:s r="198">
+                        <a:s r="195">
+                           <a:s r="194">
+                              <a:s>BipolarDiagnosis</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="195">
+                              <a:s>prevalencePeriod</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s r="198"> starts before </a:s>
+                        <a:s r="197">
+                           <a:s r="196">
+                              <a:s>QualifyingEncounter</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="197">
+                              <a:s>relevantPeriod</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="200" locator="88:3-90:98" xsi:type="Query">
+            <source localId="191" locator="88:3-88:52" alias="BipolarDiagnosis">
+               <expression localId="190" locator="88:3-88:35" xmlns:ns12="urn:healthit-gov:qdm:v5_6" dataType="ns12:Diagnosis" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="88:17-88:34" name="Bipolar Disorder" xsi:type="ValueSetRef"/>
+               </expression>
+            </source>
+            <relationship localId="199" locator="89:5-90:98" alias="QualifyingEncounter" xsi:type="With">
+               <expression localId="192" locator="89:10-89:57" name="Qualifying Encounter During Measurement Period" xsi:type="ExpressionRef"/>
+               <suchThat localId="198" locator="90:17-90:98" xsi:type="Before">
+                  <operand xsi:type="If">
+                     <condition xsi:type="IsNull">
+                        <operand locator="90:51-90:56" xsi:type="Start">
+                           <operand localId="195" locator="90:17-90:49" path="prevalencePeriod" scope="BipolarDiagnosis" xsi:type="Property"/>
+                        </operand>
+                     </condition>
+                     <then xsi:type="Null">
+                        <resultTypeSpecifier xsi:type="IntervalTypeSpecifier">
+                           <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        </resultTypeSpecifier>
+                     </then>
+                     <else lowClosed="true" highClosed="true" xsi:type="Interval">
+                        <low locator="90:51-90:56" xsi:type="Start">
+                           <operand localId="195" locator="90:17-90:49" path="prevalencePeriod" scope="BipolarDiagnosis" xsi:type="Property"/>
+                        </low>
+                        <high locator="90:51-90:56" xsi:type="Start">
+                           <operand localId="195" locator="90:17-90:49" path="prevalencePeriod" scope="BipolarDiagnosis" xsi:type="Property"/>
+                        </high>
+                     </else>
+                  </operand>
+                  <operand localId="197" locator="90:65-90:98" path="relevantPeriod" scope="QualifyingEncounter" xsi:type="Property"/>
+               </suchThat>
+            </relationship>
+         </expression>
+      </def>
+      <def localId="231" locator="135:1-141:3" name="Most Recent Adolescent Depression Screening" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="231">
+               <a:s>define &quot;Most Recent Adolescent Depression Screening&quot;:
+  </a:s>
+               <a:s r="230">
+                  <a:s>Last(</a:s>
+                  <a:s r="229">
+                     <a:s>
+                        <a:s r="203">
+                           <a:s r="202">
+                              <a:s r="202">
+                                 <a:s>[&quot;Assessment, Performed&quot;: </a:s>
+                                 <a:s>
+                                    <a:s>&quot;Adolescent depression screening assessment&quot;</a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> AdolescentDepressionScreening</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+      </a:s>
+                     <a:s r="221">
+                        <a:s>with </a:s>
+                        <a:s r="205">
+                           <a:s r="204">
+                              <a:s>
+                                 <a:s>&quot;Qualifying Encounter During Measurement Period&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> QualifyingEncounter</a:s>
+                        </a:s>
+                        <a:s>
+        such that </a:s>
+                        <a:s r="220">
+                           <a:s r="216">
+                              <a:s r="211">
+                                 <a:s r="206">
+                                    <a:s>Global</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="211">
+                                    <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                    <a:s r="208">
+                                       <a:s r="207">
+                                          <a:s>AdolescentDepressionScreening</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="208">
+                                          <a:s>relevantDatetime</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>, </a:s>
+                                    <a:s r="210">
+                                       <a:s r="209">
+                                          <a:s>AdolescentDepressionScreening</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="210">
+                                          <a:s>relevantPeriod</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>)</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s r="216">
+                                 <a:s r="215">
+                                    <a:s>14 days</a:s>
+                                 </a:s>
+                                 <a:s> or less on or before day of</a:s>
+                              </a:s>
+                              <a:s> </a:s>
+                              <a:s r="214">
+                                 <a:s>start of </a:s>
+                                 <a:s r="213">
+                                    <a:s r="212">
+                                       <a:s>QualifyingEncounter</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="213">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+          and </a:s>
+                           <a:s r="219">
+                              <a:s r="218">
+                                 <a:s r="217">
+                                    <a:s>AdolescentDepressionScreening</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="218">
+                                    <a:s>result</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> is not null</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+      </a:s>
+                     <a:s r="228">
+                        <a:s>sort by </a:s>
+                        <a:s r="227">
+                           <a:s r="226">
+                              <a:s>start of </a:s>
+                              <a:s r="225">
+                                 <a:s r="222">
+                                    <a:s>Global</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="225">
+                                    <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                    <a:s r="223">
+                                       <a:s>relevantDatetime</a:s>
+                                    </a:s>
+                                    <a:s>, </a:s>
+                                    <a:s r="224">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                    <a:s>)</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+  )</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="230" locator="136:3-141:3" xsi:type="Last">
+            <source localId="229" locator="136:8-140:83" xsi:type="Query">
+               <source localId="203" locator="136:8-136:108" alias="AdolescentDepressionScreening">
+                  <expression localId="202" locator="136:8-136:78" xmlns:ns13="urn:healthit-gov:qdm:v5_6" dataType="ns13:PositiveAssessmentPerformed" templateId="PositiveAssessmentPerformed" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                     <codes xsi:type="ToList">
+                        <operand locator="136:34-136:77" name="Adolescent depression screening assessment" xsi:type="CodeRef"/>
+                     </codes>
+                  </expression>
+               </source>
+               <relationship localId="221" locator="137:7-139:62" alias="QualifyingEncounter" xsi:type="With">
+                  <expression localId="204" locator="137:12-137:59" name="Qualifying Encounter During Measurement Period" xsi:type="ExpressionRef"/>
+                  <suchThat localId="220" locator="138:19-139:62" xsi:type="And">
+                     <operand localId="216" locator="138:19-138:217" xsi:type="And">
+                        <operand locator="138:139-138:153" precision="Day" xsi:type="In">
+                           <operand locator="138:26-138:138" xsi:type="End">
+                              <operand localId="211" locator="138:19-138:138" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                 <operand localId="208" locator="138:46-138:91" path="relevantDatetime" scope="AdolescentDepressionScreening" xsi:type="Property"/>
+                                 <operand localId="210" locator="138:94-138:137" path="relevantPeriod" scope="AdolescentDepressionScreening" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                           <operand locator="138:139-138:153" lowClosed="true" highClosed="true" xsi:type="Interval">
+                              <low locator="138:175-138:217" xsi:type="Subtract">
+                                 <operand localId="214" locator="138:175-138:217" xsi:type="Start">
+                                    <operand localId="213" locator="138:184-138:217" path="relevantPeriod" scope="QualifyingEncounter" xsi:type="Property"/>
+                                 </operand>
+                                 <operand localId="215" locator="138:139-138:145" value="14" unit="days" xsi:type="Quantity"/>
+                              </low>
+                              <high localId="214" locator="138:175-138:217" xsi:type="Start">
+                                 <operand localId="213" locator="138:184-138:217" path="relevantPeriod" scope="QualifyingEncounter" xsi:type="Property"/>
+                              </high>
+                           </operand>
+                        </operand>
+                        <operand locator="138:139-138:153" xsi:type="Not">
+                           <operand locator="138:139-138:153" xsi:type="IsNull">
+                              <operand localId="214" locator="138:175-138:217" xsi:type="Start">
+                                 <operand localId="213" locator="138:184-138:217" path="relevantPeriod" scope="QualifyingEncounter" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                        </operand>
+                     </operand>
+                     <operand localId="219" locator="139:15-139:62" xsi:type="Not">
+                        <operand locator="139:15-139:62" xsi:type="IsNull">
+                           <operand localId="218" locator="139:15-139:50" path="result" scope="AdolescentDepressionScreening" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                  </suchThat>
+               </relationship>
+               <sort localId="228" locator="140:7-140:83">
+                  <by localId="227" locator="140:15-140:83" direction="asc" xsi:type="ByExpression">
+                     <expression localId="226" locator="140:15-140:83" xsi:type="Start">
+                        <operand localId="225" locator="140:24-140:83" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                           <operand localId="223" locator="140:51-140:66" name="relevantDatetime" xsi:type="IdentifierRef"/>
+                           <operand localId="224" locator="140:69-140:82" name="relevantPeriod" xsi:type="IdentifierRef"/>
+                        </operand>
+                     </expression>
+                  </by>
+               </sort>
+            </source>
+         </expression>
+      </def>
+      <def localId="240" locator="92:1-95:15" name="Has Most Recent Adolescent Screening Negative" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="240">
+               <a:s>define &quot;Has Most Recent Adolescent Screening Negative&quot;:
+  </a:s>
+               <a:s r="239">
+                  <a:s r="238">
+                     <a:s>( </a:s>
+                     <a:s r="238">
+                        <a:s>
+                           <a:s r="233">
+                              <a:s r="232">
+                                 <a:s>
+                                    <a:s>&quot;Most Recent Adolescent Depression Screening&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> AdolescentScreen</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="237">
+                           <a:s>where </a:s>
+                           <a:s r="237">
+                              <a:s r="235">
+                                 <a:s r="234">
+                                    <a:s>AdolescentScreen</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="235">
+                                    <a:s>result</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> ~ </a:s>
+                              <a:s r="236">
+                                 <a:s>&quot;Depression screening negative (finding)&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+                  <a:s> is not null</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="239" locator="93:3-95:15" xsi:type="Not">
+            <operand locator="93:3-95:15" xsi:type="IsNull">
+               <operand localId="238" locator="93:3-95:3" xsi:type="Query">
+                  <source localId="233" locator="93:5-93:66" alias="AdolescentScreen">
+                     <expression localId="232" locator="93:5-93:49" name="Most Recent Adolescent Depression Screening" xsi:type="ExpressionRef"/>
+                  </source>
+                  <where localId="237" locator="94:7-94:79" xsi:type="Equivalent">
+                     <operand asType="t:Code" xsi:type="As">
+                        <operand localId="235" locator="94:13-94:35" path="result" scope="AdolescentScreen" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="236" locator="94:39-94:79" name="Depression screening negative (finding)" xsi:type="CodeRef"/>
+                  </where>
+               </operand>
+            </operand>
+         </expression>
+      </def>
+      <def localId="270" locator="143:1-149:3" name="Most Recent Adult Depression Screening" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="270">
+               <a:s>define &quot;Most Recent Adult Depression Screening&quot;:
+  </a:s>
+               <a:s r="269">
+                  <a:s>Last(</a:s>
+                  <a:s r="268">
+                     <a:s>
+                        <a:s r="242">
+                           <a:s r="241">
+                              <a:s r="241">
+                                 <a:s>[&quot;Assessment, Performed&quot;: </a:s>
+                                 <a:s>
+                                    <a:s>&quot;Adult depression screening assessment&quot;</a:s>
+                                 </a:s>
+                                 <a:s>]</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> AdultDepressionScreening</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+      </a:s>
+                     <a:s r="260">
+                        <a:s>with </a:s>
+                        <a:s r="244">
+                           <a:s r="243">
+                              <a:s>
+                                 <a:s>&quot;Qualifying Encounter During Measurement Period&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> QualifyingEncounter</a:s>
+                        </a:s>
+                        <a:s>
+        such that </a:s>
+                        <a:s r="259">
+                           <a:s r="255">
+                              <a:s r="250">
+                                 <a:s r="245">
+                                    <a:s>Global</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="250">
+                                    <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                    <a:s r="247">
+                                       <a:s r="246">
+                                          <a:s>AdultDepressionScreening</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="247">
+                                          <a:s>relevantDatetime</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>, </a:s>
+                                    <a:s r="249">
+                                       <a:s r="248">
+                                          <a:s>AdultDepressionScreening</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="249">
+                                          <a:s>relevantPeriod</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>)</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s r="255">
+                                 <a:s r="254">
+                                    <a:s>14 days</a:s>
+                                 </a:s>
+                                 <a:s> or less on or before day of</a:s>
+                              </a:s>
+                              <a:s> </a:s>
+                              <a:s r="253">
+                                 <a:s>start of </a:s>
+                                 <a:s r="252">
+                                    <a:s r="251">
+                                       <a:s>QualifyingEncounter</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="252">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+          and </a:s>
+                           <a:s r="258">
+                              <a:s r="257">
+                                 <a:s r="256">
+                                    <a:s>AdultDepressionScreening</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="257">
+                                    <a:s>result</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> is not null</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+      </a:s>
+                     <a:s r="267">
+                        <a:s>sort by </a:s>
+                        <a:s r="266">
+                           <a:s r="265">
+                              <a:s>start of </a:s>
+                              <a:s r="264">
+                                 <a:s r="261">
+                                    <a:s>Global</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="264">
+                                    <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                    <a:s r="262">
+                                       <a:s>relevantDatetime</a:s>
+                                    </a:s>
+                                    <a:s>, </a:s>
+                                    <a:s r="263">
+                                       <a:s>relevantPeriod</a:s>
+                                    </a:s>
+                                    <a:s>)</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+  )</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="269" locator="144:3-149:3" xsi:type="Last">
+            <source localId="268" locator="144:8-148:83" xsi:type="Query">
+               <source localId="242" locator="144:8-144:98" alias="AdultDepressionScreening">
+                  <expression localId="241" locator="144:8-144:73" xmlns:ns14="urn:healthit-gov:qdm:v5_6" dataType="ns14:PositiveAssessmentPerformed" templateId="PositiveAssessmentPerformed" codeProperty="code" codeComparator="~" xsi:type="Retrieve">
+                     <codes xsi:type="ToList">
+                        <operand locator="144:34-144:72" name="Adult depression screening assessment" xsi:type="CodeRef"/>
+                     </codes>
+                  </expression>
+               </source>
+               <relationship localId="260" locator="145:7-147:57" alias="QualifyingEncounter" xsi:type="With">
+                  <expression localId="243" locator="145:12-145:59" name="Qualifying Encounter During Measurement Period" xsi:type="ExpressionRef"/>
+                  <suchThat localId="259" locator="146:19-147:57" xsi:type="And">
+                     <operand localId="255" locator="146:19-146:207" xsi:type="And">
+                        <operand locator="146:129-146:143" precision="Day" xsi:type="In">
+                           <operand locator="146:26-146:128" xsi:type="End">
+                              <operand localId="250" locator="146:19-146:128" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                 <operand localId="247" locator="146:46-146:86" path="relevantDatetime" scope="AdultDepressionScreening" xsi:type="Property"/>
+                                 <operand localId="249" locator="146:89-146:127" path="relevantPeriod" scope="AdultDepressionScreening" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                           <operand locator="146:129-146:143" lowClosed="true" highClosed="true" xsi:type="Interval">
+                              <low locator="146:165-146:207" xsi:type="Subtract">
+                                 <operand localId="253" locator="146:165-146:207" xsi:type="Start">
+                                    <operand localId="252" locator="146:174-146:207" path="relevantPeriod" scope="QualifyingEncounter" xsi:type="Property"/>
+                                 </operand>
+                                 <operand localId="254" locator="146:129-146:135" value="14" unit="days" xsi:type="Quantity"/>
+                              </low>
+                              <high localId="253" locator="146:165-146:207" xsi:type="Start">
+                                 <operand localId="252" locator="146:174-146:207" path="relevantPeriod" scope="QualifyingEncounter" xsi:type="Property"/>
+                              </high>
+                           </operand>
+                        </operand>
+                        <operand locator="146:129-146:143" xsi:type="Not">
+                           <operand locator="146:129-146:143" xsi:type="IsNull">
+                              <operand localId="253" locator="146:165-146:207" xsi:type="Start">
+                                 <operand localId="252" locator="146:174-146:207" path="relevantPeriod" scope="QualifyingEncounter" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                        </operand>
+                     </operand>
+                     <operand localId="258" locator="147:15-147:57" xsi:type="Not">
+                        <operand locator="147:15-147:57" xsi:type="IsNull">
+                           <operand localId="257" locator="147:15-147:45" path="result" scope="AdultDepressionScreening" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                  </suchThat>
+               </relationship>
+               <sort localId="267" locator="148:7-148:83">
+                  <by localId="266" locator="148:15-148:83" direction="asc" xsi:type="ByExpression">
+                     <expression localId="265" locator="148:15-148:83" xsi:type="Start">
+                        <operand localId="264" locator="148:24-148:83" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                           <operand localId="262" locator="148:51-148:66" name="relevantDatetime" xsi:type="IdentifierRef"/>
+                           <operand localId="263" locator="148:69-148:82" name="relevantPeriod" xsi:type="IdentifierRef"/>
+                        </operand>
+                     </expression>
+                  </by>
+               </sort>
+            </source>
+         </expression>
+      </def>
+      <def localId="279" locator="97:1-100:15" name="Has Most Recent Adult Screening Negative" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="279">
+               <a:s>define &quot;Has Most Recent Adult Screening Negative&quot;:
+  </a:s>
+               <a:s r="278">
+                  <a:s r="277">
+                     <a:s>( </a:s>
+                     <a:s r="277">
+                        <a:s>
+                           <a:s r="272">
+                              <a:s r="271">
+                                 <a:s>
+                                    <a:s>&quot;Most Recent Adult Depression Screening&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> AdultScreen</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="276">
+                           <a:s>where </a:s>
+                           <a:s r="276">
+                              <a:s r="274">
+                                 <a:s r="273">
+                                    <a:s>AdultScreen</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="274">
+                                    <a:s>result</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> ~ </a:s>
+                              <a:s r="275">
+                                 <a:s>&quot;Depression screening negative (finding)&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+                  <a:s> is not null</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="278" locator="98:3-100:15" xsi:type="Not">
+            <operand locator="98:3-100:15" xsi:type="IsNull">
+               <operand localId="277" locator="98:3-100:3" xsi:type="Query">
+                  <source localId="272" locator="98:5-98:56" alias="AdultScreen">
+                     <expression localId="271" locator="98:5-98:44" name="Most Recent Adult Depression Screening" xsi:type="ExpressionRef"/>
+                  </source>
+                  <where localId="276" locator="99:7-99:74" xsi:type="Equivalent">
+                     <operand asType="t:Code" xsi:type="As">
+                        <operand localId="274" locator="99:13-99:30" path="result" scope="AdultScreen" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="275" locator="99:34-99:74" name="Depression screening negative (finding)" xsi:type="CodeRef"/>
+                  </where>
+               </operand>
+            </operand>
+         </expression>
+      </def>
+      <def localId="285" locator="102:1-105:76" name="Follow Up Intervention for Positive Adolescent Depression Screening" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="285">
+               <a:s>define &quot;Follow Up Intervention for Positive Adolescent Depression Screening&quot;:
+  </a:s>
+               <a:s r="284">
+                  <a:s r="282">
+                     <a:s r="280">
+                        <a:s>[&quot;Medication, Order&quot;: </a:s>
+                        <a:s>
+                           <a:s>&quot;Adolescent Depression Medications&quot;</a:s>
+                        </a:s>
+                        <a:s>]</a:s>
+                     </a:s>
+                     <a:s>
+    union </a:s>
+                     <a:s r="281">
+                        <a:s>[&quot;Intervention, Order&quot;: </a:s>
+                        <a:s>
+                           <a:s>&quot;Referral for Adolescent Depression&quot;</a:s>
+                        </a:s>
+                        <a:s>]</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    union </a:s>
+                  <a:s r="283">
+                     <a:s>[&quot;Intervention, Performed&quot;: </a:s>
+                     <a:s>
+                        <a:s>&quot;Follow Up for Adolescent Depression&quot;</a:s>
+                     </a:s>
+                     <a:s>]</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="284" locator="103:3-105:76" xsi:type="Union">
+            <operand xsi:type="As">
+               <operand localId="282" locator="103:3-104:71" xsi:type="Union">
+                  <operand xsi:type="As">
+                     <operand localId="280" locator="103:3-103:60" xmlns:ns15="urn:healthit-gov:qdm:v5_6" dataType="ns15:PositiveMedicationOrder" templateId="PositiveMedicationOrder" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                        <codes locator="103:25-103:59" name="Adolescent Depression Medications" xsi:type="ValueSetRef"/>
+                     </operand>
+                     <asTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType xsi:type="ChoiceTypeSpecifier">
+                           <choice xmlns:ns16="urn:healthit-gov:qdm:v5_6" name="ns16:PositiveInterventionOrder" xsi:type="NamedTypeSpecifier"/>
+                           <choice xmlns:ns17="urn:healthit-gov:qdm:v5_6" name="ns17:PositiveMedicationOrder" xsi:type="NamedTypeSpecifier"/>
+                        </elementType>
+                     </asTypeSpecifier>
+                  </operand>
+                  <operand xsi:type="As">
+                     <operand localId="281" locator="104:11-104:71" xmlns:ns18="urn:healthit-gov:qdm:v5_6" dataType="ns18:PositiveInterventionOrder" templateId="PositiveInterventionOrder" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                        <codes locator="104:35-104:70" name="Referral for Adolescent Depression" xsi:type="ValueSetRef"/>
+                     </operand>
+                     <asTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType xsi:type="ChoiceTypeSpecifier">
+                           <choice xmlns:ns19="urn:healthit-gov:qdm:v5_6" name="ns19:PositiveInterventionOrder" xsi:type="NamedTypeSpecifier"/>
+                           <choice xmlns:ns20="urn:healthit-gov:qdm:v5_6" name="ns20:PositiveMedicationOrder" xsi:type="NamedTypeSpecifier"/>
+                        </elementType>
+                     </asTypeSpecifier>
+                  </operand>
+               </operand>
+               <asTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType xsi:type="ChoiceTypeSpecifier">
+                     <choice xmlns:ns21="urn:healthit-gov:qdm:v5_6" name="ns21:PositiveInterventionPerformed" xsi:type="NamedTypeSpecifier"/>
+                     <choice xmlns:ns22="urn:healthit-gov:qdm:v5_6" name="ns22:PositiveInterventionOrder" xsi:type="NamedTypeSpecifier"/>
+                     <choice xmlns:ns23="urn:healthit-gov:qdm:v5_6" name="ns23:PositiveMedicationOrder" xsi:type="NamedTypeSpecifier"/>
+                  </elementType>
+               </asTypeSpecifier>
+            </operand>
+            <operand xsi:type="As">
+               <operand localId="283" locator="105:11-105:76" xmlns:ns24="urn:healthit-gov:qdm:v5_6" dataType="ns24:PositiveInterventionPerformed" templateId="PositiveInterventionPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="105:39-105:75" name="Follow Up for Adolescent Depression" xsi:type="ValueSetRef"/>
+               </operand>
+               <asTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType xsi:type="ChoiceTypeSpecifier">
+                     <choice xmlns:ns25="urn:healthit-gov:qdm:v5_6" name="ns25:PositiveInterventionPerformed" xsi:type="NamedTypeSpecifier"/>
+                     <choice xmlns:ns26="urn:healthit-gov:qdm:v5_6" name="ns26:PositiveInterventionOrder" xsi:type="NamedTypeSpecifier"/>
+                     <choice xmlns:ns27="urn:healthit-gov:qdm:v5_6" name="ns27:PositiveMedicationOrder" xsi:type="NamedTypeSpecifier"/>
+                  </elementType>
+               </asTypeSpecifier>
+            </operand>
+         </expression>
+      </def>
+      <def localId="291" locator="107:1-110:71" name="Follow Up Intervention for Positive Adult Depression Screening" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="291">
+               <a:s>define &quot;Follow Up Intervention for Positive Adult Depression Screening&quot;:
+  </a:s>
+               <a:s r="290">
+                  <a:s r="288">
+                     <a:s r="286">
+                        <a:s>[&quot;Medication, Order&quot;: </a:s>
+                        <a:s>
+                           <a:s>&quot;Adult Depression Medications&quot;</a:s>
+                        </a:s>
+                        <a:s>]</a:s>
+                     </a:s>
+                     <a:s>
+    union </a:s>
+                     <a:s r="287">
+                        <a:s>[&quot;Intervention, Order&quot;: </a:s>
+                        <a:s>
+                           <a:s>&quot;Referral for Adult Depression&quot;</a:s>
+                        </a:s>
+                        <a:s>]</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    union </a:s>
+                  <a:s r="289">
+                     <a:s>[&quot;Intervention, Performed&quot;: </a:s>
+                     <a:s>
+                        <a:s>&quot;Follow Up for Adult Depression&quot;</a:s>
+                     </a:s>
+                     <a:s>]</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="290" locator="108:3-110:71" xsi:type="Union">
+            <operand xsi:type="As">
+               <operand localId="288" locator="108:3-109:66" xsi:type="Union">
+                  <operand xsi:type="As">
+                     <operand localId="286" locator="108:3-108:55" xmlns:ns28="urn:healthit-gov:qdm:v5_6" dataType="ns28:PositiveMedicationOrder" templateId="PositiveMedicationOrder" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                        <codes locator="108:25-108:54" name="Adult Depression Medications" xsi:type="ValueSetRef"/>
+                     </operand>
+                     <asTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType xsi:type="ChoiceTypeSpecifier">
+                           <choice xmlns:ns29="urn:healthit-gov:qdm:v5_6" name="ns29:PositiveInterventionOrder" xsi:type="NamedTypeSpecifier"/>
+                           <choice xmlns:ns30="urn:healthit-gov:qdm:v5_6" name="ns30:PositiveMedicationOrder" xsi:type="NamedTypeSpecifier"/>
+                        </elementType>
+                     </asTypeSpecifier>
+                  </operand>
+                  <operand xsi:type="As">
+                     <operand localId="287" locator="109:11-109:66" xmlns:ns31="urn:healthit-gov:qdm:v5_6" dataType="ns31:PositiveInterventionOrder" templateId="PositiveInterventionOrder" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                        <codes locator="109:35-109:65" name="Referral for Adult Depression" xsi:type="ValueSetRef"/>
+                     </operand>
+                     <asTypeSpecifier xsi:type="ListTypeSpecifier">
+                        <elementType xsi:type="ChoiceTypeSpecifier">
+                           <choice xmlns:ns32="urn:healthit-gov:qdm:v5_6" name="ns32:PositiveInterventionOrder" xsi:type="NamedTypeSpecifier"/>
+                           <choice xmlns:ns33="urn:healthit-gov:qdm:v5_6" name="ns33:PositiveMedicationOrder" xsi:type="NamedTypeSpecifier"/>
+                        </elementType>
+                     </asTypeSpecifier>
+                  </operand>
+               </operand>
+               <asTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType xsi:type="ChoiceTypeSpecifier">
+                     <choice xmlns:ns34="urn:healthit-gov:qdm:v5_6" name="ns34:PositiveInterventionPerformed" xsi:type="NamedTypeSpecifier"/>
+                     <choice xmlns:ns35="urn:healthit-gov:qdm:v5_6" name="ns35:PositiveInterventionOrder" xsi:type="NamedTypeSpecifier"/>
+                     <choice xmlns:ns36="urn:healthit-gov:qdm:v5_6" name="ns36:PositiveMedicationOrder" xsi:type="NamedTypeSpecifier"/>
+                  </elementType>
+               </asTypeSpecifier>
+            </operand>
+            <operand xsi:type="As">
+               <operand localId="289" locator="110:11-110:71" xmlns:ns37="urn:healthit-gov:qdm:v5_6" dataType="ns37:PositiveInterventionPerformed" templateId="PositiveInterventionPerformed" codeProperty="code" codeComparator="in" xsi:type="Retrieve">
+                  <codes locator="110:39-110:70" name="Follow Up for Adult Depression" xsi:type="ValueSetRef"/>
+               </operand>
+               <asTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType xsi:type="ChoiceTypeSpecifier">
+                     <choice xmlns:ns38="urn:healthit-gov:qdm:v5_6" name="ns38:PositiveInterventionPerformed" xsi:type="NamedTypeSpecifier"/>
+                     <choice xmlns:ns39="urn:healthit-gov:qdm:v5_6" name="ns39:PositiveInterventionOrder" xsi:type="NamedTypeSpecifier"/>
+                     <choice xmlns:ns40="urn:healthit-gov:qdm:v5_6" name="ns40:PositiveMedicationOrder" xsi:type="NamedTypeSpecifier"/>
+                  </elementType>
+               </asTypeSpecifier>
+            </operand>
+         </expression>
+      </def>
+      <def localId="294" locator="118:1-119:67" name="Denominator Exclusions" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="294">
+               <a:s>define &quot;Denominator Exclusions&quot;:
+  </a:s>
+               <a:s r="293">
+                  <a:s>exists </a:s>
+                  <a:s r="292">
+                     <a:s>&quot;History of Bipolar Diagnosis Before Qualifying Encounter&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="293" locator="119:3-119:67" xsi:type="Exists">
+            <operand localId="292" locator="119:10-119:67" name="History of Bipolar Diagnosis Before Qualifying Encounter" xsi:type="ExpressionRef"/>
+         </expression>
+      </def>
+      <def localId="352" locator="174:1-185:231" name="Most Recent Adolescent Depression Screening Positive and Follow Up Provided" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="352">
+               <a:s>define &quot;Most Recent Adolescent Depression Screening Positive and Follow Up Provided&quot;:
+  </a:s>
+               <a:s r="351">
+                  <a:s>
+                     <a:s>from
+    </a:s>
+                     <a:s r="298">
+                        <a:s r="297">
+                           <a:s>
+                              <a:s>&quot;Most Recent Adolescent Depression Screening&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> LastAdolescentScreen</a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="300">
+                        <a:s r="299">
+                           <a:s>
+                              <a:s>&quot;Follow Up Intervention for Positive Adolescent Depression Screening&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> FollowUpPositiveAdolescentScreen</a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="302">
+                        <a:s r="301">
+                           <a:s>
+                              <a:s>&quot;Qualifying Encounter During Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> QualifyingEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="350">
+                     <a:s>where </a:s>
+                     <a:s r="350">
+                        <a:s r="337">
+                           <a:s r="318">
+                              <a:s r="313">
+                                 <a:s r="308">
+                                    <a:s r="303">
+                                       <a:s>Global</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="308">
+                                       <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                       <a:s r="305">
+                                          <a:s r="304">
+                                             <a:s>LastAdolescentScreen</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="305">
+                                             <a:s>relevantDatetime</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>, </a:s>
+                                       <a:s r="307">
+                                          <a:s r="306">
+                                             <a:s>LastAdolescentScreen</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="307">
+                                             <a:s>relevantPeriod</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> )</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> </a:s>
+                                 <a:s r="313">
+                                    <a:s r="312">
+                                       <a:s>14 days</a:s>
+                                    </a:s>
+                                    <a:s> or less on or before day of</a:s>
+                                 </a:s>
+                                 <a:s> </a:s>
+                                 <a:s r="311">
+                                    <a:s>start of </a:s>
+                                    <a:s r="310">
+                                       <a:s r="309">
+                                          <a:s>QualifyingEncounter</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="310">
+                                          <a:s>relevantPeriod</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      and </a:s>
+                              <a:s r="317">
+                                 <a:s r="315">
+                                    <a:s r="314">
+                                       <a:s>LastAdolescentScreen</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="315">
+                                       <a:s>result</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> ~ </a:s>
+                                 <a:s r="316">
+                                    <a:s>&quot;Depression screening positive (finding)&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+      and </a:s>
+                           <a:s r="336">
+                              <a:s>( </a:s>
+                              <a:s r="336">
+                                 <a:s r="328">
+                                    <a:s r="325">
+                                       <a:s>start of </a:s>
+                                       <a:s r="324">
+                                          <a:s r="319">
+                                             <a:s>Global</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="324">
+                                             <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                             <a:s r="321">
+                                                <a:s r="320">
+                                                   <a:s>FollowUpPositiveAdolescentScreen</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="321">
+                                                   <a:s>relevantDatetime</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>, </a:s>
+                                             <a:s r="323">
+                                                <a:s r="322">
+                                                   <a:s>FollowUpPositiveAdolescentScreen</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="323">
+                                                   <a:s>relevantPeriod</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s> )</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s r="328"> during </a:s>
+                                    <a:s r="327">
+                                       <a:s r="326">
+                                          <a:s>QualifyingEncounter</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="327">
+                                          <a:s>relevantPeriod</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+          or </a:s>
+                                 <a:s r="335">
+                                    <a:s r="330">
+                                       <a:s r="329">
+                                          <a:s>FollowUpPositiveAdolescentScreen</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="330">
+                                          <a:s>authorDatetime</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> </a:s>
+                                    <a:s r="335">
+                                       <a:s r="334">
+                                          <a:s>2 days</a:s>
+                                       </a:s>
+                                       <a:s> or less on or after day of</a:s>
+                                    </a:s>
+                                    <a:s> 
+          </a:s>
+                                    <a:s r="333">
+                                       <a:s>end of </a:s>
+                                       <a:s r="332">
+                                          <a:s r="331">
+                                             <a:s>QualifyingEncounter</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="332">
+                                             <a:s>relevantPeriod</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      and </a:s>
+                        <a:s r="349">
+                           <a:s r="347">
+                              <a:s>Coalesce(</a:s>
+                              <a:s r="344">
+                                 <a:s>start of </a:s>
+                                 <a:s r="343">
+                                    <a:s r="338">
+                                       <a:s>Global</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="343">
+                                       <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                       <a:s r="340">
+                                          <a:s r="339">
+                                             <a:s>FollowUpPositiveAdolescentScreen</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="340">
+                                             <a:s>relevantDatetime</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>, </a:s>
+                                       <a:s r="342">
+                                          <a:s r="341">
+                                             <a:s>FollowUpPositiveAdolescentScreen</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="342">
+                                             <a:s>relevantPeriod</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>)</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="346">
+                                 <a:s r="345">
+                                    <a:s>FollowUpPositiveAdolescentScreen</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="346">
+                                    <a:s>authorDatetime</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                           <a:s r="349">during </a:s>
+                           <a:s r="348">
+                              <a:s>&quot;Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="351" locator="175:3-185:231" xsi:type="Query">
+            <source localId="298" locator="176:5-176:70" alias="LastAdolescentScreen">
+               <expression localId="297" locator="176:5-176:49" name="Most Recent Adolescent Depression Screening" xsi:type="ExpressionRef"/>
+            </source>
+            <source localId="300" locator="177:5-177:106" alias="FollowUpPositiveAdolescentScreen">
+               <expression localId="299" locator="177:5-177:73" name="Follow Up Intervention for Positive Adolescent Depression Screening" xsi:type="ExpressionRef"/>
+            </source>
+            <source localId="302" locator="178:5-178:72" alias="QualifyingEncounter">
+               <expression localId="301" locator="178:5-178:52" name="Qualifying Encounter During Measurement Period" xsi:type="ExpressionRef"/>
+            </source>
+            <where localId="350" locator="179:5-185:231" xsi:type="And">
+               <operand localId="337" locator="179:11-184:7" xsi:type="And">
+                  <operand localId="318" locator="179:11-180:81" xsi:type="And">
+                     <operand localId="313" locator="179:11-179:195" xsi:type="And">
+                        <operand locator="179:117-179:131" precision="Day" xsi:type="In">
+                           <operand locator="179:18-179:115" xsi:type="End">
+                              <operand localId="308" locator="179:11-179:115" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                 <operand localId="305" locator="179:40-179:76" path="relevantDatetime" scope="LastAdolescentScreen" xsi:type="Property"/>
+                                 <operand localId="307" locator="179:79-179:113" path="relevantPeriod" scope="LastAdolescentScreen" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                           <operand locator="179:117-179:131" lowClosed="true" highClosed="true" xsi:type="Interval">
+                              <low locator="179:153-179:195" xsi:type="Subtract">
+                                 <operand localId="311" locator="179:153-179:195" xsi:type="Start">
+                                    <operand localId="310" locator="179:162-179:195" path="relevantPeriod" scope="QualifyingEncounter" xsi:type="Property"/>
+                                 </operand>
+                                 <operand localId="312" locator="179:117-179:123" value="14" unit="days" xsi:type="Quantity"/>
+                              </low>
+                              <high localId="311" locator="179:153-179:195" xsi:type="Start">
+                                 <operand localId="310" locator="179:162-179:195" path="relevantPeriod" scope="QualifyingEncounter" xsi:type="Property"/>
+                              </high>
+                           </operand>
+                        </operand>
+                        <operand locator="179:117-179:131" xsi:type="Not">
+                           <operand locator="179:117-179:131" xsi:type="IsNull">
+                              <operand localId="311" locator="179:153-179:195" xsi:type="Start">
+                                 <operand localId="310" locator="179:162-179:195" path="relevantPeriod" scope="QualifyingEncounter" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                        </operand>
+                     </operand>
+                     <operand localId="317" locator="180:11-180:81" xsi:type="Equivalent">
+                        <operand asType="t:Code" xsi:type="As">
+                           <operand localId="315" locator="180:11-180:37" path="result" scope="LastAdolescentScreen" xsi:type="Property"/>
+                        </operand>
+                        <operand localId="316" locator="180:41-180:81" name="Depression screening positive (finding)" xsi:type="CodeRef"/>
+                     </operand>
+                  </operand>
+                  <operand localId="336" locator="181:11-184:7" xsi:type="Or">
+                     <operand localId="328" locator="181:13-181:192" xsi:type="In">
+                        <operand localId="325" locator="181:13-181:150" xsi:type="Start">
+                           <operand localId="324" locator="181:22-181:150" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                              <operand localId="321" locator="181:51-181:99" path="relevantDatetime" scope="FollowUpPositiveAdolescentScreen" xsi:type="Property"/>
+                              <operand localId="323" locator="181:102-181:148" path="relevantPeriod" scope="FollowUpPositiveAdolescentScreen" xsi:type="Property"/>
+                           </operand>
+                        </operand>
+                        <operand localId="327" locator="181:159-181:192" path="relevantPeriod" scope="QualifyingEncounter" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="335" locator="182:14-183:51" xsi:type="And">
+                        <operand locator="182:62-182:75" precision="Day" xsi:type="In">
+                           <operand localId="330" locator="182:14-182:60" path="authorDatetime" scope="FollowUpPositiveAdolescentScreen" xsi:type="Property"/>
+                           <operand locator="182:62-182:75" lowClosed="true" highClosed="true" xsi:type="Interval">
+                              <low localId="333" locator="183:11-183:51" xsi:type="End">
+                                 <operand localId="332" locator="183:18-183:51" path="relevantPeriod" scope="QualifyingEncounter" xsi:type="Property"/>
+                              </low>
+                              <high locator="183:11-183:51" xsi:type="Add">
+                                 <operand localId="333" locator="183:11-183:51" xsi:type="End">
+                                    <operand localId="332" locator="183:18-183:51" path="relevantPeriod" scope="QualifyingEncounter" xsi:type="Property"/>
+                                 </operand>
+                                 <operand localId="334" locator="182:62-182:67" value="2" unit="days" xsi:type="Quantity"/>
+                              </high>
+                           </operand>
+                        </operand>
+                        <operand locator="182:62-182:75" xsi:type="Not">
+                           <operand locator="182:62-182:75" xsi:type="IsNull">
+                              <operand localId="333" locator="183:11-183:51" xsi:type="End">
+                                 <operand localId="332" locator="183:18-183:51" path="relevantPeriod" scope="QualifyingEncounter" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                        </operand>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand localId="349" locator="185:11-185:231" xsi:type="In">
+                  <operand localId="347" locator="185:11-185:204" xsi:type="Coalesce">
+                     <operand localId="344" locator="185:20-185:154" xsi:type="Start">
+                        <operand localId="343" locator="185:29-185:154" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                           <operand localId="340" locator="185:56-185:104" path="relevantDatetime" scope="FollowUpPositiveAdolescentScreen" xsi:type="Property"/>
+                           <operand localId="342" locator="185:107-185:153" path="relevantPeriod" scope="FollowUpPositiveAdolescentScreen" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                     <operand localId="346" locator="185:157-185:203" path="authorDatetime" scope="FollowUpPositiveAdolescentScreen" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="348" locator="185:212-185:231" name="Measurement Period" xsi:type="ParameterRef"/>
+               </operand>
+            </where>
+            <return distinct="true">
+               <expression xsi:type="Tuple">
+                  <element name="LastAdolescentScreen">
+                     <value name="LastAdolescentScreen" xsi:type="AliasRef"/>
+                  </element>
+                  <element name="FollowUpPositiveAdolescentScreen">
+                     <value name="FollowUpPositiveAdolescentScreen" xsi:type="AliasRef"/>
+                  </element>
+                  <element name="QualifyingEncounter">
+                     <value name="QualifyingEncounter" xsi:type="AliasRef"/>
+                  </element>
+               </expression>
+            </return>
+         </expression>
+      </def>
+      <def localId="419" locator="187:1-198:216" name="Most Recent Adult Depression Screening Positive and Follow Up Provided" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="419">
+               <a:s>define &quot;Most Recent Adult Depression Screening Positive and Follow Up Provided&quot;:
+  </a:s>
+               <a:s r="418">
+                  <a:s>
+                     <a:s>from
+    </a:s>
+                     <a:s r="365">
+                        <a:s r="364">
+                           <a:s>
+                              <a:s>&quot;Most Recent Adult Depression Screening&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> LastAdultScreen</a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="367">
+                        <a:s r="366">
+                           <a:s>
+                              <a:s>&quot;Follow Up Intervention for Positive Adult Depression Screening&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> FollowUpPositiveAdultScreen</a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="369">
+                        <a:s r="368">
+                           <a:s>
+                              <a:s>&quot;Qualifying Encounter During Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> QualifyingEncounter</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    </a:s>
+                  <a:s r="417">
+                     <a:s>where </a:s>
+                     <a:s r="417">
+                        <a:s r="404">
+                           <a:s r="385">
+                              <a:s r="380">
+                                 <a:s r="375">
+                                    <a:s r="370">
+                                       <a:s>Global</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="375">
+                                       <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                       <a:s r="372">
+                                          <a:s r="371">
+                                             <a:s>LastAdultScreen</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="372">
+                                             <a:s>relevantDatetime</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>, </a:s>
+                                       <a:s r="374">
+                                          <a:s r="373">
+                                             <a:s>LastAdultScreen</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="374">
+                                             <a:s>relevantPeriod</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> )</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> </a:s>
+                                 <a:s r="380">
+                                    <a:s r="379">
+                                       <a:s>14 days</a:s>
+                                    </a:s>
+                                    <a:s> or less on or before day of</a:s>
+                                 </a:s>
+                                 <a:s> </a:s>
+                                 <a:s r="378">
+                                    <a:s>start of </a:s>
+                                    <a:s r="377">
+                                       <a:s r="376">
+                                          <a:s>QualifyingEncounter</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="377">
+                                          <a:s>relevantPeriod</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      and </a:s>
+                              <a:s r="384">
+                                 <a:s r="382">
+                                    <a:s r="381">
+                                       <a:s>LastAdultScreen</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="382">
+                                       <a:s>result</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> ~ </a:s>
+                                 <a:s r="383">
+                                    <a:s>&quot;Depression screening positive (finding)&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+      and </a:s>
+                           <a:s r="403">
+                              <a:s>( </a:s>
+                              <a:s r="403">
+                                 <a:s r="395">
+                                    <a:s r="392">
+                                       <a:s>start of </a:s>
+                                       <a:s r="391">
+                                          <a:s r="386">
+                                             <a:s>Global</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="391">
+                                             <a:s>&quot;NormalizeInterval&quot; ( </a:s>
+                                             <a:s r="388">
+                                                <a:s r="387">
+                                                   <a:s>FollowUpPositiveAdultScreen</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="388">
+                                                   <a:s>relevantDatetime</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>, </a:s>
+                                             <a:s r="390">
+                                                <a:s r="389">
+                                                   <a:s>FollowUpPositiveAdultScreen</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="390">
+                                                   <a:s>relevantPeriod</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s> )</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s r="395"> during </a:s>
+                                    <a:s r="394">
+                                       <a:s r="393">
+                                          <a:s>QualifyingEncounter</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="394">
+                                          <a:s>relevantPeriod</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+          or </a:s>
+                                 <a:s r="402">
+                                    <a:s r="397">
+                                       <a:s r="396">
+                                          <a:s>FollowUpPositiveAdultScreen</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="397">
+                                          <a:s>authorDatetime</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> </a:s>
+                                    <a:s r="402">
+                                       <a:s r="401">
+                                          <a:s>2 days</a:s>
+                                       </a:s>
+                                       <a:s> or less on or after day of</a:s>
+                                    </a:s>
+                                    <a:s> 
+          </a:s>
+                                    <a:s r="400">
+                                       <a:s>end of </a:s>
+                                       <a:s r="399">
+                                          <a:s r="398">
+                                             <a:s>QualifyingEncounter</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="399">
+                                             <a:s>relevantPeriod</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      and </a:s>
+                        <a:s r="416">
+                           <a:s r="414">
+                              <a:s>Coalesce(</a:s>
+                              <a:s r="411">
+                                 <a:s>start of </a:s>
+                                 <a:s r="410">
+                                    <a:s r="405">
+                                       <a:s>Global</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="410">
+                                       <a:s>&quot;NormalizeInterval&quot;(</a:s>
+                                       <a:s r="407">
+                                          <a:s r="406">
+                                             <a:s>FollowUpPositiveAdultScreen</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="407">
+                                             <a:s>relevantDatetime</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>, </a:s>
+                                       <a:s r="409">
+                                          <a:s r="408">
+                                             <a:s>FollowUpPositiveAdultScreen</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="409">
+                                             <a:s>relevantPeriod</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>)</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>, </a:s>
+                              <a:s r="413">
+                                 <a:s r="412">
+                                    <a:s>FollowUpPositiveAdultScreen</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="413">
+                                    <a:s>authorDatetime</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                           <a:s r="416">during </a:s>
+                           <a:s r="415">
+                              <a:s>&quot;Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="418" locator="188:3-198:216" xsi:type="Query">
+            <source localId="365" locator="189:5-189:60" alias="LastAdultScreen">
+               <expression localId="364" locator="189:5-189:44" name="Most Recent Adult Depression Screening" xsi:type="ExpressionRef"/>
+            </source>
+            <source localId="367" locator="190:5-190:96" alias="FollowUpPositiveAdultScreen">
+               <expression localId="366" locator="190:5-190:68" name="Follow Up Intervention for Positive Adult Depression Screening" xsi:type="ExpressionRef"/>
+            </source>
+            <source localId="369" locator="191:5-191:72" alias="QualifyingEncounter">
+               <expression localId="368" locator="191:5-191:52" name="Qualifying Encounter During Measurement Period" xsi:type="ExpressionRef"/>
+            </source>
+            <where localId="417" locator="192:5-198:216" xsi:type="And">
+               <operand localId="404" locator="192:11-197:7" xsi:type="And">
+                  <operand localId="385" locator="192:11-193:76" xsi:type="And">
+                     <operand localId="380" locator="192:11-192:185" xsi:type="And">
+                        <operand locator="192:107-192:121" precision="Day" xsi:type="In">
+                           <operand locator="192:18-192:105" xsi:type="End">
+                              <operand localId="375" locator="192:11-192:105" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                                 <operand localId="372" locator="192:40-192:71" path="relevantDatetime" scope="LastAdultScreen" xsi:type="Property"/>
+                                 <operand localId="374" locator="192:74-192:103" path="relevantPeriod" scope="LastAdultScreen" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                           <operand locator="192:107-192:121" lowClosed="true" highClosed="true" xsi:type="Interval">
+                              <low locator="192:143-192:185" xsi:type="Subtract">
+                                 <operand localId="378" locator="192:143-192:185" xsi:type="Start">
+                                    <operand localId="377" locator="192:152-192:185" path="relevantPeriod" scope="QualifyingEncounter" xsi:type="Property"/>
+                                 </operand>
+                                 <operand localId="379" locator="192:107-192:113" value="14" unit="days" xsi:type="Quantity"/>
+                              </low>
+                              <high localId="378" locator="192:143-192:185" xsi:type="Start">
+                                 <operand localId="377" locator="192:152-192:185" path="relevantPeriod" scope="QualifyingEncounter" xsi:type="Property"/>
+                              </high>
+                           </operand>
+                        </operand>
+                        <operand locator="192:107-192:121" xsi:type="Not">
+                           <operand locator="192:107-192:121" xsi:type="IsNull">
+                              <operand localId="378" locator="192:143-192:185" xsi:type="Start">
+                                 <operand localId="377" locator="192:152-192:185" path="relevantPeriod" scope="QualifyingEncounter" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                        </operand>
+                     </operand>
+                     <operand localId="384" locator="193:11-193:76" xsi:type="Equivalent">
+                        <operand asType="t:Code" xsi:type="As">
+                           <operand localId="382" locator="193:11-193:32" path="result" scope="LastAdultScreen" xsi:type="Property"/>
+                        </operand>
+                        <operand localId="383" locator="193:36-193:76" name="Depression screening positive (finding)" xsi:type="CodeRef"/>
+                     </operand>
+                  </operand>
+                  <operand localId="403" locator="194:11-197:7" xsi:type="Or">
+                     <operand localId="395" locator="194:13-194:182" xsi:type="In">
+                        <operand localId="392" locator="194:13-194:140" xsi:type="Start">
+                           <operand localId="391" locator="194:22-194:140" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                              <operand localId="388" locator="194:51-194:94" path="relevantDatetime" scope="FollowUpPositiveAdultScreen" xsi:type="Property"/>
+                              <operand localId="390" locator="194:97-194:138" path="relevantPeriod" scope="FollowUpPositiveAdultScreen" xsi:type="Property"/>
+                           </operand>
+                        </operand>
+                        <operand localId="394" locator="194:149-194:182" path="relevantPeriod" scope="QualifyingEncounter" xsi:type="Property"/>
+                     </operand>
+                     <operand localId="402" locator="195:14-196:51" xsi:type="And">
+                        <operand locator="195:57-195:70" precision="Day" xsi:type="In">
+                           <operand localId="397" locator="195:14-195:55" path="authorDatetime" scope="FollowUpPositiveAdultScreen" xsi:type="Property"/>
+                           <operand locator="195:57-195:70" lowClosed="true" highClosed="true" xsi:type="Interval">
+                              <low localId="400" locator="196:11-196:51" xsi:type="End">
+                                 <operand localId="399" locator="196:18-196:51" path="relevantPeriod" scope="QualifyingEncounter" xsi:type="Property"/>
+                              </low>
+                              <high locator="196:11-196:51" xsi:type="Add">
+                                 <operand localId="400" locator="196:11-196:51" xsi:type="End">
+                                    <operand localId="399" locator="196:18-196:51" path="relevantPeriod" scope="QualifyingEncounter" xsi:type="Property"/>
+                                 </operand>
+                                 <operand localId="401" locator="195:57-195:62" value="2" unit="days" xsi:type="Quantity"/>
+                              </high>
+                           </operand>
+                        </operand>
+                        <operand locator="195:57-195:70" xsi:type="Not">
+                           <operand locator="195:57-195:70" xsi:type="IsNull">
+                              <operand localId="400" locator="196:11-196:51" xsi:type="End">
+                                 <operand localId="399" locator="196:18-196:51" path="relevantPeriod" scope="QualifyingEncounter" xsi:type="Property"/>
+                              </operand>
+                           </operand>
+                        </operand>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand localId="416" locator="198:11-198:216" xsi:type="In">
+                  <operand localId="414" locator="198:11-198:189" xsi:type="Coalesce">
+                     <operand localId="411" locator="198:20-198:144" xsi:type="Start">
+                        <operand localId="410" locator="198:29-198:144" name="NormalizeInterval" libraryName="Global" xsi:type="FunctionRef">
+                           <operand localId="407" locator="198:56-198:99" path="relevantDatetime" scope="FollowUpPositiveAdultScreen" xsi:type="Property"/>
+                           <operand localId="409" locator="198:102-198:143" path="relevantPeriod" scope="FollowUpPositiveAdultScreen" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                     <operand localId="413" locator="198:147-198:188" path="authorDatetime" scope="FollowUpPositiveAdultScreen" xsi:type="Property"/>
+                  </operand>
+                  <operand localId="415" locator="198:197-198:216" name="Measurement Period" xsi:type="ParameterRef"/>
+               </operand>
+            </where>
+            <return distinct="true">
+               <expression xsi:type="Tuple">
+                  <element name="LastAdultScreen">
+                     <value name="LastAdultScreen" xsi:type="AliasRef"/>
+                  </element>
+                  <element name="FollowUpPositiveAdultScreen">
+                     <value name="FollowUpPositiveAdultScreen" xsi:type="AliasRef"/>
+                  </element>
+                  <element name="QualifyingEncounter">
+                     <value name="QualifyingEncounter" xsi:type="AliasRef"/>
+                  </element>
+               </expression>
+            </return>
+         </expression>
+      </def>
+      <def localId="432" locator="151:1-168:5" name="Numerator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="432">
+               <a:s>define &quot;Numerator&quot;:
+  </a:s>
+               <a:s r="431">
+                  <a:s r="424">
+                     <a:s r="356">
+                        <a:s>( </a:s>
+                        <a:s r="356">
+                           <a:s r="295">
+                              <a:s>&quot;Patient Age 12 to 16 Years at Start of Measurement Period&quot;</a:s>
+                           </a:s>
+                           <a:s>
+      and </a:s>
+                           <a:s r="355">
+                              <a:s>( </a:s>
+                              <a:s r="355">
+                                 <a:s r="296">
+                                    <a:s>&quot;Has Most Recent Adolescent Screening Negative&quot;</a:s>
+                                 </a:s>
+                                 <a:s>
+          or </a:s>
+                                 <a:s r="354">
+                                    <a:s>exists </a:s>
+                                    <a:s r="353">
+                                       <a:s>&quot;Most Recent Adolescent Depression Screening Positive and Follow Up Provided&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+      )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+  )</a:s>
+                     </a:s>
+                     <a:s>
+    or </a:s>
+                     <a:s r="423">
+                        <a:s>( </a:s>
+                        <a:s r="423">
+                           <a:s r="357">
+                              <a:s>&quot;Patient Age 17 Years at Start of Measurement Period&quot;</a:s>
+                           </a:s>
+                           <a:s>
+        and </a:s>
+                           <a:s r="422">
+                              <a:s>( </a:s>
+                              <a:s r="422">
+                                 <a:s r="363">
+                                    <a:s r="361">
+                                       <a:s r="358">
+                                          <a:s>&quot;Has Most Recent Adolescent Screening Negative&quot;</a:s>
+                                       </a:s>
+                                       <a:s>
+            or </a:s>
+                                       <a:s r="360">
+                                          <a:s>exists </a:s>
+                                          <a:s r="359">
+                                             <a:s>&quot;Most Recent Adolescent Depression Screening Positive and Follow Up Provided&quot;</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+            or </a:s>
+                                    <a:s r="362">
+                                       <a:s>&quot;Has Most Recent Adult Screening Negative&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+            or </a:s>
+                                 <a:s r="421">
+                                    <a:s>exists </a:s>
+                                    <a:s r="420">
+                                       <a:s>&quot;Most Recent Adult Depression Screening Positive and Follow Up Provided&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+        )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+    )</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+    or </a:s>
+                  <a:s r="430">
+                     <a:s>( </a:s>
+                     <a:s r="430">
+                        <a:s r="425">
+                           <a:s>&quot;Patient Age 18 Years or Older at Start of Measurement Period&quot;</a:s>
+                        </a:s>
+                        <a:s>
+        and </a:s>
+                        <a:s r="429">
+                           <a:s>( </a:s>
+                           <a:s r="429">
+                              <a:s r="426">
+                                 <a:s>&quot;Has Most Recent Adult Screening Negative&quot;</a:s>
+                              </a:s>
+                              <a:s>
+            or </a:s>
+                              <a:s r="428">
+                                 <a:s>exists </a:s>
+                                 <a:s r="427">
+                                    <a:s>&quot;Most Recent Adult Depression Screening Positive and Follow Up Provided&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+        )</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    )</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="431" locator="152:3-168:5" xsi:type="Or">
+            <operand localId="424" locator="152:3-163:5" xsi:type="Or">
+               <operand localId="356" locator="152:3-156:3" xsi:type="And">
+                  <operand localId="295" locator="152:5-152:63" name="Patient Age 12 to 16 Years at Start of Measurement Period" xsi:type="ExpressionRef"/>
+                  <operand localId="355" locator="153:11-155:7" xsi:type="Or">
+                     <operand localId="296" locator="153:13-153:59" name="Has Most Recent Adolescent Screening Negative" xsi:type="ExpressionRef"/>
+                     <operand localId="354" locator="154:14-154:97" xsi:type="Exists">
+                        <operand localId="353" locator="154:21-154:97" name="Most Recent Adolescent Depression Screening Positive and Follow Up Provided" xsi:type="ExpressionRef"/>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand localId="423" locator="157:8-163:5" xsi:type="And">
+                  <operand localId="357" locator="157:10-157:62" name="Patient Age 17 Years at Start of Measurement Period" xsi:type="ExpressionRef"/>
+                  <operand localId="422" locator="158:13-162:9" xsi:type="Or">
+                     <operand localId="363" locator="158:15-160:57" xsi:type="Or">
+                        <operand localId="361" locator="158:15-159:99" xsi:type="Or">
+                           <operand localId="358" locator="158:15-158:61" name="Has Most Recent Adolescent Screening Negative" xsi:type="ExpressionRef"/>
+                           <operand localId="360" locator="159:16-159:99" xsi:type="Exists">
+                              <operand localId="359" locator="159:23-159:99" name="Most Recent Adolescent Depression Screening Positive and Follow Up Provided" xsi:type="ExpressionRef"/>
+                           </operand>
+                        </operand>
+                        <operand localId="362" locator="160:16-160:57" name="Has Most Recent Adult Screening Negative" xsi:type="ExpressionRef"/>
+                     </operand>
+                     <operand localId="421" locator="161:16-161:94" xsi:type="Exists">
+                        <operand localId="420" locator="161:23-161:94" name="Most Recent Adult Depression Screening Positive and Follow Up Provided" xsi:type="ExpressionRef"/>
+                     </operand>
+                  </operand>
+               </operand>
+            </operand>
+            <operand localId="430" locator="164:8-168:5" xsi:type="And">
+               <operand localId="425" locator="164:10-164:71" name="Patient Age 18 Years or Older at Start of Measurement Period" xsi:type="ExpressionRef"/>
+               <operand localId="429" locator="165:13-167:9" xsi:type="Or">
+                  <operand localId="426" locator="165:15-165:56" name="Has Most Recent Adult Screening Negative" xsi:type="ExpressionRef"/>
+                  <operand localId="428" locator="166:16-166:94" xsi:type="Exists">
+                     <operand localId="427" locator="166:23-166:94" name="Most Recent Adult Depression Screening Positive and Follow Up Provided" xsi:type="ExpressionRef"/>
+                  </operand>
+               </operand>
+            </operand>
+         </expression>
+      </def>
+   </statements>
+</library>
