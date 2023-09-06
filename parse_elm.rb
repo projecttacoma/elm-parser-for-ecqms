@@ -131,7 +131,7 @@ def output_csv_for_qdm_measures(measures, bundle)
           profile = data_requirement.attributes.any? { |attribute| attribute.name == 'negationRationale' } ? qi_negation_profile_name : qi_profile_name
           qi_attributes&.each do |qi_attribute|
             attribute.valuesets.each do |valueset|
-              string_rep = "#{measure.root_file}#{data_requirement.data_type}#{valueset}#{attribute.name}"
+              string_rep = "#{measure.root_file}#{data_requirement.data_type}#{valueset}#{qi_attribute.qi_field}"
               next if already_printed.any? { |ap| ap == string_rep }
 
               already_printed << string_rep
@@ -139,7 +139,7 @@ def output_csv_for_qdm_measures(measures, bundle)
                                measure.valuesets[valueset], attribute.name, profile, qi_attribute.qi_field.gsub('[x]', '')]
             end
             attribute.codes.each do |code|
-              string_rep = "#{measure.root_file}#{data_requirement.data_type}#{code}#{attribute.name}"
+              string_rep = "#{measure.root_file}#{data_requirement.data_type}#{code}#{qi_attribute.qi_field}"
               next if already_printed.any? { |ap| ap == string_rep }
 
               already_printed << string_rep
@@ -147,7 +147,7 @@ def output_csv_for_qdm_measures(measures, bundle)
                                measure.valuesets[code], attribute.name, profile, qi_attribute.qi_field.gsub('[x]', '')]
             end
             attribute.literals.each do |literal|
-              string_rep = "#{measure.root_file}#{data_requirement.data_type}#{literal}#{attribute.name}"
+              string_rep = "#{measure.root_file}#{data_requirement.data_type}#{literal}#{qi_attribute.qi_field}"
               next if already_printed.any? { |ap| ap == string_rep }
 
               already_printed << string_rep
@@ -155,7 +155,7 @@ def output_csv_for_qdm_measures(measures, bundle)
                                nil, attribute.name, profile, qi_attribute.qi_field.gsub('[x]', '')]
             end
             if attribute.literals.empty? && attribute.valuesets.empty? && attribute.codes.empty?
-              string_rep = "#{measure.root_file}#{data_requirement.data_type}#{attribute.name}"
+              string_rep = "#{measure.root_file}#{data_requirement.data_type}#{qi_attribute.qi_field}"
               next if already_printed.any? { |ap| ap == string_rep }
 
               already_printed << string_rep
